@@ -4,6 +4,7 @@ import { resetChestState } from './gameEngine.js';
 let container = null;
 let player = null;
 let cols = 0;
+let currentMap = '';
 
 function findFirstWalkable(grid) {
   for (let y = 0; y < grid.length; y++) {
@@ -34,6 +35,7 @@ export function init(gameContainer, playerObj) {
 
 export async function loadMap(filename, spawnPoint) {
   const name = filename.replace(/\.json$/, '');
+  currentMap = name;
   const { grid, environment } = await loadMapData(name);
   cols = grid[0].length;
   renderMap(grid, container, environment);
@@ -54,5 +56,9 @@ export async function loadMap(filename, spawnPoint) {
 
 export function getCols() {
   return cols;
+}
+
+export function getCurrentMapName() {
+  return currentMap;
 }
 

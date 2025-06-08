@@ -1,4 +1,6 @@
 
+import { getSkill } from './skills.js';
+
 let overlay = null;
 
 function updateHpBar(bar, current, max) {
@@ -8,8 +10,9 @@ function updateHpBar(bar, current, max) {
 /**
  * Starts a basic turn-based combat encounter.
  * @param {{name:string,hp:number}} enemy The enemy to fight.
+ * @param {{learnedSkills:string[]}} player Player state containing skills.
  */
-export function startCombat(enemy) {
+export function startCombat(enemy, player) {
   const gridEl = document.getElementById('game-grid');
   if (!gridEl) return;
 
@@ -71,46 +74,45 @@ export function startCombat(enemy) {
   }
 
   let guardActive = false;
+  let shieldBlock = false;
   let healUsed = false;
   let playerTurn = true;
 
-  const skills = {
-    strike: {
-      name: 'Strike',
-      execute() {
-        const dmg = 15;
-        enemyHp = Math.max(0, enemyHp - dmg);
-        log(`Player strikes for ${dmg} damage!`);
-        updateHpBar(enemyBar, enemyHp, enemyMax);
-        enemyBar.classList.add('damage');
-        setTimeout(() => enemyBar.classList.remove('damage'), 300);
-      },
-    },
-    guard: {
-      name: 'Guard',
-      execute() {
-        guardActive = true;
-        log('Player braces for impact.');
-      },
-    },
-    heal: {
-      name: 'Heal',
-      execute() {
-        if (healUsed) {
-          log('Heal can only be used once!');
-          return false;
-        }
-        healUsed = true;
-        playerHp = Math.min(playerMax, playerHp + 20);
-        log('Player heals for 20 HP.');
-        updateHpBar(playerBar, playerHp, playerMax);
-        playerBar.classList.add('damage');
-        setTimeout(() => playerBar.classList.remove('damage'), 300);
-      },
-    },
-  };
+  function damageEnemy(dmg) {
+    enemyHp = Math.max(0, enemyHp - dmg);
+    updateHpBar(enemyBar, enemyHp, enemyMax);
+    enemyBar.classList.add('damage');
+    setTimeout(() => enemyBar.classList.remove('damage'), 300);
+  }
 
-  Object.values(skills).forEach(skill => {
+  function healPlayer(amount) {
+    playerHp = Math.min(playerMax, playerHp + amount);
+    updateHpBar(playerBar, playerHp, playerMax);
+    playerBar.classList.add('damage');
+    setTimeout(() => playerBar.classList.remove('damage'), 300);
+  }
+
+  function activateGuard() {
+    guardActive = true;
+  }
+
+  function activateShieldBlock() {
+    shieldBlock = true;
+  }
+
+  function isHealUsed() {
+    return healUsed;
+  }
+
+  function setHealUsed() {
+    healUsed = true;
+  }
+
+  const skillList = (player.learnedSkills || [])
+    .map(id => getSkill(id))
+    .filter(Boolean);
+
+  skillList.forEach(skill => {
     const btn = document.createElement('button');
     btn.textContent = skill.name;
     btn.addEventListener('click', () => handleAction(skill));
@@ -119,7 +121,15 @@ export function startCombat(enemy) {
 
   function handleAction(skill) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
-    const result = skill.execute();
+    const result = skill.effect({
+      damageEnemy,
+      healPlayer,
+      activateGuard,
+      activateShieldBlock,
+      log,
+      isHealUsed,
+      setHealUsed,
+    });
     if (result === false) return; // invalid action
     if (enemyHp <= 0) {
       log(`${enemy.name} was defeated!`);
@@ -143,7 +153,10 @@ export function startCombat(enemy) {
   function enemyTurn() {
     if (enemyHp <= 0) return;
     let dmg = 8;
-    if (guardActive) {
+    if (shieldBlock) {
+      dmg = 0;
+      shieldBlock = false;
+    } else if (guardActive) {
       dmg = Math.max(0, dmg - 5);
       guardActive = false;
     }
