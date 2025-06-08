@@ -17,19 +17,30 @@ export function startCombat(enemy) {
 
   overlay = document.createElement('div');
   overlay.id = 'battle-overlay';
+  overlay.classList.add('battle-transition');
   overlay.innerHTML = `
-    <div class="combatant player">
-      <div class="name">Hero</div>
-      <div class="hp-bar"><div class="hp"></div></div>
-    </div>
-    <div class="combatant enemy">
-      <div class="name">${enemy.name}</div>
-      <div class="hp-bar"><div class="hp"></div></div>
-    </div>
-    <div class="actions"></div>
-    <div class="log"></div>`;
+    <div class="combat-screen">
+      <div class="combatants">
+        <div class="combatant player">
+          <div class="name">Hero</div>
+          <div class="hp-bar"><div class="hp"></div></div>
+        </div>
+        <div class="combatant enemy intro-anim">
+          <div class="portrait">${enemy.portrait || '👾'}</div>
+          <div class="name">${enemy.name}</div>
+          <div class="desc">${enemy.description || ''}</div>
+          <div class="hp-bar"><div class="hp"></div></div>
+        </div>
+      </div>
+      <div class="intro-text">${
+        enemy.intro || 'A shadowy beast snarls and prepares to strike!'
+      }</div>
+      <div class="actions hidden"></div>
+      <div class="log hidden"></div>
+    </div>`;
 
   document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.classList.add('active'));
 
   const playerBar = overlay.querySelector('.player .hp');
   const enemyBar = overlay.querySelector('.enemy .hp');
@@ -44,6 +55,12 @@ export function startCombat(enemy) {
 
   const actionsEl = overlay.querySelector('.actions');
   const logEl = overlay.querySelector('.log');
+
+  // reveal UI after intro animation
+  setTimeout(() => {
+    actionsEl.classList.remove('hidden');
+    logEl.classList.remove('hidden');
+  }, 800);
 
   function log(msg) {
     const entry = document.createElement('div');

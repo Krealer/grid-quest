@@ -116,9 +116,60 @@ body {
   font-family: sans-serif;
 }
 
+#battle-overlay.battle-transition {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#battle-overlay.battle-transition.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#battle-overlay .combat-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#battle-overlay .combatants {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 #battle-overlay .combatant {
   margin: 10px;
   text-align: center;
+}
+
+#battle-overlay .combatant .portrait {
+  font-size: 48px;
+  margin-bottom: 5px;
+}
+
+#battle-overlay .combatant .desc {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 5px;
+}
+
+#battle-overlay .combatant.enemy.intro-anim {
+  animation: enemyEntrance 0.6s ease;
+}
+
+@keyframes enemyEntrance {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 #battle-overlay .hp-bar {
@@ -129,6 +180,22 @@ body {
   margin-top: 5px;
 }
 
+#battle-overlay .intro-text {
+  margin-top: 10px;
+  opacity: 0;
+  animation: introFade 1s forwards;
+  text-align: center;
+}
+
+@keyframes introFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 #battle-overlay .hp-bar .hp {
   height: 100%;
   background: #e74c3c;
@@ -137,11 +204,22 @@ body {
 
 #battle-overlay .actions {
   margin-top: 20px;
+  text-align: center;
+}
+
+#battle-overlay .actions.hidden,
+#battle-overlay .log.hidden {
+  display: none;
 }
 
 #battle-overlay .actions button {
-  margin: 0 5px;
-  padding: 5px 15px;
+  margin: 0 8px;
+  padding: 8px 18px;
+  font-size: 16px;
+  border-radius: 4px;
+  background: #444;
+  color: #fff;
+  border: 1px solid #222;
 }
 
 #battle-overlay .log {
@@ -156,7 +234,7 @@ body {
 }
 
 #battle-overlay .actions button:hover {
-  outline: 2px solid #fff;
+  background: #555;
 }
 
 #battle-overlay .hp.damage {
