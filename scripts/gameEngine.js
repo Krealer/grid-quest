@@ -1,5 +1,5 @@
-// Game engine state management for interactive objects such as chests
-// and environmental tile effects.
+// Handles trap and tile effects triggered when the player steps on
+// certain tiles.
 import { showDialogue } from './dialogueSystem.js';
 
 /**
