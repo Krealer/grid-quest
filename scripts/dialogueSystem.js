@@ -74,3 +74,110 @@ export async function showDialogue(keyOrText, callback = () => {}) {
   overlay.addEventListener('click', finish);
   document.addEventListener('keydown', keyHandler);
 }
+
+export async function showDialogueWithChoices(keyOrText, choices = []) {
+  await loadDialogData();
+  const text = dialogueLines[keyOrText] || keyOrText || '';
+
+  const overlay = document.createElement('div');
+  overlay.id = 'dialogue-overlay';
+  overlay.innerHTML = `
+    <div class="dialogue-box">
+      <div class="dialogue-text"></div>
+      <div class="dialogue-choices" style="display:none"></div>
+    </div>`;
+  document.body.appendChild(overlay);
+  const textEl = overlay.querySelector('.dialogue-text');
+  const choicesEl = overlay.querySelector('.dialogue-choices');
+
+  let index = 0;
+  const speed = 30;
+
+  function typeNext() {
+    if (index < text.length) {
+      textEl.textContent += text.charAt(index);
+      index++;
+      setTimeout(typeNext, speed);
+    } else {
+      showChoices();
+    }
+  }
+  typeNext();
+
+  function finishTyping() {
+    if (index < text.length) {
+      textEl.textContent = text;
+      index = text.length;
+      showChoices();
+    }
+  }
+
+  function choose(idx) {
+    cleanup();
+    const choice = choices[idx];
+    if (!choice) return;
+    if (typeof choice.next === 'string') {
+      showDialogue(choice.next, choice.callback);
+    } else if (choice.next && choice.next.key) {
+      showDialogueWithChoices(choice.next.key, choice.next.choices || []);
+      if (typeof choice.callback === 'function') choice.callback();
+    } else {
+      if (typeof choice.callback === 'function') choice.callback();
+    }
+  }
+
+  function keyHandler(e) {
+    if (index < text.length) {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        finishTyping();
+      }
+      return;
+    }
+    if (e.key === 'ArrowDown') {
+      selected = (selected + 1) % choices.length;
+      updateSelection();
+    } else if (e.key === 'ArrowUp') {
+      selected = (selected - 1 + choices.length) % choices.length;
+      updateSelection();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      choose(selected);
+    }
+  }
+
+  function cleanup() {
+    document.removeEventListener('keydown', keyHandler);
+    overlay.remove();
+  }
+
+  let selected = 0;
+  let buttons = [];
+
+  function updateSelection() {
+    buttons.forEach((b, i) => {
+      if (i === selected) {
+        b.classList.add('selected');
+        b.focus();
+      } else {
+        b.classList.remove('selected');
+      }
+    });
+  }
+
+  function showChoices() {
+    choicesEl.style.display = 'flex';
+    choices.forEach((choice, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'dialogue-choice';
+      btn.textContent = choice.label;
+      btn.addEventListener('click', () => choose(i));
+      choicesEl.appendChild(btn);
+      buttons.push(btn);
+    });
+    updateSelection();
+  }
+
+  document.addEventListener('keydown', keyHandler);
+  overlay.addEventListener('click', finishTyping);
+}
