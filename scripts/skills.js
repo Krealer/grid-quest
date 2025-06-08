@@ -56,9 +56,59 @@ const skillDefs = {
       log('Flames scorch the enemy for 10 damage!');
     },
   },
+  shadowStab: {
+    id: 'shadowStab',
+    name: 'Shadow Stab',
+    description: 'Strike from the shadows for 20 damage.',
+    unlockCondition: { enemy: 'B' },
+    effect({ damageEnemy, log }) {
+      const dmg = 20;
+      damageEnemy(dmg);
+      log('You lunge from the darkness for 20 damage!');
+    },
+  },
+  boneSpike: {
+    id: 'boneSpike',
+    name: 'Bone Spike',
+    description: 'Hurl bone shards for 18 damage.',
+    unlockCondition: { enemy: 'S' },
+    effect({ damageEnemy, log }) {
+      const dmg = 18;
+      damageEnemy(dmg);
+      log('Bone shards pierce the foe for 18 damage!');
+    },
+  },
+  arcaneBlast: {
+    id: 'arcaneBlast',
+    name: 'Arcane Blast',
+    description: 'Unleash arcane energy for 12 damage.',
+    unlockCondition: { item: 'ancient_scroll' },
+    effect({ damageEnemy, log }) {
+      const dmg = 12;
+      damageEnemy(dmg);
+      log('Arcane power lashes out for 12 damage!');
+    },
+  },
 };
 
 let player = null;
+const enemySkillSources = new Set();
+
+function loadEnemySkillSources() {
+  const json = localStorage.getItem('gridquest.enemySkillSources');
+  if (!json) return [];
+  try {
+    const arr = JSON.parse(json);
+    if (Array.isArray(arr)) return arr;
+    return [];
+  } catch {
+    return [];
+  }
+}
+
+function saveEnemySkillSources(list) {
+  localStorage.setItem('gridquest.enemySkillSources', JSON.stringify(list));
+}
 
 function loadLearnedSkills() {
   const json = localStorage.getItem('gridquest.skills');
@@ -81,6 +131,8 @@ export function initSkillSystem(playerObj) {
   if (!Array.isArray(player.learnedSkills)) {
     player.learnedSkills = loadLearnedSkills();
   }
+  const enemyList = loadEnemySkillSources();
+  enemyList.forEach(id => enemySkillSources.add(id));
   // Ensure starting skills are present
   ['strike', 'guard', 'heal'].forEach(id => {
     if (!player.learnedSkills.includes(id)) {
@@ -98,6 +150,29 @@ export function unlockSkill(id) {
     return true;
   }
   return false;
+}
+
+export function isEnemySourceUsed(id) {
+  return enemySkillSources.has(id);
+}
+
+export function markEnemySource(id) {
+  if (!enemySkillSources.has(id)) {
+    enemySkillSources.add(id);
+    saveEnemySkillSources(Array.from(enemySkillSources));
+  }
+}
+
+export function unlockSkillsFromItem(itemId) {
+  const unlocked = [];
+  for (const [id, skill] of Object.entries(skillDefs)) {
+    if (skill.unlockCondition?.item === itemId) {
+      if (unlockSkill(id)) {
+        unlocked.push(id);
+      }
+    }
+  }
+  return unlocked;
 }
 
 export function hasSkill(id) {

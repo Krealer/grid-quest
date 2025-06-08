@@ -13,5 +13,19 @@
     "description": "A decaying corpse that refuses to rest.",
     "intro": "The zombie shambles toward you!",
     "portrait": "🧟"
+  },
+  "B": {
+    "name": "Bandit",
+    "hp": 60,
+    "description": "A scruffy thief eyeing your belongings.",
+    "intro": "The bandit lunges for your coin purse!",
+    "portrait": "🥷"
+  },
+  "S": {
+    "name": "Skeleton",
+    "hp": 40,
+    "description": "Bones clatter as it advances.",
+    "intro": "A skeleton rattles menacingly!",
+    "portrait": "💀"
   }
 }

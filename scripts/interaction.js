@@ -76,6 +76,14 @@ export async function handleTileInteraction(
           if (result.item) {
             showDialogue(`You obtained ${result.item.name}!`);
           }
+          if (Array.isArray(result.unlockedSkills)) {
+            result.unlockedSkills.forEach(id => {
+              const skill = getAllSkills()[id];
+              if (skill) {
+                showDialogue(`You've learned a new skill: ${skill.name}!`);
+              }
+            });
+          }
           const index = y * cols + x;
           const tileEl = container.children[index];
           if (tileEl) {

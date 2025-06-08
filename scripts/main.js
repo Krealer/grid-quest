@@ -9,7 +9,13 @@ import { showDialogue } from './dialogueSystem.js';
 import { handleTileInteraction } from './interaction.js';
 import * as eryndor from './npc/eryndor.js';
 import * as lioran from './npc/lioran.js';
-import { initSkillSystem, unlockSkill, getAllSkills } from './skills.js';
+import {
+  initSkillSystem,
+  unlockSkill,
+  getAllSkills,
+  isEnemySourceUsed,
+  markEnemySource,
+} from './skills.js';
 import { saveState, loadState, gameState } from './game_state.js';
 import {
   loadSettings,
@@ -181,11 +187,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (e.detail.enemyHp <= 0) {
         const enemyId = e.detail.enemy.id;
         defeatEnemy(enemyId);
-        for (const [id, skill] of Object.entries(getAllSkills())) {
-          if (skill.unlockCondition?.enemy === enemyId) {
-            if (unlockSkill(id)) {
-              showDialogue(`You've learned a new skill: ${skill.name}!`);
+        if (!isEnemySourceUsed(enemyId)) {
+          let unlocked = false;
+          for (const [id, skill] of Object.entries(getAllSkills())) {
+            if (skill.unlockCondition?.enemy === enemyId) {
+              if (unlockSkill(id)) {
+                showDialogue(`You've learned a new skill: ${skill.name}!`);
+                unlocked = true;
+                break;
+              }
             }
+          }
+          if (unlocked) {
+            markEnemySource(enemyId);
           }
         }
       }
