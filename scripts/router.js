@@ -1,5 +1,6 @@
-import { loadMap as loadMapData, renderMap } from './mapLoader.js';
-import { resetChestState } from './gameEngine.js';
+import { loadMap as loadMapData } from './mapLoader.js';
+import { renderGrid } from './grid.js';
+import { gameState } from './game_state.js';
 
 let container = null;
 let player = null;
@@ -37,9 +38,10 @@ export async function loadMap(filename, spawnPoint) {
   const name = filename.replace(/\.json$/, '');
   currentMap = name;
   const { grid, environment } = await loadMapData(name);
+  gameState.currentMap = name;
+  gameState.environment = environment;
   cols = grid[0].length;
-  renderMap(grid, container, environment);
-  resetChestState();
+  renderGrid(grid, container, environment);
 
   if (spawnPoint) {
     player.x = spawnPoint.x;

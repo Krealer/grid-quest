@@ -1,10 +1,11 @@
 import { getCurrentGrid } from './mapLoader.js';
-import {
-  openChestAt,
-  isChestOpened,
-  isAdjacent,
-  handleTileEffects,
-} from './gameEngine.js';
+import { handleTileEffects } from './gameEngine.js';
+import { isAdjacent } from './logic.js';
+import { isChestOpened, openChest } from './chest.js';
+import { inventory } from './inventory.js';
+import { updateInventoryUI, toggleInventoryView } from './inventory_state.js';
+import { player } from './player.js';
+import { loadEnemyData, getEnemyData, defeatEnemy } from './enemy.js';
 import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 import { startCombat } from './combatSystem.js';
@@ -16,15 +17,8 @@ import {
   applySettings,
 } from './settingsManager.js';
 
-// Simple inventory array that stores items received during play.
-// Pre-populated with a few mock items for demonstration purposes.
-export const inventory = [
-  { name: 'Mysterious Key', description: 'A rusty key of unknown origin.' },
-  { name: 'Ancient Coin', description: 'An old coin from a forgotten era.' },
-  { name: 'Healing Herb', description: 'Restores a small amount of health.' },
-];
+// Inventory contents are managed in inventory.js
 
-let enemyDefinitions = {};
 let isInBattle = false;
 
 function drawPlayer(player, container, cols) {
@@ -87,13 +81,13 @@ function handleTileClick(e, player, container, cols) {
   requestAnimationFrame(step);
 }
 
-function handleKey(e, player, container, cols) {
+async function handleKey(e, player, container, cols) {
   if (isInBattle) return;
   const grid = getCurrentGrid();
 
   if (e.code === 'Space') {
     if (!attemptStartCombat(player, container, grid, cols)) {
-      if (!attemptOpenChest(player, container, grid, cols)) {
+      if (!(await attemptOpenChest(player, container, grid, cols))) {
         attemptDrinkWater(player, grid);
       }
     }
@@ -126,7 +120,7 @@ function attemptStartCombat(player, container, grid, cols) {
         tile.classList.add('ground');
       }
       grid[y][x].type = 'G';
-      const enemy = enemyDefinitions['E'] || { name: 'Enemy', hp: 50 };
+      const enemy = getEnemyData('E') || { name: 'Enemy', hp: 50 };
       isInBattle = true;
       const intro = enemy.intro || 'A foe appears!';
       showDialogue(intro, () => startCombat({ id: 'E', ...enemy }, player));
@@ -136,7 +130,7 @@ function attemptStartCombat(player, container, grid, cols) {
   return false;
 }
 
-function attemptOpenChest(player, container, grid, cols) {
+async function attemptOpenChest(player, container, grid, cols) {
   const directions = [
     { x: 1, y: 0 },
     { x: -1, y: 0 },
@@ -155,10 +149,9 @@ function attemptOpenChest(player, container, grid, cols) {
       grid[y][x].type === 'C' &&
       isAdjacent(player.x, player.y, x, y)
     ) {
-      if (!isChestOpened(x, y)) {
-        const item = openChestAt(x, y);
+      if (!isChestOpened(`${router.getCurrentMapName()}:${x},${y}`)) {
+        const item = await openChest(`${router.getCurrentMapName()}:${x},${y}`);
         if (item) {
-          inventory.push(item);
           showDialogue(`You obtained ${item.name}!`);
 
           const index = y * cols + x;
@@ -216,7 +209,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
   const inventoryTab = document.querySelector('.inventory-tab');
   const inventoryOverlay = document.getElementById('inventory-overlay');
-  const inventoryList = document.getElementById('inventory-list');
   const closeBtn = inventoryOverlay.querySelector('.close-btn');
   const settingsTab = document.querySelector('.settings-tab');
   const settingsOverlay = document.getElementById('settings-overlay');
@@ -225,7 +217,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const scaleSelect = document.getElementById('ui-scale');
   const animToggle = document.getElementById('anim-toggle');
   const hpDisplay = document.getElementById('hp-display');
-  const player = { x: 0, y: 0, hp: 100, maxHp: 100 };
   function updateHpDisplay() {
     if (hpDisplay) {
       hpDisplay.textContent = `HP: ${player.hp}/${player.maxHp}`;
@@ -243,37 +234,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   initSkillSystem(player);
 
   try {
-    const res = await fetch('data/enemies.json');
-    if (res.ok) {
-      enemyDefinitions = await res.json();
-    }
+    await loadEnemyData();
   } catch (e) {
     console.error('Failed to load enemies', e);
   }
 
-  function renderInventory() {
-    inventoryList.innerHTML = '';
-    inventory.forEach(item => {
-      const row = document.createElement('div');
-      row.classList.add('inventory-item');
-      row.innerHTML = `<strong>${item.name}</strong><div class="desc">${item.description}</div>`;
-      inventoryList.appendChild(row);
-    });
-  }
-
-  function showInventory() {
-    renderInventory();
-    inventoryOverlay.classList.add('active');
-  }
-
-  function hideInventory() {
-    inventoryOverlay.classList.remove('active');
-  }
-
-  inventoryTab.addEventListener('click', showInventory);
-  closeBtn.addEventListener('click', hideInventory);
+  inventoryTab.addEventListener('click', toggleInventoryView);
+  closeBtn.addEventListener('click', toggleInventoryView);
   inventoryOverlay.addEventListener('click', e => {
-    if (e.target === inventoryOverlay) hideInventory();
+    if (e.target === inventoryOverlay) toggleInventoryView();
   });
 
   function showSettings() {
@@ -318,6 +287,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       isInBattle = false;
       if (e.detail.enemyHp <= 0) {
         const enemyId = e.detail.enemy.id;
+        defeatEnemy(enemyId);
         for (const [id, skill] of Object.entries(getAllSkills())) {
           if (skill.unlockCondition?.enemy === enemyId) {
             if (unlockSkill(id)) {
