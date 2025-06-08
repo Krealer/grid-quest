@@ -3,6 +3,7 @@ import { openChestAt, isChestOpened } from './gameEngine.js';
 import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 import { startCombat } from './combatSystem.js';
+import { showDialogue } from './dialogueSystem.js';
 import {
   loadSettings,
   saveSettings,
@@ -110,7 +111,8 @@ function attemptStartCombat(player, container, grid, cols) {
       grid[y][x].type = 'G';
       const enemy = enemyDefinitions['E'] || { name: 'Enemy', hp: 50 };
       isInBattle = true;
-      startCombat({ ...enemy });
+      const intro = enemy.intro || 'A foe appears!';
+      showDialogue(intro, () => startCombat({ ...enemy }));
       return true;
     }
   }
@@ -139,7 +141,7 @@ function attemptOpenChest(player, container, grid, cols) {
         const item = openChestAt(x, y);
         if (item) {
           inventory.push(item);
-          console.log(`Obtained ${item.name} from chest at (${x}, ${y})`);
+          showDialogue(`You obtained ${item.name}!`);
 
           const index = y * cols + x;
           const tile = container.children[index];
