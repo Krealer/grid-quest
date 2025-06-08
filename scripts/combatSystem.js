@@ -48,9 +48,9 @@ export function startCombat(enemy, player) {
   const playerBar = overlay.querySelector('.player .hp');
   const enemyBar = overlay.querySelector('.enemy .hp');
 
-  const playerMax = 100;
+  const playerMax = player.maxHp ?? 100;
   const enemyMax = enemy.hp || 50;
-  let playerHp = playerMax;
+  let playerHp = player.hp ?? playerMax;
   let enemyHp = enemyMax;
 
   updateHpBar(playerBar, playerHp, playerMax);
@@ -142,6 +142,9 @@ export function startCombat(enemy, player) {
 
   function endCombat() {
     log('Combat ended');
+    if (player) {
+      player.hp = playerHp;
+    }
     gridEl.classList.remove('blurred');
     overlay.remove();
     overlay = null;
