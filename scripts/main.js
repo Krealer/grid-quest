@@ -10,6 +10,7 @@ import { handleTileInteraction } from './interaction.js';
 import * as eryndor from './npc/eryndor.js';
 import * as lioran from './npc/lioran.js';
 import { initSkillSystem, unlockSkill, getAllSkills } from './skills.js';
+import { saveState, loadState, gameState } from './game_state.js';
 import {
   loadSettings,
   saveSettings,
@@ -84,6 +85,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const settingsTab = document.querySelector('.settings-tab');
   const settingsOverlay = document.getElementById('settings-overlay');
   const settingsClose = settingsOverlay.querySelector('.close-btn');
+  const saveTab = document.querySelector('.save-tab');
+  const loadTab = document.querySelector('.load-tab');
   const soundToggle = document.getElementById('sound-toggle');
   const scaleSelect = document.getElementById('ui-scale');
   const animToggle = document.getElementById('anim-toggle');
@@ -141,6 +144,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     settings.animations = animToggle.checked;
     applySettings(settings);
     saveSettings(settings);
+  });
+
+  saveTab.addEventListener('click', () => {
+    saveState();
+    showDialogue('Game saved!');
+  });
+
+  loadTab.addEventListener('click', async () => {
+    loadState();
+    const mapName = gameState.currentMap || 'map01';
+    const { cols: newCols } = await router.loadMap(mapName);
+    cols = newCols;
+    player.maxHp = 100 + (gameState.maxHpBonus || 0);
+    player.hp = Math.min(player.hp, player.maxHp);
+    updateHpDisplay();
+    showDialogue('Game loaded!');
   });
 
   try {
