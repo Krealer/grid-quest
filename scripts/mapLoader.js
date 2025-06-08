@@ -6,7 +6,17 @@ export async function loadMap(name) {
     throw new Error(`Failed to load map ${name}`);
   }
   const data = await response.json();
-  currentGrid = data.grid.map(row => [...row]);
+  currentGrid = data.grid.map(row => {
+    if (typeof row === 'string') {
+      return row.split('').map(ch => ({ type: ch }));
+    }
+    return row.map(cell => {
+      if (typeof cell === 'string') {
+        return { type: cell };
+      }
+      return cell;
+    });
+  });
   return currentGrid;
 }
 
@@ -27,7 +37,7 @@ export function renderMap(grid, container) {
       div.dataset.x = x;
       div.dataset.y = y;
 
-      switch (cell) {
+      switch (cell.type) {
         case 'G':
           div.classList.add('ground');
           break;
