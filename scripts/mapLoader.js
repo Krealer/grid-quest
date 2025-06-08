@@ -19,10 +19,14 @@ export function renderMap(grid, container) {
   const cols = grid[0].length;
   container.style.display = 'grid';
   container.style.gridTemplateColumns = `repeat(${cols}, 32px)`;
-  grid.forEach(row => {
-    [...row].forEach(cell => {
+
+  grid.forEach((row, y) => {
+    row.forEach((cell, x) => {
       const div = document.createElement('div');
       div.classList.add('tile');
+      div.dataset.x = x;
+      div.dataset.y = y;
+
       switch (cell) {
         case 'G':
           div.classList.add('ground');
@@ -39,6 +43,7 @@ export function renderMap(grid, container) {
         default:
           div.classList.add('ground');
       }
+
       container.appendChild(div);
     });
   });
