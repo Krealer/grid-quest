@@ -1,5 +1,4 @@
-// Handles trap and tile effects triggered when the player steps on
-// certain tiles.
+// Handles trap and tile effects triggered when the player steps on certain tiles.
 import { showDialogue } from './dialogueSystem.js';
 
 /**
