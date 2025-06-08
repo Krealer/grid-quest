@@ -3,6 +3,7 @@ import { addItem } from './inventory.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { getItemData, loadItems } from './item_loader.js';
 import { increaseMaxHp } from './player.js';
+import { unlockSkillsFromItem } from './skills.js';
 
 const chestContents = {
   'map01:11,3': { item: 'rusty_key' },
@@ -21,6 +22,7 @@ export async function openChest(id, player) {
   await loadItems();
   const config = chestContents[id] || {};
   let item = null;
+  let unlockedSkills = [];
   if (config.item) {
     item = getItemData(config.item);
     if (item) {
@@ -30,7 +32,8 @@ export async function openChest(id, player) {
         gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
       }
       updateInventoryUI();
+      unlockedSkills = unlockSkillsFromItem(config.item);
     }
   }
-  return { item, message: config.message || null };
+  return { item, message: config.message || null, unlockedSkills };
 }

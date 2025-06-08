@@ -1,6 +1,7 @@
 import { addItem, inventory } from './inventory.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { loadItems, getItemData } from './item_loader.js';
+import { unlockSkillsFromItem, getAllSkills } from './skills.js';
 import { dialogueMemory, setMemory } from './dialogue_state.js';
 
 let dialogueLines = {};
@@ -215,6 +216,13 @@ export async function startDialogueTree(dialogue, index = 0) {
         if (item) {
           addItem(item);
           updateInventoryUI();
+          const unlocked = unlockSkillsFromItem(opt.give);
+          unlocked.forEach(id => {
+            const skill = getAllSkills()[id];
+            if (skill) {
+              showDialogue(`You've learned a new skill: ${skill.name}!`);
+            }
+          });
         }
       }
       if (opt.goto !== null && opt.goto !== undefined) {
