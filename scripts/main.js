@@ -3,6 +3,11 @@ import { openChestAt, isChestOpened } from './gameEngine.js';
 import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 import { startCombat } from './combatSystem.js';
+import {
+  loadSettings,
+  saveSettings,
+  applySettings,
+} from './settingsManager.js';
 
 // Simple inventory array that stores items received during play.
 // Pre-populated with a few mock items for demonstration purposes.
@@ -155,8 +160,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   const inventoryOverlay = document.getElementById('inventory-overlay');
   const inventoryList = document.getElementById('inventory-list');
   const closeBtn = inventoryOverlay.querySelector('.close-btn');
+  const settingsTab = document.querySelector('.settings-tab');
+  const settingsOverlay = document.getElementById('settings-overlay');
+  const settingsClose = settingsOverlay.querySelector('.close-btn');
+  const soundToggle = document.getElementById('sound-toggle');
+  const scaleSelect = document.getElementById('ui-scale');
+  const animToggle = document.getElementById('anim-toggle');
   const player = { x: 0, y: 0 };
   let cols = 0;
+
+  let settings = loadSettings();
+  applySettings(settings);
+  soundToggle.checked = settings.sound;
+  scaleSelect.value = settings.scale;
+  animToggle.checked = settings.animations;
 
   router.init(container, player);
 
@@ -192,6 +209,37 @@ document.addEventListener('DOMContentLoaded', async () => {
   closeBtn.addEventListener('click', hideInventory);
   inventoryOverlay.addEventListener('click', e => {
     if (e.target === inventoryOverlay) hideInventory();
+  });
+
+  function showSettings() {
+    settingsOverlay.classList.add('active');
+  }
+
+  function hideSettings() {
+    settingsOverlay.classList.remove('active');
+  }
+
+  settingsTab.addEventListener('click', showSettings);
+  settingsClose.addEventListener('click', hideSettings);
+  settingsOverlay.addEventListener('click', e => {
+    if (e.target === settingsOverlay) hideSettings();
+  });
+
+  soundToggle.addEventListener('change', () => {
+    settings.sound = soundToggle.checked;
+    saveSettings(settings);
+  });
+
+  scaleSelect.addEventListener('change', () => {
+    settings.scale = scaleSelect.value;
+    applySettings(settings);
+    saveSettings(settings);
+  });
+
+  animToggle.addEventListener('change', () => {
+    settings.animations = animToggle.checked;
+    applySettings(settings);
+    saveSettings(settings);
   });
 
   try {
