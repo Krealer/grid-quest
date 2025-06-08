@@ -52,3 +52,48 @@
 .tile.player {
   background: #3498db;
 }
+
+#battle-ui.hidden {
+  display: none;
+}
+
+#battle-ui {
+  padding: 10px;
+  background: #111;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+#battle-status {
+  margin-bottom: 8px;
+}
+
+#skill-menu {
+  margin-bottom: 8px;
+}
+
+.skill-button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background: #444;
+  color: #fff;
+  border: none;
+}
+
+.skill-button:hover {
+  background: #666;
+}
+
+.skill-button.selected {
+  background: #888;
+}
+
+.flash-damage {
+  animation: flash 0.3s ease;
+}
+
+@keyframes flash {
+  from { background-color: #ff0000; }
+  to { background-color: transparent; }
+}

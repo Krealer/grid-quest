@@ -1,5 +1,6 @@
 import { getCurrentGrid } from './mapLoader.js';
 import { openChestAt, isChestOpened } from './gameEngine.js';
+import { startBattle } from './combatSystem.js';
 import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 
@@ -62,11 +63,11 @@ function handleKey(e, player, container, cols) {
   const grid = getCurrentGrid();
 
   if (e.code === 'Space') {
-    attemptOpenChest(player, container, grid, cols);
+    attemptAction(player, container, grid, cols);
   }
 }
 
-function attemptOpenChest(player, container, grid, cols) {
+function attemptAction(player, container, grid, cols) {
   const directions = [
     { x: 1, y: 0 },
     { x: -1, y: 0 },
@@ -77,35 +78,34 @@ function attemptOpenChest(player, container, grid, cols) {
   for (const dir of directions) {
     const x = player.x + dir.x;
     const y = player.y + dir.y;
-    if (
-      y >= 0 &&
-      y < grid.length &&
-      x >= 0 &&
-      x < grid[0].length &&
-      grid[y][x].type === 'C'
-    ) {
-      if (!isChestOpened(x, y)) {
-        const item = openChestAt(x, y);
-        if (item) {
-          inventory.push(item);
-          console.log(`Obtained ${item} from chest at (${x}, ${y})`);
+    if (y >= 0 && y < grid.length && x >= 0 && x < grid[0].length) {
+      if (grid[y][x].type === 'C') {
+        if (!isChestOpened(x, y)) {
+          const item = openChestAt(x, y);
+          if (item) {
+            inventory.push(item);
+            console.log(`Obtained ${item} from chest at (${x}, ${y})`);
 
-          const index = y * cols + x;
-          const tile = container.children[index];
-          if (tile) {
-            tile.classList.remove('chest');
-            tile.classList.add('chest-opened');
+            const index = y * cols + x;
+            const tile = container.children[index];
+            if (tile) {
+              tile.classList.remove('chest');
+              tile.classList.add('chest-opened');
+            }
           }
         }
+        break;
+      } else if (grid[y][x].type === 'E') {
+        startBattle(player, { hp: 30, maxHp: 30, x, y }, grid, container, cols);
+        break;
       }
-      break;
     }
   }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
-  const player = { x: 0, y: 0 };
+  const player = { x: 0, y: 0, hp: 100, maxHp: 100, guard: false };
   let cols = 0;
 
   router.init(container, player);
