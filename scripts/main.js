@@ -10,6 +10,7 @@ import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 import { startCombat } from './combatSystem.js';
 import { showDialogue } from './dialogueSystem.js';
+import * as eryndor from './npc/eryndor.js';
 import { initSkillSystem, unlockSkill, getAllSkills } from './skills.js';
 import {
   loadSettings,
@@ -20,6 +21,7 @@ import {
 // Inventory contents are managed in inventory.js
 
 let isInBattle = false;
+const npcModules = { eryndor };
 
 function drawPlayer(player, container, cols) {
   container.querySelectorAll('.player').forEach(el => el.classList.remove('player'));
@@ -88,7 +90,9 @@ async function handleKey(e, player, container, cols) {
   if (e.code === 'Space') {
     if (!attemptStartCombat(player, container, grid, cols)) {
       if (!(await attemptOpenChest(player, container, grid, cols))) {
-        attemptDrinkWater(player, grid);
+        if (!attemptTalkToNpc(player, container, grid, cols)) {
+          attemptDrinkWater(player, grid);
+        }
       }
     }
   }
@@ -170,6 +174,36 @@ async function attemptOpenChest(player, container, grid, cols) {
             }
           }
         }
+      }
+      return true;
+    }
+  }
+  return false;
+}
+
+function attemptTalkToNpc(player, container, grid, cols) {
+  const directions = [
+    { x: 1, y: 0 },
+    { x: -1, y: 0 },
+    { x: 0, y: 1 },
+    { x: 0, y: -1 },
+  ];
+
+  for (const dir of directions) {
+    const x = player.x + dir.x;
+    const y = player.y + dir.y;
+    if (
+      y >= 0 &&
+      y < grid.length &&
+      x >= 0 &&
+      x < grid[0].length &&
+      grid[y][x].type === 'N' &&
+      isAdjacent(player.x, player.y, x, y)
+    ) {
+      const npcId = grid[y][x].npc;
+      const npc = npcModules[npcId];
+      if (npc && typeof npc.interact === 'function') {
+        npc.interact();
       }
       return true;
     }
