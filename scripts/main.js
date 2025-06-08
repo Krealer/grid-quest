@@ -23,6 +23,14 @@ import {
 let isInBattle = false;
 const npcModules = { eryndor };
 
+let hpDisplay;
+
+function updateHpDisplay() {
+  if (hpDisplay) {
+    hpDisplay.textContent = `HP: ${player.hp}/${player.maxHp}`;
+  }
+}
+
 function drawPlayer(player, container, cols) {
   container.querySelectorAll('.player').forEach(el => el.classList.remove('player'));
   const index = player.y * cols + player.x;
@@ -250,12 +258,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const soundToggle = document.getElementById('sound-toggle');
   const scaleSelect = document.getElementById('ui-scale');
   const animToggle = document.getElementById('anim-toggle');
-  const hpDisplay = document.getElementById('hp-display');
-  function updateHpDisplay() {
-    if (hpDisplay) {
-      hpDisplay.textContent = `HP: ${player.hp}/${player.maxHp}`;
-    }
-  }
+  hpDisplay = document.getElementById('hp-display');
+  updateHpDisplay();
   let cols = 0;
 
   let settings = loadSettings();
