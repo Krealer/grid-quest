@@ -2,7 +2,8 @@
 import { getCurrentGrid } from './mapLoader.js';
 import { isAdjacent } from './logic.js';
 import { isChestOpened, openChest } from './chest.js';
-import { hasItem } from './inventory.js';
+import { hasItem, removeItem } from './inventory.js';
+import { updateInventoryUI } from './inventory_state.js';
 import { getEnemyData } from './enemy.js';
 import { startCombat } from './combatSystem.js';
 import { showDialogue } from './dialogueSystem.js';
@@ -41,6 +42,10 @@ export async function handleTileInteraction(
       if (required && !hasItem(required)) {
         showDialogue('The door is locked.');
         break;
+      }
+      if (required) {
+        removeItem(required);
+        updateInventoryUI();
       }
       const targetMap = tile.target || tile.leadsTo;
       const { cols: newCols } = await router.loadMap(targetMap, tile.spawn);
