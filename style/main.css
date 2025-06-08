@@ -1,0 +1,41 @@
+#game-grid {
+  margin: 20px auto;
+  width: max-content;
+}
+
+.tile {
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+  border: 1px solid #333;
+}
+
+.ground {
+  background: #777;
+}
+
+.chest {
+  background: #b5651d;
+}
+
+.enemy {
+  background: #e74c3c;
+}
+
+.door {
+  background: #2ecc71;
+}
+
+#ui-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background: #222;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+#ui-bar .tab {
+  padding: 5px 10px;
+  cursor: pointer;
+}

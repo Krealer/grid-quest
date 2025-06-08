@@ -1,0 +1,38 @@
+export async function loadMap(name) {
+  const response = await fetch(`data/maps/${name}.json`);
+  if (!response.ok) {
+    throw new Error(`Failed to load map ${name}`);
+  }
+  const data = await response.json();
+  return data.grid;
+}
+
+export function renderMap(grid, container) {
+  container.innerHTML = '';
+  const cols = grid[0].length;
+  container.style.display = 'grid';
+  container.style.gridTemplateColumns = `repeat(${cols}, 32px)`;
+  grid.forEach(row => {
+    [...row].forEach(cell => {
+      const div = document.createElement('div');
+      div.classList.add('tile');
+      switch (cell) {
+        case 'G':
+          div.classList.add('ground');
+          break;
+        case 'C':
+          div.classList.add('chest', 'blocked');
+          break;
+        case 'E':
+          div.classList.add('enemy', 'blocked');
+          break;
+        case 'D':
+          div.classList.add('door', 'blocked');
+          break;
+        default:
+          div.classList.add('ground');
+      }
+      container.appendChild(div);
+    });
+  });
+}
