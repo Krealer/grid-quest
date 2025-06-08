@@ -34,9 +34,9 @@ export function init(gameContainer, playerObj) {
 
 export async function loadMap(filename, spawnPoint) {
   const name = filename.replace(/\.json$/, '');
-  const grid = await loadMapData(name);
+  const { grid, environment } = await loadMapData(name);
   cols = grid[0].length;
-  renderMap(grid, container);
+  renderMap(grid, container, environment);
   resetChestState();
 
   if (spawnPoint) {

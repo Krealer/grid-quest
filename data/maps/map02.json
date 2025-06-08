@@ -1,4 +1,6 @@
 {
+  "name": "Rainy Crossroads",
+  "environment": "rain",
   "grid": [
     [
       { "type": "D", "target": "map01.json", "spawn": { "x": 6, "y": 7 } },
