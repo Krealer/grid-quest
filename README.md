@@ -16,6 +16,10 @@ Then open `http://localhost:8000/` in your browser to launch `index.html`. Any o
 
 Game scripts live under `scripts/` and data files are in `data/`. With the server running, modifying these files and refreshing the page is enough to see changes.
 
+### Environments
+
+Maps can specify an `environment` value which adds a CSS class like `env-fog` or `env-rain` to the grid. The stylesheet provides visual effects for these classes. Additional options such as `env-day` and `env-night` are available for custom day or night scenes.
+
 ## Deployment
 
 The repository is ready for GitHub Pages. Commit your changes to the default branch and enable Pages to serve `index.html` from the repository root.
