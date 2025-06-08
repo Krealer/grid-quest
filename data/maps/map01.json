@@ -23,7 +23,8 @@
           "x": 1,
           "y": 1
         },
-        "key": "rusted_key"
+        "locked": true,
+        "requiresItem": "rusty_key"
       },
       "G",
       "G",
