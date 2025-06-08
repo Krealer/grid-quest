@@ -22,7 +22,8 @@
         "spawn": {
           "x": 1,
           "y": 1
-        }
+        },
+        "key": "rusted_key"
       },
       "G",
       "G",

@@ -11,7 +11,7 @@ export async function openChest(id) {
   if (isChestOpened(id)) return null;
   gameState.openedChests.add(id);
   await loadItems();
-  const item = getItemData('mysterious_key');
+  const item = getItemData('rusted_key');
   if (item) {
     addItem(item);
     updateInventoryUI();
