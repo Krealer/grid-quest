@@ -1,3 +1,8 @@
+import { addItem, inventory } from './inventory.js';
+import { updateInventoryUI } from './inventory_state.js';
+import { loadItems, getItemData } from './item_loader.js';
+import { dialogueMemory, setMemory } from './dialogue_state.js';
+
 let dialogueLines = {};
 let dataLoaded = false;
 
@@ -180,4 +185,47 @@ export async function showDialogueWithChoices(keyOrText, choices = []) {
 
   document.addEventListener('keydown', keyHandler);
   overlay.addEventListener('click', finishTyping);
+}
+
+export async function startDialogueTree(dialogue, index = 0) {
+  if (!Array.isArray(dialogue) || index == null) return;
+  const entry = dialogue[index];
+  if (!entry) return;
+  const state = {
+    inventory: inventory.map(it => it.name),
+    memory: dialogueMemory,
+  };
+  const validOptions = (entry.options || []).filter(opt => {
+    if (typeof opt.condition === 'function') {
+      try {
+        return opt.condition(state);
+      } catch {
+        return false;
+      }
+    }
+    return true;
+  });
+  const choices = validOptions.map(opt => ({
+    label: opt.label,
+    callback: async () => {
+      if (opt.memoryFlag) setMemory(opt.memoryFlag);
+      if (opt.give) {
+        await loadItems();
+        const item = getItemData(opt.give);
+        if (item) {
+          addItem(item);
+          updateInventoryUI();
+        }
+      }
+      if (opt.goto !== null && opt.goto !== undefined) {
+        startDialogueTree(dialogue, opt.goto);
+      }
+    }
+  }));
+
+  if (choices.length > 0) {
+    showDialogueWithChoices(entry.text, choices);
+  } else {
+    showDialogue(entry.text);
+  }
 }

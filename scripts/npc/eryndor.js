@@ -1,6 +1,6 @@
-import { showDialogue } from '../dialogueSystem.js';
-import { dialogue } from '../npc_dialogues/eryndor_dialogue.js';
+import { startDialogueTree } from '../dialogueSystem.js';
+import { eryndorDialogue } from '../npc_dialogues/eryndor_dialogue.js';
 
 export function interact() {
-  showDialogue(dialogue.intro);
+  startDialogueTree(eryndorDialogue);
 }
