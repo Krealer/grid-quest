@@ -1,4 +1,5 @@
 let currentGrid = null;
+let currentEnvironment = 'clear';
 
 export async function loadMap(name) {
   const response = await fetch(`data/maps/${name}.json`);
@@ -6,6 +7,7 @@ export async function loadMap(name) {
     throw new Error(`Failed to load map ${name}`);
   }
   const data = await response.json();
+  currentEnvironment = data.environment || 'clear';
   currentGrid = data.grid.map(row => {
     if (typeof row === 'string') {
       return row.split('').map(ch => ({ type: ch }));
@@ -17,18 +19,29 @@ export async function loadMap(name) {
       return cell;
     });
   });
-  return currentGrid;
+  return { grid: currentGrid, environment: currentEnvironment };
 }
 
 export function getCurrentGrid() {
   return currentGrid;
 }
 
-export function renderMap(grid, container) {
+export function getCurrentEnvironment() {
+  return currentEnvironment;
+}
+
+export function renderMap(grid, container, environment = currentEnvironment) {
   container.innerHTML = '';
   const cols = grid[0].length;
   container.style.display = 'grid';
   container.style.gridTemplateColumns = `repeat(${cols}, 32px)`;
+
+  Array.from(container.classList)
+    .filter(c => c.startsWith('env-'))
+    .forEach(c => container.classList.remove(c));
+  if (environment) {
+    container.classList.add(`env-${environment}`);
+  }
 
   grid.forEach((row, y) => {
     row.forEach((cell, x) => {
