@@ -1,20 +1,10 @@
-import { loadMap, renderMap, getCurrentGrid } from './mapLoader.js';
-import { openChestAt, isChestOpened, resetChestState } from './gameEngine.js';
+import { getCurrentGrid } from './mapLoader.js';
+import { openChestAt, isChestOpened } from './gameEngine.js';
 import { findPath } from './pathfinder.js';
+import * as router from './router.js';
 
 // Simple inventory array that stores items received during play.
 export const inventory = [];
-
-function findFirstWalkable(grid) {
-  for (let y = 0; y < grid.length; y++) {
-    for (let x = 0; x < grid[y].length; x++) {
-      if (grid[y][x] === 'G') {
-        return { x, y };
-      }
-    }
-  }
-  return { x: 0, y: 0 };
-}
 
 function drawPlayer(player, container, cols) {
   container.querySelectorAll('.player').forEach(el => el.classList.remove('player'));
@@ -34,7 +24,7 @@ function handleTileClick(e, player, container, cols) {
   const x = Number(target.dataset.x);
   const y = Number(target.dataset.y);
   const grid = getCurrentGrid();
-  if (grid[y][x] !== 'G') return;
+  if (grid[y][x].type !== 'G' && grid[y][x].type !== 'D') return;
 
   const path = findPath(grid, player.x, player.y, x, y);
   if (path.length === 0) return;
@@ -50,7 +40,19 @@ function handleTileClick(e, player, container, cols) {
     player.x = pos.x;
     player.y = pos.y;
     drawPlayer(player, container, cols);
+    const tile = grid[player.y][player.x];
     index++;
+    if (tile.type === 'D') {
+      isMoving = false;
+      index = path.length;
+      router
+        .loadMap(tile.target, tile.spawn)
+        .then(({ cols: newCols }) => {
+          cols = newCols;
+        })
+        .catch(console.error);
+      return;
+    }
     setTimeout(() => requestAnimationFrame(step), 150);
   }
   requestAnimationFrame(step);
@@ -80,7 +82,7 @@ function attemptOpenChest(player, container, grid, cols) {
       y < grid.length &&
       x >= 0 &&
       x < grid[0].length &&
-      grid[y][x] === 'C'
+      grid[y][x].type === 'C'
     ) {
       if (!isChestOpened(x, y)) {
         const item = openChestAt(x, y);
@@ -106,16 +108,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const player = { x: 0, y: 0 };
   let cols = 0;
 
-  try {
-    const grid = await loadMap('map01');
-    cols = grid[0].length;
-    renderMap(grid, container);
-    resetChestState();
+  router.init(container, player);
 
-    const start = findFirstWalkable(grid);
-    player.x = start.x;
-    player.y = start.y;
-    drawPlayer(player, container, cols);
+  try {
+    const { cols: newCols } = await router.loadMap('map01');
+    cols = newCols;
 
     document.addEventListener('keydown', e => handleKey(e, player, container, cols));
     container.addEventListener('click', e => handleTileClick(e, player, container, cols));

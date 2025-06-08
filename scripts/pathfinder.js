@@ -7,7 +7,8 @@ export function findPath(mapGrid, startX, startY, targetX, targetY) {
     targetY < 0 ||
     targetX >= cols ||
     targetY >= rows ||
-    mapGrid[targetY][targetX] !== 'G'
+    (mapGrid[targetY][targetX].type !== 'G' &&
+      mapGrid[targetY][targetX].type !== 'D')
   ) {
     return [];
   }
@@ -44,7 +45,7 @@ export function findPath(mapGrid, startX, startY, targetX, targetY) {
         ny < 0 ||
         nx >= cols ||
         ny >= rows ||
-        mapGrid[ny][nx] !== 'G'
+        (mapGrid[ny][nx].type !== 'G' && mapGrid[ny][nx].type !== 'D')
       ) {
         continue;
       }
