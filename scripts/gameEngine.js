@@ -15,6 +15,9 @@ export function handleTileEffects(tileSymbol, player) {
   } else if (tileSymbol === 'T') {
     player.hp = Math.max(0, player.hp - 15);
     showDialogue('A trap! You were badly hurt. -15 HP.');
+  } else if (tileSymbol === 'W') {
+    player.hp = player.maxHp;
+    showDialogue('The cool water rejuvenates you. HP fully restored.');
   }
 }
 

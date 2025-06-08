@@ -37,11 +37,13 @@ export async function handleTileInteraction(
   const tile = grid[y][x];
   switch (tile.type) {
     case 'D': {
-      if (tile.key && !hasItem(tile.key)) {
+      const required = tile.key || tile.requiresItem;
+      if (required && !hasItem(required)) {
         showDialogue('The door is locked.');
         break;
       }
-      const { cols: newCols } = await router.loadMap(tile.target, tile.spawn);
+      const targetMap = tile.target || tile.leadsTo;
+      const { cols: newCols } = await router.loadMap(targetMap, tile.spawn);
       return newCols;
     }
     case 'E': {
@@ -52,17 +54,23 @@ export async function handleTileInteraction(
         tileEl.classList.add('ground');
       }
       tile.type = 'G';
-      const enemy = getEnemyData('E') || { name: 'Enemy', hp: 50 };
+      const enemyId = tile.enemyId || 'E';
+      const enemy = getEnemyData(enemyId) || { name: 'Enemy', hp: 50 };
       const intro = enemy.intro || 'A foe appears!';
-      showDialogue(intro, () => startCombat({ id: 'E', ...enemy }, player));
+      showDialogue(intro, () => startCombat({ id: enemyId, ...enemy }, player));
       break;
     }
     case 'C': {
       const chestId = `${router.getCurrentMapName()}:${x},${y}`;
       if (!isChestOpened(chestId)) {
-        const item = await openChest(chestId);
-        if (item) {
-          showDialogue(`You obtained ${item.name}!`);
+        const result = await openChest(chestId, player);
+        if (result) {
+          if (result.message) {
+            showDialogue(result.message);
+          }
+          if (result.item) {
+            showDialogue(`You obtained ${result.item.name}!`);
+          }
           const index = y * cols + x;
           const tileEl = container.children[index];
           if (tileEl) {

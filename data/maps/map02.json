@@ -4,6 +4,68 @@
   "grid": [
     [
       {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
         "type": "D",
         "target": "map01.json",
         "spawn": {
@@ -11,44 +73,1184 @@
           "y": 7
         }
       },
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G"
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
     ],
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG"
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N",
+        "npc": "lioran"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "t"
+      },
+      {
+        "type": "T"
+      },
+      {
+        "type": "t"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "T"
+      },
+      {
+        "type": "C"
+      },
+      {
+        "type": "t"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "T"
+      },
+      {
+        "type": "t"
+      },
+      {
+        "type": "T"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "t"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "E"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "E",
+        "enemyId": "Z"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "D",
+        "locked": true,
+        "requiresItem": "silver_key",
+        "leadsTo": "map03.json"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "C"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "C"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ],
+    [
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      }
+    ]
   ]
 }
