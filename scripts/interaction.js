@@ -2,6 +2,7 @@
 import { getCurrentGrid } from './mapLoader.js';
 import { isAdjacent } from './logic.js';
 import { isChestOpened, openChest } from './chest.js';
+import { hasItem } from './inventory.js';
 import { getEnemyData } from './enemy.js';
 import { startCombat } from './combatSystem.js';
 import { showDialogue } from './dialogueSystem.js';
@@ -36,6 +37,10 @@ export async function handleTileInteraction(
   const tile = grid[y][x];
   switch (tile.type) {
     case 'D': {
+      if (tile.key && !hasItem(tile.key)) {
+        showDialogue('The door is locked.');
+        break;
+      }
       const { cols: newCols } = await router.loadMap(tile.target, tile.spawn);
       return newCols;
     }
