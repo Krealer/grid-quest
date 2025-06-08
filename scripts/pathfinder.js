@@ -1,4 +1,6 @@
-const WALKABLE = new Set(['G', 'D', 't', 'T', 'W']);
+// Tiles the player can move onto. Doors are no longer walkable since
+// interactions are handled separately on double-click.
+const WALKABLE = new Set(['G', 't', 'T', 'W']);
 
 export function findPath(mapGrid, startX, startY, targetX, targetY) {
   const rows = mapGrid.length;
