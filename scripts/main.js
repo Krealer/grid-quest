@@ -1,5 +1,6 @@
 import { loadMap, renderMap, getCurrentGrid } from './mapLoader.js';
 import { openChestAt, isChestOpened, resetChestState } from './gameEngine.js';
+import { findPath } from './pathfinder.js';
 
 // Simple inventory array that stores items received during play.
 export const inventory = [];
@@ -24,47 +25,43 @@ function drawPlayer(player, container, cols) {
   }
 }
 
+let isMoving = false;
+
+function handleTileClick(e, player, container, cols) {
+  if (isMoving) return;
+  const target = e.target;
+  if (!target.classList.contains('tile')) return;
+  const x = Number(target.dataset.x);
+  const y = Number(target.dataset.y);
+  const grid = getCurrentGrid();
+  if (grid[y][x] !== 'G') return;
+
+  const path = findPath(grid, player.x, player.y, x, y);
+  if (path.length === 0) return;
+
+  let index = 0;
+  isMoving = true;
+  function step() {
+    if (index >= path.length) {
+      isMoving = false;
+      return;
+    }
+    const pos = path[index];
+    player.x = pos.x;
+    player.y = pos.y;
+    drawPlayer(player, container, cols);
+    index++;
+    setTimeout(() => requestAnimationFrame(step), 150);
+  }
+  requestAnimationFrame(step);
+}
+
 function handleKey(e, player, container, cols) {
   const grid = getCurrentGrid();
 
   if (e.code === 'Space') {
     attemptOpenChest(player, container, grid, cols);
-    return;
   }
-
-  let dx = 0;
-  let dy = 0;
-  switch (e.key) {
-    case 'ArrowUp':
-      dy = -1;
-      break;
-    case 'ArrowDown':
-      dy = 1;
-      break;
-    case 'ArrowLeft':
-      dx = -1;
-      break;
-    case 'ArrowRight':
-      dx = 1;
-      break;
-    default:
-      return;
-  }
-  e.preventDefault();
-  const newX = player.x + dx;
-  const newY = player.y + dy;
-  if (
-    newY < 0 ||
-    newY >= grid.length ||
-    newX < 0 ||
-    newX >= grid[0].length ||
-    grid[newY][newX] !== 'G'
-  ) {
-    return;
-  }
-  player.x = newX;
-  player.y = newY;
-  drawPlayer(player, container, cols);
 }
 
 function attemptOpenChest(player, container, grid, cols) {
@@ -121,6 +118,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     drawPlayer(player, container, cols);
 
     document.addEventListener('keydown', e => handleKey(e, player, container, cols));
+    container.addEventListener('click', e => handleTileClick(e, player, container, cols));
   } catch (err) {
     console.error(err);
   }

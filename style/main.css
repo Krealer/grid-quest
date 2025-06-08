@@ -12,6 +12,11 @@
 
 .ground {
   background: #777;
+  cursor: pointer;
+}
+
+.ground:hover {
+  outline: 2px solid #fff;
 }
 
 .chest {
