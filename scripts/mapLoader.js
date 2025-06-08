@@ -1,6 +1,16 @@
 let currentGrid = null;
 let currentEnvironment = 'clear';
 
+function normalizeGrid(grid, size = 20) {
+  const normalized = [];
+  for (let y = 0; y < size; y++) {
+    const row = grid[y] || [];
+    const paddedRow = [...row.slice(0, size), ...Array(size - row.length).fill('G')];
+    normalized.push(paddedRow);
+  }
+  return normalized;
+}
+
 export async function loadMap(name) {
   const response = await fetch(`data/maps/${name}.json`);
   if (!response.ok) {
@@ -19,6 +29,7 @@ export async function loadMap(name) {
       return cell;
     });
   });
+  currentGrid = normalizeGrid(currentGrid);
   return { grid: currentGrid, environment: currentEnvironment };
 }
 
