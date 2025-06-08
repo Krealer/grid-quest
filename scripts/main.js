@@ -5,7 +5,12 @@ import * as router from './router.js';
 import { startCombat } from './combatSystem.js';
 
 // Simple inventory array that stores items received during play.
-export const inventory = [];
+// Pre-populated with a few mock items for demonstration purposes.
+export const inventory = [
+  { name: 'Mysterious Key', description: 'A rusty key of unknown origin.' },
+  { name: 'Ancient Coin', description: 'An old coin from a forgotten era.' },
+  { name: 'Healing Herb', description: 'Restores a small amount of health.' },
+];
 
 let enemyDefinitions = {};
 let isInBattle = false;
@@ -129,7 +134,7 @@ function attemptOpenChest(player, container, grid, cols) {
         const item = openChestAt(x, y);
         if (item) {
           inventory.push(item);
-          console.log(`Obtained ${item} from chest at (${x}, ${y})`);
+          console.log(`Obtained ${item.name} from chest at (${x}, ${y})`);
 
           const index = y * cols + x;
           const tile = container.children[index];
@@ -146,6 +151,10 @@ function attemptOpenChest(player, container, grid, cols) {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
+  const inventoryTab = document.querySelector('.inventory-tab');
+  const inventoryOverlay = document.getElementById('inventory-overlay');
+  const inventoryList = document.getElementById('inventory-list');
+  const closeBtn = inventoryOverlay.querySelector('.close-btn');
   const player = { x: 0, y: 0 };
   let cols = 0;
 
@@ -159,6 +168,31 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (e) {
     console.error('Failed to load enemies', e);
   }
+
+  function renderInventory() {
+    inventoryList.innerHTML = '';
+    inventory.forEach(item => {
+      const row = document.createElement('div');
+      row.classList.add('inventory-item');
+      row.innerHTML = `<strong>${item.name}</strong><div class="desc">${item.description}</div>`;
+      inventoryList.appendChild(row);
+    });
+  }
+
+  function showInventory() {
+    renderInventory();
+    inventoryOverlay.classList.add('active');
+  }
+
+  function hideInventory() {
+    inventoryOverlay.classList.remove('active');
+  }
+
+  inventoryTab.addEventListener('click', showInventory);
+  closeBtn.addEventListener('click', hideInventory);
+  inventoryOverlay.addEventListener('click', e => {
+    if (e.target === inventoryOverlay) hideInventory();
+  });
 
   try {
     const { cols: newCols } = await router.loadMap('map01');
