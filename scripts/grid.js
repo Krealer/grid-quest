@@ -28,6 +28,10 @@ export function renderGrid(grid, container, environment = 'clear') {
         case 'E':
           div.classList.add('enemy', 'blocked');
           break;
+        case 'N':
+          div.classList.add('npc', 'blocked');
+          if (cell.npc) div.dataset.npc = cell.npc;
+          break;
         case 'D':
           div.classList.add('door', 'blocked');
           break;
