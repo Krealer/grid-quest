@@ -9,7 +9,7 @@
 <body>
   <div id="game-grid"></div>
   <div id="ui-bar">
-    <div class="tab">Settings</div>
+    <div class="tab settings-tab">Settings</div>
     <div class="tab inventory-tab">Inventory</div>
     <div class="tab">Save</div>
     <div class="tab">Load</div>
@@ -19,6 +19,26 @@
       <button class="close-btn">&times;</button>
       <h2>Inventory</h2>
       <div id="inventory-list"></div>
+    </div>
+  </div>
+  <div id="settings-overlay" class="settings-overlay">
+    <div class="settings-content">
+      <button class="close-btn">&times;</button>
+      <h2>Settings</h2>
+      <label class="setting-row">
+        <input type="checkbox" id="sound-toggle" /> Sound
+      </label>
+      <label class="setting-row">
+        UI Scale
+        <select id="ui-scale">
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+      </label>
+      <label class="setting-row">
+        <input type="checkbox" id="anim-toggle" /> Enable Grid Animations
+      </label>
     </div>
   </div>
   <script type="module" src="scripts/main.js"></script>
