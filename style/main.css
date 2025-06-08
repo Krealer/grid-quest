@@ -100,3 +100,31 @@
   margin: 0 5px;
   padding: 5px 15px;
 }
+
+#battle-overlay .log {
+  margin-top: 10px;
+  height: 80px;
+  overflow-y: auto;
+  width: 220px;
+  font-size: 14px;
+  border: 1px solid #555;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#battle-overlay .actions button:hover {
+  outline: 2px solid #fff;
+}
+
+#battle-overlay .hp.damage {
+  animation: damageFlash 0.3s;
+}
+
+@keyframes damageFlash {
+  from {
+    background: #fff;
+  }
+  to {
+    background: #e74c3c;
+  }
+}
