@@ -5,7 +5,12 @@ export function normalizeGrid(grid, size = 20) {
   const normalized = [];
   for (let y = 0; y < size; y++) {
     const row = grid[y] || [];
-    const paddedRow = [...row.slice(0, size), ...Array(size - row.length).fill('G')];
+    const paddedRow = row.slice(0, size).map(cell =>
+      typeof cell === 'string' ? { type: cell } : cell
+    );
+    for (let i = paddedRow.length; i < size; i++) {
+      paddedRow.push({ type: 'G' });
+    }
     normalized.push(paddedRow);
   }
   return normalized;
