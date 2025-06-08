@@ -1,5 +1,5 @@
 import { getCurrentGrid } from './mapLoader.js';
-import { openChestAt, isChestOpened } from './gameEngine.js';
+import { openChestAt, isChestOpened, isAdjacent } from './gameEngine.js';
 import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 import { startCombat } from './combatSystem.js';
@@ -40,7 +40,13 @@ function handleTileClick(e, player, container, cols) {
   const x = Number(target.dataset.x);
   const y = Number(target.dataset.y);
   const grid = getCurrentGrid();
-  if (grid[y][x].type !== 'G' && grid[y][x].type !== 'D') return;
+  const tileType = grid[y][x].type;
+
+  if (tileType === 'D' && !isAdjacent(player.x, player.y, x, y)) {
+    return;
+  }
+
+  if (tileType !== 'G' && tileType !== 'D') return;
 
   const path = findPath(grid, player.x, player.y, x, y);
   if (path.length === 0) return;
@@ -101,7 +107,8 @@ function attemptStartCombat(player, container, grid, cols) {
       y < grid.length &&
       x >= 0 &&
       x < grid[0].length &&
-      grid[y][x].type === 'E'
+      grid[y][x].type === 'E' &&
+      isAdjacent(player.x, player.y, x, y)
     ) {
       const index = y * cols + x;
       const tile = container.children[index];
@@ -136,7 +143,8 @@ function attemptOpenChest(player, container, grid, cols) {
       y < grid.length &&
       x >= 0 &&
       x < grid[0].length &&
-      grid[y][x].type === 'C'
+      grid[y][x].type === 'C' &&
+      isAdjacent(player.x, player.y, x, y)
     ) {
       if (!isChestOpened(x, y)) {
         const item = openChestAt(x, y);

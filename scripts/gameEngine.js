@@ -42,3 +42,17 @@ export function openChestAt(x, y) {
     description: 'A rusty key of unknown origin.',
   };
 }
+
+/**
+ * Determines if two grid positions are directly adjacent horizontally or
+ * vertically.
+ *
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
+ * @returns {boolean}
+ */
+export function isAdjacent(x1, y1, x2, y2) {
+  return Math.abs(x1 - x2) + Math.abs(y1 - y2) === 1;
+}
