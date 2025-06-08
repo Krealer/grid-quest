@@ -18,7 +18,7 @@ Game scripts live under `scripts/` and data files are in `data/`. With the serve
 
 ### Environments
 
-Maps can specify an `environment` value which adds a CSS class like `env-fog` or `env-rain` to the grid. The stylesheet provides visual effects for these classes. Additional options such as `env-day` and `env-night` are available for custom day or night scenes.
+Maps can specify an `environment` value which adds a CSS class like `env-fog` or `env-rain` to the grid. The stylesheet provides visual effects for these classes. Additional options such as `env-day`, `env-dusk` and `env-night` are available for custom day, dusk or night scenes.
 
 ## Deployment
 
