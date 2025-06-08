@@ -74,6 +74,15 @@ export function renderMap(grid, container, environment = currentEnvironment) {
         case 'D':
           div.classList.add('door', 'blocked');
           break;
+        case 't':
+          div.classList.add('trap-light');
+          break;
+        case 'T':
+          div.classList.add('trap-dark');
+          break;
+        case 'W':
+          div.classList.add('water');
+          break;
         default:
           div.classList.add('ground');
       }

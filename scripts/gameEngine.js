@@ -1,4 +1,6 @@
-// Game engine state management for interactive objects such as chests.
+// Game engine state management for interactive objects such as chests
+// and environmental tile effects.
+import { showDialogue } from './dialogueSystem.js';
 
 const openedChests = new Set();
 
@@ -55,4 +57,20 @@ export function openChestAt(x, y) {
  */
 export function isAdjacent(x1, y1, x2, y2) {
   return Math.abs(x1 - x2) + Math.abs(y1 - y2) === 1;
+}
+
+/**
+ * Applies effects based on the tile symbol the player stepped on.
+ *
+ * @param {string} tileSymbol
+ * @param {{hp:number,maxHp:number}} player
+ */
+export function handleTileEffects(tileSymbol, player) {
+  if (tileSymbol === 't') {
+    player.hp = Math.max(0, player.hp - 5);
+    showDialogue('You stepped on a hidden spike. -5 HP.');
+  } else if (tileSymbol === 'T') {
+    player.hp = Math.max(0, player.hp - 15);
+    showDialogue('A trap! You were badly hurt. -15 HP.');
+  }
 }

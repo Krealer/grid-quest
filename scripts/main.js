@@ -1,5 +1,10 @@
 import { getCurrentGrid } from './mapLoader.js';
-import { openChestAt, isChestOpened, isAdjacent } from './gameEngine.js';
+import {
+  openChestAt,
+  isChestOpened,
+  isAdjacent,
+  handleTileEffects,
+} from './gameEngine.js';
 import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 import { startCombat } from './combatSystem.js';
@@ -46,7 +51,7 @@ function handleTileClick(e, player, container, cols) {
     return;
   }
 
-  if (tileType !== 'G' && tileType !== 'D') return;
+  if (!['G', 'D', 't', 'T', 'W'].includes(tileType)) return;
 
   const path = findPath(grid, player.x, player.y, x, y);
   if (path.length === 0) return;
@@ -63,6 +68,8 @@ function handleTileClick(e, player, container, cols) {
     player.y = pos.y;
     drawPlayer(player, container, cols);
     const tile = grid[player.y][player.x];
+    handleTileEffects(tile.type, player);
+    updateHpDisplay();
     index++;
     if (tile.type === 'D') {
       isMoving = false;
@@ -86,7 +93,9 @@ function handleKey(e, player, container, cols) {
 
   if (e.code === 'Space') {
     if (!attemptStartCombat(player, container, grid, cols)) {
-      attemptOpenChest(player, container, grid, cols);
+      if (!attemptOpenChest(player, container, grid, cols)) {
+        attemptDrinkWater(player, grid);
+      }
     }
   }
 }
@@ -169,9 +178,38 @@ function attemptOpenChest(player, container, grid, cols) {
           }
         }
       }
-      break;
+      return true;
     }
   }
+  return false;
+}
+
+function attemptDrinkWater(player, grid) {
+  const directions = [
+    { x: 1, y: 0 },
+    { x: -1, y: 0 },
+    { x: 0, y: 1 },
+    { x: 0, y: -1 },
+  ];
+
+  for (const dir of directions) {
+    const x = player.x + dir.x;
+    const y = player.y + dir.y;
+    if (
+      y >= 0 &&
+      y < grid.length &&
+      x >= 0 &&
+      x < grid[0].length &&
+      grid[y][x].type === 'W' &&
+      isAdjacent(player.x, player.y, x, y)
+    ) {
+      player.hp = player.maxHp;
+      updateHpDisplay();
+      showDialogue('You kneel and drink the water. You feel completely restored.');
+      return true;
+    }
+  }
+  return false;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -186,7 +224,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const soundToggle = document.getElementById('sound-toggle');
   const scaleSelect = document.getElementById('ui-scale');
   const animToggle = document.getElementById('anim-toggle');
-  const player = { x: 0, y: 0 };
+  const hpDisplay = document.getElementById('hp-display');
+  const player = { x: 0, y: 0, hp: 100, maxHp: 100 };
+  function updateHpDisplay() {
+    if (hpDisplay) {
+      hpDisplay.textContent = `HP: ${player.hp}/${player.maxHp}`;
+    }
+  }
   let cols = 0;
 
   let settings = loadSettings();
@@ -266,6 +310,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const { cols: newCols } = await router.loadMap('map01');
     cols = newCols;
+    updateHpDisplay();
 
     document.addEventListener('keydown', e => handleKey(e, player, container, cols));
     container.addEventListener('click', e => handleTileClick(e, player, container, cols));

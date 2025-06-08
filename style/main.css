@@ -72,6 +72,18 @@ body {
   background: #2ecc71;
 }
 
+.tile.trap-light {
+  background-color: #C0C0C0;
+}
+
+.tile.trap-dark {
+  background-color: #505050;
+}
+
+.tile.water {
+  background-color: #00BFFF;
+}
+
 #ui-bar {
   display: flex;
   justify-content: center;
@@ -79,6 +91,11 @@ body {
   background: #222;
   color: #fff;
   width: 100%;
+}
+
+#hp-display {
+  margin-right: auto;
+  padding: 8px 12px;
 }
 
 #ui-bar .tab {

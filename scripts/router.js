@@ -9,7 +9,7 @@ let currentMap = '';
 function findFirstWalkable(grid) {
   for (let y = 0; y < grid.length; y++) {
     for (let x = 0; x < grid[y].length; x++) {
-      if (grid[y][x].type === 'G') {
+      if (['G', 't', 'T', 'W'].includes(grid[y][x].type)) {
         return { x, y };
       }
     }
