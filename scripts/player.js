@@ -18,3 +18,8 @@ export function takeDamage(amount) {
 export function healFull() {
   player.hp = player.maxHp;
 }
+
+export function increaseMaxHp(amount) {
+  player.maxHp += amount;
+  player.hp = Math.min(player.hp, player.maxHp);
+}

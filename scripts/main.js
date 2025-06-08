@@ -8,6 +8,7 @@ import * as router from './router.js';
 import { showDialogue } from './dialogueSystem.js';
 import { handleTileInteraction } from './interaction.js';
 import * as eryndor from './npc/eryndor.js';
+import * as lioran from './npc/lioran.js';
 import { initSkillSystem, unlockSkill, getAllSkills } from './skills.js';
 import {
   loadSettings,
@@ -18,7 +19,7 @@ import {
 // Inventory contents are managed in inventory.js
 
 let isInBattle = false;
-const npcModules = { eryndor };
+const npcModules = { eryndor, lioran };
 
 let hpDisplay;
 

@@ -6,5 +6,12 @@
     "description": "A mischievous green creature with a sharp grin.",
     "intro": "The goblin snarls and prepares to strike!",
     "portrait": "👺"
+  },
+  "Z": {
+    "name": "Zombie",
+    "hp": 50,
+    "description": "A decaying corpse that refuses to rest.",
+    "intro": "The zombie shambles toward you!",
+    "portrait": "🧟"
   }
 }
