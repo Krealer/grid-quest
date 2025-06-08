@@ -37,7 +37,7 @@ export async function showDialogue(keyOrText, callback = () => {}) {
   advance.style.display = 'none';
 
   let index = 0;
-  const speed = 30; // ms per char
+  const speed = 30; // ms per character
 
   function typeNext() {
     if (index < text.length) {
