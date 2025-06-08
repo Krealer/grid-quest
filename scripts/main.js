@@ -4,6 +4,7 @@ import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 import { startCombat } from './combatSystem.js';
 import { showDialogue } from './dialogueSystem.js';
+import { initSkillSystem, unlockSkill, getAllSkills } from './skills.js';
 import {
   loadSettings,
   saveSettings,
@@ -112,7 +113,7 @@ function attemptStartCombat(player, container, grid, cols) {
       const enemy = enemyDefinitions['E'] || { name: 'Enemy', hp: 50 };
       isInBattle = true;
       const intro = enemy.intro || 'A foe appears!';
-      showDialogue(intro, () => startCombat({ ...enemy }));
+      showDialogue(intro, () => startCombat({ id: 'E', ...enemy }, player));
       return true;
     }
   }
@@ -149,6 +150,15 @@ function attemptOpenChest(player, container, grid, cols) {
             tile.classList.remove('chest');
             tile.classList.add('chest-opened');
           }
+
+          const chestId = `${router.getCurrentMapName()}:${x},${y}`;
+          for (const [id, skill] of Object.entries(getAllSkills())) {
+            if (skill.unlockCondition?.chest === chestId) {
+              if (unlockSkill(id)) {
+                showDialogue(`You've learned a new skill: ${skill.name}!`);
+              }
+            }
+          }
         }
       }
       break;
@@ -178,6 +188,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   animToggle.checked = settings.animations;
 
   router.init(container, player);
+  initSkillSystem(player);
 
   try {
     const res = await fetch('data/enemies.json');
@@ -250,8 +261,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.addEventListener('keydown', e => handleKey(e, player, container, cols));
     container.addEventListener('click', e => handleTileClick(e, player, container, cols));
-    document.addEventListener('combatEnded', () => {
+    document.addEventListener('combatEnded', e => {
       isInBattle = false;
+      if (e.detail.enemyHp <= 0) {
+        const enemyId = e.detail.enemy.id;
+        for (const [id, skill] of Object.entries(getAllSkills())) {
+          if (skill.unlockCondition?.enemy === enemyId) {
+            if (unlockSkill(id)) {
+              showDialogue(`You've learned a new skill: ${skill.name}!`);
+            }
+          }
+        }
+      }
     });
   } catch (err) {
     console.error(err);
