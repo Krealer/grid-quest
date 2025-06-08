@@ -1,3 +1,5 @@
+const WALKABLE = new Set(['G', 'D', 't', 'T', 'W']);
+
 export function findPath(mapGrid, startX, startY, targetX, targetY) {
   const rows = mapGrid.length;
   const cols = mapGrid[0].length;
@@ -7,8 +9,7 @@ export function findPath(mapGrid, startX, startY, targetX, targetY) {
     targetY < 0 ||
     targetX >= cols ||
     targetY >= rows ||
-    (mapGrid[targetY][targetX].type !== 'G' &&
-      mapGrid[targetY][targetX].type !== 'D')
+    !WALKABLE.has(mapGrid[targetY][targetX].type)
   ) {
     return [];
   }
@@ -45,7 +46,7 @@ export function findPath(mapGrid, startX, startY, targetX, targetY) {
         ny < 0 ||
         nx >= cols ||
         ny >= rows ||
-        (mapGrid[ny][nx].type !== 'G' && mapGrid[ny][nx].type !== 'D')
+        !WALKABLE.has(mapGrid[ny][nx].type)
       ) {
         continue;
       }
