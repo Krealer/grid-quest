@@ -499,3 +499,33 @@ body {
   color: #f2e9e4;
 }
 
+.env-day {
+  background: linear-gradient(#bcd9ff 0%, #eaf4ff 100%);
+  color: #111;
+}
+
+.env-night {
+  background: radial-gradient(circle at center, #111 0%, #000 100%);
+  color: #ddd;
+}
+
+.env-night::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.8), transparent 40%),
+    radial-gradient(2px 2px at 80% 40%, rgba(255,255,255,0.8), transparent 40%),
+    radial-gradient(2px 2px at 30% 70%, rgba(255,255,255,0.8), transparent 40%),
+    radial-gradient(2px 2px at 70% 80%, rgba(255,255,255,0.8), transparent 40%);
+  animation: starTwinkle 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes starTwinkle {
+  50% { opacity: 0.5; }
+}
+
