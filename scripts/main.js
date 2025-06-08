@@ -4,7 +4,17 @@ import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 
 // Simple inventory array that stores items received during play.
-export const inventory = [];
+const itemDescriptions = {
+  'Mysterious Key': 'A key shrouded in mystery.',
+  'Ancient Coin': 'An old coin from a forgotten era.',
+  'Healing Herb': 'Restores a small amount of health.'
+};
+
+export const inventory = [
+  { name: 'Mysterious Key', description: itemDescriptions['Mysterious Key'] },
+  { name: 'Ancient Coin', description: itemDescriptions['Ancient Coin'] },
+  { name: 'Healing Herb', description: itemDescriptions['Healing Herb'] }
+];
 
 function drawPlayer(player, container, cols) {
   container.querySelectorAll('.player').forEach(el => el.classList.remove('player'));
@@ -87,7 +97,10 @@ function attemptOpenChest(player, container, grid, cols) {
       if (!isChestOpened(x, y)) {
         const item = openChestAt(x, y);
         if (item) {
-          inventory.push(item);
+          inventory.push({
+            name: item,
+            description: itemDescriptions[item] || ''
+          });
           console.log(`Obtained ${item} from chest at (${x}, ${y})`);
 
           const index = y * cols + x;
@@ -107,6 +120,38 @@ document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
   const player = { x: 0, y: 0 };
   let cols = 0;
+
+  const inventoryTab = document.querySelector('.inventory-tab');
+  const overlay = document.getElementById('inventory-overlay');
+  const closeBtn = document.getElementById('inventory-close');
+  const itemsContainer = document.getElementById('inventory-items');
+
+  function renderInventory() {
+    itemsContainer.innerHTML = '';
+    inventory.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'inventory-item';
+      div.textContent = `${item.name} - ${item.description}`;
+      itemsContainer.appendChild(div);
+    });
+  }
+
+  function showInventory() {
+    renderInventory();
+    overlay.classList.add('active');
+    inventoryTab.classList.add('active');
+  }
+
+  function hideInventory() {
+    overlay.classList.remove('active');
+    inventoryTab.classList.remove('active');
+  }
+
+  inventoryTab.addEventListener('click', showInventory);
+  closeBtn.addEventListener('click', hideInventory);
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) hideInventory();
+  });
 
   router.init(container, player);
 

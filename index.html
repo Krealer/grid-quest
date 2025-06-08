@@ -9,10 +9,17 @@
 <body>
   <div id="game-grid"></div>
   <div id="ui-bar">
-    <div class="tab">Settings</div>
-    <div class="tab">Inventory</div>
-    <div class="tab">Save</div>
-    <div class="tab">Load</div>
+    <div class="tab settings-tab">Settings</div>
+    <div class="tab inventory-tab">Inventory</div>
+    <div class="tab save-tab">Save</div>
+    <div class="tab load-tab">Load</div>
+  </div>
+  <div class="inventory-overlay" id="inventory-overlay">
+    <div class="inventory-content">
+      <button class="close-btn" id="inventory-close">&times;</button>
+      <h2>Inventory</h2>
+      <div class="inventory-items" id="inventory-items"></div>
+    </div>
   </div>
   <script type="module" src="scripts/main.js"></script>
 </body>
