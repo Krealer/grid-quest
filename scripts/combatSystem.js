@@ -43,6 +43,7 @@ export function startCombat(enemy, player) {
     </div>`;
 
   document.body.appendChild(overlay);
+  document.dispatchEvent(new CustomEvent('combatStarted'));
   requestAnimationFrame(() => overlay.classList.add('active'));
 
   const playerBar = overlay.querySelector('.player .hp');

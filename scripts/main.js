@@ -182,6 +182,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateHpDisplay();
       }
     });
+    document.addEventListener('combatStarted', () => {
+      isInBattle = true;
+    });
     document.addEventListener('combatEnded', e => {
       isInBattle = false;
       if (e.detail.enemyHp <= 0) {
