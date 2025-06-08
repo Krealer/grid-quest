@@ -52,3 +52,51 @@
 .tile.player {
   background: #3498db;
 }
+
+#game-grid.blurred {
+  filter: blur(3px);
+}
+
+#battle-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+#battle-overlay .combatant {
+  margin: 10px;
+  text-align: center;
+}
+
+#battle-overlay .hp-bar {
+  width: 150px;
+  height: 20px;
+  background: #444;
+  border: 1px solid #222;
+  margin-top: 5px;
+}
+
+#battle-overlay .hp-bar .hp {
+  height: 100%;
+  background: #e74c3c;
+  width: 100%;
+}
+
+#battle-overlay .actions {
+  margin-top: 20px;
+}
+
+#battle-overlay .actions button {
+  margin: 0 5px;
+  padding: 5px 15px;
+}
