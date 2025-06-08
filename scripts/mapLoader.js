@@ -1,10 +1,17 @@
+let currentGrid = null;
+
 export async function loadMap(name) {
   const response = await fetch(`data/maps/${name}.json`);
   if (!response.ok) {
     throw new Error(`Failed to load map ${name}`);
   }
   const data = await response.json();
-  return data.grid;
+  currentGrid = data.grid.map(row => [...row]);
+  return currentGrid;
+}
+
+export function getCurrentGrid() {
+  return currentGrid;
 }
 
 export function renderMap(grid, container) {
