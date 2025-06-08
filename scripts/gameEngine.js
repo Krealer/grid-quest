@@ -28,7 +28,7 @@ export function isChestOpened(x, y) {
  *
  * @param {number} x
  * @param {number} y
- * @returns {string|null} the item granted or null if already opened
+ * @returns {{name:string,description:string}|null} the item granted or null if already opened
  */
 export function openChestAt(x, y) {
   if (isChestOpened(x, y)) {
@@ -36,6 +36,9 @@ export function openChestAt(x, y) {
   }
   openedChests.add(`${x},${y}`);
   // In the future this could look up items based on map data. For now each
-  // chest grants a single hard-coded item.
-  return 'Mysterious Key';
+  // chest grants a single hard-coded item object with name and description.
+  return {
+    name: 'Mysterious Key',
+    description: 'A rusty key of unknown origin.',
+  };
 }
