@@ -2,6 +2,7 @@ import { getAllNpcs } from './npcInfo.js';
 import { loadEnemyInfo, getAllEnemies } from './enemyInfo.js';
 import { loadItemInfo, getAllItems } from './itemInfo.js';
 import { getDiscovered } from './player_memory.js';
+import { getAllSkillsInfo } from './skillsInfo.js';
 
 function createEntry(obj) {
   const row = document.createElement('div');
@@ -11,11 +12,22 @@ function createEntry(obj) {
   return row;
 }
 
+function createSkillEntry(skill) {
+  const row = document.createElement('div');
+  row.classList.add('info-entry', 'skill-entry');
+  row.innerHTML = `
+    <strong>${skill.name}</strong>
+    <div class="desc">${skill.description}</div>
+    <div class="meta">${skill.type} - ${skill.origin}</div>`;
+  return row;
+}
+
 export async function updateInfoPanel() {
   const npcContainer = document.getElementById('info-npcs');
   const enemyContainer = document.getElementById('info-enemies');
   const itemContainer = document.getElementById('info-items');
-  if (!npcContainer || !enemyContainer || !itemContainer) return;
+  const skillContainer = document.getElementById('info-skills');
+  if (!npcContainer || !enemyContainer || !itemContainer || !skillContainer) return;
 
   npcContainer.innerHTML = '';
   const seenNpcs = getDiscovered('npcs');
@@ -63,6 +75,21 @@ export async function updateInfoPanel() {
       if (data) itemContainer.appendChild(createEntry(data));
     });
   }
+
+  skillContainer.innerHTML = '';
+  const seenSkills = getDiscovered('skills');
+  if (seenSkills.length === 0) {
+    const msg = document.createElement('div');
+    msg.classList.add('info-empty');
+    msg.textContent = 'No skills discovered yet.';
+    skillContainer.appendChild(msg);
+  } else {
+    const allSkills = getAllSkillsInfo();
+    seenSkills.forEach(id => {
+      const data = allSkills.find(s => s.id === id);
+      if (data) skillContainer.appendChild(createSkillEntry(data));
+    });
+  }
 }
 
 function showTab(name) {
@@ -74,6 +101,7 @@ function showTab(name) {
   document.getElementById('info-npcs').style.display = name === 'npcs' ? 'block' : 'none';
   document.getElementById('info-enemies').style.display = name === 'enemies' ? 'block' : 'none';
   document.getElementById('info-items').style.display = name === 'items' ? 'block' : 'none';
+  document.getElementById('info-skills').style.display = name === 'skills' ? 'block' : 'none';
 }
 
 export async function toggleInfoPanel() {

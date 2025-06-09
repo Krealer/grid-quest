@@ -726,6 +726,15 @@ body {
   color: #555;
 }
 
+.skill-entry {
+  background: #eef6ff;
+}
+
+.skill-entry .meta {
+  font-size: 11px;
+  color: #336;
+}
+
 .info-empty {
   text-align: center;
   color: #666;

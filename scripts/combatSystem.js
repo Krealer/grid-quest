@@ -21,7 +21,7 @@ import { useDefensePotion } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
 import { gameState } from './game_state.js';
-import { discover } from './player_memory.js';
+import { discover, discoverSkill } from './player_memory.js';
 import {
   setupTabs,
   updateStatusUI,
@@ -293,6 +293,7 @@ export async function startCombat(enemy, player) {
   async function handleAction(skill) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
     log(`Player uses ${skill.name}`);
+    discoverSkill(skill.id);
     const result = skill.effect({
       damageEnemy,
       healPlayer,
@@ -432,6 +433,7 @@ export async function startCombat(enemy, player) {
 
     if (skill) {
       log(`${enemy.name} uses ${skill.name}`);
+      discoverSkill(skill.id);
       skill.effect({
         player,
         enemy,
