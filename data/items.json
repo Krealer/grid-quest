@@ -16,5 +16,13 @@
   "rotten_tooth": {
     "name": "Rotten Tooth",
     "description": "Crumbly but still has bite"
+  },
+  "health_amulet": {
+    "name": "Health Amulet",
+    "description": "An amulet that bolsters vitality"
+  },
+  "commander_badge": {
+    "name": "Commander Badge",
+    "description": "Proof of defeating the scout commander"
   }
 }

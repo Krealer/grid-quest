@@ -1,3 +1,5 @@
+import { hasMemory } from './dialogue_state.js';
+
 export const quests = {};
 
 let questData = {};
@@ -53,6 +55,11 @@ export function isQuestCompleted(id) {
 }
 
 export function getActiveQuests() {
+  if (isQuestStarted('scout_tracking') && !isQuestCompleted('scout_tracking')) {
+    if (hasMemory('scout_defeated')) {
+      completeQuest('scout_tracking');
+    }
+  }
   return Object.keys(quests)
     .filter(id => quests[id].started && !quests[id].completed)
     .map(id => {
