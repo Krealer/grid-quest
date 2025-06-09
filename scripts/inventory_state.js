@@ -1,9 +1,14 @@
 import { inventory } from './inventory.js';
+import { player } from './player.js';
 
 export function updateInventoryUI() {
   const list = document.getElementById('inventory-list');
   if (!list) return;
   list.innerHTML = '';
+  const statsEl = document.getElementById('player-stats');
+  if (statsEl) {
+    statsEl.textContent = `Defense: ${player.stats?.defense || 0}`;
+  }
   inventory.forEach(item => {
     const row = document.createElement('div');
     row.classList.add('inventory-item');
@@ -26,3 +31,4 @@ export function toggleInventoryView() {
 
 // Keep UI in sync when inventory changes
 document.addEventListener('inventoryUpdated', updateInventoryUI);
+document.addEventListener('playerDefenseChanged', updateInventoryUI);

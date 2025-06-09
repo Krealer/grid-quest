@@ -1,6 +1,7 @@
 // Handles trap and tile effects triggered when the player steps on certain tiles.
 import { showDialogue } from './dialogueSystem.js';
-import { takeDamage, healFull } from './player.js';
+import { healFull } from './player.js';
+import { applyDamage } from './logic.js';
 
 /**
  * Applies effects based on the tile symbol the player stepped on.
@@ -10,10 +11,10 @@ import { takeDamage, healFull } from './player.js';
  */
 export function handleTileEffects(tileSymbol, player) {
   if (tileSymbol === 't') {
-    takeDamage(1);
+    applyDamage(player, 1);
     showDialogue('A hidden snare cuts at your feet.');
   } else if (tileSymbol === 'T') {
-    takeDamage(2);
+    applyDamage(player, 2);
     showDialogue('Spikes! You\u2019re badly wounded!');
   } else if (tileSymbol === 'W') {
     healFull();

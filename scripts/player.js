@@ -8,6 +8,9 @@ export const player = {
   y: 0,
   hp: 100,
   maxHp: 100,
+  stats: {
+    defense: 0,
+  },
   learnedSkills: [],
   bonusHpGiven: {},
 };
@@ -52,4 +55,12 @@ export function healFull() {
 export function increaseMaxHp(amount) {
   player.maxHp += amount;
   player.hp = Math.min(player.hp, player.maxHp);
+}
+
+export function increaseDefense(amount) {
+  if (!player.stats) player.stats = { defense: 0 };
+  player.stats.defense = (player.stats.defense || 0) + amount;
+  document.dispatchEvent(
+    new CustomEvent('playerDefenseChanged', { detail: { defense: player.stats.defense } })
+  );
 }

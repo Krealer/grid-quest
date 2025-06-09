@@ -1,6 +1,7 @@
 
 import { getSkill } from './skills.js';
 import { triggerDeath } from './player.js';
+import { applyDamage } from './logic.js';
 import { addItem } from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
 import { updateInventoryUI } from './inventory_state.js';
@@ -194,8 +195,10 @@ export async function startCombat(enemy, player) {
       dmg = Math.max(0, dmg - 5);
       guardActive = false;
     }
-    playerHp = Math.max(0, playerHp - dmg);
-    log(`${enemy.name} attacks for ${dmg} damage!`);
+    const tempTarget = { hp: playerHp, stats: player.stats };
+    const applied = applyDamage(tempTarget, dmg);
+    playerHp = tempTarget.hp;
+    log(`${enemy.name} attacks for ${applied} damage!`);
     updateHpBar(playerBar, playerHp, playerMax);
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
