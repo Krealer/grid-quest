@@ -2,6 +2,7 @@
 import { showDialogue } from './dialogueSystem.js';
 import { healFull } from './player.js';
 import { applyDamage } from './logic.js';
+import { triggerDarkTrap, triggerFireTrap } from './trap_logic.js';
 import { stepSymbol } from './puzzle_state.js';
 
 /**
@@ -10,14 +11,12 @@ import { stepSymbol } from './puzzle_state.js';
  * @param {string} tileSymbol
  * @param {{hp:number,maxHp:number}} player
  */
-export function handleTileEffects(tileSymbol, player) {
+export function handleTileEffects(tileSymbol, player, x, y) {
   stepSymbol(tileSymbol);
   if (tileSymbol === 't') {
-    applyDamage(player, 1);
-    showDialogue('A hidden snare cuts at your feet.');
+    triggerDarkTrap(player, applyDamage, showDialogue, x, y);
   } else if (tileSymbol === 'T') {
-    applyDamage(player, 2);
-    showDialogue('Spikes! You\u2019re badly wounded!');
+    triggerFireTrap(player, applyDamage, showDialogue, x, y);
   } else if (tileSymbol === 'W') {
     healFull();
     showDialogue('The cool water rejuvenates you. HP fully restored.');

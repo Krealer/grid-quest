@@ -2,7 +2,8 @@ import { getCurrentGrid } from './mapLoader.js';
 import { handleTileEffects } from './gameEngine.js';
 import { toggleInventoryView } from './inventory_state.js';
 import { toggleQuestLog } from './quest_log.js';
-import { player, getTotalStats } from './player.js';
+import { player, getTotalStats, stepTo } from './player.js';
+import { initFog, reveal } from './fog_system.js';
 import { getRelicBonuses } from './relic_state.js';
 import { loadEnemyData, defeatEnemy } from './enemy.js';
 import { setMemory } from './dialogue_state.js';
@@ -28,6 +29,7 @@ import * as watcher from './npc/watcher.js';
 import * as flamebound from './npc/flamebound.js';
 import * as arbiter from './npc/arbiter.js';
 import * as loreStatue from './npc/lore_statue.js';
+import * as silentMonument from './npc/silent_monument.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -55,7 +57,8 @@ const npcModules = {
   watcher,
   flamebound,
   arbiter,
-  loreStatue
+  loreStatue,
+  silentMonument
 };
 
 let hpDisplay;
@@ -107,11 +110,10 @@ function handleTileClick(e, player, container, cols) {
       return;
     }
     const pos = path[index];
-    player.x = pos.x;
-    player.y = pos.y;
+    stepTo(pos.x, pos.y);
     router.drawPlayer(player, container, cols);
     const tile = grid[player.y][player.x];
-    handleTileEffects(tile.type, player);
+    handleTileEffects(tile.type, player, player.x, player.y);
     updateHpDisplay();
     index++;
     setTimeout(() => requestAnimationFrame(step), 150);
@@ -248,6 +250,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const { cols: newCols } = await router.loadMap('map01');
     cols = newCols;
+    initFog(container, cols);
+    reveal(player.x, player.y);
     updateHpDisplay();
     updateXpDisplay();
 
@@ -265,6 +269,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       );
       if (newCols) {
         cols = newCols;
+        initFog(container, cols);
+        reveal(player.x, player.y);
         updateHpDisplay();
       }
     });

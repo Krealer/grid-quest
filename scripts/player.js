@@ -38,6 +38,14 @@ export function moveTo(x, y) {
   player.y = y;
 }
 
+export function stepTo(x, y) {
+  player.x = x;
+  player.y = y;
+  document.dispatchEvent(
+    new CustomEvent('playerMoved', { detail: { x, y } })
+  );
+}
+
 export function takeDamage(amount) {
   player.hp = Math.max(0, player.hp - amount);
   if (player.hp === 0) triggerDeath();

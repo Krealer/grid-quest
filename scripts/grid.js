@@ -48,6 +48,8 @@ export function renderGrid(grid, container, environment = 'clear') {
           div.classList.add('ground');
       }
 
+      div.classList.add('fog-hidden');
+
       container.appendChild(div);
     });
   });

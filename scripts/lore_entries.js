@@ -43,6 +43,11 @@ export const loreEntries = [
     id: 'first_collapse',
     title: 'The First Collapse',
     text: 'Ancient texts speak of the first catastrophe that shattered these halls.'
+  },
+  {
+    id: 'beneath_the_silence',
+    title: 'Beneath the Silence',
+    text: 'Whispers tell of secrets hidden in the quietest depths.'
   }
 ];
 
