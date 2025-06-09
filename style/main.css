@@ -132,6 +132,11 @@ body {
   padding: 8px 12px;
 }
 
+#defense-display {
+  margin-right: 10px;
+  padding: 8px 12px;
+}
+
 #ui-bar .tab {
   background: #333;
   margin: 0 5px;
@@ -355,6 +360,12 @@ body {
 
 .inventory-content h2 {
   margin-top: 0;
+  text-align: center;
+}
+
+#player-stats {
+  margin-bottom: 10px;
+  font-weight: bold;
   text-align: center;
 }
 

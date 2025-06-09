@@ -30,10 +30,17 @@ let isInBattle = false;
 const npcModules = { eryndor, lioran, goblinQuestGiver, arvalin, grindle };
 
 let hpDisplay;
+let defenseDisplay;
 
 function updateHpDisplay() {
   if (hpDisplay) {
     hpDisplay.textContent = `HP: ${player.hp}/${player.maxHp}`;
+  }
+}
+
+function updateDefenseDisplay() {
+  if (defenseDisplay) {
+    defenseDisplay.textContent = `Defense: ${player.stats?.defense || 0}`;
   }
 }
 
@@ -93,7 +100,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const scaleSelect = document.getElementById('ui-scale');
   const animToggle = document.getElementById('anim-toggle');
   hpDisplay = document.getElementById('hp-display');
+  defenseDisplay = document.getElementById('defense-display');
   updateHpDisplay();
+  updateDefenseDisplay();
   let cols = 0;
 
   let settings = loadSettings();
@@ -203,7 +212,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.addEventListener('playerRespawned', e => {
       cols = e.detail.cols;
       updateHpDisplay();
+      updateDefenseDisplay();
     });
+    document.addEventListener('playerDefenseChanged', updateDefenseDisplay);
   } catch (err) {
     console.error(err);
   }
