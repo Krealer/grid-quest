@@ -9,6 +9,7 @@ export const player = {
   hp: 100,
   maxHp: 100,
   learnedSkills: [],
+  bonusHpGiven: {},
 };
 
 export function moveTo(x, y) {
