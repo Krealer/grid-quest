@@ -14,7 +14,7 @@ Then open `http://localhost:8000/` in your browser to launch `index.html`. Any o
 
 ## Development
 
-Game scripts live under `scripts/` and data files are in `data/`. With the server running, modifying these files and refreshing the page is enough to see changes.
+Game scripts live under `scripts/`, data files are in `data/`, and stylesheets can be found in `style/`. With the server running, modifying these files and refreshing the page is enough to see changes.
 
 ### Environments
 
