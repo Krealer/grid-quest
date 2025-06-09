@@ -1,5 +1,6 @@
 import { unlockBlueprint } from './craft_state.js';
 import { upgradeItem, rerollEnchantment } from './forge.js';
+import { addRelic } from './relic_state.js';
 
 export const dialogueMemory = new Set();
 
@@ -40,4 +41,9 @@ export async function triggerUpgrade(id) {
 
 export async function triggerReroll(id) {
   if (id) await rerollEnchantment(id);
+}
+
+// Give a relic to the player
+export function giveRelic(id) {
+  if (id) addRelic(id);
 }

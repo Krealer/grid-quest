@@ -12,10 +12,12 @@ import { showItemTooltip, hideItemTooltip, splitItemId, parseEnchantedId } from 
 import { canReroll, rerollEnchantment } from './forge.js';
 import { enchantments } from './enchantments.js';
 import { getItemData } from './item_loader.js';
+import { loadRelics, getRelicData, getOwnedRelics } from './relic_state.js';
 
-export function updateInventoryUI() {
+export async function updateInventoryUI() {
   const list = document.getElementById('inventory-list');
   if (!list) return;
+  await loadRelics();
   list.innerHTML = '';
   const statsEl = document.getElementById('player-stats');
   if (statsEl) {
@@ -89,6 +91,17 @@ export function updateInventoryUI() {
     }
     list.appendChild(row);
   });
+
+  // Display relics separately
+  const relicIds = getOwnedRelics();
+  relicIds.forEach(id => {
+    const data = getRelicData(id);
+    if (!data) return;
+    const row = document.createElement('div');
+    row.classList.add('inventory-item', 'relic-item');
+    row.innerHTML = `<strong>${data.name}</strong><div class="desc">${data.description || ''}</div>`;
+    list.appendChild(row);
+  });
 }
 
 export function toggleInventoryView() {
@@ -107,3 +120,4 @@ document.addEventListener('inventoryUpdated', updateInventoryUI);
 document.addEventListener('playerDefenseChanged', updateInventoryUI);
 document.addEventListener('playerXpChanged', updateInventoryUI);
 document.addEventListener('playerLevelUp', updateInventoryUI);
+document.addEventListener('relicsUpdated', updateInventoryUI);
