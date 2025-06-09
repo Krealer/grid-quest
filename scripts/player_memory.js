@@ -11,6 +11,7 @@ const memory = {
   forksVisited: { left: false, right: false },
   sealPuzzleSolved: false,
   sealingDust: false,
+  mirrorPuzzleSolved: false
 };
 
 function loadMemory() {
@@ -24,10 +25,16 @@ function loadMemory() {
     if (Array.isArray(data.skills)) memory.skills = new Set(data.skills);
     if (Array.isArray(data.lore)) memory.lore = new Set(data.lore);
     if (Array.isArray(data.maps)) memory.maps = new Set(data.maps);
-    if (typeof data.forkChoice === 'string') memory.forkChoice = data.forkChoice;
-    if (data.forksVisited) memory.forksVisited = { ...memory.forksVisited, ...data.forksVisited };
-    if (typeof data.sealPuzzleSolved === 'boolean') memory.sealPuzzleSolved = data.sealPuzzleSolved;
-    if (typeof data.sealingDust === 'boolean') memory.sealingDust = data.sealingDust;
+    if (typeof data.forkChoice === 'string')
+      memory.forkChoice = data.forkChoice;
+    if (data.forksVisited)
+      memory.forksVisited = { ...memory.forksVisited, ...data.forksVisited };
+    if (typeof data.sealPuzzleSolved === 'boolean')
+      memory.sealPuzzleSolved = data.sealPuzzleSolved;
+    if (typeof data.sealingDust === 'boolean')
+      memory.sealingDust = data.sealingDust;
+    if (typeof data.mirrorPuzzleSolved === 'boolean')
+      memory.mirrorPuzzleSolved = data.mirrorPuzzleSolved;
   } catch {
     // ignore
   }
@@ -45,6 +52,7 @@ function saveMemory() {
     forksVisited: memory.forksVisited,
     sealPuzzleSolved: memory.sealPuzzleSolved,
     sealingDust: memory.sealingDust,
+    mirrorPuzzleSolved: memory.mirrorPuzzleSolved
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
@@ -121,4 +129,13 @@ export function consumeSealingDust() {
     memory.sealingDust = false;
     saveMemory();
   }
+}
+
+export function solveMirrorPuzzle() {
+  memory.mirrorPuzzleSolved = true;
+  saveMemory();
+}
+
+export function isMirrorPuzzleSolved() {
+  return memory.mirrorPuzzleSolved;
 }

@@ -14,7 +14,7 @@ import { player } from './player.js';
 export const dialogueMemory = new Set();
 
 const state = {
-  activeDialogue: null,
+  activeDialogue: null
 };
 
 export function getActiveDialogue() {
@@ -77,24 +77,38 @@ export function chooseForkPath(path) {
   if (!path) return;
   setForkChoice(path);
   if (path === 'left') {
-    showDialogue('A Watcher nods from the shadows, approving your stealthy choice.');
+    showDialogue(
+      'A Watcher nods from the shadows, approving your stealthy choice.'
+    );
   } else if (path === 'right') {
-    showDialogue('Flamebound warriors roar in welcome as you choose the fiery road.');
+    showDialogue(
+      'Flamebound warriors roar in welcome as you choose the fiery road.'
+    );
   }
 }
 
 export function arbiterDialogue() {
   if (visitedBothForks()) {
-    showDialogue('You have proven mastery over both paths. Accept this shard of the mirror.');
+    showDialogue(
+      'You have proven mastery over both paths. Accept this shard of the mirror.'
+    );
     giveRelic('mirror_shard');
     discoverLore('two_flames_crossed');
   } else {
-    showDialogue('Only those who walk both paths may claim the mirror\'s power.');
+    showDialogue(
+      "Only those who walk both paths may claim the mirror's power."
+    );
   }
 }
 
 export function loreStatue() {
   showDialogue('Weathered runes speak of times long past.', () => {
     discoverLore('before_the_seal');
+  });
+}
+
+export function ruinsScholar() {
+  showDialogue('These stones remember the First Collapse.', () => {
+    discoverLore('first_collapse');
   });
 }

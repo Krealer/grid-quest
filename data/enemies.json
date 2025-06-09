@@ -1,4 +1,3 @@
-
 {
   "goblin01": {
     "name": "Goblin",
@@ -8,7 +7,7 @@
     "intro": "The goblin snarls and prepares to strike!",
     "portrait": "👺",
     "skills": ["strike"],
-    "drops": [ { "item": "goblin_ear", "quantity": 1 } ]
+    "drops": [{ "item": "goblin_ear", "quantity": 1 }]
   },
   "zombie01": {
     "name": "Zombie",
@@ -18,7 +17,7 @@
     "intro": "The zombie groans and lurches forward!",
     "portrait": "🧟",
     "skills": ["strike"],
-    "drops": [ { "item": "rotten_tooth", "quantity": 1 } ]
+    "drops": [{ "item": "rotten_tooth", "quantity": 1 }]
   },
   "B": {
     "name": "Bandit",
@@ -49,7 +48,7 @@
     "intro": "The scout spots you and blows a horn!",
     "portrait": "🗡️",
     "skills": ["strike"],
-    "drops": [ { "item": "goblin_ear", "quantity": 1 } ]
+    "drops": [{ "item": "goblin_ear", "quantity": 1 }]
   },
   "goblin_archer": {
     "name": "Goblin Archer",
@@ -60,7 +59,7 @@
     "portrait": "🏹",
     "skills": ["poisonSting"],
     "behavior": "aggressive",
-    "drops": [ { "item": "goblin_ear", "quantity": 1 } ]
+    "drops": [{ "item": "goblin_ear", "quantity": 1 }]
   },
   "rotting_warrior": {
     "name": "Rotting Warrior",
@@ -71,7 +70,7 @@
     "portrait": "🪓",
     "skills": ["strike", "poisonSting"],
     "behavior": "aggressive",
-    "drops": [ { "item": "rotten_tooth", "quantity": 1 } ]
+    "drops": [{ "item": "rotten_tooth", "quantity": 1 }]
   },
   "scout_commander": {
     "name": "Scout Commander",
@@ -82,7 +81,7 @@
     "portrait": "🎖️",
     "skills": ["strike", "weaken"],
     "behavior": "cautious",
-    "drops": [ { "item": "commander_badge", "quantity": 1 } ],
+    "drops": [{ "item": "commander_badge", "quantity": 1 }],
     "onDefeatMessage": "The commander falls. A silence settles over the hills."
   },
   "wandering_shade": {
@@ -172,5 +171,27 @@
     "skills": ["weaken", "strike"],
     "behavior": "aggressive",
     "drops": []
+  },
+  "ruin_watcher": {
+    "name": "Ruin Watcher",
+    "hp": 70,
+    "xp": 14,
+    "description": "A sentinel fashioned from forgotten stone.",
+    "intro": "Stone eyes open as a Ruin Watcher stirs!",
+    "portrait": "🗿",
+    "skills": ["strike"],
+    "behavior": "aggressive",
+    "drops": []
+  },
+  "echo_sentinel": {
+    "name": "Echo Sentinel",
+    "hp": 120,
+    "xp": 30,
+    "description": "Guardian of the old halls, resonating with power.",
+    "intro": "An Echo Sentinel emerges, resonating with menace!",
+    "portrait": "🔊",
+    "skills": ["strike", "weaken"],
+    "behavior": "aggressive",
+    "drops": [{ "item": "ruin_key", "quantity": 1 }]
   }
 }
