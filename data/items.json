@@ -1,7 +1,6 @@
 {
   "mysterious_key": { "name": "Mysterious Key", "description": "It hums faintly." },
   "rusty_key": { "name": "Rusty Key", "description": "Old and corroded, but it might still work." },
-  "rusted_key": { "name": "Rusted Key", "description": "Looks fragile but might still work." },
   "silver_key": { "name": "Silver Key", "description": "Shines with a dull luster." },
   "potion_of_health": { "name": "Potion of Health", "description": "Increases maximum health permanently." },
   "ancient_scroll": { "name": "Ancient Scroll", "description": "Faded text hints at forgotten lore." },
