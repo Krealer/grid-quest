@@ -34,8 +34,12 @@ export async function openChest(id, player) {
           increaseMaxHp(1);
           gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
         } else if (config.item === 'health_amulet') {
-          increaseMaxHp(2);
-          gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
+          if (!player.bonusHpGiven?.health_amulet) {
+            increaseMaxHp(2);
+            gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
+            if (!player.bonusHpGiven) player.bonusHpGiven = {};
+            player.bonusHpGiven.health_amulet = true;
+          }
         }
       }
       updateInventoryUI();
