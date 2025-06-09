@@ -7,7 +7,7 @@
     "intro": "The goblin snarls and prepares to strike!",
     "portrait": "👺",
     "skills": ["strike"],
-    "drop": { "item": "goblin_ear", "quantity": 1 }
+    "drops": [ { "item": "goblin_ear", "quantity": 1 } ]
   },
   "Z": {
     "name": "Zombie",
@@ -15,7 +15,8 @@
     "description": "A decaying corpse that refuses to rest.",
     "intro": "The zombie shambles toward you!",
     "portrait": "🧟",
-    "skills": ["strike"]
+    "skills": ["strike"],
+    "drops": []
   },
   "zombie01": {
     "name": "Zombie",
@@ -24,7 +25,7 @@
     "intro": "The zombie groans and lurches forward!",
     "portrait": "🧟",
     "skills": ["strike"],
-    "drop": { "item": "rotten_tooth", "quantity": 1 }
+    "drops": [ { "item": "rotten_tooth", "quantity": 1 } ]
   },
   "B": {
     "name": "Bandit",
@@ -33,7 +34,8 @@
     "intro": "The bandit lunges for your coin purse!",
     "portrait": "🥷",
     "skills": ["strike", "weaken"],
-    "behavior": "aggressive"
+    "behavior": "aggressive",
+    "drops": []
   },
   "S": {
     "name": "Skeleton",
@@ -41,7 +43,8 @@
     "description": "Bones clatter as it advances.",
     "intro": "A skeleton rattles menacingly!",
     "portrait": "💀",
-    "skills": ["strike"]
+    "skills": ["strike"],
+    "drops": []
   },
   "goblin_scout": {
     "name": "Goblin Scout",
@@ -50,7 +53,7 @@
     "intro": "The scout spots you and blows a horn!",
     "portrait": "🗡️",
     "skills": ["strike"],
-    "drop": { "item": "goblin_ear", "quantity": 1 }
+    "drops": [ { "item": "goblin_ear", "quantity": 1 } ]
   },
   "goblin_archer": {
     "name": "Goblin Archer",
@@ -60,7 +63,7 @@
     "portrait": "🏹",
     "skills": ["poisonSting"],
     "behavior": "aggressive",
-    "drop": { "item": "goblin_ear", "quantity": 1 }
+    "drops": [ { "item": "goblin_ear", "quantity": 1 } ]
   },
   "rotting_warrior": {
     "name": "Rotting Warrior",
@@ -70,7 +73,7 @@
     "portrait": "🪓",
     "skills": ["strike", "poisonSting"],
     "behavior": "aggressive",
-    "drop": { "item": "rotten_tooth", "quantity": 1 }
+    "drops": [ { "item": "rotten_tooth", "quantity": 1 } ]
   },
   "scout_commander": {
     "name": "Scout Commander",
@@ -80,7 +83,7 @@
     "portrait": "🎖️",
     "skills": ["strike", "weaken"],
     "behavior": "cautious",
-    "drop": { "item": "commander_badge", "quantity": 1 },
+    "drops": [ { "item": "commander_badge", "quantity": 1 } ],
     "onDefeatMessage": "The commander falls. A silence settles over the hills."
   }
 }

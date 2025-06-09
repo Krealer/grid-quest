@@ -99,3 +99,7 @@ export function appendLog(message) {
   logContainer.appendChild(entry);
   logContainer.scrollTop = logContainer.scrollHeight;
 }
+
+export function showVictoryMessage() {
+  appendLog('Victory!');
+}
