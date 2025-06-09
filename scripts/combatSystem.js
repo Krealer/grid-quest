@@ -179,6 +179,9 @@ export async function startCombat(enemy, player) {
     document.dispatchEvent(
       new CustomEvent('combatEnded', { detail: { playerHp, enemyHp, enemy } })
     );
+    if (enemyHp <= 0 && enemy.onDefeatMessage) {
+      showDialogue(enemy.onDefeatMessage);
+    }
   }
 
   function enemyTurn() {
