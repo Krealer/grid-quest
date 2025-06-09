@@ -1,3 +1,5 @@
+import { unlockBlueprint } from './craft_state.js';
+
 export const dialogueMemory = new Set();
 
 const state = {
@@ -25,3 +27,8 @@ export function endSession() {
 }
 
 export const dialogueState = state;
+
+// Allow dialogue options to grant blueprints as rewards
+export function giveBlueprint(id) {
+  if (id) unlockBlueprint(id);
+}
