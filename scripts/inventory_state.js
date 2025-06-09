@@ -40,8 +40,8 @@ export async function updateInventoryUI() {
     }
     row.innerHTML = `<strong>${displayName}${qty}</strong><div class="desc">${item.description}</div>`;
     if (enchantId) row.classList.add('enchanted');
-    const level = getItemLevel(item.id);
-    if (level > 0) {
+    const upgradeLevel = getItemLevel(item.id);
+    if (upgradeLevel > 0) {
       row.classList.add('gear-upgraded');
     }
     row.addEventListener('click', () => {
