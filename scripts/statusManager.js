@@ -55,3 +55,7 @@ export function tickStatuses(target) {
     }
   }
 }
+
+export function applyStatus(target, id, duration) {
+  addStatus(target, id, duration);
+}

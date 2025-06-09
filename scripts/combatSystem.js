@@ -7,8 +7,8 @@ import { loadItems, getItemData } from './item_loader.js';
 import { useDefensePotion } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
-import { setupTabs, updateStatusUI } from './combat_ui.js';
-import { tickStatuses, initStatuses } from './statusManager.js';
+import { setupTabs, updateStatusUI, renderSkillList } from './combat_ui.js';
+import { tickStatuses, initStatuses, applyStatus } from './statusManager.js';
 import { initEnemyState } from './enemy.js';
 
 let overlay = null;
@@ -186,12 +186,7 @@ export async function startCombat(enemy, player) {
     .map(id => getSkill(id))
     .filter(Boolean);
 
-  skillList.forEach(skill => {
-    const btn = document.createElement('button');
-    btn.textContent = skill.name;
-    btn.addEventListener('click', () => handleAction(skill));
-    skillContainer.appendChild(btn);
-  });
+  renderSkillList(skillContainer, skillList, handleAction);
 
   updateItemsUI();
   document.addEventListener('inventoryUpdated', updateItemsUI);
@@ -208,6 +203,9 @@ export async function startCombat(enemy, player) {
       log,
       isHealUsed,
       setHealUsed,
+      applyStatus,
+      player,
+      enemy,
     });
     if (result === false) return; // invalid action
     if (enemyHp <= 0) {
