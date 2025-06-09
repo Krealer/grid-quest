@@ -1,10 +1,32 @@
 {
-  "mysterious_key": { "name": "Mysterious Key", "description": "It hums faintly." },
-  "rusty_key": { "name": "Rusty Key", "description": "Old and corroded, but it might still work." },
-  "silver_key": { "name": "Silver Key", "description": "Shines with a dull luster." },
-  "forked_key": { "name": "Forked Key", "description": "Opens a chest at the crossroads." },
-  "potion_of_health": { "name": "Potion of Health", "description": "Increases maximum health permanently." },
-  "ancient_scroll": { "name": "Ancient Scroll", "description": "Faded text hints at forgotten lore." },
+  "mysterious_key": {
+    "name": "Mysterious Key",
+    "description": "It hums faintly."
+  },
+  "rusty_key": {
+    "name": "Rusty Key",
+    "description": "Old and corroded, but it might still work."
+  },
+  "silver_key": {
+    "name": "Silver Key",
+    "description": "Shines with a dull luster."
+  },
+  "ruin_key": {
+    "name": "Ruin Key",
+    "description": "Opens the path to deeper ruins."
+  },
+  "forked_key": {
+    "name": "Forked Key",
+    "description": "Opens a chest at the crossroads."
+  },
+  "potion_of_health": {
+    "name": "Potion of Health",
+    "description": "Increases maximum health permanently."
+  },
+  "ancient_scroll": {
+    "name": "Ancient Scroll",
+    "description": "Faded text hints at forgotten lore."
+  },
   "mysterious_token": {
     "name": "Mysterious Token",
     "description": "Strange energies swirl within."

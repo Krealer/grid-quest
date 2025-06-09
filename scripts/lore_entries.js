@@ -21,7 +21,7 @@ export const loreEntries = [
   },
   {
     id: 'shadow_fork',
-    title: 'Watcher\'s Path',
+    title: "Watcher's Path",
     text: 'Those who tread the shadowed road earn the notice of hidden eyes.'
   },
   {
@@ -38,6 +38,11 @@ export const loreEntries = [
     id: 'before_the_seal',
     title: 'Before the Seal',
     text: 'Records speak of the tower thriving before its gates were sealed by arcane dust.'
+  },
+  {
+    id: 'first_collapse',
+    title: 'The First Collapse',
+    text: 'Ancient texts speak of the first catastrophe that shattered these halls.'
   }
 ];
 

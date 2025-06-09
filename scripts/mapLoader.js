@@ -4,7 +4,8 @@ import {
   visitedBothForks,
   hasSealingDust,
   consumeSealingDust,
-  isSealPuzzleSolved
+  isSealPuzzleSolved,
+  isMirrorPuzzleSolved
 } from './player_memory.js';
 import { showDialogue } from './dialogueSystem.js';
 
@@ -29,6 +30,10 @@ export function normalizeGrid(grid, size = 20) {
 export async function loadMap(name) {
   if (name === 'map09' && !hasSealingDust() && !isSealPuzzleSolved()) {
     showDialogue('A shimmering seal bars your way.');
+    return null;
+  }
+  if (name === 'map10' && !isMirrorPuzzleSolved()) {
+    showDialogue('Ancient glyphs refuse to yield.');
     return null;
   }
   let data;
