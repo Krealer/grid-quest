@@ -32,7 +32,8 @@
     "description": "A scruffy thief eyeing your belongings.",
     "intro": "The bandit lunges for your coin purse!",
     "portrait": "🥷",
-    "skills": ["strike", "weaken"]
+    "skills": ["strike", "weaken"],
+    "behavior": "aggressive"
   },
   "S": {
     "name": "Skeleton",
@@ -58,6 +59,7 @@
     "intro": "A goblin archer nocks an arrow your way!",
     "portrait": "🏹",
     "skills": ["poisonSting"],
+    "behavior": "aggressive",
     "drop": { "item": "goblin_ear", "quantity": 1 }
   },
   "rotting_warrior": {
@@ -67,6 +69,7 @@
     "intro": "The rotting warrior staggers forward with a groan!",
     "portrait": "🪓",
     "skills": ["strike", "poisonSting"],
+    "behavior": "aggressive",
     "drop": { "item": "rotten_tooth", "quantity": 1 }
   },
   "scout_commander": {
@@ -76,6 +79,7 @@
     "intro": "The scout commander barks orders and charges!",
     "portrait": "🎖️",
     "skills": ["strike", "weaken"],
+    "behavior": "cautious",
     "drop": { "item": "commander_badge", "quantity": 1 },
     "onDefeatMessage": "The commander falls. A silence settles over the hills."
   }

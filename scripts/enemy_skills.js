@@ -3,6 +3,7 @@ export const enemySkills = {
     id: 'strike',
     name: 'Strike',
     description: 'A basic attack dealing 8 damage.',
+    aiType: 'damage',
     effect({ enemy, damagePlayer, log }) {
       const dmg = 8 + (enemy.tempAttack || 0);
       const applied = damagePlayer(dmg);
@@ -13,6 +14,8 @@ export const enemySkills = {
     id: 'poisonSting',
     name: 'Poison Sting',
     description: 'Deal 5 damage and inflict Poisoned.',
+    aiType: 'status',
+    applies: ['poisoned'],
     statuses: [{ target: 'player', id: 'poisoned', duration: 2 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
       const dmg = 5 + (enemy.tempAttack || 0);
@@ -25,6 +28,8 @@ export const enemySkills = {
     id: 'weaken',
     name: 'Weaken',
     description: 'Inflict Weakened for 2 turns.',
+    aiType: 'status',
+    applies: ['weakened'],
     statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
     effect({ player, applyStatus, log, enemy }) {
       applyStatus(player, 'weakened', 2);
