@@ -9,6 +9,7 @@ import { startCombat } from './combatSystem.js';
 import { showDialogue } from './dialogueSystem.js';
 import { getAllSkills, unlockSkill } from './skills.js';
 import * as router from './router.js';
+import { gameState } from './game_state.js';
 
 /**
  * Handles double click interactions on tiles.
@@ -27,6 +28,7 @@ export async function handleTileInteraction(
   cols,
   npcModules = {}
 ) {
+  if (gameState.isDead) return;
   const target = e.target;
   if (!target.classList.contains('tile')) return;
   const x = Number(target.dataset.x);

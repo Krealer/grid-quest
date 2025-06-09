@@ -1,5 +1,6 @@
 
 import { getSkill } from './skills.js';
+import { triggerDeath } from './player.js';
 
 let overlay = null;
 
@@ -145,6 +146,9 @@ export function startCombat(enemy, player) {
     log('Combat ended');
     if (player) {
       player.hp = playerHp;
+    }
+    if (playerHp <= 0) {
+      triggerDeath();
     }
     gridEl.classList.remove('blurred');
     overlay.remove();
