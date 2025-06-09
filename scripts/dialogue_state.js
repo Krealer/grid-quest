@@ -2,6 +2,8 @@ import { unlockBlueprint } from './craft_state.js';
 import { upgradeItem, rerollEnchantment } from './forge.js';
 import { addRelic } from './relic_state.js';
 import { discover, discoverLore as recordLore } from './player_memory.js';
+import { chooseClass as selectClass } from './class_state.js';
+import { player } from './player.js';
 
 export const dialogueMemory = new Set();
 
@@ -56,4 +58,11 @@ export function giveRelic(id) {
 // Unlock a lore entry
 export function discoverLore(id) {
   if (id) recordLore(id);
+}
+
+// Set the player's class if not already chosen
+export function chooseClass(id) {
+  if (id && selectClass(id)) {
+    player.classId = id;
+  }
 }

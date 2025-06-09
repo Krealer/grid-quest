@@ -8,6 +8,7 @@ import {
   gainXP,
   getTotalStats,
 } from './player.js';
+import { getClassBonuses } from './class_state.js';
 import { getPassive } from './passive_skills.js';
 import { applyDamage } from './logic.js';
 import {
@@ -348,6 +349,10 @@ export async function startCombat(enemy, player) {
             // if potion mastery defined bonus to defense potions, reuse field
             amount += p.itemHealBonus;
           }
+        }
+        const classBonus = getClassBonuses();
+        if (classBonus.itemHealBonus) {
+          amount += classBonus.itemHealBonus;
         }
         addTempDefense(amount);
         log(`Defense increased by ${amount} for this fight!`);

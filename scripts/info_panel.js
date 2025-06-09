@@ -5,6 +5,8 @@ import { getDiscovered } from './player_memory.js';
 import { getAllSkillsInfo } from './skillsInfo.js';
 import { getStatusMetadata } from './status_effects.js';
 import { getLoreEntries } from './lore_entries.js';
+import { getAllClasses } from './classesInfo.js';
+import { getChosenClass } from './class_state.js';
 
 function createEntry(obj) {
   const row = document.createElement('div');
@@ -35,6 +37,20 @@ function createStatusEntry(effect) {
   return row;
 }
 
+function createClassEntry(cls, chosen) {
+  const row = document.createElement('div');
+  row.classList.add('info-entry', 'class-entry');
+  if (chosen) row.classList.add('selected');
+  const bonus = Object.entries(cls.bonuses || {})
+    .map(([k, v]) => `${k} +${v}`)
+    .join(', ');
+  row.innerHTML = `
+    <strong>${cls.name}</strong>
+    <div class="desc">${cls.description}</div>
+    <div class="meta">${bonus}</div>`;
+  return row;
+}
+
 export async function updateInfoPanel() {
   const npcContainer = document.getElementById('info-npcs');
   const enemyContainer = document.getElementById('info-enemies');
@@ -42,7 +58,8 @@ export async function updateInfoPanel() {
   const skillContainer = document.getElementById('info-skills');
   const statusContainer = document.getElementById('info-status');
   const loreContainer = document.getElementById('info-lore');
-  if (!npcContainer || !enemyContainer || !itemContainer || !skillContainer || !statusContainer || !loreContainer) return;
+  const classContainer = document.getElementById('info-class');
+  if (!npcContainer || !enemyContainer || !itemContainer || !skillContainer || !statusContainer || !loreContainer || !classContainer) return;
 
   npcContainer.innerHTML = '';
   const seenNpcs = getDiscovered('npcs');
@@ -135,6 +152,14 @@ export async function updateInfoPanel() {
       }
     });
   }
+
+  classContainer.innerHTML = '';
+  const chosen = getChosenClass();
+  const allClasses = getAllClasses();
+  allClasses.forEach(cls => {
+    const entry = createClassEntry(cls, cls.id === chosen);
+    classContainer.appendChild(entry);
+  });
 }
 
 function showTab(name) {
@@ -149,6 +174,7 @@ function showTab(name) {
   document.getElementById('info-skills').style.display = name === 'skills' ? 'block' : 'none';
   document.getElementById('info-status').style.display = name === 'status' ? 'block' : 'none';
   document.getElementById('info-lore').style.display = name === 'lore' ? 'block' : 'none';
+  document.getElementById('info-class').style.display = name === 'class' ? 'block' : 'none';
 }
 
 export async function toggleInfoPanel() {
@@ -164,6 +190,20 @@ export async function toggleInfoPanel() {
 }
 
 export function initInfoPanel() {
+  const tabsContainer = document.querySelector('#info-panel .info-tabs');
+  const panel = document.getElementById('info-panel');
+  if (tabsContainer && panel && !document.getElementById('info-class')) {
+    const btn = document.createElement('div');
+    btn.classList.add('info-tab-btn');
+    btn.dataset.target = 'class';
+    btn.textContent = 'Class';
+    tabsContainer.appendChild(btn);
+    const div = document.createElement('div');
+    div.id = 'info-class';
+    div.classList.add('info-tab-content');
+    div.style.display = 'none';
+    panel.appendChild(div);
+  }
   const buttons = document.querySelectorAll('#info-panel .info-tab-btn');
   buttons.forEach(btn => {
     btn.addEventListener('click', () => showTab(btn.dataset.target));

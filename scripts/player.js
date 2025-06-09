@@ -5,6 +5,7 @@ import { movePlayerTo } from './map.js';
 import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
 import { getItemBonuses } from './item_stats.js';
 import { getRelicBonuses } from './relic_state.js';
+import { getClassBonuses, getChosenClass } from './class_state.js';
 
 export const player = {
   x: 0,
@@ -14,6 +15,7 @@ export const player = {
   level: 1,
   xp: 0,
   xpToNextLevel: 10,
+  classId: getChosenClass() || null,
   stats: {
     defense: 0,
   },
@@ -143,6 +145,7 @@ export function getPlayerSummary() {
     level: player.level,
     xp: player.xp,
     xpToNextLevel: player.xpToNextLevel,
+    classId: player.classId,
     passives: Array.isArray(player.passives) ? [...player.passives] : [],
   };
 }
@@ -166,6 +169,13 @@ export function getTotalStats() {
   const relicBonus = getRelicBonuses();
   if (relicBonus) {
     for (const [key, val] of Object.entries(relicBonus)) {
+      total[key] = (total[key] || 0) + val;
+    }
+  }
+  const classBonus = getClassBonuses();
+  if (classBonus) {
+    for (const [key, val] of Object.entries(classBonus)) {
+      if (key === 'itemHealBonus') continue;
       total[key] = (total[key] || 0) + val;
     }
   }
