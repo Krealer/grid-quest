@@ -2,8 +2,9 @@
 import { getSkill } from './skills.js';
 import { triggerDeath } from './player.js';
 import { applyDamage } from './logic.js';
-import { addItem } from './inventory.js';
+import { addItem, getItemsByType } from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
+import { useDefensePotion } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
 
@@ -44,7 +45,14 @@ export async function startCombat(enemy, player) {
       <div class="intro-text">${
         enemy.intro || 'A shadowy beast snarls and prepares to strike!'
       }</div>
-      <div class="actions hidden"></div>
+      <div class="actions hidden">
+        <div class="action-tabs">
+          <button class="skills-tab selected">Skills</button>
+          <button class="items-tab">Items</button>
+        </div>
+        <div class="skill-buttons"></div>
+        <div class="item-buttons hidden"></div>
+      </div>
       <div class="log hidden"></div>
     </div>`;
 
@@ -64,7 +72,13 @@ export async function startCombat(enemy, player) {
   updateHpBar(enemyBar, enemyHp, enemyMax);
 
   const actionsEl = overlay.querySelector('.actions');
+  const skillContainer = overlay.querySelector('.skill-buttons');
+  const itemContainer = overlay.querySelector('.item-buttons');
+  const skillsTabBtn = overlay.querySelector('.skills-tab');
+  const itemsTabBtn = overlay.querySelector('.items-tab');
   const logEl = overlay.querySelector('.log');
+
+  await loadItems();
 
   // reveal UI after intro animation
   setTimeout(() => {
@@ -83,6 +97,7 @@ export async function startCombat(enemy, player) {
   let guardActive = false;
   let shieldBlock = false;
   let healUsed = false;
+  let tempDefense = 0;
   let playerTurn = true;
 
   function damageEnemy(dmg) {
@@ -105,6 +120,10 @@ export async function startCombat(enemy, player) {
 
   function activateShieldBlock() {
     shieldBlock = true;
+  }
+
+  function addTempDefense(amount) {
+    tempDefense += amount;
   }
 
   function isHealUsed() {
@@ -133,6 +152,25 @@ export async function startCombat(enemy, player) {
     }
   }
 
+  function updateItemsUI() {
+    itemContainer.innerHTML = '';
+    const items = getItemsByType('combat');
+    if (items.length === 0) {
+      const msg = document.createElement('div');
+      msg.textContent = 'No usable items';
+      itemContainer.appendChild(msg);
+      return;
+    }
+    items.forEach(it => {
+      const data = getItemData(it.id);
+      const btn = document.createElement('button');
+      const qty = it.quantity > 1 ? ` x${it.quantity}` : '';
+      btn.textContent = `${data.name}${qty}`;
+      btn.addEventListener('click', () => handleItemUse(it.id));
+      itemContainer.appendChild(btn);
+    });
+  }
+
   const skillList = (player.learnedSkills || [])
     .map(id => getSkill(id))
     .filter(Boolean);
@@ -141,7 +179,22 @@ export async function startCombat(enemy, player) {
     const btn = document.createElement('button');
     btn.textContent = skill.name;
     btn.addEventListener('click', () => handleAction(skill));
-    actionsEl.appendChild(btn);
+    skillContainer.appendChild(btn);
+  });
+
+  updateItemsUI();
+  document.addEventListener('inventoryUpdated', updateItemsUI);
+  skillsTabBtn.addEventListener('click', () => {
+    skillContainer.classList.remove('hidden');
+    itemContainer.classList.add('hidden');
+    skillsTabBtn.classList.add('selected');
+    itemsTabBtn.classList.remove('selected');
+  });
+  itemsTabBtn.addEventListener('click', () => {
+    itemContainer.classList.remove('hidden');
+    skillContainer.classList.add('hidden');
+    itemsTabBtn.classList.add('selected');
+    skillsTabBtn.classList.remove('selected');
   });
 
   async function handleAction(skill) {
@@ -166,6 +219,26 @@ export async function startCombat(enemy, player) {
     setTimeout(enemyTurn, 300);
   }
 
+  function handleItemUse(id) {
+    if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
+    let used = false;
+    if (id === 'defense_potion_I') {
+      const res = useDefensePotion();
+      if (res) {
+        addTempDefense(res.defense);
+        log('Defense increased by 1 for this fight!');
+        used = true;
+      } else {
+        log('No potion available.');
+      }
+    }
+    if (used) {
+      updateItemsUI();
+      playerTurn = false;
+      setTimeout(enemyTurn, 300);
+    }
+  }
+
   function endCombat() {
     log('Combat ended');
     if (player) {
@@ -177,6 +250,7 @@ export async function startCombat(enemy, player) {
     gridEl.classList.remove('blurred');
     overlay.remove();
     overlay = null;
+    document.removeEventListener('inventoryUpdated', updateItemsUI);
     document.dispatchEvent(
       new CustomEvent('combatEnded', { detail: { playerHp, enemyHp, enemy } })
     );
@@ -195,7 +269,10 @@ export async function startCombat(enemy, player) {
       dmg = Math.max(0, dmg - 5);
       guardActive = false;
     }
-    const tempTarget = { hp: playerHp, stats: player.stats };
+    const tempTarget = {
+      hp: playerHp,
+      stats: { defense: (player.stats?.defense || 0) + tempDefense },
+    };
     const applied = applyDamage(tempTarget, dmg);
     playerHp = tempTarget.hp;
     log(`${enemy.name} attacks for ${applied} damage!`);

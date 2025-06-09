@@ -8,3 +8,10 @@ export function useArmorPiece() {
   }
   return false;
 }
+
+export function useDefensePotion() {
+  if (removeItem('defense_potion_I', 1)) {
+    return { defense: 1 };
+  }
+  return null;
+}

@@ -1,3 +1,5 @@
+import { getItemData } from './item_loader.js';
+
 export const inventory = [];
 
 export function getItemCount(nameOrId) {
@@ -39,4 +41,11 @@ export function removeItem(nameOrId, qty = 1) {
     return true;
   }
   return false;
+}
+
+export function getItemsByType(type) {
+  return inventory.filter(it => {
+    const data = getItemData(it.id);
+    return data && data.type === type;
+  });
 }
