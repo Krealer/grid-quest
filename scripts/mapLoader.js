@@ -68,3 +68,18 @@ document.addEventListener('exitTrial', async () => {
   const { movePlayerTo } = await import('./map.js');
   await movePlayerTo('map04', { x: 10, y: 10 });
 });
+
+document.addEventListener('goFork', async () => {
+  const { movePlayerTo } = await import('./map.js');
+  await movePlayerTo('map05', { x: 1, y: 1 });
+});
+
+document.addEventListener('goLeftPath', async () => {
+  const { movePlayerTo } = await import('./map.js');
+  await movePlayerTo('map06_left', { x: 1, y: 1 });
+});
+
+document.addEventListener('goRightPath', async () => {
+  const { movePlayerTo } = await import('./map.js');
+  await movePlayerTo('map06_right', { x: 1, y: 1 });
+});

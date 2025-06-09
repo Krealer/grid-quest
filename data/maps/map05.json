@@ -1,0 +1,165 @@
+{
+  "name": "Forked Pass",
+  "environment": "clear",
+  "grid": [
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "D",
+        "target": "map04.json",
+        "spawn": {
+          "x": 10,
+          "y": 18
+        }
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "C",
+        "key": "forked_key",
+        "consumeItem": true
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "N",
+        "npc": "fork_guide"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      "G",
+      "G",
+      "G",
+      {
+        "type": "E",
+        "enemyId": "stone_beetle"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "E",
+        "enemyId": "phantom_mage"
+      },
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "D",
+        "target": "map06_left.json",
+        "spawn": {
+          "x": 1,
+          "y": 1
+        }
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "D",
+        "target": "map06_right.json",
+        "spawn": {
+          "x": 1,
+          "y": 1
+        }
+      },
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    "GGGGGGGGGGGGGGGGGGGG"
+  ]
+}

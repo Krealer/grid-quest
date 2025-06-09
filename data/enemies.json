@@ -95,5 +95,27 @@
     "skills": ["weaken"],
     "behavior": "aggressive",
     "drops": []
+  },
+  "stone_beetle": {
+    "name": "Stone Beetle",
+    "hp": 70,
+    "xp": 12,
+    "description": "A heavy-shelled insect that rumbles with each step.",
+    "intro": "Stones crack as a massive beetle scuttles toward you!",
+    "portrait": "🐞",
+    "skills": ["strike"],
+    "behavior": "aggressive",
+    "drops": []
+  },
+  "phantom_mage": {
+    "name": "Phantom Mage",
+    "hp": 60,
+    "xp": 12,
+    "description": "A ghostly spellcaster muttering forgotten words.",
+    "intro": "The air grows cold as a phantom mage materializes!",
+    "portrait": "👻",
+    "skills": ["weaken"],
+    "behavior": "aggressive",
+    "drops": []
   }
 }

@@ -5,7 +5,8 @@ export const npcInfoList = [
   { id: 'arvalin', name: 'Arvalin', description: 'A scholar fascinated by cursed artifacts.' },
   { id: 'grindle', name: 'Grindle', description: 'A gruff craftsman skilled in forging.' },
   { id: 'forge_npc', name: 'Forge Master', description: 'Offers upgrades and rerolls for equipment.' },
-  { id: 'shade_sage', name: 'Shade Sage', description: 'A mysterious figure lingering in the hub.' }
+  { id: 'shade_sage', name: 'Shade Sage', description: 'A mysterious figure lingering in the hub.' },
+  { id: 'fork_guide', name: 'Pathseer', description: 'Guides travelers through the forked pass.' }
 ];
 
 export function getAllNpcs() {
