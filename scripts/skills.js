@@ -89,6 +89,36 @@ const skillDefs = {
       log('Arcane power lashes out for 12 damage!');
     },
   },
+  poisonDart: {
+    id: 'poisonDart',
+    name: 'Poison Dart',
+    description: 'Inflict Poisoned for 3 turns.',
+    statuses: [{ target: 'enemy', id: 'poisoned', duration: 3 }],
+    effect({ applyStatus, enemy, log }) {
+      applyStatus(enemy, 'poisoned', 3);
+      log('Enemy is poisoned!');
+    },
+  },
+  rally: {
+    id: 'rally',
+    name: 'Rally',
+    description: 'Gain Fortify for 3 turns.',
+    statuses: [{ target: 'self', id: 'fortify', duration: 3 }],
+    effect({ applyStatus, player, log }) {
+      applyStatus(player, 'fortify', 3);
+      log('You steel yourself against attacks.');
+    },
+  },
+  focusMind: {
+    id: 'focusMind',
+    name: 'Focus',
+    description: 'Gain Focus for your next attack.',
+    statuses: [{ target: 'self', id: 'focus', duration: 1 }],
+    effect({ applyStatus, player, log }) {
+      applyStatus(player, 'focus', 1);
+      log('You concentrate deeply, preparing your strike.');
+    },
+  },
 };
 
 let player = null;

@@ -1,3 +1,5 @@
+import { getStatusEffect } from './status_effects.js';
+
 export function setupTabs(overlay) {
   const skillContainer = overlay.querySelector('.skill-buttons');
   const itemContainer = overlay.querySelector('.item-buttons');
@@ -41,5 +43,24 @@ export function updateStatusUI(overlay, player, enemy) {
     const div = document.createElement('div');
     div.textContent = `${s.id} (${s.remaining})`;
     enemyList.appendChild(div);
+  });
+}
+
+export function renderSkillList(container, skills, onClick) {
+  if (!container) return;
+  container.innerHTML = '';
+  skills.forEach(skill => {
+    const btn = document.createElement('button');
+    const effects = [];
+    if (Array.isArray(skill.statuses)) {
+      skill.statuses.forEach(s => {
+        const ef = getStatusEffect(s.id);
+        if (ef) effects.push(ef.description);
+      });
+    }
+    const descParts = [skill.description, ...effects].filter(Boolean).join(' ');
+    btn.innerHTML = `<strong>${skill.name}</strong><div class="desc">${descParts}</div>`;
+    btn.addEventListener('click', () => onClick(skill));
+    container.appendChild(btn);
   });
 }

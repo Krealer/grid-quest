@@ -334,6 +334,12 @@ body {
   border: 1px solid #222;
 }
 
+#battle-overlay .tab-panel button .desc {
+  display: block;
+  font-size: 12px;
+  color: #ccc;
+}
+
 #battle-overlay .log {
   margin-top: 10px;
   height: 80px;
