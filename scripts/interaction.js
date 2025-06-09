@@ -43,7 +43,7 @@ export async function handleTileInteraction(
         showDialogue('The door is locked.');
         break;
       }
-      if (required) {
+      if (required && tile.consumeItem) {
         removeItem(required);
         updateInventoryUI();
       }

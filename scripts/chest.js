@@ -7,7 +7,7 @@ import { unlockSkillsFromItem } from './skills.js';
 
 const chestContents = {
   'map01:11,3': { item: 'rusty_key' },
-  'map02:5,5': { item: 'silver_key' },
+  'map02:5,5': { item: 'silver_key', message: 'You found a silver key.' },
   'map02:8,12': { message: 'This chest was empty.' },
   'map02:15,15': { item: 'potion_of_health' },
 };
