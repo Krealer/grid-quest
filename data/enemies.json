@@ -117,5 +117,27 @@
     "skills": ["weaken"],
     "behavior": "aggressive",
     "drops": []
+  },
+  "shadow_lurker": {
+    "name": "Shadow Lurker",
+    "hp": 65,
+    "xp": 14,
+    "description": "A creature that thrives in darkness and strikes unseen.",
+    "intro": "A Shadow Lurker melts out of the gloom!",
+    "portrait": "👽",
+    "skills": ["strike", "weaken"],
+    "behavior": "aggressive",
+    "drops": []
+  },
+  "flame_hound": {
+    "name": "Flame Hound",
+    "hp": 55,
+    "xp": 13,
+    "description": "A fiery beast wreathed in scorching flames.",
+    "intro": "A Flame Hound leaps toward you with blazing jaws!",
+    "portrait": "🔥",
+    "skills": ["strike"],
+    "behavior": "aggressive",
+    "drops": []
   }
 }
