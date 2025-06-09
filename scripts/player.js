@@ -13,6 +13,15 @@ export function moveTo(x, y) {
 
 export function takeDamage(amount) {
   player.hp = Math.max(0, player.hp - amount);
+  if (player.hp === 0) triggerDeath();
+}
+
+export function isAlive() {
+  return player.hp > 0;
+}
+
+export function triggerDeath() {
+  // Placeholder for future death handling
 }
 
 export function healFull() {

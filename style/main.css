@@ -77,11 +77,11 @@ body {
 }
 
 .tile.trap-light {
-  background-color: #C0C0C0;
+  background-color: #999;
 }
 
 .tile.trap-dark {
-  background-color: #505050;
+  background-color: #555;
 }
 
 .tile.water {
