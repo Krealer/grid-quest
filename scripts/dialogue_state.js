@@ -1,7 +1,7 @@
 import { unlockBlueprint } from './craft_state.js';
 import { upgradeItem, rerollEnchantment } from './forge.js';
 import { addRelic } from './relic_state.js';
-import { discover } from './player_memory.js';
+import { discover, discoverLore as recordLore } from './player_memory.js';
 
 export const dialogueMemory = new Set();
 
@@ -47,5 +47,13 @@ export async function triggerReroll(id) {
 
 // Give a relic to the player
 export function giveRelic(id) {
-  if (id) addRelic(id);
+  if (id) {
+    addRelic(id);
+    recordLore(id);
+  }
+}
+
+// Unlock a lore entry
+export function discoverLore(id) {
+  if (id) recordLore(id);
 }

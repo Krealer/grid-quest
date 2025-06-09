@@ -748,6 +748,15 @@ body {
   color: #336;
 }
 
+.lore-entry {
+  background: #fff8e1;
+}
+
+.lore-entry .desc {
+  font-size: 13px;
+  color: #444;
+}
+
 .info-empty {
   text-align: center;
   color: #666;
