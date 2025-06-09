@@ -1,33 +1,52 @@
 export const lioranDialogue = [
   {
-    text: state =>
-      state.memory.has('lioran_met')
-        ? "Ah, it's you again! I was counting raindrops."
-        : "Oh! Hello there. I'm Lioran, a wandering alchemist... I think.",
+    text: "Ah! A wanderer! Or are you a whisper? Sometimes I mix them up...",
     options: [
-      { label: "Can you heal me?", goto: 1 },
-      { label: "Who are you?", goto: 2 },
-      { label: "Goodbye.", goto: null, memoryFlag: 'lioran_met' }
+      { label: "I’m real. I think.", goto: 1, memoryFlag: "lioran_believes_player" },
+      { label: "What are you talking about?", goto: 2, memoryFlag: "lioran_confused_player" }
     ]
   },
+
   {
-    text: "Sure thing! Just hold still while I mix... wait, was that paint?",
+    text: "Real? Excellent! That means I can give you a warning... or was it a gift?",
     options: [
-      { label: "I'll drink it anyway.", goto: null },
-      { label: "On second thought, no.", goto: null }
+      { label: "A gift sounds better.", goto: 3 },
+      { label: "I’d rather hear the warning.", goto: 4 }
     ]
   },
+
   {
-    text: "I'm Lioran! Or Dorlan? Names slip my mind when I'm excited.",
+    text: "Talking helps. Mostly. Unless it attracts them.",
     options: [
-      { label: "That's not reassuring.", goto: 3 },
-      { label: "Farewell then.", goto: null, memoryFlag: 'lioran_met' }
+      { label: "Them?", goto: 4 },
+      { label: "Goodbye, Lioran.", goto: null, memoryFlag: "lioran_dismissed" }
     ]
   },
+
   {
-    text: "Nonsense! Eccentric minds are often the most helpful.",
+    text: "Here, take this. It might unlock... something. Or nothing at all.",
     options: [
-      { label: "If you say so...", goto: null }
+      {
+        label: "Thanks, I guess?",
+        goto: null,
+        give: "mysterious_token",
+        memoryFlag: "lioran_gift_given",
+        condition: (state) => !state.inventory.includes("mysterious_token")
+      },
+      {
+        label: "I don't trust strange gifts.",
+        goto: null,
+        memoryFlag: "lioran_refused_gift"
+      }
+    ]
+  },
+
+  {
+    text: "They live under the floorboards. Or maybe above. Either way — mind your step!",
+    options: [
+      { label: "You’re not making any sense.", goto: 2 },
+      { label: "I’ll be careful.", goto: null, memoryFlag: "lioran_warning_taken" }
     ]
   }
 ];
+
