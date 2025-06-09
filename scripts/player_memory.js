@@ -4,6 +4,7 @@ const memory = {
   npcs: new Set(),
   enemies: new Set(),
   items: new Set(),
+  skills: new Set(),
 };
 
 function loadMemory() {
@@ -14,6 +15,7 @@ function loadMemory() {
     if (Array.isArray(data.npcs)) memory.npcs = new Set(data.npcs);
     if (Array.isArray(data.enemies)) memory.enemies = new Set(data.enemies);
     if (Array.isArray(data.items)) memory.items = new Set(data.items);
+    if (Array.isArray(data.skills)) memory.skills = new Set(data.skills);
   } catch {
     // ignore
   }
@@ -24,6 +26,7 @@ function saveMemory() {
     npcs: Array.from(memory.npcs),
     enemies: Array.from(memory.enemies),
     items: Array.from(memory.items),
+    skills: Array.from(memory.skills),
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
@@ -47,4 +50,8 @@ export function hasDiscovered(type, id) {
 
 export function getDiscovered(type) {
   return memory[type] ? Array.from(memory[type]) : [];
+}
+
+export function discoverSkill(id) {
+  discover('skills', id);
 }
