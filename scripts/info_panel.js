@@ -7,6 +7,7 @@ import { getStatusMetadata } from './status_effects.js';
 import { getLoreEntries } from './lore_entries.js';
 import { getAllClasses } from './classesInfo.js';
 import { getChosenClass } from './class_state.js';
+import { loadRelics, getRelicData, getOwnedRelics } from './relic_state.js';
 
 function createEntry(obj) {
   const row = document.createElement('div');
@@ -51,6 +52,13 @@ function createClassEntry(cls, chosen) {
   return row;
 }
 
+function createRelicEntry(relic) {
+  const row = document.createElement('div');
+  row.classList.add('info-entry', 'relic-entry');
+  row.innerHTML = `<strong>${relic.name}</strong><div class="desc">${relic.description}</div>`;
+  return row;
+}
+
 export async function updateInfoPanel() {
   const npcContainer = document.getElementById('info-npcs');
   const enemyContainer = document.getElementById('info-enemies');
@@ -58,6 +66,7 @@ export async function updateInfoPanel() {
   const skillContainer = document.getElementById('info-skills');
   const statusContainer = document.getElementById('info-status');
   const loreContainer = document.getElementById('info-lore');
+  const relicContainer = document.getElementById('info-relics');
   const classContainer = document.getElementById('info-class');
   if (
     !npcContainer ||
@@ -66,6 +75,7 @@ export async function updateInfoPanel() {
     !skillContainer ||
     !statusContainer ||
     !loreContainer ||
+    !relicContainer ||
     !classContainer
   )
     return;
@@ -114,6 +124,21 @@ export async function updateInfoPanel() {
     seenItems.forEach((id) => {
       const data = all.find((i) => i.id === id);
       if (data) itemContainer.appendChild(createEntry(data));
+    });
+  }
+
+  await loadRelics();
+  relicContainer.innerHTML = '';
+  const ownedRelics = getOwnedRelics();
+  if (ownedRelics.length === 0) {
+    const msg = document.createElement('div');
+    msg.classList.add('info-empty');
+    msg.textContent = 'No relics found yet.';
+    relicContainer.appendChild(msg);
+  } else {
+    ownedRelics.forEach((id) => {
+      const data = getRelicData(id);
+      if (data) relicContainer.appendChild(createRelicEntry(data));
     });
   }
 
@@ -185,6 +210,8 @@ function showTab(name) {
     name === 'items' ? 'block' : 'none';
   document.getElementById('info-skills').style.display =
     name === 'skills' ? 'block' : 'none';
+  document.getElementById('info-relics').style.display =
+    name === 'relics' ? 'block' : 'none';
   document.getElementById('info-status').style.display =
     name === 'status' ? 'block' : 'none';
   document.getElementById('info-lore').style.display =
@@ -208,17 +235,31 @@ export async function toggleInfoPanel() {
 export function initInfoPanel() {
   const tabsContainer = document.querySelector('#info-panel .info-tabs');
   const panel = document.getElementById('info-panel');
-  if (tabsContainer && panel && !document.getElementById('info-class')) {
-    const btn = document.createElement('div');
-    btn.classList.add('info-tab-btn');
-    btn.dataset.target = 'class';
-    btn.textContent = 'Class';
-    tabsContainer.appendChild(btn);
-    const div = document.createElement('div');
-    div.id = 'info-class';
-    div.classList.add('info-tab-content');
-    div.style.display = 'none';
-    panel.appendChild(div);
+  if (tabsContainer && panel) {
+    if (!document.getElementById('info-relics')) {
+      const rbtn = document.createElement('div');
+      rbtn.classList.add('info-tab-btn');
+      rbtn.dataset.target = 'relics';
+      rbtn.textContent = 'Relics';
+      tabsContainer.appendChild(rbtn);
+      const rdiv = document.createElement('div');
+      rdiv.id = 'info-relics';
+      rdiv.classList.add('info-tab-content');
+      rdiv.style.display = 'none';
+      panel.appendChild(rdiv);
+    }
+    if (!document.getElementById('info-class')) {
+      const btn = document.createElement('div');
+      btn.classList.add('info-tab-btn');
+      btn.dataset.target = 'class';
+      btn.textContent = 'Class';
+      tabsContainer.appendChild(btn);
+      const div = document.createElement('div');
+      div.id = 'info-class';
+      div.classList.add('info-tab-content');
+      div.style.display = 'none';
+      panel.appendChild(div);
+    }
   }
   const buttons = document.querySelectorAll('#info-panel .info-tab-btn');
   buttons.forEach((btn) => {

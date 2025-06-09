@@ -1,11 +1,10 @@
 import { gameState } from './game_state.js';
 import { addItem } from './inventory.js';
 import { updateInventoryUI } from './inventory_state.js';
-import { addRelic } from './relic_state.js';
-import { discoverLore } from './player_memory.js';
+import { giveRelic } from './dialogue_state.js';
 import { getItemData, loadItems } from './item_loader.js';
 import { increaseMaxHp } from './player.js';
-import { unlockSkillsFromItem } from './skills.js';
+import { unlockSkillsFromItem, unlockSkillsFromRelic } from './skills.js';
 
 const chestContents = {
   'map01:11,3': { item: 'rusty_key' },
@@ -61,8 +60,8 @@ export async function openChest(id, player) {
     }
   }
   if (config.relic) {
-    await addRelic(config.relic);
-    discoverLore(config.relic);
+    giveRelic(config.relic);
+    unlockedSkills.push(...unlockSkillsFromRelic(config.relic));
   }
   return { item, message: config.message || null, unlockedSkills };
 }

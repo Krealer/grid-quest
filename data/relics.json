@@ -12,16 +12,19 @@
   "warrior_sigil": {
     "name": "Warrior Sigil",
     "description": "Awarded for proving your strength in combat.",
+    "class": "warrior",
     "bonuses": { "attack": 2 }
   },
   "guardian_emblem": {
     "name": "Guardian Emblem",
     "description": "A token that reinforces protective instincts.",
+    "class": "guardian",
     "bonuses": { "defense": 2 }
   },
   "alchemist_catalyst": {
     "name": "Alchemist Catalyst",
     "description": "A mysterious powder that empowers concoctions.",
+    "class": "alchemist",
     "bonuses": { "itemHealBonus": 1 }
   }
 }

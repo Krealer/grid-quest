@@ -11,7 +11,7 @@ const skillDefs = {
       const dmg = 15;
       damageEnemy(dmg);
       log(`Player strikes for ${dmg} damage!`);
-    },
+    }
   },
   guard: {
     id: 'guard',
@@ -20,7 +20,7 @@ const skillDefs = {
     effect({ activateGuard, log }) {
       activateGuard();
       log('Player braces for impact.');
-    },
+    }
   },
   heal: {
     id: 'heal',
@@ -34,7 +34,7 @@ const skillDefs = {
       setHealUsed();
       healPlayer(20);
       log('Player heals for 20 HP.');
-    },
+    }
   },
   shieldWall: {
     id: 'shieldWall',
@@ -44,7 +44,7 @@ const skillDefs = {
     effect({ activateShieldBlock, log }) {
       activateShieldBlock();
       log('A sturdy wall of force surrounds you.');
-    },
+    }
   },
   flameBurst: {
     id: 'flameBurst',
@@ -55,7 +55,7 @@ const skillDefs = {
       const dmg = 10;
       damageEnemy(dmg);
       log('Flames scorch the enemy for 10 damage!');
-    },
+    }
   },
   shadowStab: {
     id: 'shadowStab',
@@ -66,7 +66,7 @@ const skillDefs = {
       const dmg = 20;
       damageEnemy(dmg);
       log('You lunge from the darkness for 20 damage!');
-    },
+    }
   },
   boneSpike: {
     id: 'boneSpike',
@@ -77,7 +77,7 @@ const skillDefs = {
       const dmg = 18;
       damageEnemy(dmg);
       log('Bone shards pierce the foe for 18 damage!');
-    },
+    }
   },
   arcaneBlast: {
     id: 'arcaneBlast',
@@ -88,7 +88,7 @@ const skillDefs = {
       const dmg = 12;
       damageEnemy(dmg);
       log('Arcane power lashes out for 12 damage!');
-    },
+    }
   },
   poisonDart: {
     id: 'poisonDart',
@@ -98,7 +98,7 @@ const skillDefs = {
     effect({ applyStatus, enemy, log }) {
       applyStatus(enemy, 'poisoned', 3);
       log('Enemy is poisoned!');
-    },
+    }
   },
   rally: {
     id: 'rally',
@@ -108,7 +108,7 @@ const skillDefs = {
     effect({ applyStatus, player, log }) {
       applyStatus(player, 'fortify', 3);
       log('You steel yourself against attacks.');
-    },
+    }
   },
   focusMind: {
     id: 'focusMind',
@@ -118,7 +118,7 @@ const skillDefs = {
     effect({ applyStatus, player, log }) {
       applyStatus(player, 'focus', 1);
       log('You concentrate deeply, preparing your strike.');
-    },
+    }
   },
   purify: {
     id: 'purify',
@@ -129,18 +129,18 @@ const skillDefs = {
       const removed = removeNegativeStatus(player, [
         'poisoned',
         'cursed',
-        'blinded',
+        'blinded'
       ]);
       if (removed.length > 0) {
         const names = removed
-          .map(id => getStatusEffect(id)?.name || id)
+          .map((id) => getStatusEffect(id)?.name || id)
           .join(', ');
         log(`Purify cleanses ${names}!`);
       } else {
         log('No negative effects to purify.');
       }
-    },
-  },
+    }
+  }
 };
 
 let player = null;
@@ -184,9 +184,9 @@ export function initSkillSystem(playerObj) {
     player.learnedSkills = loadLearnedSkills();
   }
   const enemyList = loadEnemySkillSources();
-  enemyList.forEach(id => enemySkillSources.add(id));
+  enemyList.forEach((id) => enemySkillSources.add(id));
   // Ensure starting skills are present
-  ['strike', 'guard', 'heal'].forEach(id => {
+  ['strike', 'guard', 'heal'].forEach((id) => {
     if (!player.learnedSkills.includes(id)) {
       player.learnedSkills.push(id);
     }
@@ -219,6 +219,18 @@ export function unlockSkillsFromItem(itemId) {
   const unlocked = [];
   for (const [id, skill] of Object.entries(skillDefs)) {
     if (skill.unlockCondition?.item === itemId) {
+      if (unlockSkill(id)) {
+        unlocked.push(id);
+      }
+    }
+  }
+  return unlocked;
+}
+
+export function unlockSkillsFromRelic(relicId) {
+  const unlocked = [];
+  for (const [id, skill] of Object.entries(skillDefs)) {
+    if (skill.unlockCondition?.relic === relicId) {
       if (unlockSkill(id)) {
         unlocked.push(id);
       }
