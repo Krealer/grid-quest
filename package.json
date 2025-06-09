@@ -1,0 +1,7 @@
+{
+  "name": "grid-quest",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

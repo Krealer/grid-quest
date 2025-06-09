@@ -2,6 +2,7 @@ import { loadItems, getItemData } from './item_loader.js';
 import { addItem, removeItem, getItemCount } from './inventory.js';
 import { craftState } from './craft_state.js';
 import { isRecipeUnlocked } from './recipe_state.js';
+import { showError } from './errorMessage.js';
 
 let craftingAllowed = false;
 
@@ -20,11 +21,13 @@ export async function loadRecipes() {
   if (loaded) return recipes;
   try {
     const res = await fetch('data/recipes.json');
-    if (res.ok) {
-      recipes = await res.json();
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
     }
-  } catch {
-    // ignore
+    recipes = await res.json();
+  } catch (err) {
+    console.error('Failed to load recipes', err);
+    showError('Failed to load recipes. Please try again later.');
   } finally {
     loaded = true;
   }

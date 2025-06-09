@@ -20,6 +20,16 @@ Game scripts live under `scripts/`, data files are in `data/`, and stylesheets c
 
 Maps can specify an `environment` value which adds a CSS class like `env-fog` or `env-rain` to the grid. When the field is omitted the map defaults to the `clear` environment, applying an `env-clear` class. The stylesheet provides visual effects for these classes. Additional options such as `env-day`, `env-dusk` and `env-night` are available for custom day, dusk or night scenes.
 
+## Tests
+
+Basic unit tests are provided using Node's built-in test runner. After installing Node.js run:
+
+```bash
+npm test
+```
+
+This will execute the tests found in the `tests/` directory.
+
 ## Deployment
 
 The repository is ready for GitHub Pages. Commit your changes to the default branch and enable Pages to serve `index.html` from the repository root.

@@ -1,3 +1,5 @@
+import { showError } from './errorMessage.js';
+
 let currentGrid = null;
 let currentEnvironment = 'clear';
 
@@ -17,11 +19,18 @@ export function normalizeGrid(grid, size = 20) {
 }
 
 export async function loadMap(name) {
-  const response = await fetch(`data/maps/${name}.json`);
-  if (!response.ok) {
-    throw new Error(`Failed to load map ${name}`);
+  let data;
+  try {
+    const response = await fetch(`data/maps/${name}.json`);
+    if (!response.ok) {
+      throw new Error(`Failed to load map ${name}`);
+    }
+    data = await response.json();
+  } catch (err) {
+    console.error('Failed to load map', err);
+    showError('Failed to load map data. Please try again later.');
+    throw err;
   }
-  const data = await response.json();
   currentEnvironment = data.environment || 'clear';
   currentGrid = data.grid.map(row => {
     if (typeof row === 'string') {

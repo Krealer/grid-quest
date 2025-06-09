@@ -4,6 +4,7 @@ import { loadItems, getItemData } from './item_loader.js';
 import { unlockSkillsFromItem, getAllSkills } from './skills.js';
 import { dialogueMemory, setMemory } from './dialogue_state.js';
 import { quests, completeQuest } from './quest_state.js';
+import { showError } from './errorMessage.js';
 
 let dialogueLines = {};
 let dataLoaded = false;
@@ -12,11 +13,13 @@ async function loadDialogData() {
   if (dataLoaded) return;
   try {
     const res = await fetch('data/dialog.json');
-    if (res.ok) {
-      dialogueLines = await res.json();
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
     }
+    dialogueLines = await res.json();
   } catch (err) {
     console.error('Failed to load dialog data', err);
+    showError('Failed to load dialogue. Please try again later.');
   } finally {
     dataLoaded = true;
   }

@@ -1,4 +1,5 @@
 import { hasMemory } from './dialogue_state.js';
+import { showError } from './errorMessage.js';
 
 export const quests = {};
 
@@ -9,11 +10,13 @@ export async function loadQuestData() {
   if (dataLoaded) return questData;
   try {
     const res = await fetch('data/quests.json');
-    if (res.ok) {
-      questData = await res.json();
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
     }
-  } catch {
-    // ignore errors
+    questData = await res.json();
+  } catch (err) {
+    console.error('Failed to load quest data', err);
+    showError('Failed to load quests. Please try again later.');
   } finally {
     dataLoaded = true;
   }
