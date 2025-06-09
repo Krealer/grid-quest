@@ -9,15 +9,6 @@
     "skills": ["strike"],
     "drops": [ { "item": "goblin_ear", "quantity": 1 } ]
   },
-  "Z": {
-    "name": "Zombie",
-    "hp": 50,
-    "description": "A decaying corpse that refuses to rest.",
-    "intro": "The zombie shambles toward you!",
-    "portrait": "🧟",
-    "skills": ["strike"],
-    "drops": []
-  },
   "zombie01": {
     "name": "Zombie",
     "hp": 50,
