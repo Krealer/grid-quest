@@ -62,3 +62,9 @@ document.addEventListener('classChosen', async (e) => {
   const { movePlayerTo } = await import('./map.js');
   await movePlayerTo(`map_${id}`, { x: 1, y: 1 });
 });
+
+// When a trial is completed, send the player back to the central hub
+document.addEventListener('exitTrial', async () => {
+  const { movePlayerTo } = await import('./map.js');
+  await movePlayerTo('map04', { x: 10, y: 10 });
+});

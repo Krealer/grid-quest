@@ -6,6 +6,7 @@ const memory = {
   items: new Set(),
   skills: new Set(),
   lore: new Set(),
+  maps: new Set(),
 };
 
 function loadMemory() {
@@ -18,6 +19,7 @@ function loadMemory() {
     if (Array.isArray(data.items)) memory.items = new Set(data.items);
     if (Array.isArray(data.skills)) memory.skills = new Set(data.skills);
     if (Array.isArray(data.lore)) memory.lore = new Set(data.lore);
+    if (Array.isArray(data.maps)) memory.maps = new Set(data.maps);
   } catch {
     // ignore
   }
@@ -30,6 +32,7 @@ function saveMemory() {
     items: Array.from(memory.items),
     skills: Array.from(memory.skills),
     lore: Array.from(memory.lore),
+    maps: Array.from(memory.maps),
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
@@ -61,4 +64,8 @@ export function discoverSkill(id) {
 
 export function discoverLore(id) {
   discover('lore', id);
+}
+
+export function discoverMap(id) {
+  discover('maps', id);
 }

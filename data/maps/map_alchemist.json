@@ -94,7 +94,11 @@
       {
         "type": "C"
       },
-      "G"
+      {
+        "type": "D",
+        "target": "map04.json",
+        "spawn": { "x": 10, "y": 10 }
+      }
     ],
     "GGGGGGGGGGGGGGGGGGGG"
   ]

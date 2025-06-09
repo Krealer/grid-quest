@@ -1,6 +1,7 @@
 import { loadMap as loadMapData } from './mapLoader.js';
 import { renderGrid } from './grid.js';
 import { gameState } from './game_state.js';
+import { discoverMap } from './player_memory.js';
 
 let container = null;
 let player = null;
@@ -40,6 +41,7 @@ export async function loadMap(filename, spawnPoint) {
   const { grid, environment } = await loadMapData(name);
   gameState.currentMap = name;
   gameState.environment = environment;
+  discoverMap(name);
   cols = grid[0].length;
   renderGrid(grid, container, environment);
 
