@@ -3,6 +3,7 @@ import { disableMovement, enableMovement } from './movement.js';
 import { showDialogue } from './dialogueSystem.js';
 import { movePlayerTo } from './map.js';
 import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
+import { getItemBonuses } from './item_stats.js';
 
 export const player = {
   x: 0,
@@ -14,6 +15,11 @@ export const player = {
   xpToNextLevel: 10,
   stats: {
     defense: 0,
+  },
+  equipment: {
+    weapon: null,
+    armor: null,
+    accessory: null,
   },
   learnedSkills: [],
   passives: [],
@@ -138,4 +144,23 @@ export function getPlayerSummary() {
     xpToNextLevel: player.xpToNextLevel,
     passives: Array.isArray(player.passives) ? [...player.passives] : [],
   };
+}
+
+export function getTotalStats() {
+  const base = { ...(player.stats || {}) };
+  const total = { ...base };
+  const eq = player.equipment || {};
+  for (const slot of Object.keys(eq)) {
+    const itemId = eq[slot];
+    if (itemId) {
+      const bonus = getItemBonuses(itemId);
+      if (bonus) {
+        for (const [key, val] of Object.entries(bonus)) {
+          if (key === 'slot') continue;
+          total[key] = (total[key] || 0) + val;
+        }
+      }
+    }
+  }
+  return total;
 }
