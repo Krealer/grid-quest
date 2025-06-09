@@ -1,7 +1,7 @@
 
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
-import { respawn, addTempDefense, increaseMaxHp } from './player.js';
+import { respawn, addTempDefense, increaseMaxHp, gainXP } from './player.js';
 import { applyDamage } from './logic.js';
 import {
   addItem,
@@ -20,6 +20,8 @@ import {
   renderSkillList,
   initLogPanel,
   showVictoryMessage,
+  showXpGain,
+  showLevelUp,
 } from './combat_ui.js';
 import {
   tickStatuses,
@@ -238,8 +240,12 @@ export async function startCombat(enemy, player) {
         showDialogue('Inventory full for this item');
       }
     }
-    if (typeof player.xp === 'number' && typeof enemy.xp === 'number') {
-      player.xp += enemy.xp;
+    if (typeof enemy.xp === 'number') {
+      const leveled = gainXP(enemy.xp);
+      showXpGain(enemy.xp);
+      if (leveled) {
+        showLevelUp(player.level);
+      }
     }
   }
 
