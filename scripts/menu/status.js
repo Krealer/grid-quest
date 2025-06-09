@@ -3,9 +3,11 @@ import { getAllPassives } from '../passive_skills.js';
 
 export function updateStatusPanel() {
   const list = document.getElementById('status-passives');
-  if (!list) return;
+  const info = document.getElementById('status-info');
+  if (!list || !info) return;
   const defs = getAllPassives();
   list.innerHTML = '';
+  info.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}`;
   (player.passives || []).forEach(id => {
     const p = defs[id];
     if (!p) return;
@@ -31,3 +33,5 @@ export function toggleStatusPanel() {
 }
 
 document.addEventListener('passivesUpdated', updateStatusPanel);
+document.addEventListener('playerXpChanged', updateStatusPanel);
+document.addEventListener('playerLevelUp', updateStatusPanel);

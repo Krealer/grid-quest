@@ -130,3 +130,12 @@ export function gainXP(amount) {
   }
   return leveled;
 }
+
+export function getPlayerSummary() {
+  return {
+    level: player.level,
+    xp: player.xp,
+    xpToNextLevel: player.xpToNextLevel,
+    passives: Array.isArray(player.passives) ? [...player.passives] : [],
+  };
+}

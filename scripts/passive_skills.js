@@ -1,5 +1,17 @@
+function createPassive(def) {
+  return {
+    id: def.id,
+    name: def.name,
+    description: def.description,
+    unlockLevel: def.unlockLevel,
+    apply: def.apply,
+    immunity: def.immunity || [],
+    itemHealBonus: def.itemHealBonus || 0,
+  };
+}
+
 export const passiveDefs = {
-  toughness: {
+  toughness: createPassive({
     id: 'toughness',
     name: 'Toughness',
     description: '+5 Max HP',
@@ -8,21 +20,21 @@ export const passiveDefs = {
       player.maxHp += 5;
       player.hp = Math.min(player.hp, player.maxHp);
     },
-  },
-  poisonWard: {
+  }),
+  poisonWard: createPassive({
     id: 'poisonWard',
     name: 'Poison Ward',
     description: 'Immune to poison',
     unlockLevel: 5,
     immunity: ['poisoned'],
-  },
-  potionMaster: {
+  }),
+  potionMaster: createPassive({
     id: 'potionMaster',
     name: 'Potion Mastery',
     description: 'Potions heal for +5 HP',
     unlockLevel: 7,
     itemHealBonus: 5,
-  },
+  }),
 };
 
 let playerRef = null;
