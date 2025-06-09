@@ -1,0 +1,8 @@
+{
+  "healing_salve": {
+    "name": "Healing Salve",
+    "ingredients": {"goblin_ear": 1, "rotten_tooth": 1},
+    "result": "potion_of_health",
+    "quantity": 1
+  }
+}

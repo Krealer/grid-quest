@@ -23,3 +23,6 @@ export function toggleInventoryView() {
     overlay.classList.add('active');
   }
 }
+
+// Keep UI in sync when inventory changes
+document.addEventListener('inventoryUpdated', updateInventoryUI);
