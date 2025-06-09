@@ -90,3 +90,10 @@ export function hasStatus(target, id) {
   if (!target || !target.statuses) return false;
   return target.statuses.some(s => s.id === id);
 }
+
+export function clearStatuses(target) {
+  if (!target || !Array.isArray(target.statuses)) return;
+  for (const st of [...target.statuses]) {
+    removeStatus(target, st.id);
+  }
+}

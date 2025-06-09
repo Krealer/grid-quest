@@ -53,3 +53,13 @@ export function getItemsByType(type) {
     return data && data.type === type;
   });
 }
+
+export function removeHealthBonusItem() {
+  const idx = inventory.findIndex(it => it.id === 'potion_of_health');
+  if (idx !== -1) {
+    inventory.splice(idx, 1);
+    document.dispatchEvent(new CustomEvent('inventoryUpdated'));
+    return true;
+  }
+  return false;
+}

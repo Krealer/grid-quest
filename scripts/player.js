@@ -1,7 +1,7 @@
 import { gameState } from './game_state.js';
 import { disableMovement, enableMovement } from './movement.js';
 import { showDialogue } from './dialogueSystem.js';
-import { loadMap } from './router.js';
+import { movePlayerTo } from './map.js';
 
 export const player = {
   x: 0,
@@ -38,11 +38,11 @@ export function triggerDeath() {
   const gridEl = document.getElementById('game-grid');
   if (gridEl) gridEl.classList.add('death-screen');
   showDialogue('You have fallen... but not forever.');
-  setTimeout(respawnPlayer, 3000);
+  setTimeout(respawn, 3000);
 }
 
-export async function respawnPlayer() {
-  const { cols } = await loadMap('map01.json', { x: 1, y: 1 });
+export async function respawn() {
+  const cols = await movePlayerTo('map01', { x: 1, y: 1 });
   player.hp = player.maxHp;
   gameState.isDead = false;
   const gridEl = document.getElementById('game-grid');
@@ -50,6 +50,8 @@ export async function respawnPlayer() {
   enableMovement();
   document.dispatchEvent(new CustomEvent('playerRespawned', { detail: { cols } }));
 }
+
+export const respawnPlayer = respawn;
 
 export function healFull() {
   player.hp = player.maxHp;
