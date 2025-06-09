@@ -8,7 +8,9 @@ import {
 import { player, getTotalStats } from './player.js';
 import { useArmorPiece } from './item_logic.js';
 import { getItemBonuses } from './item_stats.js';
-import { showItemTooltip, hideItemTooltip } from './utils.js';
+import { showItemTooltip, hideItemTooltip, splitItemId } from './utils.js';
+import { enchantments } from './enchantments.js';
+import { getItemData } from './item_loader.js';
 
 export function updateInventoryUI() {
   const list = document.getElementById('inventory-list');
@@ -24,8 +26,16 @@ export function updateInventoryUI() {
     row.classList.add('inventory-item');
     row.dataset.id = item.id;
     const qty = item.quantity > 1 ? ` x${item.quantity}` : '';
-    const displayName = getItemDisplayName(item.id);
+    const { baseId, level, enchant } = splitItemId(item.id);
+    let displayName = item.name;
+    if (!displayName) {
+      const baseData = getItemData(baseId);
+      displayName = baseData?.name || baseId;
+      if (level > 0) displayName += ` +${level}`;
+      if (enchant && enchantments[enchant]) displayName += ` ${enchantments[enchant].name}`;
+    }
     row.innerHTML = `<strong>${displayName}${qty}</strong><div class="desc">${item.description}</div>`;
+    if (enchant) row.classList.add('enchanted');
     const level = getItemLevel(item.id);
     if (level > 0) {
       row.classList.add('gear-upgraded');

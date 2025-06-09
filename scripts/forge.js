@@ -1,7 +1,9 @@
 import { loadJson } from './dataService.js';
 import { inventory, removeItem, addItem } from './inventory.js';
 import { getItemData } from './item_loader.js';
-import { parseItemId, getItemDisplayName } from './inventory.js';
+import { getItemDisplayName } from './inventory.js';
+import { splitItemId } from './utils.js';
+import { getRandomEnchantment, getEnchantmentData } from './enchantments.js';
 
 let upgrades = {};
 let loaded = false;
@@ -33,7 +35,7 @@ export function canUpgrade(id) {
 }
 
 export function getUpgradeInfo(id) {
-  const { baseId, level } = parseItemId(id);
+  const { baseId, level } = splitItemId(id);
   const info = upgrades[baseId];
   if (!info) return null;
   if (level >= info.maxLevel) return null;
@@ -47,11 +49,17 @@ export async function upgradeItem(id) {
   if (!canUpgrade(id)) return false;
   removeItem(info.material, info.cost);
   removeItem(id, 1);
-  const { baseId, level } = parseItemId(id);
+  const { baseId, level, enchant } = splitItemId(id);
   const newLevel = level + 1;
-  const newId = `${baseId}+${newLevel}`;
+  let newEnchant = enchant;
+  if (!newEnchant && Math.random() < 0.3) {
+    newEnchant = getRandomEnchantment();
+  }
+  let newId = `${baseId}+${newLevel}`;
+  if (newEnchant) newId += `#${newEnchant}`;
   const base = getItemData(baseId) || { name: baseId, description: '' };
-  addItem({ id: newId, name: `${base.name} +${newLevel}`, description: base.description, quantity: 1 });
+  const enchName = newEnchant ? ` ${getEnchantmentData(newEnchant).name}` : '';
+  addItem({ id: newId, name: `${base.name} +${newLevel}${enchName}`, description: base.description, quantity: 1 });
   return newId;
 }
 
