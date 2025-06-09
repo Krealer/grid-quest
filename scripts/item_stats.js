@@ -1,3 +1,6 @@
+import { splitItemId } from './utils.js';
+import { enchantments } from './enchantments.js';
+
 export const itemBonuses = {
   cracked_helmet: { slot: 'armor', defense: 1 },
   'cracked_helmet+1': { slot: 'armor', defense: 2 },
@@ -11,5 +14,15 @@ export const itemBonuses = {
 };
 
 export function getItemBonuses(id) {
-  return itemBonuses[id] || null;
+  const { baseId, level, enchant } = splitItemId(id);
+  const key = level > 0 ? `${baseId}+${level}` : baseId;
+  const base = itemBonuses[key] || itemBonuses[baseId] || null;
+  if (!enchant) return base;
+  const ench = enchantments[enchant];
+  if (!ench) return base;
+  const combined = base ? { ...base } : {};
+  Object.entries(ench.bonuses).forEach(([k, v]) => {
+    combined[k] = (combined[k] || 0) + v;
+  });
+  return combined;
 }

@@ -3,6 +3,18 @@ export function getUpgradeLevel(id) {
   return match ? parseInt(match[1], 10) : 0;
 }
 
+export function splitItemId(id) {
+  const [main, enchant] = id.split('#');
+  let baseId = main;
+  let level = 0;
+  const match = /^(.+)\+(\d+)$/.exec(main);
+  if (match) {
+    baseId = match[1];
+    level = parseInt(match[2], 10);
+  }
+  return { baseId, level, enchant: enchant || null };
+}
+
 let tooltipEl;
 
 export function showItemTooltip(target, text) {

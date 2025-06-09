@@ -592,6 +592,11 @@ body {
   font-weight: bold;
 }
 
+.enchanted {
+  color: #b347ff;
+  text-shadow: 0 0 4px rgba(179, 71, 255, 0.7);
+}
+
 .item-tooltip {
   position: absolute;
   background: rgba(0, 0, 0, 0.85);
