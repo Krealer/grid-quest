@@ -1,6 +1,7 @@
 import { unlockBlueprint } from './craft_state.js';
 import { upgradeItem, rerollEnchantment } from './forge.js';
 import { addRelic } from './relic_state.js';
+import { discover } from './player_memory.js';
 
 export const dialogueMemory = new Set();
 
@@ -20,8 +21,9 @@ export function hasMemory(flag) {
   return dialogueMemory.has(flag);
 }
 
-export function startSession(dialogue) {
+export function startSession(dialogue, npcId) {
   state.activeDialogue = dialogue;
+  if (npcId) discover('npcs', npcId);
 }
 
 export function endSession() {

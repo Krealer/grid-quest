@@ -726,6 +726,13 @@ body {
   color: #555;
 }
 
+.info-empty {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 6px 0;
+}
+
 /* Settings UI */
 .settings-overlay {
   position: fixed;
