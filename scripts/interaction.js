@@ -45,7 +45,7 @@ export async function handleTileInteraction(
         showDialogue('The door is locked.');
         break;
       }
-      const targetMap = tile.target || tile.leadsTo;
+      const targetMap = tile.target;
       if (required === 'commander_badge') {
         return new Promise(resolve => {
           showDialogue('Your commander badge unlocks the way.', async () => {

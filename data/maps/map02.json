@@ -288,7 +288,7 @@
         "locked": true,
         "requiresItem": "silver_key",
         "consumeItem": true,
-        "leadsTo": "map03.json"
+        "target": "map03.json"
       }
     ],
     [
