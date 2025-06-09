@@ -20,6 +20,7 @@ import {
   applyStatus as applyStatusEffect,
   removeStatus as removeStatusEffect,
   removeNegativeStatus as removeNegativeStatusEffect,
+  hasStatus,
 } from './statusManager.js';
 import { getStatusEffect } from './status_effects.js';
 import { initEnemyState } from './enemy.js';
@@ -342,7 +343,31 @@ export async function startCombat(enemy, player) {
     const list = (enemy.skills || ['strike'])
       .map(id => getEnemySkill(id))
       .filter(Boolean);
-    const skill = list[Math.floor(Math.random() * list.length)] || getEnemySkill('strike');
+
+    const statusSkills = list.filter(
+      s => Array.isArray(s.applies) && s.applies.some(st => !hasStatus(player, st))
+    );
+    const damageSkills = list.filter(s => s.aiType === 'damage' || !s.applies);
+
+    let skill = null;
+    const playerVulnerable = hasStatus(player, 'vulnerable');
+    const behavior = enemy.behavior || 'balanced';
+
+    if (playerVulnerable && statusSkills.length) {
+      // exploit vulnerability with status attacks
+      skill = statusSkills[Math.floor(Math.random() * statusSkills.length)];
+    } else if (behavior === 'aggressive' && damageSkills.length) {
+      skill = damageSkills[Math.floor(Math.random() * damageSkills.length)];
+    } else if (behavior === 'cautious' && statusSkills.length) {
+      skill = statusSkills[Math.floor(Math.random() * statusSkills.length)];
+    } else if (damageSkills.length) {
+      skill = damageSkills[Math.floor(Math.random() * damageSkills.length)];
+    }
+
+    if (!skill) {
+      skill = list[Math.floor(Math.random() * list.length)] || getEnemySkill('strike');
+    }
+
     if (skill) {
       log(`${enemy.name} uses ${skill.name}`);
       skill.effect({
