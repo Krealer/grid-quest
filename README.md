@@ -23,3 +23,37 @@ Maps can specify an `environment` value which adds a CSS class like `env-fog` or
 ## Deployment
 
 The repository is ready for GitHub Pages. Commit your changes to the default branch and enable Pages to serve `index.html` from the repository root.
+
+## Code Layout
+
+The project keeps game scripts in the `scripts/` directory. Data files such as
+dialog definitions live under `data/` and stylesheets are found in `style/`.
+`index.html` loads these assets and initializes the game using modules from
+`scripts/`.
+
+## Testing
+
+Grid Quest does not have an automated test suite. To manually test changes,
+start a local server and open the game in your browser:
+
+```bash
+python3 -m http.server
+```
+
+Once the server is running, navigate to `http://localhost:8000/` and interact
+with the game. Reload the page after making changes to verify they work as
+expected.
+
+## Contributing
+
+1. Fork the repository and create a new branch for your feature or fix.
+2. Follow the testing steps above to verify your changes locally.
+3. Submit a pull request against the default branch with a clear description of
+   your changes.
+
+Contributions should follow the existing code style (two-space indentation) and
+include documentation updates when relevant.
+
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
