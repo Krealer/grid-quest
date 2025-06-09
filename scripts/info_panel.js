@@ -1,6 +1,7 @@
 import { getAllNpcs } from './npcInfo.js';
 import { loadEnemyInfo, getAllEnemies } from './enemyInfo.js';
 import { loadItemInfo, getAllItems } from './itemInfo.js';
+import { getDiscovered } from './player_memory.js';
 
 function createEntry(obj) {
   const row = document.createElement('div');
@@ -17,15 +18,51 @@ export async function updateInfoPanel() {
   if (!npcContainer || !enemyContainer || !itemContainer) return;
 
   npcContainer.innerHTML = '';
-  getAllNpcs().forEach(n => npcContainer.appendChild(createEntry(n)));
+  const seenNpcs = getDiscovered('npcs');
+  if (seenNpcs.length === 0) {
+    const msg = document.createElement('div');
+    msg.classList.add('info-empty');
+    msg.textContent = "You haven't met any NPCs yet.";
+    npcContainer.appendChild(msg);
+  } else {
+    const all = getAllNpcs();
+    seenNpcs.forEach(id => {
+      const data = all.find(n => n.id === id);
+      if (data) npcContainer.appendChild(createEntry(data));
+    });
+  }
 
   await loadEnemyInfo();
   enemyContainer.innerHTML = '';
-  getAllEnemies().forEach(e => enemyContainer.appendChild(createEntry(e)));
+  const seenEnemies = getDiscovered('enemies');
+  if (seenEnemies.length === 0) {
+    const msg = document.createElement('div');
+    msg.classList.add('info-empty');
+    msg.textContent = 'No enemies encountered yet.';
+    enemyContainer.appendChild(msg);
+  } else {
+    const all = getAllEnemies();
+    seenEnemies.forEach(id => {
+      const data = all.find(e => e.id === id);
+      if (data) enemyContainer.appendChild(createEntry(data));
+    });
+  }
 
   await loadItemInfo();
   itemContainer.innerHTML = '';
-  getAllItems().forEach(i => itemContainer.appendChild(createEntry(i)));
+  const seenItems = getDiscovered('items');
+  if (seenItems.length === 0) {
+    const msg = document.createElement('div');
+    msg.classList.add('info-empty');
+    msg.textContent = 'You have not collected any items yet.';
+    itemContainer.appendChild(msg);
+  } else {
+    const all = getAllItems();
+    seenItems.forEach(id => {
+      const data = all.find(i => i.id === id);
+      if (data) itemContainer.appendChild(createEntry(data));
+    });
+  }
 }
 
 function showTab(name) {

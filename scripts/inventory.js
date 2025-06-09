@@ -2,6 +2,7 @@ import { getItemData } from './item_loader.js';
 import { player } from './player.js';
 import { getItemBonuses } from './item_stats.js';
 import { unlockBlueprint } from './craft_state.js';
+import { discover } from './player_memory.js';
 
 export const inventory = [];
 
@@ -37,6 +38,7 @@ export function addItem(item) {
   if (existing) {
     if ((existing.quantity || 0) >= 99) return false;
     existing.quantity = Math.min(99, (existing.quantity || 0) + qty);
+    discover('items', parseItemId(item.id).baseId);
     document.dispatchEvent(new CustomEvent('inventoryUpdated'));
     return true;
   }
@@ -46,6 +48,7 @@ export function addItem(item) {
   if (item.id && item.id.startsWith('blueprint_')) {
     unlockBlueprint(item.id.replace('blueprint_', ''));
   }
+  discover('items', parseItemId(item.id).baseId);
   document.dispatchEvent(new CustomEvent('inventoryUpdated'));
   return true;
 }

@@ -21,6 +21,7 @@ import { useDefensePotion } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
 import { gameState } from './game_state.js';
+import { discover } from './player_memory.js';
 import {
   setupTabs,
   updateStatusUI,
@@ -309,6 +310,7 @@ export async function startCombat(enemy, player) {
     if (result === false) return; // invalid action
     if (enemyHp <= 0) {
       log(`${enemy.name} was defeated!`);
+      discover('enemies', enemy.id);
       await giveDrops();
       showVictoryMessage();
       setTimeout(endCombat, 800);
@@ -459,6 +461,7 @@ export async function startCombat(enemy, player) {
     }
     if (enemyHp <= 0) {
       log(`${enemy.name} was defeated!`);
+      discover('enemies', enemy.id);
       giveDrops();
       showVictoryMessage();
       setTimeout(endCombat, 800);
