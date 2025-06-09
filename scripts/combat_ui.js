@@ -88,6 +88,7 @@ export function initLogPanel(overlay) {
   if (logContainer) {
     logContainer.innerHTML = '';
   }
+  document.addEventListener('passiveUnlocked', onPassiveUnlocked);
   return appendLog;
 }
 
@@ -110,4 +111,9 @@ export function showXpGain(amount) {
 
 export function showLevelUp(level) {
   appendLog(`Level Up! Now level ${level}`);
+}
+
+function onPassiveUnlocked(e) {
+  const name = e.detail?.name || e.detail?.id || 'Passive';
+  appendLog(`Passive unlocked: ${name}`);
 }

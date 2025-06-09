@@ -17,6 +17,8 @@ import * as goblinQuestGiver from './npc/goblin_quest_giver.js';
 import * as arvalin from './npc/arvalin.js';
 import * as grindle from './npc/grindle.js';
 import { initSkillSystem } from './skills.js';
+import { initPassiveSystem } from './passive_skills.js';
+import { toggleStatusPanel } from './menu/status.js';
 import { saveState, loadState, gameState } from './game_state.js';
 import {
   loadSettings,
@@ -98,6 +100,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const questsTab = document.querySelector('.quests-tab');
   const questsOverlay = document.getElementById('quest-log-overlay');
   const questsClose = questsOverlay.querySelector('.close-btn');
+  const statusTab = document.querySelector('.status-tab');
+  const statusOverlay = document.getElementById('status-overlay');
+  const statusClose = statusOverlay?.querySelector('.close-btn');
   const settingsTab = document.querySelector('.settings-tab');
   const settingsOverlay = document.getElementById('settings-overlay');
   const settingsClose = settingsOverlay.querySelector('.close-btn');
@@ -122,6 +127,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   router.init(container, player);
   initSkillSystem(player);
+  initPassiveSystem(player);
 
   try {
     await loadEnemyData();
@@ -139,6 +145,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   questsOverlay.addEventListener('click', e => {
     if (e.target === questsOverlay) toggleQuestLog();
   });
+  if (statusTab) statusTab.addEventListener('click', toggleStatusPanel);
+  if (statusClose) statusClose.addEventListener('click', toggleStatusPanel);
+  if (statusOverlay) {
+    statusOverlay.addEventListener('click', e => {
+      if (e.target === statusOverlay) toggleStatusPanel();
+    });
+  }
 
   function showSettings() {
     settingsOverlay.classList.add('active');
@@ -233,6 +246,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.addEventListener('playerDefenseChanged', updateDefenseDisplay);
     document.addEventListener('playerXpChanged', updateXpDisplay);
     document.addEventListener('playerLevelUp', updateXpDisplay);
+    document.addEventListener('passivesUpdated', () => {
+      updateHpDisplay();
+      updateDefenseDisplay();
+    });
   } catch (err) {
     console.error(err);
   }

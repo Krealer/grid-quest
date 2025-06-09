@@ -13,6 +13,9 @@ export function initStatuses(target) {
 export function addStatus(target, id, duration) {
   const effect = getStatusEffect(id);
   if (!effect) return;
+  if (Array.isArray(target.passiveImmunities) && target.passiveImmunities.includes(id)) {
+    return;
+  }
   ensureArray(target);
   const existing = target.statuses.find(s => s.id === id);
   const dur = duration ?? effect.duration ?? 1;
