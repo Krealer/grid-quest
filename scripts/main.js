@@ -20,6 +20,7 @@ import * as forgeNpc from './npc/forge_npc.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
+import { toggleInfoPanel, initInfoPanel } from './info_panel.js';
 import { saveState, loadState, gameState } from './game_state.js';
 import { saveGame, loadGame } from './save_system.js';
 import {
@@ -105,6 +106,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const statusTab = document.querySelector('.status-tab');
   const statusOverlay = document.getElementById('status-overlay');
   const statusClose = statusOverlay?.querySelector('.close-btn');
+  const infoTab = document.querySelector('.info-tab');
+  const infoOverlay = document.getElementById('info-overlay');
+  const infoClose = infoOverlay?.querySelector('.close-btn');
   const settingsTab = document.querySelector('.settings-tab');
   const settingsOverlay = document.getElementById('settings-overlay');
   const settingsClose = settingsOverlay.querySelector('.close-btn');
@@ -130,6 +134,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   router.init(container, player);
   initSkillSystem(player);
   initPassiveSystem(player);
+  initInfoPanel();
 
   try {
     await loadEnemyData();
@@ -152,6 +157,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (statusOverlay) {
     statusOverlay.addEventListener('click', e => {
       if (e.target === statusOverlay) toggleStatusPanel();
+    });
+  }
+  if (infoTab) infoTab.addEventListener('click', toggleInfoPanel);
+  if (infoClose) infoClose.addEventListener('click', toggleInfoPanel);
+  if (infoOverlay) {
+    infoOverlay.addEventListener('click', e => {
+      if (e.target === infoOverlay) toggleInfoPanel();
     });
   }
 

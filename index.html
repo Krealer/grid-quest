@@ -16,6 +16,7 @@
     <div class="tab inventory-tab">Inventory</div>
     <div class="tab quests-tab">Quests</div>
     <div class="tab status-tab">Status</div>
+    <div class="tab info-tab">Info</div>
     <div class="tab save-tab">Save</div>
     <div class="tab load-tab">Load</div>
   </div>
@@ -42,6 +43,19 @@
       <div id="status-info"></div>
       <h3>Passive Skills</h3>
       <div id="status-passives"></div>
+    </div>
+  </div>
+  <div id="info-overlay" class="info-overlay">
+    <div id="info-panel">
+      <button class="close-btn">&times;</button>
+      <div class="info-tabs">
+        <div class="info-tab-btn active" data-target="npcs">NPCs</div>
+        <div class="info-tab-btn" data-target="enemies">Enemies</div>
+        <div class="info-tab-btn" data-target="items">Items</div>
+      </div>
+      <div id="info-npcs" class="info-tab-content"></div>
+      <div id="info-enemies" class="info-tab-content" style="display:none;"></div>
+      <div id="info-items" class="info-tab-content" style="display:none;"></div>
     </div>
   </div>
   <div id="settings-overlay" class="settings-overlay">
