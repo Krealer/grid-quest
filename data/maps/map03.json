@@ -143,12 +143,7 @@
       "G",
       "G",
       "G",
-      {
-        "type": "D",
-        "locked": true,
-        "requiresItem": "commander_badge",
-        "leadsTo": "map04.json"
-      }
+      "W"
     ],
     [
       "G",
