@@ -1,5 +1,12 @@
 export const dialogueMemory = new Set();
-export let activeDialogue = null;
+
+const state = {
+  activeDialogue: null,
+};
+
+export function getActiveDialogue() {
+  return state.activeDialogue;
+}
 
 export function setMemory(flag) {
   dialogueMemory.add(flag);
@@ -10,9 +17,11 @@ export function hasMemory(flag) {
 }
 
 export function startSession(dialogue) {
-  activeDialogue = dialogue;
+  state.activeDialogue = dialogue;
 }
 
 export function endSession() {
-  activeDialogue = null;
+  state.activeDialogue = null;
 }
+
+export const dialogueState = state;
