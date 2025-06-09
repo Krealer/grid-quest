@@ -66,6 +66,14 @@ export function hasItem(nameOrId) {
   return getItemCount(nameOrId) > 0;
 }
 
+export function useForkedKey() {
+  if (hasItem('forked_key')) {
+    removeItem('forked_key');
+    return true;
+  }
+  return false;
+}
+
 export function removeItem(nameOrId, qty = 1) {
   if (isRelic(parseItemId(nameOrId).baseId)) return false;
   const item = inventory.find(

@@ -7,6 +7,7 @@ const memory = {
   skills: new Set(),
   lore: new Set(),
   maps: new Set(),
+  forkChoice: null,
 };
 
 function loadMemory() {
@@ -20,6 +21,7 @@ function loadMemory() {
     if (Array.isArray(data.skills)) memory.skills = new Set(data.skills);
     if (Array.isArray(data.lore)) memory.lore = new Set(data.lore);
     if (Array.isArray(data.maps)) memory.maps = new Set(data.maps);
+    if (typeof data.forkChoice === 'string') memory.forkChoice = data.forkChoice;
   } catch {
     // ignore
   }
@@ -33,6 +35,7 @@ function saveMemory() {
     skills: Array.from(memory.skills),
     lore: Array.from(memory.lore),
     maps: Array.from(memory.maps),
+    forkChoice: memory.forkChoice,
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
@@ -68,4 +71,13 @@ export function discoverLore(id) {
 
 export function discoverMap(id) {
   discover('maps', id);
+}
+
+export function setForkChoice(path) {
+  memory.forkChoice = path;
+  saveMemory();
+}
+
+export function getForkChoice() {
+  return memory.forkChoice;
 }

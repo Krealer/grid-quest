@@ -83,7 +83,16 @@ export async function handleTileInteraction(
     }
     case 'C': {
       const chestId = `${router.getCurrentMapName()}:${x},${y}`;
+      const required = tile.key || tile.requiresItem;
+      if (required && !hasItem(required)) {
+        showDialogue('The chest is locked.');
+        break;
+      }
       if (!isChestOpened(chestId)) {
+        if (required && tile.consumeItem) {
+          removeItem(required);
+          updateInventoryUI();
+        }
         const result = await openChest(chestId, player);
         if (result) {
           if (result.message) {

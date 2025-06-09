@@ -12,6 +12,7 @@ const chestContents = {
   'map02:8,12': { message: 'This chest was empty.' },
   'map02:15,15': { item: 'potion_of_health' },
   'map03:10,10': { item: 'health_amulet' },
+  'map05:10,9': { item: 'mysterious_key', message: 'The chest clicks open revealing a strange key.' },
   'map_warrior:18,18': {
     relic: 'warrior_sigil',
     message: 'You obtained the Warrior Sigil!'

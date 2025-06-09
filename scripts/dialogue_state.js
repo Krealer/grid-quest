@@ -1,7 +1,7 @@
 import { unlockBlueprint } from './craft_state.js';
 import { upgradeItem, rerollEnchantment } from './forge.js';
 import { addRelic } from './relic_state.js';
-import { discover, discoverLore as recordLore } from './player_memory.js';
+import { discover, discoverLore as recordLore, setForkChoice } from './player_memory.js';
 import { chooseClass as selectClass } from './class_state.js';
 import { player } from './player.js';
 
@@ -65,4 +65,8 @@ export function chooseClass(id) {
   if (id && selectClass(id)) {
     player.classId = id;
   }
+}
+
+export function chooseForkPath(path) {
+  if (path) setForkChoice(path);
 }
