@@ -45,13 +45,26 @@ export async function handleTileInteraction(
         showDialogue('The door is locked.');
         break;
       }
+      const targetMap = tile.target || tile.leadsTo;
+      if (required === 'commander_badge') {
+        showDialogue('Your commander badge unlocks the way.', async () => {
+          if (tile.consumeItem) {
+            removeItem(required);
+            updateInventoryUI();
+          }
+          const { cols: newCols } = await router.loadMap(targetMap, tile.spawn);
+          return newCols;
+        });
+        break;
+      }
       if (required && tile.consumeItem) {
         removeItem(required);
         updateInventoryUI();
       }
-      const targetMap = tile.target || tile.leadsTo;
-      const { cols: newCols } = await router.loadMap(targetMap, tile.spawn);
-      return newCols;
+      {
+        const { cols: newCols } = await router.loadMap(targetMap, tile.spawn);
+        return newCols;
+      }
     }
     case 'E': {
       const index = y * cols + x;

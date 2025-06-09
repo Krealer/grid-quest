@@ -1,5 +1,256 @@
 {
   "name": "Twilight Field",
   "environment": "dusk",
-  "grid": []
+  "grid": [
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "E",
+        "enemyId": "goblin_archer"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "E",
+        "enemyId": "goblin_scout"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "E",
+        "enemyId": "scout_commander"
+      },
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "t"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      {
+        "type": "D",
+        "target": "map02.json",
+        "spawn": {
+          "x": 18,
+          "y": 10
+        }
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "t"
+      },
+      {
+        "type": "C"
+      },
+      {
+        "type": "T"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "D",
+        "locked": true,
+        "requiresItem": "commander_badge",
+        "leadsTo": "map04.json"
+      }
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "T"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "E",
+        "enemyId": "rotting_warrior"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "E",
+        "enemyId": "goblin_archer"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ]
+  ]
 }

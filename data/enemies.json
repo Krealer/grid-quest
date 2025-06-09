@@ -67,7 +67,7 @@
     "description": "Leader of the goblin scouting parties, armored and alert.",
     "intro": "The scout commander barks orders and charges!",
     "portrait": "🎖️",
-    "drop": { "item": "ancient_scroll", "quantity": 1 },
+    "drop": { "item": "commander_badge", "quantity": 1 },
     "onDefeatMessage": "The commander falls. A silence settles over the hills."
   }
 }

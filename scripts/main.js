@@ -4,6 +4,8 @@ import { toggleInventoryView } from './inventory_state.js';
 import { toggleQuestLog } from './quest_log.js';
 import { player } from './player.js';
 import { loadEnemyData, defeatEnemy } from './enemy.js';
+import { setMemory } from './dialogue_state.js';
+import { completeQuest, isQuestStarted, isQuestCompleted } from './quest_state.js';
 import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 import { showDialogue } from './dialogueSystem.js';
@@ -195,6 +197,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (e.detail.enemyHp <= 0) {
         const enemyId = e.detail.enemy.id;
         defeatEnemy(enemyId);
+        if (enemyId === 'goblin_scout') {
+          setMemory('scout_defeated');
+          if (isQuestStarted('scout_tracking') && !isQuestCompleted('scout_tracking')) {
+            completeQuest('scout_tracking');
+          }
+        }
       }
     });
 
