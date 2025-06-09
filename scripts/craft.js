@@ -2,6 +2,7 @@ import { loadItems, getItemData } from './item_loader.js';
 import { addItem, removeItem, getItemCount } from './inventory.js';
 import { craftState } from './craft_state.js';
 import { isRecipeUnlocked } from './recipe_state.js';
+import { loadJson } from './dataService.js';
 
 let craftingAllowed = false;
 
@@ -18,16 +19,11 @@ let loaded = false;
 
 export async function loadRecipes() {
   if (loaded) return recipes;
-  try {
-    const res = await fetch('data/recipes.json');
-    if (res.ok) {
-      recipes = await res.json();
-    }
-  } catch {
-    // ignore
-  } finally {
-    loaded = true;
+  const data = await loadJson('data/recipes.json');
+  if (data) {
+    recipes = data;
   }
+  loaded = true;
   return recipes;
 }
 
