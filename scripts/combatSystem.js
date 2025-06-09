@@ -8,14 +8,20 @@ import { loadItems, getItemData } from './item_loader.js';
 import { useDefensePotion } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
-import { setupTabs, updateStatusUI, renderSkillList } from './combat_ui.js';
+import {
+  setupTabs,
+  updateStatusUI,
+  renderSkillList,
+  initLogPanel,
+} from './combat_ui.js';
 import {
   tickStatuses,
   initStatuses,
-  applyStatus,
-  removeStatus,
-  removeNegativeStatus,
+  applyStatus as applyStatusEffect,
+  removeStatus as removeStatusEffect,
+  removeNegativeStatus as removeNegativeStatusEffect,
 } from './statusManager.js';
+import { getStatusEffect } from './status_effects.js';
 import { initEnemyState } from './enemy.js';
 
 let overlay = null;
@@ -99,6 +105,8 @@ export async function startCombat(enemy, player) {
   const itemContainer = overlay.querySelector('.item-buttons');
   const logEl = overlay.querySelector('.log');
 
+  const log = initLogPanel(overlay);
+
   await loadItems();
 
   // reveal UI after intro animation
@@ -107,13 +115,6 @@ export async function startCombat(enemy, player) {
     logEl.classList.remove('hidden');
   }, 800);
 
-  function log(msg) {
-    const entry = document.createElement('div');
-    entry.textContent = msg;
-    logEl.appendChild(entry);
-    logEl.scrollTop = logEl.scrollHeight;
-    console.log(msg);
-  }
 
   let guardActive = false;
   let shieldBlock = false;
@@ -139,6 +140,7 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
+    log(`Player takes ${applied} damage`);
     return applied;
   }
 
@@ -148,6 +150,7 @@ export async function startCombat(enemy, player) {
     updateHpBar(enemyBar, enemyHp, enemyMax);
     enemyBar.classList.add('damage');
     setTimeout(() => enemyBar.classList.remove('damage'), 300);
+    log(`${enemy.name} takes ${dmg} damage`);
   }
 
   function healPlayer(amount) {
@@ -156,6 +159,34 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
+    log(`Player heals ${amount} HP`);
+  }
+
+  function applyStatusLogged(target, id, duration) {
+    applyStatusEffect(target, id, duration);
+    const name = getStatusEffect(id)?.name || id;
+    const who = target === player ? 'Player' : enemy.name;
+    log(`${who} gains ${name}`);
+    updateStatusUI(overlay, player, enemy);
+  }
+
+  function removeStatusLogged(target, id) {
+    removeStatusEffect(target, id);
+    const name = getStatusEffect(id)?.name || id;
+    const who = target === player ? 'Player' : enemy.name;
+    log(`${name} removed from ${who}`);
+    updateStatusUI(overlay, player, enemy);
+  }
+
+  function removeNegativeStatusLogged(target, ids) {
+    const removed = removeNegativeStatusEffect(target, ids);
+    removed.forEach(r => {
+      const name = getStatusEffect(r)?.name || r;
+      const who = target === player ? 'Player' : enemy.name;
+      log(`${name} removed from ${who}`);
+    });
+    updateStatusUI(overlay, player, enemy);
+    return removed;
   }
 
   function activateGuard() {
@@ -224,6 +255,7 @@ export async function startCombat(enemy, player) {
 
   async function handleAction(skill) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
+    log(`Player uses ${skill.name}`);
     const result = skill.effect({
       damageEnemy,
       healPlayer,
@@ -232,9 +264,9 @@ export async function startCombat(enemy, player) {
       log,
       isHealUsed,
       setHealUsed,
-      applyStatus,
-      removeStatus,
-      removeNegativeStatus,
+      applyStatus: applyStatusLogged,
+      removeStatus: removeStatusLogged,
+      removeNegativeStatus: removeNegativeStatusLogged,
       player,
       enemy,
     });
@@ -259,6 +291,8 @@ export async function startCombat(enemy, player) {
   function handleItemUse(id) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
     let used = false;
+    const data = getItemData(id);
+    if (data) log(`Player uses ${data.name}`);
     if (id === 'defense_potion_I') {
       const res = useDefensePotion();
       if (res) {
@@ -310,13 +344,14 @@ export async function startCombat(enemy, player) {
       .filter(Boolean);
     const skill = list[Math.floor(Math.random() * list.length)] || getEnemySkill('strike');
     if (skill) {
+      log(`${enemy.name} uses ${skill.name}`);
       skill.effect({
         player,
         enemy,
         damagePlayer,
-        applyStatus,
-        removeStatus,
-        removeNegativeStatus,
+        applyStatus: applyStatusLogged,
+        removeStatus: removeStatusLogged,
+        removeNegativeStatus: removeNegativeStatusLogged,
         log,
       });
     }

@@ -79,3 +79,23 @@ export function renderSkillList(container, skills, onClick) {
     container.appendChild(btn);
   });
 }
+
+let logContainer = null;
+
+// Initialize the combat log panel and return a convenience log function.
+export function initLogPanel(overlay) {
+  logContainer = overlay.querySelector('.log');
+  if (logContainer) {
+    logContainer.innerHTML = '';
+  }
+  return appendLog;
+}
+
+// Append a single entry to the combat log panel.
+export function appendLog(message) {
+  if (!logContainer) return;
+  const entry = document.createElement('div');
+  entry.textContent = message;
+  logContainer.appendChild(entry);
+  logContainer.scrollTop = logContainer.scrollHeight;
+}
