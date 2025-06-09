@@ -67,6 +67,12 @@ export function renderSkillList(container, skills, onClick) {
         if (ef) effects.push(ef.description);
       });
     }
+    if (Array.isArray(skill.cleanse)) {
+      const names = skill.cleanse
+        .map(id => getStatusEffect(id)?.name || id)
+        .join(', ');
+      effects.push(`Removes ${names}`);
+    }
     const descParts = [skill.description, ...effects].filter(Boolean).join(' ');
     btn.innerHTML = `<strong>${skill.name}</strong><div class="desc">${descParts}</div>`;
     btn.addEventListener('click', () => onClick(skill));

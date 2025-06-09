@@ -38,6 +38,27 @@ export function removeStatus(target, id) {
   target.statuses.splice(idx, 1);
 }
 
+export function removeNegativeStatus(target, ids) {
+  if (!target || !target.statuses) return [];
+  const toRemove = Array.isArray(ids)
+    ? ids
+    : ids
+    ? [ids]
+    : target.statuses.map(s => s.id);
+  const removed = [];
+  for (const id of toRemove) {
+    const effect = getStatusEffect(id);
+    if (!effect || effect.type !== 'negative') continue;
+    const idx = target.statuses.findIndex(s => s.id === id);
+    if (idx !== -1) {
+      if (effect.remove) effect.remove(target);
+      target.statuses.splice(idx, 1);
+      removed.push(id);
+    }
+  }
+  return removed;
+}
+
 export function tickStatuses(target) {
   if (!target || !target.statuses) return;
   for (let i = target.statuses.length - 1; i >= 0; i--) {
