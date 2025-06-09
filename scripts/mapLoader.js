@@ -51,6 +51,16 @@ export async function loadMap(name) {
     if (name === 'map09' && hasSealingDust()) {
       consumeSealingDust();
     }
+    if (name === 'map09' && isMirrorPuzzleSolved()) {
+      // Unlock the door leading to map10 once the mirror puzzle is solved
+      for (const row of data.grid) {
+        for (const cell of row) {
+          if (cell && cell.type === 'D' && cell.target === 'map10.json') {
+            cell.locked = false;
+          }
+        }
+      }
+    }
   } catch (err) {
     console.error(err);
     showError(`Failed to load map ${name}`);

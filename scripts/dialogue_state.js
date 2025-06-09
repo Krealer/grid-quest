@@ -112,3 +112,9 @@ export function ruinsScholar() {
     discoverLore('first_collapse');
   });
 }
+
+export function silentMonument() {
+  showDialogue('The monument hums softly beneath the silence.', () => {
+    discoverLore('beneath_the_silence');
+  });
+}
