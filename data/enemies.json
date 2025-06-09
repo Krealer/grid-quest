@@ -36,5 +36,38 @@
     "description": "Bones clatter as it advances.",
     "intro": "A skeleton rattles menacingly!",
     "portrait": "💀"
+  },
+  "goblin_scout": {
+    "name": "Goblin Scout",
+    "hp": 40,
+    "description": "A keen-eyed goblin keeping watch over the hills.",
+    "intro": "The scout spots you and blows a horn!",
+    "portrait": "🗡️",
+    "drop": { "item": "goblin_ear", "quantity": 1 }
+  },
+  "goblin_archer": {
+    "name": "Goblin Archer",
+    "hp": 45,
+    "description": "This goblin prefers attacking from a distance.",
+    "intro": "A goblin archer nocks an arrow your way!",
+    "portrait": "🏹",
+    "drop": { "item": "goblin_ear", "quantity": 1 }
+  },
+  "rotting_warrior": {
+    "name": "Rotting Warrior",
+    "hp": 60,
+    "description": "A decayed soldier still clinging to its rusted blade.",
+    "intro": "The rotting warrior staggers forward with a groan!",
+    "portrait": "🪓",
+    "drop": { "item": "rotten_tooth", "quantity": 1 }
+  },
+  "scout_commander": {
+    "name": "Scout Commander",
+    "hp": 90,
+    "description": "Leader of the goblin scouting parties, armored and alert.",
+    "intro": "The scout commander barks orders and charges!",
+    "portrait": "🎖️",
+    "drop": { "item": "ancient_scroll", "quantity": 1 },
+    "onDefeatMessage": "The commander falls. A silence settles over the hills."
   }
 }
