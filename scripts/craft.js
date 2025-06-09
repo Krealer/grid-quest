@@ -3,6 +3,7 @@ import { addItem, removeItem, getItemCount } from './inventory.js';
 import { craftState } from './craft_state.js';
 import { isRecipeUnlocked } from './recipe_state.js';
 import { loadJson } from './dataService.js';
+import { showError } from './errorPrompt.js';
 
 let craftingAllowed = false;
 
@@ -22,6 +23,8 @@ export async function loadRecipes() {
   const data = await loadJson('data/recipes.json');
   if (data) {
     recipes = data;
+  } else {
+    showError('Failed to load recipes');
   }
   loaded = true;
   return recipes;

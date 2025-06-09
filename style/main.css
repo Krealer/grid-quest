@@ -706,3 +706,50 @@ body {
   50% { opacity: 0.5; }
 }
 
+/* Error Prompt */
+.error-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1200;
+}
+
+.error-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.error-content {
+  background: #fff;
+  color: #333;
+  padding: 20px;
+  border-radius: 8px;
+  width: 260px;
+  max-width: 90%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.error-content .error-ok {
+  margin-top: 15px;
+  padding: 6px 12px;
+  background: #444;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error-content .error-ok:hover {
+  background: #555;
+}
+

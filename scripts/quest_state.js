@@ -1,5 +1,6 @@
 import { hasMemory } from './dialogue_state.js';
 import { loadJson } from './dataService.js';
+import { showError } from './errorPrompt.js';
 
 export const quests = {};
 
@@ -11,6 +12,8 @@ export async function loadQuestData() {
   const data = await loadJson('data/quests.json');
   if (data) {
     questData = data;
+  } else {
+    showError('Failed to load quests');
   }
   dataLoaded = true;
   return questData;
