@@ -47,15 +47,16 @@ export async function handleTileInteraction(
       }
       const targetMap = tile.target || tile.leadsTo;
       if (required === 'commander_badge') {
-        showDialogue('Your commander badge unlocks the way.', async () => {
-          if (tile.consumeItem) {
-            removeItem(required);
-            updateInventoryUI();
-          }
-          const { cols: newCols } = await router.loadMap(targetMap, tile.spawn);
-          return newCols;
+        return new Promise(resolve => {
+          showDialogue('Your commander badge unlocks the way.', async () => {
+            if (tile.consumeItem) {
+              removeItem(required);
+              updateInventoryUI();
+            }
+            const { cols: newCols } = await router.loadMap(targetMap, tile.spawn);
+            resolve(newCols);
+          });
         });
-        break;
       }
       if (required && tile.consumeItem) {
         removeItem(required);
