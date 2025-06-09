@@ -1,5 +1,6 @@
 
 import { getSkill } from './skills.js';
+import { getEnemySkill } from './enemy_skills.js';
 import { triggerDeath, addTempDefense } from './player.js';
 import { applyDamage } from './logic.js';
 import { addItem, getItemsByType } from './inventory.js';
@@ -112,6 +113,28 @@ export async function startCombat(enemy, player) {
   let shieldBlock = false;
   let healUsed = false;
   let playerTurn = true;
+
+  function damagePlayer(dmg) {
+    let amount = dmg;
+    if (shieldBlock) {
+      amount = 0;
+      shieldBlock = false;
+    } else if (guardActive) {
+      amount = Math.max(0, amount - 5);
+      guardActive = false;
+    }
+    const tempTarget = {
+      hp: playerHp,
+      stats: { defense: (player.stats?.defense || 0) + player.tempDefense },
+    };
+    const applied = applyDamage(tempTarget, amount);
+    playerHp = tempTarget.hp;
+    player.hp = playerHp;
+    updateHpBar(playerBar, playerHp, playerMax);
+    playerBar.classList.add('damage');
+    setTimeout(() => playerBar.classList.remove('damage'), 300);
+    return applied;
+  }
 
   function damageEnemy(dmg) {
     enemyHp = Math.max(0, enemyHp - dmg);
@@ -274,25 +297,19 @@ export async function startCombat(enemy, player) {
 
   function enemyTurn() {
     if (enemyHp <= 0) return;
-    let dmg = 8;
-    if (shieldBlock) {
-      dmg = 0;
-      shieldBlock = false;
-    } else if (guardActive) {
-      dmg = Math.max(0, dmg - 5);
-      guardActive = false;
+    const list = (enemy.skills || ['strike'])
+      .map(id => getEnemySkill(id))
+      .filter(Boolean);
+    const skill = list[Math.floor(Math.random() * list.length)] || getEnemySkill('strike');
+    if (skill) {
+      skill.effect({
+        player,
+        enemy,
+        damagePlayer,
+        applyStatus,
+        log,
+      });
     }
-    const tempTarget = {
-      hp: playerHp,
-      stats: { defense: (player.stats?.defense || 0) + player.tempDefense },
-    };
-    const applied = applyDamage(tempTarget, dmg);
-    playerHp = tempTarget.hp;
-    player.hp = playerHp;
-    log(`${enemy.name} attacks for ${applied} damage!`);
-    updateHpBar(playerBar, playerHp, playerMax);
-    playerBar.classList.add('damage');
-    setTimeout(() => playerBar.classList.remove('damage'), 300);
     if (playerHp <= 0) {
       log('Player was defeated!');
       endCombat();
