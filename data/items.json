@@ -43,5 +43,11 @@
   "purified_token": {
     "name": "Purified Token",
     "description": "Cleansed and safe to handle."
+  },
+  "defense_potion_I": {
+    "name": "Defense Potion I",
+    "description": "Increases defense by 1 for this fight.",
+    "type": "combat",
+    "effect": { "temporaryDefense": 1 }
   }
 }

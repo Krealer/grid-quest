@@ -282,6 +282,14 @@ body {
   text-align: center;
 }
 
+#battle-overlay .action-tabs {
+  margin-bottom: 10px;
+}
+
+#battle-overlay .action-tabs button.selected {
+  background: #666;
+}
+
 #battle-overlay .actions.hidden,
 #battle-overlay .log.hidden {
   display: none;
