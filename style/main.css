@@ -255,6 +255,15 @@ body {
   margin-top: 5px;
 }
 
+#battle-overlay .statuses {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+#battle-overlay .statuses div {
+  margin-top: 2px;
+}
+
 #battle-overlay .intro-text {
   margin-top: 10px;
   opacity: 0;
