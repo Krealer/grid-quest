@@ -92,3 +92,9 @@ export function arbiterDialogue() {
     showDialogue('Only those who walk both paths may claim the mirror\'s power.');
   }
 }
+
+export function loreStatue() {
+  showDialogue('Weathered runes speak of times long past.', () => {
+    discoverLore('before_the_seal');
+  });
+}

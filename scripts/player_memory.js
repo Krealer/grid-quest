@@ -9,6 +9,8 @@ const memory = {
   maps: new Set(),
   forkChoice: null,
   forksVisited: { left: false, right: false },
+  sealPuzzleSolved: false,
+  sealingDust: false,
 };
 
 function loadMemory() {
@@ -24,6 +26,8 @@ function loadMemory() {
     if (Array.isArray(data.maps)) memory.maps = new Set(data.maps);
     if (typeof data.forkChoice === 'string') memory.forkChoice = data.forkChoice;
     if (data.forksVisited) memory.forksVisited = { ...memory.forksVisited, ...data.forksVisited };
+    if (typeof data.sealPuzzleSolved === 'boolean') memory.sealPuzzleSolved = data.sealPuzzleSolved;
+    if (typeof data.sealingDust === 'boolean') memory.sealingDust = data.sealingDust;
   } catch {
     // ignore
   }
@@ -39,6 +43,8 @@ function saveMemory() {
     maps: Array.from(memory.maps),
     forkChoice: memory.forkChoice,
     forksVisited: memory.forksVisited,
+    sealPuzzleSolved: memory.sealPuzzleSolved,
+    sealingDust: memory.sealingDust,
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
@@ -94,4 +100,25 @@ export function markForkVisited(path) {
 
 export function visitedBothForks() {
   return memory.forksVisited.left && memory.forksVisited.right;
+}
+
+export function solveSealPuzzle() {
+  memory.sealPuzzleSolved = true;
+  memory.sealingDust = true;
+  saveMemory();
+}
+
+export function isSealPuzzleSolved() {
+  return memory.sealPuzzleSolved;
+}
+
+export function hasSealingDust() {
+  return memory.sealingDust;
+}
+
+export function consumeSealingDust() {
+  if (memory.sealingDust) {
+    memory.sealingDust = false;
+    saveMemory();
+  }
 }

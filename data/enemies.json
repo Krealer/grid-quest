@@ -151,6 +151,17 @@
     "behavior": "aggressive",
     "drops": []
   },
+  "relic_guardian": {
+    "name": "Relic Guardian",
+    "hp": 120,
+    "xp": 20,
+    "description": "An ancient construct protecting forgotten treasures.",
+    "intro": "Stone grinds as the relic guardian awakens!",
+    "portrait": "🛡️",
+    "skills": ["strike", "weaken"],
+    "behavior": "aggressive",
+    "drops": []
+  },
   "shadow_pyromancer": {
     "name": "Shadow Pyromancer",
     "hp": 80,

@@ -2,6 +2,7 @@
 import { showDialogue } from './dialogueSystem.js';
 import { healFull } from './player.js';
 import { applyDamage } from './logic.js';
+import { stepSymbol } from './puzzle_state.js';
 
 /**
  * Applies effects based on the tile symbol the player stepped on.
@@ -10,6 +11,7 @@ import { applyDamage } from './logic.js';
  * @param {{hp:number,maxHp:number}} player
  */
 export function handleTileEffects(tileSymbol, player) {
+  stepSymbol(tileSymbol);
   if (tileSymbol === 't') {
     applyDamage(player, 1);
     showDialogue('A hidden snare cuts at your feet.');

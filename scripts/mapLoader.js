@@ -1,5 +1,11 @@
 import { showError } from './errorPrompt.js';
-import { markForkVisited, visitedBothForks } from './player_memory.js';
+import {
+  markForkVisited,
+  visitedBothForks,
+  hasSealingDust,
+  consumeSealingDust,
+  isSealPuzzleSolved
+} from './player_memory.js';
 import { showDialogue } from './dialogueSystem.js';
 
 let currentGrid = null;
@@ -21,6 +27,10 @@ export function normalizeGrid(grid, size = 20) {
 }
 
 export async function loadMap(name) {
+  if (name === 'map09' && !hasSealingDust() && !isSealPuzzleSolved()) {
+    showDialogue('A shimmering seal bars your way.');
+    return null;
+  }
   let data;
   try {
     const response = await fetch(`data/maps/${name}.json`);
@@ -32,6 +42,9 @@ export async function loadMap(name) {
     if (name === 'map06_right') markForkVisited('right');
     if (name === 'map07' && visitedBothForks()) {
       showDialogue('The air hums as the twin trials align.');
+    }
+    if (name === 'map09' && hasSealingDust()) {
+      consumeSealingDust();
     }
   } catch (err) {
     console.error(err);
