@@ -20,6 +20,7 @@ import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
 import { saveState, loadState, gameState } from './game_state.js';
+import { saveGame, loadGame } from './save_system.js';
 import {
   loadSettings,
   saveSettings,
@@ -186,11 +187,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   saveTab.addEventListener('click', () => {
     saveState();
+    saveGame();
     showDialogue('Game saved!');
   });
 
   loadTab.addEventListener('click', async () => {
     loadState();
+    loadGame();
     const mapName = gameState.currentMap || 'map01';
     try {
       const { cols: newCols } = await router.loadMap(mapName);
