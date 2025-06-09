@@ -8,5 +8,20 @@
     "name": "Defender's Emblem",
     "description": "An ancient badge that bolsters defense.",
     "bonuses": { "defense": 2 }
+  },
+  "warrior_sigil": {
+    "name": "Warrior Sigil",
+    "description": "Awarded for proving your strength in combat.",
+    "bonuses": { "attack": 2 }
+  },
+  "guardian_emblem": {
+    "name": "Guardian Emblem",
+    "description": "A token that reinforces protective instincts.",
+    "bonuses": { "defense": 2 }
+  },
+  "alchemist_catalyst": {
+    "name": "Alchemist Catalyst",
+    "description": "A mysterious powder that empowers concoctions.",
+    "bonuses": { "itemHealBonus": 1 }
   }
 }
