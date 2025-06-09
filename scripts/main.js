@@ -35,14 +35,6 @@ function updateHpDisplay() {
   }
 }
 
-function drawPlayer(player, container, cols) {
-  container.querySelectorAll('.player').forEach(el => el.classList.remove('player'));
-  const index = player.y * cols + player.x;
-  const tile = container.children[index];
-  if (tile) {
-    tile.classList.add('player');
-  }
-}
 
 let isMoving = false;
 
@@ -71,7 +63,7 @@ function handleTileClick(e, player, container, cols) {
     const pos = path[index];
     player.x = pos.x;
     player.y = pos.y;
-    drawPlayer(player, container, cols);
+    router.drawPlayer(player, container, cols);
     const tile = grid[player.y][player.x];
     handleTileEffects(tile.type, player);
     updateHpDisplay();

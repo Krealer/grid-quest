@@ -18,7 +18,7 @@ function findFirstWalkable(grid) {
   return { x: 0, y: 0 };
 }
 
-function drawPlayer(playerObj, containerEl, colsCount) {
+export function drawPlayer(playerObj, containerEl, colsCount) {
   containerEl
     .querySelectorAll('.player')
     .forEach(el => el.classList.remove('player'));
