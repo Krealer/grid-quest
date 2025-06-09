@@ -27,6 +27,7 @@ export function startQuest(id) {
     quests[id] = { started: false, completed: false };
   }
   quests[id].started = true;
+  document.dispatchEvent(new CustomEvent('questUpdated'));
 }
 
 export function completeQuest(id) {
@@ -34,6 +35,13 @@ export function completeQuest(id) {
     quests[id] = { started: true, completed: false };
   }
   quests[id].completed = true;
+  loadQuestData().then(() => {
+    const data = questData[id];
+    if (data && Array.isArray(data.onCompleteUnlocks)) {
+      data.onCompleteUnlocks.forEach(qId => startQuest(qId));
+    }
+    document.dispatchEvent(new CustomEvent('questUpdated'));
+  });
 }
 
 export function isQuestStarted(id) {

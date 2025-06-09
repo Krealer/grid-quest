@@ -3,7 +3,7 @@ import { updateInventoryUI } from './inventory_state.js';
 import { loadItems, getItemData } from './item_loader.js';
 import { unlockSkillsFromItem, getAllSkills } from './skills.js';
 import { dialogueMemory, setMemory } from './dialogue_state.js';
-import { quests } from './quest_state.js';
+import { quests, completeQuest } from './quest_state.js';
 
 let dialogueLines = {};
 let dataLoaded = false;
@@ -236,6 +236,9 @@ export async function startDialogueTree(dialogue, index = 0) {
             }
           });
         }
+      }
+      if (opt.completeQuest) {
+        completeQuest(opt.completeQuest);
       }
       if (opt.goto !== null && opt.goto !== undefined) {
         startDialogueTree(dialogue, opt.goto);
