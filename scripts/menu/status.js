@@ -58,3 +58,4 @@ document.addEventListener('passivesUpdated', updateStatusPanel);
 document.addEventListener('playerXpChanged', updateStatusPanel);
 document.addEventListener('playerLevelUp', updateStatusPanel);
 document.addEventListener('equipmentChanged', updateStatusPanel);
+document.addEventListener('equipmentCrafted', updateStatusPanel);

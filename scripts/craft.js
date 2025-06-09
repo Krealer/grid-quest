@@ -1,6 +1,7 @@
 import { loadItems, getItemData } from './item_loader.js';
-import { addItem, removeItem, getItemCount } from './inventory.js';
-import { craftState } from './craft_state.js';
+import { addItem, removeItem, getItemCount, equipItem, getEquippedItem } from './inventory.js';
+import { craftState, isBlueprintUnlocked } from './craft_state.js';
+import { getItemBonuses } from './item_stats.js';
 import { isRecipeUnlocked } from './recipe_state.js';
 import { loadJson } from './dataService.js';
 import { showError } from './errorPrompt.js';
@@ -17,6 +18,8 @@ export function endCraftingSession() {
 
 let recipes = {};
 let loaded = false;
+let blueprints = {};
+let blueprintsLoaded = false;
 
 export async function loadRecipes() {
   if (loaded) return recipes;
@@ -30,23 +33,42 @@ export async function loadRecipes() {
   return recipes;
 }
 
+export async function loadBlueprints() {
+  if (blueprintsLoaded) return blueprints;
+  const data = await loadJson('data/blueprints.json');
+  if (data) {
+    blueprints = data;
+  } else {
+    showError('Failed to load blueprints');
+  }
+  blueprintsLoaded = true;
+  return blueprints;
+}
+
+export function getBlueprint(id) {
+  return blueprints[id];
+}
+
 export function getRecipe(id) {
   return recipes[id];
 }
 
 export function canCraft(id) {
-  const recipe = recipes[id];
+  const recipe = recipes[id] || blueprints[id];
   if (!recipe) return false;
   return Object.entries(recipe.ingredients).every(([item, qty]) => getItemCount(item) >= qty);
 }
 
 export async function craft(id) {
   await loadRecipes();
+  await loadBlueprints();
   await loadItems();
   if (!craftingAllowed) return false;
-  if (!isRecipeUnlocked(id)) return false;
+  const recipe = recipes[id] || blueprints[id];
+  if (!recipe) return false;
+  if (blueprints[id] && !isBlueprintUnlocked(id)) return false;
+  if (recipes[id] && !isRecipeUnlocked(id)) return false;
   if (!canCraft(id)) return false;
-  const recipe = recipes[id];
   for (const [item, qty] of Object.entries(recipe.ingredients)) {
     removeItem(item, qty);
   }
@@ -54,6 +76,15 @@ export async function craft(id) {
   if (data) {
     addItem({ ...data, id: recipe.result, quantity: recipe.quantity || 1 });
     craftState.lastCrafted = recipe.result;
+    const bonus = getItemBonuses(recipe.result);
+    if (bonus && bonus.slot && !getEquippedItem(bonus.slot)) {
+      equipItem(recipe.result);
+    }
+    if (bonus && bonus.slot) {
+      document.dispatchEvent(
+        new CustomEvent('equipmentCrafted', { detail: recipe.result })
+      );
+    }
     return true;
   }
   return false;

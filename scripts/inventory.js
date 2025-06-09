@@ -1,6 +1,7 @@
 import { getItemData } from './item_loader.js';
 import { player } from './player.js';
 import { getItemBonuses } from './item_stats.js';
+import { unlockBlueprint } from './craft_state.js';
 
 export const inventory = [];
 
@@ -21,6 +22,9 @@ export function addItem(item) {
     return true;
   }
   inventory.push({ ...item, quantity: qty });
+  if (item.id && item.id.startsWith('blueprint_')) {
+    unlockBlueprint(item.id.replace('blueprint_', ''));
+  }
   document.dispatchEvent(new CustomEvent('inventoryUpdated'));
   return true;
 }
