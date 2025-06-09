@@ -6,6 +6,7 @@
     "description": "A mischievous green creature with a sharp grin.",
     "intro": "The goblin snarls and prepares to strike!",
     "portrait": "👺",
+    "skills": ["strike"],
     "drop": { "item": "goblin_ear", "quantity": 1 }
   },
   "Z": {
@@ -13,7 +14,8 @@
     "hp": 50,
     "description": "A decaying corpse that refuses to rest.",
     "intro": "The zombie shambles toward you!",
-    "portrait": "🧟"
+    "portrait": "🧟",
+    "skills": ["strike"]
   },
   "zombie01": {
     "name": "Zombie",
@@ -21,6 +23,7 @@
     "description": "A shambling undead with vacant eyes.",
     "intro": "The zombie groans and lurches forward!",
     "portrait": "🧟",
+    "skills": ["strike"],
     "drop": { "item": "rotten_tooth", "quantity": 1 }
   },
   "B": {
@@ -28,14 +31,16 @@
     "hp": 60,
     "description": "A scruffy thief eyeing your belongings.",
     "intro": "The bandit lunges for your coin purse!",
-    "portrait": "🥷"
+    "portrait": "🥷",
+    "skills": ["strike", "weaken"]
   },
   "S": {
     "name": "Skeleton",
     "hp": 40,
     "description": "Bones clatter as it advances.",
     "intro": "A skeleton rattles menacingly!",
-    "portrait": "💀"
+    "portrait": "💀",
+    "skills": ["strike"]
   },
   "goblin_scout": {
     "name": "Goblin Scout",
@@ -43,6 +48,7 @@
     "description": "A keen-eyed goblin keeping watch over the hills.",
     "intro": "The scout spots you and blows a horn!",
     "portrait": "🗡️",
+    "skills": ["strike"],
     "drop": { "item": "goblin_ear", "quantity": 1 }
   },
   "goblin_archer": {
@@ -51,6 +57,7 @@
     "description": "This goblin prefers attacking from a distance.",
     "intro": "A goblin archer nocks an arrow your way!",
     "portrait": "🏹",
+    "skills": ["poisonSting"],
     "drop": { "item": "goblin_ear", "quantity": 1 }
   },
   "rotting_warrior": {
@@ -59,6 +66,7 @@
     "description": "A decayed soldier still clinging to its rusted blade.",
     "intro": "The rotting warrior staggers forward with a groan!",
     "portrait": "🪓",
+    "skills": ["strike", "poisonSting"],
     "drop": { "item": "rotten_tooth", "quantity": 1 }
   },
   "scout_commander": {
@@ -67,6 +75,7 @@
     "description": "Leader of the goblin scouting parties, armored and alert.",
     "intro": "The scout commander barks orders and charges!",
     "portrait": "🎖️",
+    "skills": ["strike", "weaken"],
     "drop": { "item": "commander_badge", "quantity": 1 },
     "onDefeatMessage": "The commander falls. A silence settles over the hills."
   }
