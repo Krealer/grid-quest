@@ -3,7 +3,7 @@ import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
 import { triggerDeath, addTempDefense } from './player.js';
 import { applyDamage } from './logic.js';
-import { addItem, getItemsByType } from './inventory.js';
+import { addItem, getItemsByType, addItemToInventory } from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
 import { useDefensePotion } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
@@ -13,6 +13,7 @@ import {
   updateStatusUI,
   renderSkillList,
   initLogPanel,
+  showVictoryMessage,
 } from './combat_ui.js';
 import {
   tickStatuses,
@@ -206,21 +207,32 @@ export async function startCombat(enemy, player) {
     healUsed = true;
   }
 
-  async function giveDrop() {
-    if (!enemy.drop || !enemy.drop.item) return;
+  async function giveDrops() {
+    const list = [];
+    if (Array.isArray(enemy.drops)) {
+      list.push(...enemy.drops);
+    } else if (enemy.drop) {
+      list.push(enemy.drop);
+    }
+    if (!list.length) return;
     await loadItems();
-    const data = getItemData(enemy.drop.item);
-    if (!data) return;
-    const success = addItem({
-      ...data,
-      id: enemy.drop.item,
-      quantity: enemy.drop.quantity || 1,
-    });
-    updateInventoryUI();
-    if (success) {
-      showDialogue(`You obtained ${data.name}!`);
-    } else {
-      showDialogue('Inventory full for this item');
+    for (const drop of list) {
+      const data = getItemData(drop.item);
+      if (!data) continue;
+      const success = addItemToInventory({
+        ...data,
+        id: drop.item,
+        quantity: drop.quantity || 1,
+      });
+      updateInventoryUI();
+      if (success) {
+        showDialogue(`You obtained ${data.name}!`);
+      } else {
+        showDialogue('Inventory full for this item');
+      }
+    }
+    if (typeof player.xp === 'number' && typeof enemy.xp === 'number') {
+      player.xp += enemy.xp;
     }
   }
 
@@ -274,8 +286,9 @@ export async function startCombat(enemy, player) {
     if (result === false) return; // invalid action
     if (enemyHp <= 0) {
       log(`${enemy.name} was defeated!`);
-      await giveDrop();
-      endCombat();
+      await giveDrops();
+      showVictoryMessage();
+      setTimeout(endCombat, 800);
       return;
     }
     tickStatuses(player);
@@ -399,8 +412,9 @@ export async function startCombat(enemy, player) {
     }
     if (enemyHp <= 0) {
       log(`${enemy.name} was defeated!`);
-      giveDrop();
-      endCombat();
+      giveDrops();
+      showVictoryMessage();
+      setTimeout(endCombat, 800);
       return;
     }
     playerTurn = true;

@@ -23,6 +23,10 @@ export function addItem(item) {
   return true;
 }
 
+export function addItemToInventory(item) {
+  return addItem(item);
+}
+
 export function hasItem(nameOrId) {
   return getItemCount(nameOrId) > 0;
 }
