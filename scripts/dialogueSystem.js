@@ -214,7 +214,7 @@ export async function startDialogueTree(dialogue, index = 0) {
         await loadItems();
         const item = getItemData(opt.give);
         if (item) {
-          addItem(item);
+          addItem({ ...item, id: opt.give });
           updateInventoryUI();
           const unlocked = unlockSkillsFromItem(opt.give);
           unlocked.forEach(id => {

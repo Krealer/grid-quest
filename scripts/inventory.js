@@ -1,21 +1,38 @@
 export const inventory = [];
 
+export function getItemCount(nameOrId) {
+  const item = inventory.find(
+    it => it.name === nameOrId || it.id === nameOrId
+  );
+  return item ? item.quantity || 0 : 0;
+}
+
 export function addItem(item) {
-  inventory.push(item);
+  const qty = item.quantity || 1;
+  const existing = inventory.find(it => it.id === item.id);
+  if (existing) {
+    if ((existing.quantity || 0) >= 99) return false;
+    existing.quantity = Math.min(99, (existing.quantity || 0) + qty);
+    return true;
+  }
+  inventory.push({ ...item, quantity: qty });
+  return true;
 }
 
 export function hasItem(nameOrId) {
-  return inventory.some(
-    it => it.name === nameOrId || it.id === nameOrId
-  );
+  return getItemCount(nameOrId) > 0;
 }
 
-export function removeItem(nameOrId) {
-  const idx = inventory.findIndex(
+export function removeItem(nameOrId, qty = 1) {
+  const item = inventory.find(
     it => it.name === nameOrId || it.id === nameOrId
   );
-  if (idx !== -1) {
-    inventory.splice(idx, 1);
+  if (item) {
+    item.quantity = (item.quantity || 0) - qty;
+    if (item.quantity <= 0) {
+      const idx = inventory.indexOf(item);
+      if (idx !== -1) inventory.splice(idx, 1);
+    }
     return true;
   }
   return false;

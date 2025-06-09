@@ -1,6 +1,10 @@
 
 import { getSkill } from './skills.js';
 import { triggerDeath } from './player.js';
+import { addItem } from './inventory.js';
+import { loadItems, getItemData } from './item_loader.js';
+import { updateInventoryUI } from './inventory_state.js';
+import { showDialogue } from './dialogueSystem.js';
 
 let overlay = null;
 
@@ -13,7 +17,7 @@ function updateHpBar(bar, current, max) {
  * @param {{name:string,hp:number}} enemy The enemy to fight.
  * @param {{learnedSkills:string[]}} player Player state containing skills.
  */
-export function startCombat(enemy, player) {
+export async function startCombat(enemy, player) {
   const gridEl = document.getElementById('game-grid');
   if (!gridEl) return;
 
@@ -110,6 +114,24 @@ export function startCombat(enemy, player) {
     healUsed = true;
   }
 
+  async function giveDrop() {
+    if (!enemy.drop || !enemy.drop.item) return;
+    await loadItems();
+    const data = getItemData(enemy.drop.item);
+    if (!data) return;
+    const success = addItem({
+      ...data,
+      id: enemy.drop.item,
+      quantity: enemy.drop.quantity || 1,
+    });
+    updateInventoryUI();
+    if (success) {
+      showDialogue(`You obtained ${data.name}!`);
+    } else {
+      showDialogue('Inventory full for this item');
+    }
+  }
+
   const skillList = (player.learnedSkills || [])
     .map(id => getSkill(id))
     .filter(Boolean);
@@ -121,7 +143,7 @@ export function startCombat(enemy, player) {
     actionsEl.appendChild(btn);
   });
 
-  function handleAction(skill) {
+  async function handleAction(skill) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
     const result = skill.effect({
       damageEnemy,
@@ -135,6 +157,7 @@ export function startCombat(enemy, player) {
     if (result === false) return; // invalid action
     if (enemyHp <= 0) {
       log(`${enemy.name} was defeated!`);
+      await giveDrop();
       endCombat();
       return;
     }
