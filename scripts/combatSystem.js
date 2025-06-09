@@ -9,7 +9,13 @@ import { useDefensePotion } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
 import { setupTabs, updateStatusUI, renderSkillList } from './combat_ui.js';
-import { tickStatuses, initStatuses, applyStatus } from './statusManager.js';
+import {
+  tickStatuses,
+  initStatuses,
+  applyStatus,
+  removeStatus,
+  removeNegativeStatus,
+} from './statusManager.js';
 import { initEnemyState } from './enemy.js';
 
 let overlay = null;
@@ -227,6 +233,8 @@ export async function startCombat(enemy, player) {
       isHealUsed,
       setHealUsed,
       applyStatus,
+      removeStatus,
+      removeNegativeStatus,
       player,
       enemy,
     });
@@ -307,6 +315,8 @@ export async function startCombat(enemy, player) {
         enemy,
         damagePlayer,
         applyStatus,
+        removeStatus,
+        removeNegativeStatus,
         log,
       });
     }

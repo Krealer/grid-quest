@@ -1,4 +1,5 @@
 // Defines skill data and manages unlocking/lookup
+import { getStatusEffect } from './status_effects.js';
 
 const skillDefs = {
   strike: {
@@ -117,6 +118,27 @@ const skillDefs = {
     effect({ applyStatus, player, log }) {
       applyStatus(player, 'focus', 1);
       log('You concentrate deeply, preparing your strike.');
+    },
+  },
+  purify: {
+    id: 'purify',
+    name: 'Purify',
+    description: 'Remove certain negative effects from yourself.',
+    cleanse: ['poisoned', 'cursed', 'blinded'],
+    effect({ player, removeNegativeStatus, log }) {
+      const removed = removeNegativeStatus(player, [
+        'poisoned',
+        'cursed',
+        'blinded',
+      ]);
+      if (removed.length > 0) {
+        const names = removed
+          .map(id => getStatusEffect(id)?.name || id)
+          .join(', ');
+        log(`Purify cleanses ${names}!`);
+      } else {
+        log('No negative effects to purify.');
+      }
     },
   },
 };
