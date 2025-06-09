@@ -15,6 +15,11 @@ export function splitItemId(id) {
   return { baseId, level, enchant: enchant || null };
 }
 
+export function parseEnchantedId(id) {
+  const [cleanId, enchant] = id.split('#');
+  return { id: cleanId, enchant: enchant || null };
+}
+
 let tooltipEl;
 
 export function showItemTooltip(target, text) {

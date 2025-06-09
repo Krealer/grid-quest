@@ -49,5 +49,13 @@
     "description": "Increases defense by 1 for this fight.",
     "type": "combat",
     "effect": { "temporaryDefense": 1 }
+  },
+  "mystic_dust": {
+    "name": "Mystic Dust",
+    "description": "Powder pulsating with magical energy."
+  },
+  "arcane_crystal": {
+    "name": "Arcane Crystal",
+    "description": "A crystal infused with raw arcana."
   }
 }

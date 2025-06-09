@@ -1,4 +1,4 @@
-import { loadUpgradeData, listUpgradeableItems, beginForgeSession, canUpgrade } from '../forge.js';
+import { loadUpgradeData, listUpgradeableItems, listRerollableItems, beginForgeSession, canUpgrade, canReroll } from '../forge.js';
 import { showDialogue } from '../dialogueSystem.js';
 import { getItemDisplayName, parseItemId } from '../inventory.js';
 
@@ -6,6 +6,7 @@ export async function createForgeDialogue() {
   await loadUpgradeData();
   beginForgeSession();
   const items = listUpgradeableItems();
+  const rerollables = listRerollableItems();
   const options = items.map(it => ({
     label: `Upgrade ${getItemDisplayName(it.id)}`,
     goto: null,
@@ -17,6 +18,17 @@ export async function createForgeDialogue() {
       showDialogue(`Your ${getItemDisplayName(newId)} has been strengthened.`);
     }
   }));
+  rerollables.forEach(it => {
+    options.push({
+      label: `Reroll ${getItemDisplayName(it.id)}`,
+      goto: null,
+      condition: () => canReroll(it.id),
+      triggerReroll: it.id,
+      onChoose: () => {
+        showDialogue('Let\'s see what magic emerges...');
+      }
+    });
+  });
   options.push({ label: 'Maybe later.', goto: null });
   return [
     {

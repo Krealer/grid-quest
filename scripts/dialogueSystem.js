@@ -2,7 +2,7 @@ import { addItem, removeItem, inventory } from './inventory.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { loadItems, getItemData } from './item_loader.js';
 import { unlockSkillsFromItem, getAllSkills } from './skills.js';
-import { dialogueMemory, setMemory, giveBlueprint, triggerUpgrade } from './dialogue_state.js';
+import { dialogueMemory, setMemory, giveBlueprint, triggerUpgrade, triggerReroll } from './dialogue_state.js';
 import { getQuests, completeQuest } from './quest_state.js';
 import { showError } from './errorPrompt.js';
 
@@ -244,6 +244,9 @@ export async function startDialogueTree(dialogue, index = 0) {
       }
       if (opt.triggerUpgrade) {
         await triggerUpgrade(opt.triggerUpgrade);
+      }
+      if (opt.triggerReroll) {
+        await triggerReroll(opt.triggerReroll);
       }
       if (opt.completeQuest) {
         completeQuest(opt.completeQuest);
