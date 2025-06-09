@@ -1,8 +1,16 @@
 {
   "healing_salve": {
+    "id": "healing_salve",
     "name": "Healing Salve",
     "ingredients": {"goblin_ear": 1, "rotten_tooth": 1},
     "result": "potion_of_health",
+    "quantity": 1
+  },
+  "health_amulet": {
+    "id": "health_amulet",
+    "name": "Health Amulet",
+    "ingredients": {"potion_of_health": 2},
+    "result": "health_amulet",
     "quantity": 1
   }
 }

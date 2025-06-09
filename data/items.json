@@ -21,6 +21,10 @@
     "name": "Health Amulet",
     "description": "An amulet that bolsters vitality"
   },
+  "blueprint_amulet": {
+    "name": "Blueprint: Amulet",
+    "description": "Instructions for crafting a health amulet"
+  },
   "commander_badge": {
     "name": "Commander Badge",
     "description": "Proof of defeating the scout commander"

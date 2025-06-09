@@ -1,10 +1,12 @@
-import { loadRecipes, canCraft, craft, getRecipe } from '../craft.js';
+import { loadRecipes, canCraft, craft, getRecipe, beginCraftingSession } from '../craft.js';
 import { craftState } from '../craft_state.js';
+import { isRecipeUnlocked } from '../recipe_state.js';
 import { showDialogue } from '../dialogueSystem.js';
 
 export async function createGrindleDialogue() {
   await loadRecipes();
-  const recipeIds = Object.keys(await loadRecipes());
+  const recipeIds = Object.keys(await loadRecipes()).filter(id => isRecipeUnlocked(id));
+  beginCraftingSession();
   const options = recipeIds.map(id => ({
     label: `Craft ${getRecipe(id).name}`,
     goto: null,
