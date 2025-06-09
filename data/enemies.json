@@ -14,6 +14,13 @@
     "intro": "The zombie shambles toward you!",
     "portrait": "🧟"
   },
+  "zombie01": {
+    "name": "Zombie",
+    "hp": 50,
+    "description": "A shambling undead with vacant eyes.",
+    "intro": "The zombie groans and lurches forward!",
+    "portrait": "🧟"
+  },
   "B": {
     "name": "Bandit",
     "hp": 60,
