@@ -33,6 +33,11 @@ export const loreEntries = [
     id: 'two_flames_crossed',
     title: 'The Two Flames Crossed',
     text: 'Few manage to master both shadow and flame. Their convergence unveils hidden power.'
+  },
+  {
+    id: 'before_the_seal',
+    title: 'Before the Seal',
+    text: 'Records speak of the tower thriving before its gates were sealed by arcane dust.'
   }
 ];
 

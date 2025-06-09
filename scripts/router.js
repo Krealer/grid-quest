@@ -1,4 +1,4 @@
-import { loadMap as loadMapData } from './mapLoader.js';
+import { loadMap as loadMapData, getCurrentGrid } from './mapLoader.js';
 import { renderGrid } from './grid.js';
 import { gameState } from './game_state.js';
 import { discoverMap } from './player_memory.js';
@@ -37,8 +37,12 @@ export function init(gameContainer, playerObj) {
 
 export async function loadMap(filename, spawnPoint) {
   const name = filename.replace(/\.json$/, '');
+  const result = await loadMapData(name);
+  if (!result) {
+    return { grid: getCurrentGrid(), cols };
+  }
+  const { grid, environment } = result;
   currentMap = name;
-  const { grid, environment } = await loadMapData(name);
   gameState.currentMap = name;
   gameState.environment = environment;
   discoverMap(name);

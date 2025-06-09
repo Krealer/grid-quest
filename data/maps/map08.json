@@ -1,0 +1,26 @@
+{
+  "name": "Sealed Approach",
+  "environment": "night",
+  "grid": [
+    [ { "type": "D", "target": "map07.json", "spawn": { "x": 10, "y": 18 } }, "G", "G", "G", "G", "G", "G", "G", "G", "G", "G", "G", "G", "G", "G", "G", "G", "G", "G", "G" ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    ["G","G","G","G","G","G","G","G","G","G", {"type":"N","npc":"lore_statue"}, "G","G","G","G","G","G","G","G","G"],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    ["G","G","G","G","G","G","G","G","G","G", {"type":"E","enemyId":"relic_guardian"}, "G","G","G","G","G","G","G","G","G"],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGG1GGGGGGGGGG",
+    "GGGGGGGGGG2GGGGGGGGGG",
+    "GGGGGGGGGG3GGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    ["G","G","G","G","G","G","G","G","G","G", {"type":"D","target":"map09.json", "spawn": { "x": 1, "y": 1 } }, "G","G","G","G","G","G","G","G","G"]
+  ]
+}
