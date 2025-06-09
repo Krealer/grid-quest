@@ -1,7 +1,13 @@
 
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
-import { respawn, addTempDefense, increaseMaxHp, gainXP } from './player.js';
+import {
+  respawn,
+  addTempDefense,
+  increaseMaxHp,
+  gainXP,
+  getTotalStats,
+} from './player.js';
 import { getPassive } from './passive_skills.js';
 import { applyDamage } from './logic.js';
 import {
@@ -142,9 +148,10 @@ export async function startCombat(enemy, player) {
       amount = Math.max(0, amount - 5);
       guardActive = false;
     }
+    const base = getTotalStats();
     const tempTarget = {
       hp: playerHp,
-      stats: { defense: (player.stats?.defense || 0) + player.tempDefense },
+      stats: { defense: (base.defense || 0) + player.tempDefense },
     };
     const applied = applyDamage(tempTarget, amount);
     playerHp = tempTarget.hp;
@@ -156,7 +163,9 @@ export async function startCombat(enemy, player) {
     return applied;
   }
 
-  function damageEnemy(dmg) {
+  function damageEnemy(baseDmg) {
+    const stats = getTotalStats();
+    const dmg = baseDmg + (stats.attack || 0) + (player.tempAttack || 0);
     enemyHp = Math.max(0, enemyHp - dmg);
     enemy.hp = enemyHp;
     updateHpBar(enemyBar, enemyHp, enemyMax);

@@ -1,4 +1,6 @@
 import { getItemData } from './item_loader.js';
+import { player } from './player.js';
+import { getItemBonuses } from './item_stats.js';
 
 export const inventory = [];
 
@@ -62,4 +64,19 @@ export function removeHealthBonusItem() {
     return true;
   }
   return false;
+}
+
+export function equipItem(itemId) {
+  const bonus = getItemBonuses(itemId);
+  if (!bonus || !bonus.slot) return false;
+  if (!player.equipment) {
+    player.equipment = { weapon: null, armor: null, accessory: null };
+  }
+  player.equipment[bonus.slot] = itemId;
+  document.dispatchEvent(new CustomEvent('equipmentChanged'));
+  return true;
+}
+
+export function getEquippedItem(slot) {
+  return player.equipment ? player.equipment[slot] : null;
 }
