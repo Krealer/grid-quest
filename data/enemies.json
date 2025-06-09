@@ -84,5 +84,16 @@
     "behavior": "cautious",
     "drops": [ { "item": "commander_badge", "quantity": 1 } ],
     "onDefeatMessage": "The commander falls. A silence settles over the hills."
+  },
+  "wandering_shade": {
+    "name": "Wandering Shade",
+    "hp": 55,
+    "xp": 10,
+    "description": "A spectral remnant drifting between realms.",
+    "intro": "A chill fills the air as a shadowy figure emerges!",
+    "portrait": "💮",
+    "skills": ["weaken"],
+    "behavior": "aggressive",
+    "drops": []
   }
 }

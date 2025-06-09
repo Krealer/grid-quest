@@ -22,6 +22,7 @@ import * as goblinQuestGiver from './npc/goblin_quest_giver.js';
 import * as arvalin from './npc/arvalin.js';
 import * as grindle from './npc/grindle.js';
 import * as forgeNpc from './npc/forge_npc.js';
+import * as shadeSage from './npc/shade_sage.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -43,7 +44,8 @@ const npcModules = {
   goblinQuestGiver,
   arvalin,
   grindle,
-  forgeNpc
+  forgeNpc,
+  shadeSage
 };
 
 let hpDisplay;

@@ -1,0 +1,355 @@
+{
+  "name": "Central Hub",
+  "environment": "clear",
+  "grid": [
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "D",
+        "target": "map_warrior.json",
+        "spawn": {
+          "x": 1,
+          "y": 1
+        }
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      "G",
+      "G",
+      "G",
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      "G",
+      "G",
+      "G",
+      {
+        "type": "E",
+        "enemyId": "wandering_shade"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      {
+        "type": "D",
+        "target": "map_alchemist.json",
+        "spawn": {
+          "x": 1,
+          "y": 1
+        }
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "N",
+        "npc": "shade_sage"
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "D",
+        "target": "map_mystic.json",
+        "spawn": {
+          "x": 1,
+          "y": 1
+        }
+      }
+    ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      "G",
+      "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      {
+        "type": "W"
+      },
+      "G",
+      "G",
+      "G"
+    ],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "D",
+        "target": "map_guardian.json",
+        "spawn": {
+          "x": 1,
+          "y": 1
+        }
+      },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ]
+  ]
+}
