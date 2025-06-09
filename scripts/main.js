@@ -7,6 +7,7 @@ import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 import { showDialogue } from './dialogueSystem.js';
 import { handleTileInteraction } from './interaction.js';
+import { isMovementDisabled } from './movement.js';
 import * as eryndor from './npc/eryndor.js';
 import * as lioran from './npc/lioran.js';
 import {
@@ -48,7 +49,7 @@ function drawPlayer(player, container, cols) {
 let isMoving = false;
 
 function handleTileClick(e, player, container, cols) {
-  if (isMoving || isInBattle) return;
+  if (isMoving || isInBattle || isMovementDisabled()) return;
   const target = e.target;
   if (!target.classList.contains('tile')) return;
   const x = Number(target.dataset.x);
@@ -175,7 +176,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     container.addEventListener('click', e => handleTileClick(e, player, container, cols));
     container.addEventListener('dblclick', async e => {
-      if (isInBattle || isMoving) return;
+      if (isInBattle || isMoving || isMovementDisabled()) return;
       const newCols = await handleTileInteraction(e, player, container, cols, npcModules);
       if (newCols) {
         cols = newCols;
@@ -206,6 +207,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
         }
       }
+    });
+
+    document.addEventListener('playerRespawned', e => {
+      cols = e.detail.cols;
+      updateHpDisplay();
     });
   } catch (err) {
     console.error(err);

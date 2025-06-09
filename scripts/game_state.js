@@ -4,6 +4,7 @@ export const gameState = {
   defeatedEnemies: new Set(),
   environment: 'clear',
   maxHpBonus: 0,
+  isDead: false,
 };
 
 export function saveState() {
