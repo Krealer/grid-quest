@@ -1,13 +1,17 @@
-let disabled = false;
+const state = {
+  disabled: false,
+};
 
 export function disableMovement() {
-  disabled = true;
+  state.disabled = true;
 }
 
 export function enableMovement() {
-  disabled = false;
+  state.disabled = false;
 }
 
 export function isMovementDisabled() {
-  return disabled;
+  return state.disabled;
 }
+
+export const movementState = state;

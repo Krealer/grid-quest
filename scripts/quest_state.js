@@ -2,42 +2,47 @@ import { hasMemory } from './dialogue_state.js';
 import { loadJson } from './dataService.js';
 import { showError } from './errorPrompt.js';
 
-export const quests = {};
+const state = {
+  quests: {},
+  data: {},
+  loaded: false,
+};
 
-let questData = {};
-let dataLoaded = false;
+export function getQuests() {
+  return state.quests;
+}
 
 export async function loadQuestData() {
-  if (dataLoaded) return questData;
+  if (state.loaded) return state.data;
   const data = await loadJson('data/quests.json');
   if (data) {
-    questData = data;
+    state.data = data;
   } else {
     showError('Failed to load quests');
   }
-  dataLoaded = true;
-  return questData;
+  state.loaded = true;
+  return state.data;
 }
 
 export function getQuestData(id) {
-  return questData[id];
+  return state.data[id];
 }
 
 export function startQuest(id) {
-  if (!quests[id]) {
-    quests[id] = { started: false, completed: false };
+  if (!state.quests[id]) {
+    state.quests[id] = { started: false, completed: false };
   }
-  quests[id].started = true;
+  state.quests[id].started = true;
   document.dispatchEvent(new CustomEvent('questUpdated'));
 }
 
 export function completeQuest(id) {
-  if (!quests[id]) {
-    quests[id] = { started: true, completed: false };
+  if (!state.quests[id]) {
+    state.quests[id] = { started: true, completed: false };
   }
-  quests[id].completed = true;
+  state.quests[id].completed = true;
   loadQuestData().then(() => {
-    const data = questData[id];
+    const data = state.data[id];
     if (data && Array.isArray(data.onCompleteUnlocks)) {
       data.onCompleteUnlocks.forEach(qId => startQuest(qId));
     }
@@ -46,11 +51,11 @@ export function completeQuest(id) {
 }
 
 export function isQuestStarted(id) {
-  return !!quests[id]?.started;
+  return !!state.quests[id]?.started;
 }
 
 export function isQuestCompleted(id) {
-  return !!quests[id]?.completed;
+  return !!state.quests[id]?.completed;
 }
 
 export function getActiveQuests() {
@@ -59,10 +64,12 @@ export function getActiveQuests() {
       completeQuest('scout_tracking');
     }
   }
-  return Object.keys(quests)
-    .filter(id => quests[id].started && !quests[id].completed)
+  return Object.keys(state.quests)
+    .filter(id => state.quests[id].started && !state.quests[id].completed)
     .map(id => {
-      const data = questData[id] || { title: id, description: '' };
+      const data = state.data[id] || { title: id, description: '' };
       return { id, ...data };
     });
 }
+
+export const questState = state;
