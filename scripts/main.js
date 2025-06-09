@@ -1,6 +1,7 @@
 import { getCurrentGrid } from './mapLoader.js';
 import { handleTileEffects } from './gameEngine.js';
 import { toggleInventoryView } from './inventory_state.js';
+import { toggleQuestLog } from './quest_log.js';
 import { player } from './player.js';
 import { loadEnemyData, defeatEnemy } from './enemy.js';
 import { findPath } from './pathfinder.js';
@@ -84,6 +85,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const inventoryTab = document.querySelector('.inventory-tab');
   const inventoryOverlay = document.getElementById('inventory-overlay');
   const closeBtn = inventoryOverlay.querySelector('.close-btn');
+  const questsTab = document.querySelector('.quests-tab');
+  const questsOverlay = document.getElementById('quest-log-overlay');
+  const questsClose = questsOverlay.querySelector('.close-btn');
   const settingsTab = document.querySelector('.settings-tab');
   const settingsOverlay = document.getElementById('settings-overlay');
   const settingsClose = settingsOverlay.querySelector('.close-btn');
@@ -115,6 +119,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   closeBtn.addEventListener('click', toggleInventoryView);
   inventoryOverlay.addEventListener('click', e => {
     if (e.target === inventoryOverlay) toggleInventoryView();
+  });
+  questsTab.addEventListener('click', toggleQuestLog);
+  questsClose.addEventListener('click', toggleQuestLog);
+  questsOverlay.addEventListener('click', e => {
+    if (e.target === questsOverlay) toggleQuestLog();
   });
 
   function showSettings() {
