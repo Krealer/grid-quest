@@ -264,6 +264,22 @@ body {
   margin-top: 2px;
 }
 
+/* new style for improved status display */
+#battle-overlay .status-effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+#battle-overlay .status-effects .effect {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
 #battle-overlay .intro-text {
   margin-top: 10px;
   opacity: 0;

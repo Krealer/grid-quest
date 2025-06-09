@@ -59,3 +59,8 @@ export function tickStatuses(target) {
 export function applyStatus(target, id, duration) {
   addStatus(target, id, duration);
 }
+
+export function getStatusList(target) {
+  if (!target || !Array.isArray(target.statuses)) return [];
+  return target.statuses.map(s => ({ id: s.id, remaining: s.remaining }));
+}
