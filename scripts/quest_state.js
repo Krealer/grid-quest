@@ -1,4 +1,5 @@
 import { hasMemory } from './dialogue_state.js';
+import { loadJson } from './dataService.js';
 
 export const quests = {};
 
@@ -7,16 +8,11 @@ let dataLoaded = false;
 
 export async function loadQuestData() {
   if (dataLoaded) return questData;
-  try {
-    const res = await fetch('data/quests.json');
-    if (res.ok) {
-      questData = await res.json();
-    }
-  } catch {
-    // ignore errors
-  } finally {
-    dataLoaded = true;
+  const data = await loadJson('data/quests.json');
+  if (data) {
+    questData = data;
   }
+  dataLoaded = true;
   return questData;
 }
 
