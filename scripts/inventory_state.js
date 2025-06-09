@@ -8,7 +8,8 @@ import {
 import { player, getTotalStats } from './player.js';
 import { useArmorPiece } from './item_logic.js';
 import { getItemBonuses } from './item_stats.js';
-import { showItemTooltip, hideItemTooltip, splitItemId } from './utils.js';
+import { showItemTooltip, hideItemTooltip, splitItemId, parseEnchantedId } from './utils.js';
+import { canReroll, rerollEnchantment } from './forge.js';
 import { enchantments } from './enchantments.js';
 import { getItemData } from './item_loader.js';
 
@@ -27,6 +28,7 @@ export function updateInventoryUI() {
     row.dataset.id = item.id;
     const qty = item.quantity > 1 ? ` x${item.quantity}` : '';
     const { baseId, level, enchant } = splitItemId(item.id);
+    const { enchant: enchantId } = parseEnchantedId(item.id);
     let displayName = item.name;
     if (!displayName) {
       const baseData = getItemData(baseId);
@@ -35,7 +37,7 @@ export function updateInventoryUI() {
       if (enchant && enchantments[enchant]) displayName += ` ${enchantments[enchant].name}`;
     }
     row.innerHTML = `<strong>${displayName}${qty}</strong><div class="desc">${item.description}</div>`;
-    if (enchant) row.classList.add('enchanted');
+    if (enchantId) row.classList.add('enchanted');
     const level = getItemLevel(item.id);
     if (level > 0) {
       row.classList.add('gear-upgraded');
@@ -56,6 +58,20 @@ export function updateInventoryUI() {
         updateInventoryUI();
       });
       row.appendChild(btn);
+    }
+    if (enchantId && bonus && bonus.slot) {
+      const rbtn = document.createElement('button');
+      rbtn.classList.add('reroll-btn');
+      rbtn.textContent = 'Reroll';
+      rbtn.disabled = !canReroll(item.id);
+      rbtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const newId = rerollEnchantment(item.id);
+        const log = document.getElementById('forge-log');
+        if (log && newId) log.textContent = `Enchantment rerolled to ${getItemDisplayName(newId)}`;
+        updateInventoryUI();
+      });
+      row.appendChild(rbtn);
     }
 
     let tooltipText = '';

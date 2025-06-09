@@ -1,5 +1,5 @@
 import { unlockBlueprint } from './craft_state.js';
-import { upgradeItem } from './forge.js';
+import { upgradeItem, rerollEnchantment } from './forge.js';
 
 export const dialogueMemory = new Set();
 
@@ -36,4 +36,8 @@ export function giveBlueprint(id) {
 
 export async function triggerUpgrade(id) {
   if (id) await upgradeItem(id);
+}
+
+export async function triggerReroll(id) {
+  if (id) await rerollEnchantment(id);
 }
