@@ -170,12 +170,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadTab.addEventListener('click', async () => {
     loadState();
     const mapName = gameState.currentMap || 'map01';
-    const { cols: newCols } = await router.loadMap(mapName);
-    cols = newCols;
-    player.maxHp = 100 + (gameState.maxHpBonus || 0);
-    player.hp = Math.min(player.hp, player.maxHp);
-    updateHpDisplay();
-    showDialogue('Game loaded!');
+    try {
+      const { cols: newCols } = await router.loadMap(mapName);
+      cols = newCols;
+      player.maxHp = 100 + (gameState.maxHpBonus || 0);
+      player.hp = Math.min(player.hp, player.maxHp);
+      updateHpDisplay();
+      showDialogue('Game loaded!');
+    } catch (err) {
+      console.error(err);
+    }
   });
 
   try {

@@ -4,6 +4,7 @@ import { loadItems, getItemData } from './item_loader.js';
 import { unlockSkillsFromItem, getAllSkills } from './skills.js';
 import { dialogueMemory, setMemory } from './dialogue_state.js';
 import { quests, completeQuest } from './quest_state.js';
+import { showError } from './errorPrompt.js';
 
 let dialogueLines = {};
 let dataLoaded = false;
@@ -17,6 +18,7 @@ async function loadDialogData() {
     }
   } catch (err) {
     console.error('Failed to load dialog data', err);
+    showError('Failed to load dialogue');
   } finally {
     dataLoaded = true;
   }
