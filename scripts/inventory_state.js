@@ -3,12 +3,17 @@ import {
   equipItem,
   getEquippedItem,
   getItemDisplayName,
-  getItemLevel,
+  getItemLevel
 } from './inventory.js';
 import { player, getTotalStats } from './player.js';
 import { useArmorPiece } from './item_logic.js';
 import { getItemBonuses } from './item_stats.js';
-import { showItemTooltip, hideItemTooltip, splitItemId, parseEnchantedId } from './utils.js';
+import {
+  showItemTooltip,
+  hideItemTooltip,
+  splitItemId,
+  parseEnchantedId
+} from './utils.js';
 import { canReroll, rerollEnchantment } from './forge.js';
 import { enchantments } from './enchantments.js';
 import { getItemData } from './item_loader.js';
@@ -22,9 +27,9 @@ export async function updateInventoryUI() {
   const statsEl = document.getElementById('player-stats');
   if (statsEl) {
     const stats = getTotalStats();
-    statsEl.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Defense: ${stats.defense || 0}`;
+    statsEl.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Attack: ${stats.attack || 0}  Defense: ${stats.defense || 0}`;
   }
-  inventory.forEach(item => {
+  inventory.forEach((item) => {
     const row = document.createElement('div');
     row.classList.add('inventory-item');
     row.dataset.id = item.id;
@@ -36,7 +41,8 @@ export async function updateInventoryUI() {
       const baseData = getItemData(baseId);
       displayName = baseData?.name || baseId;
       if (level > 0) displayName += ` +${level}`;
-      if (enchant && enchantments[enchant]) displayName += ` ${enchantments[enchant].name}`;
+      if (enchant && enchantments[enchant])
+        displayName += ` ${enchantments[enchant].name}`;
     }
     row.innerHTML = `<strong>${displayName}${qty}</strong><div class="desc">${item.description}</div>`;
     if (enchantId) row.classList.add('enchanted');
@@ -53,8 +59,9 @@ export async function updateInventoryUI() {
     if (bonus && bonus.slot) {
       const btn = document.createElement('button');
       btn.classList.add('equip-btn');
-      btn.textContent = getEquippedItem(bonus.slot) === item.id ? 'Unequip' : 'Equip';
-      btn.addEventListener('click', e => {
+      btn.textContent =
+        getEquippedItem(bonus.slot) === item.id ? 'Unequip' : 'Equip';
+      btn.addEventListener('click', (e) => {
         e.stopPropagation();
         equipItem(item.id);
         updateInventoryUI();
@@ -66,11 +73,12 @@ export async function updateInventoryUI() {
       rbtn.classList.add('reroll-btn');
       rbtn.textContent = 'Reroll';
       rbtn.disabled = !canReroll(item.id);
-      rbtn.addEventListener('click', e => {
+      rbtn.addEventListener('click', (e) => {
         e.stopPropagation();
         const newId = rerollEnchantment(item.id);
         const log = document.getElementById('forge-log');
-        if (log && newId) log.textContent = `Enchantment rerolled to ${getItemDisplayName(newId)}`;
+        if (log && newId)
+          log.textContent = `Enchantment rerolled to ${getItemDisplayName(newId)}`;
         updateInventoryUI();
       });
       row.appendChild(rbtn);
@@ -79,14 +87,16 @@ export async function updateInventoryUI() {
     let tooltipText = '';
     if (bonus) {
       const effects = [];
-      Object.keys(bonus).forEach(k => {
+      Object.keys(bonus).forEach((k) => {
         if (k === 'slot') return;
         effects.push(`${k.charAt(0).toUpperCase() + k.slice(1)} +${bonus[k]}`);
       });
       tooltipText = effects.join(', ');
     }
     if (tooltipText) {
-      row.addEventListener('mouseenter', () => showItemTooltip(row, tooltipText));
+      row.addEventListener('mouseenter', () =>
+        showItemTooltip(row, tooltipText)
+      );
       row.addEventListener('mouseleave', hideItemTooltip);
     }
     list.appendChild(row);
@@ -94,7 +104,7 @@ export async function updateInventoryUI() {
 
   // Display relics separately
   const relicIds = getOwnedRelics();
-  relicIds.forEach(id => {
+  relicIds.forEach((id) => {
     const data = getRelicData(id);
     if (!data) return;
     const row = document.createElement('div');

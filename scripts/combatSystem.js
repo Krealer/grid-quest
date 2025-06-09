@@ -1,4 +1,3 @@
-
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
 import {
@@ -6,7 +5,7 @@ import {
   addTempDefense,
   increaseMaxHp,
   gainXP,
-  getTotalStats,
+  getTotalStats
 } from './player.js';
 import { getClassBonuses } from './class_state.js';
 import { getPassive } from './passive_skills.js';
@@ -15,7 +14,7 @@ import {
   addItem,
   getItemsByType,
   addItemToInventory,
-  removeHealthBonusItem,
+  removeHealthBonusItem
 } from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
 import { useDefensePotion } from './item_logic.js';
@@ -30,7 +29,7 @@ import {
   initLogPanel,
   showVictoryMessage,
   showXpGain,
-  showLevelUp,
+  showLevelUp
 } from './combat_ui.js';
 import {
   tickStatuses,
@@ -39,7 +38,7 @@ import {
   removeStatus as removeStatusEffect,
   removeNegativeStatus as removeNegativeStatusEffect,
   hasStatus,
-  clearStatuses,
+  clearStatuses
 } from './statusManager.js';
 import { getStatusEffect } from './status_effects.js';
 import { initEnemyState } from './enemy.js';
@@ -103,7 +102,8 @@ export async function startCombat(enemy, player) {
   const playerBar = overlay.querySelector('.player .hp');
   const enemyBar = overlay.querySelector('.enemy .hp');
 
-  const playerMax = player.maxHp ?? 100;
+  const statsBonus = getTotalStats();
+  const playerMax = (player.maxHp ?? 100) + (statsBonus.maxHp || 0);
   const enemyMax = enemy.hp || 50;
   let playerHp = player.hp ?? playerMax;
   let enemyHp = enemyMax;
@@ -135,7 +135,6 @@ export async function startCombat(enemy, player) {
     logEl.classList.remove('hidden');
   }, 800);
 
-
   let guardActive = false;
   let shieldBlock = false;
   let healUsed = false;
@@ -153,7 +152,7 @@ export async function startCombat(enemy, player) {
     const base = getTotalStats();
     const tempTarget = {
       hp: playerHp,
-      stats: { defense: (base.defense || 0) + player.tempDefense },
+      stats: { defense: (base.defense || 0) + player.tempDefense }
     };
     const applied = applyDamage(tempTarget, amount);
     playerHp = tempTarget.hp;
@@ -203,7 +202,7 @@ export async function startCombat(enemy, player) {
 
   function removeNegativeStatusLogged(target, ids) {
     const removed = removeNegativeStatusEffect(target, ids);
-    removed.forEach(r => {
+    removed.forEach((r) => {
       const name = getStatusEffect(r)?.name || r;
       const who = target === player ? 'Player' : enemy.name;
       log(`${name} removed from ${who}`);
@@ -243,7 +242,7 @@ export async function startCombat(enemy, player) {
       const success = addItemToInventory({
         ...data,
         id: drop.item,
-        quantity: drop.quantity || 1,
+        quantity: drop.quantity || 1
       });
       updateInventoryUI();
       if (success) {
@@ -270,7 +269,7 @@ export async function startCombat(enemy, player) {
       itemContainer.appendChild(msg);
       return;
     }
-    items.forEach(it => {
+    items.forEach((it) => {
       const data = getItemData(it.id);
       const btn = document.createElement('button');
       const qty = it.quantity > 1 ? ` x${it.quantity}` : '';
@@ -281,7 +280,7 @@ export async function startCombat(enemy, player) {
   }
 
   const skillList = (player.learnedSkills || [])
-    .map(id => getSkill(id))
+    .map((id) => getSkill(id))
     .filter(Boolean);
 
   renderSkillList(skillContainer, skillList, handleAction);
@@ -307,7 +306,7 @@ export async function startCombat(enemy, player) {
       removeStatus: removeStatusLogged,
       removeNegativeStatus: removeNegativeStatusLogged,
       player,
-      enemy,
+      enemy
     });
     if (result === false) return; // invalid action
     if (enemyHp <= 0) {
@@ -409,13 +408,17 @@ export async function startCombat(enemy, player) {
   function enemyTurn() {
     if (enemyHp <= 0) return;
     const list = (enemy.skills || ['strike'])
-      .map(id => getEnemySkill(id))
+      .map((id) => getEnemySkill(id))
       .filter(Boolean);
 
     const statusSkills = list.filter(
-      s => Array.isArray(s.applies) && s.applies.some(st => !hasStatus(player, st))
+      (s) =>
+        Array.isArray(s.applies) &&
+        s.applies.some((st) => !hasStatus(player, st))
     );
-    const damageSkills = list.filter(s => s.aiType === 'damage' || !s.applies);
+    const damageSkills = list.filter(
+      (s) => s.aiType === 'damage' || !s.applies
+    );
 
     let skill = null;
     const playerVulnerable = hasStatus(player, 'vulnerable');
@@ -433,7 +436,9 @@ export async function startCombat(enemy, player) {
     }
 
     if (!skill) {
-      skill = list[Math.floor(Math.random() * list.length)] || getEnemySkill('strike');
+      skill =
+        list[Math.floor(Math.random() * list.length)] ||
+        getEnemySkill('strike');
     }
 
     if (skill) {
@@ -446,7 +451,7 @@ export async function startCombat(enemy, player) {
         applyStatus: applyStatusLogged,
         removeStatus: removeStatusLogged,
         removeNegativeStatus: removeNegativeStatusLogged,
-        log,
+        log
       });
     }
     if (playerHp <= 0) {

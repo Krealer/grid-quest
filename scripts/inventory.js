@@ -3,6 +3,7 @@ import { player } from './player.js';
 import { getItemBonuses } from './item_stats.js';
 import { unlockBlueprint } from './craft_state.js';
 import { discover } from './player_memory.js';
+import { isRelic } from './relic_state.js';
 
 export const inventory = [];
 
@@ -27,14 +28,15 @@ export function getItemDisplayName(id) {
 
 export function getItemCount(nameOrId) {
   const item = inventory.find(
-    it => it.name === nameOrId || it.id === nameOrId
+    (it) => it.name === nameOrId || it.id === nameOrId
   );
   return item ? item.quantity || 0 : 0;
 }
 
 export function addItem(item) {
   const qty = item.quantity || 1;
-  const existing = inventory.find(it => it.id === item.id);
+  if (isRelic(parseItemId(item.id).baseId)) return false;
+  const existing = inventory.find((it) => it.id === item.id);
   if (existing) {
     if ((existing.quantity || 0) >= 99) return false;
     existing.quantity = Math.min(99, (existing.quantity || 0) + qty);
@@ -43,7 +45,10 @@ export function addItem(item) {
     return true;
   }
   const name = item.name || getItemDisplayName(item.id);
-  const desc = item.description || getItemData(parseItemId(item.id).baseId)?.description || '';
+  const desc =
+    item.description ||
+    getItemData(parseItemId(item.id).baseId)?.description ||
+    '';
   inventory.push({ ...item, name, description: desc, quantity: qty });
   if (item.id && item.id.startsWith('blueprint_')) {
     unlockBlueprint(item.id.replace('blueprint_', ''));
@@ -62,8 +67,9 @@ export function hasItem(nameOrId) {
 }
 
 export function removeItem(nameOrId, qty = 1) {
+  if (isRelic(parseItemId(nameOrId).baseId)) return false;
   const item = inventory.find(
-    it => it.name === nameOrId || it.id === nameOrId
+    (it) => it.name === nameOrId || it.id === nameOrId
   );
   if (item) {
     item.quantity = (item.quantity || 0) - qty;
@@ -78,14 +84,14 @@ export function removeItem(nameOrId, qty = 1) {
 }
 
 export function getItemsByType(type) {
-  return inventory.filter(it => {
+  return inventory.filter((it) => {
     const data = getItemData(it.id);
     return data && data.type === type;
   });
 }
 
 export function removeHealthBonusItem() {
-  const idx = inventory.findIndex(it => it.id === 'potion_of_health');
+  const idx = inventory.findIndex((it) => it.id === 'potion_of_health');
   if (idx !== -1) {
     inventory.splice(idx, 1);
     document.dispatchEvent(new CustomEvent('inventoryUpdated'));
@@ -108,4 +114,3 @@ export function equipItem(itemId) {
 export function getEquippedItem(slot) {
   return player.equipment ? player.equipment[slot] : null;
 }
-

@@ -2,10 +2,15 @@ import { getCurrentGrid } from './mapLoader.js';
 import { handleTileEffects } from './gameEngine.js';
 import { toggleInventoryView } from './inventory_state.js';
 import { toggleQuestLog } from './quest_log.js';
-import { player } from './player.js';
+import { player, getTotalStats } from './player.js';
+import { getRelicBonuses } from './relic_state.js';
 import { loadEnemyData, defeatEnemy } from './enemy.js';
 import { setMemory } from './dialogue_state.js';
-import { completeQuest, isQuestStarted, isQuestCompleted } from './quest_state.js';
+import {
+  completeQuest,
+  isQuestStarted,
+  isQuestCompleted
+} from './quest_state.js';
 import { findPath } from './pathfinder.js';
 import * as router from './router.js';
 import { showDialogue } from './dialogueSystem.js';
@@ -26,13 +31,20 @@ import { saveGame, loadGame } from './save_system.js';
 import {
   loadSettings,
   saveSettings,
-  applySettings,
+  applySettings
 } from './settingsManager.js';
 
 // Inventory contents are managed in inventory.js
 
 let isInBattle = false;
-const npcModules = { eryndor, lioran, goblinQuestGiver, arvalin, grindle, forgeNpc };
+const npcModules = {
+  eryndor,
+  lioran,
+  goblinQuestGiver,
+  arvalin,
+  grindle,
+  forgeNpc
+};
 
 let hpDisplay;
 let defenseDisplay;
@@ -40,13 +52,15 @@ let xpDisplay;
 
 function updateHpDisplay() {
   if (hpDisplay) {
-    hpDisplay.textContent = `HP: ${player.hp}/${player.maxHp}`;
+    const bonus = getRelicBonuses().maxHp || 0;
+    hpDisplay.textContent = `HP: ${player.hp}/${player.maxHp + bonus}`;
   }
 }
 
 function updateDefenseDisplay() {
   if (defenseDisplay) {
-    defenseDisplay.textContent = `Defense: ${player.stats?.defense || 0}`;
+    const stats = getTotalStats();
+    defenseDisplay.textContent = `Defense: ${stats.defense || 0}`;
   }
 }
 
@@ -55,7 +69,6 @@ function updateXpDisplay() {
     xpDisplay.textContent = `Level: ${player.level} XP: ${player.xp}/${player.xpToNextLevel}`;
   }
 }
-
 
 let isMoving = false;
 
@@ -93,7 +106,6 @@ function handleTileClick(e, player, container, cols) {
   }
   requestAnimationFrame(step);
 }
-
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
@@ -144,25 +156,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   inventoryTab.addEventListener('click', toggleInventoryView);
   closeBtn.addEventListener('click', toggleInventoryView);
-  inventoryOverlay.addEventListener('click', e => {
+  inventoryOverlay.addEventListener('click', (e) => {
     if (e.target === inventoryOverlay) toggleInventoryView();
   });
   questsTab.addEventListener('click', toggleQuestLog);
   questsClose.addEventListener('click', toggleQuestLog);
-  questsOverlay.addEventListener('click', e => {
+  questsOverlay.addEventListener('click', (e) => {
     if (e.target === questsOverlay) toggleQuestLog();
   });
   if (statusTab) statusTab.addEventListener('click', toggleStatusPanel);
   if (statusClose) statusClose.addEventListener('click', toggleStatusPanel);
   if (statusOverlay) {
-    statusOverlay.addEventListener('click', e => {
+    statusOverlay.addEventListener('click', (e) => {
       if (e.target === statusOverlay) toggleStatusPanel();
     });
   }
   if (infoTab) infoTab.addEventListener('click', toggleInfoPanel);
   if (infoClose) infoClose.addEventListener('click', toggleInfoPanel);
   if (infoOverlay) {
-    infoOverlay.addEventListener('click', e => {
+    infoOverlay.addEventListener('click', (e) => {
       if (e.target === infoOverlay) toggleInfoPanel();
     });
   }
@@ -177,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   settingsTab.addEventListener('click', showSettings);
   settingsClose.addEventListener('click', hideSettings);
-  settingsOverlay.addEventListener('click', e => {
+  settingsOverlay.addEventListener('click', (e) => {
     if (e.target === settingsOverlay) hideSettings();
   });
 
@@ -227,10 +239,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateHpDisplay();
     updateXpDisplay();
 
-    container.addEventListener('click', e => handleTileClick(e, player, container, cols));
-    container.addEventListener('dblclick', async e => {
+    container.addEventListener('click', (e) =>
+      handleTileClick(e, player, container, cols)
+    );
+    container.addEventListener('dblclick', async (e) => {
       if (isInBattle || isMoving || isMovementDisabled()) return;
-      const newCols = await handleTileInteraction(e, player, container, cols, npcModules);
+      const newCols = await handleTileInteraction(
+        e,
+        player,
+        container,
+        cols,
+        npcModules
+      );
       if (newCols) {
         cols = newCols;
         updateHpDisplay();
@@ -239,21 +259,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.addEventListener('combatStarted', () => {
       isInBattle = true;
     });
-    document.addEventListener('combatEnded', e => {
+    document.addEventListener('combatEnded', (e) => {
       isInBattle = false;
       if (e.detail.enemyHp <= 0) {
         const enemyId = e.detail.enemy.id;
         defeatEnemy(enemyId);
         if (enemyId === 'goblin_scout') {
           setMemory('scout_defeated');
-          if (isQuestStarted('scout_tracking') && !isQuestCompleted('scout_tracking')) {
+          if (
+            isQuestStarted('scout_tracking') &&
+            !isQuestCompleted('scout_tracking')
+          ) {
             completeQuest('scout_tracking');
           }
         }
       }
     });
 
-    document.addEventListener('playerRespawned', e => {
+    document.addEventListener('playerRespawned', (e) => {
       cols = e.detail.cols;
       updateHpDisplay();
       updateDefenseDisplay();

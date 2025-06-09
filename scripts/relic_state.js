@@ -5,7 +5,7 @@ const STORAGE_KEY = 'gridquest.relics';
 
 export const relicState = {
   owned: new Set(),
-  data: {},
+  data: {}
 };
 
 function loadOwned() {
@@ -42,6 +42,10 @@ export function getRelicData(id) {
   return relicState.data[id];
 }
 
+export function isRelic(id) {
+  return !!relicState.data[id];
+}
+
 export function getOwnedRelics() {
   return Array.from(relicState.owned);
 }
@@ -70,7 +74,7 @@ export function removeRelic(id) {
 
 export function getRelicBonuses() {
   const totals = {};
-  relicState.owned.forEach(id => {
+  relicState.owned.forEach((id) => {
     const data = relicState.data[id];
     if (data && data.bonuses) {
       Object.entries(data.bonuses).forEach(([k, v]) => {
