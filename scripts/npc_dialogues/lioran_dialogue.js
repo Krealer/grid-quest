@@ -31,7 +31,7 @@ export const lioranDialogue = [
         goto: null,
         give: "mysterious_token",
         memoryFlag: "lioran_gift_given",
-        condition: (state) => !state.inventory.includes("mysterious_token")
+        condition: (state) => !state.inventory['mysterious_token']
       },
       {
         label: "I don't trust strange gifts.",

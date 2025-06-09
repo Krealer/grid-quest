@@ -10,6 +10,7 @@ import { handleTileInteraction } from './interaction.js';
 import { isMovementDisabled } from './movement.js';
 import * as eryndor from './npc/eryndor.js';
 import * as lioran from './npc/lioran.js';
+import * as goblinQuestGiver from './npc/goblin_quest_giver.js';
 import { initSkillSystem } from './skills.js';
 import { saveState, loadState, gameState } from './game_state.js';
 import {
@@ -21,7 +22,7 @@ import {
 // Inventory contents are managed in inventory.js
 
 let isInBattle = false;
-const npcModules = { eryndor, lioran };
+const npcModules = { eryndor, lioran, goblinQuestGiver };
 
 let hpDisplay;
 

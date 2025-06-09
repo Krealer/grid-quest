@@ -1,8 +1,9 @@
-import { addItem, inventory } from './inventory.js';
+import { addItem, removeItem, inventory } from './inventory.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { loadItems, getItemData } from './item_loader.js';
 import { unlockSkillsFromItem, getAllSkills } from './skills.js';
 import { dialogueMemory, setMemory } from './dialogue_state.js';
+import { quests } from './quest_state.js';
 
 let dialogueLines = {};
 let dataLoaded = false;
@@ -193,9 +194,13 @@ export async function startDialogueTree(dialogue, index = 0) {
   const entry = dialogue[index];
   if (!entry) return;
   const state = {
-    inventory: inventory.map(it => it.name),
+    inventory: {},
     memory: dialogueMemory,
+    quests,
   };
+  inventory.forEach(it => {
+    state.inventory[it.id] = it.quantity || 1;
+  });
   const validOptions = (entry.options || []).filter(opt => {
     if (typeof opt.condition === 'function') {
       try {
@@ -210,6 +215,13 @@ export async function startDialogueTree(dialogue, index = 0) {
     label: opt.label,
     callback: async () => {
       if (opt.memoryFlag) setMemory(opt.memoryFlag);
+      if (typeof opt.onChoose === 'function') {
+        try {
+          await opt.onChoose();
+        } catch (e) {
+          console.error('onChoose error', e);
+        }
+      }
       if (opt.give) {
         await loadItems();
         const item = getItemData(opt.give);

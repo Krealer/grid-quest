@@ -21,7 +21,7 @@ export const eryndorDialogue = [
         goto: null,
         give: "ancient_scroll",
         memoryFlag: "received_scroll",
-        condition: (state) => !state.inventory.includes("ancient_scroll")
+        condition: (state) => !state.inventory['ancient_scroll']
       }
     ]
   }
