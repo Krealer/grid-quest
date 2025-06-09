@@ -1,6 +1,17 @@
 import { loadItems, getItemData } from './item_loader.js';
 import { addItem, removeItem, getItemCount } from './inventory.js';
 import { craftState } from './craft_state.js';
+import { isRecipeUnlocked } from './recipe_state.js';
+
+let craftingAllowed = false;
+
+export function beginCraftingSession() {
+  craftingAllowed = true;
+}
+
+export function endCraftingSession() {
+  craftingAllowed = false;
+}
 
 let recipes = {};
 let loaded = false;
@@ -33,6 +44,8 @@ export function canCraft(id) {
 export async function craft(id) {
   await loadRecipes();
   await loadItems();
+  if (!craftingAllowed) return false;
+  if (!isRecipeUnlocked(id)) return false;
   if (!canCraft(id)) return false;
   const recipe = recipes[id];
   for (const [item, qty] of Object.entries(recipe.ingredients)) {
