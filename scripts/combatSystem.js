@@ -7,6 +7,7 @@ import { loadItems, getItemData } from './item_loader.js';
 import { useDefensePotion } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
+import { setupTabs } from './combat_ui.js';
 
 let overlay = null;
 
@@ -50,8 +51,10 @@ export async function startCombat(enemy, player) {
           <button class="skills-tab selected">Skills</button>
           <button class="items-tab">Items</button>
         </div>
-        <div class="skill-buttons"></div>
-        <div class="item-buttons hidden"></div>
+        <div class="tab-panels">
+          <div class="skill-buttons tab-panel"></div>
+          <div class="item-buttons tab-panel hidden"></div>
+        </div>
       </div>
       <div class="log hidden"></div>
     </div>`;
@@ -74,8 +77,6 @@ export async function startCombat(enemy, player) {
   const actionsEl = overlay.querySelector('.actions');
   const skillContainer = overlay.querySelector('.skill-buttons');
   const itemContainer = overlay.querySelector('.item-buttons');
-  const skillsTabBtn = overlay.querySelector('.skills-tab');
-  const itemsTabBtn = overlay.querySelector('.items-tab');
   const logEl = overlay.querySelector('.log');
 
   await loadItems();
@@ -184,18 +185,7 @@ export async function startCombat(enemy, player) {
 
   updateItemsUI();
   document.addEventListener('inventoryUpdated', updateItemsUI);
-  skillsTabBtn.addEventListener('click', () => {
-    skillContainer.classList.remove('hidden');
-    itemContainer.classList.add('hidden');
-    skillsTabBtn.classList.add('selected');
-    itemsTabBtn.classList.remove('selected');
-  });
-  itemsTabBtn.addEventListener('click', () => {
-    itemContainer.classList.remove('hidden');
-    skillContainer.classList.add('hidden');
-    itemsTabBtn.classList.add('selected');
-    skillsTabBtn.classList.remove('selected');
-  });
+  setupTabs(overlay);
 
   async function handleAction(skill) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;

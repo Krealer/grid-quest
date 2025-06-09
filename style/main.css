@@ -284,10 +284,30 @@ body {
 
 #battle-overlay .action-tabs {
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+#battle-overlay .action-tabs button {
+  padding: 6px 14px;
 }
 
 #battle-overlay .action-tabs button.selected {
   background: #666;
+  border-color: #999;
+}
+
+#battle-overlay .tab-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+#battle-overlay .hidden {
+  display: none;
 }
 
 #battle-overlay .actions.hidden,
