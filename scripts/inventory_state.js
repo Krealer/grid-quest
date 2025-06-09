@@ -1,5 +1,6 @@
 import { inventory } from './inventory.js';
 import { player } from './player.js';
+import { useArmorPiece } from './item_logic.js';
 
 export function updateInventoryUI() {
   const list = document.getElementById('inventory-list');
@@ -12,8 +13,14 @@ export function updateInventoryUI() {
   inventory.forEach(item => {
     const row = document.createElement('div');
     row.classList.add('inventory-item');
+    row.dataset.id = item.id;
     const qty = item.quantity > 1 ? ` x${item.quantity}` : '';
     row.innerHTML = `<strong>${item.name}${qty}</strong><div class="desc">${item.description}</div>`;
+    row.addEventListener('click', () => {
+      if (item.id === 'armor_piece') {
+        useArmorPiece();
+      }
+    });
     list.appendChild(row);
   });
 }

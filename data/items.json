@@ -36,6 +36,10 @@
     "name": "Cracked Helmet",
     "description": "Barely held together after many battles."
   },
+  "armor_piece": {
+    "name": "Armor Piece",
+    "description": "A chunk of metal that can be forged into protection."
+  },
   "purified_token": {
     "name": "Purified Token",
     "description": "Cleansed and safe to handle."

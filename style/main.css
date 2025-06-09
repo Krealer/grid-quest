@@ -382,6 +382,7 @@ body {
 .inventory-item {
   border-bottom: 1px solid #ddd;
   padding: 6px 0;
+  cursor: pointer;
 }
 
 .inventory-item:last-child {
