@@ -1,13 +1,19 @@
 
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
-import { triggerDeath, addTempDefense } from './player.js';
+import { respawn, addTempDefense, increaseMaxHp } from './player.js';
 import { applyDamage } from './logic.js';
-import { addItem, getItemsByType, addItemToInventory } from './inventory.js';
+import {
+  addItem,
+  getItemsByType,
+  addItemToInventory,
+  removeHealthBonusItem,
+} from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
 import { useDefensePotion } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
+import { gameState } from './game_state.js';
 import {
   setupTabs,
   updateStatusUI,
@@ -22,6 +28,7 @@ import {
   removeStatus as removeStatusEffect,
   removeNegativeStatus as removeNegativeStatusEffect,
   hasStatus,
+  clearStatuses,
 } from './statusManager.js';
 import { getStatusEffect } from './status_effects.js';
 import { initEnemyState } from './enemy.js';
@@ -298,6 +305,11 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     updateHpBar(enemyBar, enemyHp, enemyMax);
     updateStatusUI(overlay, player, enemy);
+    if (playerHp <= 0) {
+      log('Player was defeated!');
+      endCombat();
+      return;
+    }
     playerTurn = false;
     setTimeout(enemyTurn, 300);
   }
@@ -336,9 +348,6 @@ export async function startCombat(enemy, player) {
     if (player) {
       player.hp = playerHp;
     }
-    if (playerHp <= 0) {
-      triggerDeath();
-    }
     gridEl.classList.remove('blurred');
     overlay.remove();
     overlay = null;
@@ -349,6 +358,20 @@ export async function startCombat(enemy, player) {
     if (enemyHp <= 0 && enemy.onDefeatMessage) {
       showDialogue(enemy.onDefeatMessage);
     }
+    if (playerHp <= 0) {
+      defeat();
+    }
+  }
+
+  async function defeat() {
+    log('Defeated...');
+    showDialogue('Defeated...');
+    if (removeHealthBonusItem()) {
+      increaseMaxHp(-1);
+      gameState.maxHpBonus = Math.max(0, (gameState.maxHpBonus || 0) - 1);
+    }
+    clearStatuses(player);
+    await respawn();
   }
 
   function enemyTurn() {
