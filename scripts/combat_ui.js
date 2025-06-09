@@ -103,3 +103,11 @@ export function appendLog(message) {
 export function showVictoryMessage() {
   appendLog('Victory!');
 }
+
+export function showXpGain(amount) {
+  appendLog(`Gained ${amount} XP`);
+}
+
+export function showLevelUp(level) {
+  appendLog(`Level Up! Now level ${level}`);
+}

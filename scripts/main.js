@@ -31,6 +31,7 @@ const npcModules = { eryndor, lioran, goblinQuestGiver, arvalin, grindle };
 
 let hpDisplay;
 let defenseDisplay;
+let xpDisplay;
 
 function updateHpDisplay() {
   if (hpDisplay) {
@@ -41,6 +42,12 @@ function updateHpDisplay() {
 function updateDefenseDisplay() {
   if (defenseDisplay) {
     defenseDisplay.textContent = `Defense: ${player.stats?.defense || 0}`;
+  }
+}
+
+function updateXpDisplay() {
+  if (xpDisplay) {
+    xpDisplay.textContent = `Level: ${player.level} XP: ${player.xp}/${player.xpToNextLevel}`;
   }
 }
 
@@ -101,8 +108,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const animToggle = document.getElementById('anim-toggle');
   hpDisplay = document.getElementById('hp-display');
   defenseDisplay = document.getElementById('defense-display');
+  xpDisplay = document.getElementById('xp-display');
   updateHpDisplay();
   updateDefenseDisplay();
+  updateXpDisplay();
   let cols = 0;
 
   let settings = loadSettings();
@@ -176,6 +185,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       player.maxHp = 100 + (gameState.maxHpBonus || 0);
       player.hp = Math.min(player.hp, player.maxHp);
       updateHpDisplay();
+      updateXpDisplay();
       showDialogue('Game loaded!');
     } catch (err) {
       console.error(err);
@@ -186,6 +196,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const { cols: newCols } = await router.loadMap('map01');
     cols = newCols;
     updateHpDisplay();
+    updateXpDisplay();
 
     container.addEventListener('click', e => handleTileClick(e, player, container, cols));
     container.addEventListener('dblclick', async e => {
@@ -217,8 +228,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       cols = e.detail.cols;
       updateHpDisplay();
       updateDefenseDisplay();
+      updateXpDisplay();
     });
     document.addEventListener('playerDefenseChanged', updateDefenseDisplay);
+    document.addEventListener('playerXpChanged', updateXpDisplay);
+    document.addEventListener('playerLevelUp', updateXpDisplay);
   } catch (err) {
     console.error(err);
   }

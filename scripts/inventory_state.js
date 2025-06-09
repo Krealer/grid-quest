@@ -8,7 +8,7 @@ export function updateInventoryUI() {
   list.innerHTML = '';
   const statsEl = document.getElementById('player-stats');
   if (statsEl) {
-    statsEl.textContent = `Defense: ${player.stats?.defense || 0}`;
+    statsEl.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Defense: ${player.stats?.defense || 0}`;
   }
   inventory.forEach(item => {
     const row = document.createElement('div');
@@ -39,3 +39,5 @@ export function toggleInventoryView() {
 // Keep UI in sync when inventory changes
 document.addEventListener('inventoryUpdated', updateInventoryUI);
 document.addEventListener('playerDefenseChanged', updateInventoryUI);
+document.addEventListener('playerXpChanged', updateInventoryUI);
+document.addEventListener('playerLevelUp', updateInventoryUI);

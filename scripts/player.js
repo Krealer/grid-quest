@@ -8,6 +8,9 @@ export const player = {
   y: 0,
   hp: 100,
   maxHp: 100,
+  level: 1,
+  xp: 0,
+  xpToNextLevel: 10,
   stats: {
     defense: 0,
   },
@@ -81,4 +84,38 @@ export function addTempAttack(amount) {
 export function resetTempStats() {
   player.tempDefense = 0;
   player.tempAttack = 0;
+}
+
+export function levelUp() {
+  player.level += 1;
+  player.xpToNextLevel = Math.floor(player.xpToNextLevel * 1.5);
+  player.maxHp += 1;
+  player.hp = player.maxHp;
+  document.dispatchEvent(
+    new CustomEvent('playerLevelUp', { detail: { level: player.level } })
+  );
+  document.dispatchEvent(
+    new CustomEvent('playerXpChanged', {
+      detail: { xp: player.xp, level: player.level, xpToNext: player.xpToNextLevel },
+    })
+  );
+}
+
+export function gainXP(amount) {
+  if (typeof amount !== 'number' || amount <= 0) return false;
+  player.xp += amount;
+  let leveled = false;
+  while (player.xp >= player.xpToNextLevel) {
+    player.xp -= player.xpToNextLevel;
+    levelUp();
+    leveled = true;
+  }
+  if (!leveled) {
+    document.dispatchEvent(
+      new CustomEvent('playerXpChanged', {
+        detail: { xp: player.xp, level: player.level, xpToNext: player.xpToNextLevel },
+      })
+    );
+  }
+  return leveled;
 }
