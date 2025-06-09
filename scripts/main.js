@@ -24,6 +24,8 @@ import * as grindle from './npc/grindle.js';
 import * as forgeNpc from './npc/forge_npc.js';
 import * as shadeSage from './npc/shade_sage.js';
 import * as forkGuide from './npc/fork_guide.js';
+import * as watcher from './npc/watcher.js';
+import * as flamebound from './npc/flamebound.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -47,7 +49,9 @@ const npcModules = {
   grindle,
   forgeNpc,
   shadeSage,
-  forkGuide
+  forkGuide,
+  watcher,
+  flamebound
 };
 
 let hpDisplay;

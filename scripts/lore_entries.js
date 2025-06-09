@@ -18,6 +18,16 @@ export const loreEntries = [
     id: 'hub_origins',
     title: 'Origins of the Hub',
     text: 'Legends tell of a nexus binding the paths of aspiring heroes.'
+  },
+  {
+    id: 'shadow_fork',
+    title: 'Watcher\'s Path',
+    text: 'Those who tread the shadowed road earn the notice of hidden eyes.'
+  },
+  {
+    id: 'flame_fork',
+    title: 'Flamebound Way',
+    text: 'Walking the fiery path forges a bond with the heat of battle.'
   }
 ];
 

@@ -2,6 +2,7 @@ import { unlockBlueprint } from './craft_state.js';
 import { upgradeItem, rerollEnchantment } from './forge.js';
 import { addRelic } from './relic_state.js';
 import { discover, discoverLore as recordLore, setForkChoice } from './player_memory.js';
+import { showDialogue } from './dialogueSystem.js';
 import { chooseClass as selectClass } from './class_state.js';
 import { player } from './player.js';
 
@@ -68,5 +69,11 @@ export function chooseClass(id) {
 }
 
 export function chooseForkPath(path) {
-  if (path) setForkChoice(path);
+  if (!path) return;
+  setForkChoice(path);
+  if (path === 'left') {
+    showDialogue('A Watcher nods from the shadows, approving your stealthy choice.');
+  } else if (path === 'right') {
+    showDialogue('Flamebound warriors roar in welcome as you choose the fiery road.');
+  }
 }
