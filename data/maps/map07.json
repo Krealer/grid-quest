@@ -1,0 +1,26 @@
+{
+  "name": "Crossroads of Embers",
+  "environment": "dusk",
+  "grid": [
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    ["G","G","G","G","G","G","G","G","G","G", {"type":"E","enemyId":"ember_wraith"},"G","G","G","G","G","G","G","G","G"],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    ["G","G","G","G","G","G","G","G","G","G", {"type":"N","npc":"arbiter"},"G","G","G","G","G","G","G","G","G"],
+    "GGGGGGGGGGGGGGGGGGGG",
+    ["G","G","G","G","G","G","G","G", {"type":"E","enemyId":"shadow_pyromancer"},"G","G","G","G","G","G","G","G","G","G"],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG",
+    ["G","G","G","G","G","G","G","G","G","G", {"type":"D","target":"map08.json","spawn":{"x":1,"y":1}},"G","G","G","G","G","G","G","G","G"],
+    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGGGGGGGGGGGGG"
+  ]
+}

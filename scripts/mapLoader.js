@@ -1,4 +1,6 @@
 import { showError } from './errorPrompt.js';
+import { markForkVisited, visitedBothForks } from './player_memory.js';
+import { showDialogue } from './dialogueSystem.js';
 
 let currentGrid = null;
 let currentEnvironment = 'clear';
@@ -26,6 +28,11 @@ export async function loadMap(name) {
       throw new Error(`Failed to load map ${name}`);
     }
     data = await response.json();
+    if (name === 'map06_left') markForkVisited('left');
+    if (name === 'map06_right') markForkVisited('right');
+    if (name === 'map07' && visitedBothForks()) {
+      showDialogue('The air hums as the twin trials align.');
+    }
   } catch (err) {
     console.error(err);
     showError(`Failed to load map ${name}`);
@@ -82,4 +89,9 @@ document.addEventListener('goLeftPath', async () => {
 document.addEventListener('goRightPath', async () => {
   const { movePlayerTo } = await import('./map.js');
   await movePlayerTo('map06_right', { x: 1, y: 1 });
+});
+
+document.addEventListener('goConvergence', async () => {
+  const { movePlayerTo } = await import('./map.js');
+  await movePlayerTo('map07', { x: 1, y: 1 });
 });

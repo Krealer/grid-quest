@@ -139,5 +139,27 @@
     "skills": ["strike"],
     "behavior": "aggressive",
     "drops": []
+  },
+  "ember_wraith": {
+    "name": "Ember Wraith",
+    "hp": 70,
+    "xp": 15,
+    "description": "A spirit burning with both shadow and fire.",
+    "intro": "Flames flicker as a wraith coalesces from the darkness!",
+    "portrait": "🔥",
+    "skills": ["strike", "weaken"],
+    "behavior": "aggressive",
+    "drops": []
+  },
+  "shadow_pyromancer": {
+    "name": "Shadow Pyromancer",
+    "hp": 80,
+    "xp": 16,
+    "description": "A mage wielding flames that thrive in darkness.",
+    "intro": "A pyromancer steps from the gloom, sparks dancing!",
+    "portrait": "🧙",
+    "skills": ["weaken", "strike"],
+    "behavior": "aggressive",
+    "drops": []
   }
 }

@@ -26,5 +26,10 @@
     "description": "A mysterious powder that empowers concoctions.",
     "class": "alchemist",
     "bonuses": { "itemHealBonus": 1 }
+  },
+  "mirror_shard": {
+    "name": "Mirror Shard",
+    "description": "Reflects the trials of shadow and flame, empowering the bearer.",
+    "bonuses": { "attack": 1, "defense": 1 }
   }
 }
