@@ -587,6 +587,24 @@ body {
   font-size: 14px;
 }
 
+.gear-upgraded {
+  color: #1e8b1e;
+  font-weight: bold;
+}
+
+.item-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 1000;
+  display: none;
+}
+
 @media (max-width: 500px) {
   .status-content {
     width: 95%;

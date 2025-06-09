@@ -1,7 +1,14 @@
-import { inventory, equipItem, getEquippedItem } from './inventory.js';
+import {
+  inventory,
+  equipItem,
+  getEquippedItem,
+  getItemDisplayName,
+  getItemLevel,
+} from './inventory.js';
 import { player, getTotalStats } from './player.js';
 import { useArmorPiece } from './item_logic.js';
 import { getItemBonuses } from './item_stats.js';
+import { showItemTooltip, hideItemTooltip } from './utils.js';
 
 export function updateInventoryUI() {
   const list = document.getElementById('inventory-list');
@@ -17,7 +24,12 @@ export function updateInventoryUI() {
     row.classList.add('inventory-item');
     row.dataset.id = item.id;
     const qty = item.quantity > 1 ? ` x${item.quantity}` : '';
-    row.innerHTML = `<strong>${item.name}${qty}</strong><div class="desc">${item.description}</div>`;
+    const displayName = getItemDisplayName(item.id);
+    row.innerHTML = `<strong>${displayName}${qty}</strong><div class="desc">${item.description}</div>`;
+    const level = getItemLevel(item.id);
+    if (level > 0) {
+      row.classList.add('gear-upgraded');
+    }
     row.addEventListener('click', () => {
       if (item.id === 'armor_piece') {
         useArmorPiece();
@@ -34,6 +46,20 @@ export function updateInventoryUI() {
         updateInventoryUI();
       });
       row.appendChild(btn);
+    }
+
+    let tooltipText = '';
+    if (bonus) {
+      const effects = [];
+      Object.keys(bonus).forEach(k => {
+        if (k === 'slot') return;
+        effects.push(`${k.charAt(0).toUpperCase() + k.slice(1)} +${bonus[k]}`);
+      });
+      tooltipText = effects.join(', ');
+    }
+    if (tooltipText) {
+      row.addEventListener('mouseenter', () => showItemTooltip(row, tooltipText));
+      row.addEventListener('mouseleave', hideItemTooltip);
     }
     list.appendChild(row);
   });

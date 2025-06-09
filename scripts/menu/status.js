@@ -1,6 +1,9 @@
 import { player } from '../player.js';
 import { getAllPassives } from '../passive_skills.js';
 import { getItemData } from '../item_loader.js';
+import { getItemDisplayName, getItemLevel } from '../inventory.js';
+import { getItemBonuses } from '../item_stats.js';
+import { showItemTooltip, hideItemTooltip } from '../utils.js';
 
 export function updateStatusPanel() {
   const list = document.getElementById('status-passives');
@@ -25,8 +28,30 @@ export function updateStatusPanel() {
     const item = id ? getItemData(id) : null;
     const row = document.createElement('div');
     row.classList.add('status-equip');
-    const name = item ? item.name : 'None';
-    row.textContent = `${slot.charAt(0).toUpperCase() + slot.slice(1)}: ${name}`;
+    let display = 'None';
+    let level = 0;
+    if (id) {
+      display = getItemDisplayName(id);
+      level = getItemLevel(id);
+    }
+    row.innerHTML = `${slot.charAt(0).toUpperCase() + slot.slice(1)}: <span>${display}</span>`;
+    if (level > 0) {
+      row.querySelector('span').classList.add('gear-upgraded');
+    }
+    const bonus = id ? getItemBonuses(id) : null;
+    let tooltip = '';
+    if (bonus) {
+      const effects = [];
+      Object.keys(bonus).forEach(k => {
+        if (k === 'slot') return;
+        effects.push(`${k.charAt(0).toUpperCase() + k.slice(1)} +${bonus[k]}`);
+      });
+      tooltip = effects.join(', ');
+    }
+    if (tooltip) {
+      row.addEventListener('mouseenter', () => showItemTooltip(row, tooltip));
+      row.addEventListener('mouseleave', hideItemTooltip);
+    }
     equipList.appendChild(row);
   });
   info.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}`;
