@@ -2,6 +2,7 @@
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
 import { respawn, addTempDefense, increaseMaxHp, gainXP } from './player.js';
+import { getPassive } from './passive_skills.js';
 import { applyDamage } from './logic.js';
 import {
   addItem,
@@ -328,8 +329,16 @@ export async function startCombat(enemy, player) {
     if (id === 'defense_potion_I') {
       const res = useDefensePotion();
       if (res) {
-        addTempDefense(res.defense);
-        log('Defense increased by 1 for this fight!');
+        let amount = res.defense;
+        if (player.passives && player.passives.includes('potionMaster')) {
+          const p = getPassive('potionMaster');
+          if (p && p.itemHealBonus) {
+            // if potion mastery defined bonus to defense potions, reuse field
+            amount += p.itemHealBonus;
+          }
+        }
+        addTempDefense(amount);
+        log(`Defense increased by ${amount} for this fight!`);
         used = true;
       } else {
         log('No potion available.');

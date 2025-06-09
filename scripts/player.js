@@ -2,6 +2,7 @@ import { gameState } from './game_state.js';
 import { disableMovement, enableMovement } from './movement.js';
 import { showDialogue } from './dialogueSystem.js';
 import { movePlayerTo } from './map.js';
+import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
 
 export const player = {
   x: 0,
@@ -15,6 +16,8 @@ export const player = {
     defense: 0,
   },
   learnedSkills: [],
+  passives: [],
+  passiveImmunities: [],
   bonusHpGiven: {},
   tempDefense: 0,
   tempAttack: 0,
@@ -91,6 +94,14 @@ export function levelUp() {
   player.xpToNextLevel = Math.floor(player.xpToNextLevel * 1.5);
   player.maxHp += 1;
   player.hp = player.maxHp;
+  const unlocked = unlockPassivesForLevel(player.level);
+  unlocked.forEach(id => {
+    const p = getPassive(id);
+    const name = p?.name || id;
+    document.dispatchEvent(
+      new CustomEvent('passiveUnlocked', { detail: { id, name } })
+    );
+  });
   document.dispatchEvent(
     new CustomEvent('playerLevelUp', { detail: { level: player.level } })
   );
