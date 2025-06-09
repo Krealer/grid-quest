@@ -38,14 +38,14 @@ export async function startCombat(enemy, player) {
         <div class="combatant player">
           <div class="name">Hero</div>
           <div class="hp-bar"><div class="hp"></div></div>
-          <div class="statuses player-statuses"></div>
+          <div class="statuses status-effects player-statuses"></div>
         </div>
         <div class="combatant enemy intro-anim">
           <div class="portrait">${enemy.portrait || '👾'}</div>
           <div class="name">${enemy.name}</div>
           <div class="desc">${enemy.description || ''}</div>
           <div class="hp-bar"><div class="hp"></div></div>
-          <div class="statuses enemy-statuses"></div>
+          <div class="statuses status-effects enemy-statuses"></div>
         </div>
       </div>
       <div class="intro-text">${

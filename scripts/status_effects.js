@@ -8,6 +8,7 @@ export const statusEffects = {
   regen: {
     id: 'regen',
     name: 'Regeneration',
+    icon: '💚',
     description: 'Heal 1 HP per turn.',
     type: 'positive',
     duration: 3,
@@ -18,6 +19,7 @@ export const statusEffects = {
   fortify: {
     id: 'fortify',
     name: 'Fortify',
+    icon: '🛡',
     description: '+2 defense.',
     type: 'positive',
     duration: 3,
@@ -31,6 +33,7 @@ export const statusEffects = {
   focus: {
     id: 'focus',
     name: 'Focus',
+    icon: '🎯',
     description: '+2 damage on next attack.',
     type: 'positive',
     duration: 1,
@@ -44,6 +47,7 @@ export const statusEffects = {
   speed_boost: {
     id: 'speed_boost',
     name: 'Speed Boost',
+    icon: '💨',
     description: 'Act first in combat.',
     type: 'positive',
     duration: 2,
@@ -57,6 +61,7 @@ export const statusEffects = {
   clarity: {
     id: 'clarity',
     name: 'Clarity',
+    icon: '👁️',
     description: 'See enemy intents.',
     type: 'positive',
     duration: 3,
@@ -64,6 +69,7 @@ export const statusEffects = {
   barrier: {
     id: 'barrier',
     name: 'Barrier',
+    icon: '🔰',
     description: 'Absorb next 5 damage.',
     type: 'positive',
     duration: 2,
@@ -77,6 +83,7 @@ export const statusEffects = {
   blessed: {
     id: 'blessed',
     name: 'Blessed',
+    icon: '✨',
     description: 'Immune to one negative effect.',
     type: 'positive',
     duration: 2,
@@ -84,6 +91,7 @@ export const statusEffects = {
   empowered: {
     id: 'empowered',
     name: 'Empowered',
+    icon: '⚡',
     description: 'Double skill effects.',
     type: 'positive',
     duration: 1,
@@ -91,6 +99,7 @@ export const statusEffects = {
   resolve: {
     id: 'resolve',
     name: 'Resolve',
+    icon: '❤️',
     description: 'Survive 1 fatal blow with 1 HP.',
     type: 'positive',
     duration: 3,
@@ -104,6 +113,7 @@ export const statusEffects = {
   invisible: {
     id: 'invisible',
     name: 'Invisible',
+    icon: '👤',
     description: 'Cannot be targeted for 1 turn.',
     type: 'positive',
     duration: 1,
@@ -113,6 +123,7 @@ export const statusEffects = {
   poisoned: {
     id: 'poisoned',
     name: 'Poisoned',
+    icon: '☠️',
     description: 'Lose 1 HP per turn.',
     type: 'negative',
     duration: 3,
@@ -123,6 +134,7 @@ export const statusEffects = {
   weakened: {
     id: 'weakened',
     name: 'Weakened',
+    icon: '🤕',
     description: 'Deal half damage.',
     type: 'negative',
     duration: 2,
@@ -136,6 +148,7 @@ export const statusEffects = {
   cursed: {
     id: 'cursed',
     name: 'Cursed',
+    icon: '💀',
     description: 'Cannot use items.',
     type: 'negative',
     duration: 3,
@@ -149,6 +162,7 @@ export const statusEffects = {
   blinded: {
     id: 'blinded',
     name: 'Blinded',
+    icon: '🙈',
     description: '50% miss chance.',
     type: 'negative',
     duration: 2,
@@ -162,6 +176,7 @@ export const statusEffects = {
   burned: {
     id: 'burned',
     name: 'Burned',
+    icon: '🔥',
     description: 'Lose 2 HP when using a skill.',
     type: 'negative',
     duration: 3,
@@ -169,6 +184,7 @@ export const statusEffects = {
   paralyzed: {
     id: 'paralyzed',
     name: 'Paralyzed',
+    icon: '⛔',
     description: '50% chance to skip turn.',
     type: 'negative',
     duration: 2,
@@ -176,6 +192,7 @@ export const statusEffects = {
   silenced: {
     id: 'silenced',
     name: 'Silenced',
+    icon: '🤐',
     description: 'Cannot use skills.',
     type: 'negative',
     duration: 2,
@@ -183,6 +200,7 @@ export const statusEffects = {
   vulnerable: {
     id: 'vulnerable',
     name: 'Vulnerable',
+    icon: '💢',
     description: 'Take 50% more damage.',
     type: 'negative',
     duration: 2,
@@ -196,6 +214,7 @@ export const statusEffects = {
   slowed: {
     id: 'slowed',
     name: 'Slowed',
+    icon: '🐢',
     description: 'Act last in turn order.',
     type: 'negative',
     duration: 2,
@@ -209,6 +228,7 @@ export const statusEffects = {
   haunted: {
     id: 'haunted',
     name: 'Haunted',
+    icon: '👻',
     description: 'Cannot heal while active.',
     type: 'negative',
     duration: 3,

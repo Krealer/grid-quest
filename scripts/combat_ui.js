@@ -1,4 +1,5 @@
 import { getStatusEffect } from './status_effects.js';
+import { getStatusList } from './statusManager.js';
 
 export function setupTabs(overlay) {
   const skillContainer = overlay.querySelector('.skill-buttons');
@@ -34,15 +35,23 @@ export function updateStatusUI(overlay, player, enemy) {
   if (!playerList || !enemyList) return;
   playerList.innerHTML = '';
   enemyList.innerHTML = '';
-  (player.statuses || []).forEach(s => {
-    const div = document.createElement('div');
-    div.textContent = `${s.id} (${s.remaining})`;
-    playerList.appendChild(div);
+  getStatusList(player).forEach(s => {
+    const ef = getStatusEffect(s.id);
+    const span = document.createElement('span');
+    span.className = 'effect';
+    span.title = ef?.description || s.id;
+    const icon = ef?.icon ? `${ef.icon} ` : '';
+    span.textContent = `${icon}${ef?.name || s.id} (${s.remaining})`;
+    playerList.appendChild(span);
   });
-  (enemy.statuses || []).forEach(s => {
-    const div = document.createElement('div');
-    div.textContent = `${s.id} (${s.remaining})`;
-    enemyList.appendChild(div);
+  getStatusList(enemy).forEach(s => {
+    const ef = getStatusEffect(s.id);
+    const span = document.createElement('span');
+    span.className = 'effect';
+    span.title = ef?.description || s.id;
+    const icon = ef?.icon ? `${ef.icon} ` : '';
+    span.textContent = `${icon}${ef?.name || s.id} (${s.remaining})`;
+    enemyList.appendChild(span);
   });
 }
 
