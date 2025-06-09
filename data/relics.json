@@ -1,0 +1,12 @@
+{
+  "vitality_orb": {
+    "name": "Orb of Vitality",
+    "description": "A glowing sphere that strengthens life itself.",
+    "bonuses": { "maxHp": 10 }
+  },
+  "defender_emblem": {
+    "name": "Defender's Emblem",
+    "description": "An ancient badge that bolsters defense.",
+    "bonuses": { "defense": 2 }
+  }
+}

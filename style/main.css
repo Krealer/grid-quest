@@ -469,6 +469,11 @@ body {
   font-size: 12px;
 }
 
+.relic-item {
+  background: #fff7d1;
+  color: #b07d0a;
+}
+
 .forge-log {
   margin-top: 8px;
   font-size: 14px;

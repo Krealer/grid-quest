@@ -4,6 +4,7 @@ import { showDialogue } from './dialogueSystem.js';
 import { movePlayerTo } from './map.js';
 import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
 import { getItemBonuses } from './item_stats.js';
+import { getRelicBonuses } from './relic_state.js';
 
 export const player = {
   x: 0,
@@ -160,6 +161,12 @@ export function getTotalStats() {
           total[key] = (total[key] || 0) + val;
         }
       }
+    }
+  }
+  const relicBonus = getRelicBonuses();
+  if (relicBonus) {
+    for (const [key, val] of Object.entries(relicBonus)) {
+      total[key] = (total[key] || 0) + val;
     }
   }
   return total;
