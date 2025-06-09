@@ -1,4 +1,4 @@
-import { startQuest, completeQuest } from '../quest_state.js';
+import { startQuest } from '../quest_state.js';
 import { removeItem, addItem } from '../inventory.js';
 import { loadItems, getItemData } from '../item_loader.js';
 
@@ -26,8 +26,8 @@ export const goblinQuestDialogue = [
           const data = getItemData('silver_key') || { name: 'Silver Key', description: '' };
           removeItem('goblin_ear', 3);
           addItem({ ...data, id: 'silver_key', quantity: 1 });
-          completeQuest('goblin_gear');
-        }
+        },
+        completeQuest: 'goblin_gear'
       },
       {
         label: "Not yet.",

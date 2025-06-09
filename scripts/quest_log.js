@@ -27,3 +27,6 @@ export function toggleQuestLog() {
     overlay.classList.add('active');
   }
 }
+
+// Refresh the quest list whenever quest data changes
+document.addEventListener('questUpdated', updateQuestUI);

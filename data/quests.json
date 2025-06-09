@@ -1,6 +1,11 @@
 {
   "goblin_gear": {
     "title": "Goblin Gear",
-    "description": "Collect three goblin ears for the quest giver."
+    "description": "Collect three goblin ears for the quest giver.",
+    "onCompleteUnlocks": ["scout_tracking"]
+  },
+  "scout_tracking": {
+    "title": "Tracking the Scout",
+    "description": "Follow the goblin scout's trail to their camp."
   }
 }
