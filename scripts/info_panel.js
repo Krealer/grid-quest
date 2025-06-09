@@ -4,6 +4,7 @@ import { loadItemInfo, getAllItems } from './itemInfo.js';
 import { getDiscovered } from './player_memory.js';
 import { getAllSkillsInfo } from './skillsInfo.js';
 import { getStatusMetadata } from './status_effects.js';
+import { getLoreEntries } from './lore_entries.js';
 
 function createEntry(obj) {
   const row = document.createElement('div');
@@ -40,7 +41,8 @@ export async function updateInfoPanel() {
   const itemContainer = document.getElementById('info-items');
   const skillContainer = document.getElementById('info-skills');
   const statusContainer = document.getElementById('info-status');
-  if (!npcContainer || !enemyContainer || !itemContainer || !skillContainer || !statusContainer) return;
+  const loreContainer = document.getElementById('info-lore');
+  if (!npcContainer || !enemyContainer || !itemContainer || !skillContainer || !statusContainer || !loreContainer) return;
 
   npcContainer.innerHTML = '';
   const seenNpcs = getDiscovered('npcs');
@@ -113,6 +115,26 @@ export async function updateInfoPanel() {
   sorted.forEach(eff => {
     statusContainer.appendChild(createStatusEntry(eff));
   });
+
+  loreContainer.innerHTML = '';
+  const seenLore = getDiscovered('lore');
+  if (seenLore.length === 0) {
+    const msg = document.createElement('div');
+    msg.classList.add('info-empty');
+    msg.textContent = 'No lore discovered yet.';
+    loreContainer.appendChild(msg);
+  } else {
+    const allLore = getLoreEntries();
+    seenLore.forEach(id => {
+      const data = allLore.find(l => l.id === id);
+      if (data) {
+        const row = document.createElement('div');
+        row.classList.add('info-entry', 'lore-entry');
+        row.innerHTML = `<strong>${data.title}</strong><div class="desc">${data.text}</div>`;
+        loreContainer.appendChild(row);
+      }
+    });
+  }
 }
 
 function showTab(name) {
@@ -126,6 +148,7 @@ function showTab(name) {
   document.getElementById('info-items').style.display = name === 'items' ? 'block' : 'none';
   document.getElementById('info-skills').style.display = name === 'skills' ? 'block' : 'none';
   document.getElementById('info-status').style.display = name === 'status' ? 'block' : 'none';
+  document.getElementById('info-lore').style.display = name === 'lore' ? 'block' : 'none';
 }
 
 export async function toggleInfoPanel() {
