@@ -26,6 +26,7 @@ import * as shadeSage from './npc/shade_sage.js';
 import * as forkGuide from './npc/fork_guide.js';
 import * as watcher from './npc/watcher.js';
 import * as flamebound from './npc/flamebound.js';
+import * as arbiter from './npc/arbiter.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -51,7 +52,8 @@ const npcModules = {
   shadeSage,
   forkGuide,
   watcher,
-  flamebound
+  flamebound,
+  arbiter
 };
 
 let hpDisplay;

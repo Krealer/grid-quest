@@ -8,7 +8,8 @@ export const npcInfoList = [
   { id: 'shade_sage', name: 'Shade Sage', description: 'A mysterious figure lingering in the hub.' },
   { id: 'fork_guide', name: 'Pathseer', description: 'Guides travelers through the forked pass.' },
   { id: 'watcher', name: 'Watcher', description: 'A silent guardian hidden in the shadows.' },
-  { id: 'flamebound', name: 'Flamebound', description: 'A warrior devoted to the fires within the earth.' }
+  { id: 'flamebound', name: 'Flamebound', description: 'A warrior devoted to the fires within the earth.' },
+  { id: 'arbiter', name: 'Arbiter', description: 'Keeper of balance between shadow and flame.' }
 ];
 
 export function getAllNpcs() {

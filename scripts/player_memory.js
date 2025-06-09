@@ -8,6 +8,7 @@ const memory = {
   lore: new Set(),
   maps: new Set(),
   forkChoice: null,
+  forksVisited: { left: false, right: false },
 };
 
 function loadMemory() {
@@ -22,6 +23,7 @@ function loadMemory() {
     if (Array.isArray(data.lore)) memory.lore = new Set(data.lore);
     if (Array.isArray(data.maps)) memory.maps = new Set(data.maps);
     if (typeof data.forkChoice === 'string') memory.forkChoice = data.forkChoice;
+    if (data.forksVisited) memory.forksVisited = { ...memory.forksVisited, ...data.forksVisited };
   } catch {
     // ignore
   }
@@ -36,6 +38,7 @@ function saveMemory() {
     lore: Array.from(memory.lore),
     maps: Array.from(memory.maps),
     forkChoice: memory.forkChoice,
+    forksVisited: memory.forksVisited,
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
@@ -80,4 +83,15 @@ export function setForkChoice(path) {
 
 export function getForkChoice() {
   return memory.forkChoice;
+}
+
+export function markForkVisited(path) {
+  if (path === 'left' || path === 'right') {
+    memory.forksVisited[path] = true;
+    saveMemory();
+  }
+}
+
+export function visitedBothForks() {
+  return memory.forksVisited.left && memory.forksVisited.right;
 }

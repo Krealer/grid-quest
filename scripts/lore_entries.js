@@ -28,6 +28,11 @@ export const loreEntries = [
     id: 'flame_fork',
     title: 'Flamebound Way',
     text: 'Walking the fiery path forges a bond with the heat of battle.'
+  },
+  {
+    id: 'two_flames_crossed',
+    title: 'The Two Flames Crossed',
+    text: 'Few manage to master both shadow and flame. Their convergence unveils hidden power.'
   }
 ];
 

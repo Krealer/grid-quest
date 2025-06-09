@@ -1,7 +1,12 @@
 import { unlockBlueprint } from './craft_state.js';
 import { upgradeItem, rerollEnchantment } from './forge.js';
 import { addRelic } from './relic_state.js';
-import { discover, discoverLore as recordLore, setForkChoice } from './player_memory.js';
+import {
+  discover,
+  discoverLore as recordLore,
+  setForkChoice,
+  visitedBothForks
+} from './player_memory.js';
 import { showDialogue } from './dialogueSystem.js';
 import { chooseClass as selectClass } from './class_state.js';
 import { player } from './player.js';
@@ -75,5 +80,15 @@ export function chooseForkPath(path) {
     showDialogue('A Watcher nods from the shadows, approving your stealthy choice.');
   } else if (path === 'right') {
     showDialogue('Flamebound warriors roar in welcome as you choose the fiery road.');
+  }
+}
+
+export function arbiterDialogue() {
+  if (visitedBothForks()) {
+    showDialogue('You have proven mastery over both paths. Accept this shard of the mirror.');
+    giveRelic('mirror_shard');
+    discoverLore('two_flames_crossed');
+  } else {
+    showDialogue('Only those who walk both paths may claim the mirror\'s power.');
   }
 }
