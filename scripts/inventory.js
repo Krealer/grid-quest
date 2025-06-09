@@ -5,6 +5,25 @@ import { unlockBlueprint } from './craft_state.js';
 
 export const inventory = [];
 
+export function parseItemId(id) {
+  const match = /^(.+)\+(\d+)$/.exec(id);
+  if (match) {
+    return { baseId: match[1], level: parseInt(match[2], 10) };
+  }
+  return { baseId: id, level: 0 };
+}
+
+export function getItemLevel(id) {
+  return parseItemId(id).level;
+}
+
+export function getItemDisplayName(id) {
+  const { baseId, level } = parseItemId(id);
+  const data = getItemData(baseId);
+  const baseName = data?.name || baseId;
+  return level > 0 ? `${baseName} +${level}` : baseName;
+}
+
 export function getItemCount(nameOrId) {
   const item = inventory.find(
     it => it.name === nameOrId || it.id === nameOrId
@@ -21,7 +40,9 @@ export function addItem(item) {
     document.dispatchEvent(new CustomEvent('inventoryUpdated'));
     return true;
   }
-  inventory.push({ ...item, quantity: qty });
+  const name = item.name || getItemDisplayName(item.id);
+  const desc = item.description || getItemData(parseItemId(item.id).baseId)?.description || '';
+  inventory.push({ ...item, name, description: desc, quantity: qty });
   if (item.id && item.id.startsWith('blueprint_')) {
     unlockBlueprint(item.id.replace('blueprint_', ''));
   }
@@ -84,3 +105,4 @@ export function equipItem(itemId) {
 export function getEquippedItem(slot) {
   return player.equipment ? player.equipment[slot] : null;
 }
+

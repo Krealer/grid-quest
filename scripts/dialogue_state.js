@@ -1,4 +1,5 @@
 import { unlockBlueprint } from './craft_state.js';
+import { upgradeItem } from './forge.js';
 
 export const dialogueMemory = new Set();
 
@@ -31,4 +32,8 @@ export const dialogueState = state;
 // Allow dialogue options to grant blueprints as rewards
 export function giveBlueprint(id) {
   if (id) unlockBlueprint(id);
+}
+
+export async function triggerUpgrade(id) {
+  if (id) await upgradeItem(id);
 }
