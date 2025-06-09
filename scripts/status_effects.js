@@ -248,3 +248,13 @@ export function getStatusEffect(id) {
 export function getAllStatusEffects() {
   return statusEffects;
 }
+
+export function getStatusMetadata() {
+  return Object.values(statusEffects).map(e => ({
+    id: e.id,
+    name: e.name,
+    description: e.description,
+    type: e.type,
+    temporary: typeof e.duration === 'number',
+  }));
+}

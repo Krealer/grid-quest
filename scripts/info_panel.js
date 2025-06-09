@@ -3,6 +3,7 @@ import { loadEnemyInfo, getAllEnemies } from './enemyInfo.js';
 import { loadItemInfo, getAllItems } from './itemInfo.js';
 import { getDiscovered } from './player_memory.js';
 import { getAllSkillsInfo } from './skillsInfo.js';
+import { getStatusMetadata } from './status_effects.js';
 
 function createEntry(obj) {
   const row = document.createElement('div');
@@ -22,12 +23,24 @@ function createSkillEntry(skill) {
   return row;
 }
 
+function createStatusEntry(effect) {
+  const row = document.createElement('div');
+  row.classList.add('info-entry', effect.type);
+  const durationLabel = effect.temporary ? 'Temporary' : 'Passive';
+  row.innerHTML = `
+    <strong>${effect.name}</strong>
+    <div class="desc">${effect.description}</div>
+    <div class="meta">${durationLabel}</div>`;
+  return row;
+}
+
 export async function updateInfoPanel() {
   const npcContainer = document.getElementById('info-npcs');
   const enemyContainer = document.getElementById('info-enemies');
   const itemContainer = document.getElementById('info-items');
   const skillContainer = document.getElementById('info-skills');
-  if (!npcContainer || !enemyContainer || !itemContainer || !skillContainer) return;
+  const statusContainer = document.getElementById('info-status');
+  if (!npcContainer || !enemyContainer || !itemContainer || !skillContainer || !statusContainer) return;
 
   npcContainer.innerHTML = '';
   const seenNpcs = getDiscovered('npcs');
@@ -90,6 +103,16 @@ export async function updateInfoPanel() {
       if (data) skillContainer.appendChild(createSkillEntry(data));
     });
   }
+
+  statusContainer.innerHTML = '';
+  const effects = getStatusMetadata();
+  const sorted = effects.sort((a, b) => {
+    if (a.type === b.type) return a.name.localeCompare(b.name);
+    return a.type === 'positive' ? -1 : 1;
+  });
+  sorted.forEach(eff => {
+    statusContainer.appendChild(createStatusEntry(eff));
+  });
 }
 
 function showTab(name) {
@@ -102,6 +125,7 @@ function showTab(name) {
   document.getElementById('info-enemies').style.display = name === 'enemies' ? 'block' : 'none';
   document.getElementById('info-items').style.display = name === 'items' ? 'block' : 'none';
   document.getElementById('info-skills').style.display = name === 'skills' ? 'block' : 'none';
+  document.getElementById('info-status').style.display = name === 'status' ? 'block' : 'none';
 }
 
 export async function toggleInfoPanel() {

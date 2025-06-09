@@ -613,6 +613,14 @@ body {
   text-shadow: 0 0 4px rgba(179, 71, 255, 0.7);
 }
 
+.positive {
+  color: #2ecc71;
+}
+
+.negative {
+  color: #e74c3c;
+}
+
 .item-tooltip {
   position: absolute;
   background: rgba(0, 0, 0, 0.85);
@@ -724,6 +732,11 @@ body {
 .info-entry .desc {
   font-size: 12px;
   color: #555;
+}
+
+.info-entry .meta {
+  font-size: 11px;
+  color: #336;
 }
 
 .skill-entry {
