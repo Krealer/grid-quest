@@ -7,9 +7,9 @@ export function normalizeGrid(grid, size = 20) {
   const normalized = [];
   for (let y = 0; y < size; y++) {
     const row = grid[y] || [];
-    const paddedRow = row.slice(0, size).map(cell =>
-      typeof cell === 'string' ? { type: cell } : cell
-    );
+    const paddedRow = row
+      .slice(0, size)
+      .map((cell) => (typeof cell === 'string' ? { type: cell } : cell));
     for (let i = paddedRow.length; i < size; i++) {
       paddedRow.push({ type: 'G' });
     }
@@ -32,11 +32,11 @@ export async function loadMap(name) {
     throw err;
   }
   currentEnvironment = data.environment || 'clear';
-  currentGrid = data.grid.map(row => {
+  currentGrid = data.grid.map((row) => {
     if (typeof row === 'string') {
-      return row.split('').map(ch => ({ type: ch }));
+      return row.split('').map((ch) => ({ type: ch }));
     }
-    return row.map(cell => {
+    return row.map((cell) => {
       if (typeof cell === 'string') {
         return { type: cell };
       }
@@ -55,3 +55,10 @@ export function getCurrentEnvironment() {
   return currentEnvironment;
 }
 
+// After a class is chosen, send the player to that class's trial map
+document.addEventListener('classChosen', async (e) => {
+  const id = e?.detail?.id;
+  if (!id) return;
+  const { movePlayerTo } = await import('./map.js');
+  await movePlayerTo(`map_${id}`, { x: 1, y: 1 });
+});

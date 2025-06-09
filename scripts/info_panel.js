@@ -59,7 +59,16 @@ export async function updateInfoPanel() {
   const statusContainer = document.getElementById('info-status');
   const loreContainer = document.getElementById('info-lore');
   const classContainer = document.getElementById('info-class');
-  if (!npcContainer || !enemyContainer || !itemContainer || !skillContainer || !statusContainer || !loreContainer || !classContainer) return;
+  if (
+    !npcContainer ||
+    !enemyContainer ||
+    !itemContainer ||
+    !skillContainer ||
+    !statusContainer ||
+    !loreContainer ||
+    !classContainer
+  )
+    return;
 
   npcContainer.innerHTML = '';
   const seenNpcs = getDiscovered('npcs');
@@ -70,8 +79,8 @@ export async function updateInfoPanel() {
     npcContainer.appendChild(msg);
   } else {
     const all = getAllNpcs();
-    seenNpcs.forEach(id => {
-      const data = all.find(n => n.id === id);
+    seenNpcs.forEach((id) => {
+      const data = all.find((n) => n.id === id);
       if (data) npcContainer.appendChild(createEntry(data));
     });
   }
@@ -86,8 +95,8 @@ export async function updateInfoPanel() {
     enemyContainer.appendChild(msg);
   } else {
     const all = getAllEnemies();
-    seenEnemies.forEach(id => {
-      const data = all.find(e => e.id === id);
+    seenEnemies.forEach((id) => {
+      const data = all.find((e) => e.id === id);
       if (data) enemyContainer.appendChild(createEntry(data));
     });
   }
@@ -102,8 +111,8 @@ export async function updateInfoPanel() {
     itemContainer.appendChild(msg);
   } else {
     const all = getAllItems();
-    seenItems.forEach(id => {
-      const data = all.find(i => i.id === id);
+    seenItems.forEach((id) => {
+      const data = all.find((i) => i.id === id);
       if (data) itemContainer.appendChild(createEntry(data));
     });
   }
@@ -117,8 +126,8 @@ export async function updateInfoPanel() {
     skillContainer.appendChild(msg);
   } else {
     const allSkills = getAllSkillsInfo();
-    seenSkills.forEach(id => {
-      const data = allSkills.find(s => s.id === id);
+    seenSkills.forEach((id) => {
+      const data = allSkills.find((s) => s.id === id);
       if (data) skillContainer.appendChild(createSkillEntry(data));
     });
   }
@@ -129,7 +138,7 @@ export async function updateInfoPanel() {
     if (a.type === b.type) return a.name.localeCompare(b.name);
     return a.type === 'positive' ? -1 : 1;
   });
-  sorted.forEach(eff => {
+  sorted.forEach((eff) => {
     statusContainer.appendChild(createStatusEntry(eff));
   });
 
@@ -142,8 +151,8 @@ export async function updateInfoPanel() {
     loreContainer.appendChild(msg);
   } else {
     const allLore = getLoreEntries();
-    seenLore.forEach(id => {
-      const data = allLore.find(l => l.id === id);
+    seenLore.forEach((id) => {
+      const data = allLore.find((l) => l.id === id);
       if (data) {
         const row = document.createElement('div');
         row.classList.add('info-entry', 'lore-entry');
@@ -156,7 +165,7 @@ export async function updateInfoPanel() {
   classContainer.innerHTML = '';
   const chosen = getChosenClass();
   const allClasses = getAllClasses();
-  allClasses.forEach(cls => {
+  allClasses.forEach((cls) => {
     const entry = createClassEntry(cls, cls.id === chosen);
     classContainer.appendChild(entry);
   });
@@ -164,17 +173,24 @@ export async function updateInfoPanel() {
 
 function showTab(name) {
   const tabs = document.querySelectorAll('#info-panel .info-tab-btn');
-  tabs.forEach(t => {
+  tabs.forEach((t) => {
     if (t.dataset.target === name) t.classList.add('active');
     else t.classList.remove('active');
   });
-  document.getElementById('info-npcs').style.display = name === 'npcs' ? 'block' : 'none';
-  document.getElementById('info-enemies').style.display = name === 'enemies' ? 'block' : 'none';
-  document.getElementById('info-items').style.display = name === 'items' ? 'block' : 'none';
-  document.getElementById('info-skills').style.display = name === 'skills' ? 'block' : 'none';
-  document.getElementById('info-status').style.display = name === 'status' ? 'block' : 'none';
-  document.getElementById('info-lore').style.display = name === 'lore' ? 'block' : 'none';
-  document.getElementById('info-class').style.display = name === 'class' ? 'block' : 'none';
+  document.getElementById('info-npcs').style.display =
+    name === 'npcs' ? 'block' : 'none';
+  document.getElementById('info-enemies').style.display =
+    name === 'enemies' ? 'block' : 'none';
+  document.getElementById('info-items').style.display =
+    name === 'items' ? 'block' : 'none';
+  document.getElementById('info-skills').style.display =
+    name === 'skills' ? 'block' : 'none';
+  document.getElementById('info-status').style.display =
+    name === 'status' ? 'block' : 'none';
+  document.getElementById('info-lore').style.display =
+    name === 'lore' ? 'block' : 'none';
+  document.getElementById('info-class').style.display =
+    name === 'class' ? 'block' : 'none';
 }
 
 export async function toggleInfoPanel() {
@@ -205,13 +221,24 @@ export function initInfoPanel() {
     panel.appendChild(div);
   }
   const buttons = document.querySelectorAll('#info-panel .info-tab-btn');
-  buttons.forEach(btn => {
+  buttons.forEach((btn) => {
     btn.addEventListener('click', () => showTab(btn.dataset.target));
   });
   const closeBtn = document.querySelector('#info-panel .close-btn');
   if (closeBtn) closeBtn.addEventListener('click', toggleInfoPanel);
   const overlay = document.getElementById('info-overlay');
-  if (overlay) overlay.addEventListener('click', e => {
-    if (e.target === overlay) toggleInfoPanel();
+  if (overlay)
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) toggleInfoPanel();
+    });
+  document.addEventListener('relicsUpdated', () => {
+    const ov = document.getElementById('info-overlay');
+    if (ov && ov.classList.contains('active')) updateInfoPanel();
+  });
+  document.addEventListener('memoryUpdated', (e) => {
+    if (e.detail.type === 'lore') {
+      const ov = document.getElementById('info-overlay');
+      if (ov && ov.classList.contains('active')) updateInfoPanel();
+    }
   });
 }

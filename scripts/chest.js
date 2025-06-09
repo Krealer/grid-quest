@@ -1,6 +1,8 @@
 import { gameState } from './game_state.js';
 import { addItem } from './inventory.js';
 import { updateInventoryUI } from './inventory_state.js';
+import { addRelic } from './relic_state.js';
+import { discoverLore } from './player_memory.js';
 import { getItemData, loadItems } from './item_loader.js';
 import { increaseMaxHp } from './player.js';
 import { unlockSkillsFromItem } from './skills.js';
@@ -11,6 +13,18 @@ const chestContents = {
   'map02:8,12': { message: 'This chest was empty.' },
   'map02:15,15': { item: 'potion_of_health' },
   'map03:10,10': { item: 'health_amulet' },
+  'map_warrior:18,18': {
+    relic: 'warrior_sigil',
+    message: 'You obtained the Warrior Sigil!'
+  },
+  'map_guardian:18,18': {
+    relic: 'guardian_emblem',
+    message: 'You obtained the Guardian Emblem!'
+  },
+  'map_alchemist:18,18': {
+    relic: 'alchemist_catalyst',
+    message: 'You obtained the Alchemist Catalyst!'
+  }
 };
 
 export function isChestOpened(id) {
@@ -45,6 +59,10 @@ export async function openChest(id, player) {
       updateInventoryUI();
       unlockedSkills = unlockSkillsFromItem(config.item);
     }
+  }
+  if (config.relic) {
+    await addRelic(config.relic);
+    discoverLore(config.relic);
   }
   return { item, message: config.message || null, unlockedSkills };
 }
