@@ -7,7 +7,8 @@ export function updateInventoryUI() {
   inventory.forEach(item => {
     const row = document.createElement('div');
     row.classList.add('inventory-item');
-    row.innerHTML = `<strong>${item.name}</strong><div class="desc">${item.description}</div>`;
+    const qty = item.quantity > 1 ? ` x${item.quantity}` : '';
+    row.innerHTML = `<strong>${item.name}${qty}</strong><div class="desc">${item.description}</div>`;
     list.appendChild(row);
   });
 }

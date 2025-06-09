@@ -1,11 +1,12 @@
 
 {
-  "E": {
+  "goblin01": {
     "name": "Goblin",
     "hp": 50,
     "description": "A mischievous green creature with a sharp grin.",
     "intro": "The goblin snarls and prepares to strike!",
-    "portrait": "👺"
+    "portrait": "👺",
+    "drop": { "item": "goblin_ear", "quantity": 1 }
   },
   "Z": {
     "name": "Zombie",
@@ -19,7 +20,8 @@
     "hp": 50,
     "description": "A shambling undead with vacant eyes.",
     "intro": "The zombie groans and lurches forward!",
-    "portrait": "🧟"
+    "portrait": "🧟",
+    "drop": { "item": "rotten_tooth", "quantity": 1 }
   },
   "B": {
     "name": "Bandit",

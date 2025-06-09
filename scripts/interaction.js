@@ -61,7 +61,7 @@ export async function handleTileInteraction(
         tileEl.classList.add('ground');
       }
       tile.type = 'G';
-      const enemyId = tile.enemyId || 'E';
+      const enemyId = tile.enemyId || 'goblin01';
       const enemy = getEnemyData(enemyId) || { name: 'Enemy', hp: 50 };
       const intro = enemy.intro || 'A foe appears!';
       showDialogue(intro, () => startCombat({ id: enemyId, ...enemy }, player));

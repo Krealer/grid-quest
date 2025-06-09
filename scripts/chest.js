@@ -26,7 +26,8 @@ export async function openChest(id, player) {
   if (config.item) {
     item = getItemData(config.item);
     if (item) {
-      addItem({ ...item, id: config.item });
+      const qty = config.quantity || 1;
+      addItem({ ...item, id: config.item, quantity: qty });
       if (config.item === 'potion_of_health' && player) {
         increaseMaxHp(1);
         gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;

@@ -8,5 +8,13 @@
   "mysterious_token": {
     "name": "Mysterious Token",
     "description": "Strange energies swirl within."
+  },
+  "goblin_ear": {
+    "name": "Goblin Ear",
+    "description": "Slightly gross but widely traded"
+  },
+  "rotten_tooth": {
+    "name": "Rotten Tooth",
+    "description": "Crumbly but still has bite"
   }
 }
