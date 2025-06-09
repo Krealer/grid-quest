@@ -25,3 +25,21 @@ export function setupTabs(overlay) {
   // default
   showSkills();
 }
+
+export function updateStatusUI(overlay, player, enemy) {
+  const playerList = overlay.querySelector('.player-statuses');
+  const enemyList = overlay.querySelector('.enemy-statuses');
+  if (!playerList || !enemyList) return;
+  playerList.innerHTML = '';
+  enemyList.innerHTML = '';
+  (player.statuses || []).forEach(s => {
+    const div = document.createElement('div');
+    div.textContent = `${s.id} (${s.remaining})`;
+    playerList.appendChild(div);
+  });
+  (enemy.statuses || []).forEach(s => {
+    const div = document.createElement('div');
+    div.textContent = `${s.id} (${s.remaining})`;
+    enemyList.appendChild(div);
+  });
+}

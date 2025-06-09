@@ -22,3 +22,10 @@ export function isEnemyDefeated(id) {
 export function defeatEnemy(id) {
   gameState.defeatedEnemies.add(id);
 }
+
+export function initEnemyState(enemy) {
+  if (!enemy) return;
+  if (!Array.isArray(enemy.statuses)) enemy.statuses = [];
+  if (typeof enemy.tempDefense !== 'number') enemy.tempDefense = 0;
+  if (typeof enemy.tempAttack !== 'number') enemy.tempAttack = 0;
+}

@@ -1,13 +1,15 @@
 
 import { getSkill } from './skills.js';
-import { triggerDeath } from './player.js';
+import { triggerDeath, addTempDefense } from './player.js';
 import { applyDamage } from './logic.js';
 import { addItem, getItemsByType } from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
 import { useDefensePotion } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
-import { setupTabs } from './combat_ui.js';
+import { setupTabs, updateStatusUI } from './combat_ui.js';
+import { tickStatuses, initStatuses } from './statusManager.js';
+import { initEnemyState } from './enemy.js';
 
 let overlay = null;
 
@@ -35,12 +37,14 @@ export async function startCombat(enemy, player) {
         <div class="combatant player">
           <div class="name">Hero</div>
           <div class="hp-bar"><div class="hp"></div></div>
+          <div class="statuses player-statuses"></div>
         </div>
         <div class="combatant enemy intro-anim">
           <div class="portrait">${enemy.portrait || '👾'}</div>
           <div class="name">${enemy.name}</div>
           <div class="desc">${enemy.description || ''}</div>
           <div class="hp-bar"><div class="hp"></div></div>
+          <div class="statuses enemy-statuses"></div>
         </div>
       </div>
       <div class="intro-text">${
@@ -71,6 +75,15 @@ export async function startCombat(enemy, player) {
   let playerHp = player.hp ?? playerMax;
   let enemyHp = enemyMax;
 
+  // initialize status tracking and temp stats
+  initStatuses(player);
+  initStatuses(enemy);
+  initEnemyState(enemy);
+  player.tempDefense = 0;
+  player.tempAttack = 0;
+  enemy.tempDefense = 0;
+  enemy.tempAttack = 0;
+
   updateHpBar(playerBar, playerHp, playerMax);
   updateHpBar(enemyBar, enemyHp, enemyMax);
 
@@ -98,11 +111,11 @@ export async function startCombat(enemy, player) {
   let guardActive = false;
   let shieldBlock = false;
   let healUsed = false;
-  let tempDefense = 0;
   let playerTurn = true;
 
   function damageEnemy(dmg) {
     enemyHp = Math.max(0, enemyHp - dmg);
+    enemy.hp = enemyHp;
     updateHpBar(enemyBar, enemyHp, enemyMax);
     enemyBar.classList.add('damage');
     setTimeout(() => enemyBar.classList.remove('damage'), 300);
@@ -110,6 +123,7 @@ export async function startCombat(enemy, player) {
 
   function healPlayer(amount) {
     playerHp = Math.min(playerMax, playerHp + amount);
+    player.hp = playerHp;
     updateHpBar(playerBar, playerHp, playerMax);
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
@@ -121,10 +135,6 @@ export async function startCombat(enemy, player) {
 
   function activateShieldBlock() {
     shieldBlock = true;
-  }
-
-  function addTempDefense(amount) {
-    tempDefense += amount;
   }
 
   function isHealUsed() {
@@ -186,6 +196,7 @@ export async function startCombat(enemy, player) {
   updateItemsUI();
   document.addEventListener('inventoryUpdated', updateItemsUI);
   setupTabs(overlay);
+  updateStatusUI(overlay, player, enemy);
 
   async function handleAction(skill) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
@@ -205,6 +216,13 @@ export async function startCombat(enemy, player) {
       endCombat();
       return;
     }
+    tickStatuses(player);
+    tickStatuses(enemy);
+    playerHp = player.hp;
+    enemyHp = enemy.hp;
+    updateHpBar(playerBar, playerHp, playerMax);
+    updateHpBar(enemyBar, enemyHp, enemyMax);
+    updateStatusUI(overlay, player, enemy);
     playerTurn = false;
     setTimeout(enemyTurn, 300);
   }
@@ -224,6 +242,13 @@ export async function startCombat(enemy, player) {
     }
     if (used) {
       updateItemsUI();
+      tickStatuses(player);
+      tickStatuses(enemy);
+      playerHp = player.hp;
+      enemyHp = enemy.hp;
+      updateHpBar(playerBar, playerHp, playerMax);
+      updateHpBar(enemyBar, enemyHp, enemyMax);
+      updateStatusUI(overlay, player, enemy);
       playerTurn = false;
       setTimeout(enemyTurn, 300);
     }
@@ -261,16 +286,35 @@ export async function startCombat(enemy, player) {
     }
     const tempTarget = {
       hp: playerHp,
-      stats: { defense: (player.stats?.defense || 0) + tempDefense },
+      stats: { defense: (player.stats?.defense || 0) + player.tempDefense },
     };
     const applied = applyDamage(tempTarget, dmg);
     playerHp = tempTarget.hp;
+    player.hp = playerHp;
     log(`${enemy.name} attacks for ${applied} damage!`);
     updateHpBar(playerBar, playerHp, playerMax);
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
     if (playerHp <= 0) {
       log('Player was defeated!');
+      endCombat();
+      return;
+    }
+    tickStatuses(player);
+    tickStatuses(enemy);
+    playerHp = player.hp;
+    enemyHp = enemy.hp;
+    updateHpBar(playerBar, playerHp, playerMax);
+    updateHpBar(enemyBar, enemyHp, enemyMax);
+    updateStatusUI(overlay, player, enemy);
+    if (playerHp <= 0) {
+      log('Player was defeated!');
+      endCombat();
+      return;
+    }
+    if (enemyHp <= 0) {
+      log(`${enemy.name} was defeated!`);
+      giveDrop();
       endCombat();
       return;
     }

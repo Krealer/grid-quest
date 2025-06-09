@@ -13,6 +13,9 @@ export const player = {
   },
   learnedSkills: [],
   bonusHpGiven: {},
+  tempDefense: 0,
+  tempAttack: 0,
+  statuses: [],
 };
 
 export function moveTo(x, y) {
@@ -63,4 +66,17 @@ export function increaseDefense(amount) {
   document.dispatchEvent(
     new CustomEvent('playerDefenseChanged', { detail: { defense: player.stats.defense } })
   );
+}
+
+export function addTempDefense(amount) {
+  player.tempDefense = (player.tempDefense || 0) + amount;
+}
+
+export function addTempAttack(amount) {
+  player.tempAttack = (player.tempAttack || 0) + amount;
+}
+
+export function resetTempStats() {
+  player.tempDefense = 0;
+  player.tempAttack = 0;
 }
