@@ -13,9 +13,11 @@ export function addItem(item) {
   if (existing) {
     if ((existing.quantity || 0) >= 99) return false;
     existing.quantity = Math.min(99, (existing.quantity || 0) + qty);
+    document.dispatchEvent(new CustomEvent('inventoryUpdated'));
     return true;
   }
   inventory.push({ ...item, quantity: qty });
+  document.dispatchEvent(new CustomEvent('inventoryUpdated'));
   return true;
 }
 
@@ -33,6 +35,7 @@ export function removeItem(nameOrId, qty = 1) {
       const idx = inventory.indexOf(item);
       if (idx !== -1) inventory.splice(idx, 1);
     }
+    document.dispatchEvent(new CustomEvent('inventoryUpdated'));
     return true;
   }
   return false;

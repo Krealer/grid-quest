@@ -7,5 +7,9 @@
   "scout_tracking": {
     "title": "Tracking the Scout",
     "description": "Follow the goblin scout's trail to their camp."
+  },
+  "purify_token": {
+    "title": "Purify the Token",
+    "description": "Bring Arvalin a goblin insignia and a cracked helmet."
   }
 }

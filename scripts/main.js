@@ -14,6 +14,8 @@ import { isMovementDisabled } from './movement.js';
 import * as eryndor from './npc/eryndor.js';
 import * as lioran from './npc/lioran.js';
 import * as goblinQuestGiver from './npc/goblin_quest_giver.js';
+import * as arvalin from './npc/arvalin.js';
+import * as grindle from './npc/grindle.js';
 import { initSkillSystem } from './skills.js';
 import { saveState, loadState, gameState } from './game_state.js';
 import {
@@ -25,7 +27,7 @@ import {
 // Inventory contents are managed in inventory.js
 
 let isInBattle = false;
-const npcModules = { eryndor, lioran, goblinQuestGiver };
+const npcModules = { eryndor, lioran, goblinQuestGiver, arvalin, grindle };
 
 let hpDisplay;
 

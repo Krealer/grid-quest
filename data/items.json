@@ -24,5 +24,17 @@
   "commander_badge": {
     "name": "Commander Badge",
     "description": "Proof of defeating the scout commander"
+  },
+  "goblin_insignia": {
+    "name": "Goblin Insignia",
+    "description": "Marked with crude goblin symbols."
+  },
+  "cracked_helmet": {
+    "name": "Cracked Helmet",
+    "description": "Barely held together after many battles."
+  },
+  "purified_token": {
+    "name": "Purified Token",
+    "description": "Cleansed and safe to handle."
   }
 }
