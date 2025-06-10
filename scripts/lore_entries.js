@@ -73,6 +73,11 @@ export const loreEntries = [
     id: 'memory_not',
     title: 'A Memory of What Was Not',
     text: 'Within the fracture you glimpse paths forever untraveled.'
+  },
+  {
+    id: 'pattern_end',
+    title: 'The Pattern at the End',
+    text: 'Fragments reveal how every choice weaves the final doorway.'
   }
 ];
 

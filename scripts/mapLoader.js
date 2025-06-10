@@ -8,7 +8,9 @@ import {
   isMirrorPuzzleSolved,
   isCorruptionPuzzleSolved,
   isRotationPuzzleSolved,
-  getEchoConversationCount
+  getEchoConversationCount,
+  getIdeologyReward,
+  getLoreRelicCount
 } from './player_memory.js';
 import { isEnemyDefeated } from './enemy.js';
 import { showDialogue } from './dialogueSystem.js';
@@ -126,6 +128,15 @@ export async function loadMap(name) {
             if (getEchoConversationCount() < 3 || isEnemyDefeated('shadow_inversion')) {
               cell.type = 'G';
             }
+          }
+        }
+      }
+    }
+    if (name === 'map16' && getIdeologyReward() && getLoreRelicCount() >= 3) {
+      for (const row of data.grid) {
+        for (const cell of row) {
+          if (cell && cell.type === 'D' && cell.target === 'map17.json') {
+            cell.locked = false;
           }
         }
       }

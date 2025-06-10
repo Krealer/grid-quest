@@ -216,6 +216,17 @@
     "behavior": "aggressive",
     "drops": []
   },
+  "unmoving_shadow": {
+    "name": "Unmoving Shadow",
+    "hp": 80,
+    "xp": 0,
+    "description": "A dark figure that barely reacts to your presence.",
+    "intro": "A silent shadow looms, unmoving.",
+    "portrait": "🌑",
+    "skills": ["strike"],
+    "behavior": "passive",
+    "drops": []
+  },
   "mirror_clone": {
     "name": "Mirror Clone",
     "hp": 80,

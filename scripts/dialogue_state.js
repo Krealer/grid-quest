@@ -1,13 +1,17 @@
 import { unlockBlueprint } from './craft_state.js';
 import { upgradeItem, rerollEnchantment } from './forge.js';
 import { addRelic } from './relic_state.js';
+import { addItem } from './inventory.js';
+import { loadItems, getItemData } from './item_loader.js';
 import {
   discover,
   discoverLore as recordLore,
   setForkChoice,
   visitedBothForks,
   getForkChoice,
-  recordEchoConversation
+  recordEchoConversation,
+  setIdeologyReward,
+  incrementLoreRelicCount
 } from './player_memory.js';
 import { showDialogue } from './dialogueSystem.js';
 import { chooseClass as selectClass } from './class_state.js';
@@ -62,6 +66,7 @@ export function giveRelic(id) {
   if (id) {
     addRelic(id);
     recordLore(id);
+    incrementLoreRelicCount();
   }
 }
 
@@ -207,5 +212,29 @@ export function echoMemory() {
   showDialogue('Fragments swirl, revealing what never came to pass.', () => {
     discoverLore('memory_not');
     recordEchoConversation('memory');
+  });
+}
+
+export async function emberDialogue() {
+  await loadItems();
+  const data = getItemData('mystic_dust') || {
+    name: 'Mystic Dust',
+    description: ''
+  };
+  showDialogue('Embers gather, offering you their spark.', () => {
+    addItem({ ...data, id: 'mystic_dust', quantity: 1 });
+    setIdeologyReward('ember');
+  });
+}
+
+export async function veilDialogue() {
+  await loadItems();
+  const data = getItemData('arcane_crystal') || {
+    name: 'Arcane Crystal',
+    description: ''
+  };
+  showDialogue('A cool hush surrounds you with hidden promise.', () => {
+    addItem({ ...data, id: 'arcane_crystal', quantity: 1 });
+    setIdeologyReward('veil');
   });
 }
