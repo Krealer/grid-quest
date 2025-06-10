@@ -193,5 +193,27 @@
     "skills": ["strike", "weaken"],
     "behavior": "aggressive",
     "drops": [{ "item": "ruin_key", "quantity": 1 }]
+  },
+  "whispered_mirror": {
+    "name": "The Whispered Mirror",
+    "hp": 200,
+    "xp": 50,
+    "description": "A reflective entity reacting to remembered choices.",
+    "intro": "The mirror's surface ripples, echoing your past decisions.",
+    "portrait": "🪞",
+    "skills": ["strike", "weaken"],
+    "behavior": "aggressive",
+    "drops": []
+  },
+  "mirror_clone": {
+    "name": "Mirror Clone",
+    "hp": 80,
+    "xp": 0,
+    "description": "An echo shaped from your resolve.",
+    "intro": "A reflection steps from the mirror!",
+    "portrait": "✨",
+    "skills": ["strike"],
+    "behavior": "aggressive",
+    "drops": []
   }
 }

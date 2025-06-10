@@ -137,3 +137,15 @@ export function vaultkeeperHints() {
     'The floor obeys the sigils. Step upon them and the vault shall turn.'
   );
 }
+
+export function mirrorBossIntro() {
+  showDialogue(
+    'The mirror stirs, reflecting every step you have taken.'
+  );
+}
+
+export function loreObelisk() {
+  showDialogue('Ancient glyphs shift with your reflection.', () => {
+    discoverLore('reflections_deepself');
+  });
+}

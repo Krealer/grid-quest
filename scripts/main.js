@@ -33,6 +33,7 @@ import * as silentMonument from './npc/silent_monument.js';
 import * as breathlessNight from './npc/breathless_night.js';
 import * as corruptionShrine from './npc/corruption_shrine.js';
 import * as vaultkeeper from './npc/vaultkeeper.js';
+import * as loreObelisk from './npc/lore_obelisk.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -64,7 +65,8 @@ const npcModules = {
   silentMonument,
   breathlessNight,
   corruptionShrine,
-  vaultkeeper
+  vaultkeeper,
+  loreObelisk
 };
 
 let hpDisplay;
