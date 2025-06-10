@@ -48,6 +48,7 @@ import * as echoMemory from './npc/echo_memory.js';
 import * as ember from './npc/ember.js';
 import * as veil from './npc/veil.js';
 import * as firstMemory from './npc/first_memory.js';
+import * as ruinsScholarNpc from './npc/ruins_scholar.js';
 import * as krealer from './npc/krealer.js';
 import * as krealer1 from './npc/krealer1.js';
 import * as krealer2 from './npc/krealer2.js';
@@ -78,32 +79,33 @@ let isInBattle = false;
 const npcModules = {
   eryndor,
   coren,
-  goblinQuestGiver,
+  goblin_quest_giver: goblinQuestGiver,
   arvalin,
   lioran,
   grindle,
-  forgeNpc,
-  shadeSage,
-  forkGuide,
+  forge_npc: forgeNpc,
+  shade_sage: shadeSage,
+  fork_guide: forkGuide,
   watcher,
   flamebound,
   arbiter,
-  loreStatue,
-  silentMonument,
-  breathlessNight,
-  corruptionShrine,
+  lore_statue: loreStatue,
+  silent_monument: silentMonument,
+  breathless_night: breathlessNight,
+  corruption_shrine: corruptionShrine,
   vaultkeeper,
-  loreObelisk,
-  dreamEcho1,
-  dreamEcho2,
-  relicChamber,
-  secondVoice,
-  echoSelfShadow,
-  echoSelfFlame,
-  echoSelfPeace,
-  echoMemory,
+  lore_obelisk: loreObelisk,
+  dream_echo1: dreamEcho1,
+  dream_echo2: dreamEcho2,
+  relic_chamber: relicChamber,
+  second_voice: secondVoice,
+  echo_self_shadow: echoSelfShadow,
+  echo_self_flame: echoSelfFlame,
+  echo_self_peace: echoSelfPeace,
+  echo_memory: echoMemory,
   ember,
   veil,
+  first_memory: firstMemory,
   krealer,
   krealer1,
   krealer2,
@@ -113,8 +115,8 @@ const npcModules = {
   krealer6,
   krealer7,
   krealer8,
-  fieldNoteDisintegration,
-  firstMemory
+  field_note_disintegration: fieldNoteDisintegration,
+  ruins_scholar: ruinsScholarNpc
 };
 
 let hpDisplay;
