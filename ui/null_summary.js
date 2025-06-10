@@ -9,17 +9,17 @@ import {
   krealer7Dialogue,
   krealer8Dialogue
 } from '../scripts/dialogue_state.js';
-import { hasKrealerFlag } from '../scripts/player_memory.js';
+import { hasKrealerFlag, getKrealerFlagByPrefix } from '../scripts/player_memory.js';
 
 const modules = [
-  { id: 'krealer1', flag: 'flag_krealer1', data: krealer1Dialogue[0] },
-  { id: 'krealer2', flag: 'flag_krealer2', data: krealer2Dialogue[0] },
-  { id: 'krealer3', flag: 'flag_krealer3', data: krealer3Dialogue[0] },
-  { id: 'krealer4', flag: 'flag_krealer4', data: krealer4Dialogue[0] },
-  { id: 'krealer5', flag: 'flag_krealer5', data: krealer5Dialogue[0] },
-  { id: 'krealer6', flag: 'flag_krealer6', data: krealer6Dialogue[0] },
-  { id: 'krealer7', flag: 'flag_krealer7', data: krealer7Dialogue[0] },
-  { id: 'krealer8', flag: 'flag_krealer8', data: krealer8Dialogue[0] }
+  { id: 'krealer1', flag: 'flag_krealer1', prefix: 'k1_', dialogue: krealer1Dialogue },
+  { id: 'krealer2', flag: 'flag_krealer2', prefix: 'k2_', dialogue: krealer2Dialogue },
+  { id: 'krealer3', flag: 'flag_krealer3', prefix: 'k3_', dialogue: krealer3Dialogue },
+  { id: 'krealer4', flag: 'flag_krealer4', prefix: 'k4_', dialogue: krealer4Dialogue },
+  { id: 'krealer5', flag: 'flag_krealer5', prefix: 'k5_', dialogue: krealer5Dialogue },
+  { id: 'krealer6', flag: 'flag_krealer6', prefix: 'k6_', dialogue: krealer6Dialogue },
+  { id: 'krealer7', flag: 'flag_krealer7', prefix: 'k7_', dialogue: krealer7Dialogue },
+  { id: 'krealer8', flag: 'flag_krealer8', prefix: 'k8_', dialogue: krealer8Dialogue }
 ];
 
 export function allKrealerFlagsSet() {
@@ -28,6 +28,22 @@ export function allKrealerFlagsSet() {
 
 export function getMissingModules() {
   return modules.filter(m => !hasKrealerFlag(m.flag)).map(m => m.id);
+}
+
+function findPath(dialogue, flag, index = 0, path = []) {
+  const entry = dialogue[index];
+  if (!entry) return null;
+  for (const opt of entry.options || []) {
+    const newPath = [...path, { question: entry.text, answer: opt.label }];
+    if (opt.memoryFlag === flag && (opt.goto === null || opt.goto === undefined)) {
+      return newPath;
+    }
+    if (opt.goto !== null && opt.goto !== undefined) {
+      const result = findPath(dialogue, flag, opt.goto, newPath);
+      if (result) return result;
+    }
+  }
+  return null;
 }
 
 export function updateNullSummary() {
@@ -48,11 +64,15 @@ export function updateNullSummary() {
     const row = document.createElement('div');
     row.classList.add('null-summary-entry');
     const title = npcAppearance[m.id].displayTitle || m.id;
-    const question = m.data.text;
-    const response = m.data.options && m.data.options[0]
-      ? m.data.options[0].label
-      : '';
-    row.innerHTML = `<strong>${title}</strong><div class="question">${question}</div><div class="answer">${response}</div>`;
+    const branchFlag = getKrealerFlagByPrefix(m.prefix);
+    const path = branchFlag ? findPath(m.dialogue, branchFlag) : null;
+    let html = `<strong>${title}</strong>`;
+    if (path) {
+      path.forEach(step => {
+        html += `<div class="question">${step.question}</div><div class="answer">${step.answer}</div>`;
+      });
+    }
+    row.innerHTML = html;
     list.appendChild(row);
   });
 }
