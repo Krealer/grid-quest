@@ -54,3 +54,11 @@ npm install
 ## License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## Known Issues
+
+5. Large Untested Modules
+   - Some JavaScript files (e.g., `scripts/main.js`) are several hundred lines long, making them hard to maintain and test.
+
+6. Manual Asset Loading
+   - Many JSON assets are fetched at runtime (e.g., `loadMap` in `scripts/mapLoader.js`), requiring a local HTTP server. If any file is missing or malformed, the error handling is minimal.
