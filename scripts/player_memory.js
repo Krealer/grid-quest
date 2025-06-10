@@ -247,6 +247,11 @@ export function getKrealerFlags() {
   return Array.from(memory.krealerFlags);
 }
 
+export function getKrealerFlagByPrefix(prefix) {
+  if (!prefix) return null;
+  return Array.from(memory.krealerFlags).find(f => f.startsWith(prefix)) || null;
+}
+
 export function allKrealerFlagsSet() {
   const ids = [
     'flag_krealer1',
