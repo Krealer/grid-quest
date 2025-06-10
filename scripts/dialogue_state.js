@@ -11,6 +11,7 @@ import { showDialogue } from './dialogueSystem.js';
 import { chooseClass as selectClass } from './class_state.js';
 import { player } from './player.js';
 import { clearCorruption } from './corruption_state.js';
+import { unlockRelicSlot, unlockPortal15 } from './player_state.js';
 
 export const dialogueMemory = new Set();
 
@@ -139,13 +140,35 @@ export function vaultkeeperHints() {
 }
 
 export function mirrorBossIntro() {
-  showDialogue(
-    'The mirror stirs, reflecting every step you have taken.'
-  );
+  showDialogue('The mirror stirs, reflecting every step you have taken.');
 }
 
 export function loreObelisk() {
   showDialogue('Ancient glyphs shift with your reflection.', () => {
     discoverLore('reflections_deepself');
+  });
+}
+
+export function dreamEchoOne() {
+  showDialogue('A soft whisper floats by.', () => {
+    discoverLore('dream_fragment_one');
+  });
+}
+
+export function dreamEchoTwo() {
+  showDialogue('Shimmering motes form fleeting words.', () => {
+    discoverLore('dream_fragment_two');
+  });
+}
+
+export function relicChamber() {
+  showDialogue('The chamber resonates with ancient power.', () => {
+    unlockRelicSlot();
+  });
+}
+
+export function secondVoice() {
+  showDialogue('You face a reflection that is wholly your own.', () => {
+    unlockPortal15();
   });
 }

@@ -1,0 +1,1134 @@
+{
+  "name": "Dream Nexus",
+  "environment": "dream",
+  "grid": [
+    [
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N",
+        "npc": "dream_echo1"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N",
+        "npc": "dream_echo2"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "N",
+        "npc": "second_voice"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N",
+        "npc": "relic_chamber"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "glow": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "flow": true
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "D",
+        "target": "map15.json",
+        "spawn": {
+          "x": 1,
+          "y": 1
+        },
+        "locked": true
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      "N"
+    ],
+    [
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N",
+      "N"
+    ]
+  ]
+}

@@ -58,6 +58,16 @@ export const loreEntries = [
     id: 'reflections_deepself',
     title: 'Reflections of the Deepself',
     text: 'Those who confront the Whispered Mirror glimpse echoes of their inner truth.'
+  },
+  {
+    id: 'dream_fragment_one',
+    title: 'Fragment of Slumber',
+    text: 'Dreams weave a veil between heart and world within the Nexus.'
+  },
+  {
+    id: 'dream_fragment_two',
+    title: 'Echoes of the Inner Voice',
+    text: 'Whispers in the dreamscape reveal truths long hidden.'
   }
 ];
 

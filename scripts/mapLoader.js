@@ -11,6 +11,7 @@ import {
 } from './player_memory.js';
 import { isEnemyDefeated } from './enemy.js';
 import { showDialogue } from './dialogueSystem.js';
+import { isPortal15Unlocked } from './player_state.js';
 
 let currentGrid = null;
 let currentEnvironment = 'clear';
@@ -99,6 +100,15 @@ export async function loadMap(name) {
         }
       }
     }
+    if (name === 'map14' && isPortal15Unlocked()) {
+      for (const row of data.grid) {
+        for (const cell of row) {
+          if (cell && cell.type === 'D' && cell.target === 'map15.json') {
+            cell.locked = false;
+          }
+        }
+      }
+    }
   } catch (err) {
     console.error(err);
     showError(`Failed to load map ${name}`);
@@ -160,4 +170,15 @@ document.addEventListener('goRightPath', async () => {
 document.addEventListener('goConvergence', async () => {
   const { movePlayerTo } = await import('./map.js');
   await movePlayerTo('map07', { x: 1, y: 1 });
+});
+
+document.addEventListener('portal15Unlocked', () => {
+  if (!currentGrid) return;
+  for (const row of currentGrid) {
+    for (const cell of row) {
+      if (cell && cell.type === 'D' && cell.target === 'map15.json') {
+        cell.locked = false;
+      }
+    }
+  }
 });

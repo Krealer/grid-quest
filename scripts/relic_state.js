@@ -72,9 +72,11 @@ export function removeRelic(id) {
   }
 }
 
+import { getEquippedRelics } from './relic_inventory.js';
+
 export function getRelicBonuses() {
   const totals = {};
-  relicState.owned.forEach((id) => {
+  getEquippedRelics().forEach((id) => {
     const data = relicState.data[id];
     if (data && data.bonuses) {
       Object.entries(data.bonuses).forEach(([k, v]) => {
