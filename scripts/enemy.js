@@ -36,4 +36,5 @@ export function initEnemyState(enemy) {
   if (!Array.isArray(enemy.statuses)) enemy.statuses = [];
   if (typeof enemy.tempDefense !== 'number') enemy.tempDefense = 0;
   if (typeof enemy.tempAttack !== 'number') enemy.tempAttack = 0;
+  enemy.isPlayer = false;
 }

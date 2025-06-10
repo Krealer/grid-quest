@@ -14,7 +14,7 @@ export const statusEffects = {
     duration: 3,
     apply(target) {
       target.hp = Math.min(target.maxHp, target.hp + 1);
-    },
+    }
   },
   fortify: {
     id: 'fortify',
@@ -28,7 +28,7 @@ export const statusEffects = {
     },
     remove(target) {
       target.stats.defense -= 2;
-    },
+    }
   },
   focus: {
     id: 'focus',
@@ -42,7 +42,7 @@ export const statusEffects = {
     },
     remove(target) {
       target.bonusDamage -= 2;
-    },
+    }
   },
   speed_boost: {
     id: 'speed_boost',
@@ -56,7 +56,7 @@ export const statusEffects = {
     },
     remove(target) {
       target.priority -= 1;
-    },
+    }
   },
   clarity: {
     id: 'clarity',
@@ -64,7 +64,7 @@ export const statusEffects = {
     icon: '👁️',
     description: 'See enemy intents.',
     type: 'positive',
-    duration: 3,
+    duration: 3
   },
   barrier: {
     id: 'barrier',
@@ -78,7 +78,7 @@ export const statusEffects = {
     },
     remove(target) {
       target.absorb -= 5;
-    },
+    }
   },
   blessed: {
     id: 'blessed',
@@ -86,7 +86,7 @@ export const statusEffects = {
     icon: '✨',
     description: 'Immune to one negative effect.',
     type: 'positive',
-    duration: 2,
+    duration: 2
   },
   empowered: {
     id: 'empowered',
@@ -94,7 +94,7 @@ export const statusEffects = {
     icon: '⚡',
     description: 'Double skill effects.',
     type: 'positive',
-    duration: 1,
+    duration: 1
   },
   resolve: {
     id: 'resolve',
@@ -108,7 +108,7 @@ export const statusEffects = {
     },
     remove(target) {
       target.hasResolve = false;
-    },
+    }
   },
   invisible: {
     id: 'invisible',
@@ -116,7 +116,7 @@ export const statusEffects = {
     icon: '👤',
     description: 'Cannot be targeted for 1 turn.',
     type: 'positive',
-    duration: 1,
+    duration: 1
   },
 
   // ---------- Negative Effects ----------
@@ -129,7 +129,7 @@ export const statusEffects = {
     duration: 3,
     apply(target) {
       target.hp = Math.max(0, target.hp - 1);
-    },
+    }
   },
   weakened: {
     id: 'weakened',
@@ -143,7 +143,7 @@ export const statusEffects = {
     },
     remove(target) {
       target.damageModifier /= 0.5;
-    },
+    }
   },
   cursed: {
     id: 'cursed',
@@ -157,7 +157,7 @@ export const statusEffects = {
     },
     remove(target) {
       target.noItems = false;
-    },
+    }
   },
   blinded: {
     id: 'blinded',
@@ -171,15 +171,29 @@ export const statusEffects = {
     },
     remove(target) {
       target.missChance -= 0.5;
-    },
+    }
   },
   burned: {
     id: 'burned',
     name: 'Burned',
     icon: '🔥',
-    description: 'Lose 2 HP when using a skill.',
+    description: 'Lose 1 HP per turn.',
     type: 'negative',
     duration: 3,
+    apply(target) {
+      target.hp = Math.max(0, target.hp - 1);
+    }
+  },
+  bleeding: {
+    id: 'bleeding',
+    name: 'Bleeding',
+    icon: '🩸',
+    description: 'Lose 1 HP per turn.',
+    type: 'negative',
+    duration: 3,
+    apply(target) {
+      target.hp = Math.max(0, target.hp - 1);
+    }
   },
   paralyzed: {
     id: 'paralyzed',
@@ -187,7 +201,7 @@ export const statusEffects = {
     icon: '⛔',
     description: '50% chance to skip turn.',
     type: 'negative',
-    duration: 2,
+    duration: 2
   },
   silenced: {
     id: 'silenced',
@@ -195,7 +209,7 @@ export const statusEffects = {
     icon: '🤐',
     description: 'Cannot use skills.',
     type: 'negative',
-    duration: 2,
+    duration: 2
   },
   vulnerable: {
     id: 'vulnerable',
@@ -209,7 +223,7 @@ export const statusEffects = {
     },
     remove(target) {
       target.damageTakenMod -= 0.5;
-    },
+    }
   },
   slowed: {
     id: 'slowed',
@@ -223,7 +237,7 @@ export const statusEffects = {
     },
     remove(target) {
       target.priority += 1;
-    },
+    }
   },
   haunted: {
     id: 'haunted',
@@ -237,8 +251,8 @@ export const statusEffects = {
     },
     remove(target) {
       target.noHealing = false;
-    },
-  },
+    }
+  }
 };
 
 export function getStatusEffect(id) {
@@ -250,11 +264,11 @@ export function getAllStatusEffects() {
 }
 
 export function getStatusMetadata() {
-  return Object.values(statusEffects).map(e => ({
+  return Object.values(statusEffects).map((e) => ({
     id: e.id,
     name: e.name,
     description: e.description,
     type: e.type,
-    temporary: typeof e.duration === 'number',
+    temporary: typeof e.duration === 'number'
   }));
 }

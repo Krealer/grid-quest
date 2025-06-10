@@ -7,8 +7,24 @@ export function generateTileId(x, y) {
 }
 
 export function applyDamage(target, amount) {
+  let dmg = amount;
+  if (typeof target.damageTakenMod === 'number') {
+    dmg *= target.damageTakenMod;
+  }
+  if (typeof target.absorb === 'number' && target.absorb > 0) {
+    const absorbed = Math.min(target.absorb, dmg);
+    dmg -= absorbed;
+    target.absorb -= absorbed;
+  }
   const defense = target.stats?.defense || 0;
-  const final = Math.max(0, amount - defense);
+  dmg = Math.max(0, dmg - defense);
+  const final = Math.floor(dmg);
+  if (target.hasResolve && target.hp - final <= 0) {
+    const lost = target.hp - 1;
+    target.hasResolve = false;
+    target.hp = 1;
+    return lost;
+  }
   target.hp = Math.max(0, target.hp - final);
   return final;
 }

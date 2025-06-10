@@ -31,7 +31,8 @@ export const player = {
   bonusHpGiven: {},
   tempDefense: 0,
   tempAttack: 0,
-  statuses: []
+  statuses: [],
+  isPlayer: true
 };
 
 export function moveTo(x, y) {

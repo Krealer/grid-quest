@@ -39,14 +39,16 @@ import {
   showLevelUp
 } from './combat_ui.js';
 import {
-  tickStatuses,
   initStatuses,
-  applyStatus as applyStatusEffect,
-  removeStatus as removeStatusEffect,
   removeNegativeStatus as removeNegativeStatusEffect,
   hasStatus,
   clearStatuses
 } from './statusManager.js';
+import {
+  applyEffect as applyStatusEffect,
+  removeStatus as removeStatusEffect,
+  tickStatusEffects
+} from './status_effect.js';
 import { getStatusEffect } from './status_effects.js';
 import { initEnemyState } from './enemy.js';
 
@@ -162,11 +164,15 @@ export async function startCombat(enemy, player) {
     const base = getTotalStats();
     const tempTarget = {
       hp: playerHp,
-      stats: { defense: (base.defense || 0) + player.tempDefense }
+      stats: { defense: (base.defense || 0) + player.tempDefense },
+      damageTakenMod: player.damageTakenMod,
+      absorb: player.absorb,
+      hasResolve: player.hasResolve
     };
     const applied = applyDamage(tempTarget, amount);
     playerHp = tempTarget.hp;
     player.hp = playerHp;
+    player.absorb = tempTarget.absorb;
     updateHpBar(playerBar, playerHp, playerMax);
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
@@ -176,14 +182,25 @@ export async function startCombat(enemy, player) {
 
   function damageEnemy(baseDmg) {
     const stats = getTotalStats();
-    const dmg = baseDmg + (stats.attack || 0) + (player.tempAttack || 0);
+    let dmg = baseDmg + (stats.attack || 0) + (player.tempAttack || 0);
+    if (typeof player.damageModifier === 'number') {
+      dmg *= player.damageModifier;
+    }
+    if (typeof player.bonusDamage === 'number') {
+      dmg += player.bonusDamage;
+      player.bonusDamage = 0;
+    }
     const tempTarget = {
       hp: enemyHp,
       stats: { defense: (enemy.stats?.defense || 0) + enemy.tempDefense },
+      damageTakenMod: enemy.damageTakenMod,
+      absorb: enemy.absorb,
+      hasResolve: enemy.hasResolve
     };
     const applied = applyDamage(tempTarget, dmg);
     enemyHp = tempTarget.hp;
     enemy.hp = enemyHp;
+    enemy.absorb = tempTarget.absorb;
     updateHpBar(enemyBar, enemyHp, enemyMax);
     enemyBar.classList.add('damage');
     setTimeout(() => enemyBar.classList.remove('damage'), 300);
@@ -302,6 +319,18 @@ export async function startCombat(enemy, player) {
 
   async function handleAction(skill) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
+    if (hasStatus(player, 'paralyzed') && Math.random() < 0.5) {
+      log('Paralyzed! You cannot act.');
+      tickStatusEffects(player, log);
+      tickStatusEffects(enemy, log);
+      playerTurn = false;
+      setTimeout(enemyTurn, 300);
+      return;
+    }
+    if (hasStatus(player, 'silenced')) {
+      log('Silenced! You cannot use skills.');
+      return;
+    }
     log(`Player uses ${skill.name}`);
     discoverSkill(skill.id);
     const result = skill.effect({
@@ -334,8 +363,8 @@ export async function startCombat(enemy, player) {
       setTimeout(endCombat, 800);
       return;
     }
-    tickStatuses(player);
-    tickStatuses(enemy);
+    tickStatusEffects(player, log);
+    tickStatusEffects(enemy, log);
     playerHp = player.hp;
     enemyHp = enemy.hp;
     handlePhaseTriggers();
@@ -353,6 +382,10 @@ export async function startCombat(enemy, player) {
 
   function handleItemUse(id) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
+    if (hasStatus(player, 'cursed')) {
+      log('A curse prevents you from using items!');
+      return;
+    }
     let used = false;
     const data = getItemData(id);
     if (data) log(`Player uses ${data.name}`);
@@ -380,8 +413,8 @@ export async function startCombat(enemy, player) {
     }
     if (used) {
       updateItemsUI();
-      tickStatuses(player);
-      tickStatuses(enemy);
+      tickStatusEffects(player, log);
+      tickStatusEffects(enemy, log);
       playerHp = player.hp;
       enemyHp = enemy.hp;
       updateHpBar(playerBar, playerHp, playerMax);
@@ -446,6 +479,20 @@ export async function startCombat(enemy, player) {
 
   function enemyTurn() {
     if (enemyHp <= 0) return;
+    if (hasStatus(enemy, 'paralyzed') && Math.random() < 0.5) {
+      log(`${enemy.name} is paralyzed and cannot act!`);
+      tickStatusEffects(player, log);
+      tickStatusEffects(enemy, log);
+      playerTurn = true;
+      return;
+    }
+    if (hasStatus(enemy, 'silenced')) {
+      log(`${enemy.name} is silenced and cannot act!`);
+      tickStatusEffects(player, log);
+      tickStatusEffects(enemy, log);
+      playerTurn = true;
+      return;
+    }
     const list = (enemy.skills || ['strike'])
       .map((id) => getEnemySkill(id))
       .filter(Boolean);
@@ -501,8 +548,8 @@ export async function startCombat(enemy, player) {
       endCombat();
       return;
     }
-    tickStatuses(player);
-    tickStatuses(enemy);
+    tickStatusEffects(player, log);
+    tickStatusEffects(enemy, log);
     playerHp = player.hp;
     enemyHp = enemy.hp;
     updateHpBar(playerBar, playerHp, playerMax);
