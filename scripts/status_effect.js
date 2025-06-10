@@ -22,6 +22,10 @@ export function tickStatusEffects(target, log) {
     if (st.remaining <= 0) {
       if (def.remove) def.remove(target);
       target.statuses.splice(i, 1);
+      if (typeof log === 'function') {
+        const who = target.isPlayer ? 'You' : target.name || 'Enemy';
+        log(`${def.name || st.id} fades from ${who}.`);
+      }
     }
   }
 }

@@ -331,7 +331,8 @@ export async function startCombat(enemy, player) {
       log('Silenced! You cannot use skills.');
       return;
     }
-    log(`Player uses ${skill.name}`);
+    const icon = skill.icon ? `${skill.icon} ` : '';
+    log(`Player uses ${icon}${skill.name}`);
     discoverSkill(skill.id);
     const result = skill.effect({
       damageEnemy,
@@ -531,7 +532,8 @@ export async function startCombat(enemy, player) {
     }
 
     if (skill) {
-      log(`${enemy.name} uses ${skill.name}`);
+      const icon = skill.icon ? `${skill.icon} ` : '';
+      log(`${enemy.name} uses ${icon}${skill.name}`);
       discoverSkill(skill.id);
       skill.effect({
         player,

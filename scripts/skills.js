@@ -5,7 +5,10 @@ const skillDefs = {
   strike: {
     id: 'strike',
     name: 'Strike',
+    icon: '⚔️',
     description: 'Deal 15 damage.',
+    cost: 0,
+    cooldown: 0,
     // Basic attack
     effect({ damageEnemy, log }) {
       const dmg = 15;
@@ -16,7 +19,10 @@ const skillDefs = {
   guard: {
     id: 'guard',
     name: 'Guard',
+    icon: '🛡️',
     description: 'Reduce damage from the next attack.',
+    cost: 0,
+    cooldown: 0,
     effect({ activateGuard, log }) {
       activateGuard();
       log('Player braces for impact.');
@@ -25,7 +31,10 @@ const skillDefs = {
   heal: {
     id: 'heal',
     name: 'Heal',
+    icon: '✨',
     description: 'Restore 20 HP. Can be used once per battle.',
+    cost: 0,
+    cooldown: 0,
     effect({ healPlayer, log, isHealUsed, setHealUsed }) {
       if (isHealUsed()) {
         log('Heal can only be used once!');
@@ -39,7 +48,10 @@ const skillDefs = {
   shieldWall: {
     id: 'shieldWall',
     name: 'Shield Wall',
+    icon: '🛡️',
     description: 'Completely block the next attack.',
+    cost: 0,
+    cooldown: 0,
     unlockCondition: { chest: 'map01:11,3' },
     effect({ activateShieldBlock, log }) {
       activateShieldBlock();
@@ -49,7 +61,10 @@ const skillDefs = {
   flameBurst: {
     id: 'flameBurst',
     name: 'Flame Burst',
+    icon: '🔥',
     description: 'Engulf the foe in flames for 10 damage.',
+    cost: 0,
+    cooldown: 0,
     unlockCondition: { enemy: 'E' },
     effect({ damageEnemy, log }) {
       const dmg = 10;
@@ -60,7 +75,10 @@ const skillDefs = {
   shadowStab: {
     id: 'shadowStab',
     name: 'Shadow Stab',
+    icon: '🌑',
     description: 'Strike from the shadows for 20 damage.',
+    cost: 0,
+    cooldown: 0,
     unlockCondition: { enemy: 'B' },
     effect({ damageEnemy, log }) {
       const dmg = 20;
@@ -71,7 +89,10 @@ const skillDefs = {
   boneSpike: {
     id: 'boneSpike',
     name: 'Bone Spike',
+    icon: '🦴',
     description: 'Hurl bone shards for 18 damage.',
+    cost: 0,
+    cooldown: 0,
     unlockCondition: { enemy: 'S' },
     effect({ damageEnemy, log }) {
       const dmg = 18;
@@ -82,7 +103,10 @@ const skillDefs = {
   arcaneBlast: {
     id: 'arcaneBlast',
     name: 'Arcane Blast',
+    icon: '✨',
     description: 'Unleash arcane energy for 12 damage.',
+    cost: 0,
+    cooldown: 0,
     unlockCondition: { item: 'ancient_scroll' },
     effect({ damageEnemy, log }) {
       const dmg = 12;
@@ -93,7 +117,10 @@ const skillDefs = {
   poisonDart: {
     id: 'poisonDart',
     name: 'Poison Dart',
+    icon: '☠️',
     description: 'Inflict Poisoned for 3 turns.',
+    cost: 0,
+    cooldown: 0,
     statuses: [{ target: 'enemy', id: 'poisoned', duration: 3 }],
     effect({ applyStatus, enemy, log }) {
       applyStatus(enemy, 'poisoned', 3);
@@ -103,7 +130,10 @@ const skillDefs = {
   rally: {
     id: 'rally',
     name: 'Rally',
+    icon: '📣',
     description: 'Gain Fortify for 3 turns.',
+    cost: 0,
+    cooldown: 0,
     statuses: [{ target: 'self', id: 'fortify', duration: 3 }],
     effect({ applyStatus, player, log }) {
       applyStatus(player, 'fortify', 3);
@@ -113,7 +143,10 @@ const skillDefs = {
   focusMind: {
     id: 'focusMind',
     name: 'Focus',
+    icon: '🎯',
     description: 'Gain Focus for your next attack.',
+    cost: 0,
+    cooldown: 0,
     statuses: [{ target: 'self', id: 'focus', duration: 1 }],
     effect({ applyStatus, player, log }) {
       applyStatus(player, 'focus', 1);
@@ -123,7 +156,10 @@ const skillDefs = {
   purify: {
     id: 'purify',
     name: 'Purify',
+    icon: '💫',
     description: 'Remove certain negative effects from yourself.',
+    cost: 0,
+    cooldown: 0,
     cleanse: ['poisoned', 'cursed', 'blinded'],
     effect({ player, removeNegativeStatus, log }) {
       const removed = removeNegativeStatus(player, [

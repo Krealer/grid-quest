@@ -1,5 +1,6 @@
 import { getStatusEffect } from './status_effects.js';
 import { getStatusList } from './statusManager.js';
+import { attachTooltip } from '../ui/skillsPanel.js';
 
 export function setupTabs(overlay) {
   const skillContainer = overlay.querySelector('.skill-buttons');
@@ -73,9 +74,17 @@ export function renderSkillList(container, skills, onClick) {
         .join(', ');
       effects.push(`Removes ${names}`);
     }
-    const descParts = [skill.description, ...effects].filter(Boolean).join(' ');
-    btn.innerHTML = `<strong>${skill.name}</strong><div class="desc">${descParts}</div>`;
+    const meta = [];
+    if (typeof skill.cost === 'number' && skill.cost > 0) meta.push(`Cost: ${skill.cost}`);
+    if (typeof skill.cooldown === 'number' && skill.cooldown > 0)
+      meta.push(`Cooldown: ${skill.cooldown}`);
+    const descParts = [skill.description, ...effects, ...meta]
+      .filter(Boolean)
+      .join(' ');
+    const icon = skill.icon ? `${skill.icon} ` : '';
+    btn.innerHTML = `<strong>${icon}${skill.name}</strong><div class="desc">${descParts}</div>`;
     btn.addEventListener('click', () => onClick(skill));
+    attachTooltip(btn, skill);
     container.appendChild(btn);
   });
 }
