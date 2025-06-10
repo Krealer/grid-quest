@@ -6,8 +6,15 @@
     "description": "A mischievous green creature with a sharp grin.",
     "intro": "The goblin snarls and prepares to strike!",
     "portrait": "👺",
-    "skills": ["strike"],
-    "drops": [{ "item": "goblin_ear", "quantity": 1 }]
+    "skills": [
+      "strike"
+    ],
+    "drops": [
+      {
+        "item": "goblin_ear",
+        "quantity": 1
+      }
+    ]
   },
   "zombie01": {
     "name": "Zombie",
@@ -16,8 +23,15 @@
     "description": "A shambling undead with vacant eyes.",
     "intro": "The zombie groans and lurches forward!",
     "portrait": "🧟",
-    "skills": ["strike"],
-    "drops": [{ "item": "rotten_tooth", "quantity": 1 }]
+    "skills": [
+      "strike"
+    ],
+    "drops": [
+      {
+        "item": "rotten_tooth",
+        "quantity": 1
+      }
+    ]
   },
   "B": {
     "name": "Bandit",
@@ -26,7 +40,10 @@
     "description": "A scruffy thief eyeing your belongings.",
     "intro": "The bandit lunges for your coin purse!",
     "portrait": "🥷",
-    "skills": ["strike", "weaken"],
+    "skills": [
+      "strike",
+      "weaken"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -37,7 +54,9 @@
     "description": "Bones clatter as it advances.",
     "intro": "A skeleton rattles menacingly!",
     "portrait": "💀",
-    "skills": ["strike"],
+    "skills": [
+      "strike"
+    ],
     "drops": []
   },
   "goblin_scout": {
@@ -47,8 +66,15 @@
     "description": "A keen-eyed goblin keeping watch over the hills.",
     "intro": "The scout spots you and blows a horn!",
     "portrait": "🗡️",
-    "skills": ["strike"],
-    "drops": [{ "item": "goblin_ear", "quantity": 1 }]
+    "skills": [
+      "strike"
+    ],
+    "drops": [
+      {
+        "item": "goblin_ear",
+        "quantity": 1
+      }
+    ]
   },
   "goblin_archer": {
     "name": "Goblin Archer",
@@ -57,9 +83,16 @@
     "description": "This goblin prefers attacking from a distance.",
     "intro": "A goblin archer nocks an arrow your way!",
     "portrait": "🏹",
-    "skills": ["poisonSting"],
+    "skills": [
+      "poisonSting"
+    ],
     "behavior": "aggressive",
-    "drops": [{ "item": "goblin_ear", "quantity": 1 }]
+    "drops": [
+      {
+        "item": "goblin_ear",
+        "quantity": 1
+      }
+    ]
   },
   "rotting_warrior": {
     "name": "Rotting Warrior",
@@ -68,9 +101,17 @@
     "description": "A decayed soldier still clinging to its rusted blade.",
     "intro": "The rotting warrior staggers forward with a groan!",
     "portrait": "🪓",
-    "skills": ["strike", "poisonSting"],
+    "skills": [
+      "strike",
+      "poisonSting"
+    ],
     "behavior": "aggressive",
-    "drops": [{ "item": "rotten_tooth", "quantity": 1 }]
+    "drops": [
+      {
+        "item": "rotten_tooth",
+        "quantity": 1
+      }
+    ]
   },
   "scout_commander": {
     "name": "Scout Commander",
@@ -79,9 +120,17 @@
     "description": "Leader of the goblin scouting parties, armored and alert.",
     "intro": "The scout commander barks orders and charges!",
     "portrait": "🎖️",
-    "skills": ["strike", "weaken"],
+    "skills": [
+      "strike",
+      "weaken"
+    ],
     "behavior": "cautious",
-    "drops": [{ "item": "commander_badge", "quantity": 1 }],
+    "drops": [
+      {
+        "item": "commander_badge",
+        "quantity": 1
+      }
+    ],
     "onDefeatMessage": "The commander falls. A silence settles over the hills."
   },
   "wandering_shade": {
@@ -91,7 +140,9 @@
     "description": "A spectral remnant drifting between realms.",
     "intro": "A chill fills the air as a shadowy figure emerges!",
     "portrait": "💮",
-    "skills": ["weaken"],
+    "skills": [
+      "weaken"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -102,7 +153,9 @@
     "description": "A heavy-shelled insect that rumbles with each step.",
     "intro": "Stones crack as a massive beetle scuttles toward you!",
     "portrait": "🐞",
-    "skills": ["strike"],
+    "skills": [
+      "strike"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -113,7 +166,9 @@
     "description": "A ghostly spellcaster muttering forgotten words.",
     "intro": "The air grows cold as a phantom mage materializes!",
     "portrait": "👻",
-    "skills": ["weaken"],
+    "skills": [
+      "weaken"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -124,7 +179,10 @@
     "description": "A creature that thrives in darkness and strikes unseen.",
     "intro": "A Shadow Lurker melts out of the gloom!",
     "portrait": "👽",
-    "skills": ["strike", "weaken"],
+    "skills": [
+      "strike",
+      "weaken"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -135,7 +193,9 @@
     "description": "A fiery beast wreathed in scorching flames.",
     "intro": "A Flame Hound leaps toward you with blazing jaws!",
     "portrait": "🔥",
-    "skills": ["strike"],
+    "skills": [
+      "strike"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -146,7 +206,10 @@
     "description": "A spirit burning with both shadow and fire.",
     "intro": "Flames flicker as a wraith coalesces from the darkness!",
     "portrait": "🔥",
-    "skills": ["strike", "weaken"],
+    "skills": [
+      "strike",
+      "weaken"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -157,7 +220,10 @@
     "description": "An ancient construct protecting forgotten treasures.",
     "intro": "Stone grinds as the relic guardian awakens!",
     "portrait": "🛡️",
-    "skills": ["strike", "weaken"],
+    "skills": [
+      "strike",
+      "weaken"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -168,7 +234,10 @@
     "description": "A mage wielding flames that thrive in darkness.",
     "intro": "A pyromancer steps from the gloom, sparks dancing!",
     "portrait": "🧙",
-    "skills": ["weaken", "strike"],
+    "skills": [
+      "weaken",
+      "strike"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -179,7 +248,9 @@
     "description": "A sentinel fashioned from forgotten stone.",
     "intro": "Stone eyes open as a Ruin Watcher stirs!",
     "portrait": "🗿",
-    "skills": ["strike"],
+    "skills": [
+      "strike"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -190,9 +261,17 @@
     "description": "Guardian of the old halls, resonating with power.",
     "intro": "An Echo Sentinel emerges, resonating with menace!",
     "portrait": "🔊",
-    "skills": ["strike", "weaken"],
+    "skills": [
+      "strike",
+      "weaken"
+    ],
     "behavior": "aggressive",
-    "drops": [{ "item": "ruin_key", "quantity": 1 }]
+    "drops": [
+      {
+        "item": "ruin_key",
+        "quantity": 1
+      }
+    ]
   },
   "whispered_mirror": {
     "name": "The Whispered Mirror",
@@ -201,7 +280,10 @@
     "description": "A reflective entity reacting to remembered choices.",
     "intro": "The mirror's surface ripples, echoing your past decisions.",
     "portrait": "🪞",
-    "skills": ["strike", "weaken"],
+    "skills": [
+      "strike",
+      "weaken"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -212,7 +294,10 @@
     "description": "A twisted reflection drawn from forsaken choices.",
     "intro": "From the rift emerges a warped silhouette of yourself!",
     "portrait": "🌑",
-    "skills": ["strike", "weaken"],
+    "skills": [
+      "strike",
+      "weaken"
+    ],
     "behavior": "aggressive",
     "drops": []
   },
@@ -223,7 +308,9 @@
     "description": "A dark figure that barely reacts to your presence.",
     "intro": "A silent shadow looms, unmoving.",
     "portrait": "🌑",
-    "skills": ["strike"],
+    "skills": [
+      "strike"
+    ],
     "behavior": "passive",
     "drops": []
   },
@@ -234,7 +321,24 @@
     "description": "An echo shaped from your resolve.",
     "intro": "A reflection steps from the mirror!",
     "portrait": "✨",
-    "skills": ["strike"],
+    "skills": [
+      "strike"
+    ],
+    "behavior": "aggressive",
+    "drops": []
+  },
+  "echo_absolute": {
+    "name": "Echo Absolute",
+    "hp": 300,
+    "xp": 100,
+    "description": "A culmination of every path you've taken.",
+    "intro": "All echoes merge into one overwhelming presence!",
+    "portrait": "✨",
+    "skills": [
+      "strike",
+      "memorySurge",
+      "relicGuard"
+    ],
     "behavior": "aggressive",
     "drops": []
   }

@@ -1,3 +1,6 @@
+import { getEchoConversationCount } from './player_memory.js';
+import { getOwnedRelics } from './relic_state.js';
+
 export const enemySkills = {
   strike: {
     id: 'strike',
@@ -34,6 +37,30 @@ export const enemySkills = {
     effect({ player, applyStatus, log, enemy }) {
       applyStatus(player, 'weakened', 2);
       log(`${enemy.name} casts weaken!`);
+    },
+  },
+  memorySurge: {
+    id: 'memorySurge',
+    name: 'Memory Surge',
+    description: 'Damage increases with every echo remembered.',
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const count = getEchoConversationCount();
+      const dmg = 10 + count * 2 + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} unleashes memories for ${applied} damage!`);
+    },
+  },
+  relicGuard: {
+    id: 'relicGuard',
+    name: 'Relic Guard',
+    description: 'Raises defense based on relics owned.',
+    aiType: 'buff',
+    effect({ enemy, log }) {
+      const relics = getOwnedRelics().length;
+      const amount = relics * 2;
+      enemy.tempDefense = (enemy.tempDefense || 0) + amount;
+      log(`${enemy.name} hardens with relic power (+${amount} defense)!`);
     },
   },
 };

@@ -78,6 +78,26 @@ export const loreEntries = [
     id: 'pattern_end',
     title: 'The Pattern at the End',
     text: 'Fragments reveal how every choice weaves the final doorway.'
+  },
+  {
+    id: 'absolute_victory',
+    title: 'Victory Over the Echo',
+    text: 'Defeating the Absolute brought calm to the fracture.'
+  },
+  {
+    id: 'absolute_defeat',
+    title: 'The Echo Prevails',
+    text: 'Memories were lost to the overwhelming echo.'
+  },
+  {
+    id: 'phase_shift',
+    title: 'Shifting Echoes',
+    text: 'The final foe transformed with your remembered choices.'
+  },
+  {
+    id: 'relic_resonance',
+    title: 'Relic Resonance',
+    text: 'Your gathered relics fueled the echo\'s power.'
   }
 ];
 

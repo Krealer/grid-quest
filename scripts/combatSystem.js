@@ -23,6 +23,9 @@ import { showDialogue } from './dialogueSystem.js';
 import { gameState } from './game_state.js';
 import { discover, discoverSkill } from './player_memory.js';
 import { advanceBossPhase, resetBossPhase } from './boss_state.js';
+import { finalFlags, setPhase, setBossDefeated } from './memory_flags.js';
+import { recordEnding } from './ending_manager.js';
+import { echoAbsoluteVictory, echoAbsoluteDefeat } from './dialogue_state.js';
 import {
   setupTabs,
   updateStatusUI,
@@ -98,6 +101,7 @@ export async function startCombat(enemy, player) {
 
   document.body.appendChild(overlay);
   resetBossPhase(enemy.id);
+  if (enemy.id === 'echo_absolute') setPhase(1);
   document.dispatchEvent(new CustomEvent('combatStarted'));
   requestAnimationFrame(() => overlay.classList.add('active'));
 
@@ -311,11 +315,16 @@ export async function startCombat(enemy, player) {
       enemy
     });
     if (result === false) return; // invalid action
-    advanceBossPhase(enemy);
+    handlePhaseTriggers();
     if (enemyHp <= 0) {
       log(`${enemy.name} was defeated!`);
       discover('enemies', enemy.id);
       await giveDrops();
+      if (enemy.id === 'echo_absolute') {
+        recordEnding('victory', 'echo absolute');
+        echoAbsoluteVictory();
+        setBossDefeated();
+      }
       showVictoryMessage();
       setTimeout(endCombat, 800);
       return;
@@ -324,7 +333,7 @@ export async function startCombat(enemy, player) {
     tickStatuses(enemy);
     playerHp = player.hp;
     enemyHp = enemy.hp;
-    advanceBossPhase(enemy);
+    handlePhaseTriggers();
     updateHpBar(playerBar, playerHp, playerMax);
     updateHpBar(enemyBar, enemyHp, enemyMax);
     updateStatusUI(overlay, player, enemy);
@@ -407,6 +416,27 @@ export async function startCombat(enemy, player) {
     }
     clearStatuses(player);
     await respawn();
+    if (enemy.id === 'echo_absolute') {
+      recordEnding('defeat', 'echo absolute');
+      echoAbsoluteDefeat();
+    }
+  }
+
+  function handlePhaseTriggers() {
+    if (enemy.id === 'echo_absolute') {
+      const pct = enemy.hp / enemy.maxHp;
+      if (finalFlags.phase === 1 && pct <= 0.7) {
+        enemy.skills.push('memorySurge');
+        setPhase(2);
+        showDialogue('Memories ignite around the Absolute!');
+      } else if (finalFlags.phase === 2 && pct <= 0.3) {
+        enemy.skills.push('relicGuard');
+        setPhase(3);
+        showDialogue('Relics resonate with new power!');
+      }
+    } else {
+      advanceBossPhase(enemy);
+    }
   }
 
   function enemyTurn() {
@@ -472,6 +502,10 @@ export async function startCombat(enemy, player) {
     updateStatusUI(overlay, player, enemy);
     if (playerHp <= 0) {
       log('Player was defeated!');
+      if (enemy.id === 'echo_absolute') {
+        recordEnding('defeat', 'echo absolute');
+        echoAbsoluteDefeat();
+      }
       endCombat();
       return;
     }
@@ -479,6 +513,11 @@ export async function startCombat(enemy, player) {
       log(`${enemy.name} was defeated!`);
       discover('enemies', enemy.id);
       giveDrops();
+      if (enemy.id === 'echo_absolute') {
+        recordEnding('victory', 'echo absolute');
+        echoAbsoluteVictory();
+        setBossDefeated();
+      }
       showVictoryMessage();
       setTimeout(endCombat, 800);
       return;

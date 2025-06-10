@@ -3,6 +3,7 @@ import { upgradeItem, rerollEnchantment } from './forge.js';
 import { addRelic } from './relic_state.js';
 import { addItem } from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
+import { getOwnedRelics } from './relic_state.js';
 import {
   discover,
   discoverLore as recordLore,
@@ -13,6 +14,8 @@ import {
   setIdeologyReward,
   incrementLoreRelicCount
 } from './player_memory.js';
+import { getEchoConversationCount } from './player_memory.js';
+import { recordEnding } from './ending_manager.js';
 import { showDialogue } from './dialogueSystem.js';
 import { chooseClass as selectClass } from './class_state.js';
 import { player } from './player.js';
@@ -236,5 +239,26 @@ export async function veilDialogue() {
   showDialogue('A cool hush surrounds you with hidden promise.', () => {
     addItem({ ...data, id: 'arcane_crystal', quantity: 1 });
     setIdeologyReward('veil');
+  });
+}
+
+export function echoAbsoluteIntro() {
+  const echoes = getEchoConversationCount();
+  const relics = getOwnedRelics().length;
+  const line =
+    `All ${echoes} echoes and ${relics} relics converge into one form.`;
+  showDialogue(line);
+}
+
+export function echoAbsoluteVictory() {
+  showDialogue('The Absolute fades, leaving clarity behind.', () => {
+    discoverLore('pattern_end');
+    recordEnding('victory', 'Echo Absolute defeated');
+  });
+}
+
+export function echoAbsoluteDefeat() {
+  showDialogue('Memories scatter as darkness takes hold.', () => {
+    recordEnding('defeat', 'Consumed by the Absolute');
   });
 }
