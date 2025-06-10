@@ -1,6 +1,8 @@
-import { startDialogueTree } from '../dialogueSystem.js';
+import { startDialogueTree, showDialogue } from '../dialogueSystem.js';
 import { krealer1Dialogue } from '../dialogue_state.js';
+import { npcAppearance } from '../npc_data.js';
 
 export function interact() {
-  startDialogueTree(krealer1Dialogue);
+  const title = npcAppearance.krealer1.displayTitle || 'Krealer';
+  showDialogue(title, () => startDialogueTree(krealer1Dialogue));
 }
