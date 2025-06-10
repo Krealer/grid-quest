@@ -21,6 +21,7 @@ import { gameState } from './game_state.js';
 
 let currentGrid = null;
 let currentEnvironment = 'clear';
+let currentProperties = {};
 
 export function normalizeGrid(grid, size = 20) {
   const normalized = [];
@@ -180,6 +181,7 @@ export async function loadMap(name) {
     throw err;
   }
   currentEnvironment = data.environment || 'clear';
+  currentProperties = data.properties || {};
   currentGrid = data.grid.map((row) => {
     if (typeof row === 'string') {
       return row.split('').map((ch) => ({ type: ch }));
@@ -192,7 +194,11 @@ export async function loadMap(name) {
     });
   });
   currentGrid = normalizeGrid(currentGrid);
-  return { grid: currentGrid, environment: currentEnvironment };
+  return {
+    grid: currentGrid,
+    environment: currentEnvironment,
+    properties: currentProperties,
+  };
 }
 
 export function getCurrentGrid() {
@@ -201,6 +207,10 @@ export function getCurrentGrid() {
 
 export function getCurrentEnvironment() {
   return currentEnvironment;
+}
+
+export function isFogEnabled() {
+  return !!currentProperties.fog;
 }
 
 // After a class is chosen, send the player to that class's trial map

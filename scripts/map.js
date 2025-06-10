@@ -1,7 +1,7 @@
 import * as router from './router.js';
 import { renderGrid } from './grid.js';
 import { player } from './player.js';
-import { getCurrentGrid, getCurrentEnvironment } from './mapLoader.js';
+import { getCurrentGrid, getCurrentEnvironment, isFogEnabled } from './mapLoader.js';
 
 /**
  * Move the player to a given map and coordinates.
@@ -21,7 +21,7 @@ export function spawnNpc(x, y, id) {
   if (!grid || !container) return;
   if (!grid[y] || !grid[y][x]) return;
   grid[y][x] = { type: 'N', npc: id };
-  renderGrid(grid, container, getCurrentEnvironment());
+  renderGrid(grid, container, getCurrentEnvironment(), isFogEnabled());
   router.drawPlayer(player, container, router.getCols());
 }
 
@@ -31,6 +31,6 @@ export function spawnEnemy(x, y, id) {
   if (!grid || !container) return;
   if (!grid[y] || !grid[y][x]) return;
   grid[y][x] = { type: 'E', enemyId: id };
-  renderGrid(grid, container, getCurrentEnvironment());
+  renderGrid(grid, container, getCurrentEnvironment(), isFogEnabled());
   router.drawPlayer(player, container, router.getCols());
 }

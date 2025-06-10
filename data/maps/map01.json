@@ -1,6 +1,7 @@
 {
   "name": "Fogbound Glade",
   "environment": "fog",
+  "properties": { "fog": true },
   "grid": [
     "GWFGFGFGGGGGFGGGGGGG",
     "GGtFGFGFGGGGGFGGGGGG",
