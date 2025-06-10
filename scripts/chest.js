@@ -7,9 +7,17 @@ import { increaseMaxHp } from './player.js';
 import { unlockSkillsFromItem, unlockSkillsFromRelic } from './skills.js';
 
 const chestContents = {
-  'map01:11,3': {
-    items: ['rusty_key', 'faded_letter'],
-    message: 'Nestled within are a rusty key and a timeworn letter.'
+  'map01:10,5': {
+    item: 'rusty_key',
+    message: 'Inside you find a rusty key.'
+  },
+  'map01:17,9': {
+    item: 'defense_potion_I',
+    message: 'The chest holds a Defense Potion.'
+  },
+  'map01:3,17': {
+    item: 'old_coin',
+    message: 'You pick up an old coin.'
   },
   'map02:5,5': { item: 'silver_key', message: 'You found a silver key.' },
   'map02:8,12': {

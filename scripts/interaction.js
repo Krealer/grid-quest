@@ -133,6 +133,7 @@ export async function handleTileInteraction(
             tileEl.classList.remove('chest');
             tileEl.classList.add('chest-opened');
           }
+          tile.type = 'G';
           for (const [id, skill] of Object.entries(getAllSkills())) {
             if (skill.unlockCondition?.chest === chestId) {
               if (unlockSkill(id)) {
