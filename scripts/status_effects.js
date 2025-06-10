@@ -211,6 +211,14 @@ export const statusEffects = {
     type: 'negative',
     duration: 2
   },
+  silence: {
+    id: 'silence',
+    name: 'Silence',
+    icon: '🤐',
+    description: 'Cannot use skills for 2 turns.',
+    type: 'negative',
+    duration: 2
+  },
   vulnerable: {
     id: 'vulnerable',
     name: 'Vulnerable',
@@ -224,6 +232,14 @@ export const statusEffects = {
     remove(target) {
       target.damageTakenMod -= 0.5;
     }
+  },
+  unstable: {
+    id: 'unstable',
+    name: 'Unstable',
+    icon: '💫',
+    description: '25% chance actions fail.',
+    type: 'negative',
+    duration: 3
   },
   slowed: {
     id: 'slowed',

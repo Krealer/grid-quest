@@ -17,7 +17,11 @@ import {
   removeHealthBonusItem
 } from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
-import { useDefensePotion, useFadedBlade, useArcaneSpark } from './item_logic.js';
+import {
+  useDefensePotion,
+  useFadedBlade,
+  useArcaneSpark
+} from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
 import { gameState } from './game_state.js';
@@ -330,7 +334,15 @@ export async function startCombat(enemy, player) {
       setTimeout(enemyTurn, 300);
       return;
     }
-    if (hasStatus(player, 'silenced')) {
+    if (hasStatus(player, 'unstable') && Math.random() < 0.25) {
+      log('Unstable! Your action falters.');
+      tickStatusEffects(player, log);
+      tickStatusEffects(enemy, log);
+      playerTurn = false;
+      setTimeout(enemyTurn, 300);
+      return;
+    }
+    if (hasStatus(player, 'silenced') || hasStatus(player, 'silence')) {
       log('Silenced! You cannot use skills.');
       return;
     }
@@ -516,7 +528,14 @@ export async function startCombat(enemy, player) {
       playerTurn = true;
       return;
     }
-    if (hasStatus(enemy, 'silenced')) {
+    if (hasStatus(enemy, 'unstable') && Math.random() < 0.25) {
+      log(`${enemy.name} staggers in instability!`);
+      tickStatusEffects(player, log);
+      tickStatusEffects(enemy, log);
+      playerTurn = true;
+      return;
+    }
+    if (hasStatus(enemy, 'silenced') || hasStatus(enemy, 'silence')) {
       log(`${enemy.name} is silenced and cannot act!`);
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);

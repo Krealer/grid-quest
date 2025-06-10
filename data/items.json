@@ -224,5 +224,26 @@
     "type": "quest",
     "stackLimit": 1,
     "icon": "💠"
+  },
+  "sentry_plating": {
+    "name": "Sentry Plating",
+    "description": "Metal scrap from a corrupted sentry. Useful for crafting armor.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🛡️"
+  },
+  "chaos_organ": {
+    "name": "Chaos Organ",
+    "description": "A pulsing organ harvested from a rift creature.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🧬"
+  },
+  "void_residue": {
+    "name": "Void Residue",
+    "description": "Residual essence of the void, prized by collectors.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🕳️"
   }
 }

@@ -231,6 +231,57 @@ export const enemySkills = {
       applyStatus(player, 'vulnerable', 2);
       log(`${enemy.name} crushes your guard for ${applied} damage!`);
     }
+  },
+  bleed_claw: {
+    id: 'bleed_claw',
+    name: 'Bleeding Claw',
+    icon: '🩸',
+    description: 'Quick strike that causes bleeding.',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['bleeding'],
+    statuses: [{ target: 'player', id: 'bleeding', duration: 3 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 6 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'bleeding', 3);
+      log(`${enemy.name} slashes for ${applied} damage and causes bleeding!`);
+    }
+  },
+  rift_touch: {
+    id: 'rift_touch',
+    name: 'Rift Touch',
+    icon: '💫',
+    description: 'Inflicts the Unstable status on the target.',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['unstable'],
+    statuses: [{ target: 'player', id: 'unstable', duration: 3 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 5 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'unstable', 3);
+      log(`${enemy.name} touches you for ${applied} damage. Reality wavers!`);
+    }
+  },
+  silence_wave: {
+    id: 'silence_wave',
+    name: 'Silencing Wave',
+    icon: '🔇',
+    description: 'Disrupts magic, applying Silence.',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['silence'],
+    statuses: [{ target: 'player', id: 'silence', duration: 2 }],
+    effect({ enemy, player, applyStatus, log }) {
+      applyStatus(player, 'silence', 2);
+      log(`${enemy.name} emits a wave of silence!`);
+    }
   }
 };
 
