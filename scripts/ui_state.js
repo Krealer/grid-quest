@@ -3,6 +3,7 @@ import { hasCodeFile } from './inventory.js';
 import { getCurrentMapName } from './router.js';
 import { player } from './player.js';
 import { showDialogue } from './dialogueSystem.js';
+import { allKrealerFlagsSet, toggleNullSummary } from '../ui/null_summary.js';
 
 let returnMap = null;
 let returnPos = null;
@@ -12,6 +13,10 @@ export function initNullTab(tab) {
   tab.addEventListener('click', async () => {
     const current = getCurrentMapName();
     if (current !== 'null_room') {
+      if (allKrealerFlagsSet()) {
+        toggleNullSummary();
+        return;
+      }
       if (!hasCodeFile()) {
         showDialogue('Obtain code file to enter.');
         return;

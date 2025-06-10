@@ -56,6 +56,7 @@ import * as krealer6 from './npc/krealer6.js';
 import * as krealer7 from './npc/krealer7.js';
 import * as krealer8 from './npc/krealer8.js';
 import { initNullTab } from './ui_state.js';
+import { initNullSummary } from '../ui/null_summary.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -211,6 +212,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initSkillSystem(player);
   initPassiveSystem(player);
   initInfoPanel();
+  initNullSummary();
 
   try {
     await loadEnemyData();

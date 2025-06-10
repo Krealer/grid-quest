@@ -242,3 +242,21 @@ export function setKrealerFlag(id) {
 export function hasKrealerFlag(id) {
   return memory.krealerFlags.has(id);
 }
+
+export function getKrealerFlags() {
+  return Array.from(memory.krealerFlags);
+}
+
+export function allKrealerFlagsSet() {
+  const ids = [
+    'flag_krealer1',
+    'flag_krealer2',
+    'flag_krealer3',
+    'flag_krealer4',
+    'flag_krealer5',
+    'flag_krealer6',
+    'flag_krealer7',
+    'flag_krealer8'
+  ];
+  return ids.every(id => memory.krealerFlags.has(id));
+}
