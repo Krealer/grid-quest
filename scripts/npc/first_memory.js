@@ -1,6 +1,8 @@
 import { startDialogueTree, showDialogue } from '../dialogueSystem.js';
 import { firstMemoryDialogue } from '../npc_dialogues/first_memory_dialogue.js';
+import { npcAppearance } from '../npc_data.js';
 
 export function interact() {
-  showDialogue('Memory Echo', () => startDialogueTree(firstMemoryDialogue));
+  const title = npcAppearance.first_memory.displayTitle || 'Memory';
+  showDialogue(title, () => startDialogueTree(firstMemoryDialogue));
 }

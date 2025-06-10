@@ -7,6 +7,7 @@ import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
 import { getItemBonuses } from './item_stats.js';
 import { getRelicBonuses } from './relic_state.js';
 import { getClassBonuses, getChosenClass } from './class_state.js';
+import { unlockSkill, getAllSkills } from './skills.js';
 
 export const player = {
   x: 0,
@@ -201,4 +202,13 @@ export function getTotalStats() {
     }
   }
   return total;
+}
+
+export function grantSkill(id) {
+  if (unlockSkill(id)) {
+    const skill = getAllSkills()[id];
+    if (skill) {
+      showDialogue(`You've learned a new skill: ${skill.name}!`);
+    }
+  }
 }

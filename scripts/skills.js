@@ -153,6 +153,19 @@ const skillDefs = {
       log('You concentrate deeply, preparing your strike.');
     }
   },
+  focusStrike: {
+    id: 'focus_strike',
+    name: 'Focus Strike',
+    icon: '🎯',
+    description: 'A precise attack that rarely misses.',
+    cost: 0,
+    cooldown: 0,
+    effect({ damageEnemy, log }) {
+      const dmg = 18;
+      damageEnemy(dmg);
+      log(`Your focus strike deals ${dmg} damage!`);
+    }
+  },
   purify: {
     id: 'purify',
     name: 'Purify',
