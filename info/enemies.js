@@ -30,5 +30,29 @@ export const enemies = [
     location: '10,10',
     drops: 'Commander Badge',
     skills: 'power_slash, call_backup, crush_defense'
+  },
+  {
+    id: 'corrupted_sentry',
+    name: 'Corrupted Sentry',
+    map: 'Map04',
+    location: '9,12 / 9,14',
+    drops: 'Sentry Plating',
+    skills: 'bleed_claw'
+  },
+  {
+    id: 'rift_lurker',
+    name: 'Rift Lurker',
+    map: 'Map04',
+    location: '10,5',
+    drops: 'Chaos Organ',
+    skills: 'rift_touch'
+  },
+  {
+    id: 'arcane_wretch',
+    name: 'Arcane Wretch',
+    map: 'Map04',
+    location: '12,10',
+    drops: 'Void Residue',
+    skills: 'silence_wave'
   }
 ];

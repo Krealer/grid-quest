@@ -112,6 +112,30 @@ export const itemData = {
     type: 'combat',
     stackLimit: 3,
     icon: '✨'
+  },
+  sentry_plating: {
+    id: 'sentry_plating',
+    name: 'Sentry Plating',
+    description: 'Metal scrap useful for future armor crafting.',
+    type: 'material',
+    stackLimit: 99,
+    icon: '🛡️'
+  },
+  chaos_organ: {
+    id: 'chaos_organ',
+    name: 'Chaos Organ',
+    description: 'Rare organ from rift creatures used in potent fusions.',
+    type: 'material',
+    stackLimit: 99,
+    icon: '🧬'
+  },
+  void_residue: {
+    id: 'void_residue',
+    name: 'Void Residue',
+    description: 'Traded among scholars for high-level crafting.',
+    type: 'material',
+    stackLimit: 99,
+    icon: '🕳️'
   }
 };
 

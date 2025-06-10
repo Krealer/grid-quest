@@ -83,10 +83,7 @@
       "F",
       "G",
       "G",
-      {
-        "type": "E",
-        "enemyId": "stone_beetle"
-      },
+      "G",
       "G",
       "F",
       "G",
@@ -228,9 +225,15 @@
       "F",
       "G",
       "F",
+      {
+        "type": "E",
+        "enemyId": "corrupted_sentry"
+      },
       "G",
-      "G",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "corrupted_sentry"
+      },
       "G",
       "F",
       "F",
@@ -250,7 +253,10 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "rift_lurker"
+      },
       "G",
       "G",
       "G",
@@ -313,7 +319,10 @@
       "F",
       "W",
       "F",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "arcane_wretch"
+      },
       "F",
       "W",
       "F",
