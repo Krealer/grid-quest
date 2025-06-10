@@ -108,6 +108,11 @@ export const loreEntries = [
     id: 'null_factor_accessed',
     title: 'Null Factor Accessed',
     text: 'Your mind recalls every trial within the Null Factor.'
+  },
+  {
+    id: 'field_note_disintegration',
+    title: 'Field Note: Disintegration',
+    text: 'Scrawled observations describe matter crumbling into nothing.'
   }
 ];
 

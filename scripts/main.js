@@ -23,6 +23,7 @@ import * as eryndor from './npc/eryndor.js';
 import * as coren from './npc/coren.js';
 import * as goblinQuestGiver from './npc/goblin_quest_giver.js';
 import * as arvalin from './npc/arvalin.js';
+import * as lioran from './npc/lioran.js';
 import * as grindle from './npc/grindle.js';
 import * as forgeNpc from './npc/forge_npc.js';
 import * as shadeSage from './npc/shade_sage.js';
@@ -56,6 +57,7 @@ import * as krealer5 from './npc/krealer5.js';
 import * as krealer6 from './npc/krealer6.js';
 import * as krealer7 from './npc/krealer7.js';
 import * as krealer8 from './npc/krealer8.js';
+import * as fieldNoteDisintegration from './npc/field_note_disintegration.js';
 import { initNullTab } from './ui_state.js';
 import { initNullSummary } from '../ui/null_summary.js';
 import { initSkillSystem } from './skills.js';
@@ -78,6 +80,7 @@ const npcModules = {
   coren,
   goblinQuestGiver,
   arvalin,
+  lioran,
   grindle,
   forgeNpc,
   shadeSage,
@@ -110,6 +113,7 @@ const npcModules = {
   krealer6,
   krealer7,
   krealer8,
+  fieldNoteDisintegration,
   firstMemory
 };
 

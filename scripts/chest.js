@@ -17,7 +17,10 @@ const chestContents = {
     memoryFlag: 'empty_chest_seen'
   },
   'map02:15,15': { item: 'potion_of_health' },
-  'map03:10,10': { item: 'health_amulet' },
+  'map03:10,10': {
+    item: 'health_amulet',
+    message: 'A pedestal glows softly, revealing a radiant amulet.'
+  },
   'map05:10,9': {
     item: 'mysterious_key',
     message: 'The chest clicks open revealing a strange key.'

@@ -7,7 +7,7 @@ export const npcInfoList = [
   {
     id: 'lioran',
     name: 'Lioran',
-    description: 'An eccentric mystic who speaks in riddles.'
+    description: 'A fugitive scholar hiding among the ruins.'
   },
   {
     id: 'coren',
