@@ -15,7 +15,9 @@ const memory = {
   corruptionPuzzleSolved: false,
   rotationPuzzleSolved: false,
   echoes: new Set(),
-  shadowFightTriggered: false
+  shadowFightTriggered: false,
+  ideologyReward: null,
+  loreRelicCount: 0
 };
 
 function loadMemory() {
@@ -46,6 +48,10 @@ function loadMemory() {
     if (Array.isArray(data.echoes)) memory.echoes = new Set(data.echoes);
     if (typeof data.shadowFightTriggered === 'boolean')
       memory.shadowFightTriggered = data.shadowFightTriggered;
+    if (typeof data.ideologyReward === 'string')
+      memory.ideologyReward = data.ideologyReward;
+    if (typeof data.loreRelicCount === 'number')
+      memory.loreRelicCount = data.loreRelicCount;
   } catch {
     // ignore
   }
@@ -67,7 +73,9 @@ function saveMemory() {
     corruptionPuzzleSolved: memory.corruptionPuzzleSolved,
     rotationPuzzleSolved: memory.rotationPuzzleSolved,
     echoes: Array.from(memory.echoes),
-    shadowFightTriggered: memory.shadowFightTriggered
+    shadowFightTriggered: memory.shadowFightTriggered,
+    ideologyReward: memory.ideologyReward,
+    loreRelicCount: memory.loreRelicCount
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
@@ -197,4 +205,22 @@ export function markShadowFight() {
 
 export function isShadowFightMarked() {
   return memory.shadowFightTriggered;
+}
+
+export function setIdeologyReward(id) {
+  memory.ideologyReward = id;
+  saveMemory();
+}
+
+export function getIdeologyReward() {
+  return memory.ideologyReward;
+}
+
+export function incrementLoreRelicCount() {
+  memory.loreRelicCount += 1;
+  saveMemory();
+}
+
+export function getLoreRelicCount() {
+  return memory.loreRelicCount;
 }

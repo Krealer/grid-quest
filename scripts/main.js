@@ -42,6 +42,8 @@ import * as echoSelfShadow from './npc/echo_self_shadow.js';
 import * as echoSelfFlame from './npc/echo_self_flame.js';
 import * as echoSelfPeace from './npc/echo_self_peace.js';
 import * as echoMemory from './npc/echo_memory.js';
+import * as ember from './npc/ember.js';
+import * as veil from './npc/veil.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -82,7 +84,9 @@ const npcModules = {
   echoSelfShadow,
   echoSelfFlame,
   echoSelfPeace,
-  echoMemory
+  echoMemory,
+  ember,
+  veil
 };
 
 let hpDisplay;
