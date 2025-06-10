@@ -3,9 +3,8 @@ import { onStepEffect, isWalkable } from './tile_type.js';
 import { toggleInventoryView } from './inventory_state.js';
 import { toggleQuestLog } from './quest_log.js';
 import { toggleCraftView } from './craft_ui.js';
-import { player, getTotalStats, stepTo } from './player.js';
+import { player, stepTo } from './player.js';
 import { initFog, reveal, revealAll } from './fog_system.js';
-import { getRelicBonuses } from './relic_state.js';
 import { loadEnemyData, defeatEnemy } from './enemy.js';
 import { setMemory } from './dialogue_state.js';
 import {
@@ -21,47 +20,13 @@ import { isMovementDisabled } from './movement.js';
 import { hasCodeFile, hasItem } from './inventory.js';
 import { craftState } from './craft_state.js';
 import { movePlayerTo, spawnEnemy } from './map.js';
-import * as eryndor from './npc/eryndor.js';
-import * as coren from './npc/coren.js';
-import * as goblinQuestGiver from './npc/goblin_quest_giver.js';
-import * as arvalin from './npc/arvalin.js';
-import * as lioran from './npc/lioran.js';
-import * as grindle from './npc/grindle.js';
-import * as forgeNpc from './npc/forge_npc.js';
-import * as shadeSage from './npc/shade_sage.js';
-import * as myralen from './npc/myralen.js';
-import * as forkGuide from './npc/fork_guide.js';
-import * as watcher from './npc/watcher.js';
-import * as flamebound from './npc/flamebound.js';
-import * as arbiter from './npc/arbiter.js';
-import * as loreStatue from './npc/lore_statue.js';
-import * as silentMonument from './npc/silent_monument.js';
-import * as breathlessNight from './npc/breathless_night.js';
-import * as corruptionShrine from './npc/corruption_shrine.js';
-import * as vaultkeeper from './npc/vaultkeeper.js';
-import * as loreObelisk from './npc/lore_obelisk.js';
-import * as dreamEcho1 from './npc/dream_echo1.js';
-import * as dreamEcho2 from './npc/dream_echo2.js';
-import * as relicChamber from './npc/relic_chamber.js';
-import * as secondVoice from './npc/second_voice.js';
-import * as echoSelfShadow from './npc/echo_self_shadow.js';
-import * as echoSelfFlame from './npc/echo_self_flame.js';
-import * as echoSelfPeace from './npc/echo_self_peace.js';
-import * as echoMemory from './npc/echo_memory.js';
-import * as ember from './npc/ember.js';
-import * as veil from './npc/veil.js';
-import * as firstMemory from './npc/first_memory.js';
-import * as ruinsScholarNpc from './npc/ruins_scholar.js';
-import * as krealer from './npc/krealer.js';
-import * as krealer1 from './npc/krealer1.js';
-import * as krealer2 from './npc/krealer2.js';
-import * as krealer3 from './npc/krealer3.js';
-import * as krealer4 from './npc/krealer4.js';
-import * as krealer5 from './npc/krealer5.js';
-import * as krealer6 from './npc/krealer6.js';
-import * as krealer7 from './npc/krealer7.js';
-import * as krealer8 from './npc/krealer8.js';
-import * as fieldNoteDisintegration from './npc/field_note_disintegration.js';
+import { npcModules } from './npc/index.js';
+import {
+  initPlayerDisplay,
+  updateHpDisplay,
+  updateDefenseDisplay,
+  updateXpDisplay
+} from './ui/playerDisplay.js';
 import { initNullTab } from './ui_state.js';
 import { initNullSummary } from '../ui/null_summary.js';
 import { initSkillSystem } from './skills.js';
@@ -79,73 +44,6 @@ import {
 // Inventory contents are managed in inventory.js
 
 let isInBattle = false;
-const npcModules = {
-  eryndor,
-  coren,
-  goblin_quest_giver: goblinQuestGiver,
-  arvalin,
-  lioran,
-  grindle,
-  forge_npc: forgeNpc,
-  shade_sage: shadeSage,
-  myralen,
-  fork_guide: forkGuide,
-  watcher,
-  flamebound,
-  arbiter,
-  lore_statue: loreStatue,
-  silent_monument: silentMonument,
-  breathless_night: breathlessNight,
-  corruption_shrine: corruptionShrine,
-  vaultkeeper,
-  lore_obelisk: loreObelisk,
-  dream_echo1: dreamEcho1,
-  dream_echo2: dreamEcho2,
-  relic_chamber: relicChamber,
-  second_voice: secondVoice,
-  echo_self_shadow: echoSelfShadow,
-  echo_self_flame: echoSelfFlame,
-  echo_self_peace: echoSelfPeace,
-  echo_memory: echoMemory,
-  ember,
-  veil,
-  first_memory: firstMemory,
-  krealer,
-  krealer1,
-  krealer2,
-  krealer3,
-  krealer4,
-  krealer5,
-  krealer6,
-  krealer7,
-  krealer8,
-  field_note_disintegration: fieldNoteDisintegration,
-  ruins_scholar: ruinsScholarNpc
-};
-
-let hpDisplay;
-let defenseDisplay;
-let xpDisplay;
-
-function updateHpDisplay() {
-  if (hpDisplay) {
-    const bonus = getRelicBonuses().maxHp || 0;
-    hpDisplay.textContent = `HP: ${player.hp}/${player.maxHp + bonus}`;
-  }
-}
-
-function updateDefenseDisplay() {
-  if (defenseDisplay) {
-    const stats = getTotalStats();
-    defenseDisplay.textContent = `Defense: ${stats.defense || 0}`;
-  }
-}
-
-function updateXpDisplay() {
-  if (xpDisplay) {
-    xpDisplay.textContent = `Level: ${player.level} XP: ${player.xp}/${player.xpToNextLevel}`;
-  }
-}
 
 let isMoving = false;
 
@@ -209,9 +107,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const soundToggle = document.getElementById('sound-toggle');
   const scaleSelect = document.getElementById('ui-scale');
   const animToggle = document.getElementById('anim-toggle');
-  hpDisplay = document.getElementById('hp-display');
-  defenseDisplay = document.getElementById('defense-display');
-  xpDisplay = document.getElementById('xp-display');
+  initPlayerDisplay();
   updateHpDisplay();
   updateDefenseDisplay();
   updateXpDisplay();
