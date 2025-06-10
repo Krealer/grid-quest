@@ -167,5 +167,12 @@
     "type": "quest",
     "stackLimit": 1,
     "icon": "💾"
+  },
+  "recall_shard": {
+    "name": "Recall Shard",
+    "description": "A fragment pulsing with lost memory.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "💠"
   }
 }

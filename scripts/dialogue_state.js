@@ -734,3 +734,11 @@ export function echoAbsoluteDefeat() {
     recordEnding('defeat', 'Consumed by the Absolute');
   });
 }
+
+export function flagMetFirstMemory() {
+  setMemory('met_first_memory');
+}
+
+export function flagEryndorSkillGiven() {
+  setMemory('eryndor_skill_given');
+}

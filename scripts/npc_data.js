@@ -3,14 +3,14 @@ export const npcAppearance = {
     nameColor: '#ccccff',
     font: 'sans-serif',
     border: '#ccccff',
-    displayTitle: 'Memory Echo',
+    displayTitle: 'Echo of a Name',
     dialogueScale: 1
   },
   eryndor: {
     nameColor: '#99ff99',
     font: 'serif',
     border: '#99ff99',
-    displayTitle: 'Eryndor',
+    displayTitle: 'Eryndor, the Withheld',
     dialogueScale: 1
   },
   krealer1: {
@@ -68,5 +68,18 @@ export const npcAppearance = {
     border: '#ff99cc',
     displayTitle: 'Persona Architecture',
     dialogueScale: 0.9
+  }
+};
+
+export const npcData = {
+  first_memory: {
+    name: 'Echo of a Name',
+    map: 'map01',
+    description: 'A fragmented memory that speaks in whispers.'
+  },
+  eryndor: {
+    name: 'Eryndor, the Withheld',
+    map: 'map01',
+    description: 'A guarded mentor who knows forgotten techniques.'
   }
 };
