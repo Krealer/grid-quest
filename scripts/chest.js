@@ -1,5 +1,5 @@
 import { gameState } from './game_state.js';
-import { addItem } from './inventory.js';
+import { addItem, giveItem } from './inventory.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { giveRelic, setMemory } from './dialogue_state.js';
 import { getItemData, loadItems } from './item_loader.js';
@@ -19,12 +19,21 @@ const chestContents = {
     item: 'old_coin',
     message: 'You pick up an old coin.'
   },
-  'map02:5,5': { item: 'silver_key', message: 'You found a silver key.' },
-  'map02:8,12': {
-    message: 'This chest was empty. A whisper stirs in your thoughts.',
+  'map02:5,5': {
+    item: 'health_amulet',
+    message: 'You found a shimmering amulet.',
+    memoryFlag: 'map02_health_amulet'
+  },
+  'map02:9,9': {
+    item: 'map02_key',
+    message: 'You found a key among the traps.',
+    memoryFlag: 'map02_key_found'
+  },
+  'map02:15,15': {
+    item: 'empty_note',
+    message: 'This chest was empty.',
     memoryFlag: 'empty_chest_seen'
   },
-  'map02:15,15': { item: 'potion_of_health' },
   'map03:10,10': {
     item: 'health_amulet',
     message: 'A pedestal glows softly, revealing a radiant amulet.'
@@ -71,7 +80,7 @@ export async function openChest(id, player) {
     for (const itm of config.items) {
       const data = getItemData(itm);
       if (data) {
-        addItem({ ...data, id: itm, quantity: 1 });
+        giveItem(itm, 1);
         items.push(data);
         unlockedSkills.push(...unlockSkillsFromItem(itm));
         if (player && itm === 'potion_of_health') {
@@ -85,7 +94,7 @@ export async function openChest(id, player) {
     item = getItemData(config.item);
     if (item) {
       const qty = config.quantity || 1;
-      addItem({ ...item, id: config.item, quantity: qty });
+      giveItem(config.item, qty);
       if (player && config.item === 'potion_of_health') {
         increaseMaxHp(1);
         gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
