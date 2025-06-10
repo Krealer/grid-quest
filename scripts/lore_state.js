@@ -40,3 +40,7 @@ export function getLoreFlags() {
 export function isEchoVergeTriggered() {
   return flags.has('echo_verge_triggered');
 }
+
+export function isEchoFragBreach() {
+  return flags.has('echo_frag_breach');
+}

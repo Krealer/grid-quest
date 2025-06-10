@@ -37,6 +37,7 @@ export async function handleTileInteraction(
   const tile = grid[y][x];
   const sameTile = player.x === x && player.y === y;
   if (tile.type === 'echo') {
+    // Echoes can be triggered from the same tile or an adjacent one
     if (!isAdjacent(player.x, player.y, x, y) && !sameTile) return;
   } else if (!isAdjacent(player.x, player.y, x, y)) {
     return;

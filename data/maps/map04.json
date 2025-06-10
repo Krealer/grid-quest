@@ -178,7 +178,10 @@
       "F",
       "G",
       "F",
-      "G",
+      {
+        "type": "echo",
+        "id": "breach_fragment"
+      },
       "G",
       "G",
       "G",

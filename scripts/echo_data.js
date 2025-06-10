@@ -16,6 +16,15 @@ export const echoData = {
       'Voices echo backwards in time… but remember nothing.',
       'The verge remembers what you try to forget.'
     ]
+  },
+  breach_fragment: {
+    id: 'breach_fragment',
+    flag: 'echo_frag_breach',
+    text: [
+      'Time fractured here before it even tried to hold together.',
+      'They watched, but not from beyond — from underneath.',
+      'The breach is not an accident. It is an attempt.'
+    ]
   }
 };
 
