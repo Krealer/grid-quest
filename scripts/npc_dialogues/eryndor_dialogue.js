@@ -24,7 +24,9 @@ export const eryndorDialogue = [
         condition: (state) => !state.inventory['ancient_scroll']
       },
       { label: "What is this place?", goto: 3 },
-      { label: "What happened to your order?", goto: 4 }
+      { label: "What happened to your order?", goto: 4 },
+      { label: "Why am I here?", goto: 5 },
+      { label: "Do you fear what stirs?", goto: 6 }
     ]
   },
   {
@@ -33,6 +35,14 @@ export const eryndorDialogue = [
   },
   {
     text: "Time and turmoil scattered the Lorebound. Only echoes remain.",
+    options: [{ label: "Back.", goto: 2 }]
+  },
+  {
+    text: "Purpose is a trail only you can walk. Seek the echoes and learn.",
+    options: [{ label: "Back.", goto: 2 }]
+  },
+  {
+    text: "Even sages feel fear. It reminds us that something ancient awakens.",
     options: [{ label: "Back.", goto: 2 }]
   }
 ];
