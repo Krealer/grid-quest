@@ -403,6 +403,36 @@
       { "item": "code_file", "quantity": 1 }
     ]
   },
+  "goblin_raider": {
+    "name": "Goblin Raider",
+    "hp": 55,
+    "stats": { "attack": 3, "defense": 1 },
+    "xp": 7,
+    "description": "A goblin clad in mismatched gear from raids.",
+    "intro": "A goblin raider leaps from the shadows!",
+    "portrait": "🗡️",
+    "skills": [
+      "scratch"
+    ],
+    "drops": [
+      { "item": "goblin_gear", "quantity": 1 }
+    ]
+  },
+  "restless_bones": {
+    "name": "Restless Bones",
+    "hp": 45,
+    "stats": { "attack": 2, "defense": 0 },
+    "xp": 6,
+    "description": "Bones animated by lingering necrotic energy.",
+    "intro": "A pile of bones rattles to life!",
+    "portrait": "💀",
+    "skills": [
+      "decay_touch"
+    ],
+    "drops": [
+      { "item": "bone_fragment", "quantity": 1 }
+    ]
+  },
   "echo_absolute": {
     "name": "Echo Absolute",
     "hp": 300,

@@ -62,6 +62,13 @@
     "stackLimit": 99,
     "icon": "👂"
   },
+  "goblin_gear": {
+    "name": "Goblin Gear",
+    "description": "Common drop; tradeable later",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "⚙️"
+  },
   "rotten_tooth": {
     "name": "Rotten Tooth",
     "description": "Crumbly but still has bite",
@@ -71,7 +78,7 @@
   },
   "bone_fragment": {
     "name": "Bone Fragment",
-    "description": "Sharp piece of bone from an undead",
+    "description": "Necrotic crafting material",
     "type": "material",
     "stackLimit": 99,
     "icon": "🦴"
