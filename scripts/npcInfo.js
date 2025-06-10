@@ -35,6 +35,11 @@ export const npcInfoList = [
     description: 'A gruff craftsman skilled in forging.'
   },
   {
+    id: 'vaelin',
+    name: 'Vaelin',
+    description: 'Scout turned philosopher wandering the Verge.'
+  },
+  {
     id: 'forge_npc',
     name: 'Forge Master',
     description: 'Offers upgrades and rerolls for equipment.'

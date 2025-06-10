@@ -161,6 +161,14 @@
     "icon": "🧴",
     "effect": { "temporaryDefense": 1 }
   },
+  "faded_blade": {
+    "name": "Faded Blade",
+    "description": "Vaelin's weathered weapon. Use in combat to gain +2 attack for the fight.",
+    "type": "combat",
+    "stackLimit": 1,
+    "icon": "🗡️",
+    "effect": { "temporaryAttack": 2 }
+  },
   "mystic_dust": {
     "name": "Mystic Dust",
     "description": "Powder pulsating with magical energy.",

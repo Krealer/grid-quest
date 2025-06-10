@@ -17,7 +17,7 @@ import {
   removeHealthBonusItem
 } from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
-import { useDefensePotion } from './item_logic.js';
+import { useDefensePotion, useFadedBlade } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
 import { gameState } from './game_state.js';
@@ -412,6 +412,15 @@ export async function startCombat(enemy, player) {
         used = true;
       } else {
         log('No potion available.');
+      }
+    }
+    if (id === 'faded_blade') {
+      const res = useFadedBlade();
+      if (res) {
+        log(`Attack increased by ${res.attack} for this fight!`);
+        used = true;
+      } else {
+        log('No blade available.');
       }
     }
     if (used) {
