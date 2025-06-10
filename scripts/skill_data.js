@@ -33,5 +33,26 @@ export const skillData = {
     damage: 8,
     accuracy: 1,
     description: 'Heavy strike with a chance to weaken the target.'
+  },
+  power_slash: {
+    id: 'power_slash',
+    name: 'Power Slash',
+    damage: 10,
+    accuracy: 1,
+    description: 'A strong attack used by seasoned warriors.'
+  },
+  call_backup: {
+    id: 'call_backup',
+    name: 'Call Backup',
+    damage: 0,
+    accuracy: 1,
+    description: 'Summon allies to bolster the commander.'
+  },
+  crush_defense: {
+    id: 'crush_defense',
+    name: 'Crush Defense',
+    damage: 7,
+    accuracy: 1,
+    description: 'Attack that leaves the target vulnerable.'
   }
 };

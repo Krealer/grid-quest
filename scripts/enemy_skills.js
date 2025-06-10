@@ -15,7 +15,7 @@ export const enemySkills = {
       const dmg = 8 + atk + (enemy.tempAttack || 0);
       const applied = damagePlayer(dmg);
       log(`${enemy.name} strikes for ${applied} damage!`);
-    },
+    }
   },
   poisonSting: {
     id: 'poisonSting',
@@ -33,7 +33,7 @@ export const enemySkills = {
       const applied = damagePlayer(dmg);
       applyStatus(player, 'poisoned', 2);
       log(`${enemy.name} stings for ${applied} damage and poisons you!`);
-    },
+    }
   },
   weaken: {
     id: 'weaken',
@@ -48,7 +48,7 @@ export const enemySkills = {
     effect({ player, applyStatus, log, enemy }) {
       applyStatus(player, 'weakened', 2);
       log(`${enemy.name} casts weaken!`);
-    },
+    }
   },
   memorySurge: {
     id: 'memorySurge',
@@ -64,7 +64,7 @@ export const enemySkills = {
       const dmg = 10 + count * 2 + atk + (enemy.tempAttack || 0);
       const applied = damagePlayer(dmg);
       log(`${enemy.name} unleashes memories for ${applied} damage!`);
-    },
+    }
   },
   relicGuard: {
     id: 'relicGuard',
@@ -79,7 +79,7 @@ export const enemySkills = {
       const amount = relics * 2;
       enemy.tempDefense = (enemy.tempDefense || 0) + amount;
       log(`${enemy.name} hardens with relic power (+${amount} defense)!`);
-    },
+    }
   },
   shadowBolt: {
     id: 'shadowBolt',
@@ -163,7 +163,7 @@ export const enemySkills = {
       const dmg = 6 + atk + (enemy.tempAttack || 0);
       const applied = damagePlayer(dmg + 1);
       log(`${enemy.name} fires a piercing arrow for ${applied} damage!`);
-    },
+    }
   },
   decay_blow: {
     id: 'decay_blow',
@@ -186,6 +186,52 @@ export const enemySkills = {
       log(`${enemy.name} crushes for ${applied} damage!`);
     }
   },
+  power_slash: {
+    id: 'power_slash',
+    name: 'Power Slash',
+    icon: '💥',
+    description: 'A heavy swing dealing significant damage.',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 10 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} unleashes a power slash for ${applied} damage!`);
+    }
+  },
+  call_backup: {
+    id: 'call_backup',
+    name: 'Call Backup',
+    icon: '📣',
+    description: 'Rallies allies to increase attack.',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'buff',
+    effect({ enemy, log }) {
+      enemy.tempAttack = (enemy.tempAttack || 0) + 2;
+      log(`${enemy.name} calls for backup, bolstering its strength!`);
+    }
+  },
+  crush_defense: {
+    id: 'crush_defense',
+    name: 'Crush Defense',
+    icon: '🔨',
+    description: 'Damages and makes the target vulnerable.',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['vulnerable'],
+    statuses: [{ target: 'player', id: 'vulnerable', duration: 2 }],
+    effect({ enemy, damagePlayer, applyStatus, log, player }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 7 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'vulnerable', 2);
+      log(`${enemy.name} crushes your guard for ${applied} damage!`);
+    }
+  }
 };
 
 export function getEnemySkill(id) {

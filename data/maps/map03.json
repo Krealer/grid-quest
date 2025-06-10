@@ -20,7 +20,7 @@
       "G",
       {
         "type": "E",
-        "enemyId": "goblin_raider"
+        "enemyId": "goblin_scout"
       },
       "G",
       "G",
@@ -48,7 +48,10 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "goblin_archer"
+      },
       "G",
       "G",
       "G",
@@ -73,7 +76,10 @@
       {
         "type": "C"
       },
-      "G",
+      {
+        "type": "E",
+        "enemyId": "rotting_warrior"
+      },
       "G",
       "G",
       "F"
@@ -125,7 +131,10 @@
       "F",
       "F",
       "t",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "scout_commander"
+      },
       "t",
       "F",
       "F",
@@ -163,10 +172,7 @@
       "G",
       "G",
       "W",
-      {
-        "type": "E",
-        "enemyId": "shadow_inversion"
-      },
+      "G",
       "W",
       "W",
       "G",

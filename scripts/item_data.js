@@ -40,6 +40,30 @@ export const itemData = {
     stackLimit: 1,
     icon: '🏹'
   },
+  commander_badge: {
+    id: 'commander_badge',
+    name: 'Commander Badge',
+    description: 'Proof of defeating the scout commander.',
+    type: 'gear',
+    stackLimit: 1,
+    icon: '🎖️'
+  },
+  scout_blade: {
+    id: 'scout_blade',
+    name: 'Scout Blade',
+    description: 'A light blade once wielded by a goblin scout.',
+    type: 'material',
+    stackLimit: 1,
+    icon: '🔪'
+  },
+  bone_shard: {
+    id: 'bone_shard',
+    name: 'Bone Shard',
+    description: 'Fragment used in defense-crafting rituals.',
+    type: 'material',
+    stackLimit: 99,
+    icon: '🦴'
+  },
   cracked_helmet: {
     id: 'cracked_helmet',
     name: 'Cracked Helmet',

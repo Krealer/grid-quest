@@ -111,6 +111,20 @@
     "stackLimit": 1,
     "icon": "🎖️"
   },
+  "scout_blade": {
+    "name": "Scout Blade",
+    "description": "A light blade carried by goblin scouts",
+    "type": "material",
+    "stackLimit": 1,
+    "icon": "🔪"
+  },
+  "bone_shard": {
+    "name": "Bone Shard",
+    "description": "Fragment useful for crafting defensive charms",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🦴"
+  },
   "goblin_insignia": {
     "name": "Goblin Insignia",
     "description": "Marked with crude goblin symbols.",
