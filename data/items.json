@@ -20,6 +20,13 @@
     "stackLimit": 1,
     "icon": "🗝️"
   },
+  "map02_key": {
+    "name": "Map02 Key",
+    "description": "Opens the way forward.",
+    "type": "key",
+    "stackLimit": 1,
+    "icon": "🗝️"
+  },
   "ruin_key": {
     "name": "Ruin Key",
     "description": "Opens the path to deeper ruins.",
@@ -85,8 +92,8 @@
   },
   "health_amulet": {
     "name": "Health Amulet",
-    "description": "An amulet that bolsters vitality",
-    "type": "gear",
+    "description": "Permanently increases max HP when found",
+    "type": "passive",
     "stackLimit": 1,
     "icon": "🩸"
   },
@@ -160,6 +167,13 @@
     "type": "quest",
     "stackLimit": 1,
     "icon": "✉️"
+  },
+  "empty_note": {
+    "name": "Empty Note",
+    "description": "A faded note… it's unreadable.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "📝"
   },
   "old_coin": {
     "name": "Old Coin",
