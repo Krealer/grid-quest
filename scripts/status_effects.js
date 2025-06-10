@@ -137,7 +137,7 @@ export const statusEffects = {
     icon: '🤕',
     description: 'Deal half damage.',
     type: 'negative',
-    duration: 2,
+    duration: 3,
     apply(target) {
       target.damageModifier = (target.damageModifier || 1) * 0.5;
     },

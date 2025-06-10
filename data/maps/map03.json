@@ -112,7 +112,7 @@
     ],
     "FGGGGGGGGGFGGGGGGGGF",
     "FGGGGGGGGtFtGGGGGGGF",
-    "FGGGGGGGtttttGGGGGGF",
+    "FGGGGGGTtttttGGGGGTF",
     [
       {
         "type": "D",
@@ -166,13 +166,13 @@
       "G",
       "G",
       "G",
-      "G",
+      "t",
       "t",
       {
         "type": "C"
       },
       "t",
-      "G",
+      "t",
       "G",
       "G",
       "G",
