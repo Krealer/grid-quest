@@ -78,7 +78,10 @@
     [
       "F",
       "G",
-      "F",
+      {
+        "type": "E",
+        "enemyId": "rotting_warrior"
+      },
       {
         "type": "W"
       },
@@ -202,7 +205,10 @@
       "F"
     ],
     [
-      "F",
+      {
+        "type": "E",
+        "enemyId": "goblin_archer"
+      },
       "F",
       "G",
       "F",

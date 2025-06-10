@@ -31,6 +31,22 @@ export const itemData = {
     stackLimit: 1,
     icon: '🎯',
     passiveModifier: { accuracy: 0.1 }
+  },
+  goblin_bow: {
+    id: 'goblin_bow',
+    name: 'Goblin Bow',
+    description: 'A crude bow taken from a goblin archer.',
+    type: 'gear',
+    stackLimit: 1,
+    icon: '🏹'
+  },
+  cracked_helmet: {
+    id: 'cracked_helmet',
+    name: 'Cracked Helmet',
+    description: 'Offers minimal protection despite the damage.',
+    type: 'gear',
+    stackLimit: 1,
+    icon: '🪖'
   }
 };
 
