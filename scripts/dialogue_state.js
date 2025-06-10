@@ -10,6 +10,7 @@ import {
 import { showDialogue } from './dialogueSystem.js';
 import { chooseClass as selectClass } from './class_state.js';
 import { player } from './player.js';
+import { clearCorruption } from './corruption_state.js';
 
 export const dialogueMemory = new Set();
 
@@ -116,5 +117,17 @@ export function ruinsScholar() {
 export function silentMonument() {
   showDialogue('The monument hums softly beneath the silence.', () => {
     discoverLore('beneath_the_silence');
+  });
+}
+
+export function breathlessNight() {
+  showDialogue('An inscription whispers of the Breathless Night.', () => {
+    discoverLore('breathless_night');
+  });
+}
+
+export function corruptionShrine() {
+  showDialogue('A purifying light washes over you.', () => {
+    clearCorruption();
   });
 }

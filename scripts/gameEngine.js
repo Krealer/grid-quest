@@ -11,8 +11,8 @@ import { stepSymbol } from './puzzle_state.js';
  * @param {string} tileSymbol
  * @param {{hp:number,maxHp:number}} player
  */
-export function handleTileEffects(tileSymbol, player, x, y) {
-  stepSymbol(tileSymbol);
+export async function handleTileEffects(tileSymbol, player, x, y) {
+  await stepSymbol(tileSymbol);
   if (tileSymbol === 't') {
     triggerDarkTrap(player, applyDamage, showDialogue, x, y);
   } else if (tileSymbol === 'T') {
@@ -22,4 +22,3 @@ export function handleTileEffects(tileSymbol, player, x, y) {
     showDialogue('The cool water rejuvenates you. HP fully restored.');
   }
 }
-

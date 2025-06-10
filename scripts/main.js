@@ -30,6 +30,8 @@ import * as flamebound from './npc/flamebound.js';
 import * as arbiter from './npc/arbiter.js';
 import * as loreStatue from './npc/lore_statue.js';
 import * as silentMonument from './npc/silent_monument.js';
+import * as breathlessNight from './npc/breathless_night.js';
+import * as corruptionShrine from './npc/corruption_shrine.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -58,7 +60,9 @@ const npcModules = {
   flamebound,
   arbiter,
   loreStatue,
-  silentMonument
+  silentMonument,
+  breathlessNight,
+  corruptionShrine
 };
 
 let hpDisplay;
@@ -104,7 +108,7 @@ function handleTileClick(e, player, container, cols) {
 
   let index = 0;
   isMoving = true;
-  function step() {
+  async function step() {
     if (index >= path.length) {
       isMoving = false;
       return;
@@ -113,7 +117,7 @@ function handleTileClick(e, player, container, cols) {
     stepTo(pos.x, pos.y);
     router.drawPlayer(player, container, cols);
     const tile = grid[player.y][player.x];
-    handleTileEffects(tile.type, player, player.x, player.y);
+    await handleTileEffects(tile.type, player, player.x, player.y);
     updateHpDisplay();
     index++;
     setTimeout(() => requestAnimationFrame(step), 150);

@@ -14,7 +14,7 @@ export function initFog(gridContainer, colsCount) {
   cols = colsCount;
   revealed.clear();
   if (!container) return;
-  container.querySelectorAll('.tile').forEach(tile => {
+  container.querySelectorAll('.tile').forEach((tile) => {
     tile.classList.add('fog-hidden');
   });
 }
@@ -29,4 +29,9 @@ export function reveal(x, y) {
   if (tile) {
     tile.classList.remove('fog-hidden');
   }
+}
+
+export function isRevealed(x, y) {
+  const key = `${x},${y}`;
+  return revealed.has(key);
 }
