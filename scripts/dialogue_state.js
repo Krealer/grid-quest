@@ -750,3 +750,7 @@ export function flagMetLioran() {
 export function flagObtainedArcaneSpark() {
   setMemory('obtained_arcane_spark');
 }
+
+export function flagRiftLurkerDefeated() {
+  setMemory('rift_lurker_defeated');
+}

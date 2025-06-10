@@ -245,5 +245,12 @@
     "type": "material",
     "stackLimit": 99,
     "icon": "🕳️"
+  },
+  "rift_stone": {
+    "name": "Rift Stone",
+    "description": "A shard humming with unstable dimensional energy.",
+    "type": "key",
+    "stackLimit": 1,
+    "icon": "💎"
   }
 }

@@ -16,7 +16,9 @@ export const itemDescriptions = {
   ward_leaf:
     'Ward Leaf \u2013 a crafting material discovered in Isolation Nexus, prized for defensive rituals.',
   old_scroll:
-    'Old Scroll \u2013 a weathered document from Isolation Nexus. Someone may want to read it later.'
+    'Old Scroll \u2013 a weathered document from Isolation Nexus. Someone may want to read it later.',
+  rift_stone:
+    'Rift Stone \u2013 unlocks the sealed gate in Isolation Nexus after defeating the Rift Lurker.'
 };
 
 export function markItemUsed(id) {

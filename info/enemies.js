@@ -44,7 +44,7 @@ export const enemies = [
     name: 'Rift Lurker',
     map: 'Map04',
     location: '10,5',
-    drops: 'Chaos Organ',
+    drops: 'Rift Stone',
     skills: 'rift_touch'
   },
   {

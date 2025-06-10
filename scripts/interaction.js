@@ -59,5 +59,18 @@ export async function handleTileInteraction(
     return newCols;
   }
 
+  if (tile.type === 'D' && tile.requiresItem === 'rift_stone' && tile.locked) {
+    if (!hasItem('rift_stone')) {
+      showDialogue(tile.message || 'A rift barrier blocks the way.');
+      return;
+    }
+    removeItem('rift_stone');
+    markItemUsed('rift_stone');
+    updateInventoryUI();
+    tile.locked = false;
+    const newCols = await enterDoor(tile.target, tile.spawn);
+    return newCols;
+  }
+
   return onInteractEffect(tile, x, y, player, container, cols, npcModules);
 }
