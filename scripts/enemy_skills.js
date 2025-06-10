@@ -117,6 +117,39 @@ export const enemySkills = {
       log(`${enemy.name} bites for ${applied} damage and burns you!`);
     }
   },
+  scratch: {
+    id: 'scratch',
+    name: 'Scratch',
+    icon: '🗡️',
+    description: 'A quick swipe dealing 7 damage.',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 7 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} scratches for ${applied} damage!`);
+    }
+  },
+  decay_touch: {
+    id: 'decay_touch',
+    name: 'Decay Touch',
+    icon: '☠️',
+    description: 'Weak necrotic attack that curses the target.',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['cursed'],
+    statuses: [{ target: 'player', id: 'cursed', duration: 2 }],
+    effect({ enemy, damagePlayer, applyStatus, log, player }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 4 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'cursed', 2);
+      log(`${enemy.name} spreads decay for ${applied} damage!`);
+    }
+  },
 };
 
 export function getEnemySkill(id) {

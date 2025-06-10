@@ -33,7 +33,10 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "goblin_raider"
+      },
       "G",
       "G",
       "G",
@@ -395,7 +398,10 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "restless_bones"
+      },
       "G",
       "G",
       "G",
