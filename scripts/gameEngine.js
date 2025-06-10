@@ -4,6 +4,8 @@ import { healFull } from './player.js';
 import { applyDamage } from './logic.js';
 import { triggerDarkTrap, triggerFireTrap } from './trap_logic.js';
 import { stepSymbol } from './puzzle_state.js';
+import { triggerRotation } from './rotation_puzzle.js';
+import { getCurrentGrid } from './mapLoader.js';
 
 /**
  * Applies effects based on the tile symbol the player stepped on.
@@ -13,6 +15,11 @@ import { stepSymbol } from './puzzle_state.js';
  */
 export async function handleTileEffects(tileSymbol, player, x, y) {
   await stepSymbol(tileSymbol);
+  const grid = getCurrentGrid();
+  const tile = grid?.[y]?.[x];
+  if (tile && tile.rotate) {
+    triggerRotation(tile.rotate);
+  }
   if (tileSymbol === 't') {
     triggerDarkTrap(player, applyDamage, showDialogue, x, y);
   } else if (tileSymbol === 'T') {

@@ -12,7 +12,10 @@ const chestContents = {
   'map02:8,12': { message: 'This chest was empty.' },
   'map02:15,15': { item: 'potion_of_health' },
   'map03:10,10': { item: 'health_amulet' },
-  'map05:10,9': { item: 'mysterious_key', message: 'The chest clicks open revealing a strange key.' },
+  'map05:10,9': {
+    item: 'mysterious_key',
+    message: 'The chest clicks open revealing a strange key.'
+  },
   'map_warrior:18,18': {
     relic: 'warrior_sigil',
     message: 'You obtained the Warrior Sigil!'
@@ -24,6 +27,10 @@ const chestContents = {
   'map_alchemist:18,18': {
     relic: 'alchemist_catalyst',
     message: 'You obtained the Alchemist Catalyst!'
+  },
+  'map12:9,9': {
+    relic: 'compass_core',
+    message: 'You obtained the Compass Core!'
   }
 };
 

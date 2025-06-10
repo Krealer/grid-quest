@@ -12,7 +12,8 @@ const memory = {
   sealPuzzleSolved: false,
   sealingDust: false,
   mirrorPuzzleSolved: false,
-  corruptionPuzzleSolved: false
+  corruptionPuzzleSolved: false,
+  rotationPuzzleSolved: false
 };
 
 function loadMemory() {
@@ -38,6 +39,8 @@ function loadMemory() {
       memory.mirrorPuzzleSolved = data.mirrorPuzzleSolved;
     if (typeof data.corruptionPuzzleSolved === 'boolean')
       memory.corruptionPuzzleSolved = data.corruptionPuzzleSolved;
+    if (typeof data.rotationPuzzleSolved === 'boolean')
+      memory.rotationPuzzleSolved = data.rotationPuzzleSolved;
   } catch {
     // ignore
   }
@@ -56,7 +59,8 @@ function saveMemory() {
     sealPuzzleSolved: memory.sealPuzzleSolved,
     sealingDust: memory.sealingDust,
     mirrorPuzzleSolved: memory.mirrorPuzzleSolved,
-    corruptionPuzzleSolved: memory.corruptionPuzzleSolved
+    corruptionPuzzleSolved: memory.corruptionPuzzleSolved,
+    rotationPuzzleSolved: memory.rotationPuzzleSolved
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
@@ -151,4 +155,13 @@ export function solveCorruptionPuzzle() {
 
 export function isCorruptionPuzzleSolved() {
   return memory.corruptionPuzzleSolved;
+}
+
+export function solveRotationPuzzle() {
+  memory.rotationPuzzleSolved = true;
+  saveMemory();
+}
+
+export function isRotationPuzzleSolved() {
+  return memory.rotationPuzzleSolved;
 }

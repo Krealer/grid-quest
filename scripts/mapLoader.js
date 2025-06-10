@@ -6,7 +6,8 @@ import {
   consumeSealingDust,
   isSealPuzzleSolved,
   isMirrorPuzzleSolved,
-  isCorruptionPuzzleSolved
+  isCorruptionPuzzleSolved,
+  isRotationPuzzleSolved
 } from './player_memory.js';
 import { showDialogue } from './dialogueSystem.js';
 
@@ -70,6 +71,19 @@ export async function loadMap(name) {
       for (const row of data.grid) {
         for (const cell of row) {
           if (cell && cell.type === 'D' && cell.target === 'map12.json') {
+            cell.locked = false;
+          }
+        }
+      }
+    }
+    if (name === 'map12' && isRotationPuzzleSolved()) {
+      for (const row of data.grid) {
+        for (const cell of row) {
+          if (
+            cell &&
+            cell.type === 'D' &&
+            (cell.target === 'map13.json' || cell.target === 'map12.json')
+          ) {
             cell.locked = false;
           }
         }

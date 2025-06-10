@@ -10,6 +10,7 @@ import { showDialogue } from './dialogueSystem.js';
 import { getAllSkills, unlockSkill } from './skills.js';
 import * as router from './router.js';
 import { gameState } from './game_state.js';
+import { triggerRotation } from './rotation_puzzle.js';
 
 /**
  * Handles double click interactions on tiles.
@@ -47,13 +48,16 @@ export async function handleTileInteraction(
       }
       const targetMap = tile.target;
       if (required === 'commander_badge') {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           showDialogue('Your commander badge unlocks the way.', async () => {
             if (tile.consumeItem) {
               removeItem(required);
               updateInventoryUI();
             }
-            const { cols: newCols } = await router.loadMap(targetMap, tile.spawn);
+            const { cols: newCols } = await router.loadMap(
+              targetMap,
+              tile.spawn
+            );
             resolve(newCols);
           });
         });
@@ -102,7 +106,7 @@ export async function handleTileInteraction(
             showDialogue(`You obtained ${result.item.name}!`);
           }
           if (Array.isArray(result.unlockedSkills)) {
-            result.unlockedSkills.forEach(id => {
+            result.unlockedSkills.forEach((id) => {
               const skill = getAllSkills()[id];
               if (skill) {
                 showDialogue(`You've learned a new skill: ${skill.name}!`);
@@ -131,6 +135,12 @@ export async function handleTileInteraction(
       const npc = npcModules[npcId];
       if (npc && typeof npc.interact === 'function') {
         npc.interact();
+      }
+      break;
+    }
+    case 'G': {
+      if (tile.rotate) {
+        triggerRotation(tile.rotate);
       }
       break;
     }

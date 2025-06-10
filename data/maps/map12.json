@@ -1,0 +1,1259 @@
+{
+  "name": "Rotating Vault",
+  "environment": "dusk",
+  "grid": [
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "E",
+        "enemyId": "goblin"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "rotate": "A"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "rotate": "B"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "C"
+      },
+      {
+        "type": "N",
+        "npc": "vaultkeeper"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "D",
+        "target": "map13.json",
+        "locked": true,
+        "spawn": {
+          "x": 1,
+          "y": 1
+        }
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "E",
+        "enemyId": "goblin"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "rotate": "C"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G",
+        "rotate": "D"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "G"
+      },
+      {
+        "type": "N"
+      }
+    ],
+    [
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      },
+      {
+        "type": "N"
+      }
+    ]
+  ]
+}

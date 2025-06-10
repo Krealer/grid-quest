@@ -131,3 +131,9 @@ export function corruptionShrine() {
     clearCorruption();
   });
 }
+
+export function vaultkeeperHints() {
+  showDialogue(
+    'The floor obeys the sigils. Step upon them and the vault shall turn.'
+  );
+}

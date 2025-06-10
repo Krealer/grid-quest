@@ -31,5 +31,10 @@
     "name": "Mirror Shard",
     "description": "Reflects the trials of shadow and flame, empowering the bearer.",
     "bonuses": { "attack": 1, "defense": 1 }
+  },
+  "compass_core": {
+    "name": "Compass Core",
+    "description": "A magnetized relic that expands your sight in haze.",
+    "bonuses": { "visibility": 3 }
   }
 }
