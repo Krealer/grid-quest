@@ -202,7 +202,10 @@
       "G",
       "W",
       "W",
-      "G",
+      {
+        "type": "echo",
+        "id": "verge_whispers"
+      },
       "F"
     ],
     "FGGGGGGGGGFGGGWWWWGF",
