@@ -83,7 +83,7 @@ export async function openChest(id, player) {
         giveItem(itm, 1);
         items.push(data);
         unlockedSkills.push(...unlockSkillsFromItem(itm));
-        if (player && itm === 'potion_of_health') {
+        if (player && itm === 'health_potion') {
           increaseMaxHp(1);
           gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
         }
@@ -95,7 +95,7 @@ export async function openChest(id, player) {
     if (item) {
       const qty = config.quantity || 1;
       giveItem(config.item, qty);
-      if (player && config.item === 'potion_of_health') {
+      if (player && config.item === 'health_potion') {
         increaseMaxHp(1);
         gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
       }

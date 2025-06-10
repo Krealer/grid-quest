@@ -41,8 +41,8 @@
     "stackLimit": 1,
     "icon": "🗝️"
   },
-  "potion_of_health": {
-    "name": "Potion of Health",
+  "health_potion": {
+    "name": "Health Potion",
     "description": "Increases maximum health permanently.",
     "type": "consumable",
     "stackLimit": 5,

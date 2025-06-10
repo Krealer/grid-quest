@@ -10,7 +10,7 @@ export const inventory = [];
 export const passiveModifiers = {};
 
 export function recalcPassiveModifiers() {
-  Object.keys(passiveModifiers).forEach(k => delete passiveModifiers[k]);
+  Object.keys(passiveModifiers).forEach((k) => delete passiveModifiers[k]);
   const eq = player.equipment || {};
   Object.values(eq).forEach((id) => {
     if (!id) return;
@@ -66,12 +66,12 @@ export function addItem(item) {
     if ((existing.quantity || 0) >= limit) return false;
     existing.quantity = Math.min(limit, (existing.quantity || 0) + qty);
     discover('items', parseItemId(item.id).baseId);
-      if (baseId === 'health_amulet') {
-        if (!player.bonusHpGiven?.health_amulet) {
-          gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
-        }
-        applyItemReward(baseId);
+    if (baseId === 'health_amulet') {
+      if (!player.bonusHpGiven?.health_amulet) {
+        gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
       }
+      applyItemReward(baseId);
+    }
     document.dispatchEvent(new CustomEvent('inventoryUpdated'));
     return true;
   }
@@ -84,7 +84,7 @@ export function addItem(item) {
     ...item,
     name,
     description: desc,
-    quantity: Math.min(qty, limit),
+    quantity: Math.min(qty, limit)
   });
   if (item.id && item.id.startsWith('blueprint_')) {
     unlockBlueprint(item.id.replace('blueprint_', ''));
@@ -164,7 +164,7 @@ export function getItemsByType(type) {
 }
 
 export function removeHealthBonusItem() {
-  const idx = inventory.findIndex((it) => it.id === 'potion_of_health');
+  const idx = inventory.findIndex((it) => it.id === 'health_potion');
   if (idx !== -1) {
     inventory.splice(idx, 1);
     document.dispatchEvent(new CustomEvent('inventoryUpdated'));
