@@ -557,6 +557,10 @@
       {
         "item": "chaos_organ",
         "quantity": 1
+      },
+      {
+        "item": "rift_stone",
+        "quantity": 1
       }
     ]
   },

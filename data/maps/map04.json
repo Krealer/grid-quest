@@ -447,6 +447,22 @@
       "F"
     ],
     [
+      {
+        "type": "D",
+        "target": "map03.json",
+        "spawn": {
+          "x": 1,
+          "y": 1
+        }
+      },
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
       "F",
       "F",
       "F",
@@ -463,17 +479,11 @@
         "spawn": {
           "x": 1,
           "y": 1
-        }
-      },
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F"
+        },
+        "locked": true,
+        "requiresItem": "rift_stone",
+        "consumeItem": true
+      }
     ],
     [
       "F",
