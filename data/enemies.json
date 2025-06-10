@@ -172,6 +172,19 @@
     "behavior": "aggressive",
     "drops": []
   },
+  "ghost_echo": {
+    "name": "Ghost Echo",
+    "hp": 30,
+    "xp": 0,
+    "description": "A faint apparition clinging to lost memories.",
+    "intro": "A ghostly echo rises from the fallen goblin!",
+    "portrait": "👻",
+    "skills": [
+      "weaken"
+    ],
+    "behavior": "aggressive",
+    "drops": []
+  },
   "shadow_lurker": {
     "name": "Shadow Lurker",
     "hp": 65,

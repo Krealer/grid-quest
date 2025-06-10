@@ -2,11 +2,11 @@
   "name": "Fogbound Glade",
   "environment": "fog",
   "grid": [
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
+    "GWGGGGGGGGGGGGGGGGGG",
+    "GGtGGGGGGGGGGGGGGGGG",
     "GGGGGGGGGGGGGGGGGGGG",
     "GGGGGGGGGGGCGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
+    ["G","G","G","G","G","G","G","G","G","G", {"type":"N","npc":"first_memory"}, "G","G","G","G","G","G","G","G","G"],
     "GGGGGEGGGGGGGGGGGGGG",
     "GGGGGGGGGGGGGGGGGGGG",
     [

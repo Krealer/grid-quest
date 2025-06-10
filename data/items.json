@@ -81,6 +81,10 @@
     "name": "Arcane Crystal",
     "description": "A crystal infused with raw arcana."
   },
+  "faded_letter": {
+    "name": "Faded Letter",
+    "description": "The writing is smudged but hints at a forgotten past."
+  },
   "code_file": {
     "name": "Code File",
     "description": "Encrypted data holding mysterious power."

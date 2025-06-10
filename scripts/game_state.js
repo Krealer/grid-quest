@@ -5,6 +5,7 @@ export const gameState = {
   environment: 'clear',
   maxHpBonus: 0,
   isDead: false,
+  lastEnemyPos: null,
 };
 
 export function saveState() {

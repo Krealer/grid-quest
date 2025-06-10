@@ -17,8 +17,8 @@ import * as router from './router.js';
 import { showDialogue } from './dialogueSystem.js';
 import { handleTileInteraction } from './interaction.js';
 import { isMovementDisabled } from './movement.js';
-import { hasCodeFile } from './inventory.js';
-import { movePlayerTo } from './map.js';
+import { hasCodeFile, hasItem } from './inventory.js';
+import { movePlayerTo, spawnEnemy } from './map.js';
 import * as eryndor from './npc/eryndor.js';
 import * as lioran from './npc/lioran.js';
 import * as goblinQuestGiver from './npc/goblin_quest_giver.js';
@@ -46,6 +46,7 @@ import * as echoSelfPeace from './npc/echo_self_peace.js';
 import * as echoMemory from './npc/echo_memory.js';
 import * as ember from './npc/ember.js';
 import * as veil from './npc/veil.js';
+import * as firstMemory from './npc/first_memory.js';
 import * as krealer from './npc/krealer.js';
 import * as krealer1 from './npc/krealer1.js';
 import * as krealer2 from './npc/krealer2.js';
@@ -108,7 +109,8 @@ const npcModules = {
   krealer5,
   krealer6,
   krealer7,
-  krealer8
+  krealer8,
+  firstMemory
 };
 
 let hpDisplay;
@@ -349,6 +351,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (e.detail.enemyHp <= 0) {
         const enemyId = e.detail.enemy.id;
         defeatEnemy(enemyId);
+        if (
+          enemyId === 'goblin01' &&
+          !hasItem('goblin_ear') &&
+          !hasItem('goblin_insignia') &&
+          !hasItem('cracked_helmet')
+        ) {
+          const pos = gameState.lastEnemyPos;
+          if (pos) spawnEnemy(pos.x, pos.y, 'ghost_echo');
+        }
         if (enemyId === 'goblin_scout') {
           setMemory('scout_defeated');
           if (
