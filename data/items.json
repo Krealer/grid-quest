@@ -1,96 +1,164 @@
 {
   "mysterious_key": {
     "name": "Mysterious Key",
-    "description": "It hums faintly."
+    "description": "It hums faintly.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "🗝️"
   },
   "rusty_key": {
     "name": "Rusty Key",
-    "description": "Old and corroded, but it might still work."
+    "description": "Old and corroded, but it might still work.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "🗝️"
   },
   "silver_key": {
     "name": "Silver Key",
-    "description": "Shines with a dull luster."
+    "description": "Shines with a dull luster.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "🗝️"
   },
   "ruin_key": {
     "name": "Ruin Key",
-    "description": "Opens the path to deeper ruins."
+    "description": "Opens the path to deeper ruins.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "🗝️"
   },
   "forked_key": {
     "name": "Forked Key",
-    "description": "Opens a chest at the crossroads."
+    "description": "Opens a chest at the crossroads.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "🗝️"
   },
   "potion_of_health": {
     "name": "Potion of Health",
-    "description": "Increases maximum health permanently."
+    "description": "Increases maximum health permanently.",
+    "type": "consumable",
+    "stackLimit": 5,
+    "icon": "🧪"
   },
   "ancient_scroll": {
     "name": "Ancient Scroll",
-    "description": "Faded text hints at forgotten lore."
+    "description": "Faded text hints at forgotten lore.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "📜"
   },
   "mysterious_token": {
     "name": "Mysterious Token",
-    "description": "Strange energies swirl within."
+    "description": "Strange energies swirl within.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🔮"
   },
   "goblin_ear": {
     "name": "Goblin Ear",
-    "description": "Slightly gross but widely traded"
+    "description": "Slightly gross but widely traded",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "👂"
   },
   "rotten_tooth": {
     "name": "Rotten Tooth",
-    "description": "Crumbly but still has bite"
+    "description": "Crumbly but still has bite",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🦷"
   },
   "bone_fragment": {
     "name": "Bone Fragment",
-    "description": "Sharp piece of bone from an undead"
+    "description": "Sharp piece of bone from an undead",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🦴"
   },
   "health_amulet": {
     "name": "Health Amulet",
-    "description": "An amulet that bolsters vitality"
+    "description": "An amulet that bolsters vitality",
+    "type": "gear",
+    "stackLimit": 1,
+    "icon": "🩸"
   },
   "blueprint_amulet": {
     "name": "Blueprint: Amulet",
-    "description": "Instructions for crafting a health amulet"
+    "description": "Instructions for crafting a health amulet",
+    "type": "material",
+    "stackLimit": 1,
+    "icon": "📜"
   },
   "commander_badge": {
     "name": "Commander Badge",
-    "description": "Proof of defeating the scout commander"
+    "description": "Proof of defeating the scout commander",
+    "type": "gear",
+    "stackLimit": 1,
+    "icon": "🎖️"
   },
   "goblin_insignia": {
     "name": "Goblin Insignia",
-    "description": "Marked with crude goblin symbols."
+    "description": "Marked with crude goblin symbols.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "🏳️"
   },
   "cracked_helmet": {
     "name": "Cracked Helmet",
-    "description": "Barely held together after many battles."
+    "description": "Barely held together after many battles.",
+    "type": "gear",
+    "stackLimit": 1,
+    "icon": "🪖"
   },
   "armor_piece": {
     "name": "Armor Piece",
-    "description": "A chunk of metal that can be forged into protection."
+    "description": "A chunk of metal that can be forged into protection.",
+    "type": "consumable",
+    "stackLimit": 99,
+    "icon": "🛡️"
   },
   "purified_token": {
     "name": "Purified Token",
-    "description": "Cleansed and safe to handle."
+    "description": "Cleansed and safe to handle.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "☀️"
   },
   "defense_potion_I": {
     "name": "Defense Potion I",
     "description": "Increases defense by 1 for this fight.",
-    "type": "combat",
+    "type": "consumable",
+    "stackLimit": 10,
+    "icon": "🧴",
     "effect": { "temporaryDefense": 1 }
   },
   "mystic_dust": {
     "name": "Mystic Dust",
-    "description": "Powder pulsating with magical energy."
+    "description": "Powder pulsating with magical energy.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "✨"
   },
   "arcane_crystal": {
     "name": "Arcane Crystal",
-    "description": "A crystal infused with raw arcana."
+    "description": "A crystal infused with raw arcana.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🔮"
   },
   "faded_letter": {
     "name": "Faded Letter",
-    "description": "The writing is smudged but hints at a forgotten past."
+    "description": "The writing is smudged but hints at a forgotten past.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "✉️"
   },
   "code_file": {
     "name": "Code File",
-    "description": "Encrypted data holding mysterious power."
+    "description": "Encrypted data holding mysterious power.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "💾"
   }
 }
