@@ -27,6 +27,8 @@ import { finalFlags, setPhase, setBossDefeated } from './memory_flags.js';
 import { recordEnding } from './ending_manager.js';
 import { echoAbsoluteVictory, echoAbsoluteDefeat } from './dialogue_state.js';
 import { spawnNpc } from './map.js';
+import { isElite, isBoss } from './enemy_logic.js';
+import { getEnemyDrops } from './loot_table.js';
 import {
   setupTabs,
   updateStatusUI,
@@ -112,6 +114,7 @@ export async function startCombat(enemy, player) {
   const statsBonus = getTotalStats();
   const playerMax = (player.maxHp ?? 100) + (statsBonus.maxHp || 0);
   const enemyMax = enemy.hp || 50;
+  enemy.maxHp = enemyMax;
   let playerHp = player.hp ?? playerMax;
   let enemyHp = enemyMax;
 
@@ -174,12 +177,17 @@ export async function startCombat(enemy, player) {
   function damageEnemy(baseDmg) {
     const stats = getTotalStats();
     const dmg = baseDmg + (stats.attack || 0) + (player.tempAttack || 0);
-    enemyHp = Math.max(0, enemyHp - dmg);
+    const tempTarget = {
+      hp: enemyHp,
+      stats: { defense: (enemy.stats?.defense || 0) + enemy.tempDefense },
+    };
+    const applied = applyDamage(tempTarget, dmg);
+    enemyHp = tempTarget.hp;
     enemy.hp = enemyHp;
     updateHpBar(enemyBar, enemyHp, enemyMax);
     enemyBar.classList.add('damage');
     setTimeout(() => enemyBar.classList.remove('damage'), 300);
-    log(`${enemy.name} takes ${dmg} damage`);
+    log(`${enemy.name} takes ${applied} damage`);
   }
 
   function healPlayer(amount) {
@@ -235,12 +243,7 @@ export async function startCombat(enemy, player) {
   }
 
   async function giveDrops() {
-    const list = [];
-    if (Array.isArray(enemy.drops)) {
-      list.push(...enemy.drops);
-    } else if (enemy.drop) {
-      list.push(enemy.drop);
-    }
+    const list = await getEnemyDrops(enemy.id);
     if (!list.length) return;
     await loadItems();
     for (const drop of list) {
@@ -459,8 +462,11 @@ export async function startCombat(enemy, player) {
     let skill = null;
     const playerVulnerable = hasStatus(player, 'vulnerable');
     const behavior = enemy.behavior || 'balanced';
+    const special = isElite(enemy) || isBoss(enemy);
 
-    if (playerVulnerable && statusSkills.length) {
+    if (special && list.length >= 2) {
+      skill = list[Math.floor(Math.random() * list.length)];
+    } else if (playerVulnerable && statusSkills.length) {
       // exploit vulnerability with status attacks
       skill = statusSkills[Math.floor(Math.random() * statusSkills.length)];
     } else if (behavior === 'aggressive' && damageSkills.length) {
