@@ -38,6 +38,10 @@ import * as dreamEcho1 from './npc/dream_echo1.js';
 import * as dreamEcho2 from './npc/dream_echo2.js';
 import * as relicChamber from './npc/relic_chamber.js';
 import * as secondVoice from './npc/second_voice.js';
+import * as echoSelfShadow from './npc/echo_self_shadow.js';
+import * as echoSelfFlame from './npc/echo_self_flame.js';
+import * as echoSelfPeace from './npc/echo_self_peace.js';
+import * as echoMemory from './npc/echo_memory.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -74,7 +78,11 @@ const npcModules = {
   dreamEcho1,
   dreamEcho2,
   relicChamber,
-  secondVoice
+  secondVoice,
+  echoSelfShadow,
+  echoSelfFlame,
+  echoSelfPeace,
+  echoMemory
 };
 
 let hpDisplay;

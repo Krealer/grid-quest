@@ -5,7 +5,9 @@ import {
   discover,
   discoverLore as recordLore,
   setForkChoice,
-  visitedBothForks
+  visitedBothForks,
+  getForkChoice,
+  recordEchoConversation
 } from './player_memory.js';
 import { showDialogue } from './dialogueSystem.js';
 import { chooseClass as selectClass } from './class_state.js';
@@ -170,5 +172,40 @@ export function relicChamber() {
 export function secondVoice() {
   showDialogue('You face a reflection that is wholly your own.', () => {
     unlockPortal15();
+  });
+}
+
+export function echoSelfShadow() {
+  const choice = getForkChoice();
+  const text =
+    choice === 'left'
+      ? 'This shadow mirrors the path you already chose.'
+      : 'I am the you that stepped into darkness when you did not.';
+  showDialogue(text, () => {
+    recordEchoConversation('shadow');
+  });
+}
+
+export function echoSelfFlame() {
+  const choice = getForkChoice();
+  const text =
+    choice === 'right'
+      ? 'Your flames already burn, yet I linger as possibility.'
+      : 'I am the blaze you declined to ignite.';
+  showDialogue(text, () => {
+    recordEchoConversation('flame');
+  });
+}
+
+export function echoSelfPeace() {
+  showDialogue('I am the quiet path you never walked.', () => {
+    recordEchoConversation('peace');
+  });
+}
+
+export function echoMemory() {
+  showDialogue('Fragments swirl, revealing what never came to pass.', () => {
+    discoverLore('memory_not');
+    recordEchoConversation('memory');
   });
 }

@@ -13,7 +13,9 @@ const memory = {
   sealingDust: false,
   mirrorPuzzleSolved: false,
   corruptionPuzzleSolved: false,
-  rotationPuzzleSolved: false
+  rotationPuzzleSolved: false,
+  echoes: new Set(),
+  shadowFightTriggered: false
 };
 
 function loadMemory() {
@@ -41,6 +43,9 @@ function loadMemory() {
       memory.corruptionPuzzleSolved = data.corruptionPuzzleSolved;
     if (typeof data.rotationPuzzleSolved === 'boolean')
       memory.rotationPuzzleSolved = data.rotationPuzzleSolved;
+    if (Array.isArray(data.echoes)) memory.echoes = new Set(data.echoes);
+    if (typeof data.shadowFightTriggered === 'boolean')
+      memory.shadowFightTriggered = data.shadowFightTriggered;
   } catch {
     // ignore
   }
@@ -60,7 +65,9 @@ function saveMemory() {
     sealingDust: memory.sealingDust,
     mirrorPuzzleSolved: memory.mirrorPuzzleSolved,
     corruptionPuzzleSolved: memory.corruptionPuzzleSolved,
-    rotationPuzzleSolved: memory.rotationPuzzleSolved
+    rotationPuzzleSolved: memory.rotationPuzzleSolved,
+    echoes: Array.from(memory.echoes),
+    shadowFightTriggered: memory.shadowFightTriggered
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
@@ -164,4 +171,30 @@ export function solveRotationPuzzle() {
 
 export function isRotationPuzzleSolved() {
   return memory.rotationPuzzleSolved;
+}
+
+export function recordEchoConversation(id) {
+  if (!id) return;
+  if (!memory.echoes.has(id)) {
+    memory.echoes.add(id);
+    saveMemory();
+    document.dispatchEvent(
+      new CustomEvent('echoesUpdated', { detail: { count: memory.echoes.size } })
+    );
+  }
+}
+
+export function getEchoConversationCount() {
+  return memory.echoes.size;
+}
+
+export function markShadowFight() {
+  if (!memory.shadowFightTriggered) {
+    memory.shadowFightTriggered = true;
+    saveMemory();
+  }
+}
+
+export function isShadowFightMarked() {
+  return memory.shadowFightTriggered;
 }

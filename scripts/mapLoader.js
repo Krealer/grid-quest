@@ -7,7 +7,8 @@ import {
   isSealPuzzleSolved,
   isMirrorPuzzleSolved,
   isCorruptionPuzzleSolved,
-  isRotationPuzzleSolved
+  isRotationPuzzleSolved,
+  getEchoConversationCount
 } from './player_memory.js';
 import { isEnemyDefeated } from './enemy.js';
 import { showDialogue } from './dialogueSystem.js';
@@ -109,6 +110,26 @@ export async function loadMap(name) {
         }
       }
     }
+    if (name === 'map15' && getEchoConversationCount() >= 2) {
+      for (const row of data.grid) {
+        for (const cell of row) {
+          if (cell && cell.type === 'D' && cell.target === 'map16.json') {
+            cell.locked = false;
+          }
+        }
+      }
+    }
+    if (name === 'map15') {
+      for (const row of data.grid) {
+        for (const cell of row) {
+          if (cell && cell.type === 'E' && cell.enemyId === 'shadow_inversion') {
+            if (getEchoConversationCount() < 3 || isEnemyDefeated('shadow_inversion')) {
+              cell.type = 'G';
+            }
+          }
+        }
+      }
+    }
   } catch (err) {
     console.error(err);
     showError(`Failed to load map ${name}`);
@@ -178,6 +199,19 @@ document.addEventListener('portal15Unlocked', () => {
     for (const cell of row) {
       if (cell && cell.type === 'D' && cell.target === 'map15.json') {
         cell.locked = false;
+      }
+    }
+  }
+});
+
+document.addEventListener('echoesUpdated', () => {
+  if (!currentGrid) return;
+  if (getEchoConversationCount() >= 2) {
+    for (const row of currentGrid) {
+      for (const cell of row) {
+        if (cell && cell.type === 'D' && cell.target === 'map16.json') {
+          cell.locked = false;
+        }
       }
     }
   }

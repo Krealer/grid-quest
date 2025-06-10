@@ -205,6 +205,17 @@
     "behavior": "aggressive",
     "drops": []
   },
+  "shadow_inversion": {
+    "name": "Shadow Inversion",
+    "hp": 220,
+    "xp": 60,
+    "description": "A twisted reflection drawn from forsaken choices.",
+    "intro": "From the rift emerges a warped silhouette of yourself!",
+    "portrait": "🌑",
+    "skills": ["strike", "weaken"],
+    "behavior": "aggressive",
+    "drops": []
+  },
   "mirror_clone": {
     "name": "Mirror Clone",
     "hp": 80,

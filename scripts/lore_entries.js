@@ -68,6 +68,11 @@ export const loreEntries = [
     id: 'dream_fragment_two',
     title: 'Echoes of the Inner Voice',
     text: 'Whispers in the dreamscape reveal truths long hidden.'
+  },
+  {
+    id: 'memory_not',
+    title: 'A Memory of What Was Not',
+    text: 'Within the fracture you glimpse paths forever untraveled.'
   }
 ];
 
