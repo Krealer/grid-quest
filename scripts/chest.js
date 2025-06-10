@@ -38,6 +38,21 @@ const chestContents = {
     item: 'health_amulet',
     message: 'You feel stronger.'
   },
+  'map04:10,11': {
+    item: 'mana_gem',
+    message: 'You found a glowing Mana Gem.',
+    memoryFlag: 'map04_chest_1_opened'
+  },
+  'map04:7,4': {
+    item: 'ward_leaf',
+    message: 'Inside lies a delicate Ward Leaf.',
+    memoryFlag: 'map04_chest_2_opened'
+  },
+  'map04:18,10': {
+    item: 'old_scroll',
+    message: 'The chest holds an old scroll.',
+    memoryFlag: 'map04_chest_3_opened'
+  },
   'map05:10,9': {
     item: 'mysterious_key',
     message: 'The chest clicks open revealing a strange key.'

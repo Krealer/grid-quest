@@ -43,6 +43,9 @@ export async function handleTileInteraction(
   }
   if (!isInteractable(tile.type)) return;
 
+  // Chests and other interactables are handled through onInteractEffect,
+  // which will grant items and remove opened chests from the map.
+
   if (tile.type === 'D' && tile.requiresItem === 'commander_badge') {
     if (!hasItem('commander_badge')) {
       showDialogue(tile.message || 'The insignia is missing.');

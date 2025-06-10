@@ -6,6 +6,7 @@ import { unlockBlueprint } from './craft_state.js';
 import { discover } from './player_memory.js';
 import { isRelic } from './relic_state.js';
 
+export const DEFAULT_STACK_LIMIT = 99;
 export const inventory = [];
 export const passiveModifiers = {};
 
@@ -60,7 +61,7 @@ export function addItem(item) {
   if (isRelic(parseItemId(item.id).baseId)) return false;
   const baseId = parseItemId(item.id).baseId;
   const data = getItemData(baseId) || {};
-  const limit = data.stackLimit || 99;
+  const limit = data.stackLimit || DEFAULT_STACK_LIMIT;
   const existing = inventory.find((it) => it.id === item.id);
   if (existing) {
     if ((existing.quantity || 0) >= limit) return false;
