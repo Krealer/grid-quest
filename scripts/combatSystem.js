@@ -17,7 +17,7 @@ import {
   removeHealthBonusItem
 } from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
-import { useDefensePotion, useFadedBlade } from './item_logic.js';
+import { useDefensePotion, useFadedBlade, useArcaneSpark } from './item_logic.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
 import { gameState } from './game_state.js';
@@ -152,6 +152,7 @@ export async function startCombat(enemy, player) {
   let guardActive = false;
   let shieldBlock = false;
   let healUsed = false;
+  let sparkUsed = false;
   let playerTurn = true;
 
   function damagePlayer(dmg) {
@@ -421,6 +422,21 @@ export async function startCombat(enemy, player) {
         used = true;
       } else {
         log('No blade available.');
+      }
+    }
+    if (id === 'arcane_spark') {
+      if (sparkUsed) {
+        log('The spark has already been unleashed this battle.');
+      } else {
+        const res = useArcaneSpark();
+        if (res) {
+          damageEnemy(res.damage);
+          log(`Arcane energies erupt for ${res.damage} damage!`);
+          sparkUsed = true;
+          used = true;
+        } else {
+          log('No spark available.');
+        }
       }
     }
     if (used) {

@@ -104,6 +104,14 @@ export const itemData = {
     type: 'quest',
     stackLimit: 1,
     icon: '📜'
+  },
+  arcane_spark: {
+    id: 'arcane_spark',
+    name: 'Arcane Spark',
+    description: 'Unleashes a burst damaging all foes once per battle.',
+    type: 'combat',
+    stackLimit: 3,
+    icon: '✨'
   }
 };
 
