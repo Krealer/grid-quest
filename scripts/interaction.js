@@ -8,6 +8,7 @@ import { getEnemyData } from './enemy.js';
 import { startCombat } from './combatSystem.js';
 import { showDialogue } from './dialogueSystem.js';
 import { getAllSkills, unlockSkill } from './skills.js';
+import { echoAbsoluteIntro } from './dialogue_state.js';
 import * as router from './router.js';
 import { gameState } from './game_state.js';
 import { triggerRotation } from './rotation_puzzle.js';
@@ -81,8 +82,13 @@ export async function handleTileInteraction(
       tile.type = 'G';
       const enemyId = tile.enemyId || 'goblin01';
       const enemy = getEnemyData(enemyId) || { name: 'Enemy', hp: 50 };
-      const intro = enemy.intro || 'A foe appears!';
-      showDialogue(intro, () => startCombat({ id: enemyId, ...enemy }, player));
+      if (enemyId === 'echo_absolute') {
+        echoAbsoluteIntro();
+        startCombat({ id: enemyId, ...enemy }, player);
+      } else {
+        const intro = enemy.intro || 'A foe appears!';
+        showDialogue(intro, () => startCombat({ id: enemyId, ...enemy }, player));
+      }
       break;
     }
     case 'C': {
