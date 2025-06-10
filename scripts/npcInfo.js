@@ -75,6 +75,11 @@ export const npcInfoList = [
     description: 'Guardian of the rotating vault.'
   },
   {
+    id: 'korell',
+    name: 'Korell',
+    description: 'Hermit-technician who unlocks Fusion Crafting.'
+  },
+  {
     id: 'krealer',
     name: 'Krealer',
     description: 'A cryptic entity guarding forbidden knowledge.'
