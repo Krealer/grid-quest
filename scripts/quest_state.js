@@ -1,4 +1,4 @@
-import { hasMemory } from './dialogue_state.js';
+import { hasMemory, setMemory } from './dialogue_state.js';
 import { loadJson } from './dataService.js';
 import { showError } from './errorPrompt.js';
 
@@ -73,3 +73,10 @@ export function getActiveQuests() {
 }
 
 export const questState = state;
+
+// track defeat of the goblin scout for quests
+document.addEventListener('combatEnded', (e) => {
+  if (e.detail.enemyHp <= 0 && e.detail.enemy.id === 'goblin_scout') {
+    setMemory('scout_defeated');
+  }
+});

@@ -7,9 +7,7 @@
     "description": "A mischievous green creature with a sharp grin.",
     "intro": "The goblin snarls and prepares to strike!",
     "portrait": "👺",
-    "skills": [
-      "strike"
-    ],
+    "skills": ["strike"],
     "drops": [
       {
         "item": "goblin_ear",
@@ -25,9 +23,7 @@
     "description": "A shambling undead with vacant eyes.",
     "intro": "The zombie groans and lurches forward!",
     "portrait": "🧟",
-    "skills": [
-      "strike"
-    ],
+    "skills": ["strike"],
     "drops": [
       {
         "item": "bone_fragment",
@@ -43,14 +39,9 @@
     "description": "A scruffy thief eyeing your belongings.",
     "intro": "The bandit lunges for your coin purse!",
     "portrait": "🥷",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
+    "skills": ["strike", "weaken"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "armor_piece", "quantity": 1 }
-    ]
+    "drops": [{ "item": "armor_piece", "quantity": 1 }]
   },
   "S": {
     "name": "Skeleton",
@@ -60,12 +51,8 @@
     "description": "Bones clatter as it advances.",
     "intro": "A skeleton rattles menacingly!",
     "portrait": "💀",
-    "skills": [
-      "strike"
-    ],
-    "drops": [
-      { "item": "bone_fragment", "quantity": 1 }
-    ]
+    "skills": ["strike"],
+    "drops": [{ "item": "bone_fragment", "quantity": 1 }]
   },
   "goblin_scout": {
     "name": "Goblin Scout",
@@ -75,12 +62,10 @@
     "description": "A keen-eyed goblin keeping watch over the hills.",
     "intro": "The scout spots you and blows a horn!",
     "portrait": "🗡️",
-    "skills": [
-      "strike"
-    ],
+    "skills": ["strike"],
     "drops": [
       {
-        "item": "goblin_ear",
+        "item": "scout_blade",
         "quantity": 1
       }
     ]
@@ -93,13 +78,9 @@
     "description": "A nimble archer supporting the goblin ranks.",
     "intro": "A goblin archer looses a piercing shot!",
     "portrait": "🏹",
-    "skills": [
-      "piercing_arrow"
-    ],
+    "skills": ["piercing_arrow"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "goblin_bow", "quantity": 1 }
-    ]
+    "drops": [{ "item": "goblin_bow", "quantity": 1 }]
   },
   "rotting_warrior": {
     "name": "Rotting Warrior",
@@ -109,13 +90,9 @@
     "description": "An undead fighter dripping with stagnant water.",
     "intro": "A rotting warrior lumbers from the marsh!",
     "portrait": "🪓",
-    "skills": [
-      "decay_blow"
-    ],
+    "skills": ["decay_blow"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "cracked_helmet", "quantity": 1 }
-    ]
+    "drops": [{ "item": "bone_shard", "quantity": 1 }]
   },
   "scout_commander": {
     "name": "Scout Commander",
@@ -125,10 +102,7 @@
     "description": "Leader of the goblin scouting parties, armored and alert.",
     "intro": "The scout commander barks orders and charges!",
     "portrait": "🎖️",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
+    "skills": ["power_slash", "call_backup", "crush_defense"],
     "behavior": "cautious",
     "type": "elite",
     "drops": [
@@ -147,14 +121,9 @@
     "description": "A spectral remnant drifting between realms.",
     "intro": "A chill fills the air as a shadowy figure emerges!",
     "portrait": "💮",
-    "skills": [
-      "weaken",
-      "shadowBolt"
-    ],
+    "skills": ["weaken", "shadowBolt"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "mystic_dust", "quantity": 1 }
-    ]
+    "drops": [{ "item": "mystic_dust", "quantity": 1 }]
   },
   "stone_beetle": {
     "name": "Stone Beetle",
@@ -164,13 +133,9 @@
     "description": "A heavy-shelled insect that rumbles with each step.",
     "intro": "Stones crack as a massive beetle scuttles toward you!",
     "portrait": "🐞",
-    "skills": [
-      "strike"
-    ],
+    "skills": ["strike"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "armor_piece", "quantity": 1 }
-    ]
+    "drops": [{ "item": "armor_piece", "quantity": 1 }]
   },
   "phantom_mage": {
     "name": "Phantom Mage",
@@ -180,14 +145,9 @@
     "description": "A ghostly spellcaster muttering forgotten words.",
     "intro": "The air grows cold as a phantom mage materializes!",
     "portrait": "👻",
-    "skills": [
-      "weaken",
-      "shadowBolt"
-    ],
+    "skills": ["weaken", "shadowBolt"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "arcane_crystal", "quantity": 1 }
-    ]
+    "drops": [{ "item": "arcane_crystal", "quantity": 1 }]
   },
   "ghost_echo": {
     "name": "Ghost Echo",
@@ -197,13 +157,9 @@
     "description": "A faint apparition clinging to lost memories.",
     "intro": "A ghostly echo rises from the fallen goblin!",
     "portrait": "👻",
-    "skills": [
-      "weaken"
-    ],
+    "skills": ["weaken"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "faded_letter", "quantity": 1 }
-    ]
+    "drops": [{ "item": "faded_letter", "quantity": 1 }]
   },
   "shadow_lurker": {
     "name": "Shadow Lurker",
@@ -213,14 +169,9 @@
     "description": "A creature that thrives in darkness and strikes unseen.",
     "intro": "A Shadow Lurker melts out of the gloom!",
     "portrait": "👽",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
+    "skills": ["strike", "weaken"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "mysterious_token", "quantity": 1 }
-    ]
+    "drops": [{ "item": "mysterious_token", "quantity": 1 }]
   },
   "flame_hound": {
     "name": "Flame Hound",
@@ -230,14 +181,9 @@
     "description": "A fiery beast wreathed in scorching flames.",
     "intro": "A Flame Hound leaps toward you with blazing jaws!",
     "portrait": "🔥",
-    "skills": [
-      "strike",
-      "emberBite"
-    ],
+    "skills": ["strike", "emberBite"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "purified_token", "quantity": 1 }
-    ]
+    "drops": [{ "item": "purified_token", "quantity": 1 }]
   },
   "ember_wraith": {
     "name": "Ember Wraith",
@@ -247,14 +193,9 @@
     "description": "A spirit burning with both shadow and fire.",
     "intro": "Flames flicker as a wraith coalesces from the darkness!",
     "portrait": "🔥",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
+    "skills": ["strike", "weaken"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "mystic_dust", "quantity": 1 }
-    ]
+    "drops": [{ "item": "mystic_dust", "quantity": 1 }]
   },
   "relic_guardian": {
     "name": "Relic Guardian",
@@ -264,15 +205,10 @@
     "description": "An ancient construct protecting forgotten treasures.",
     "intro": "Stone grinds as the relic guardian awakens!",
     "portrait": "🛡️",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
+    "skills": ["strike", "weaken"],
     "behavior": "aggressive",
     "type": "elite",
-    "drops": [
-      { "item": "blueprint_amulet", "quantity": 1 }
-    ]
+    "drops": [{ "item": "blueprint_amulet", "quantity": 1 }]
   },
   "shadow_pyromancer": {
     "name": "Shadow Pyromancer",
@@ -282,14 +218,9 @@
     "description": "A mage wielding flames that thrive in darkness.",
     "intro": "A pyromancer steps from the gloom, sparks dancing!",
     "portrait": "🧙",
-    "skills": [
-      "weaken",
-      "strike"
-    ],
+    "skills": ["weaken", "strike"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "arcane_crystal", "quantity": 1 }
-    ]
+    "drops": [{ "item": "arcane_crystal", "quantity": 1 }]
   },
   "ruin_watcher": {
     "name": "Ruin Watcher",
@@ -299,13 +230,9 @@
     "description": "A sentinel fashioned from forgotten stone.",
     "intro": "Stone eyes open as a Ruin Watcher stirs!",
     "portrait": "🗿",
-    "skills": [
-      "strike"
-    ],
+    "skills": ["strike"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "cracked_helmet", "quantity": 1 }
-    ]
+    "drops": [{ "item": "cracked_helmet", "quantity": 1 }]
   },
   "echo_sentinel": {
     "name": "Echo Sentinel",
@@ -315,10 +242,7 @@
     "description": "Guardian of the old halls, resonating with power.",
     "intro": "An Echo Sentinel emerges, resonating with menace!",
     "portrait": "🔊",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
+    "skills": ["strike", "weaken"],
     "behavior": "aggressive",
     "type": "elite",
     "drops": [
@@ -336,15 +260,10 @@
     "description": "A reflective entity reacting to remembered choices.",
     "intro": "The mirror's surface ripples, echoing your past decisions.",
     "portrait": "🪞",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
+    "skills": ["strike", "weaken"],
     "behavior": "aggressive",
     "boss": true,
-    "drops": [
-      { "item": "code_file", "quantity": 1 }
-    ]
+    "drops": [{ "item": "code_file", "quantity": 1 }]
   },
   "shadow_inversion": {
     "name": "Shadow Inversion",
@@ -354,15 +273,10 @@
     "description": "A twisted reflection drawn from forsaken choices.",
     "intro": "From the rift emerges a warped silhouette of yourself!",
     "portrait": "🌑",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
+    "skills": ["strike", "weaken"],
     "behavior": "aggressive",
     "boss": true,
-    "drops": [
-      { "item": "mysterious_token", "quantity": 1 }
-    ]
+    "drops": [{ "item": "mysterious_token", "quantity": 1 }]
   },
   "unmoving_shadow": {
     "name": "Unmoving Shadow",
@@ -372,13 +286,9 @@
     "description": "A dark figure that barely reacts to your presence.",
     "intro": "A silent shadow looms, unmoving.",
     "portrait": "🌑",
-    "skills": [
-      "strike"
-    ],
+    "skills": ["strike"],
     "behavior": "passive",
-    "drops": [
-      { "item": "faded_letter", "quantity": 1 }
-    ]
+    "drops": [{ "item": "faded_letter", "quantity": 1 }]
   },
   "mirror_clone": {
     "name": "Mirror Clone",
@@ -388,13 +298,9 @@
     "description": "An echo shaped from your resolve.",
     "intro": "A reflection steps from the mirror!",
     "portrait": "✨",
-    "skills": [
-      "strike"
-    ],
+    "skills": ["strike"],
     "behavior": "aggressive",
-    "drops": [
-      { "item": "code_file", "quantity": 1 }
-    ]
+    "drops": [{ "item": "code_file", "quantity": 1 }]
   },
   "goblin_raider": {
     "name": "Goblin Raider",
@@ -404,12 +310,8 @@
     "description": "A goblin clad in mismatched gear from raids.",
     "intro": "A goblin raider leaps from the shadows!",
     "portrait": "🗡️",
-    "skills": [
-      "scratch"
-    ],
-    "drops": [
-      { "item": "goblin_gear", "quantity": 1 }
-    ]
+    "skills": ["scratch"],
+    "drops": [{ "item": "goblin_gear", "quantity": 1 }]
   },
   "restless_bones": {
     "name": "Restless Bones",
@@ -419,12 +321,8 @@
     "description": "Bones animated by lingering necrotic energy.",
     "intro": "A pile of bones rattles to life!",
     "portrait": "💀",
-    "skills": [
-      "decay_touch"
-    ],
-    "drops": [
-      { "item": "bone_fragment", "quantity": 1 }
-    ]
+    "skills": ["decay_touch"],
+    "drops": [{ "item": "bone_fragment", "quantity": 1 }]
   },
   "echo_absolute": {
     "name": "Echo Absolute",
@@ -434,15 +332,9 @@
     "description": "A culmination of every path you've taken.",
     "intro": "All echoes merge into one overwhelming presence!",
     "portrait": "✨",
-    "skills": [
-      "strike",
-      "memorySurge",
-      "relicGuard"
-    ],
+    "skills": ["strike", "memorySurge", "relicGuard"],
     "behavior": "aggressive",
     "boss": true,
-    "drops": [
-      { "item": "health_amulet", "quantity": 1 }
-    ]
+    "drops": [{ "item": "health_amulet", "quantity": 1 }]
   }
 }
