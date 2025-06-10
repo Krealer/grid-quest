@@ -13,6 +13,8 @@ import * as router from './router.js';
 import { gameState } from './game_state.js';
 import { triggerRotation } from './rotation_puzzle.js';
 import { recordEchoConversation } from './player_memory.js';
+import { getEchoData } from './echo_data.js';
+import { setLoreFlag } from './lore_state.js';
 
 /**
  * Handles double click interactions on tiles.
@@ -146,13 +148,23 @@ export async function handleTileInteraction(
       break;
     }
     case 'echo': {
-      showDialogue(
-        'Fog remembers what we forget. But not all of it returns whole.',
-        () => {
-          recordEchoConversation('fogbound_intro');
-          setMemory('echo_fogbound_intro');
+      const echo = getEchoData(tile.id);
+      if (echo) {
+        for (const line of echo.text) {
+          // eslint-disable-next-line no-await-in-loop
+          await new Promise((resolve) => showDialogue(line, resolve));
         }
-      );
+        recordEchoConversation(tile.id);
+        setLoreFlag(echo.flag);
+        setMemory(echo.flag);
+      }
+      const index = y * cols + x;
+      const tileEl = container.children[index];
+      if (tileEl) {
+        tileEl.classList.remove('echo', 'blocked');
+        tileEl.classList.add('ground');
+      }
+      tile.type = 'G';
       break;
     }
     case 'N': {

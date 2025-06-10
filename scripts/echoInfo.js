@@ -6,6 +6,11 @@ export const echoInfoList = [
       'Fog remembers what we forget. But not all of it returns whole.'
   },
   {
+    id: 'fogbound_fragment',
+    name: 'Fogbound Fragment',
+    description: 'Echo of a self unsure it ever existed.'
+  },
+  {
     id: 'shadow',
     name: 'Shadow Self',
     description: 'A reflection of the path you did not take.'

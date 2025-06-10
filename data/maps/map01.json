@@ -68,7 +68,10 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "echo",
+        "id": "fogbound_fragment"
+      },
       "G",
       "G",
       "G",
