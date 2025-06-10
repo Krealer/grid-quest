@@ -36,10 +36,13 @@ export function getItemCount(nameOrId) {
 export function addItem(item) {
   const qty = item.quantity || 1;
   if (isRelic(parseItemId(item.id).baseId)) return false;
+  const baseId = parseItemId(item.id).baseId;
+  const data = getItemData(baseId) || {};
+  const limit = data.stackLimit || 99;
   const existing = inventory.find((it) => it.id === item.id);
   if (existing) {
-    if ((existing.quantity || 0) >= 99) return false;
-    existing.quantity = Math.min(99, (existing.quantity || 0) + qty);
+    if ((existing.quantity || 0) >= limit) return false;
+    existing.quantity = Math.min(limit, (existing.quantity || 0) + qty);
     discover('items', parseItemId(item.id).baseId);
     document.dispatchEvent(new CustomEvent('inventoryUpdated'));
     return true;
@@ -49,7 +52,12 @@ export function addItem(item) {
     item.description ||
     getItemData(parseItemId(item.id).baseId)?.description ||
     '';
-  inventory.push({ ...item, name, description: desc, quantity: qty });
+  inventory.push({
+    ...item,
+    name,
+    description: desc,
+    quantity: Math.min(qty, limit),
+  });
   if (item.id && item.id.startsWith('blueprint_')) {
     unlockBlueprint(item.id.replace('blueprint_', ''));
   }

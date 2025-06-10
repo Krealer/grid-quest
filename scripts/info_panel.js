@@ -13,6 +13,9 @@ function createEntry(obj) {
   const row = document.createElement('div');
   row.classList.add('info-entry');
   let extra = obj.drops ? `<div class="desc">Drops: ${obj.drops}</div>` : '';
+  if (obj.effects) {
+    extra += `<div class="desc">Effect: ${obj.effects}</div>`;
+  }
   row.innerHTML = `<strong>${obj.name}</strong><div class="desc">${obj.description}</div>${extra}`;
   return row;
 }
