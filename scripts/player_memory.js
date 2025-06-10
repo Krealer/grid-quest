@@ -202,6 +202,10 @@ export function getEchoConversationCount() {
   return memory.echoes.size;
 }
 
+export function getEchoConversations() {
+  return Array.from(memory.echoes);
+}
+
 export function markShadowFight() {
   if (!memory.shadowFightTriggered) {
     memory.shadowFightTriggered = true;
@@ -249,7 +253,9 @@ export function getKrealerFlags() {
 
 export function getKrealerFlagByPrefix(prefix) {
   if (!prefix) return null;
-  return Array.from(memory.krealerFlags).find(f => f.startsWith(prefix)) || null;
+  return (
+    Array.from(memory.krealerFlags).find((f) => f.startsWith(prefix)) || null
+  );
 }
 
 export function allKrealerFlagsSet() {
@@ -263,5 +269,5 @@ export function allKrealerFlagsSet() {
     'flag_krealer7',
     'flag_krealer8'
   ];
-  return ids.every(id => memory.krealerFlags.has(id));
+  return ids.every((id) => memory.krealerFlags.has(id));
 }

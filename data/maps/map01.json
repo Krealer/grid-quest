@@ -1,7 +1,9 @@
 {
   "name": "Fogbound Glade",
   "environment": "fog",
-  "properties": { "fog": true },
+  "properties": {
+    "fog": true
+  },
   "grid": [
     "GWFGFGFGGGGGFGGGGGGG",
     "GGtFGFGFGGGGGFGGGGGG",
@@ -22,7 +24,10 @@
         "type": "N",
         "npc": "first_memory"
       },
-      "G",
+      {
+        "type": "echo",
+        "id": "fogbound_intro"
+      },
       "G",
       "G",
       "G",

@@ -1,36 +1,21 @@
 export const firstMemoryDialogue = [
   {
-    text: 'A faint echo of your past flickers before you.',
+    text: 'The fog parts, revealing a vision from long ago.',
     options: [
       {
-        label: 'Reach toward the memory.',
+        label: 'Watch carefully.',
         goto: 1,
+        memoryFlag: 'first_memory_seen',
         onChoose: () =>
           import('../dialogue_state.js').then((m) =>
             m.discoverLore('first_memory')
-          ),
-        memoryFlag: 'first_memory_touched'
+          )
       },
-      { label: 'Ignore it.', goto: null }
+      { label: 'Let it fade.', goto: null }
     ]
   },
   {
-    text: 'Images swirl, revealing moments you thought lost.',
-    options: [
-      {
-        label: 'Embrace what you see.',
-        goto: 2,
-        memoryFlag: 'first_memory_embraced'
-      },
-      { label: 'Turn away.', goto: 3, memoryFlag: 'first_memory_rejected' }
-    ]
-  },
-  {
-    text: 'Warmth fills you as the vision settles.',
-    options: [{ label: 'Let it fade.', goto: null }]
-  },
-  {
-    text: 'Doubt lingers as the vision dims.',
-    options: [{ label: 'Leave it be.', goto: null }]
+    text: 'The memory shimmers before dissolving back into fog.',
+    options: [{ label: 'Continue on.', goto: null }]
   }
 ];
