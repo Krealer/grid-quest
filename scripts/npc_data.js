@@ -1,4 +1,18 @@
 export const npcAppearance = {
+  first_memory: {
+    nameColor: '#ccccff',
+    font: 'sans-serif',
+    border: '#ccccff',
+    displayTitle: 'Memory Echo',
+    dialogueScale: 1
+  },
+  eryndor: {
+    nameColor: '#99ff99',
+    font: 'serif',
+    border: '#99ff99',
+    displayTitle: 'Eryndor',
+    dialogueScale: 1
+  },
   krealer1: {
     nameColor: '#ff9999',
     font: 'monospace',

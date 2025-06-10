@@ -5,6 +5,11 @@ export const npcInfoList = [
     description: 'Last of the Lorebound, keeper of forgotten tales.'
   },
   {
+    id: 'first_memory',
+    name: 'Memory Echo',
+    description: 'A lingering vision of your earliest recollections.'
+  },
+  {
     id: 'lioran',
     name: 'Lioran',
     description: 'A fugitive scholar hiding among the ruins.'
