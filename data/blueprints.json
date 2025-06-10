@@ -2,14 +2,14 @@
   "health_amulet": {
     "id": "health_amulet",
     "name": "Health Amulet",
-    "ingredients": {"potion_of_health": 2},
+    "ingredients": { "health_potion": 2 },
     "result": "health_amulet",
     "quantity": 1
   },
   "cracked_helmet": {
     "id": "cracked_helmet",
     "name": "Cracked Helmet",
-    "ingredients": {"armor_piece": 3},
+    "ingredients": { "armor_piece": 3 },
     "result": "cracked_helmet",
     "quantity": 1
   }

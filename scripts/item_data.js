@@ -12,7 +12,7 @@ export const itemData = {
     name: 'Health Amulet',
     description: 'Permanently increases max HP when found.',
     type: 'passive',
-    stackLimit: 1,
+    stackLimit: 99,
     icon: '🩸'
   },
   empty_note: {
@@ -51,7 +51,8 @@ export const itemData = {
   faded_blade: {
     id: 'faded_blade',
     name: 'Faded Blade',
-    description: 'A worn weapon once carried by Vaelin. Use in battle to strike harder.',
+    description:
+      'A worn weapon once carried by Vaelin. Use in battle to strike harder.',
     type: 'combat',
     stackLimit: 1,
     icon: '🗡️'
