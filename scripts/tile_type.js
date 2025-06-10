@@ -21,7 +21,7 @@ export function isInteractable(symbol) {
 }
 
 import { showDialogue } from './dialogueSystem.js';
-import { healFull } from './player.js';
+import { healFull, healToFull } from './player.js';
 import { applyDamage } from './logic.js';
 import { triggerDarkTrap, triggerFireTrap } from './trap_logic.js';
 import { getCurrentGrid } from './mapLoader.js';
@@ -212,6 +212,17 @@ export async function onInteractEffect(
         tileEl.classList.add('ground');
       }
       tile.type = 'G';
+      break;
+    }
+    case 'W': {
+      healToFull();
+      showDialogue('The cool water rejuvenates you. HP fully restored.');
+      const index = y * cols + x;
+      const tileEl = container.children[index];
+      if (tileEl) {
+        tileEl.classList.add('ripple');
+        setTimeout(() => tileEl.classList.remove('ripple'), 800);
+      }
       break;
     }
     case 'N': {

@@ -6,6 +6,7 @@ export const gameState = {
   maxHpBonus: 0,
   isDead: false,
   lastEnemyPos: null,
+  inCombat: false
 };
 
 export function saveState() {

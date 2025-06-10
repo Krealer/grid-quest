@@ -67,6 +67,8 @@ export async function startCombat(enemy, player) {
   const gridEl = document.getElementById('game-grid');
   if (!gridEl) return;
 
+  gameState.inCombat = true;
+  gridEl.classList.add('no-interact');
   gridEl.classList.add('blurred');
 
   overlay = document.createElement('div');
@@ -431,7 +433,9 @@ export async function startCombat(enemy, player) {
     if (player) {
       player.hp = playerHp;
     }
+    gameState.inCombat = false;
     gridEl.classList.remove('blurred');
+    gridEl.classList.remove('no-interact');
     overlay.remove();
     overlay = null;
     document.removeEventListener('inventoryUpdated', updateItemsUI);
