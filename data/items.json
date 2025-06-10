@@ -22,7 +22,7 @@
   },
   "map02_key": {
     "name": "Map02 Key",
-    "description": "Opens the way forward.",
+    "description": "Required to unlock the path to the next map.",
     "type": "key",
     "stackLimit": 1,
     "icon": "🗝️"
@@ -92,9 +92,9 @@
   },
   "health_amulet": {
     "name": "Health Amulet",
-    "description": "Permanently increases max HP when found",
+    "description": "Permanently increases max HP when found.",
     "type": "passive",
-    "stackLimit": 1,
+    "stackLimit": 99,
     "icon": "🩸"
   },
   "blueprint_amulet": {
@@ -113,21 +113,21 @@
   },
   "commander_badge": {
     "name": "Commander Badge",
-    "description": "Proof of defeating the scout commander",
+    "description": "Proof of defeating the scout commander.",
     "type": "gear",
     "stackLimit": 1,
     "icon": "🎖️"
   },
   "scout_blade": {
     "name": "Scout Blade",
-    "description": "A light blade carried by goblin scouts",
+    "description": "A light blade once wielded by a goblin scout.",
     "type": "material",
     "stackLimit": 1,
     "icon": "🔪"
   },
   "bone_shard": {
     "name": "Bone Shard",
-    "description": "Fragment useful for crafting defensive charms",
+    "description": "Fragment used in defense-crafting rituals.",
     "type": "material",
     "stackLimit": 99,
     "icon": "🦴"
@@ -141,7 +141,7 @@
   },
   "cracked_helmet": {
     "name": "Cracked Helmet",
-    "description": "Barely held together after many battles.",
+    "description": "Offers minimal protection despite the damage.",
     "type": "gear",
     "stackLimit": 1,
     "icon": "🪖"
@@ -170,11 +170,10 @@
   },
   "faded_blade": {
     "name": "Faded Blade",
-    "description": "Vaelin's weathered weapon. Use in combat to gain +2 attack for the fight.",
+    "description": "A worn weapon once carried by Vaelin. Use in battle to strike harder.",
     "type": "combat",
     "stackLimit": 1,
-    "icon": "🗡️",
-    "effect": { "temporaryAttack": 2 }
+    "icon": "🗡️"
   },
   "mystic_dust": {
     "name": "Mystic Dust",
@@ -199,7 +198,7 @@
   },
   "empty_note": {
     "name": "Empty Note",
-    "description": "A faded note… it's unreadable.",
+    "description": "This chest was empty.",
     "type": "quest",
     "stackLimit": 1,
     "icon": "📝"
@@ -227,24 +226,67 @@
   },
   "sentry_plating": {
     "name": "Sentry Plating",
-    "description": "Metal scrap from a corrupted sentry. Useful for crafting armor.",
+    "description": "Metal scrap useful for future armor crafting.",
     "type": "material",
     "stackLimit": 99,
     "icon": "🛡️"
   },
   "chaos_organ": {
     "name": "Chaos Organ",
-    "description": "A pulsing organ harvested from a rift creature.",
+    "description": "Rare organ from rift creatures used in potent fusions.",
     "type": "material",
     "stackLimit": 99,
     "icon": "🧬"
   },
   "void_residue": {
     "name": "Void Residue",
-    "description": "Residual essence of the void, prized by collectors.",
+    "description": "Traded among scholars for high-level crafting.",
     "type": "material",
     "stackLimit": 99,
     "icon": "🕳️"
+  },
+  "focus_ring": {
+    "name": "Focus Ring",
+    "description": "Slightly improves the accuracy of all skills.",
+    "type": "gear",
+    "stackLimit": 1,
+    "icon": "🎯",
+    "passiveModifier": { "accuracy": 0.1 }
+  },
+  "goblin_bow": {
+    "name": "Goblin Bow",
+    "description": "A crude bow taken from a goblin archer.",
+    "type": "gear",
+    "stackLimit": 1,
+    "icon": "🏹"
+  },
+  "mana_gem": {
+    "name": "Mana Gem",
+    "description": "Refreshes all skill cooldowns once.",
+    "type": "combat",
+    "stackLimit": 99,
+    "icon": "🔮"
+  },
+  "ward_leaf": {
+    "name": "Ward Leaf",
+    "description": "Used later for crafting defense-enhancing items.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🍃"
+  },
+  "old_scroll": {
+    "name": "Old Scroll",
+    "description": "Triggers hidden dialogue with a future ally.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "📜"
+  },
+  "arcane_spark": {
+    "name": "Arcane Spark",
+    "description": "Unleashes a burst damaging all foes once per battle.",
+    "type": "combat",
+    "stackLimit": 3,
+    "icon": "✨"
   },
   "rift_stone": {
     "name": "Rift Stone",
