@@ -7,6 +7,7 @@ const memory = {
   skills: new Set(),
   lore: new Set(),
   maps: new Set(),
+  krealerFlags: new Set(),
   forkChoice: null,
   forksVisited: { left: false, right: false },
   sealPuzzleSolved: false,
@@ -45,6 +46,8 @@ function loadMemory() {
       memory.corruptionPuzzleSolved = data.corruptionPuzzleSolved;
     if (typeof data.rotationPuzzleSolved === 'boolean')
       memory.rotationPuzzleSolved = data.rotationPuzzleSolved;
+    if (Array.isArray(data.krealerFlags))
+      memory.krealerFlags = new Set(data.krealerFlags);
     if (Array.isArray(data.echoes)) memory.echoes = new Set(data.echoes);
     if (typeof data.shadowFightTriggered === 'boolean')
       memory.shadowFightTriggered = data.shadowFightTriggered;
@@ -72,6 +75,7 @@ function saveMemory() {
     mirrorPuzzleSolved: memory.mirrorPuzzleSolved,
     corruptionPuzzleSolved: memory.corruptionPuzzleSolved,
     rotationPuzzleSolved: memory.rotationPuzzleSolved,
+    krealerFlags: Array.from(memory.krealerFlags),
     echoes: Array.from(memory.echoes),
     shadowFightTriggered: memory.shadowFightTriggered,
     ideologyReward: memory.ideologyReward,
@@ -187,7 +191,9 @@ export function recordEchoConversation(id) {
     memory.echoes.add(id);
     saveMemory();
     document.dispatchEvent(
-      new CustomEvent('echoesUpdated', { detail: { count: memory.echoes.size } })
+      new CustomEvent('echoesUpdated', {
+        detail: { count: memory.echoes.size }
+      })
     );
   }
 }
@@ -223,4 +229,16 @@ export function incrementLoreRelicCount() {
 
 export function getLoreRelicCount() {
   return memory.loreRelicCount;
+}
+
+export function setKrealerFlag(id) {
+  if (!id) return;
+  if (!memory.krealerFlags.has(id)) {
+    memory.krealerFlags.add(id);
+    saveMemory();
+  }
+}
+
+export function hasKrealerFlag(id) {
+  return memory.krealerFlags.has(id);
 }

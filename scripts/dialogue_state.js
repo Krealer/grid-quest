@@ -12,7 +12,8 @@ import {
   getForkChoice,
   recordEchoConversation,
   setIdeologyReward,
-  incrementLoreRelicCount
+  incrementLoreRelicCount,
+  setKrealerFlag
 } from './player_memory.js';
 import { getEchoConversationCount } from './player_memory.js';
 import { recordEnding } from './ending_manager.js';
@@ -34,6 +35,7 @@ export function getActiveDialogue() {
 
 export function setMemory(flag) {
   dialogueMemory.add(flag);
+  if (flag && flag.startsWith('flag_krealer')) setKrealerFlag(flag);
 }
 
 export function hasMemory(flag) {
@@ -255,57 +257,57 @@ export async function krealerDialogue() {
 
 export const krealer1Dialogue = [
   {
-    text: 'What do you fear most within yourself?',
-    options: [{ label: 'Contemplate', goto: null }]
+    text: 'Doubt is a weapon. Who truly commands your thoughts?',
+    options: [{ label: 'Proceed', goto: null, memoryFlag: 'flag_krealer1' }]
   }
 ];
 
 export const krealer2Dialogue = [
   {
-    text: 'Which memory keeps you awake at night?',
-    options: [{ label: 'Consider', goto: null }]
+    text: 'Trust is a mask you offer willingly. Whose face lies beneath?',
+    options: [{ label: 'Proceed', goto: null, memoryFlag: 'flag_krealer2' }]
   }
 ];
 
 export const krealer3Dialogue = [
   {
-    text: 'When did doubt first take root in your mind?',
-    options: [{ label: 'Reflect', goto: null }]
+    text: 'Feeling or thinking— which do you bury deepest?',
+    options: [{ label: 'Proceed', goto: null, memoryFlag: 'flag_krealer3' }]
   }
 ];
 
 export const krealer4Dialogue = [
   {
-    text: 'What truth about yourself is hardest to accept?',
-    options: [{ label: 'Acknowledge', goto: null }]
+    text: 'Every step is watched. Do you see yourself reflected?',
+    options: [{ label: 'Proceed', goto: null, memoryFlag: 'flag_krealer4' }]
   }
 ];
 
 export const krealer5Dialogue = [
   {
-    text: 'If you could erase one regret, what would it be?',
-    options: [{ label: 'Ponder', goto: null }]
+    text: 'Predict your rival and the game is won before it begins.',
+    options: [{ label: 'Proceed', goto: null, memoryFlag: 'flag_krealer5' }]
   }
 ];
 
 export const krealer6Dialogue = [
   {
-    text: 'What future possibility frightens you the most?',
-    options: [{ label: 'Muse', goto: null }]
+    text: 'Memories fade. Which one would you erase first?',
+    options: [{ label: 'Proceed', goto: null, memoryFlag: 'flag_krealer6' }]
   }
 ];
 
 export const krealer7Dialogue = [
   {
-    text: 'When you dream, who do you wish to become?',
-    options: [{ label: 'Envision', goto: null }]
+    text: 'Consequences blur when apathy reigns. Does choice matter to you?',
+    options: [{ label: 'Proceed', goto: null, memoryFlag: 'flag_krealer7' }]
   }
 ];
 
 export const krealer8Dialogue = [
   {
-    text: 'What would you sacrifice for perfect peace?',
-    options: [{ label: 'Deliberate', goto: null }]
+    text: 'You are the story you build. Which parts are real?',
+    options: [{ label: 'Proceed', goto: null, memoryFlag: 'flag_krealer8' }]
   }
 ];
 
