@@ -1,3 +1,5 @@
+import { getForkChoice } from './player_memory.js';
+
 export function renderGrid(grid, container, environment = 'clear') {
   container.innerHTML = '';
   const cols = grid[0].length;
@@ -12,13 +14,19 @@ export function renderGrid(grid, container, environment = 'clear') {
   }
 
   grid.forEach((row, y) => {
+    const choice = getForkChoice();
     row.forEach((cell, x) => {
       const div = document.createElement('div');
       div.classList.add('tile');
       div.dataset.x = x;
       div.dataset.y = y;
 
-      switch (cell.type) {
+      let type = cell.type;
+      if (cell.memoryType && choice && cell.memoryType[choice]) {
+        type = cell.memoryType[choice];
+      }
+
+      switch (type) {
         case 'G':
           div.classList.add('ground');
           break;

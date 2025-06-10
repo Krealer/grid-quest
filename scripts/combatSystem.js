@@ -22,6 +22,7 @@ import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
 import { gameState } from './game_state.js';
 import { discover, discoverSkill } from './player_memory.js';
+import { advanceBossPhase, resetBossPhase } from './boss_state.js';
 import {
   setupTabs,
   updateStatusUI,
@@ -96,6 +97,7 @@ export async function startCombat(enemy, player) {
     </div>`;
 
   document.body.appendChild(overlay);
+  resetBossPhase(enemy.id);
   document.dispatchEvent(new CustomEvent('combatStarted'));
   requestAnimationFrame(() => overlay.classList.add('active'));
 
@@ -309,6 +311,7 @@ export async function startCombat(enemy, player) {
       enemy
     });
     if (result === false) return; // invalid action
+    advanceBossPhase(enemy);
     if (enemyHp <= 0) {
       log(`${enemy.name} was defeated!`);
       discover('enemies', enemy.id);
@@ -321,6 +324,7 @@ export async function startCombat(enemy, player) {
     tickStatuses(enemy);
     playerHp = player.hp;
     enemyHp = enemy.hp;
+    advanceBossPhase(enemy);
     updateHpBar(playerBar, playerHp, playerMax);
     updateHpBar(enemyBar, enemyHp, enemyMax);
     updateStatusUI(overlay, player, enemy);

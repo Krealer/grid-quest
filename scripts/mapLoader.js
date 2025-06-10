@@ -9,6 +9,7 @@ import {
   isCorruptionPuzzleSolved,
   isRotationPuzzleSolved
 } from './player_memory.js';
+import { isEnemyDefeated } from './enemy.js';
 import { showDialogue } from './dialogueSystem.js';
 
 let currentGrid = null;
@@ -84,6 +85,15 @@ export async function loadMap(name) {
             cell.type === 'D' &&
             (cell.target === 'map13.json' || cell.target === 'map12.json')
           ) {
+            cell.locked = false;
+          }
+        }
+      }
+    }
+    if (name === 'map13' && isEnemyDefeated('whispered_mirror')) {
+      for (const row of data.grid) {
+        for (const cell of row) {
+          if (cell && cell.type === 'D' && cell.target === 'map14.json') {
             cell.locked = false;
           }
         }

@@ -53,6 +53,11 @@ export const loreEntries = [
     id: 'breathless_night',
     title: 'The Breathless Night',
     text: 'Legends speak of a night so still that even the winds dared not breathe.'
+  },
+  {
+    id: 'reflections_deepself',
+    title: 'Reflections of the Deepself',
+    text: 'Those who confront the Whispered Mirror glimpse echoes of their inner truth.'
   }
 ];
 
