@@ -1,7 +1,12 @@
 import { getForkChoice } from './player_memory.js';
 import { player } from './player.js';
 
-export function renderGrid(grid, container, environment = 'clear', fog = false) {
+export function renderGrid(
+  grid,
+  container,
+  environment = 'clear',
+  fog = false
+) {
   container.innerHTML = '';
   const cols = grid[0].length;
   container.style.display = 'grid';
@@ -44,6 +49,9 @@ export function renderGrid(grid, container, environment = 'clear', fog = false) 
         case 'N':
           div.classList.add('npc', 'blocked');
           if (cell.npc) div.dataset.npc = cell.npc;
+          break;
+        case 'echo':
+          div.classList.add('echo', 'blocked');
           break;
         case 'D':
           div.classList.add('door', 'blocked');

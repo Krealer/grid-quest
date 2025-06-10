@@ -122,6 +122,10 @@ body {
   background: #9b59b6;
 }
 
+.echo {
+  background: #95a5a6;
+}
+
 .door {
   background: #2ecc71;
 }
@@ -141,10 +145,19 @@ body {
 }
 
 @keyframes shake {
-  0%,100% { transform: translateX(0); }
-  25% { transform: translateX(-2px); }
-  50% { transform: translateX(2px); }
-  75% { transform: translateX(-2px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
 }
 
 .tile.trap-dark {
@@ -160,15 +173,28 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3),
+    transparent 70%
+  );
   animation: ripple 1.5s infinite;
   pointer-events: none;
 }
 
 @keyframes ripple {
-  0% { transform: scale(0.9); opacity: 0.4; }
-  50% { transform: scale(1.05); opacity: 0.2; }
-  100% { transform: scale(0.9); opacity: 0.4; }
+  0% {
+    transform: scale(0.9);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.4;
+  }
 }
 
 .tile.glowing {
@@ -177,8 +203,13 @@ body {
 }
 
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 8px rgba(255,255,255,0.7); }
-  50% { box-shadow: 0 0 12px rgba(255,255,255,1); }
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 1);
+  }
 }
 
 @keyframes float {

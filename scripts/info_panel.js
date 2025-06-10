@@ -1,13 +1,14 @@
 import { getAllNpcs } from './npcInfo.js';
 import { loadEnemyInfo, getAllEnemies } from './enemyInfo.js';
 import { loadItemInfo, getAllItems } from './itemInfo.js';
-import { getDiscovered } from './player_memory.js';
+import { getDiscovered, getEchoConversations } from './player_memory.js';
 import { getAllSkillsInfo } from './skillsInfo.js';
 import { getStatusMetadata } from './status_effects.js';
 import { getLoreEntries } from './lore_entries.js';
 import { getAllClasses } from './classesInfo.js';
 import { getChosenClass } from './class_state.js';
 import { loadRelics, getRelicData, getOwnedRelics } from './relic_state.js';
+import { getAllEchoes } from './echoInfo.js';
 
 function createEntry(obj) {
   const row = document.createElement('div');
@@ -71,6 +72,7 @@ export async function updateInfoPanel() {
   const loreContainer = document.getElementById('info-lore');
   const relicContainer = document.getElementById('info-relics');
   const classContainer = document.getElementById('info-class');
+  const echoContainer = document.getElementById('info-echoes');
   if (
     !npcContainer ||
     !enemyContainer ||
@@ -79,7 +81,8 @@ export async function updateInfoPanel() {
     !statusContainer ||
     !loreContainer ||
     !relicContainer ||
-    !classContainer
+    !classContainer ||
+    !echoContainer
   )
     return;
 
@@ -142,6 +145,21 @@ export async function updateInfoPanel() {
     ownedRelics.forEach((id) => {
       const data = getRelicData(id);
       if (data) relicContainer.appendChild(createRelicEntry(data));
+    });
+  }
+
+  echoContainer.innerHTML = '';
+  const seenEchoes = getEchoConversations();
+  if (seenEchoes.length === 0) {
+    const msg = document.createElement('div');
+    msg.classList.add('info-empty');
+    msg.textContent = 'No echoes encountered yet.';
+    echoContainer.appendChild(msg);
+  } else {
+    const allEchoes = getAllEchoes();
+    seenEchoes.forEach((id) => {
+      const data = allEchoes.find((e) => e.id === id);
+      if (data) echoContainer.appendChild(createEntry(data));
     });
   }
 
@@ -221,6 +239,8 @@ function showTab(name) {
     name === 'lore' ? 'block' : 'none';
   document.getElementById('info-class').style.display =
     name === 'class' ? 'block' : 'none';
+  document.getElementById('info-echoes').style.display =
+    name === 'echoes' ? 'block' : 'none';
 }
 
 export async function toggleInfoPanel() {
@@ -263,6 +283,18 @@ export function initInfoPanel() {
       div.style.display = 'none';
       panel.appendChild(div);
     }
+    if (!document.getElementById('info-echoes')) {
+      const ebtn = document.createElement('div');
+      ebtn.classList.add('info-tab-btn');
+      ebtn.dataset.target = 'echoes';
+      ebtn.textContent = 'Echoes';
+      tabsContainer.appendChild(ebtn);
+      const ediv = document.createElement('div');
+      ediv.id = 'info-echoes';
+      ediv.classList.add('info-tab-content');
+      ediv.style.display = 'none';
+      panel.appendChild(ediv);
+    }
   }
   const buttons = document.querySelectorAll('#info-panel .info-tab-btn');
   buttons.forEach((btn) => {
@@ -284,5 +316,9 @@ export function initInfoPanel() {
       const ov = document.getElementById('info-overlay');
       if (ov && ov.classList.contains('active')) updateInfoPanel();
     }
+  });
+  document.addEventListener('echoesUpdated', () => {
+    const ov = document.getElementById('info-overlay');
+    if (ov && ov.classList.contains('active')) updateInfoPanel();
   });
 }
