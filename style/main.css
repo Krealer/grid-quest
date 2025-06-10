@@ -130,6 +130,23 @@ body {
   background-color: #999;
 }
 
+.tile.trap-dark,
+.tile.trap-light {
+  position: relative;
+}
+
+.tile.trap-dark.triggered,
+.tile.trap-light.triggered {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+}
+
 .tile.trap-dark {
   background-color: #555;
 }
@@ -138,8 +155,30 @@ body {
   background-color: #00bfff;
 }
 
+.tile.water.ripple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 70%);
+  animation: ripple 1.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  0% { transform: scale(0.9); opacity: 0.4; }
+  50% { transform: scale(1.05); opacity: 0.2; }
+  100% { transform: scale(0.9); opacity: 0.4; }
+}
+
 .tile.glowing {
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(255,255,255,0.7); }
+  50% { box-shadow: 0 0 12px rgba(255,255,255,1); }
 }
 
 @keyframes float {

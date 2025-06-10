@@ -10,6 +10,11 @@ export const npcInfoList = [
     description: 'An eccentric mystic who speaks in riddles.'
   },
   {
+    id: 'coren',
+    name: 'Coren',
+    description: 'A wary scout who still answers to his commander.'
+  },
+  {
     id: 'goblin_quest_giver',
     name: 'Goblin Trader',
     description: 'Trades goblin gear for mysterious rewards.'
