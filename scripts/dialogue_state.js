@@ -742,3 +742,7 @@ export function flagMetFirstMemory() {
 export function flagEryndorSkillGiven() {
   setMemory('eryndor_skill_given');
 }
+
+export function flagMetLioran() {
+  setMemory('met_lioran');
+}

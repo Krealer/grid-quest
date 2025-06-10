@@ -7,6 +7,27 @@ import { discover } from './player_memory.js';
 import { isRelic } from './relic_state.js';
 
 export const inventory = [];
+export const passiveModifiers = {};
+
+export function recalcPassiveModifiers() {
+  Object.keys(passiveModifiers).forEach(k => delete passiveModifiers[k]);
+  const eq = player.equipment || {};
+  Object.values(eq).forEach((id) => {
+    if (!id) return;
+    const data = getItemData(parseItemId(id).baseId);
+    if (data && data.passiveModifier) {
+      Object.entries(data.passiveModifier).forEach(([k, v]) => {
+        passiveModifiers[k] = (passiveModifiers[k] || 0) + v;
+      });
+    }
+  });
+}
+
+export function getPassiveModifiers() {
+  return { ...passiveModifiers };
+}
+
+recalcPassiveModifiers();
 
 export function parseItemId(id) {
   const match = /^(.+)\+(\d+)$/.exec(id);
@@ -150,6 +171,7 @@ export function equipItem(itemId) {
     player.equipment = { weapon: null, armor: null, accessory: null };
   }
   player.equipment[bonus.slot] = itemId;
+  recalcPassiveModifiers();
   document.dispatchEvent(new CustomEvent('equipmentChanged'));
   return true;
 }
