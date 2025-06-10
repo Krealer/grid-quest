@@ -15,6 +15,8 @@ import {
 import { isEnemyDefeated } from './enemy.js';
 import { showDialogue } from './dialogueSystem.js';
 import { isPortal15Unlocked } from './player_state.js';
+import { finalFlags } from './memory_flags.js';
+import { hasItem } from './inventory.js';
 
 let currentGrid = null;
 let currentEnvironment = 'clear';
@@ -49,6 +51,10 @@ export async function loadMap(name) {
   }
   let data;
   try {
+    if (name === 'null_room' && !hasItem('code_file')) {
+      showDialogue('Obtain code file to enter.');
+      return null;
+    }
     const response = await fetch(`data/maps/${name}.json`);
     if (!response.ok) {
       throw new Error(`Failed to load map ${name}`);
@@ -124,8 +130,15 @@ export async function loadMap(name) {
     if (name === 'map15') {
       for (const row of data.grid) {
         for (const cell of row) {
-          if (cell && cell.type === 'E' && cell.enemyId === 'shadow_inversion') {
-            if (getEchoConversationCount() < 3 || isEnemyDefeated('shadow_inversion')) {
+          if (
+            cell &&
+            cell.type === 'E' &&
+            cell.enemyId === 'shadow_inversion'
+          ) {
+            if (
+              getEchoConversationCount() < 3 ||
+              isEnemyDefeated('shadow_inversion')
+            ) {
               cell.type = 'G';
             }
           }
@@ -139,6 +152,11 @@ export async function loadMap(name) {
             cell.locked = false;
           }
         }
+      }
+    }
+    if (name === 'map17' && finalFlags.bossDefeated) {
+      if (data.grid[10] && data.grid[10][10]) {
+        data.grid[10][10] = { type: 'N', npc: 'krealer' };
       }
     }
   } catch (err) {

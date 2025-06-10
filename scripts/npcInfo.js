@@ -58,6 +58,11 @@ export const npcInfoList = [
     id: 'vaultkeeper',
     name: 'Vaultkeeper',
     description: 'Guardian of the rotating vault.'
+  },
+  {
+    id: 'krealer',
+    name: 'Krealer',
+    description: 'A cryptic entity guarding forbidden knowledge.'
   }
 ];
 

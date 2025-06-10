@@ -80,5 +80,9 @@
   "arcane_crystal": {
     "name": "Arcane Crystal",
     "description": "A crystal infused with raw arcana."
+  },
+  "code_file": {
+    "name": "Code File",
+    "description": "Encrypted data holding mysterious power."
   }
 }

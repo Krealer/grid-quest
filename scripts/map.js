@@ -1,4 +1,7 @@
 import * as router from './router.js';
+import { renderGrid } from './grid.js';
+import { player } from './player.js';
+import { getCurrentGrid, getCurrentEnvironment } from './mapLoader.js';
 
 /**
  * Move the player to a given map and coordinates.
@@ -10,4 +13,14 @@ export async function movePlayerTo(mapId, coords) {
   const name = mapId.replace(/\.json$/, '');
   const { cols } = await router.loadMap(name, coords);
   return cols;
+}
+
+export function spawnNpc(x, y, id) {
+  const grid = getCurrentGrid();
+  const container = document.getElementById('game-grid');
+  if (!grid || !container) return;
+  if (!grid[y] || !grid[y][x]) return;
+  grid[y][x] = { type: 'N', npc: id };
+  renderGrid(grid, container, getCurrentEnvironment());
+  router.drawPlayer(player, container, router.getCols());
 }

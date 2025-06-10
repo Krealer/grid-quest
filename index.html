@@ -1,95 +1,116 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Grid Quest</title>
-  <link rel="stylesheet" href="style/main.css">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-</head>
-<body>
-  <div id="game-grid"></div>
-  <div id="ui-bar">
-    <div id="hp-display"></div>
-    <div id="defense-display"></div>
-    <div id="xp-display"></div>
-    <div class="tab settings-tab">Settings</div>
-    <div class="tab inventory-tab">Inventory</div>
-    <div class="tab quests-tab">Quests</div>
-    <div class="tab status-tab">Status</div>
-    <div class="tab info-tab">Info</div>
-    <div class="tab save-tab">Save</div>
-    <div class="tab load-tab">Load</div>
-  </div>
-  <div id="inventory-overlay" class="inventory-overlay">
-    <div class="inventory-content">
-      <button class="close-btn">&times;</button>
-      <h2>Inventory</h2>
-      <div id="player-stats"></div>
-      <div id="inventory-list"></div>
-      <div id="forge-log" class="forge-log"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Grid Quest</title>
+    <link rel="stylesheet" href="style/main.css" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div id="game-grid"></div>
+    <div id="ui-bar">
+      <div id="hp-display"></div>
+      <div id="defense-display"></div>
+      <div id="xp-display"></div>
+      <div class="tab settings-tab">Settings</div>
+      <div class="tab inventory-tab">Inventory</div>
+      <div class="tab quests-tab">Quests</div>
+      <div class="tab status-tab">Status</div>
+      <div class="tab null-tab disabled">The Null Factor</div>
+      <div class="tab info-tab">Info</div>
+      <div class="tab save-tab">Save</div>
+      <div class="tab load-tab">Load</div>
     </div>
-  </div>
-  <div id="quest-log-overlay" class="quest-overlay">
-    <div class="quest-content">
-      <button class="close-btn">&times;</button>
-      <h2>Active Quests</h2>
-      <div id="quest-log"></div>
-    </div>
-  </div>
-  <div id="status-overlay" class="status-overlay">
-    <div class="status-content">
-      <button class="close-btn">&times;</button>
-      <h2>Player Status</h2>
-      <div id="status-info"></div>
-      <h3>Passive Skills</h3>
-      <div id="status-passives"></div>
-    </div>
-  </div>
-  <div id="info-overlay" class="info-overlay">
-    <div id="info-panel">
-      <button class="close-btn">&times;</button>
-      <div class="info-tabs">
-        <div class="info-tab-btn active" data-target="npcs">NPCs</div>
-        <div class="info-tab-btn" data-target="enemies">Enemies</div>
-        <div class="info-tab-btn" data-target="items">Items</div>
-        <div class="info-tab-btn" data-target="skills">Skills</div>
-        <div class="info-tab-btn" data-target="status">Status</div>
-        <div class="info-tab-btn" data-target="lore">Lore</div>
+    <div id="inventory-overlay" class="inventory-overlay">
+      <div class="inventory-content">
+        <button class="close-btn">&times;</button>
+        <h2>Inventory</h2>
+        <div id="player-stats"></div>
+        <div id="inventory-list"></div>
+        <div id="forge-log" class="forge-log"></div>
       </div>
-      <div id="info-npcs" class="info-tab-content"></div>
-      <div id="info-enemies" class="info-tab-content" style="display:none;"></div>
-      <div id="info-items" class="info-tab-content" style="display:none;"></div>
-      <div id="info-skills" class="info-tab-content" style="display:none;"></div>
-      <div id="info-status" class="info-tab-content" style="display:none;"></div>
-      <div id="info-lore" class="info-tab-content" style="display:none;"></div>
     </div>
-  </div>
-  <div id="settings-overlay" class="settings-overlay">
-    <div class="settings-content">
-      <button class="close-btn">&times;</button>
-      <h2>Settings</h2>
-      <label class="setting-row">
-        <input type="checkbox" id="sound-toggle" /> Sound
-      </label>
-      <label class="setting-row">
-        UI Scale
-        <select id="ui-scale">
-          <option value="small">Small</option>
-          <option value="medium">Medium</option>
-          <option value="large">Large</option>
-        </select>
-      </label>
-      <label class="setting-row">
-        <input type="checkbox" id="anim-toggle" /> Enable Grid Animations
-      </label>
+    <div id="quest-log-overlay" class="quest-overlay">
+      <div class="quest-content">
+        <button class="close-btn">&times;</button>
+        <h2>Active Quests</h2>
+        <div id="quest-log"></div>
+      </div>
     </div>
-  </div>
-  <div id="error-overlay" class="error-overlay">
-    <div class="error-content">
-      <div id="error-message"></div>
-      <button class="error-ok">OK</button>
+    <div id="status-overlay" class="status-overlay">
+      <div class="status-content">
+        <button class="close-btn">&times;</button>
+        <h2>Player Status</h2>
+        <div id="status-info"></div>
+        <h3>Passive Skills</h3>
+        <div id="status-passives"></div>
+      </div>
     </div>
-  </div>
-  <script type="module" src="scripts/main.js"></script>
-</body>
+    <div id="info-overlay" class="info-overlay">
+      <div id="info-panel">
+        <button class="close-btn">&times;</button>
+        <div class="info-tabs">
+          <div class="info-tab-btn active" data-target="npcs">NPCs</div>
+          <div class="info-tab-btn" data-target="enemies">Enemies</div>
+          <div class="info-tab-btn" data-target="items">Items</div>
+          <div class="info-tab-btn" data-target="skills">Skills</div>
+          <div class="info-tab-btn" data-target="status">Status</div>
+          <div class="info-tab-btn" data-target="lore">Lore</div>
+        </div>
+        <div id="info-npcs" class="info-tab-content"></div>
+        <div
+          id="info-enemies"
+          class="info-tab-content"
+          style="display: none"
+        ></div>
+        <div
+          id="info-items"
+          class="info-tab-content"
+          style="display: none"
+        ></div>
+        <div
+          id="info-skills"
+          class="info-tab-content"
+          style="display: none"
+        ></div>
+        <div
+          id="info-status"
+          class="info-tab-content"
+          style="display: none"
+        ></div>
+        <div
+          id="info-lore"
+          class="info-tab-content"
+          style="display: none"
+        ></div>
+      </div>
+    </div>
+    <div id="settings-overlay" class="settings-overlay">
+      <div class="settings-content">
+        <button class="close-btn">&times;</button>
+        <h2>Settings</h2>
+        <label class="setting-row">
+          <input type="checkbox" id="sound-toggle" /> Sound
+        </label>
+        <label class="setting-row">
+          UI Scale
+          <select id="ui-scale">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </label>
+        <label class="setting-row">
+          <input type="checkbox" id="anim-toggle" /> Enable Grid Animations
+        </label>
+      </div>
+    </div>
+    <div id="error-overlay" class="error-overlay">
+      <div class="error-content">
+        <div id="error-message"></div>
+        <button class="error-ok">OK</button>
+      </div>
+    </div>
+    <script type="module" src="scripts/main.js"></script>
+  </body>
 </html>

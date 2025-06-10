@@ -74,6 +74,10 @@ export function useForkedKey() {
   return false;
 }
 
+export function hasCodeFile() {
+  return hasItem('code_file');
+}
+
 export function removeItem(nameOrId, qty = 1) {
   if (isRelic(parseItemId(nameOrId).baseId)) return false;
   const item = inventory.find(
