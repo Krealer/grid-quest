@@ -10,11 +10,13 @@ import { showDialogue } from './dialogueSystem.js';
 import { getAllSkills, unlockSkill } from './skills.js';
 import { echoAbsoluteIntro, setMemory } from './dialogue_state.js';
 import * as router from './router.js';
+import { transitionToMap } from './transition.js';
 import { gameState } from './game_state.js';
 import { triggerRotation } from './rotation_puzzle.js';
 import { recordEchoConversation } from './player_memory.js';
 import { getEchoData } from './echo_data.js';
 import { setLoreFlag } from './lore_state.js';
+import { markItemUsed } from '../info/items.js';
 
 /**
  * Handles double click interactions on tiles.
@@ -46,19 +48,34 @@ export async function handleTileInteraction(
   switch (tile.type) {
     case 'D': {
       const required = tile.key || tile.requiresItem;
-      if (required && !hasItem(required)) {
+      const targetMap = tile.target;
+      if (tile.locked && required && !hasItem(required)) {
         showDialogue('The door is locked.');
         break;
       }
-      const targetMap = tile.target;
       if (required === 'commander_badge') {
         return new Promise((resolve) => {
           showDialogue('Your commander badge unlocks the way.', async () => {
             if (tile.consumeItem) {
               removeItem(required);
+              markItemUsed(required);
               updateInventoryUI();
             }
-            const { cols: newCols } = await router.loadMap(
+            const { cols: newCols } = await transitionToMap(targetMap, tile.spawn);
+            resolve(newCols);
+          });
+        });
+      }
+      if (tile.locked && required && hasItem(required)) {
+        return new Promise((resolve) => {
+          showDialogue('You use the key to unlock the door.', async () => {
+            if (tile.consumeItem) {
+              removeItem(required);
+              markItemUsed(required);
+              updateInventoryUI();
+            }
+            tile.locked = false;
+            const { cols: newCols } = await transitionToMap(
               targetMap,
               tile.spawn
             );
@@ -68,10 +85,11 @@ export async function handleTileInteraction(
       }
       if (required && tile.consumeItem) {
         removeItem(required);
+        markItemUsed(required);
         updateInventoryUI();
       }
       {
-        const { cols: newCols } = await router.loadMap(targetMap, tile.spawn);
+        const { cols: newCols } = await transitionToMap(targetMap, tile.spawn);
         return newCols;
       }
     }

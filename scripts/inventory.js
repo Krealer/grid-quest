@@ -103,6 +103,10 @@ export function removeItem(nameOrId, qty = 1) {
   return false;
 }
 
+export function consumeItem(id, qty = 1) {
+  return removeItem(id, qty);
+}
+
 export function getItemsByType(type) {
   return inventory.filter((it) => {
     const data = getItemData(it.id);

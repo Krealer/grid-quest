@@ -130,6 +130,10 @@ body {
   background: #2ecc71;
 }
 
+.door.locked {
+  background: #1abc9c;
+}
+
 .tile.trap-light {
   background-color: #999;
 }
@@ -1218,4 +1222,21 @@ body {
   font-size: 13px;
   color: #555;
   margin-top: 2px;
+}
+
+#map-overlay.map-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 1000;
+}
+
+#map-overlay.map-transition.active {
+  opacity: 1;
 }

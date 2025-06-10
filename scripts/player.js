@@ -8,6 +8,7 @@ import { getItemBonuses } from './item_stats.js';
 import { getRelicBonuses } from './relic_state.js';
 import { getClassBonuses, getChosenClass } from './class_state.js';
 import { unlockSkill, getAllSkills } from './skills.js';
+import { addItem, removeItem as removeInvItem } from './inventory.js';
 
 export const player = {
   x: 0,
@@ -211,4 +212,12 @@ export function grantSkill(id) {
       showDialogue(`You've learned a new skill: ${skill.name}!`);
     }
   }
+}
+
+export function obtainItem(id, qty = 1) {
+  addItem({ id, quantity: qty });
+}
+
+export function loseItem(id, qty = 1) {
+  removeInvItem(id, qty);
 }

@@ -74,7 +74,17 @@
       },
       "G",
       "G",
-      "G",
+      {
+        "type": "D",
+        "target": "map02.json",
+        "spawn": {
+          "x": 1,
+          "y": 1
+        },
+        "locked": true,
+        "requiresItem": "rusty_key",
+        "consumeItem": true
+      },
       "F"
     ],
     [
@@ -180,16 +190,7 @@
       "G",
       "G",
       "G",
-      {
-        "type": "D",
-        "target": "map02.json",
-        "spawn": {
-          "x": 1,
-          "y": 1
-        },
-        "locked": true,
-        "requiresItem": "rusty_key"
-      },
+      "G",
       "G",
       "G",
       "G",
