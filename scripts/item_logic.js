@@ -23,3 +23,10 @@ export function useFadedBlade() {
   }
   return null;
 }
+
+export function useArcaneSpark() {
+  if (removeItem('arcane_spark', 1)) {
+    return { damage: 6 };
+  }
+  return null;
+}

@@ -29,6 +29,7 @@ import * as lioran from './npc/lioran.js';
 import * as grindle from './npc/grindle.js';
 import * as forgeNpc from './npc/forge_npc.js';
 import * as shadeSage from './npc/shade_sage.js';
+import * as myralen from './npc/myralen.js';
 import * as forkGuide from './npc/fork_guide.js';
 import * as watcher from './npc/watcher.js';
 import * as flamebound from './npc/flamebound.js';
@@ -87,6 +88,7 @@ const npcModules = {
   grindle,
   forge_npc: forgeNpc,
   shade_sage: shadeSage,
+  myralen,
   fork_guide: forkGuide,
   watcher,
   flamebound,

@@ -11,6 +11,8 @@ export const itemDescriptions = {
     "Vaelin's old weapon. Using it in combat grants +2 attack for that battle.",
   mana_gem:
     'Mana Gem \u2013 found in Isolation Nexus. Using it in combat refreshes all skill cooldowns.',
+  arcane_spark:
+    'Arcane Spark \u2013 once per battle, deals 6 damage to every enemy.',
   ward_leaf:
     'Ward Leaf \u2013 a crafting material discovered in Isolation Nexus, prized for defensive rituals.',
   old_scroll:

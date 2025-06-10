@@ -746,3 +746,7 @@ export function flagEryndorSkillGiven() {
 export function flagMetLioran() {
   setMemory('met_lioran');
 }
+
+export function flagObtainedArcaneSpark() {
+  setMemory('obtained_arcane_spark');
+}
