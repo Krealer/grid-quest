@@ -140,7 +140,8 @@ export function removeItem(nameOrId, qty = 1) {
     (it) => it.name === nameOrId || it.id === nameOrId
   );
   if (item) {
-    item.quantity = (item.quantity || 0) - qty;
+    const removeQty = Math.min(qty, item.quantity || 0);
+    item.quantity = (item.quantity || 0) - removeQty;
     if (item.quantity <= 0) {
       const idx = inventory.indexOf(item);
       if (idx !== -1) inventory.splice(idx, 1);

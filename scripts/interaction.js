@@ -3,6 +3,11 @@ import { getCurrentGrid } from './mapLoader.js';
 import { isAdjacent } from './logic.js';
 import { gameState } from './game_state.js';
 import { isInteractable, onInteractEffect } from './tile_type.js';
+import { hasItem, removeItem } from './inventory.js';
+import { updateInventoryUI } from './inventory_state.js';
+import { showDialogue } from './dialogueSystem.js';
+import { markItemUsed } from '../info/items.js';
+import { enterDoor } from './player.js';
 
 /**
  * Handles double click interactions on tiles.
@@ -32,5 +37,18 @@ export async function handleTileInteraction(
 
   const tile = grid[y][x];
   if (!isInteractable(tile.type)) return;
+
+  if (tile.type === 'D' && tile.requiresItem === 'commander_badge') {
+    if (!hasItem('commander_badge')) {
+      showDialogue(tile.message || 'The insignia is missing.');
+      return;
+    }
+    removeItem('commander_badge');
+    markItemUsed('commander_badge');
+    updateInventoryUI();
+    const newCols = await enterDoor(tile.target, tile.spawn);
+    return newCols;
+  }
+
   return onInteractEffect(tile, x, y, player, container, cols, npcModules);
 }
