@@ -98,6 +98,11 @@ export const loreEntries = [
     id: 'relic_resonance',
     title: 'Relic Resonance',
     text: 'Your gathered relics fueled the echo\'s power.'
+  },
+  {
+    id: 'null_factor_accessed',
+    title: 'Null Factor Accessed',
+    text: 'Your mind recalls every trial within the Null Factor.'
   }
 ];
 
