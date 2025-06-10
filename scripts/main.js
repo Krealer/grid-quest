@@ -34,6 +34,10 @@ import * as breathlessNight from './npc/breathless_night.js';
 import * as corruptionShrine from './npc/corruption_shrine.js';
 import * as vaultkeeper from './npc/vaultkeeper.js';
 import * as loreObelisk from './npc/lore_obelisk.js';
+import * as dreamEcho1 from './npc/dream_echo1.js';
+import * as dreamEcho2 from './npc/dream_echo2.js';
+import * as relicChamber from './npc/relic_chamber.js';
+import * as secondVoice from './npc/second_voice.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -66,7 +70,11 @@ const npcModules = {
   breathlessNight,
   corruptionShrine,
   vaultkeeper,
-  loreObelisk
+  loreObelisk,
+  dreamEcho1,
+  dreamEcho2,
+  relicChamber,
+  secondVoice
 };
 
 let hpDisplay;

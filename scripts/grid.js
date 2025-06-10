@@ -7,8 +7,8 @@ export function renderGrid(grid, container, environment = 'clear') {
   container.style.gridTemplateColumns = `repeat(${cols}, 32px)`;
 
   Array.from(container.classList)
-    .filter(c => c.startsWith('env-'))
-    .forEach(c => container.classList.remove(c));
+    .filter((c) => c.startsWith('env-'))
+    .forEach((c) => container.classList.remove(c));
   if (environment) {
     container.classList.add(`env-${environment}`);
   }
@@ -55,6 +55,10 @@ export function renderGrid(grid, container, environment = 'clear') {
         default:
           div.classList.add('ground');
       }
+
+      if (cell.flow) div.classList.add('flowing');
+      if (cell.glow) div.classList.add('glowing');
+      if (typeof cell.opacity === 'number') div.style.opacity = cell.opacity;
 
       div.classList.add('fog-hidden');
 
