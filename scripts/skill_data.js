@@ -19,5 +19,19 @@ export const skillData = {
     damage: 4,
     accuracy: 1,
     description: 'Necrotic hit that leaves a lingering curse.'
+  },
+  piercing_arrow: {
+    id: 'piercing_arrow',
+    name: 'Piercing Arrow',
+    damage: 6,
+    accuracy: 1,
+    description: 'Ranged shot that punches through defenses.'
+  },
+  decay_blow: {
+    id: 'decay_blow',
+    name: 'Decay Blow',
+    damage: 8,
+    accuracy: 1,
+    description: 'Heavy strike with a chance to weaken the target.'
   }
 };

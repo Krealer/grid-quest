@@ -89,39 +89,32 @@
     "name": "Goblin Archer",
     "hp": 45,
     "stats": { "attack": 3, "defense": 0 },
-    "xp": 7,
-    "description": "This goblin prefers attacking from a distance.",
-    "intro": "A goblin archer nocks an arrow your way!",
+    "xp": 6,
+    "description": "A nimble archer supporting the goblin ranks.",
+    "intro": "A goblin archer looses a piercing shot!",
     "portrait": "🏹",
     "skills": [
-      "poisonSting"
+      "piercing_arrow"
     ],
     "behavior": "aggressive",
     "drops": [
-      {
-        "item": "goblin_ear",
-        "quantity": 1
-      }
+      { "item": "goblin_bow", "quantity": 1 }
     ]
   },
   "rotting_warrior": {
     "name": "Rotting Warrior",
-    "hp": 60,
-    "stats": { "attack": 3, "defense": 1 },
+    "hp": 65,
+    "stats": { "attack": 4, "defense": 2 },
     "xp": 8,
-    "description": "A decayed soldier still clinging to its rusted blade.",
-    "intro": "The rotting warrior staggers forward with a groan!",
+    "description": "An undead fighter dripping with stagnant water.",
+    "intro": "A rotting warrior lumbers from the marsh!",
     "portrait": "🪓",
     "skills": [
-      "strike",
-      "poisonSting"
+      "decay_blow"
     ],
     "behavior": "aggressive",
     "drops": [
-      {
-        "item": "rotten_tooth",
-        "quantity": 1
-      }
+      { "item": "cracked_helmet", "quantity": 1 }
     ]
   },
   "scout_commander": {

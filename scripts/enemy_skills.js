@@ -150,6 +150,42 @@ export const enemySkills = {
       log(`${enemy.name} spreads decay for ${applied} damage!`);
     }
   },
+  piercing_arrow: {
+    id: 'piercing_arrow',
+    name: 'Piercing Arrow',
+    icon: '🏹',
+    description: '6 damage that partially ignores defense.',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 6 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg + 1);
+      log(`${enemy.name} fires a piercing arrow for ${applied} damage!`);
+    },
+  },
+  decay_blow: {
+    id: 'decay_blow',
+    name: 'Decay Blow',
+    icon: '🪓',
+    description: '8 damage with a chance to inflict Weakened.',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['weakened'],
+    statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
+    effect({ enemy, damagePlayer, applyStatus, log, player }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 8 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      if (Math.random() < 0.5) {
+        applyStatus(player, 'weakened', 2);
+        log('You feel your strength fading!');
+      }
+      log(`${enemy.name} crushes for ${applied} damage!`);
+    }
+  },
 };
 
 export function getEnemySkill(id) {
