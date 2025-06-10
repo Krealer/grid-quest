@@ -1,7 +1,7 @@
 import { gameState } from './game_state.js';
 import { addItem } from './inventory.js';
 import { updateInventoryUI } from './inventory_state.js';
-import { giveRelic } from './dialogue_state.js';
+import { giveRelic, setMemory } from './dialogue_state.js';
 import { getItemData, loadItems } from './item_loader.js';
 import { increaseMaxHp } from './player.js';
 import { unlockSkillsFromItem, unlockSkillsFromRelic } from './skills.js';
@@ -12,7 +12,10 @@ const chestContents = {
     message: 'Nestled within are a rusty key and a timeworn letter.'
   },
   'map02:5,5': { item: 'silver_key', message: 'You found a silver key.' },
-  'map02:8,12': { message: 'This chest was empty.' },
+  'map02:8,12': {
+    message: 'This chest was empty. A whisper stirs in your thoughts.',
+    memoryFlag: 'empty_chest_seen'
+  },
   'map02:15,15': { item: 'potion_of_health' },
   'map03:10,10': { item: 'health_amulet' },
   'map05:10,9': {
@@ -46,6 +49,9 @@ export async function openChest(id, player) {
   gameState.openedChests.add(id);
   await loadItems();
   const config = chestContents[id] || {};
+  if (config.memoryFlag) {
+    setMemory(config.memoryFlag);
+  }
   let item = null;
   let items = null;
   let unlockedSkills = [];

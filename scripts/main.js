@@ -20,7 +20,7 @@ import { isMovementDisabled } from './movement.js';
 import { hasCodeFile, hasItem } from './inventory.js';
 import { movePlayerTo, spawnEnemy } from './map.js';
 import * as eryndor from './npc/eryndor.js';
-import * as lioran from './npc/lioran.js';
+import * as coren from './npc/coren.js';
 import * as goblinQuestGiver from './npc/goblin_quest_giver.js';
 import * as arvalin from './npc/arvalin.js';
 import * as grindle from './npc/grindle.js';
@@ -75,7 +75,7 @@ import {
 let isInBattle = false;
 const npcModules = {
   eryndor,
-  lioran,
+  coren,
   goblinQuestGiver,
   arvalin,
   grindle,
@@ -368,6 +368,9 @@ document.addEventListener('DOMContentLoaded', async () => {
           ) {
             completeQuest('scout_tracking');
           }
+        }
+        if (enemyId === 'zombie01') {
+          setMemory('flag_zombie_defeated');
         }
       }
     });

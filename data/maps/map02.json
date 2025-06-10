@@ -107,12 +107,19 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "G",
+        "opacity": 0.8
+      },
       {
         "type": "N",
-        "npc": "lioran"
+        "npc": "coren",
+        "glow": true
       },
-      "G",
+      {
+        "type": "G",
+        "opacity": 0.8
+      },
       "G",
       "G",
       "G",
@@ -136,13 +143,19 @@
       {
         "type": "T"
       },
+      "F",
+      "F",
       "G",
       "G",
       "G",
-      "G",
-      "G",
-      "G",
-      "G",
+      {
+        "type": "G",
+        "opacity": 0.8
+      },
+      {
+        "type": "G",
+        "opacity": 0.8
+      },
       "G",
       "G",
       "G",
@@ -164,8 +177,8 @@
         "type": "t"
       },
       "G",
-      "G",
-      "G",
+      "F",
+      "F",
       "G",
       "G",
       "G",
@@ -267,16 +280,20 @@
       "G",
       "G",
       {
-        "type": "W"
+        "type": "W",
+        "flow": true
       },
       {
-        "type": "W"
+        "type": "W",
+        "flow": true
       },
       {
-        "type": "W"
+        "type": "W",
+        "flow": true
       },
       {
-        "type": "W"
+        "type": "W",
+        "flow": true
       },
       "G",
       "G",
