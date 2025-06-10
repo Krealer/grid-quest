@@ -47,6 +47,15 @@ import * as echoMemory from './npc/echo_memory.js';
 import * as ember from './npc/ember.js';
 import * as veil from './npc/veil.js';
 import * as krealer from './npc/krealer.js';
+import * as krealer1 from './npc/krealer1.js';
+import * as krealer2 from './npc/krealer2.js';
+import * as krealer3 from './npc/krealer3.js';
+import * as krealer4 from './npc/krealer4.js';
+import * as krealer5 from './npc/krealer5.js';
+import * as krealer6 from './npc/krealer6.js';
+import * as krealer7 from './npc/krealer7.js';
+import * as krealer8 from './npc/krealer8.js';
+import { initNullTab } from './ui_state.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -90,7 +99,15 @@ const npcModules = {
   echoMemory,
   ember,
   veil,
-  krealer
+  krealer,
+  krealer1,
+  krealer2,
+  krealer3,
+  krealer4,
+  krealer5,
+  krealer6,
+  krealer7,
+  krealer8
 };
 
 let hpDisplay;
@@ -235,16 +252,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  async function gotoNullFactor() {
-    if (!hasCodeFile()) {
-      showDialogue('Obtain code file to enter.');
-      return;
-    }
-    await movePlayerTo('null_room', { x: 1, y: 1 });
-  }
-
   if (nullTab) {
-    nullTab.addEventListener('click', gotoNullFactor);
+    initNullTab(nullTab);
     updateNullTab();
   }
   document.addEventListener('inventoryUpdated', updateNullTab);

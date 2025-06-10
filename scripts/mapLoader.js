@@ -222,6 +222,12 @@ document.addEventListener('goConvergence', async () => {
   await movePlayerTo('map07', { x: 1, y: 1 });
 });
 
+// Load the Null Factor when requested
+document.addEventListener('openNullRoom', async () => {
+  const { movePlayerTo } = await import('./map.js');
+  await movePlayerTo('null_room', { x: 1, y: 1 });
+});
+
 document.addEventListener('portal15Unlocked', () => {
   if (!currentGrid) return;
   for (const row of currentGrid) {

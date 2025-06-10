@@ -253,6 +253,62 @@ export async function krealerDialogue() {
   });
 }
 
+export const krealer1Dialogue = [
+  {
+    text: 'What do you fear most within yourself?',
+    options: [{ label: 'Contemplate', goto: null }]
+  }
+];
+
+export const krealer2Dialogue = [
+  {
+    text: 'Which memory keeps you awake at night?',
+    options: [{ label: 'Consider', goto: null }]
+  }
+];
+
+export const krealer3Dialogue = [
+  {
+    text: 'When did doubt first take root in your mind?',
+    options: [{ label: 'Reflect', goto: null }]
+  }
+];
+
+export const krealer4Dialogue = [
+  {
+    text: 'What truth about yourself is hardest to accept?',
+    options: [{ label: 'Acknowledge', goto: null }]
+  }
+];
+
+export const krealer5Dialogue = [
+  {
+    text: 'If you could erase one regret, what would it be?',
+    options: [{ label: 'Ponder', goto: null }]
+  }
+];
+
+export const krealer6Dialogue = [
+  {
+    text: 'What future possibility frightens you the most?',
+    options: [{ label: 'Muse', goto: null }]
+  }
+];
+
+export const krealer7Dialogue = [
+  {
+    text: 'When you dream, who do you wish to become?',
+    options: [{ label: 'Envision', goto: null }]
+  }
+];
+
+export const krealer8Dialogue = [
+  {
+    text: 'What would you sacrifice for perfect peace?',
+    options: [{ label: 'Deliberate', goto: null }]
+  }
+];
+
 export function echoAbsoluteIntro() {
   const echoes = getEchoConversationCount();
   const relics = getOwnedRelics().length;
