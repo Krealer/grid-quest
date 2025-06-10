@@ -19,6 +19,18 @@ export function initFog(gridContainer, colsCount) {
   });
 }
 
+export function revealAll() {
+  if (!container) return;
+  container.querySelectorAll('.tile').forEach((tile) => {
+    tile.classList.remove('fog-hidden');
+    const x = Number(tile.dataset.x);
+    const y = Number(tile.dataset.y);
+    if (!Number.isNaN(x) && !Number.isNaN(y)) {
+      revealed.add(`${x},${y}`);
+    }
+  });
+}
+
 export function reveal(x, y) {
   if (!container) return;
   const key = `${x},${y}`;

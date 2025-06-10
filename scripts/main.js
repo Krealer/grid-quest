@@ -3,7 +3,7 @@ import { handleTileEffects } from './gameEngine.js';
 import { toggleInventoryView } from './inventory_state.js';
 import { toggleQuestLog } from './quest_log.js';
 import { player, getTotalStats, stepTo } from './player.js';
-import { initFog, reveal } from './fog_system.js';
+import { initFog, reveal, revealAll } from './fog_system.js';
 import { getRelicBonuses } from './relic_state.js';
 import { loadEnemyData, defeatEnemy } from './enemy.js';
 import { setMemory } from './dialogue_state.js';
@@ -310,6 +310,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       const { cols: newCols } = await router.loadMap(mapName);
       cols = newCols;
+      initFog(container, cols);
+      if (router.getCurrentMapName() === 'map01') {
+        revealAll();
+      } else {
+        reveal(player.x, player.y);
+      }
       player.maxHp = 100 + (gameState.maxHpBonus || 0);
       player.hp = Math.min(player.hp, player.maxHp);
       updateHpDisplay();
@@ -324,7 +330,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const { cols: newCols } = await router.loadMap('map01');
     cols = newCols;
     initFog(container, cols);
-    reveal(player.x, player.y);
+    if (router.getCurrentMapName() === 'map01') {
+      revealAll();
+    } else {
+      reveal(player.x, player.y);
+    }
     updateHpDisplay();
     updateXpDisplay();
 
@@ -343,7 +353,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (newCols) {
         cols = newCols;
         initFog(container, cols);
-        reveal(player.x, player.y);
+        if (router.getCurrentMapName() === 'map01') {
+          revealAll();
+        } else {
+          reveal(player.x, player.y);
+        }
         updateHpDisplay();
       }
     });
@@ -381,6 +395,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.addEventListener('playerRespawned', (e) => {
       cols = e.detail.cols;
+      initFog(container, cols);
+      revealAll();
       updateHpDisplay();
       updateDefenseDisplay();
       updateXpDisplay();
