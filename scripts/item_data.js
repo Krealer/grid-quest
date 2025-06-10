@@ -80,6 +80,30 @@ export const itemData = {
     type: 'gear',
     stackLimit: 1,
     icon: '🪖'
+  },
+  mana_gem: {
+    id: 'mana_gem',
+    name: 'Mana Gem',
+    description: 'Refreshes all skill cooldowns once.',
+    type: 'combat',
+    stackLimit: 99,
+    icon: '🔮'
+  },
+  ward_leaf: {
+    id: 'ward_leaf',
+    name: 'Ward Leaf',
+    description: 'Used later for crafting defense-enhancing items.',
+    type: 'material',
+    stackLimit: 99,
+    icon: '🍃'
+  },
+  old_scroll: {
+    id: 'old_scroll',
+    name: 'Old Scroll',
+    description: 'Triggers hidden dialogue with a future ally.',
+    type: 'quest',
+    stackLimit: 1,
+    icon: '📜'
   }
 };
 
