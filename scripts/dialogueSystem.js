@@ -5,23 +5,20 @@ import { unlockSkillsFromItem, getAllSkills } from './skills.js';
 import { dialogueMemory, setMemory, giveBlueprint, triggerUpgrade, triggerReroll } from './dialogue_state.js';
 import { getQuests, completeQuest } from './quest_state.js';
 import { showError } from './errorPrompt.js';
+import { loadJson } from './dataService.js';
 
 let dialogueLines = {};
 let dataLoaded = false;
 
 async function loadDialogData() {
   if (dataLoaded) return;
-  try {
-    const res = await fetch('data/dialog.json');
-    if (res.ok) {
-      dialogueLines = await res.json();
-    }
-  } catch (err) {
-    console.error('Failed to load dialog data', err);
+  const data = await loadJson('data/dialog.json');
+  if (data) {
+    dialogueLines = data;
+  } else {
     showError('Failed to load dialogue');
-  } finally {
-    dataLoaded = true;
   }
+  dataLoaded = true;
 }
 
 export async function showDialogue(keyOrText, callback = () => {}) {

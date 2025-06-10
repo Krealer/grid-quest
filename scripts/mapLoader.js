@@ -1,4 +1,5 @@
 import { showError } from './errorPrompt.js';
+import { loadJson } from './dataService.js';
 import {
   markForkVisited,
   visitedBothForks,
@@ -57,11 +58,11 @@ export async function loadMap(name) {
       showDialogue('Obtain code file to enter.');
       return null;
     }
-    const response = await fetch(`data/maps/${name}.json`);
-    if (!response.ok) {
-      throw new Error(`Failed to load map ${name}`);
+    data = await loadJson(`data/maps/${name}.json`);
+    if (!data) {
+      showError(`Failed to load map ${name}`);
+      return null;
     }
-    data = await response.json();
     if (name === 'map06_left') markForkVisited('left');
     if (name === 'map06_right') markForkVisited('right');
     if (name === 'map07' && visitedBothForks()) {
@@ -177,7 +178,7 @@ export async function loadMap(name) {
     }
   } catch (err) {
     console.error(err);
-    showError(`Failed to load map ${name}`);
+    showError(err.message || `Failed to load map ${name}`);
     throw err;
   }
   currentEnvironment = data.environment || 'clear';

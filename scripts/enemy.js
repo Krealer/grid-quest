@@ -1,19 +1,15 @@
 import { gameState } from './game_state.js';
 import { showError } from './errorPrompt.js';
+import { loadJson } from './dataService.js';
 
 let enemyData = {};
 
 export async function loadEnemyData() {
   if (Object.keys(enemyData).length) return enemyData;
-  try {
-    const res = await fetch('data/enemies.json');
-    if (res.ok) {
-      enemyData = await res.json();
-    } else {
-      throw new Error('Failed to load enemies');
-    }
-  } catch (err) {
-    console.error(err);
+  const data = await loadJson('data/enemies.json');
+  if (data) {
+    enemyData = data;
+  } else {
     showError('Failed to load enemies');
   }
   return enemyData;
