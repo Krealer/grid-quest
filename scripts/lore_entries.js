@@ -48,6 +48,11 @@ export const loreEntries = [
     id: 'beneath_the_silence',
     title: 'Beneath the Silence',
     text: 'Whispers tell of secrets hidden in the quietest depths.'
+  },
+  {
+    id: 'breathless_night',
+    title: 'The Breathless Night',
+    text: 'Legends speak of a night so still that even the winds dared not breathe.'
   }
 ];
 

@@ -2,6 +2,7 @@ import { gameState } from './game_state.js';
 import { disableMovement, enableMovement } from './movement.js';
 import { showDialogue } from './dialogueSystem.js';
 import { movePlayerTo } from './map.js';
+import { handleMoveCorruption } from './corruption_state.js';
 import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
 import { getItemBonuses } from './item_stats.js';
 import { getRelicBonuses } from './relic_state.js';
@@ -17,12 +18,12 @@ export const player = {
   xpToNextLevel: 10,
   classId: getChosenClass() || null,
   stats: {
-    defense: 0,
+    defense: 0
   },
   equipment: {
     weapon: null,
     armor: null,
-    accessory: null,
+    accessory: null
   },
   learnedSkills: [],
   passives: [],
@@ -30,7 +31,7 @@ export const player = {
   bonusHpGiven: {},
   tempDefense: 0,
   tempAttack: 0,
-  statuses: [],
+  statuses: []
 };
 
 export function moveTo(x, y) {
@@ -41,9 +42,8 @@ export function moveTo(x, y) {
 export function stepTo(x, y) {
   player.x = x;
   player.y = y;
-  document.dispatchEvent(
-    new CustomEvent('playerMoved', { detail: { x, y } })
-  );
+  handleMoveCorruption(x, y);
+  document.dispatchEvent(new CustomEvent('playerMoved', { detail: { x, y } }));
 }
 
 export function takeDamage(amount) {
@@ -71,7 +71,9 @@ export async function respawn() {
   const gridEl = document.getElementById('game-grid');
   if (gridEl) gridEl.classList.remove('death-screen');
   enableMovement();
-  document.dispatchEvent(new CustomEvent('playerRespawned', { detail: { cols } }));
+  document.dispatchEvent(
+    new CustomEvent('playerRespawned', { detail: { cols } })
+  );
 }
 
 export const respawnPlayer = respawn;
@@ -89,7 +91,9 @@ export function increaseDefense(amount) {
   if (!player.stats) player.stats = { defense: 0 };
   player.stats.defense = (player.stats.defense || 0) + amount;
   document.dispatchEvent(
-    new CustomEvent('playerDefenseChanged', { detail: { defense: player.stats.defense } })
+    new CustomEvent('playerDefenseChanged', {
+      detail: { defense: player.stats.defense }
+    })
   );
 }
 
@@ -112,7 +116,7 @@ export function levelUp() {
   player.maxHp += 1;
   player.hp = player.maxHp;
   const unlocked = unlockPassivesForLevel(player.level);
-  unlocked.forEach(id => {
+  unlocked.forEach((id) => {
     const p = getPassive(id);
     const name = p?.name || id;
     document.dispatchEvent(
@@ -124,7 +128,11 @@ export function levelUp() {
   );
   document.dispatchEvent(
     new CustomEvent('playerXpChanged', {
-      detail: { xp: player.xp, level: player.level, xpToNext: player.xpToNextLevel },
+      detail: {
+        xp: player.xp,
+        level: player.level,
+        xpToNext: player.xpToNextLevel
+      }
     })
   );
 }
@@ -141,7 +149,11 @@ export function gainXP(amount) {
   if (!leveled) {
     document.dispatchEvent(
       new CustomEvent('playerXpChanged', {
-        detail: { xp: player.xp, level: player.level, xpToNext: player.xpToNextLevel },
+        detail: {
+          xp: player.xp,
+          level: player.level,
+          xpToNext: player.xpToNextLevel
+        }
       })
     );
   }
@@ -154,7 +166,7 @@ export function getPlayerSummary() {
     xp: player.xp,
     xpToNextLevel: player.xpToNextLevel,
     classId: player.classId,
-    passives: Array.isArray(player.passives) ? [...player.passives] : [],
+    passives: Array.isArray(player.passives) ? [...player.passives] : []
   };
 }
 

@@ -5,7 +5,8 @@ import {
   hasSealingDust,
   consumeSealingDust,
   isSealPuzzleSolved,
-  isMirrorPuzzleSolved
+  isMirrorPuzzleSolved,
+  isCorruptionPuzzleSolved
 } from './player_memory.js';
 import { showDialogue } from './dialogueSystem.js';
 
@@ -36,6 +37,10 @@ export async function loadMap(name) {
     showDialogue('Ancient glyphs refuse to yield.');
     return null;
   }
+  if (name === 'map12' && !isCorruptionPuzzleSolved()) {
+    showDialogue('A malignant force repels you.');
+    return null;
+  }
   let data;
   try {
     const response = await fetch(`data/maps/${name}.json`);
@@ -56,6 +61,15 @@ export async function loadMap(name) {
       for (const row of data.grid) {
         for (const cell of row) {
           if (cell && cell.type === 'D' && cell.target === 'map10.json') {
+            cell.locked = false;
+          }
+        }
+      }
+    }
+    if (name === 'map11' && isCorruptionPuzzleSolved()) {
+      for (const row of data.grid) {
+        for (const cell of row) {
+          if (cell && cell.type === 'D' && cell.target === 'map12.json') {
             cell.locked = false;
           }
         }
