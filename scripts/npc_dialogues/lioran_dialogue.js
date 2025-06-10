@@ -47,6 +47,28 @@ export const lioranDialogue = [
       { label: "You’re not making any sense.", goto: 2 },
       { label: "I’ll be careful.", goto: null, memoryFlag: "lioran_warning_taken" }
     ]
+  },
+  {
+    text: "I saw how you handled that scout. The commander will notice your meddling.",
+    options: [
+      { label: "He won't be an issue either.", goto: null },
+      { label: "Why warn me?", goto: 6 }
+    ],
+    condition: (state) => state.memory.has('scout_defeated')
+  },
+  {
+    text: "Because I'm hiding from them. Call me a fugitive scholar, if titles matter.",
+    options: [
+      { label: "Need any help?", goto: 7 },
+      { label: "Stay safe, then.", goto: null }
+    ]
+  },
+  {
+    text: "Bring me any field notes you find. Knowledge deserves a keeper.",
+    options: [
+      { label: "I'll keep an eye out.", goto: null, memoryFlag: 'lioran_sidequest' },
+      { label: "Another time.", goto: null }
+    ]
   }
 ];
 

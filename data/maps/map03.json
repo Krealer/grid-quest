@@ -5,17 +5,32 @@
     "GGGGGGGGGGGGGGGGGGGG",
     "GGGGGGGGGGGGGGGGGGGG",
     "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
     [
       "G",
       "G",
       "G",
+      {
+        "type": "G",
+        "opacity": 0.8
+      },
       "G",
       "G",
       "G",
       "G",
       "G",
       "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    [
       "G",
       "G",
       "G",
@@ -24,6 +39,15 @@
         "type": "E",
         "enemyId": "goblin_archer"
       },
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
       "G",
       "G",
       "G",
@@ -42,7 +66,7 @@
         "enemyId": "goblin_scout"
       },
       "G",
-      "G",
+      "t",
       "G",
       "G",
       "G",
@@ -56,10 +80,9 @@
       "G",
       "G"
     ],
-    "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGTGGGGGGGGGGGGG",
     "GGGGGGGGGGGGGGGGGGGG",
     [
-      "G",
       "G",
       "G",
       "G",
@@ -76,6 +99,10 @@
       "G",
       {
         "type": "E",
+        "enemyId": "rotting_warrior"
+      },
+      {
+        "type": "E",
         "enemyId": "scout_commander"
       },
       "G",
@@ -88,7 +115,7 @@
       "G",
       {
         "type": "N",
-        "npc": "arvalin"
+        "npc": "lioran"
       },
       "G",
       "G",
@@ -96,11 +123,9 @@
       "G",
       "G",
       "G",
-      "G",
-      {
-        "type": "t"
-      },
-      "G",
+      "F",
+      "F",
+      "F",
       "G",
       "G",
       "G",
@@ -130,9 +155,7 @@
       {
         "type": "t"
       },
-      {
-        "type": "C"
-      },
+      "G",
       {
         "type": "T"
       },
@@ -172,33 +195,14 @@
       "G",
       "G"
     ],
-    [
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      {
-        "type": "E",
-        "enemyId": "rotting_warrior"
-      },
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G",
-      "G"
-    ],
     "GGGGGGGGGGGGGGGGGGGG",
+    "GGGGGGGGFGGGGGGGGGGG",
     [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
       "G",
       "G",
       "G",
@@ -216,6 +220,26 @@
         "enemyId": "goblin_archer"
       },
       "G",
+      "G"
+    ],
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "N",
+        "npc": "field_note_disintegration"
+      },
+      "G",
+      "F",
+      "G",
+      "F",
+      "G",
+      "G",
+      "G",
+      "G",
       "G",
       "G",
       "G",
@@ -223,8 +247,31 @@
       "G",
       "G"
     ],
-    "GGGGGGGGGGGGGGGGGGGG",
-    "GGGGGGGGGGGGGGGGGGGG",
+    [
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "F",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      "G",
+      {
+        "type": "G",
+        "opacity": 0.8
+      },
+      "G",
+      "G",
+      "G"
+    ],
     "GGGGGGGGGGGGGGGGGGGG",
     "GGGGGGGGGGGGGGGGGGGG",
     [
@@ -242,7 +289,16 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "D",
+        "target": "map04.json",
+        "locked": true,
+        "requiresItem": "commander_badge",
+        "spawn": {
+          "x": 10,
+          "y": 1
+        }
+      },
       "G",
       "G",
       "G",

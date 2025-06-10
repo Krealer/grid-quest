@@ -179,6 +179,12 @@ export function dreamEchoTwo() {
   });
 }
 
+export function fieldNoteDisintegration() {
+  showDialogue('Fragments detail how decay reduces all to dust.', () => {
+    discoverLore('field_note_disintegration');
+  });
+}
+
 export function relicChamber() {
   showDialogue('The chamber resonates with ancient power.', () => {
     unlockRelicSlot();
