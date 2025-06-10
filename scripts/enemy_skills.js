@@ -5,7 +5,10 @@ export const enemySkills = {
   strike: {
     id: 'strike',
     name: 'Strike',
+    icon: '⚔️',
     description: 'A basic attack dealing 8 damage.',
+    cost: 0,
+    cooldown: 0,
     aiType: 'damage',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
@@ -17,7 +20,10 @@ export const enemySkills = {
   poisonSting: {
     id: 'poisonSting',
     name: 'Poison Sting',
+    icon: '☠️',
     description: 'Deal 5 damage and inflict Poisoned.',
+    cost: 0,
+    cooldown: 0,
     aiType: 'status',
     applies: ['poisoned'],
     statuses: [{ target: 'player', id: 'poisoned', duration: 2 }],
@@ -32,7 +38,10 @@ export const enemySkills = {
   weaken: {
     id: 'weaken',
     name: 'Weaken',
+    icon: '🤕',
     description: 'Inflict Weakened for 2 turns.',
+    cost: 0,
+    cooldown: 0,
     aiType: 'status',
     applies: ['weakened'],
     statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
@@ -44,7 +53,10 @@ export const enemySkills = {
   memorySurge: {
     id: 'memorySurge',
     name: 'Memory Surge',
+    icon: '💥',
     description: 'Damage increases with every echo remembered.',
+    cost: 0,
+    cooldown: 0,
     aiType: 'damage',
     effect({ enemy, damagePlayer, log }) {
       const count = getEchoConversationCount();
@@ -57,7 +69,10 @@ export const enemySkills = {
   relicGuard: {
     id: 'relicGuard',
     name: 'Relic Guard',
+    icon: '🛡️',
     description: 'Raises defense based on relics owned.',
+    cost: 0,
+    cooldown: 0,
     aiType: 'buff',
     effect({ enemy, log }) {
       const relics = getOwnedRelics().length;
@@ -69,7 +84,10 @@ export const enemySkills = {
   shadowBolt: {
     id: 'shadowBolt',
     name: 'Shadow Bolt',
+    icon: '🌑',
     description: '6 damage and inflicts Haunted.',
+    cost: 0,
+    cooldown: 0,
     aiType: 'status',
     applies: ['haunted'],
     statuses: [{ target: 'player', id: 'haunted', duration: 2 }],
@@ -84,7 +102,10 @@ export const enemySkills = {
   emberBite: {
     id: 'emberBite',
     name: 'Ember Bite',
+    icon: '🔥',
     description: 'Chomp for 6 damage and burn the target.',
+    cost: 0,
+    cooldown: 0,
     aiType: 'status',
     applies: ['burned'],
     statuses: [{ target: 'player', id: 'burned', duration: 2 }],
