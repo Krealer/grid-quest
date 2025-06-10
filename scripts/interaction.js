@@ -33,9 +33,14 @@ export async function handleTileInteraction(
   const y = Number(target.dataset.y);
   const grid = getCurrentGrid();
   if (!grid || !grid[y] || !grid[y][x]) return;
-  if (!isAdjacent(player.x, player.y, x, y)) return;
 
   const tile = grid[y][x];
+  const sameTile = player.x === x && player.y === y;
+  if (tile.type === 'echo') {
+    if (!isAdjacent(player.x, player.y, x, y) && !sameTile) return;
+  } else if (!isAdjacent(player.x, player.y, x, y)) {
+    return;
+  }
   if (!isInteractable(tile.type)) return;
 
   if (tile.type === 'D' && tile.requiresItem === 'commander_badge') {

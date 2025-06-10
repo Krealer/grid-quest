@@ -36,3 +36,7 @@ export function hasLoreFlag(flag) {
 export function getLoreFlags() {
   return Array.from(flags);
 }
+
+export function isEchoVergeTriggered() {
+  return flags.has('echo_verge_triggered');
+}

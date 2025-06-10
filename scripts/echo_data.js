@@ -12,8 +12,9 @@ export const echoData = {
     id: 'verge_whispers',
     flag: 'echo_verge_triggered',
     text: [
-      'A faint whisper rides the rain-soaked breeze.',
-      "Something ancient stirs beyond the water's edge."
+      'You stand at the edge of something unfinished.',
+      'Voices echo backwards in time… but remember nothing.',
+      'The verge remembers what you try to forget.'
     ]
   }
 };
