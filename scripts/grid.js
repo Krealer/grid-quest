@@ -75,6 +75,7 @@ export function renderGrid(
           div.classList.add('ground');
       }
 
+      if (cell.locked) div.classList.add('locked');
       if (cell.flow) div.classList.add('flowing');
       if (cell.glow) div.classList.add('glowing');
       if (typeof cell.opacity === 'number') div.style.opacity = cell.opacity;
