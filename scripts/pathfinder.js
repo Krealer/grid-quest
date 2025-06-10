@@ -1,6 +1,6 @@
-// Tiles the player can move onto. Doors are no longer walkable since
-// interactions are handled separately on double-click.
-const WALKABLE = new Set(['G', 't', 'T', 'W']);
+// Pathfinding utility for grid based movement. Walkability is
+// determined by tile_type.js so the logic stays centralized.
+import { isWalkable } from './tile_type.js';
 
 import PriorityQueue from './priorityQueue.js';
 
@@ -13,7 +13,7 @@ export function findPath(mapGrid, startX, startY, targetX, targetY) {
     targetY < 0 ||
     targetX >= cols ||
     targetY >= rows ||
-    !WALKABLE.has(mapGrid[targetY][targetX].type)
+    !isWalkable(mapGrid[targetY][targetX].type)
   ) {
     return [];
   }
@@ -57,7 +57,7 @@ export function findPath(mapGrid, startX, startY, targetX, targetY) {
         ny < 0 ||
         nx >= cols ||
         ny >= rows ||
-        !WALKABLE.has(mapGrid[ny][nx].type)
+        !isWalkable(mapGrid[ny][nx].type)
       ) {
         continue;
       }

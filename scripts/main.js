@@ -1,5 +1,5 @@
 import { getCurrentGrid, isFogEnabled } from './mapLoader.js';
-import { handleTileEffects } from './gameEngine.js';
+import { onStepEffect, isWalkable } from './tile_type.js';
 import { toggleInventoryView } from './inventory_state.js';
 import { toggleQuestLog } from './quest_log.js';
 import { player, getTotalStats, stepTo } from './player.js';
@@ -154,8 +154,8 @@ function handleTileClick(e, player, container, cols) {
   const grid = getCurrentGrid();
   const tileType = grid[y][x].type;
 
-  // Doors are interacted with via double-click, so they are not walkable.
-  if (!['G', 't', 'T', 'W'].includes(tileType)) return;
+  // Use the centralized tile definitions to determine walkability.
+  if (!isWalkable(tileType)) return;
 
   const path = findPath(grid, player.x, player.y, x, y);
   if (path.length === 0) return;
@@ -171,7 +171,7 @@ function handleTileClick(e, player, container, cols) {
     stepTo(pos.x, pos.y);
     router.drawPlayer(player, container, cols);
     const tile = grid[player.y][player.x];
-    await handleTileEffects(tile.type, player, player.x, player.y);
+    await onStepEffect(tile.type, player, player.x, player.y);
     updateHpDisplay();
     index++;
     setTimeout(() => requestAnimationFrame(step), 150);
