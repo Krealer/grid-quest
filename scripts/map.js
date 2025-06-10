@@ -24,3 +24,13 @@ export function spawnNpc(x, y, id) {
   renderGrid(grid, container, getCurrentEnvironment());
   router.drawPlayer(player, container, router.getCols());
 }
+
+export function spawnEnemy(x, y, id) {
+  const grid = getCurrentGrid();
+  const container = document.getElementById('game-grid');
+  if (!grid || !container) return;
+  if (!grid[y] || !grid[y][x]) return;
+  grid[y][x] = { type: 'E', enemyId: id };
+  renderGrid(grid, container, getCurrentEnvironment());
+  router.drawPlayer(player, container, router.getCols());
+}

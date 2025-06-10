@@ -139,6 +139,12 @@ export function breathlessNight() {
   });
 }
 
+export function firstMemory() {
+  showDialogue('A faded etching recalls your first memory.', () => {
+    discoverLore('first_memory');
+  });
+}
+
 export function corruptionShrine() {
   showDialogue('A purifying light washes over you.', () => {
     clearCorruption();

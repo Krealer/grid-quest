@@ -7,7 +7,10 @@ import { increaseMaxHp } from './player.js';
 import { unlockSkillsFromItem, unlockSkillsFromRelic } from './skills.js';
 
 const chestContents = {
-  'map01:11,3': { item: 'rusty_key' },
+  'map01:11,3': {
+    items: ['rusty_key', 'faded_letter'],
+    message: 'Nestled within are a rusty key and a timeworn letter.'
+  },
   'map02:5,5': { item: 'silver_key', message: 'You found a silver key.' },
   'map02:8,12': { message: 'This chest was empty.' },
   'map02:15,15': { item: 'potion_of_health' },
@@ -44,8 +47,32 @@ export async function openChest(id, player) {
   await loadItems();
   const config = chestContents[id] || {};
   let item = null;
+  let items = null;
   let unlockedSkills = [];
-  if (config.item) {
+  if (Array.isArray(config.items)) {
+    items = [];
+    for (const itm of config.items) {
+      const data = getItemData(itm);
+      if (data) {
+        addItem({ ...data, id: itm, quantity: 1 });
+        items.push(data);
+        unlockedSkills.push(...unlockSkillsFromItem(itm));
+        if (player && itm === 'potion_of_health') {
+          increaseMaxHp(1);
+          gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
+        }
+        if (player && itm === 'health_amulet') {
+          if (!player.bonusHpGiven?.health_amulet) {
+            increaseMaxHp(2);
+            gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
+            if (!player.bonusHpGiven) player.bonusHpGiven = {};
+            player.bonusHpGiven.health_amulet = true;
+          }
+        }
+      }
+    }
+    updateInventoryUI();
+  } else if (config.item) {
     item = getItemData(config.item);
     if (item) {
       const qty = config.quantity || 1;
@@ -71,5 +98,5 @@ export async function openChest(id, player) {
     giveRelic(config.relic);
     unlockedSkills.push(...unlockSkillsFromRelic(config.relic));
   }
-  return { item, message: config.message || null, unlockedSkills };
+  return { item, items, message: config.message || null, unlockedSkills };
 }

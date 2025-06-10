@@ -80,6 +80,7 @@ export async function handleTileInteraction(
         tileEl.classList.add('ground');
       }
       tile.type = 'G';
+      gameState.lastEnemyPos = { x, y };
       const enemyId = tile.enemyId || 'goblin01';
       const enemy = getEnemyData(enemyId) || { name: 'Enemy', hp: 50 };
       if (enemyId === 'echo_absolute') {
@@ -108,7 +109,11 @@ export async function handleTileInteraction(
           if (result.message) {
             showDialogue(result.message);
           }
-          if (result.item) {
+          if (Array.isArray(result.items)) {
+            result.items.forEach((it) => {
+              if (it) showDialogue(`You obtained ${it.name}!`);
+            });
+          } else if (result.item) {
             showDialogue(`You obtained ${result.item.name}!`);
           }
           if (Array.isArray(result.unlockedSkills)) {

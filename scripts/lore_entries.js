@@ -70,6 +70,11 @@ export const loreEntries = [
     text: 'Whispers in the dreamscape reveal truths long hidden.'
   },
   {
+    id: 'first_memory',
+    title: 'First Memory',
+    text: 'A hazy recollection surfaces, hinting at your earliest steps.'
+  },
+  {
     id: 'memory_not',
     title: 'A Memory of What Was Not',
     text: 'Within the fracture you glimpse paths forever untraveled.'

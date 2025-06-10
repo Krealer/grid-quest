@@ -22,7 +22,17 @@ export const eryndorDialogue = [
         give: "ancient_scroll",
         memoryFlag: "received_scroll",
         condition: (state) => !state.inventory['ancient_scroll']
-      }
+      },
+      { label: "What is this place?", goto: 3 },
+      { label: "What happened to your order?", goto: 4 }
     ]
+  },
+  {
+    text: "Mist hides the path, but also preserves it. Many wander lost.",
+    options: [{ label: "I see.", goto: 2 }]
+  },
+  {
+    text: "Time and turmoil scattered the Lorebound. Only echoes remain.",
+    options: [{ label: "Back.", goto: 2 }]
   }
 ];
