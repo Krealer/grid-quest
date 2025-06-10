@@ -2,7 +2,7 @@
 import { getCurrentGrid } from './mapLoader.js';
 import { isAdjacent } from './logic.js';
 import { isChestOpened, openChest } from './chest.js';
-import { hasItem, removeItem } from './inventory.js';
+import { hasItem, removeItem, useKey } from './inventory.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { getEnemyData } from './enemy.js';
 import { startCombat } from './combatSystem.js';
@@ -11,6 +11,7 @@ import { getAllSkills, unlockSkill } from './skills.js';
 import { echoAbsoluteIntro, setMemory } from './dialogue_state.js';
 import * as router from './router.js';
 import { transitionToMap } from './transition.js';
+import { enterDoor } from './player.js';
 import { gameState } from './game_state.js';
 import { triggerRotation } from './rotation_puzzle.js';
 import { recordEchoConversation } from './player_memory.js';
@@ -49,8 +50,8 @@ export async function handleTileInteraction(
     case 'D': {
       const required = tile.key || tile.requiresItem;
       const targetMap = tile.target;
-      if (tile.locked && required && !hasItem(required)) {
-        showDialogue('The door is locked.');
+      if (required && !hasItem(required)) {
+        showDialogue('It\u2019s locked.');
         break;
       }
       if (required === 'commander_badge') {
@@ -66,30 +67,27 @@ export async function handleTileInteraction(
           });
         });
       }
-      if (tile.locked && required && hasItem(required)) {
+      if (tile.locked && required) {
         return new Promise((resolve) => {
           showDialogue('You use the key to unlock the door.', async () => {
             if (tile.consumeItem) {
-              removeItem(required);
+              useKey(required);
               markItemUsed(required);
               updateInventoryUI();
             }
             tile.locked = false;
-            const { cols: newCols } = await transitionToMap(
-              targetMap,
-              tile.spawn
-            );
+            const { cols: newCols } = await enterDoor(targetMap, tile.spawn);
             resolve(newCols);
           });
         });
       }
       if (required && tile.consumeItem) {
-        removeItem(required);
+        useKey(required);
         markItemUsed(required);
         updateInventoryUI();
       }
       {
-        const { cols: newCols } = await transitionToMap(targetMap, tile.spawn);
+        const { cols: newCols } = await enterDoor(targetMap, tile.spawn);
         return newCols;
       }
     }

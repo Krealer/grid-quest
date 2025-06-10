@@ -122,6 +122,14 @@ export function useForkedKey() {
   return false;
 }
 
+export function useKey(id) {
+  if (hasItem(id)) {
+    removeItem(id);
+    return true;
+  }
+  return false;
+}
+
 export function hasCodeFile() {
   return hasItem('code_file');
 }

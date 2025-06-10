@@ -2,6 +2,7 @@ import { gameState } from './game_state.js';
 import { disableMovement, enableMovement } from './movement.js';
 import { showDialogue } from './dialogueSystem.js';
 import { movePlayerTo } from './map.js';
+import { transitionToMap } from './transition.js';
 import { handleMoveCorruption } from './corruption_state.js';
 import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
 import { getItemBonuses } from './item_stats.js';
@@ -236,4 +237,9 @@ export function obtainItem(id, qty = 1) {
 
 export function loseItem(id, qty = 1) {
   removeInvItem(id, qty);
+}
+
+export async function enterDoor(target, spawn) {
+  const { cols } = await transitionToMap(target, spawn);
+  return cols;
 }
