@@ -412,6 +412,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       updateXpDisplay();
     });
     document.addEventListener('playerDefenseChanged', updateDefenseDisplay);
+    document.addEventListener('playerHpChanged', updateHpDisplay);
     document.addEventListener('playerXpChanged', updateXpDisplay);
     document.addEventListener('playerLevelUp', updateXpDisplay);
     document.addEventListener('passivesUpdated', () => {

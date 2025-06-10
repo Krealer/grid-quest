@@ -128,6 +128,7 @@ export function toggleInventoryView() {
 // Keep UI in sync when inventory changes
 document.addEventListener('inventoryUpdated', updateInventoryUI);
 document.addEventListener('playerDefenseChanged', updateInventoryUI);
+document.addEventListener('playerHpChanged', updateInventoryUI);
 document.addEventListener('playerXpChanged', updateInventoryUI);
 document.addEventListener('playerLevelUp', updateInventoryUI);
 document.addEventListener('relicsUpdated', updateInventoryUI);

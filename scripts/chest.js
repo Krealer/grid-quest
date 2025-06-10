@@ -34,9 +34,9 @@ const chestContents = {
     message: 'This chest was empty.',
     memoryFlag: 'empty_chest_seen'
   },
-  'map03:10,10': {
+  'map03:10,12': {
     item: 'health_amulet',
-    message: 'A pedestal glows softly, revealing a radiant amulet.'
+    message: 'You feel stronger.'
   },
   'map05:10,9': {
     item: 'mysterious_key',

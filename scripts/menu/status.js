@@ -80,6 +80,7 @@ export function toggleStatusPanel() {
 }
 
 document.addEventListener('passivesUpdated', updateStatusPanel);
+document.addEventListener('playerHpChanged', updateStatusPanel);
 document.addEventListener('playerXpChanged', updateStatusPanel);
 document.addEventListener('playerLevelUp', updateStatusPanel);
 document.addEventListener('equipmentChanged', updateStatusPanel);

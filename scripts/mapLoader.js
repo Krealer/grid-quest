@@ -119,9 +119,9 @@ export async function loadMap(name) {
           }
         }
       }
-      if (!gameState.openedChests.has('map03:10,10')) {
-        if (data.grid[10] && data.grid[10][10]) {
-          data.grid[10][10] = { type: 'C', glow: true };
+      if (!gameState.openedChests.has('map03:10,12')) {
+        if (data.grid[12] && data.grid[12][10]) {
+          data.grid[12][10] = { type: 'C', glow: true };
         }
       }
     }
