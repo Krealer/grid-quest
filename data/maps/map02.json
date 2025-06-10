@@ -57,7 +57,10 @@
       "F",
       "F",
       "G",
-      "F",
+      {
+        "type": "echo",
+        "id": "verge_whispers"
+      },
       "G",
       "F",
       "G",
