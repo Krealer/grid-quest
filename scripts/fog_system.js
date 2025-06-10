@@ -1,5 +1,6 @@
 let cols = 0;
 let container = null;
+let active = false;
 const revealed = new Set();
 
 document.addEventListener('playerMoved', (e) => {
@@ -9,18 +10,23 @@ document.addEventListener('playerMoved', (e) => {
   }
 });
 
-export function initFog(gridContainer, colsCount) {
+export function initFog(gridContainer, colsCount, enable = false) {
   container = gridContainer;
   cols = colsCount;
+  active = enable;
   revealed.clear();
   if (!container) return;
   container.querySelectorAll('.tile').forEach((tile) => {
-    tile.classList.add('fog-hidden');
+    if (active) {
+      tile.classList.add('fog-hidden');
+    } else {
+      tile.classList.remove('fog-hidden');
+    }
   });
 }
 
 export function revealAll() {
-  if (!container) return;
+  if (!container || !active) return;
   container.querySelectorAll('.tile').forEach((tile) => {
     tile.classList.remove('fog-hidden');
     const x = Number(tile.dataset.x);
@@ -32,7 +38,7 @@ export function revealAll() {
 }
 
 export function reveal(x, y) {
-  if (!container) return;
+  if (!container || !active) return;
   const key = `${x},${y}`;
   if (revealed.has(key)) return;
   revealed.add(key);
@@ -44,6 +50,11 @@ export function reveal(x, y) {
 }
 
 export function isRevealed(x, y) {
+  if (!active) return true;
   const key = `${x},${y}`;
   return revealed.has(key);
+}
+
+export function isFogActive() {
+  return active;
 }

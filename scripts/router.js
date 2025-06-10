@@ -41,13 +41,13 @@ export async function loadMap(filename, spawnPoint) {
   if (!result) {
     return { grid: getCurrentGrid(), cols };
   }
-  const { grid, environment } = result;
+  const { grid, environment, properties } = result;
   currentMap = name;
   gameState.currentMap = name;
   gameState.environment = environment;
   discoverMap(name);
   cols = grid[0].length;
-  renderGrid(grid, container, environment);
+  renderGrid(grid, container, environment, properties?.fog);
 
   // Mark chests that were previously opened
   for (const id of gameState.openedChests) {
@@ -72,7 +72,7 @@ export async function loadMap(filename, spawnPoint) {
   }
 
   drawPlayer(player, container, cols);
-  return { grid, cols };
+  return { grid, cols, properties };
 }
 
 export function getCols() {

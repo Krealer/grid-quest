@@ -1,6 +1,7 @@
 {
   "name": "Shrouded Labyrinth",
   "environment": "fog",
+  "properties": { "fog": true },
   "grid": [
     [
       "N",

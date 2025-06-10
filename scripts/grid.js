@@ -1,7 +1,7 @@
 import { getForkChoice } from './player_memory.js';
 import { player } from './player.js';
 
-export function renderGrid(grid, container, environment = 'clear') {
+export function renderGrid(grid, container, environment = 'clear', fog = false) {
   container.innerHTML = '';
   const cols = grid[0].length;
   container.style.display = 'grid';
@@ -71,7 +71,7 @@ export function renderGrid(grid, container, environment = 'clear') {
       if (cell.glow) div.classList.add('glowing');
       if (typeof cell.opacity === 'number') div.style.opacity = cell.opacity;
 
-      div.classList.add('fog-hidden');
+      if (fog) div.classList.add('fog-hidden');
 
       container.appendChild(div);
     });
