@@ -90,6 +90,14 @@ export function increaseMaxHp(amount) {
   player.hp = Math.min(player.hp, player.maxHp);
 }
 
+export function applyItemReward(id) {
+  if (id === 'health_amulet' && !player.bonusHpGiven?.health_amulet) {
+    increaseMaxHp(1);
+    if (!player.bonusHpGiven) player.bonusHpGiven = {};
+    player.bonusHpGiven.health_amulet = true;
+  }
+}
+
 export function increaseDefense(amount) {
   if (!player.stats) player.stats = { defense: 0 };
   player.stats.defense = (player.stats.defense || 0) + amount;

@@ -1,5 +1,5 @@
 import { getItemData } from './item_loader.js';
-import { player, increaseMaxHp } from './player.js';
+import { player, applyItemReward } from './player.js';
 import { gameState } from './game_state.js';
 import { getItemBonuses } from './item_stats.js';
 import { unlockBlueprint } from './craft_state.js';
@@ -45,11 +45,11 @@ export function addItem(item) {
     if ((existing.quantity || 0) >= limit) return false;
     existing.quantity = Math.min(limit, (existing.quantity || 0) + qty);
     discover('items', parseItemId(item.id).baseId);
-    if (baseId === 'health_amulet' && !player.bonusHpGiven?.health_amulet) {
-      increaseMaxHp(1);
-      gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
-      if (!player.bonusHpGiven) player.bonusHpGiven = {};
-      player.bonusHpGiven.health_amulet = true;
+    if (baseId === 'health_amulet') {
+      if (!player.bonusHpGiven?.health_amulet) {
+        gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
+      }
+      applyItemReward(baseId);
     }
     document.dispatchEvent(new CustomEvent('inventoryUpdated'));
     return true;
@@ -69,11 +69,11 @@ export function addItem(item) {
     unlockBlueprint(item.id.replace('blueprint_', ''));
   }
   discover('items', parseItemId(item.id).baseId);
-  if (baseId === 'health_amulet' && !player.bonusHpGiven?.health_amulet) {
-    increaseMaxHp(1);
-    gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
-    if (!player.bonusHpGiven) player.bonusHpGiven = {};
-    player.bonusHpGiven.health_amulet = true;
+  if (baseId === 'health_amulet') {
+    if (!player.bonusHpGiven?.health_amulet) {
+      gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
+    }
+    applyItemReward(baseId);
   }
   document.dispatchEvent(new CustomEvent('inventoryUpdated'));
   return true;
@@ -81,6 +81,12 @@ export function addItem(item) {
 
 export function addItemToInventory(item) {
   return addItem(item);
+}
+
+export function giveItem(id, quantity = 1) {
+  const data = getItemData(id);
+  if (!data) return false;
+  return addItem({ ...data, id, quantity });
 }
 
 export function hasItem(nameOrId) {
