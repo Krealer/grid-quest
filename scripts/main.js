@@ -17,6 +17,8 @@ import * as router from './router.js';
 import { showDialogue } from './dialogueSystem.js';
 import { handleTileInteraction } from './interaction.js';
 import { isMovementDisabled } from './movement.js';
+import { hasCodeFile } from './inventory.js';
+import { movePlayerTo } from './map.js';
 import * as eryndor from './npc/eryndor.js';
 import * as lioran from './npc/lioran.js';
 import * as goblinQuestGiver from './npc/goblin_quest_giver.js';
@@ -44,6 +46,7 @@ import * as echoSelfPeace from './npc/echo_self_peace.js';
 import * as echoMemory from './npc/echo_memory.js';
 import * as ember from './npc/ember.js';
 import * as veil from './npc/veil.js';
+import * as krealer from './npc/krealer.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
@@ -86,7 +89,8 @@ const npcModules = {
   echoSelfPeace,
   echoMemory,
   ember,
-  veil
+  veil,
+  krealer
 };
 
 let hpDisplay;
@@ -158,6 +162,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const questsOverlay = document.getElementById('quest-log-overlay');
   const questsClose = questsOverlay.querySelector('.close-btn');
   const statusTab = document.querySelector('.status-tab');
+  const nullTab = document.querySelector('.null-tab');
   const statusOverlay = document.getElementById('status-overlay');
   const statusClose = statusOverlay?.querySelector('.close-btn');
   const infoTab = document.querySelector('.info-tab');
@@ -220,6 +225,29 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (e.target === infoOverlay) toggleInfoPanel();
     });
   }
+
+  function updateNullTab() {
+    if (!nullTab) return;
+    if (hasCodeFile()) {
+      nullTab.classList.remove('disabled');
+    } else {
+      nullTab.classList.add('disabled');
+    }
+  }
+
+  async function gotoNullFactor() {
+    if (!hasCodeFile()) {
+      showDialogue('Obtain code file to enter.');
+      return;
+    }
+    await movePlayerTo('null_room', { x: 1, y: 1 });
+  }
+
+  if (nullTab) {
+    nullTab.addEventListener('click', gotoNullFactor);
+    updateNullTab();
+  }
+  document.addEventListener('inventoryUpdated', updateNullTab);
 
   function showSettings() {
     settingsOverlay.classList.add('active');

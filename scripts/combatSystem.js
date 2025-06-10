@@ -26,6 +26,7 @@ import { advanceBossPhase, resetBossPhase } from './boss_state.js';
 import { finalFlags, setPhase, setBossDefeated } from './memory_flags.js';
 import { recordEnding } from './ending_manager.js';
 import { echoAbsoluteVictory, echoAbsoluteDefeat } from './dialogue_state.js';
+import { spawnNpc } from './map.js';
 import {
   setupTabs,
   updateStatusUI,
@@ -324,6 +325,7 @@ export async function startCombat(enemy, player) {
         recordEnding('victory', 'echo absolute');
         echoAbsoluteVictory();
         setBossDefeated();
+        spawnNpc(10, 10, 'krealer');
       }
       showVictoryMessage();
       setTimeout(endCombat, 800);
@@ -517,6 +519,7 @@ export async function startCombat(enemy, player) {
         recordEnding('victory', 'echo absolute');
         echoAbsoluteVictory();
         setBossDefeated();
+        spawnNpc(10, 10, 'krealer');
       }
       showVictoryMessage();
       setTimeout(endCombat, 800);

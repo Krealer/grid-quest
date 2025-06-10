@@ -242,11 +242,21 @@ export async function veilDialogue() {
   });
 }
 
+export async function krealerDialogue() {
+  await loadItems();
+  const data = getItemData('code_file') || {
+    name: 'Code File',
+    description: ''
+  };
+  showDialogue('Krealer hands you a shimmering code file.', () => {
+    addItem({ ...data, id: 'code_file', quantity: 1 });
+  });
+}
+
 export function echoAbsoluteIntro() {
   const echoes = getEchoConversationCount();
   const relics = getOwnedRelics().length;
-  const line =
-    `All ${echoes} echoes and ${relics} relics converge into one form.`;
+  const line = `All ${echoes} echoes and ${relics} relics converge into one form.`;
   showDialogue(line);
 }
 
