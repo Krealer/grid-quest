@@ -91,15 +91,22 @@ export function healFull() {
 }
 
 export function increaseMaxHp(amount) {
+  if (typeof amount !== 'number' || amount === 0) return;
   player.maxHp += amount;
   player.hp = Math.min(player.hp, player.maxHp);
+  document.dispatchEvent(
+    new CustomEvent('playerHpChanged', {
+      detail: { hp: player.hp, maxHp: player.maxHp }
+    })
+  );
 }
 
 export function applyItemReward(id) {
   if (id === 'health_amulet' && !player.bonusHpGiven?.health_amulet) {
-    increaseMaxHp(1);
+    increaseMaxHp(2);
     if (!player.bonusHpGiven) player.bonusHpGiven = {};
     player.bonusHpGiven.health_amulet = true;
+    showDialogue('You feel a warmth surge through you.');
   }
 }
 

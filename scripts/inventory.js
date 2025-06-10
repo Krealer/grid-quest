@@ -66,12 +66,12 @@ export function addItem(item) {
     if ((existing.quantity || 0) >= limit) return false;
     existing.quantity = Math.min(limit, (existing.quantity || 0) + qty);
     discover('items', parseItemId(item.id).baseId);
-    if (baseId === 'health_amulet') {
-      if (!player.bonusHpGiven?.health_amulet) {
-        gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
+      if (baseId === 'health_amulet') {
+        if (!player.bonusHpGiven?.health_amulet) {
+          gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
+        }
+        applyItemReward(baseId);
       }
-      applyItemReward(baseId);
-    }
     document.dispatchEvent(new CustomEvent('inventoryUpdated'));
     return true;
   }
@@ -92,7 +92,7 @@ export function addItem(item) {
   discover('items', parseItemId(item.id).baseId);
   if (baseId === 'health_amulet') {
     if (!player.bonusHpGiven?.health_amulet) {
-      gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
+      gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
     }
     applyItemReward(baseId);
   }
