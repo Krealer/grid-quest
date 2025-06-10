@@ -48,6 +48,14 @@ export const itemData = {
     stackLimit: 1,
     icon: '🎖️'
   },
+  faded_blade: {
+    id: 'faded_blade',
+    name: 'Faded Blade',
+    description: 'A worn weapon once carried by Vaelin. Use in battle to strike harder.',
+    type: 'combat',
+    stackLimit: 1,
+    icon: '🗡️'
+  },
   scout_blade: {
     id: 'scout_blade',
     name: 'Scout Blade',
