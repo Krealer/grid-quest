@@ -12,13 +12,14 @@
 
 ## Running locally
 
-Because the game loads JSON data with `fetch`, it must be served over HTTP. From the project root run:
+Grid Quest loads data via `fetch` so it needs to be served over HTTP. After running `npm install` you can start a simple server from the project root:
 
 ```bash
 python3 -m http.server
+# or npx http-server
 ```
 
-Open `http://localhost:8000/` to start playing. Any static server will work.
+Visit `http://localhost:8000/` in your browser.
 
 ## Project structure
 
@@ -33,17 +34,25 @@ Refresh the browser after editing files in `scripts/`, `style/` or `data/`. Node
 
 ### Setup
 
-Install dev dependencies once:
+1. Install [Node.js](https://nodejs.org/) (v18 or later recommended).
+2. Install the project dependencies:
 
 ```bash
 npm install
 ```
+
 
 ### Available commands
 
 - `npm run lint` – check code with ESLint
 - `npm run format` – format files using Prettier
 - `npm test` – run Jest tests (none included by default)
+## Deploying to GitHub Pages
+
+1. Push your latest code to the `main` branch (or another branch you wish to publish).
+2. In the repository settings, enable **GitHub Pages** and select that branch as the source.
+3. Once the Pages build completes, access the game at `https://<username>.github.io/<repository>/`.
+
 
 ## Contributing
 
