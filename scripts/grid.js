@@ -52,6 +52,12 @@ export function renderGrid(grid, container, environment = 'clear') {
         case 'W':
           div.classList.add('water');
           break;
+        case 'F':
+          div.classList.add('fractured');
+          break;
+        case 'B':
+          div.classList.add('bridge');
+          break;
         default:
           div.classList.add('ground');
       }
