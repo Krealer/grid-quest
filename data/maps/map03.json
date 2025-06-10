@@ -146,10 +146,11 @@
       {
         "type": "D",
         "target": "map04.json",
-        "spawn": {
-          "x": 1,
-          "y": 10
-        }
+        "spawn": { "x": 1, "y": 1 },
+        "locked": true,
+        "requiresItem": "commander_badge",
+        "consumeItem": true,
+        "message": "The insignia is missing."
       }
     ],
     "FGGGGGGGtttttGGGGGGF",
