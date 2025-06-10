@@ -1,6 +1,16 @@
 import { loadItems, getItemData } from './item_loader.js';
-import { addItem, removeItem, getItemCount, equipItem, getEquippedItem } from './inventory.js';
-import { craftState, isBlueprintUnlocked } from './craft_state.js';
+import {
+  addItem,
+  removeItem,
+  getItemCount,
+  equipItem,
+  getEquippedItem
+} from './inventory.js';
+import {
+  craftState,
+  isBlueprintUnlocked,
+  isFusionUnlocked
+} from './craft_state.js';
 import { getItemBonuses } from './item_stats.js';
 import { isRecipeUnlocked } from './recipe_state.js';
 import { loadJson } from './dataService.js';
@@ -9,7 +19,9 @@ import { showError } from './errorPrompt.js';
 let craftingAllowed = false;
 
 export function beginCraftingSession() {
-  craftingAllowed = true;
+  if (isFusionUnlocked()) {
+    craftingAllowed = true;
+  }
 }
 
 export function endCraftingSession() {
@@ -56,7 +68,9 @@ export function getRecipe(id) {
 export function canCraft(id) {
   const recipe = recipes[id] || blueprints[id];
   if (!recipe) return false;
-  return Object.entries(recipe.ingredients).every(([item, qty]) => getItemCount(item) >= qty);
+  return Object.entries(recipe.ingredients).every(
+    ([item, qty]) => getItemCount(item) >= qty
+  );
 }
 
 export async function craft(id) {

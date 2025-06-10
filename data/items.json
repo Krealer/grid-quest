@@ -104,6 +104,13 @@
     "stackLimit": 1,
     "icon": "📜"
   },
+  "blueprint_health_amulet": {
+    "name": "Blueprint: Health Amulet",
+    "description": "A parchment detailing how to fuse potions into an amulet",
+    "type": "material",
+    "stackLimit": 1,
+    "icon": "📜"
+  },
   "commander_badge": {
     "name": "Commander Badge",
     "description": "Proof of defeating the scout commander",
