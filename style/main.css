@@ -286,6 +286,10 @@ body {
   filter: blur(3px);
 }
 
+#game-grid.no-interact {
+  pointer-events: none;
+}
+
 #game-grid.death-screen::after {
   content: '';
   position: absolute;

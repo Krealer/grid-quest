@@ -90,6 +90,15 @@ export function healFull() {
   player.hp = player.maxHp;
 }
 
+export function healToFull() {
+  player.hp = player.maxHp;
+  document.dispatchEvent(
+    new CustomEvent('playerHpChanged', {
+      detail: { hp: player.hp, maxHp: player.maxHp }
+    })
+  );
+}
+
 export function increaseMaxHp(amount) {
   if (typeof amount !== 'number' || amount === 0) return;
   player.maxHp += amount;

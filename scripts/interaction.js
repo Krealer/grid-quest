@@ -26,7 +26,7 @@ export async function handleTileInteraction(
   cols,
   npcModules = {}
 ) {
-  if (gameState.isDead) return;
+  if (gameState.isDead || gameState.inCombat) return;
   const target = e.target;
   if (!target.classList.contains('tile')) return;
   const x = Number(target.dataset.x);
