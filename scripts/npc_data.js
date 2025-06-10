@@ -13,6 +13,13 @@ export const npcAppearance = {
     displayTitle: 'Eryndor, the Withheld',
     dialogueScale: 1
   },
+  lioran: {
+    nameColor: '#99ffff',
+    font: 'serif',
+    border: '#99ffff',
+    displayTitle: 'Lioran, the Measured',
+    dialogueScale: 1
+  },
   krealer1: {
     nameColor: '#ff9999',
     font: 'monospace',
@@ -81,5 +88,10 @@ export const npcData = {
     name: 'Eryndor, the Withheld',
     map: 'map01',
     description: 'A guarded mentor who knows forgotten techniques.'
+  },
+  lioran: {
+    name: 'Lioran, the Measured',
+    map: 'map02',
+    description: 'An analytical wanderer who studies patterns in battle.'
   }
 };

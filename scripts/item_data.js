@@ -22,6 +22,15 @@ export const itemData = {
     type: 'quest',
     stackLimit: 1,
     icon: '📝'
+  },
+  focus_ring: {
+    id: 'focus_ring',
+    name: 'Focus Ring',
+    description: 'Slightly improves the accuracy of all skills.',
+    type: 'gear',
+    stackLimit: 1,
+    icon: '🎯',
+    passiveModifier: { accuracy: 0.1 }
   }
 };
 

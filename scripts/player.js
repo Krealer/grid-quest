@@ -8,7 +8,11 @@ import { getItemBonuses } from './item_stats.js';
 import { getRelicBonuses } from './relic_state.js';
 import { getClassBonuses, getChosenClass } from './class_state.js';
 import { unlockSkill, getAllSkills } from './skills.js';
-import { addItem, removeItem as removeInvItem } from './inventory.js';
+import {
+  addItem,
+  removeItem as removeInvItem,
+  getPassiveModifiers
+} from './inventory.js';
 
 export const player = {
   x: 0,
@@ -202,6 +206,10 @@ export function getTotalStats() {
     for (const [key, val] of Object.entries(relicBonus)) {
       total[key] = (total[key] || 0) + val;
     }
+  }
+  const passiveMods = getPassiveModifiers();
+  for (const [key, val] of Object.entries(passiveMods)) {
+    total[key] = (total[key] || 0) + val;
   }
   const classBonus = getClassBonuses();
   if (classBonus) {
