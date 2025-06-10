@@ -154,6 +154,13 @@
     "stackLimit": 1,
     "icon": "✉️"
   },
+  "old_coin": {
+    "name": "Old Coin",
+    "description": "A weathered coin from ages past.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "🪙"
+  },
   "code_file": {
     "name": "Code File",
     "description": "Encrypted data holding mysterious power.",
