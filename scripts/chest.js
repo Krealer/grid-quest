@@ -78,14 +78,6 @@ export async function openChest(id, player) {
           increaseMaxHp(1);
           gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
         }
-        if (player && itm === 'health_amulet') {
-          if (!player.bonusHpGiven?.health_amulet) {
-            increaseMaxHp(2);
-            gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
-            if (!player.bonusHpGiven) player.bonusHpGiven = {};
-            player.bonusHpGiven.health_amulet = true;
-          }
-        }
       }
     }
     updateInventoryUI();
@@ -94,18 +86,9 @@ export async function openChest(id, player) {
     if (item) {
       const qty = config.quantity || 1;
       addItem({ ...item, id: config.item, quantity: qty });
-      if (player) {
-        if (config.item === 'potion_of_health') {
-          increaseMaxHp(1);
-          gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
-        } else if (config.item === 'health_amulet') {
-          if (!player.bonusHpGiven?.health_amulet) {
-            increaseMaxHp(2);
-            gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
-            if (!player.bonusHpGiven) player.bonusHpGiven = {};
-            player.bonusHpGiven.health_amulet = true;
-          }
-        }
+      if (player && config.item === 'potion_of_health') {
+        increaseMaxHp(1);
+        gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
       }
       updateInventoryUI();
       unlockedSkills = unlockSkillsFromItem(config.item);
