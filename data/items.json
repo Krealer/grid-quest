@@ -39,6 +39,10 @@
     "name": "Rotten Tooth",
     "description": "Crumbly but still has bite"
   },
+  "bone_fragment": {
+    "name": "Bone Fragment",
+    "description": "Sharp piece of bone from an undead"
+  },
   "health_amulet": {
     "name": "Health Amulet",
     "description": "An amulet that bolsters vitality"
