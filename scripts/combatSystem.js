@@ -19,6 +19,7 @@ import {
 import { loadItems, getItemData } from './item_loader.js';
 import {
   useDefensePotion,
+  useDefensePotionII,
   useFadedBlade,
   useArcaneSpark
 } from './item_logic.js';
@@ -463,6 +464,27 @@ export async function startCombat(enemy, player) {
         log('No potion available.');
       }
     }
+    if (id === 'defense_potion_II') {
+      const res = useDefensePotionII();
+      if (res) {
+        let amount = res.defense;
+        if (player.passives && player.passives.includes('potionMaster')) {
+          const p = getPassive('potionMaster');
+          if (p && p.itemHealBonus) {
+            amount += p.itemHealBonus;
+          }
+        }
+        const classBonus = getClassBonuses();
+        if (classBonus.itemHealBonus) {
+          amount += classBonus.itemHealBonus;
+        }
+        addTempDefense(amount);
+        log(`Defense increased by ${amount} for this fight!`);
+        used = true;
+      } else {
+        log('No potion available.');
+      }
+    }
     if (id === 'faded_blade') {
       const res = useFadedBlade();
       if (res) {
@@ -600,33 +622,32 @@ export async function startCombat(enemy, player) {
       skill = list[idx % list.length];
       enemy.skillIndex = (idx + 1) % list.length;
     } else {
-
-    if (special && list.length >= 2) {
-      skill = list[Math.floor(Math.random() * list.length)];
-    } else if (playerVulnerable && statusSkills.length) {
-      // exploit vulnerability with status attacks
-      skill = statusSkills[Math.floor(Math.random() * statusSkills.length)];
-    } else if (behavior === 'aggressive' && damageSkills.length) {
-      skill = damageSkills[Math.floor(Math.random() * damageSkills.length)];
-    } else if (behavior === 'cautious' && statusSkills.length) {
-      skill = statusSkills[Math.floor(Math.random() * statusSkills.length)];
-    } else if (damageSkills.length) {
-      skill = damageSkills[Math.floor(Math.random() * damageSkills.length)];
-    }
-
-    if (!skill) {
-      if (list.length > 0) {
+      if (special && list.length >= 2) {
         skill = list[Math.floor(Math.random() * list.length)];
-      } else if (!enemySilenced) {
-        skill = getEnemySkill('strike');
-      } else {
-        log(`${enemy.name} is silenced and cannot act!`);
-        tickStatusEffects(player, log);
-        tickStatusEffects(enemy, log);
-        playerTurn = true;
-        return;
+      } else if (playerVulnerable && statusSkills.length) {
+        // exploit vulnerability with status attacks
+        skill = statusSkills[Math.floor(Math.random() * statusSkills.length)];
+      } else if (behavior === 'aggressive' && damageSkills.length) {
+        skill = damageSkills[Math.floor(Math.random() * damageSkills.length)];
+      } else if (behavior === 'cautious' && statusSkills.length) {
+        skill = statusSkills[Math.floor(Math.random() * statusSkills.length)];
+      } else if (damageSkills.length) {
+        skill = damageSkills[Math.floor(Math.random() * damageSkills.length)];
       }
-    }
+
+      if (!skill) {
+        if (list.length > 0) {
+          skill = list[Math.floor(Math.random() * list.length)];
+        } else if (!enemySilenced) {
+          skill = getEnemySkill('strike');
+        } else {
+          log(`${enemy.name} is silenced and cannot act!`);
+          tickStatusEffects(player, log);
+          tickStatusEffects(enemy, log);
+          playerTurn = true;
+          return;
+        }
+      }
     }
 
     if (skill) {

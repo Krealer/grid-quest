@@ -57,6 +57,18 @@ const chestContents = {
     item: 'mysterious_key',
     message: 'The chest clicks open revealing a strange key.'
   },
+  'map05:9,10': {
+    item: 'defense_potion_II',
+    message: 'Carefully prying it open yields a potent Defense Potion.'
+  },
+  'map05:1,1': {
+    item: 'crystal_shard',
+    message: 'Tucked in the corner lies a faintly glowing crystal shard.'
+  },
+  'map05:10,15': {
+    item: 'rift_fragment',
+    message: 'Inside the obvious chest rests a curious rift fragment.'
+  },
   'map_warrior:18,18': {
     relic: 'warrior_sigil',
     message: 'You obtained the Warrior Sigil!'

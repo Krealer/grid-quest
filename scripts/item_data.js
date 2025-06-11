@@ -136,6 +136,30 @@ export const itemData = {
     type: 'material',
     stackLimit: 99,
     icon: '🕳️'
+  },
+  crystal_shard: {
+    id: 'crystal_shard',
+    name: 'Crystal Shard',
+    description: 'A faintly glowing fragment used for skill upgrades.',
+    type: 'material',
+    stackLimit: 99,
+    icon: '🔷'
+  },
+  defense_potion_II: {
+    id: 'defense_potion_II',
+    name: 'Defense Potion II',
+    description: 'Increases defense by 2 for this fight.',
+    type: 'combat',
+    stackLimit: 10,
+    icon: '🧴'
+  },
+  rift_fragment: {
+    id: 'rift_fragment',
+    name: 'Rift Fragment',
+    description: 'A fragment pulsing with dimensional energy.',
+    type: 'quest',
+    stackLimit: 1,
+    icon: '💠'
   }
 };
 
