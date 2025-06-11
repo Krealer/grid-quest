@@ -46,6 +46,7 @@ import * as veil from './veil.js';
 import * as watcher from './watcher.js';
 import * as caelen from './caelen.js';
 import * as darius_the_conversationalist from './darius_the_conversationalist.js';
+import * as kaelor_the_weaver from './kaelor_the_weaver.js';
 import * as npc01 from './npc_01.js';
 import * as npc02 from './npc_02.js';
 import * as npc03 from './npc_03.js';
@@ -100,6 +101,7 @@ export const npcModules = {
   watcher,
   caelen,
   darius_the_conversationalist,
+  kaelor_the_weaver,
   npc_01: npc01,
   npc_02: npc02,
   npc_03: npc03,

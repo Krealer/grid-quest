@@ -180,7 +180,10 @@
       "G",
       "G",
       "F",
-      "G",
+      {
+        "type": "N",
+        "npc": "kaelor_the_weaver"
+      },
       "G",
       "G",
       "G",

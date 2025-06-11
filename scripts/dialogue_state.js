@@ -770,3 +770,7 @@ export function flagRiftLurkerDefeated() {
 export function flagTradedForPrismKey() {
   setMemory('traded_for_prism_key');
 }
+
+export function flagTradedWithKaelor() {
+  setMemory('traded_with_kaelor');
+}
