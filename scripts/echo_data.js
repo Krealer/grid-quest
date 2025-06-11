@@ -25,6 +25,15 @@ export const echoData = {
       'They watched, but not from beyond — from underneath.',
       'The breach is not an accident. It is an attempt.'
     ]
+  },
+  convergence_fragment: {
+    id: 'convergence_fragment',
+    flag: 'echo_convergence_fragment',
+    text: [
+      'Fragments of many paths converge here.',
+      'Each step echoes with choices unresolved.',
+      'You sense a greater design taking form.'
+    ]
   }
 };
 
