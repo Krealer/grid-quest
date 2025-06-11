@@ -270,7 +270,7 @@
         },
         "locked": true,
         "requiresItem": "rift_eye",
-        "consumeItem": true,
+        "consumeItem": false,
         "message": "A singular socket awaits a gaze… but you hold no eye."
       }
     ],

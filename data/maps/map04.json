@@ -458,7 +458,7 @@
         },
         "locked": true,
         "requiresItem": "rift_stone",
-        "consumeItem": true
+        "consumeItem": false
       }
     ],
     [
