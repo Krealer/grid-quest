@@ -62,42 +62,38 @@
       </div>
     </div>
     <div id="info-overlay" class="info-overlay">
-      <div id="info-panel">
+      <div id="info-menu">
         <button class="close-btn">&times;</button>
-        <div class="info-tabs">
-          <div class="info-tab-btn active" data-target="npcs">NPCs</div>
-          <div class="info-tab-btn" data-target="enemies">Enemies</div>
-          <div class="info-tab-btn" data-target="items">Items</div>
-          <div class="info-tab-btn" data-target="skills">Skills</div>
-          <div class="info-tab-btn" data-target="status">Status</div>
-          <div class="info-tab-btn" data-target="lore">Lore</div>
+        <nav class="info-nav">
+          <div class="info-nav-btn active" data-target="enemies">Enemies</div>
+          <div class="info-nav-btn" data-target="items">Items</div>
+          <div class="info-nav-btn" data-target="skills">Skills</div>
+          <div class="info-nav-btn" data-target="status">Status</div>
+          <div class="info-nav-btn" data-target="lore">Lore</div>
+        </nav>
+        <div class="info-content">
+          <div id="content-enemies" class="info-section"></div>
+          <div
+            id="content-items"
+            class="info-section"
+            style="display: none"
+          ></div>
+          <div
+            id="content-skills"
+            class="info-section"
+            style="display: none"
+          ></div>
+          <div
+            id="content-status"
+            class="info-section"
+            style="display: none"
+          ></div>
+          <div
+            id="content-lore"
+            class="info-section"
+            style="display: none"
+          ></div>
         </div>
-        <div id="info-npcs" class="info-tab-content"></div>
-        <div
-          id="info-enemies"
-          class="info-tab-content"
-          style="display: none"
-        ></div>
-        <div
-          id="info-items"
-          class="info-tab-content"
-          style="display: none"
-        ></div>
-        <div
-          id="info-skills"
-          class="info-tab-content"
-          style="display: none"
-        ></div>
-        <div
-          id="info-status"
-          class="info-tab-content"
-          style="display: none"
-        ></div>
-        <div
-          id="info-lore"
-          class="info-tab-content"
-          style="display: none"
-        ></div>
       </div>
     </div>
     <div id="null-summary-overlay" class="null-summary-overlay">
@@ -151,7 +147,9 @@
         <label class="setting-row">
           <input type="checkbox" id="center-toggle" /> Center Mode (Portrait)
         </label>
-        <button id="reset-settings" class="reset-btn">Reset All Settings</button>
+        <button id="reset-settings" class="reset-btn">
+          Reset All Settings
+        </button>
       </div>
     </div>
     <div id="error-overlay" class="error-overlay">

@@ -1,0 +1,10 @@
+[
+  {
+    "id": "strike",
+    "name": "Strike",
+    "type": "Offensive",
+    "effect": "Deal physical damage to a target.",
+    "cooldown": 0,
+    "origin": "Goblin"
+  }
+]
