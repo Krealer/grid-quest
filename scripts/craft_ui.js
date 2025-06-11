@@ -59,6 +59,7 @@ export function toggleCraftView() {
     overlay.classList.remove('active');
   } else {
     updateCraftUI();
+    overlay.scrollTop = 0;
     overlay.classList.add('active');
   }
 }
