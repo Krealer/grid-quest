@@ -38,5 +38,12 @@ export const npcs = [
     location: '4,10',
     items: 'Clarity Shard, Gentle Flask, Dreamleaf',
     description: 'Affable wanderer who loves long conversations.'
+  },
+  {
+    id: 'silari_the_analyst',
+    name: 'Silari',
+    map: 'Map07 Maze',
+    location: '4,15',
+    description: 'Calm informant who answers lore questions, not a trader.'
   }
 ];
