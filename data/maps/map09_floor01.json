@@ -1,5 +1,5 @@
 {
-  "name": "Temple Outer Waters",
+  "name": "Temple Depths F1",
   "environment": "ruins",
   "grid": [
     "FFFFFFFFFFFFFFFFFFFF",
@@ -14,7 +14,7 @@
       "W",
       "W",
       "W",
-      { "type": "D", "target": "map08.json", "spawn": { "x": 10, "y": 18 } },
+      { "type": "D", "target": "map09.json", "spawn": { "x": 10, "y": 18 } },
       "W",
       "W",
       "W",
@@ -53,7 +53,7 @@
       "F",
       "F",
       "F",
-      { "type": "D", "target": "map09_floor01.json", "spawn": { "x": 10, "y": 1 }, "locked": true, "requiresItem": "temple_key" },
+      "F",
       "F",
       "F",
       "F",

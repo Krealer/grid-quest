@@ -10,6 +10,17 @@ export const itemData = {
     stackLimit: 1,
     icon: '🗝️'
   },
+  temple_key: {
+    id: 'temple_key',
+    name: 'Temple Key',
+    description: 'Opens the sealed temple gate.',
+    type: 'key',
+    tags: ['lore'],
+    category: 'key',
+    consumable: false,
+    stackLimit: 1,
+    icon: '🗝️'
+  },
   health_potion: {
     id: 'health_potion',
     name: 'Health Potion',
