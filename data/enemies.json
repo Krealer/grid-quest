@@ -575,7 +575,8 @@
     "description": "A warped mage that disrupts magic.",
     "intro": "Arcane whispers herald the wretch's arrival!",
     "portrait": "🧟‍♂️",
-    "skills": ["silence_wave"],
+    "skills": ["silence_wave", "arcane_bolt", "weakening_hex"],
+    "cycleSkills": true,
     "behavior": "aggressive",
     "drops": [
       {
