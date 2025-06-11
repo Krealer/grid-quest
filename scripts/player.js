@@ -12,8 +12,10 @@ import { unlockSkill, getAllSkills } from './skills.js';
 import {
   addItem,
   removeItem as removeInvItem,
-  getPassiveModifiers
+  getPassiveModifiers,
+  recalcPassiveModifiers
 } from './inventory.js';
+import { checkTempleSet } from './equipment.js';
 
 export const player = {
   x: 0,
@@ -244,6 +246,9 @@ export function deserializePlayer(data) {
     player.equipment.weapon = data.equipment.weapon || null;
     player.equipment.armor = data.equipment.armor || null;
     player.equipment.accessory = data.equipment.accessory || null;
+    recalcPassiveModifiers();
+    checkTempleSet();
+    document.dispatchEvent(new CustomEvent('equipmentChanged'));
   }
 }
 

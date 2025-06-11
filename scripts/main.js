@@ -34,6 +34,7 @@ import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
 import { toggleInfoMenu, initInfoMenu } from '../ui/info_menu.js';
+import { refreshInventoryDisplay } from '../ui/inventory_menu.js';
 import { saveState, loadState, gameState } from './game_state.js';
 import { saveGame, loadGame } from './save_load.js';
 import { initMenuBar } from '../ui/menu_bar.js';
@@ -132,6 +133,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       showDialogue('No save found.');
       return;
     }
+    refreshInventoryDisplay();
     const mapName = gameState.currentMap || 'map01';
     try {
       const { cols: newCols } = await router.loadMap(mapName);

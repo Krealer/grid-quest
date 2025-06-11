@@ -1,7 +1,14 @@
 const STORAGE_KEY = 'gridquest.saveData';
 
-import { serializeGameState, deserializeGameState } from './game_state.js';
-import { serializeInventory, deserializeInventory } from './inventory_state.js';
+import {
+  serializeGameState,
+  deserializeGameState,
+  validateLoadedInventory
+} from './game_state.js';
+import {
+  serializeInventory,
+  loadInventoryFromObject
+} from './inventory_state.js';
 import { serializeQuestState, deserializeQuestState } from './quest_state.js';
 import { serializePlayer, deserializePlayer } from './player.js';
 
@@ -21,7 +28,8 @@ export function loadGame() {
   try {
     const data = JSON.parse(json);
     deserializeGameState(data.game || {});
-    deserializeInventory(data.inventory || {});
+    loadInventoryFromObject(data.inventory || {});
+    validateLoadedInventory(data.inventory?.items || []);
     deserializeQuestState(data.quests || {});
     deserializePlayer(data.player || {});
     return true;

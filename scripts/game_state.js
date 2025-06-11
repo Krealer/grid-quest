@@ -1,4 +1,5 @@
 import { loadSettings } from './settingsManager.js';
+import { inventory } from './inventory.js';
 
 export const gameState = {
   currentMap: '',
@@ -43,5 +44,12 @@ export function loadState() {
     deserializeGameState(data);
   } catch {
     // ignore malformed data
+  }
+}
+
+export function validateLoadedInventory(savedItems) {
+  const expected = Array.isArray(savedItems) ? savedItems.length : 0;
+  if (expected !== inventory.length) {
+    console.warn('Inventory size mismatch after load');
   }
 }
