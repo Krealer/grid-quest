@@ -309,3 +309,9 @@ export async function enterDoor(target, spawn) {
   const { cols } = await transitionToMap(target, spawn);
   return cols;
 }
+
+export function reapplyEquipmentBonuses() {
+  recalcPassiveModifiers();
+  checkTempleSet();
+  document.dispatchEvent(new CustomEvent('equipmentChanged'));
+}

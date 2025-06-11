@@ -1,6 +1,5 @@
-import { inventory, recalcPassiveModifiers } from './inventory.js';
-import { player } from './player.js';
-import { checkTempleSet } from './equipment.js';
+import { inventory } from './inventory.js';
+import { player, reapplyEquipmentBonuses } from './player.js';
 
 export function serializeInventory() {
   return {
@@ -24,12 +23,18 @@ export function deserializeInventory(data) {
     player.equipment.armor = data.equipment.armor || null;
     player.equipment.accessory = data.equipment.accessory || null;
   }
-  recalcPassiveModifiers();
-  checkTempleSet();
-  document.dispatchEvent(new CustomEvent('equipmentChanged'));
-  document.dispatchEvent(new CustomEvent('inventoryUpdated'));
 }
 
 export function loadInventoryFromObject(savedInventory) {
   deserializeInventory(savedInventory);
+  reapplyEquipmentBonuses();
+  document.dispatchEvent(new CustomEvent('inventoryUpdated'));
 }
+
+export const inventoryState = {
+  loadFromObject(savedInventory) {
+    deserializeInventory(savedInventory);
+    reapplyEquipmentBonuses();
+    document.dispatchEvent(new CustomEvent('inventoryUpdated'));
+  }
+};

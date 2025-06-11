@@ -7,7 +7,7 @@ import {
 } from './game_state.js';
 import {
   serializeInventory,
-  loadInventoryFromObject
+  inventoryState
 } from './inventory_state.js';
 import { serializeQuestState, deserializeQuestState } from './quest_state.js';
 import { serializePlayer, deserializePlayer } from './player.js';
@@ -28,7 +28,7 @@ export function loadGame() {
   try {
     const data = JSON.parse(json);
     deserializeGameState(data.game || {});
-    loadInventoryFromObject(data.inventory || {});
+    inventoryState.loadFromObject(data.inventory || {});
     validateLoadedInventory(data.inventory?.items || []);
     deserializeQuestState(data.quests || {});
     deserializePlayer(data.player || {});
