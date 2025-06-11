@@ -17,5 +17,17 @@ export const npcs = [
     name: 'Myralen',
     map: 'Map04',
     description: 'Delivers a volatile arcane weapon.'
+  },
+  {
+    id: 'syranel',
+    name: 'Syranel',
+    map: 'Map05',
+    description: 'Quest giver seeking a rotting heart to teach forbidden skill.'
+  },
+  {
+    id: 'thalos',
+    name: 'Thalos',
+    map: 'Map05',
+    description: 'Watcher of the rift who mutters about echoes.'
   }
 ];

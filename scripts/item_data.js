@@ -73,6 +73,14 @@ export const itemData = {
     stackLimit: 99,
     icon: '🦴'
   },
+  rotting_heart: {
+    id: 'rotting_heart',
+    name: 'Rotting Heart',
+    description: 'Still oozing with foul ichor.',
+    type: 'quest',
+    stackLimit: 99,
+    icon: '❤️'
+  },
   cracked_helmet: {
     id: 'cracked_helmet',
     name: 'Cracked Helmet',

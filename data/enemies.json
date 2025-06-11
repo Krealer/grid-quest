@@ -132,6 +132,10 @@
       {
         "item": "bone_shard",
         "quantity": 1
+      },
+      {
+        "item": "rotting_heart",
+        "quantity": 1
       }
     ]
   },

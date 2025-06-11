@@ -33,6 +33,8 @@ import * as lioran from './lioran.js';
 import * as loreObelisk from './lore_obelisk.js';
 import * as loreStatue from './lore_statue.js';
 import * as myralen from './myralen.js';
+import * as syranel from './syranel.js';
+import * as thalos from './thalos.js';
 import * as relicChamber from './relic_chamber.js';
 import * as ruinsScholar from './ruins_scholar.js';
 import * as secondVoice from './second_voice.js';
@@ -79,6 +81,8 @@ export const npcModules = {
   lore_obelisk: loreObelisk,
   lore_statue: loreStatue,
   myralen,
+  syranel,
+  thalos,
   relic_chamber: relicChamber,
   ruins_scholar: ruinsScholar,
   second_voice: secondVoice,

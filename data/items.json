@@ -132,6 +132,13 @@
     "stackLimit": 99,
     "icon": "🦴"
   },
+  "rotting_heart": {
+    "name": "Rotting Heart",
+    "description": "Still oozing with foul ichor.",
+    "type": "quest",
+    "stackLimit": 99,
+    "icon": "❤️"
+  },
   "goblin_insignia": {
     "name": "Goblin Insignia",
     "description": "Marked with crude goblin symbols.",

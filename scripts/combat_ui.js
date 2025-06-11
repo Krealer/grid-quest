@@ -117,12 +117,17 @@ export function renderSkillList(container, skills, onClick) {
   return map;
 }
 
-export function setSkillDisabledState(buttonMap, skillLookup, isSilenced) {
+export function setSkillDisabledState(
+  buttonMap,
+  skillLookup,
+  isSilenced,
+  cooldowns = {}
+) {
   Object.entries(buttonMap).forEach(([id, btn]) => {
     if (!btn) return;
     const def = skillLookup[id];
     const offensive = def?.category === 'offensive';
-    if (isSilenced && offensive) {
+    if ((isSilenced && offensive) || cooldowns[id] > 0) {
       btn.classList.add('disabled');
       btn.disabled = true;
     } else {

@@ -163,6 +163,7 @@ export async function startCombat(enemy, player) {
   let shieldBlock = false;
   let healUsed = false;
   let sparkUsed = false;
+  const skillCooldowns = {};
   let playerTurn = true;
 
   function damagePlayer(dmg) {
@@ -275,6 +276,12 @@ export async function startCombat(enemy, player) {
     healUsed = true;
   }
 
+  function tickCooldowns() {
+    Object.keys(skillCooldowns).forEach((id) => {
+      if (skillCooldowns[id] > 0) skillCooldowns[id]--;
+    });
+  }
+
   async function giveDrops() {
     const list = await getEnemyDrops(enemy.id);
     if (!list.length) return;
@@ -355,7 +362,7 @@ export async function startCombat(enemy, player) {
   function updateSkillDisableState() {
     const silenced =
       hasStatus(player, 'silence') || hasStatus(player, 'silenced');
-    setSkillDisabledState(skillButtons, skillLookup, silenced);
+    setSkillDisabledState(skillButtons, skillLookup, silenced, skillCooldowns);
   }
 
   async function handleAction(skill) {
@@ -382,6 +389,10 @@ export async function startCombat(enemy, player) {
       log('You are silenced and cannot use offensive skills.');
       return;
     }
+    if (skillCooldowns[skill.id] > 0) {
+      log(`${skill.name} is on cooldown for ${skillCooldowns[skill.id]} more turn(s).`);
+      return;
+    }
     const icon = skill.icon ? `${skill.icon} ` : '';
     log(`Player uses ${icon}${skill.name}`);
     discoverSkill(skill.id);
@@ -400,6 +411,9 @@ export async function startCombat(enemy, player) {
       enemy
     });
     if (result === false) return; // invalid action
+    if (skill.cooldown > 0) {
+      skillCooldowns[skill.id] = skill.cooldown;
+    }
     handlePhaseTriggers();
     if (enemyHp <= 0) {
       log(`${enemy.name} was defeated!`);
@@ -585,6 +599,8 @@ export async function startCombat(enemy, player) {
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       playerTurn = true;
+      tickCooldowns();
+      updateSkillDisableState();
       return;
     }
     if (hasStatus(enemy, 'unstable') && Math.random() < 0.25) {
@@ -592,6 +608,8 @@ export async function startCombat(enemy, player) {
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       playerTurn = true;
+      tickCooldowns();
+      updateSkillDisableState();
       return;
     }
     const enemySilenced =
@@ -645,6 +663,8 @@ export async function startCombat(enemy, player) {
           tickStatusEffects(player, log);
           tickStatusEffects(enemy, log);
           playerTurn = true;
+          tickCooldowns();
+          updateSkillDisableState();
           return;
         }
       }
@@ -701,5 +721,7 @@ export async function startCombat(enemy, player) {
       return;
     }
     playerTurn = true;
+    tickCooldowns();
+    updateSkillDisableState();
   }
 }
