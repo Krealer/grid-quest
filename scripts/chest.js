@@ -101,6 +101,10 @@ const chestContents = {
     item: 'forgotten_ring',
     message: 'This false dead end conceals a forgotten ring.'
   },
+  'map07_maze01:14,7': {
+    item: 'maze_key_1',
+    message: 'Inside you find Maze Key 1.'
+  },
   'map08:3,3': {
     item: 'defense_potion_I',
     message: 'You find a basic Defense Potion.'
