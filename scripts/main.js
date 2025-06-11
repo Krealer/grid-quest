@@ -34,7 +34,7 @@ import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
 import { toggleInfoMenu, initInfoMenu } from '../ui/info_menu.js';
-import { refreshInventoryDisplay } from '../ui/inventory_menu.js';
+import { refreshInventoryDisplay, initInventoryMenu } from '../ui/inventory_menu.js';
 import {
   initSaveSlotsMenu,
   openSaveMenu,
@@ -197,6 +197,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   initMenuBar(handleSave, handleLoad);
   initInventoryUI();
+  initInventoryMenu();
   initPlayerDisplay();
   updateHpDisplay();
   updateDefenseDisplay();
