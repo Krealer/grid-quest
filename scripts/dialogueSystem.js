@@ -2,10 +2,17 @@ import { addItem, removeItem, inventory } from './inventory.js';
 import { updateInventoryUI } from './inventory_ui.js';
 import { loadItems, getItemData } from './item_loader.js';
 import { unlockSkillsFromItem, getAllSkills } from './skills.js';
-import { dialogueMemory, setMemory, giveBlueprint, triggerUpgrade, triggerReroll } from './dialogue_state.js';
+import {
+  dialogueMemory,
+  setMemory,
+  giveBlueprint,
+  triggerUpgrade,
+  triggerReroll
+} from './dialogue_state.js';
 import { getQuests, completeQuest } from './quest_state.js';
 import { showError } from './errorPrompt.js';
 import { loadJson } from './dataService.js';
+import { gameState } from './game_state.js';
 
 let dialogueLines = {};
 let dataLoaded = false;
