@@ -47,6 +47,8 @@ import { loadLanguage } from './language_loader.js';
 
 // Inventory contents are managed in inventory.js
 
+let settings = loadSettings();
+
 let isInBattle = false;
 
 let isMoving = false;
@@ -160,7 +162,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateXpDisplay();
   let cols = 0;
 
-  let settings = loadSettings();
+  settings = loadSettings();
   applySettings(settings);
   coordsToggle.checked = settings.gridCoordinates;
   moveSelect.value = settings.movementSpeed;
@@ -319,7 +321,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       loadLanguage(settings.language);
     }
   });
-
 
   try {
     const { cols: newCols } = await router.loadMap('map01');
