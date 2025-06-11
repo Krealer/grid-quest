@@ -1,5 +1,5 @@
 import { getItemData } from './item_loader.js';
-import { player, applyItemReward } from './player.js';
+import { player } from './player.js';
 import { gameState } from './game_state.js';
 import { getItemBonuses } from './item_stats.js';
 import { checkTempleSet } from './equipment.js';
@@ -78,12 +78,6 @@ export function addItem(item) {
     if ((existing.quantity || 0) >= limit) return false;
     existing.quantity = Math.min(limit, (existing.quantity || 0) + qty);
     discover('items', parseItemId(item.id).baseId);
-    if (baseId === 'health_amulet') {
-      if (!player.bonusHpGiven?.health_amulet) {
-        gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
-      }
-      applyItemReward(baseId);
-    }
     document.dispatchEvent(new CustomEvent('inventoryUpdated'));
     return true;
   }
@@ -102,12 +96,6 @@ export function addItem(item) {
     unlockBlueprint(item.id.replace('blueprint_', ''));
   }
   discover('items', parseItemId(item.id).baseId);
-  if (baseId === 'health_amulet') {
-    if (!player.bonusHpGiven?.health_amulet) {
-      gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 2;
-    }
-    applyItemReward(baseId);
-  }
   document.dispatchEvent(new CustomEvent('inventoryUpdated'));
   return true;
 }
@@ -202,15 +190,6 @@ export function getItemsByType(type) {
   });
 }
 
-export function removeHealthBonusItem() {
-  const idx = inventory.findIndex((it) => it.id === 'health_potion');
-  if (idx !== -1) {
-    inventory.splice(idx, 1);
-    document.dispatchEvent(new CustomEvent('inventoryUpdated'));
-    return true;
-  }
-  return false;
-}
 
 export function removePrismFragments(qty = 10) {
   return removeItem('prism_fragment', qty);

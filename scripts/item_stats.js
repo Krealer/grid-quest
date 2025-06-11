@@ -2,16 +2,16 @@ import { splitItemId } from './utils.js';
 import { enchantments } from './enchantments.js';
 
 export const itemBonuses = {
-  cracked_helmet: { slot: 'armor', defense: 1 },
-  'cracked_helmet+1': { slot: 'armor', defense: 2 },
-  'cracked_helmet+2': { slot: 'armor', defense: 3 },
-  'cracked_helmet+3': { slot: 'armor', defense: 4 },
+  cracked_helmet: { slot: 'armor' },
+  'cracked_helmet+1': { slot: 'armor' },
+  'cracked_helmet+2': { slot: 'armor' },
+  'cracked_helmet+3': { slot: 'armor' },
   focus_ring: { slot: 'accessory' },
-  forgotten_ring: { slot: 'accessory', attack: 1 },
-  goblin_sword: { slot: 'weapon', attack: 3 },
-  temple_sword: { slot: 'weapon', attack: 3 },
-  temple_shell: { slot: 'armor', defense: 2, maxHp: 5 },
-  temple_ring: { slot: 'accessory', attack: 1, defense: 1, maxHp: 2 }
+  forgotten_ring: { slot: 'accessory' },
+  goblin_sword: { slot: 'weapon' },
+  temple_sword: { slot: 'weapon' },
+  temple_shell: { slot: 'armor' },
+  temple_ring: { slot: 'accessory' }
 };
 
 export function getItemBonuses(id) {

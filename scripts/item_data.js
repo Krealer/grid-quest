@@ -44,16 +44,49 @@ export const itemData = {
     icon: '🧪',
     useInCombat: true
   },
-  health_amulet: {
-    id: 'health_amulet',
-    name: 'Health Amulet',
-    description: 'Permanently increases max HP when found.',
-    type: 'passive',
-    tags: ['equipable'],
-    category: 'equipable',
-    consumable: false,
+  xp_scroll: {
+    id: 'xp_scroll',
+    name: 'XP Scroll',
+    description: 'Use to gain 25 experience.',
+    type: 'consumable',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
-    icon: '🩸'
+    icon: '📜',
+    use() {
+      import('./player.js').then((m) => m.gainXP(25));
+    }
+  },
+  xp_potion: {
+    id: 'xp_potion',
+    name: 'XP Potion',
+    description: 'Use in battle to gain 50 XP.',
+    type: 'consumable',
+    tags: ['combat'],
+    category: 'combat',
+    consumable: true,
+    stackLimit: 5,
+    icon: '🧪',
+    useInCombat: true,
+    use() {
+      import('./player.js').then((m) => m.gainXP(50));
+    }
+  },
+  xp_relic: {
+    id: 'xp_relic',
+    name: 'XP Relic',
+    description: 'Grants 100 XP when used from your pack.',
+    type: 'consumable',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 1,
+    icon: '🔮',
+    inventoryOnly: true,
+    use() {
+      import('./player.js').then((m) => m.gainXP(100));
+    }
   },
   empty_note: {
     id: 'empty_note',

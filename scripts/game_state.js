@@ -6,7 +6,6 @@ export const gameState = {
   openedChests: new Set(),
   defeatedEnemies: new Set(),
   environment: 'clear',
-  maxHpBonus: 0,
   isDead: false,
   lastEnemyPos: null,
   inCombat: false,
@@ -18,7 +17,6 @@ export function serializeGameState() {
     currentMap: gameState.currentMap,
     openedChests: Array.from(gameState.openedChests),
     defeatedEnemies: Array.from(gameState.defeatedEnemies),
-    maxHpBonus: gameState.maxHpBonus,
     settings: gameState.settings
   };
 }
@@ -28,7 +26,6 @@ export function deserializeGameState(data) {
   gameState.currentMap = data.currentMap || '';
   gameState.openedChests = new Set(data.openedChests || []);
   gameState.defeatedEnemies = new Set(data.defeatedEnemies || []);
-  gameState.maxHpBonus = data.maxHpBonus || 0;
   gameState.settings = data.settings || {};
 }
 

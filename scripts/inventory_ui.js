@@ -4,11 +4,11 @@ import {
   getEquippedItem,
   getItemDisplayName,
   getItemLevel,
-  getItemsByCategory
+  getItemsByCategory,
+  consumeItem
 } from './inventory.js';
-import { player, getTotalStats } from './player.js';
+import { player, getTotalStats, gainXP } from './player.js';
 import {
-  useArmorPiece,
   useHealthPotion,
   useDefensePotion,
   useDefensePotionII,
@@ -97,11 +97,6 @@ export async function updateInventoryUI() {
     if (upgradeLevel > 0) {
       row.classList.add('gear-upgraded');
     }
-    row.addEventListener('click', () => {
-      if (item.id === 'armor_piece') {
-        useArmorPiece();
-      }
-    });
     const bonus = getItemBonuses(item.id);
     if (bonus && bonus.slot && getEquippedItem(bonus.slot) === item.id) {
       row.classList.add('equipped-item');
@@ -261,6 +256,16 @@ function handleInventoryItemUse(id) {
   } else if (id === 'ember_prayer_scroll') {
     const res = useEmberPrayerScroll();
     if (res) used = true;
+  } else if (typeof data.use === 'function') {
+    if (data.inventoryOnly && gameState.inCombat) {
+      logMessage('Cannot use this item in combat.');
+      return;
+    }
+    const res = data.use();
+    if (res !== false) {
+      consumeItem(id, 1);
+      used = true;
+    }
   }
   if (used) {
     markItemUsed(id);

@@ -37,12 +37,27 @@ export const player = {
   learnedSkills: [],
   passives: [],
   passiveImmunities: [],
-  bonusHpGiven: {},
   tempDefense: 0,
   tempAttack: 0,
   statuses: [],
   isPlayer: true
 };
+
+export function calculateStatsFromLevel(level) {
+  const maxHp = 100 + level * 2 + Math.floor(level / 5) * 3;
+  const defense = Math.floor(level / 5);
+  const attack = Math.floor(level / 10);
+  return { maxHp, defense, attack };
+}
+
+export function updateStatsFromLevel() {
+  const { maxHp, defense, attack } = calculateStatsFromLevel(player.level);
+  player.maxHp = maxHp;
+  if (!player.stats) player.stats = { attack: 0, defense: 0 };
+  player.stats.defense = defense;
+  player.stats.attack = attack;
+  if (player.hp > player.maxHp) player.hp = player.maxHp;
+}
 
 export function moveTo(x, y) {
   player.x = x;
@@ -120,24 +135,6 @@ export function increaseMaxHp(amount) {
   );
 }
 
-export function applyItemReward(id) {
-  if (id === 'health_amulet' && !player.bonusHpGiven?.health_amulet) {
-    increaseMaxHp(2);
-    if (!player.bonusHpGiven) player.bonusHpGiven = {};
-    player.bonusHpGiven.health_amulet = true;
-    showDialogue('You feel a warmth surge through you.');
-  }
-}
-
-export function increaseDefense(amount) {
-  if (!player.stats) player.stats = { defense: 0 };
-  player.stats.defense = (player.stats.defense || 0) + amount;
-  document.dispatchEvent(
-    new CustomEvent('playerDefenseChanged', {
-      detail: { defense: player.stats.defense }
-    })
-  );
-}
 
 export function addTempDefense(amount) {
   player.tempDefense = (player.tempDefense || 0) + amount;
@@ -155,7 +152,7 @@ export function resetTempStats() {
 export function levelUp() {
   player.level += 1;
   player.xpToNextLevel = Math.floor(player.xpToNextLevel * 1.5);
-  player.maxHp += 1;
+  updateStatsFromLevel();
   player.hp = player.maxHp;
   const unlocked = unlockPassivesForLevel(player.level);
   unlocked.forEach((id) => {
@@ -250,6 +247,7 @@ export function deserializePlayer(data) {
     checkTempleSet();
     document.dispatchEvent(new CustomEvent('equipmentChanged'));
   }
+  updateStatsFromLevel();
 }
 
 export function getTotalStats() {
@@ -315,3 +313,6 @@ export function reapplyEquipmentBonuses() {
   checkTempleSet();
   document.dispatchEvent(new CustomEvent('equipmentChanged'));
 }
+
+// initialize stats based on starting level
+updateStatsFromLevel();
