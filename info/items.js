@@ -26,7 +26,7 @@ export const itemDescriptions = {
   psy_fiber:
     'Psy Fiber \u2013 material for neural implants or debuff recipes.',
   rift_eye:
-    'Rift Eye \u2013 rumored to open a psychic gate somewhere.',
+    'Rift Eye \u2013 rumored to open a psychic gate somewhere; unlocks rift gate.',
   memory_gem:
     'Memory Gem \u2013 trade or socket this to improve your skills.',
   crystal_shard: 'Crystal Shard \u2013 can be used later to upgrade skills.',
