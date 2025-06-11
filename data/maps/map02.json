@@ -1,6 +1,9 @@
 {
   "name": "Rainy Crossroads",
-  "environment": "rain",
+  "environment": "fog",
+  "properties": {
+    "fog": false
+  },
   "grid": [
     [
       "F",
