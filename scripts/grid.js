@@ -1,5 +1,6 @@
 import { getForkChoice } from './player_memory.js';
 import { player } from './player.js';
+import { getTileDescription } from './tile_type.js';
 
 export function renderGrid(
   grid,
@@ -74,6 +75,9 @@ export function renderGrid(
         default:
           div.classList.add('ground');
       }
+
+      div.dataset.label = getTileDescription(type);
+      div.title = `(${x},${y})`;
 
       if (cell.locked) div.classList.add('locked');
       if (cell.flow) div.classList.add('flowing');

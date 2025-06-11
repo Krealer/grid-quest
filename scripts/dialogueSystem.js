@@ -38,7 +38,7 @@ export async function showDialogue(keyOrText, callback = () => {}) {
   advance.style.display = 'none';
 
   let index = 0;
-  const speed = 30; // ms per character
+  const speed = gameState.settings?.dialogueAnim === false ? 0 : 30; // ms per character
 
   function typeNext() {
     if (index < text.length) {
@@ -97,7 +97,7 @@ export async function showDialogueWithChoices(keyOrText, choices = []) {
   const choicesEl = overlay.querySelector('.dialogue-choices');
 
   let index = 0;
-  const speed = 30;
+  const speed = gameState.settings?.dialogueAnim === false ? 0 : 30;
 
   function typeNext() {
     if (index < text.length) {

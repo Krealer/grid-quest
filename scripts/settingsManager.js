@@ -1,8 +1,8 @@
-const DEFAULT_SETTINGS = {
-  sound: true,
-  scale: 'medium',
-  animations: true,
-};
+import data from '../settings_data.json' assert { type: 'json' };
+
+export const DEFAULT_SETTINGS = Object.fromEntries(
+  Object.entries(data).map(([k, v]) => [k, v.default])
+);
 
 export function loadSettings() {
   const json = localStorage.getItem('gridquest.settings');
@@ -22,13 +22,26 @@ export function saveSettings(settings) {
 export function applySettings(settings) {
   const grid = document.getElementById('game-grid');
   if (!grid) return;
-  const scales = ['scale-small', 'scale-medium', 'scale-large'];
-  grid.classList.remove(...scales);
-  grid.classList.add(`scale-${settings.scale}`);
-  if (settings.animations) {
-    grid.classList.remove('no-animations');
+  if (settings.colorblind) {
+    grid.classList.add('colorblind');
   } else {
-    grid.classList.add('no-animations');
+    grid.classList.remove('colorblind');
   }
-  // sound setting stored for future use
+  if (settings.tileLabels) {
+    grid.classList.add('show-labels');
+  } else {
+    grid.classList.remove('show-labels');
+  }
+
+  const tiles = grid.querySelectorAll('.tile');
+  tiles.forEach((t) => {
+    const x = t.dataset.x;
+    const y = t.dataset.y;
+    if (settings.gridCoordinates) {
+      t.title = `(${x},${y})`;
+    } else {
+      t.removeAttribute('title');
+    }
+  });
 }
+

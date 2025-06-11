@@ -113,19 +113,45 @@
         <button class="close-btn">&times;</button>
         <h2>Settings</h2>
         <label class="setting-row">
-          <input type="checkbox" id="sound-toggle" /> Sound
+          <input type="checkbox" id="coords-toggle" /> Grid Coordinates
         </label>
         <label class="setting-row">
-          UI Scale
-          <select id="ui-scale">
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
+          Movement Speed
+          <select id="move-speed">
+            <option value="slow">Slow</option>
+            <option value="normal">Normal</option>
+            <option value="fast">Fast</option>
           </select>
         </label>
         <label class="setting-row">
-          <input type="checkbox" id="anim-toggle" /> Enable Grid Animations
+          Combat Speed
+          <select id="combat-speed">
+            <option value="instant">Instant</option>
+            <option value="normal">Normal</option>
+          </select>
         </label>
+        <label class="setting-row">
+          <input type="checkbox" id="colorblind-toggle" /> Colorblind Mode
+        </label>
+        <label class="setting-row">
+          <input type="checkbox" id="label-toggle" /> Show Tile Labels
+        </label>
+        <label class="setting-row">
+          <input type="checkbox" id="dialogue-toggle" /> Dialogue Animation
+        </label>
+        <label class="setting-row">
+          Language
+          <select id="language-select">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="ja">日本語</option>
+          </select>
+        </label>
+        <label class="setting-row">
+          <input type="checkbox" id="center-toggle" /> Center Mode (Portrait)
+        </label>
+        <button id="reset-settings" class="reset-btn">Reset All Settings</button>
       </div>
     </div>
     <div id="error-overlay" class="error-overlay">

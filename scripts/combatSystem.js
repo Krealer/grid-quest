@@ -154,11 +154,14 @@ export async function startCombat(enemy, player) {
 
   await loadItems();
 
+  const delayMap = { instant: 0, normal: 300 };
+  const animDelay = delayMap[gameState.settings?.combatSpeed || 'normal'];
+
   // reveal UI after intro animation
   setTimeout(() => {
     actionsEl.classList.remove('hidden');
     logEl.classList.remove('hidden');
-  }, 800);
+  }, animDelay + 500);
 
   let guardActive = false;
   let shieldBlock = false;
@@ -422,7 +425,7 @@ export async function startCombat(enemy, player) {
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       playerTurn = false;
-      setTimeout(enemyTurn, 300);
+      setTimeout(enemyTurn, animDelay);
       return;
     }
     if (hasStatus(player, 'confused') && Math.random() < 0.33) {
@@ -430,7 +433,7 @@ export async function startCombat(enemy, player) {
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       playerTurn = false;
-      setTimeout(enemyTurn, 300);
+      setTimeout(enemyTurn, animDelay);
       return;
     }
     if (hasStatus(player, 'unstable') && Math.random() < 0.25) {
@@ -438,7 +441,7 @@ export async function startCombat(enemy, player) {
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       playerTurn = false;
-      setTimeout(enemyTurn, 300);
+      setTimeout(enemyTurn, animDelay);
       return;
     }
     const silenced =
@@ -487,7 +490,7 @@ export async function startCombat(enemy, player) {
         spawnNpc(10, 10, 'krealer');
       }
       showVictoryMessage();
-      setTimeout(endCombat, 800);
+      setTimeout(endCombat, animDelay + 500);
       return;
     }
     tickStatusEffects(player, log);
@@ -505,7 +508,7 @@ export async function startCombat(enemy, player) {
       return;
     }
     playerTurn = false;
-    setTimeout(enemyTurn, 300);
+    setTimeout(enemyTurn, animDelay);
   }
 
   function handleItemUse(id) {
@@ -660,7 +663,7 @@ export async function startCombat(enemy, player) {
       updateStatusUI(overlay, player, enemy);
       updateSkillDisableState();
       playerTurn = false;
-      setTimeout(enemyTurn, 300);
+      setTimeout(enemyTurn, animDelay);
     }
   }
 
@@ -863,7 +866,7 @@ export async function startCombat(enemy, player) {
         spawnNpc(10, 10, 'krealer');
       }
       showVictoryMessage();
-      setTimeout(endCombat, 800);
+      setTimeout(endCombat, animDelay + 500);
       return;
     }
     playerTurn = true;
