@@ -1,6 +1,6 @@
 import { getCurrentGrid, isFogEnabled } from './mapLoader.js';
 import { onStepEffect, isWalkable } from './tile_type.js';
-import { toggleInventoryView } from './inventory_state.js';
+import { toggleInventoryView, initInventoryUI } from './inventory_ui.js';
 import { toggleQuestLog } from './quest_log.js';
 import { toggleCraftView } from './craft_ui.js';
 import { player, stepTo } from './player.js';
@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const soundToggle = document.getElementById('sound-toggle');
   const scaleSelect = document.getElementById('ui-scale');
   const animToggle = document.getElementById('anim-toggle');
+  initInventoryUI();
   initPlayerDisplay();
   updateHpDisplay();
   updateDefenseDisplay();

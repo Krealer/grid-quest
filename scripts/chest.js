@@ -1,6 +1,6 @@
 import { gameState } from './game_state.js';
 import { addItem, giveItem } from './inventory.js';
-import { updateInventoryUI } from './inventory_state.js';
+import { updateInventoryUI } from './inventory_ui.js';
 import { giveRelic, setMemory } from './dialogue_state.js';
 import { getItemData, loadItems } from './item_loader.js';
 import { increaseMaxHp } from './player.js';

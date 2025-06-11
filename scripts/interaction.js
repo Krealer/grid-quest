@@ -4,7 +4,7 @@ import { isAdjacent } from './logic.js';
 import { gameState } from './game_state.js';
 import { isInteractable, onInteractEffect } from './tile_type.js';
 import { hasItem, removeItem } from './inventory.js';
-import { updateInventoryUI } from './inventory_state.js';
+import { updateInventoryUI } from './inventory_ui.js';
 import { showDialogue } from './dialogueSystem.js';
 import { markItemUsed } from '../info/items.js';
 import { setMemory } from './dialogue_state.js';

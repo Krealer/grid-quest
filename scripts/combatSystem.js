@@ -12,7 +12,7 @@ import { getPassive } from './passive_skills.js';
 import { applyDamage } from './logic.js';
 import {
   addItem,
-  getItemsByType,
+  getItemsByTag,
   addItemToInventory,
   removeHealthBonusItem
 } from './inventory.js';
@@ -23,7 +23,7 @@ import {
   useFadedBlade,
   useArcaneSpark
 } from './item_logic.js';
-import { updateInventoryUI } from './inventory_state.js';
+import { updateInventoryUI } from './inventory_ui.js';
 import { showDialogue } from './dialogueSystem.js';
 import { gameState } from './game_state.js';
 import { discover, discoverSkill } from './player_memory.js';
@@ -312,7 +312,7 @@ export async function startCombat(enemy, player) {
 
   function updateItemsUI() {
     itemContainer.innerHTML = '';
-    const items = getItemsByType('combat');
+    const items = getItemsByTag('combat');
     if (items.length === 0) {
       const msg = document.createElement('div');
       msg.textContent = 'No usable items';

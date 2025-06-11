@@ -561,6 +561,24 @@ body {
   text-align: center;
 }
 
+.inventory-categories {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.inventory-categories button {
+  flex: 1;
+  padding: 4px;
+  font-size: 12px;
+}
+
+.inventory-categories button.selected {
+  background: #666;
+  color: #fff;
+  border-color: #999;
+}
+
 .inventory-content .close-btn {
   position: absolute;
   top: 8px;
