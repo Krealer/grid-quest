@@ -127,18 +127,18 @@ export function hasItem(nameOrId) {
 
 export function useForkedKey() {
   if (hasItem('forked_key')) {
-    removeItem('forked_key');
+    const data = getItemData('forked_key');
+    if (data?.consumable !== false) removeItem('forked_key');
     return true;
   }
   return false;
 }
 
 export function useKey(id) {
-  if (hasItem(id)) {
-    removeItem(id);
-    return true;
-  }
-  return false;
+  if (!hasItem(id)) return false;
+  const data = getItemData(id);
+  if (data?.consumable !== false) removeItem(id);
+  return true;
 }
 
 export function hasCodeFile() {
@@ -164,6 +164,8 @@ export function removeItem(nameOrId, qty = 1) {
 }
 
 export function consumeItem(id, qty = 1) {
+  const data = getItemData(id);
+  if (data?.consumable === false) return false;
   const removed = removeItem(id, qty);
   if (removed) recordItemUse(id, qty);
   return removed;
@@ -173,6 +175,13 @@ export function getItemsByTag(tag) {
   return inventory.filter((it) => {
     const data = getItemData(it.id);
     return data && Array.isArray(data.tags) && data.tags.includes(tag);
+  });
+}
+
+export function getItemsByCategory(category) {
+  return inventory.filter((it) => {
+    const data = getItemData(it.id);
+    return data && data.category === category;
   });
 }
 

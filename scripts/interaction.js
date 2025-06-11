@@ -53,7 +53,7 @@ export async function handleTileInteraction(
       showDialogue(tile.message || 'The insignia is missing.');
       return;
     }
-    removeItem('commander_badge');
+    useKey('commander_badge');
     markItemUsed('commander_badge');
     updateInventoryUI();
     const newCols = await enterDoor(tile.target, tile.spawn);
@@ -65,7 +65,7 @@ export async function handleTileInteraction(
       showDialogue(tile.message || 'A rift barrier blocks the way.');
       return;
     }
-    removeItem('rift_stone');
+    useKey('rift_stone');
     markItemUsed('rift_stone');
     updateInventoryUI();
     tile.locked = false;
@@ -81,7 +81,7 @@ export async function handleTileInteraction(
       );
       return;
     }
-    removeItem('rift_eye');
+    useKey('rift_eye');
     markItemUsed('rift_eye');
     updateInventoryUI();
     tile.locked = false;

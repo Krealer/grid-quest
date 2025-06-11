@@ -4,7 +4,7 @@ import {
   getEquippedItem,
   getItemDisplayName,
   getItemLevel,
-  getItemsByTag
+  getItemsByCategory
 } from './inventory.js';
 import { player, getTotalStats } from './player.js';
 import {
@@ -62,7 +62,9 @@ export async function updateInventoryUI() {
     const stats = getTotalStats();
     statsEl.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Attack: ${stats.attack || 0}  Defense: ${stats.defense || 0}`;
   }
-  const filtered = getItemsByTag(currentCategory);
+  let cat = currentCategory;
+  if (cat === 'items') cat = 'general';
+  const filtered = getItemsByCategory(cat);
   if (filtered.length === 0) {
     const msg = document.createElement('div');
     msg.classList.add('info-empty');
@@ -125,7 +127,7 @@ export async function updateInventoryUI() {
     }
 
     const baseData = getItemData(item.id);
-    if (baseData && Array.isArray(baseData.tags) && baseData.tags.includes('combat')) {
+    if (baseData && baseData.category === 'combat') {
       const ubtn = document.createElement('button');
       ubtn.classList.add('equip-btn');
       ubtn.textContent = 'Use';

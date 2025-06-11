@@ -11,7 +11,7 @@ import { getPassive } from './passive_skills.js';
 import { applyDamage } from './logic.js';
 import {
   addItem,
-  getItemsByTag,
+  getItemsByCategory,
   addItemToInventory,
   removeHealthBonusItem
 } from './inventory.js';
@@ -314,7 +314,7 @@ export async function startCombat(enemy, player) {
 
   function updateItemsUI() {
     itemContainer.innerHTML = '';
-    const items = getItemsByTag('combat');
+    const items = getItemsByCategory('combat');
     if (items.length === 0) {
       const msg = document.createElement('div');
       msg.textContent = 'No usable items';

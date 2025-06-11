@@ -5,6 +5,8 @@ export const itemData = {
     description: 'Required to unlock the path to the next map.',
     type: 'key',
     tags: ['lore'],
+    category: 'key',
+    consumable: false,
     stackLimit: 1,
     icon: '🗝️'
   },
@@ -14,6 +16,8 @@ export const itemData = {
     description: 'Recovers 20 HP when used in combat.',
     type: 'combat',
     tags: ['combat'],
+    category: 'combat',
+    consumable: true,
     stackLimit: 5,
     icon: '🧪',
     useInCombat: true
@@ -24,6 +28,8 @@ export const itemData = {
     description: 'Permanently increases max HP when found.',
     type: 'passive',
     tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
     stackLimit: 99,
     icon: '🩸'
   },
@@ -33,6 +39,8 @@ export const itemData = {
     description: 'This chest was empty.',
     type: 'quest',
     tags: ['lore'],
+    category: 'lore',
+    consumable: false,
     stackLimit: 1,
     icon: '📝'
   },
@@ -42,6 +50,8 @@ export const itemData = {
     description: 'Slightly improves the accuracy of all skills.',
     type: 'gear',
     tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
     stackLimit: 1,
     icon: '🎯',
     passiveModifier: { accuracy: 0.1 }
@@ -52,6 +62,8 @@ export const itemData = {
     description: 'A crude bow taken from a goblin archer.',
     type: 'gear',
     tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
     stackLimit: 1,
     icon: '🏹'
   },
@@ -61,6 +73,8 @@ export const itemData = {
     description: 'Proof of defeating the scout commander.',
     type: 'gear',
     tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
     stackLimit: 1,
     icon: '🎖️'
   },
@@ -71,6 +85,8 @@ export const itemData = {
       'A worn weapon once carried by Vaelin. Use in battle to strike harder.',
     type: 'combat',
     tags: ['combat'],
+    category: 'combat',
+    consumable: true,
     stackLimit: 1,
     icon: '🗡️',
     useInCombat: true
@@ -81,6 +97,8 @@ export const itemData = {
     description: 'A light blade once wielded by a goblin scout.',
     type: 'material',
     tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 1,
     icon: '🔪'
   },
@@ -90,6 +108,8 @@ export const itemData = {
     description: 'Fragment used in defense-crafting rituals.',
     type: 'material',
     tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
     icon: '🦴'
   },
@@ -99,6 +119,8 @@ export const itemData = {
     description: 'Still oozing with foul ichor.',
     type: 'quest',
     tags: ['lore'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
     icon: '❤️'
   },
@@ -108,6 +130,8 @@ export const itemData = {
     description: 'Offers minimal protection despite the damage.',
     type: 'gear',
     tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
     stackLimit: 1,
     icon: '🪖'
   },
@@ -117,6 +141,8 @@ export const itemData = {
     description: 'Refreshes all skill cooldowns once.',
     type: 'combat',
     tags: ['combat'],
+    category: 'combat',
+    consumable: true,
     stackLimit: 99,
     icon: '🔮',
     useInCombat: true
@@ -127,6 +153,8 @@ export const itemData = {
     description: 'Used later for crafting defense-enhancing items.',
     type: 'material',
     tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
     icon: '🍃'
   },
@@ -136,6 +164,8 @@ export const itemData = {
     description: 'Triggers hidden dialogue with a future ally.',
     type: 'quest',
     tags: ['lore'],
+    category: 'lore',
+    consumable: false,
     stackLimit: 1,
     icon: '📜'
   },
@@ -145,6 +175,8 @@ export const itemData = {
     description: 'Unleashes a burst damaging all foes once per battle.',
     type: 'combat',
     tags: ['combat'],
+    category: 'combat',
+    consumable: true,
     stackLimit: 3,
     icon: '✨',
     useInCombat: true
@@ -155,6 +187,8 @@ export const itemData = {
     description: 'Metal scrap useful for future armor crafting.',
     type: 'material',
     tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
     icon: '🛡️'
   },
@@ -164,6 +198,8 @@ export const itemData = {
     description: 'Rare organ from rift creatures used in potent fusions.',
     type: 'material',
     tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
     icon: '🧬'
   },
@@ -173,6 +209,8 @@ export const itemData = {
     description: 'Traded among scholars for high-level crafting.',
     type: 'material',
     tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
     icon: '🕳️'
   },
@@ -182,6 +220,8 @@ export const itemData = {
     description: 'A faintly glowing fragment used for skill upgrades.',
     type: 'material',
     tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
     icon: '🔷'
   },
@@ -191,6 +231,8 @@ export const itemData = {
     description: 'Increases defense by 2 for this fight.',
     type: 'combat',
     tags: ['combat'],
+    category: 'combat',
+    consumable: true,
     stackLimit: 10,
     icon: '🧴',
     useInCombat: true
@@ -201,6 +243,8 @@ export const itemData = {
     description: 'Used to enhance life-based skills (future).',
     type: 'material',
     tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
     icon: '🧬'
   },
@@ -210,6 +254,8 @@ export const itemData = {
     description: 'Required for crafting crystalline armor later.',
     type: 'material',
     tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
     icon: '✨'
   },
@@ -219,6 +265,8 @@ export const itemData = {
     description: 'Component in neural implants or debuff skills.',
     type: 'material',
     tags: ['items'],
+    category: 'general',
+    consumable: true,
     stackLimit: 99,
     icon: '🧠'
   },
@@ -228,6 +276,8 @@ export const itemData = {
     description: 'May open a sealed psychic gate elsewhere.',
     type: 'key',
     tags: ['lore'],
+    category: 'key',
+    consumable: false,
     stackLimit: 1,
     icon: '👁️'
   },
@@ -237,6 +287,8 @@ export const itemData = {
     description: 'Can be socketed or traded for a skill token.',
     type: 'material',
     tags: ['lore'],
+    category: 'lore',
+    consumable: false,
     stackLimit: 99,
     icon: '🔮'
   },
@@ -246,6 +298,8 @@ export const itemData = {
     description: 'A fragment pulsing with dimensional energy.',
     type: 'quest',
     tags: ['lore'],
+    category: 'lore',
+    consumable: false,
     stackLimit: 1,
     icon: '💠'
   }
