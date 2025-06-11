@@ -244,7 +244,7 @@ export async function onInteractEffect(
       const npcId = tile.npc;
       const npc = npcModules[npcId];
       if (npc && typeof npc.interact === 'function') {
-        npc.interact();
+        await npc.interact();
       }
       break;
     }

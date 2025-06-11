@@ -1,37 +1,25 @@
 export const eryndorDialogue = [
   {
-    text: 'A hooded figure blocks your path, gaze unreadable.',
+    text: "These lands are littered with fragments of what once was.",
     options: [
-      { label: 'Who are you?', goto: 1 },
-      { label: 'Step away', goto: null }
+      { label: "What can I do with them?", goto: 1 }
     ]
   },
   {
-    text: "'Eryndor,' he says. 'I keep what others misuse.'",
+    text: "Some bones remember purpose. Some scraps still shield.",
     options: [
-      { label: 'I seek your guidance.', goto: 2 },
-      { label: 'Then I will not intrude.', goto: null, memoryFlag: 'eryndor_intro' }
+      { label: "That sounds useful.", goto: 2 },
+      { label: "I prefer smashing things.", goto: null }
     ]
   },
   {
-    text: 'Knowledge has a price. Focus is the first payment.',
+    text: "Combine a bone fragment with a broken armor piece. You\u2019ll find resilience in that.",
     options: [
       {
-        label: 'Teach me',
-        goto: 3
-      },
-      { label: 'Another time.', goto: null }
-    ]
-  },
-  {
-    text: 'He demonstrates a swift, precise strike.',
-    options: [
-      {
-        label: 'Commit it to memory',
+        label: "Got it. Thanks.",
         goto: null,
-        memoryFlag: 'eryndor_skill_given',
-        onChoose: () =>
-          import('../player.js').then((m) => m.grantSkill('focus_strike'))
+        memoryFlag: "learned_defense_potion_I",
+        grantRecipe: "defense_potion_I"
       }
     ]
   }

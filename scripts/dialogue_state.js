@@ -39,6 +39,7 @@ export function getActiveDialogue() {
 export function setMemory(flag) {
   dialogueMemory.add(flag);
   if (flag && flag.startsWith('flag_krealer')) setKrealerFlag(flag);
+  document.dispatchEvent(new CustomEvent('memoryFlagSet', { detail: flag }));
 }
 
 export function hasMemory(flag) {

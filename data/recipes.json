@@ -12,5 +12,15 @@
     "ingredients": { "health_potion": 2 },
     "result": "health_amulet",
     "quantity": 1
+  },
+  "defense_potion_I": {
+    "id": "defense_potion_I",
+    "name": "Defense Potion I",
+    "ingredients": { "bone_fragment": 1, "armor_piece": 1 },
+    "result": "defense_potion_I",
+    "quantity": 1,
+    "type": "combat",
+    "maxStack": 5,
+    "description": "Grants +1 DEF for the current battle."
   }
 }
