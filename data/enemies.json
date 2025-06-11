@@ -625,6 +625,18 @@
     "behavior": "balanced",
     "drops": [{ "item": "prism_fragment", "quantity": 1 }]
   },
+  "ember_fiend": {
+    "name": "Ember Fiend",
+    "hp": 55,
+    "stats": { "attack": 5, "defense": 1 },
+    "xp": 12,
+    "description": "A fiery creature that leaves burning trails.",
+    "intro": "Flames roar as an Ember Fiend emerges!",
+    "portrait": "🔥",
+    "skills": ["blazing_claw", "flame_pulse"],
+    "behavior": "aggressive",
+    "drops": [{ "item": "ember_residue", "quantity": 1 }]
+  },
   "pain_lattice": {
     "name": "Pain Lattice",
     "hp": 70,

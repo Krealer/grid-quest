@@ -139,6 +139,12 @@ export function ruinsScholar() {
   });
 }
 
+export function map08Npc() {
+  showDialogue('The threshold crumbles, but paths still lie ahead.', () => {
+    discoverLore('thresholds_ruined');
+  });
+}
+
 export function silentMonument() {
   showDialogue('The monument hums softly beneath the silence.', () => {
     discoverLore('beneath_the_silence');

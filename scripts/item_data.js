@@ -461,6 +461,17 @@ export const itemData = {
     stackLimit: 99,
     icon: '🌿'
   },
+  ember_residue: {
+    id: 'ember_residue',
+    name: 'Ember Residue',
+    description: 'Warm fragments left behind by fiery foes.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🔥'
+  },
   forgotten_ring: {
     id: 'forgotten_ring',
     name: 'Forgotten Ring',

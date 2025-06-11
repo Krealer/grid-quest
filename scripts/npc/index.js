@@ -53,6 +53,7 @@ import * as npc02 from './npc_02.js';
 import * as npc03 from './npc_03.js';
 import * as npc04 from './npc_04.js';
 import * as verrel_the_voice from './verrel_the_voice.js';
+import * as map08_npc from './map08_npc.js';
 
 // Export a single map of NPC ids to modules
 export const npcModules = {
@@ -109,5 +110,6 @@ export const npcModules = {
   npc_02: npc02,
   npc_03: npc03,
   npc_04: npc04,
-  verrel_the_voice
+  verrel_the_voice,
+  map08_npc
 };

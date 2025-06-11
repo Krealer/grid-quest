@@ -39,6 +39,14 @@
     "icon": "🗝️",
     "category": "key"
   },
+  "temple_key": {
+    "name": "Temple Key",
+    "description": "Opens the sealed temple gate.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "🗝️",
+    "category": "key"
+  },
   "forked_key": {
     "name": "Forked Key",
     "description": "Opens a chest at the crossroads.",
