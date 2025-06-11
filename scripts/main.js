@@ -97,6 +97,28 @@ function handleTileClick(e, player, container, cols) {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
+  // Prevent double-tap zoom on mobile devices
+  document.addEventListener(
+    'touchstart',
+    (event) => {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    },
+    { passive: false }
+  );
+  let lastTouch = 0;
+  document.addEventListener(
+    'touchend',
+    (e) => {
+      const now = Date.now();
+      if (now - lastTouch <= 300) {
+        e.preventDefault();
+      }
+      lastTouch = now;
+    },
+    { passive: false }
+  );
   const inventoryTab = document.querySelector('.inventory-tab');
   const inventoryOverlay = document.getElementById('inventory-overlay');
   const closeBtn = inventoryOverlay.querySelector('.close-btn');
