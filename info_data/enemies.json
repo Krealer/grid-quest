@@ -2,10 +2,36 @@
   {
     "id": "goblin_scout",
     "name": "Goblin Scout",
-    "locations": ["Map03"],
-    "drops": ["Scout Blade"],
-    "skills": ["strike"],
-    "weaknesses": ["fire"],
-    "resistances": ["poison"]
+    "locations": [
+      "Map03"
+    ],
+    "drops": [
+      "Scout Blade"
+    ],
+    "skills": [
+      "strike"
+    ],
+    "weaknesses": [
+      "fire"
+    ],
+    "resistances": [
+      "poison"
+    ]
+  },
+  {
+    "id": "cracked_crystal_sentry",
+    "name": "Cracked Crystal Sentry",
+    "locations": [
+      "Map07 Maze"
+    ],
+    "drops": [
+      "Prism Fragment"
+    ],
+    "skills": [
+      "refract_crack",
+      "prism_crack"
+    ],
+    "weaknesses": [],
+    "resistances": []
   }
 ]

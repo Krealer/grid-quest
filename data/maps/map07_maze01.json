@@ -177,7 +177,10 @@
       "F",
       "F",
       "F",
-      "G",
+      {
+        "type": "C",
+        "item": "maze_key_1"
+      },
       "F",
       "G",
       "F",
@@ -201,7 +204,7 @@
       "F",
       {
         "type": "E",
-        "enemyId": "crystal_sentry"
+        "enemyId": "cracked_crystal_sentry"
       },
       "F",
       "G",
