@@ -2,7 +2,7 @@ import { getCurrentGrid, isFogEnabled } from './mapLoader.js';
 import { onStepEffect, isWalkable } from './tile_type.js';
 import { toggleInventoryView, initInventoryUI } from './inventory_ui.js';
 import { toggleQuestLog } from './quest_log.js';
-import { toggleCraftView } from './craft_ui.js';
+import { toggleCraftMenu, initCraftMenu } from '../ui/craft_menu.js';
 import { player, stepTo, updateStatsFromLevel } from './player.js';
 import { initFog, reveal, revealAll } from './fog_system.js';
 import { loadEnemyData, defeatEnemy } from './enemy.js';
@@ -19,7 +19,6 @@ import { handleTileInteraction } from './interaction.js';
 import { isMovementDisabled } from './movement.js';
 import { hasCodeFile, hasItem } from './inventory.js';
 import { initMobileCenter } from './mobile_ui.js';
-import { craftState } from './craft_state.js';
 import { movePlayerTo, spawnEnemy } from './map.js';
 import { npcModules } from './npc/index.js';
 import {
@@ -129,9 +128,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const questsTab = document.querySelector('.quests-tab');
   const questsOverlay = document.getElementById('quest-log-overlay');
   const questsClose = questsOverlay.querySelector('.close-btn');
-  const craftTab = document.querySelector('.craft-tab');
-  const craftOverlay = document.getElementById('craft-overlay');
-  const craftClose = craftOverlay?.querySelector('.close-btn');
   const statusTab = document.querySelector('.status-tab');
   const nullTab = document.querySelector('.null-tab');
   const statusOverlay = document.getElementById('status-overlay');
@@ -199,10 +195,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     performLoad(e.detail.slot);
   });
 
-  initMenuBar(handleSave, handleLoad);
+  initMenuBar(handleSave, handleLoad, toggleCraftMenu);
   initMainMenu();
   initInventoryUI();
   initInventoryMenu();
+  initCraftMenu();
   initPlayerDisplay();
   updateHpDisplay();
   updateDefenseDisplay();
@@ -240,13 +237,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   inventoryOverlay.addEventListener('click', (e) => {
     if (e.target === inventoryOverlay) toggleInventoryView();
   });
-  if (craftTab) craftTab.addEventListener('click', toggleCraftView);
-  if (craftClose) craftClose.addEventListener('click', toggleCraftView);
-  if (craftOverlay) {
-    craftOverlay.addEventListener('click', (e) => {
-      if (e.target === craftOverlay) toggleCraftView();
-    });
-  }
   questsTab.addEventListener('click', toggleQuestLog);
   questsClose.addEventListener('click', toggleQuestLog);
   questsOverlay.addEventListener('click', (e) => {
@@ -282,18 +272,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   document.addEventListener('inventoryUpdated', updateNullTab);
 
-  function updateCraftTab() {
-    if (!craftTab) return;
-    if (craftState.unlockedBlueprints.size > 0) {
-      craftTab.style.display = 'block';
-    } else {
-      craftTab.style.display = 'none';
-    }
-  }
-
-  updateCraftTab();
-  document.addEventListener('blueprintUnlocked', updateCraftTab);
-  document.addEventListener('blueprintsLoaded', updateCraftTab);
 
   function showSettings() {
     settingsOverlay.classList.add('active');
