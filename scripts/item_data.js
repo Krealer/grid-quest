@@ -383,6 +383,17 @@ export const itemData = {
     icon: '📜',
     useInCombat: true
   },
+  prism_key: {
+    id: 'prism_key',
+    name: 'Prism Key',
+    description: 'Unlocks the door to the final mirror.',
+    type: 'key',
+    tags: ['lore'],
+    category: 'key',
+    consumable: false,
+    stackLimit: 1,
+    icon: '🗝️'
+  },
   forgotten_ring: {
     id: 'forgotten_ring',
     name: 'Forgotten Ring',

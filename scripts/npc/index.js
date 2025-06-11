@@ -44,6 +44,7 @@ import * as vaelin from './vaelin.js';
 import * as vaultkeeper from './vaultkeeper.js';
 import * as veil from './veil.js';
 import * as watcher from './watcher.js';
+import * as caelen from './caelen.js';
 
 // Export a single map of NPC ids to modules
 export const npcModules = {
@@ -91,5 +92,6 @@ export const npcModules = {
   vaelin,
   vaultkeeper,
   veil,
-  watcher
+  watcher,
+  caelen
 };

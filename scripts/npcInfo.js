@@ -80,6 +80,11 @@ export const npcInfoList = [
     description: 'Hermit-technician who unlocks Fusion Crafting.'
   },
   {
+    id: 'caelen',
+    name: 'Caelen',
+    description: 'World-weary trader intrigued by magic artifacts.'
+  },
+  {
     id: 'krealer',
     name: 'Krealer',
     description: 'A cryptic entity guarding forbidden knowledge.'

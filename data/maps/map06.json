@@ -248,7 +248,7 @@
       "G",
       "G",
       "G",
-      "G",
+      { "type": "N", "npc": "caelen" },
       "G",
       "G",
       "G",
@@ -447,7 +447,9 @@
           "x": 1,
           "y": 1
         },
-        "locked": true
+        "locked": true,
+        "requiresItem": "prism_key",
+        "consumeItem": false
       },
       "F"
     ],
