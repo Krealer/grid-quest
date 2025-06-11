@@ -831,6 +831,11 @@ body {
   font-weight: bold;
 }
 
+/* Highlight for items that are currently equipped */
+.equipped-item {
+  background: #e0ffe0;
+}
+
 .enchanted {
   color: #b347ff;
   text-shadow: 0 0 4px rgba(179, 71, 255, 0.7);
