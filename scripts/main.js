@@ -3,7 +3,7 @@ import { onStepEffect, isWalkable } from './tile_type.js';
 import { toggleInventoryView, initInventoryUI } from './inventory_ui.js';
 import { toggleQuestLog } from './quest_log.js';
 import { toggleCraftView } from './craft_ui.js';
-import { player, stepTo } from './player.js';
+import { player, stepTo, updateStatsFromLevel } from './player.js';
 import { initFog, reveal, revealAll } from './fog_system.js';
 import { loadEnemyData, defeatEnemy } from './enemy.js';
 import { setMemory } from './dialogue_state.js';
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           reveal(player.x, player.y);
         }
       }
-      player.maxHp = 100 + (gameState.maxHpBonus || 0);
+      updateStatsFromLevel();
       player.hp = Math.min(player.hp, player.maxHp);
       updateHpDisplay();
       updateXpDisplay();

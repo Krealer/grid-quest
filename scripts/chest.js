@@ -3,7 +3,7 @@ import { addItem, giveItem } from './inventory.js';
 import { updateInventoryUI } from './inventory_ui.js';
 import { giveRelic, setMemory } from './dialogue_state.js';
 import { getItemData, loadItems } from './item_loader.js';
-import { increaseMaxHp, loseHpNonLethal } from './player.js';
+import { loseHpNonLethal } from './player.js';
 import { unlockSkillsFromItem, unlockSkillsFromRelic } from './skills.js';
 
 const chestContents = {
@@ -20,8 +20,8 @@ const chestContents = {
     message: 'You pick up an old coin.'
   },
   'map02:5,5': {
-    item: 'health_amulet',
-    message: 'You found a shimmering amulet.',
+    item: 'xp_scroll',
+    message: 'You found a shimmering scroll.',
     memoryFlag: 'map02_health_amulet'
   },
   'map02:9,9': {
@@ -35,8 +35,8 @@ const chestContents = {
     memoryFlag: 'empty_chest_seen'
   },
   'map03:10,12': {
-    item: 'health_amulet',
-    message: 'You feel stronger.'
+    item: 'xp_scroll',
+    message: 'You feel knowledge flow into you.'
   },
   'map04:10,11': {
     item: 'mana_gem',
@@ -132,19 +132,19 @@ const chestContents = {
     message: 'Inside rests a sealed scroll etched in ember.'
   },
   'map09_floor03:4,3': {
-    item: 'temple_sword',
+    item: 'xp_scroll',
     hpLoss: 10,
-    message: 'A guardian trap drains your strength as you claim the sword.'
+    message: 'A guardian trap drains your strength as you snatch the scroll.'
   },
   'map09_floor03:9,5': {
-    item: 'temple_shell',
+    item: 'xp_potion',
     hpLoss: 10,
-    message: 'Ancient energies lash out when the shell is taken.'
+    message: 'Ancient energies lash out as you secure the potion.'
   },
   'map09_floor03:15,8': {
-    item: 'temple_ring',
+    item: 'xp_relic',
     hpLoss: 10,
-    message: 'Cursed fumes seep out as you grasp the ring.'
+    message: 'Cursed fumes seep out as you grasp the relic.'
   },
   'map_alchemist:18,18': {
     relic: 'alchemist_catalyst',
@@ -179,10 +179,6 @@ export async function openChest(id, player) {
         await giveItem(itm, 1);
         items.push(data);
         unlockedSkills.push(...unlockSkillsFromItem(itm));
-        if (player && itm === 'health_potion') {
-          increaseMaxHp(1);
-          gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
-        }
       }
     }
     updateInventoryUI();
@@ -191,10 +187,6 @@ export async function openChest(id, player) {
     if (item) {
       const qty = config.quantity || 1;
       await giveItem(config.item, qty);
-      if (player && config.item === 'health_potion') {
-        increaseMaxHp(1);
-        gameState.maxHpBonus = (gameState.maxHpBonus || 0) + 1;
-      }
       updateInventoryUI();
       unlockedSkills = unlockSkillsFromItem(config.item);
     }

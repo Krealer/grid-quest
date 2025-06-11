@@ -1,13 +1,6 @@
 import { consumeItem } from './inventory.js';
-import { increaseDefense, addTempAttack } from './player.js';
+import { addTempAttack } from './player.js';
 
-export function useArmorPiece() {
-  if (consumeItem('armor_piece', 1)) {
-    increaseDefense(1);
-    return true;
-  }
-  return false;
-}
 
 export function useDefensePotion() {
   if (consumeItem('defense_potion_I', 1)) {

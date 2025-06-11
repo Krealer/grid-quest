@@ -1,14 +1,13 @@
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
-import { respawn, increaseMaxHp, gainXP, getTotalStats } from './player.js';
+import { respawn, gainXP, getTotalStats } from './player.js';
 import { getClassBonuses } from './class_state.js';
 import { getPassive } from './passive_skills.js';
 import { applyDamage } from './logic.js';
 import {
   addItem,
   getItemsByCategory,
-  addItemToInventory,
-  removeHealthBonusItem
+  addItemToInventory
 } from './inventory.js';
 import { loadItems, getItemData } from './item_loader.js';
 import {
@@ -692,10 +691,6 @@ export async function startCombat(enemy, player) {
   async function defeat() {
     log('Defeated...');
     showDialogue('Defeated...');
-    if (removeHealthBonusItem()) {
-      increaseMaxHp(-1);
-      gameState.maxHpBonus = Math.max(0, (gameState.maxHpBonus || 0) - 1);
-    }
     clearStatuses(player);
     await respawn();
     if (enemy.id === 'echo_absolute') {
