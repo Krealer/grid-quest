@@ -4,6 +4,7 @@ import { showDialogue } from './dialogueSystem.js';
 import { movePlayerTo } from './map.js';
 import { transitionToMap } from './transition.js';
 import { handleMoveCorruption } from './corruption_state.js';
+import { isMobilePortrait, centerGridOnPlayer } from './mobile_ui.js';
 import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
 import { getItemBonuses } from './item_stats.js';
 import { getRelicBonuses } from './relic_state.js';
@@ -79,6 +80,12 @@ export function stepTo(x, y) {
   player.y = y;
   handleMoveCorruption(x, y);
   document.dispatchEvent(new CustomEvent('playerMoved', { detail: { x, y } }));
+  if (gameState.settings?.centerMode && isMobilePortrait()) {
+    const container = document.getElementById('game-grid');
+    if (container) {
+      centerGridOnPlayer(container);
+    }
+  }
 }
 
 export function takeDamage(amount) {
