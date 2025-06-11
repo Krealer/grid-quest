@@ -7,7 +7,7 @@ import {
 } from './game_state.js';
 import { serializeInventory, inventoryState } from './inventory_state.js';
 import { serializeQuestState, deserializeQuestState } from './quest_state.js';
-import { serializePlayer, deserializePlayer } from './player.js';
+import { serializePlayer, deserializePlayer, player } from './player.js';
 import { refreshInventoryDisplay } from '../ui/inventory_menu.js';
 
 import { gameState } from './game_state.js';
@@ -38,6 +38,8 @@ export function loadGame(slot = 1) {
     const data = JSON.parse(json);
     deserializeGameState(data.game || {});
     inventoryState.loadFromObject(data.inventory || {});
+    console.log('Loaded inventory:', inventory);
+    console.log('Equipped:', player.equipment);
     refreshInventoryDisplay();
     validateLoadedInventory(data.inventory?.items || []);
     deserializeQuestState(data.quests || {});
