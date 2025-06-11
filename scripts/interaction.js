@@ -76,8 +76,7 @@ export async function handleTileInteraction(
   if (tile.type === 'D' && tile.requiresItem === 'rift_eye' && tile.locked) {
     if (!hasItem('rift_eye')) {
       showDialogue(
-        tile.message ||
-          'A singular socket awaits a gaze… but you hold no eye.'
+        tile.message || 'A singular socket awaits a gaze… but you hold no eye.'
       );
       return;
     }
@@ -86,6 +85,32 @@ export async function handleTileInteraction(
     updateInventoryUI();
     tile.locked = false;
     setMemory('entered_map06');
+    const newCols = await enterDoor(tile.target, tile.spawn);
+    return newCols;
+  }
+
+  if (tile.type === 'D' && tile.requiresItem === 'maze_key_1' && tile.locked) {
+    if (!hasItem('maze_key_1')) {
+      showDialogue(tile.message || 'The door is sealed by an unfamiliar lock.');
+      return;
+    }
+    useKey('maze_key_1');
+    markItemUsed('maze_key_1');
+    updateInventoryUI();
+    tile.locked = false;
+    const newCols = await enterDoor(tile.target, tile.spawn);
+    return newCols;
+  }
+
+  if (tile.type === 'D' && tile.requiresItem === 'maze_key_2' && tile.locked) {
+    if (!hasItem('maze_key_2')) {
+      showDialogue(tile.message || 'A sturdy gate bars your path.');
+      return;
+    }
+    useKey('maze_key_2');
+    markItemUsed('maze_key_2');
+    updateInventoryUI();
+    tile.locked = false;
     const newCols = await enterDoor(tile.target, tile.spawn);
     return newCols;
   }

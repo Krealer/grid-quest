@@ -23,12 +23,10 @@ export const itemDescriptions = {
     'Flesh Crystal \u2013 enhances life-based skills in future updates.',
   crystal_dust:
     'Crystal Dust \u2013 key component for crystalline armor crafting.',
-  psy_fiber:
-    'Psy Fiber \u2013 material for neural implants or debuff recipes.',
+  psy_fiber: 'Psy Fiber \u2013 material for neural implants or debuff recipes.',
   rift_eye:
     'Rift Eye \u2013 rumored to open a psychic gate somewhere; unlocks rift gate.',
-  memory_gem:
-    'Memory Gem \u2013 trade or socket this to improve your skills.',
+  memory_gem: 'Memory Gem \u2013 trade or socket this to improve your skills.',
   crystal_shard: 'Crystal Shard \u2013 can be used later to upgrade skills.',
   defense_potion_II:
     'Defense Potion II \u2013 grants +2 defense for the current battle.',
@@ -43,14 +41,14 @@ export const itemDescriptions = {
     'Blood Resin \u2013 a rare component for advanced leech recipes.',
   echo_splinter:
     'Echo Splinter \u2013 rumor says it unlocks a dialogue option in map07.',
-  crystal_seed:
-    'Crystal Seed \u2013 essential for future item upgrades.',
-  mana_scroll:
-    'Mana Scroll \u2013 completely refreshes all skill cooldowns.',
+  crystal_seed: 'Crystal Seed \u2013 essential for future item upgrades.',
+  mana_scroll: 'Mana Scroll \u2013 completely refreshes all skill cooldowns.',
   prism_key:
     'Prism Key \u2013 obtained from Caelen in map06, unlocks the path to the next area.',
-  forgotten_ring:
-    'Forgotten Ring \u2013 when worn, grants +1 attack.'
+  maze_key_1: 'Maze Key 1 \u2013 opens the western maze in the Gatepoint Room.',
+  maze_key_2:
+    'Maze Key 2 \u2013 unlocks the northern gate of the Gatepoint Room.',
+  forgotten_ring: 'Forgotten Ring \u2013 when worn, grants +1 attack.'
 };
 
 export function markItemUsed(id) {
