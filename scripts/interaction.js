@@ -7,6 +7,7 @@ import { hasItem, removeItem } from './inventory.js';
 import { updateInventoryUI } from './inventory_state.js';
 import { showDialogue } from './dialogueSystem.js';
 import { markItemUsed } from '../info/items.js';
+import { setMemory } from './dialogue_state.js';
 import { enterDoor } from './player.js';
 
 /**
@@ -68,6 +69,23 @@ export async function handleTileInteraction(
     markItemUsed('rift_stone');
     updateInventoryUI();
     tile.locked = false;
+    const newCols = await enterDoor(tile.target, tile.spawn);
+    return newCols;
+  }
+
+  if (tile.type === 'D' && tile.requiresItem === 'rift_eye' && tile.locked) {
+    if (!hasItem('rift_eye')) {
+      showDialogue(
+        tile.message ||
+          'A singular socket awaits a gaze… but you hold no eye.'
+      );
+      return;
+    }
+    removeItem('rift_eye');
+    markItemUsed('rift_eye');
+    updateInventoryUI();
+    tile.locked = false;
+    setMemory('entered_map06');
     const newCols = await enterDoor(tile.target, tile.spawn);
     return newCols;
   }

@@ -268,7 +268,10 @@
           "x": 1,
           "y": 1
         },
-        "locked": true
+        "locked": true,
+        "requiresItem": "rift_eye",
+        "consumeItem": true,
+        "message": "A singular socket awaits a gaze… but you hold no eye."
       }
     ],
     [

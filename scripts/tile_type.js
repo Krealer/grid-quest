@@ -83,7 +83,7 @@ export async function onInteractEffect(
     case 'D': {
       const required = tile.key || tile.requiresItem;
       const targetMap = tile.target;
-      if (required && !hasItem(required)) {
+      if (required && !hasItem(required) && tile.locked) {
         showDialogue("It\u2019s locked.");
         break;
       }
