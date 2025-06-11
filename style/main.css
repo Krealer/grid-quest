@@ -817,6 +817,17 @@ body {
   color: #27ae60;
 }
 
+@media (max-width: 768px) {
+  .craft-overlay {
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+  .craft-content {
+    width: 95%;
+    max-height: calc(100vh - 40px);
+  }
+}
+
 /* Quest Log UI */
 .quest-overlay {
   position: fixed;
