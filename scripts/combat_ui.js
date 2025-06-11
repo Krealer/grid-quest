@@ -3,32 +3,55 @@ import { getStatusList } from './statusManager.js';
 import { attachTooltip } from '../ui/skillsPanel.js';
 
 export function setupTabs(overlay) {
-  const skillContainer = overlay.querySelector('.skill-buttons');
+  const offContainer = overlay.querySelector('.offensive-skill-buttons');
+  const defContainer = overlay.querySelector('.defensive-skill-buttons');
   const itemContainer = overlay.querySelector('.item-buttons');
-  const skillsTabBtn = overlay.querySelector('.skills-tab');
+  const offTabBtn = overlay.querySelector('.offensive-tab');
+  const defTabBtn = overlay.querySelector('.defensive-tab');
   const itemsTabBtn = overlay.querySelector('.items-tab');
-  if (!skillContainer || !itemContainer || !skillsTabBtn || !itemsTabBtn)
+  if (
+    !offContainer ||
+    !defContainer ||
+    !itemContainer ||
+    !offTabBtn ||
+    !defTabBtn ||
+    !itemsTabBtn
+  )
     return;
 
-  function showSkills() {
-    skillContainer.classList.remove('hidden');
+  function showOffensive() {
+    offContainer.classList.remove('hidden');
+    defContainer.classList.add('hidden');
     itemContainer.classList.add('hidden');
-    skillsTabBtn.classList.add('selected');
+    offTabBtn.classList.add('selected');
+    defTabBtn.classList.remove('selected');
+    itemsTabBtn.classList.remove('selected');
+  }
+
+  function showDefensive() {
+    defContainer.classList.remove('hidden');
+    offContainer.classList.add('hidden');
+    itemContainer.classList.add('hidden');
+    defTabBtn.classList.add('selected');
+    offTabBtn.classList.remove('selected');
     itemsTabBtn.classList.remove('selected');
   }
 
   function showItems() {
     itemContainer.classList.remove('hidden');
-    skillContainer.classList.add('hidden');
+    offContainer.classList.add('hidden');
+    defContainer.classList.add('hidden');
     itemsTabBtn.classList.add('selected');
-    skillsTabBtn.classList.remove('selected');
+    offTabBtn.classList.remove('selected');
+    defTabBtn.classList.remove('selected');
   }
 
-  skillsTabBtn.addEventListener('click', showSkills);
+  offTabBtn.addEventListener('click', showOffensive);
+  defTabBtn.addEventListener('click', showDefensive);
   itemsTabBtn.addEventListener('click', showItems);
 
   // default
-  showSkills();
+  showOffensive();
 }
 
 export function updateStatusUI(overlay, player, enemy) {
@@ -94,10 +117,12 @@ export function renderSkillList(container, skills, onClick) {
   return map;
 }
 
-export function setSkillDisabledState(buttonMap, isSilenced, allowed = []) {
+export function setSkillDisabledState(buttonMap, skillLookup, isSilenced) {
   Object.entries(buttonMap).forEach(([id, btn]) => {
     if (!btn) return;
-    if (isSilenced && !allowed.includes(id)) {
+    const def = skillLookup[id];
+    const offensive = def?.category === 'offensive';
+    if (isSilenced && offensive) {
       btn.classList.add('disabled');
       btn.disabled = true;
     } else {

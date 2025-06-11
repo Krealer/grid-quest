@@ -207,7 +207,7 @@ export const statusEffects = {
     id: 'silenced',
     name: 'Silenced',
     icon: '🤐',
-    description: 'Cannot use skills.',
+    description: 'Cannot use offensive skills.',
     type: 'negative',
     duration: 2
   },
@@ -215,10 +215,9 @@ export const statusEffects = {
     id: 'silence',
     name: 'Silence',
     icon: '🤐',
-    description: 'Cannot use skills except Guard.',
+    description: 'Cannot use offensive skills.',
     type: 'negative',
-    duration: 2,
-    allowSkills: ['guard']
+    duration: 2
   },
   vulnerable: {
     id: 'vulnerable',
