@@ -379,6 +379,10 @@
         "type": "N",
         "npc": "npc_04"
       },
+      {
+        "type": "N",
+        "npc": "verrel_the_voice"
+      },
       "G",
       "G",
       "G",

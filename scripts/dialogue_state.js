@@ -774,3 +774,7 @@ export function flagTradedForPrismKey() {
 export function flagTradedWithKaelor() {
   setMemory('traded_with_kaelor');
 }
+
+export function flagManipulatedByVerrel() {
+  setMemory('manipulated_by_verrel');
+}

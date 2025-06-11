@@ -215,6 +215,23 @@ export function removePrismFragments(qty = 10) {
   return removeItem('prism_fragment', qty);
 }
 
+export function removeEnemyDropItem() {
+  const enemyItems = [
+    'prism_fragment',
+    'goblin_ear',
+    'zombie_claw',
+    'cracked_signet',
+    'arcane_core'
+  ];
+  for (const id of enemyItems) {
+    if (getItemCount(id) > 0) {
+      removeItem(id, 1);
+      return id;
+    }
+  }
+  return null;
+}
+
 export function equipItem(itemId) {
   const bonus = getItemBonuses(itemId);
   if (!bonus || !bonus.slot) return false;

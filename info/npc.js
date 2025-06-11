@@ -23,8 +23,7 @@ export const npcs = [
     name: 'Thalos',
     map: 'Map05',
     description: 'Watcher of the rift who mutters about echoes.'
-  }
-  ,
+  },
   {
     id: 'caelen',
     name: 'Caelen',
@@ -45,5 +44,12 @@ export const npcs = [
     map: 'Map07 Maze',
     location: '4,15',
     description: 'Calm informant who answers lore questions, not a trader.'
+  },
+  {
+    id: 'verrel_the_voice',
+    name: 'Verrel',
+    map: 'Map07 Maze',
+    location: '16,15',
+    description: 'Speaks of kindness, leaves you with less.'
   }
 ];
