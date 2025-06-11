@@ -61,7 +61,7 @@ const chestContents = {
     item: 'defense_potion_II',
     message: 'Carefully prying it open yields a potent Defense Potion.'
   },
-  'map05:1,1': {
+  'map05:2,1': {
     item: 'crystal_shard',
     message: 'Tucked in the corner lies a faintly glowing crystal shard.'
   },
