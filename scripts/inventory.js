@@ -221,7 +221,10 @@ export function removeEnemyDropItem() {
     'goblin_ear',
     'zombie_claw',
     'cracked_signet',
-    'arcane_core'
+    'arcane_core',
+    'warden_crest',
+    'idol_fragment',
+    'obsidian_core'
   ];
   for (const id of enemyItems) {
     if (getItemCount(id) > 0) {

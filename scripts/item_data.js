@@ -493,6 +493,62 @@ export const itemData = {
     consumable: false,
     stackLimit: 1,
     icon: '💍'
+  },
+  dusty_scroll: {
+    id: 'dusty_scroll',
+    name: 'Dusty Scroll',
+    description: 'Ancient writing describing lost rituals.',
+    type: 'quest',
+    tags: ['lore'],
+    category: 'lore',
+    consumable: false,
+    stackLimit: 1,
+    icon: '📜'
+  },
+  ritual_oil: {
+    id: 'ritual_oil',
+    name: 'Ritual Oil',
+    description: 'Use in combat to enhance mystical attacks.',
+    type: 'combat',
+    tags: ['combat'],
+    category: 'combat',
+    consumable: true,
+    stackLimit: 3,
+    icon: '🛢️',
+    useInCombat: true
+  },
+  warden_crest: {
+    id: 'warden_crest',
+    name: 'Warden Crest',
+    description: 'Symbol of temple guardians used for sturdy gear.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🛡️'
+  },
+  idol_fragment: {
+    id: 'idol_fragment',
+    name: 'Idol Fragment',
+    description: 'Piece of a shattered idol prized by collectors.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🗿'
+  },
+  obsidian_core: {
+    id: 'obsidian_core',
+    name: 'Obsidian Core',
+    description: 'Dark shard radiating forbidden power.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '⚫'
   }
 };
 
