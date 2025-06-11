@@ -24,6 +24,6 @@ export async function tryVicarDoor(tile) {
     updateInventoryUI();
     tile.locked = false;
   }
-  const { cols } = await enterDoor(tile.target, tile.spawn);
-  return cols;
+  const newCols = await enterDoor(tile.target, tile.spawn);
+  return newCols;
 }

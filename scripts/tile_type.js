@@ -118,7 +118,7 @@ export async function onInteractEffect(
               updateInventoryUI();
             }
             tile.locked = false;
-            const { cols: newCols } = await enterDoor(targetMap, tile.spawn);
+            const newCols = await enterDoor(targetMap, tile.spawn);
             resolve(newCols);
           });
         });
@@ -129,7 +129,7 @@ export async function onInteractEffect(
         updateInventoryUI();
       }
       {
-        const { cols: newCols } = await enterDoor(targetMap, tile.spawn);
+        const newCols = await enterDoor(targetMap, tile.spawn);
         return newCols;
       }
     }

@@ -138,10 +138,10 @@
   "commander_badge": {
     "name": "Commander Badge",
     "description": "Proof of defeating the scout commander.",
-    "type": "gear",
+    "type": "key",
     "stackLimit": 1,
     "icon": "🎖️",
-    "category": "equipable"
+    "category": "key"
   },
   "scout_blade": {
     "name": "Scout Blade",
