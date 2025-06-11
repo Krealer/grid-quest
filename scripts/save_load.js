@@ -11,10 +11,13 @@ import { serializePlayer, deserializePlayer } from './player.js';
 import { refreshInventoryDisplay } from '../ui/inventory_menu.js';
 
 import { gameState } from './game_state.js';
+import { inventory } from './inventory.js';
 
 export function saveGame(slot = 1) {
   const data = {
     timestamp: Date.now(),
+    mapName: gameState.currentMap,
+    itemCount: inventory.length,
     game: serializeGameState(),
     inventory: serializeInventory(),
     quests: serializeQuestState(),
