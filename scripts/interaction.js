@@ -9,6 +9,7 @@ import { showDialogue } from './dialogueSystem.js';
 import { markItemUsed } from '../info/items.js';
 import { setMemory } from './dialogue_state.js';
 import { enterDoor } from './player.js';
+import { tryVicarDoor } from './door_logic.js';
 
 /**
  * Handles double click interactions on tiles.
@@ -112,6 +113,11 @@ export async function handleTileInteraction(
     updateInventoryUI();
     tile.locked = false;
     const newCols = await enterDoor(tile.target, tile.spawn);
+    return newCols;
+  }
+
+  if (tile.type === 'D' && tile.requiresItem === 'vicar_sigil') {
+    const newCols = await tryVicarDoor(tile);
     return newCols;
   }
 

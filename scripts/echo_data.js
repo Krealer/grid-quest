@@ -34,6 +34,12 @@ export const echoData = {
       'Each step echoes with choices unresolved.',
       'You sense a greater design taking form.'
     ]
+  },
+  vicar_entrance_warning: {
+    id: 'vicar_entrance_warning',
+    text: [
+      'The air is thick with finality. Once you enter… you cannot turn back.'
+    ]
   }
 };
 

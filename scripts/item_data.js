@@ -739,6 +739,18 @@ export const itemData = {
     stackLimit: 1,
     icon: '💍'
   },
+  vicar_sigil: {
+    id: 'vicar_sigil',
+    name: 'Vicar Sigil',
+    description:
+      'Proof of dominion over the Stonebound Vicar. Unlocks sacred doors.',
+    type: 'key',
+    tags: ['lore'],
+    category: 'key',
+    consumable: false,
+    stackLimit: 1,
+    icon: '🗝️'
+  },
   echo_crystal: {
     id: 'echo_crystal',
     name: 'Echo Crystal',
