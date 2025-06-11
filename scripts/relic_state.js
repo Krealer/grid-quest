@@ -23,7 +23,23 @@ function saveOwned(list) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
 }
 
+const DEPRECATED_RELICS = ['warrior', 'guardian', 'mirror'];
+
+function purgeDeprecatedRelics() {
+  let changed = false;
+  DEPRECATED_RELICS.forEach((id) => {
+    if (relicState.owned.has(id)) {
+      relicState.owned.delete(id);
+      changed = true;
+    }
+  });
+  if (changed) {
+    saveOwned(Array.from(relicState.owned));
+  }
+}
+
 relicState.owned = new Set(loadOwned());
+purgeDeprecatedRelics();
 
 document.dispatchEvent(new CustomEvent('relicsLoaded'));
 
