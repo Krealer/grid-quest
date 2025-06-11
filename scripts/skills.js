@@ -167,6 +167,22 @@ const skillDefs = {
       log('A powerful aegis surrounds you.');
     }
   },
+  emberPrayer: {
+    id: 'emberPrayer',
+    name: 'Ember Prayer',
+    icon: '🔥',
+    description: 'Deal fire damage and apply Burn for 3 turns.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 2,
+    unlockCondition: { item: 'ember_prayer_scroll' },
+    effect({ damageEnemy, applyStatus, enemy, log }) {
+      const dmg = 16;
+      damageEnemy(dmg);
+      applyStatus(enemy, 'burn', 3);
+      log('Sacred flames sear the foe!');
+    }
+  },
   focusMind: {
     id: 'focusMind',
     name: 'Focus',

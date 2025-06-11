@@ -396,5 +396,53 @@
     "stackLimit": 1,
     "icon": "💎",
     "category": "key"
+  },
+  "mana_ember": {
+    "name": "Mana Ember",
+    "description": "Restores skill energy when used in combat.",
+    "type": "combat",
+    "stackLimit": 5,
+    "icon": "🔥",
+    "category": "combat"
+  },
+  "ember_prayer_scroll": {
+    "name": "Scroll: Ember Prayer",
+    "description": "Using it teaches the Ember Prayer skill.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "📜",
+    "category": "lore"
+  },
+  "ashen_core": {
+    "name": "Ashen Core",
+    "description": "Remnant from an Ash Vessel.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "⚱️",
+    "category": "general"
+  },
+  "dust_talisman": {
+    "name": "Dust Talisman",
+    "description": "Charm carried by Dust Prophets.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🌫️",
+    "category": "general"
+  },
+  "resonant_chime": {
+    "name": "Resonant Chime",
+    "description": "Chime that echoes with power.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🔔",
+    "category": "general"
+  },
+  "wailing_essence": {
+    "name": "Wailing Essence",
+    "description": "Captures the cry of a Hollow Wailer.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🎵",
+    "category": "general"
   }
 }

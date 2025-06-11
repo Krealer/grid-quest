@@ -18,7 +18,8 @@ import {
   useStaminaDust,
   useReflectPotion,
   useManaScroll,
-  useAegisInvocationScroll
+  useAegisInvocationScroll,
+  useEmberPrayerScroll
 } from './item_logic.js';
 import { getItemBonuses } from './item_stats.js';
 import {
@@ -247,6 +248,9 @@ function handleInventoryItemUse(id) {
     if (res) used = true;
   } else if (id === 'aegis_invocation_scroll') {
     const res = useAegisInvocationScroll();
+    if (res) used = true;
+  } else if (id === 'ember_prayer_scroll') {
+    const res = useEmberPrayerScroll();
     if (res) used = true;
   }
   if (used) {
