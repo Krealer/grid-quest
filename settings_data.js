@@ -29,6 +29,6 @@ export default {
   },
   centerMode: {
     default: false,
-    description: 'Re-center grid after movement in portrait'
+    description: 'Keeps the player centered on mobile in portrait'
   }
 };

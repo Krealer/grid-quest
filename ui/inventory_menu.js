@@ -10,3 +10,17 @@ export async function refreshInventoryDisplay() {
   await loadItems();
   updateInventoryUI();
 }
+
+export function initInventoryMenu() {
+  const categories = document.querySelector('.inventory-categories');
+  function updateTabs() {
+    if (!categories) return;
+    if (window.innerWidth < 480) {
+      categories.classList.add('mobile');
+    } else {
+      categories.classList.remove('mobile');
+    }
+  }
+  updateTabs();
+  window.addEventListener('resize', updateTabs);
+}
