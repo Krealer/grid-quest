@@ -441,5 +441,13 @@
     "stackLimit": 99,
     "icon": "🎵",
     "category": "general"
+  },
+  "maze_key_1": {
+    "name": "Maze Key 1",
+    "description": "A key used deep in the maze system.",
+    "type": "quest",
+    "stackLimit": 1,
+    "icon": "🗝️",
+    "category": "quest"
   }
 }

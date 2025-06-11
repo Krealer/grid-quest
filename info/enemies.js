@@ -80,6 +80,14 @@ export const enemies = [
     skills: 'prism_shot, refract_guard'
   },
   {
+    id: 'cracked_crystal_sentry',
+    name: 'Cracked Crystal Sentry',
+    map: 'Map07 Maze',
+    location: '14,8',
+    drops: 'Prism Fragment',
+    skills: 'refract_crack, prism_crack'
+  },
+  {
     id: 'pain_lattice',
     name: 'Pain Lattice',
     map: 'Map05',

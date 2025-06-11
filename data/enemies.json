@@ -972,5 +972,28 @@
         "quantity": 1
       }
     ]
+  },
+  "cracked_crystal_sentry": {
+    "name": "Cracked Crystal Sentry",
+    "hp": 300,
+    "stats": {
+      "attack": 4,
+      "defense": 5
+    },
+    "xp": 100,
+    "description": "A fractured sentinel brimming with unstable power.",
+    "intro": "Fragments stir as a Cracked Crystal Sentry emerges!",
+    "portrait": "💠",
+    "skills": [
+      "refract_crack",
+      "prism_crack"
+    ],
+    "behavior": "balanced",
+    "drops": [
+      {
+        "item": "prism_fragment",
+        "quantity": 1
+      }
+    ]
   }
 }
