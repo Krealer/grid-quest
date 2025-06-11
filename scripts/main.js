@@ -35,6 +35,11 @@ import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
 import { toggleInfoMenu, initInfoMenu } from '../ui/info_menu.js';
 import { refreshInventoryDisplay } from '../ui/inventory_menu.js';
+import {
+  initSaveSlotsMenu,
+  openSaveMenu,
+  openLoadMenu
+} from '../ui/save_slots_menu.js';
 import { saveState, loadState, gameState } from './game_state.js';
 import { saveGame, loadGame } from './save_load.js';
 import { initMenuBar } from '../ui/menu_bar.js';
@@ -122,14 +127,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   const resetBtn = document.getElementById('reset-settings');
 
   function handleSave() {
-    saveState();
-    saveGame();
-    showDialogue('Game Saved.');
+    openSaveMenu();
   }
 
-  async function handleLoad() {
+  function handleLoad() {
+    openLoadMenu();
+  }
+
+  async function performLoad(slot) {
     loadState();
-    if (!loadGame()) {
+    if (!loadGame(slot)) {
       showDialogue('No save found.');
       return;
     }
@@ -155,6 +162,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       console.error(err);
     }
   }
+
+  document.addEventListener('saveSlot', (e) => {
+    saveState();
+    saveGame(e.detail.slot);
+    showDialogue('Game Saved.');
+  });
+
+  document.addEventListener('loadSlot', (e) => {
+    performLoad(e.detail.slot);
+  });
 
   initMenuBar(handleSave, handleLoad);
   initInventoryUI();
@@ -182,6 +199,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initPassiveSystem(player);
   initInfoMenu();
   initNullSummary();
+  initSaveSlotsMenu();
 
   try {
     await loadEnemyData();
