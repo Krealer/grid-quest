@@ -89,6 +89,17 @@ export const itemData = {
     stackLimit: 1,
     icon: '🏹'
   },
+  goblin_sword: {
+    id: 'goblin_sword',
+    name: 'Goblin Sword',
+    description: 'Crude blade favored by goblins.',
+    type: 'gear',
+    tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
+    stackLimit: 1,
+    icon: '🗡️'
+  },
   commander_badge: {
     id: 'commander_badge',
     name: 'Commander Badge',
