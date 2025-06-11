@@ -161,6 +161,46 @@ export const itemData = {
     stackLimit: 10,
     icon: '🧴'
   },
+  flesh_crystal: {
+    id: 'flesh_crystal',
+    name: 'Flesh Crystal',
+    description: 'Used to enhance life-based skills (future).',
+    type: 'material',
+    stackLimit: 99,
+    icon: '🧬'
+  },
+  crystal_dust: {
+    id: 'crystal_dust',
+    name: 'Crystal Dust',
+    description: 'Required for crafting crystalline armor later.',
+    type: 'material',
+    stackLimit: 99,
+    icon: '✨'
+  },
+  psy_fiber: {
+    id: 'psy_fiber',
+    name: 'Psy Fiber',
+    description: 'Component in neural implants or debuff skills.',
+    type: 'material',
+    stackLimit: 99,
+    icon: '🧠'
+  },
+  rift_eye: {
+    id: 'rift_eye',
+    name: 'Rift Eye',
+    description: 'May open a sealed psychic gate elsewhere.',
+    type: 'key',
+    stackLimit: 1,
+    icon: '👁️'
+  },
+  memory_gem: {
+    id: 'memory_gem',
+    name: 'Memory Gem',
+    description: 'Can be socketed or traded for a skill token.',
+    type: 'material',
+    stackLimit: 99,
+    icon: '🔮'
+  },
   rift_fragment: {
     id: 'rift_fragment',
     name: 'Rift Fragment',

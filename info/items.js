@@ -19,6 +19,16 @@ export const itemDescriptions = {
     'Old Scroll \u2013 a weathered document from Isolation Nexus. Someone may want to read it later.',
   rift_stone:
     'Rift Stone \u2013 unlocks the sealed gate in Isolation Nexus after defeating the Rift Lurker.',
+  flesh_crystal:
+    'Flesh Crystal \u2013 enhances life-based skills in future updates.',
+  crystal_dust:
+    'Crystal Dust \u2013 key component for crystalline armor crafting.',
+  psy_fiber:
+    'Psy Fiber \u2013 material for neural implants or debuff recipes.',
+  rift_eye:
+    'Rift Eye \u2013 rumored to open a psychic gate somewhere.',
+  memory_gem:
+    'Memory Gem \u2013 trade or socket this to improve your skills.',
   crystal_shard: 'Crystal Shard \u2013 can be used later to upgrade skills.',
   defense_potion_II:
     'Defense Potion II \u2013 grants +2 defense for the current battle.',

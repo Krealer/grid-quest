@@ -54,5 +54,68 @@ export const skillData = {
     damage: 7,
     accuracy: 1,
     description: 'Attack that leaves the target vulnerable.'
+  },
+  slam: {
+    id: 'slam',
+    name: 'Slam',
+    damage: 8,
+    accuracy: 1,
+    description: 'A heavy smash from lumbering foes.'
+  },
+  grasp: {
+    id: 'grasp',
+    name: 'Grasp',
+    damage: 5,
+    accuracy: 1,
+    description: 'Deals light damage and slows the target.'
+  },
+  shard_spike: {
+    id: 'shard_spike',
+    name: 'Shard Spike',
+    damage: 7,
+    accuracy: 1,
+    description: 'Pierces defenses with a crystal spike.'
+  },
+  reflect_shell: {
+    id: 'reflect_shell',
+    name: 'Reflect Shell',
+    damage: 0,
+    accuracy: 1,
+    description: 'Hardens the caster, raising defense.'
+  },
+  neural_lash: {
+    id: 'neural_lash',
+    name: 'Neural Lash',
+    damage: 9,
+    accuracy: 1,
+    description: 'Psychic strike that sears nerves.'
+  },
+  confuse: {
+    id: 'confuse',
+    name: 'Confuse',
+    damage: 0,
+    accuracy: 1,
+    description: 'Scrambles the target\'s senses.'
+  },
+  fracture_wave: {
+    id: 'fracture_wave',
+    name: 'Fracture Wave',
+    damage: 8,
+    accuracy: 1,
+    description: 'Mental wave that rattles the mind.'
+  },
+  mind_spike: {
+    id: 'mind_spike',
+    name: 'Mind Spike',
+    damage: 12,
+    accuracy: 1,
+    description: 'A brutal psychic spear of pain.'
+  },
+  echo_wound: {
+    id: 'echo_wound',
+    name: 'Echo Wound',
+    damage: 0,
+    accuracy: 1,
+    description: 'Leaves the target Fragile for a short time.'
   }
 };

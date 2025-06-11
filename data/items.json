@@ -295,6 +295,41 @@
     "stackLimit": 3,
     "icon": "✨"
   },
+  "flesh_crystal": {
+    "name": "Flesh Crystal",
+    "description": "Used to enhance life-based skills (future)",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🧬"
+  },
+  "crystal_dust": {
+    "name": "Crystal Dust",
+    "description": "Required by later crafting recipe for crystalline armor",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "✨"
+  },
+  "psy_fiber": {
+    "name": "Psy Fiber",
+    "description": "Component in neural implants or debuff skills (future)",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🧠"
+  },
+  "rift_eye": {
+    "name": "Rift Eye",
+    "description": "May be used in map06 to open sealed psychic gate",
+    "type": "key",
+    "stackLimit": 1,
+    "icon": "👁️"
+  },
+  "memory_gem": {
+    "name": "Memory Gem",
+    "description": "May be socketed (future mechanic) or traded for skill token",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🔮"
+  },
   "rift_stone": {
     "name": "Rift Stone",
     "description": "A shard humming with unstable dimensional energy.",
