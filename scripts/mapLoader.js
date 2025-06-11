@@ -113,13 +113,6 @@ export async function loadMap(name) {
       }
     }
     if (name === 'map03' && isEnemyDefeated('scout_commander')) {
-      for (const row of data.grid) {
-        for (const cell of row) {
-          if (cell && cell.type === 'D' && cell.target === 'map04.json') {
-            cell.locked = false;
-          }
-        }
-      }
       if (!gameState.openedChests.has('map03:10,12')) {
         if (data.grid[12] && data.grid[12][10]) {
           data.grid[12][10] = { type: 'C', glow: true };
