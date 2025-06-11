@@ -25,6 +25,9 @@ import { unlockRelicSlot, unlockPortal15 } from './player_state.js';
 
 export const dialogueMemory = new Set();
 
+// Record branching choices so later conversations can reference them.
+export const dialogueBranches = {};
+
 const state = {
   activeDialogue: null
 };
@@ -40,6 +43,15 @@ export function setMemory(flag) {
 
 export function hasMemory(flag) {
   return dialogueMemory.has(flag);
+}
+
+export function setBranchChoice(id, choice) {
+  if (!id) return;
+  dialogueBranches[id] = choice;
+}
+
+export function getBranchChoice(id) {
+  return dialogueBranches[id];
 }
 
 export function startSession(dialogue, npcId) {
