@@ -137,6 +137,7 @@ export async function startCombat(enemy, player) {
   player.tempAttack = 0;
   enemy.tempDefense = 0;
   enemy.tempAttack = 0;
+  enemy.skillIndex = 0;
 
   updateHpBar(playerBar, playerHp, playerMax);
   updateHpBar(enemyBar, enemyHp, enemyMax);
@@ -594,6 +595,12 @@ export async function startCombat(enemy, player) {
     const behavior = enemy.behavior || 'balanced';
     const special = isElite(enemy) || isBoss(enemy);
 
+    if (enemy.cycleSkills && list.length) {
+      const idx = enemy.skillIndex || 0;
+      skill = list[idx % list.length];
+      enemy.skillIndex = (idx + 1) % list.length;
+    } else {
+
     if (special && list.length >= 2) {
       skill = list[Math.floor(Math.random() * list.length)];
     } else if (playerVulnerable && statusSkills.length) {
@@ -619,6 +626,7 @@ export async function startCombat(enemy, player) {
         playerTurn = true;
         return;
       }
+    }
     }
 
     if (skill) {

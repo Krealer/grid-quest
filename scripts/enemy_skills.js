@@ -284,6 +284,38 @@ export const enemySkills = {
       log(`${enemy.name} touches you for ${applied} damage. Reality wavers!`);
     }
   },
+  arcane_bolt: {
+    id: 'arcane_bolt',
+    name: 'Arcane Bolt',
+    icon: '✨',
+    description: 'A burst of arcane energy dealing 7 damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 7 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} hurls an arcane bolt for ${applied} damage!`);
+    }
+  },
+  weakening_hex: {
+    id: 'weakening_hex',
+    name: 'Weakening Hex',
+    icon: '🌀',
+    description: 'Applies Weakened for 3 turns.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['weakened'],
+    statuses: [{ target: 'player', id: 'weakened', duration: 3 }],
+    effect({ enemy, player, applyStatus, log }) {
+      applyStatus(player, 'weakened', 3);
+      log(`${enemy.name} hexes you with weakening magic!`);
+    }
+  },
   silence_wave: {
     id: 'silence_wave',
     name: 'Silencing Wave',
