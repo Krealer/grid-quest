@@ -17,7 +17,8 @@ function createEntry(obj) {
   if (obj.effects) {
     extra += `<div class="desc">Effect: ${obj.effects}</div>`;
   }
-  row.innerHTML = `<strong>${obj.name}</strong><div class="desc">${obj.description}</div>${extra}`;
+  let meta = obj.category ? `<div class="meta">${obj.category}</div>` : '';
+  row.innerHTML = `<strong>${obj.name}</strong><div class="desc">${obj.description}</div>${extra}${meta}`;
   return row;
 }
 

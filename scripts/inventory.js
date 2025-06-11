@@ -157,10 +157,20 @@ export function consumeItem(id, qty = 1) {
   return removeItem(id, qty);
 }
 
+export function getItemsByTag(tag) {
+  return inventory.filter((it) => {
+    const data = getItemData(it.id);
+    return data && Array.isArray(data.tags) && data.tags.includes(tag);
+  });
+}
+
 export function getItemsByType(type) {
   return inventory.filter((it) => {
     const data = getItemData(it.id);
-    return data && data.type === type;
+    return (
+      (data && data.type === type) ||
+      (Array.isArray(data.tags) && data.tags.includes(type))
+    );
   });
 }
 

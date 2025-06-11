@@ -55,7 +55,7 @@ export async function onStepEffect(symbol, player, x, y) {
 // Interaction effects for doors, chests, enemies, NPCs and echoes
 import { isChestOpened, openChest } from './chest.js';
 import { hasItem, removeItem, useKey } from './inventory.js';
-import { updateInventoryUI } from './inventory_state.js';
+import { updateInventoryUI } from './inventory_ui.js';
 import { getEnemyData } from './enemy.js';
 import { startCombat } from './combatSystem.js';
 import { getAllSkills, unlockSkill } from './skills.js';

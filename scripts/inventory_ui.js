@@ -3,7 +3,8 @@ import {
   equipItem,
   getEquippedItem,
   getItemDisplayName,
-  getItemLevel
+  getItemLevel,
+  getItemsByTag
 } from './inventory.js';
 import { player, getTotalStats } from './player.js';
 import { useArmorPiece } from './item_logic.js';
@@ -19,17 +20,45 @@ import { enchantments } from './enchantments.js';
 import { getItemData } from './item_loader.js';
 import { loadRelics, getRelicData, getOwnedRelics } from './relic_state.js';
 
+let currentCategory = 'items';
+
+function updateCategoryButtons() {
+  const btns = document.querySelectorAll('.inventory-categories button');
+  btns.forEach((b) => {
+    b.classList.toggle('selected', b.dataset.cat === currentCategory);
+  });
+}
+
+export function initInventoryUI() {
+  document.querySelectorAll('.inventory-categories button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      currentCategory = btn.dataset.cat;
+      updateCategoryButtons();
+      updateInventoryUI();
+    });
+  });
+  updateCategoryButtons();
+}
+
 export async function updateInventoryUI() {
   const list = document.getElementById('inventory-list');
   if (!list) return;
   await loadRelics();
   list.innerHTML = '';
+  updateCategoryButtons();
   const statsEl = document.getElementById('player-stats');
   if (statsEl) {
     const stats = getTotalStats();
     statsEl.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Attack: ${stats.attack || 0}  Defense: ${stats.defense || 0}`;
   }
-  inventory.forEach((item) => {
+  const filtered = getItemsByTag(currentCategory);
+  if (filtered.length === 0) {
+    const msg = document.createElement('div');
+    msg.classList.add('info-empty');
+    msg.textContent = 'No items in this category.';
+    list.appendChild(msg);
+  }
+  filtered.forEach((item) => {
     const row = document.createElement('div');
     row.classList.add('inventory-item');
     row.dataset.id = item.id;

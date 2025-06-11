@@ -38,6 +38,7 @@ export async function loadItemInfo() {
     }
 
     const dropped = dropMap[id] ? Array.from(dropMap[id]).join(', ') : '';
+    const category = Array.isArray(base.tags) && base.tags.length > 0 ? base.tags[0] : base.type;
 
     return {
       id,
@@ -45,6 +46,7 @@ export async function loadItemInfo() {
       description: base.description || '',
       drops: dropped,
       effects,
+      category,
     };
   });
 
