@@ -43,26 +43,39 @@ function buildMenu() {
     });
     row.appendChild(btn);
 
-    let info = '';
+    let infoData = null;
     if (hasData) {
       try {
         const data = JSON.parse(json);
+        const map = data.mapName || data.game?.currentMap || '';
+        const items =
+          typeof data.itemCount === 'number'
+            ? data.itemCount
+            : Array.isArray(data.inventory?.items)
+            ? data.inventory.items.length
+            : 0;
         const date = new Date(data.timestamp || Date.now()).toLocaleString();
-        const map = data.game?.currentMap || '';
-        const items = Array.isArray(data.inventory?.items)
-          ? data.inventory.items.length
-          : 0;
-        info = `${date} — Map: ${map || 'N/A'}, Items: ${items}`;
+        infoData = { map, items, date };
       } catch {
-        info = '';
+        infoData = null;
       }
-    } else if (mode === 'load') {
-      info = 'Empty';
     }
 
     const infoEl = document.createElement('div');
     infoEl.classList.add('slot-info');
-    infoEl.textContent = info;
+    if (infoData) {
+      const mapEl = document.createElement('div');
+      mapEl.textContent = `Map: ${infoData.map || 'N/A'}`;
+      const itemsEl = document.createElement('div');
+      itemsEl.textContent = `Items: ${infoData.items}`;
+      const timeEl = document.createElement('div');
+      timeEl.textContent = `Saved: ${infoData.date}`;
+      infoEl.appendChild(mapEl);
+      infoEl.appendChild(itemsEl);
+      infoEl.appendChild(timeEl);
+    } else {
+      infoEl.textContent = 'Slot empty';
+    }
     row.appendChild(infoEl);
 
     container.appendChild(row);

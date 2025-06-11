@@ -1511,6 +1511,12 @@ body {
   font-size: 12px;
   color: #555;
   margin-left: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+}
+.slot-info > div {
+  margin-right: 8px;
 }
 
 @media (max-width: 500px) {
@@ -1521,5 +1527,6 @@ body {
   .slot-info {
     margin-left: 0;
     margin-top: 4px;
+    flex-direction: column;
   }
 }
