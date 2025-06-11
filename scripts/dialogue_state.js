@@ -784,3 +784,11 @@ export function flagTradedWithKaelor() {
 export function flagManipulatedByVerrel() {
   setMemory('manipulated_by_verrel');
 }
+
+export function vicarDoorMessageNorth() {
+  showDialogue('A holy seal binds this passage.');
+}
+
+export function vicarDoorMessageExit() {
+  showDialogue('You may only proceed with proof of dominion.');
+}

@@ -847,6 +847,57 @@ export const enemySkills = {
       }
       log(`${enemy.name} strikes a despairing note for ${applied} damage!`);
     }
+  },
+  stone_pulse: {
+    id: 'stone_pulse',
+    name: 'Stone Pulse',
+    icon: '🪨',
+    description: 'Shockwave dealing moderate physical damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 9 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} sends a stone pulse for ${applied} damage!`);
+    }
+  },
+  sacred_bind: {
+    id: 'sacred_bind',
+    name: 'Sacred Bind',
+    icon: '⛓️',
+    description: 'Silences the foe for 3 turns.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 3,
+    aiType: 'status',
+    applies: ['silence'],
+    statuses: [{ target: 'player', id: 'silence', duration: 3 }],
+    effect({ enemy, player, applyStatus, log }) {
+      applyStatus(player, 'silence', 3);
+      log(`${enemy.name} binds you in sacred silence!`);
+    }
+  },
+  blessed_quake: {
+    id: 'blessed_quake',
+    name: 'Blessed Quake',
+    icon: '💥',
+    description: 'Quake that may paralyze the foe.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 2,
+    aiType: 'damage',
+    applies: ['paralyzed'],
+    statuses: [{ target: 'player', id: 'paralyzed', duration: 1 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 7 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'paralyzed', 1);
+      log(`${enemy.name} invokes a blessed quake for ${applied} damage!`);
+    }
   }
 };
 
