@@ -394,6 +394,28 @@ export const itemData = {
     stackLimit: 1,
     icon: '🗝️'
   },
+  maze_key_1: {
+    id: 'maze_key_1',
+    name: 'Maze Key 1',
+    description: 'Opens the western maze gate in the Gatepoint Room.',
+    type: 'key',
+    tags: ['lore'],
+    category: 'key',
+    consumable: false,
+    stackLimit: 1,
+    icon: '🗝️'
+  },
+  maze_key_2: {
+    id: 'maze_key_2',
+    name: 'Maze Key 2',
+    description: 'Opens the northern gate in the Gatepoint Room.',
+    type: 'key',
+    tags: ['lore'],
+    category: 'key',
+    consumable: false,
+    stackLimit: 1,
+    icon: '🗝️'
+  },
   forgotten_ring: {
     id: 'forgotten_ring',
     name: 'Forgotten Ring',

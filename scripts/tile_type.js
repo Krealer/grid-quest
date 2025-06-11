@@ -45,7 +45,7 @@ export async function onStepEffect(symbol, player, x, y) {
       setTimeout(() => tileEl.classList.remove('triggered'), 400);
     }
   } else if (symbol === 'W') {
-    healFull();
+    healToFull();
     showDialogue('The cool water rejuvenates you. HP fully restored.');
     if (tileEl) {
       tileEl.classList.add('ripple');
@@ -86,7 +86,7 @@ export async function onInteractEffect(
       const required = tile.key || tile.requiresItem;
       const targetMap = tile.target;
       if (required && !hasItem(required) && tile.locked) {
-        showDialogue("It\u2019s locked.");
+        showDialogue('It\u2019s locked.');
         break;
       }
       if (required === 'commander_badge') {
@@ -97,7 +97,10 @@ export async function onInteractEffect(
               markItemUsed(required);
               updateInventoryUI();
             }
-            const { cols: newCols } = await transitionToMap(targetMap, tile.spawn);
+            const { cols: newCols } = await transitionToMap(
+              targetMap,
+              tile.spawn
+            );
             resolve(newCols);
           });
         });
@@ -142,7 +145,9 @@ export async function onInteractEffect(
         startCombat({ id: enemyId, ...enemy }, player);
       } else {
         const intro = enemy.intro || 'A foe appears!';
-        showDialogue(intro, () => startCombat({ id: enemyId, ...enemy }, player));
+        showDialogue(intro, () =>
+          startCombat({ id: enemyId, ...enemy }, player)
+        );
       }
       break;
     }
