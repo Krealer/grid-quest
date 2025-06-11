@@ -180,7 +180,10 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "echo",
+        "id": "convergence_fragment"
+      },
       "F",
       "F",
       "F",
