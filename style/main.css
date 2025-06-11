@@ -255,20 +255,25 @@ body {
 }
 
 #ui-bar .tab {
-  background: #333;
   margin: 0 5px;
+}
+
+.tab {
+  background: #333;
   padding: 8px 12px;
   cursor: pointer;
   border-radius: 4px;
   transition: background 0.2s;
   border: 1px solid #444;
+  color: #fff;
+  font-weight: 600;
 }
 
-#ui-bar .tab:hover {
+.tab:hover {
   background: #555;
 }
 
-#ui-bar .tab.disabled {
+.tab.disabled {
   opacity: 0.5;
   pointer-events: none;
 }
@@ -567,16 +572,16 @@ body {
   margin-bottom: 8px;
 }
 
-.inventory-categories button {
+.inventory-categories .tab {
   flex: 1;
-  padding: 4px;
-  font-size: 12px;
+  margin: 0;
+  padding: 6px 10px;
+  font-size: 14px;
 }
 
-.inventory-categories button.selected {
-  background: #666;
-  color: #fff;
-  border-color: #999;
+.inventory-categories .tab.selected {
+  background: #555;
+  border-color: #666;
 }
 
 .inventory-content .close-btn {
