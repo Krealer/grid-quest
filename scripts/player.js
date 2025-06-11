@@ -58,10 +58,11 @@ export const player = {
 };
 
 export function calculateStatsFromLevel(level) {
-  const lvl = level - 1;
-  const maxHp = 100 + lvl * 2 + Math.floor(lvl / 5) * 3;
-  const defense = Math.floor(level / 5);
-  const attack = 15 + Math.floor(level / 10);
+  const lvl = level;
+  const milestoneHp = Math.floor(lvl / 5) * 2 + Math.floor(lvl / 10) * 2;
+  const maxHp = 100 + lvl * 2 + milestoneHp;
+  const attack = 15 + Math.floor(lvl / 5);
+  const defense = Math.floor(lvl / 10);
   return { maxHp, defense, attack };
 }
 
