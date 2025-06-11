@@ -237,6 +237,8 @@ export function removeEnemyDropItem() {
 }
 
 export function equipItem(itemId) {
+  const data = getItemData(itemId);
+  if (data && data.type === 'key') return false;
   const bonus = getItemBonuses(itemId);
   if (!bonus || !bonus.slot) return false;
   if (!player.equipment) {
