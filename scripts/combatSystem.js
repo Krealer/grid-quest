@@ -100,11 +100,13 @@ export async function startCombat(enemy, player) {
       }</div>
       <div class="actions hidden">
         <div class="action-tabs">
-          <button class="skills-tab selected">Skills</button>
+          <button class="offensive-tab selected">Offensive</button>
+          <button class="defensive-tab">Defensive</button>
           <button class="items-tab">Items</button>
         </div>
         <div class="tab-panels">
-          <div class="skill-buttons tab-panel"></div>
+          <div class="offensive-skill-buttons tab-panel"></div>
+          <div class="defensive-skill-buttons tab-panel hidden"></div>
           <div class="item-buttons tab-panel hidden"></div>
         </div>
       </div>
@@ -140,7 +142,8 @@ export async function startCombat(enemy, player) {
   updateHpBar(enemyBar, enemyHp, enemyMax);
 
   const actionsEl = overlay.querySelector('.actions');
-  const skillContainer = overlay.querySelector('.skill-buttons');
+  const offensiveContainer = overlay.querySelector('.offensive-skill-buttons');
+  const defensiveContainer = overlay.querySelector('.defensive-skill-buttons');
   const itemContainer = overlay.querySelector('.item-buttons');
   const logEl = overlay.querySelector('.log');
 
@@ -317,11 +320,29 @@ export async function startCombat(enemy, player) {
     });
   }
 
-  const skillList = (player.learnedSkills || [])
+  const allSkills = (player.learnedSkills || [])
     .map((id) => getSkill(id))
     .filter(Boolean);
 
-  const skillButtons = renderSkillList(skillContainer, skillList, handleAction);
+  const skillLookup = {};
+  allSkills.forEach((s) => {
+    skillLookup[s.id] = s;
+  });
+
+  const offensiveSkills = allSkills.filter((s) => s.category === 'offensive');
+  const defensiveSkills = allSkills.filter((s) => s.category === 'defensive');
+
+  const offButtons = renderSkillList(
+    offensiveContainer,
+    offensiveSkills,
+    handleAction
+  );
+  const defButtons = renderSkillList(
+    defensiveContainer,
+    defensiveSkills,
+    handleAction
+  );
+  const skillButtons = { ...offButtons, ...defButtons };
 
   updateItemsUI();
   document.addEventListener('inventoryUpdated', updateItemsUI);
@@ -332,7 +353,7 @@ export async function startCombat(enemy, player) {
   function updateSkillDisableState() {
     const silenced =
       hasStatus(player, 'silence') || hasStatus(player, 'silenced');
-    setSkillDisabledState(skillButtons, silenced, ['guard']);
+    setSkillDisabledState(skillButtons, skillLookup, silenced);
   }
 
   async function handleAction(skill) {
@@ -355,8 +376,8 @@ export async function startCombat(enemy, player) {
     }
     const silenced =
       hasStatus(player, 'silenced') || hasStatus(player, 'silence');
-    if (silenced && !skill.silenceExempt) {
-      log('You are silenced and cannot use that skill.');
+    if (silenced && skill.category === 'offensive') {
+      log('You are silenced and cannot use offensive skills.');
       return;
     }
     const icon = skill.icon ? `${skill.icon} ` : '';
@@ -550,16 +571,14 @@ export async function startCombat(enemy, player) {
       playerTurn = true;
       return;
     }
-    if (hasStatus(enemy, 'silenced') || hasStatus(enemy, 'silence')) {
-      log(`${enemy.name} is silenced and cannot act!`);
-      tickStatusEffects(player, log);
-      tickStatusEffects(enemy, log);
-      playerTurn = true;
-      return;
-    }
-    const list = (enemy.skills || ['strike'])
+    const enemySilenced =
+      hasStatus(enemy, 'silenced') || hasStatus(enemy, 'silence');
+    let list = (enemy.skills || ['strike'])
       .map((id) => getEnemySkill(id))
       .filter(Boolean);
+    if (enemySilenced) {
+      list = list.filter((s) => s.category !== 'offensive');
+    }
 
     const statusSkills = list.filter(
       (s) =>
@@ -589,9 +608,17 @@ export async function startCombat(enemy, player) {
     }
 
     if (!skill) {
-      skill =
-        list[Math.floor(Math.random() * list.length)] ||
-        getEnemySkill('strike');
+      if (list.length > 0) {
+        skill = list[Math.floor(Math.random() * list.length)];
+      } else if (!enemySilenced) {
+        skill = getEnemySkill('strike');
+      } else {
+        log(`${enemy.name} is silenced and cannot act!`);
+        tickStatusEffects(player, log);
+        tickStatusEffects(enemy, log);
+        playerTurn = true;
+        return;
+      }
     }
 
     if (skill) {
