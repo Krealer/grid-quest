@@ -162,10 +162,8 @@ export async function startCombat(enemy, player) {
     logEl.classList.remove('hidden');
   }, animDelay + 500);
 
-  let guardActive = false;
   let shieldBlock = false;
   let enemyGuard = false;
-  let healUsed = false;
   let sparkUsed = false;
   let reflectActive = false;
   const skillCooldowns = {};
@@ -180,9 +178,6 @@ export async function startCombat(enemy, player) {
     if (shieldBlock) {
       amount = 0;
       shieldBlock = false;
-    } else if (guardActive) {
-      amount = Math.max(0, amount - 5);
-      guardActive = false;
     }
     const totals = getTotalStats();
     const tempTarget = {
@@ -296,7 +291,7 @@ export async function startCombat(enemy, player) {
   }
 
   function activateGuard() {
-    guardActive = true;
+    applyStatusEffect(player, 'guarded', 2);
   }
 
   function activateShieldBlock() {
@@ -305,14 +300,6 @@ export async function startCombat(enemy, player) {
 
   function activateEnemyGuard() {
     enemyGuard = true;
-  }
-
-  function isHealUsed() {
-    return healUsed;
-  }
-
-  function setHealUsed() {
-    healUsed = true;
   }
 
   function tickCooldowns() {
@@ -467,8 +454,6 @@ export async function startCombat(enemy, player) {
       activateGuard,
       activateShieldBlock,
       log,
-      isHealUsed,
-      setHealUsed,
       applyStatus: applyStatusLogged,
       removeStatus: removeStatusLogged,
       removeNegativeStatus: removeNegativeStatusLogged,

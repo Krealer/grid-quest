@@ -6,26 +6,27 @@ const skillDefs = {
     id: 'strike',
     name: 'Strike',
     icon: '⚔️',
-    description: 'Deal 15 damage.',
+    description: 'Deal damage equal to your Attack stat.',
     category: 'offensive',
     cost: 0,
     cooldown: 0,
-    // Basic attack
+    source: 'starter',
+    // Basic attack scaled by player ATK
     effect({ damageEnemy, log }) {
-      const dmg = 15;
-      damageEnemy(dmg);
-      log(`Player strikes for ${dmg} damage!`);
+      const dealt = damageEnemy(0);
+      log(`Player strikes for ${dealt} damage!`);
     }
   },
   guard: {
     id: 'guard',
     name: 'Guard',
     icon: '🛡️',
-    description: 'Reduce damage from the next attack.',
+    description: 'Reduce damage from the next attack by 50%.',
     category: 'defensive',
     silenceExempt: true,
     cost: 0,
     cooldown: 0,
+    source: 'starter',
     effect({ activateGuard, log }) {
       activateGuard();
       log('Player braces for impact.');
@@ -35,18 +36,15 @@ const skillDefs = {
     id: 'heal',
     name: 'Heal',
     icon: '✨',
-    description: 'Restore 20 HP. Can be used once per battle.',
+    description: 'Restore 20% of your max HP.',
     category: 'defensive',
     cost: 0,
-    cooldown: 0,
-    effect({ healPlayer, log, isHealUsed, setHealUsed }) {
-      if (isHealUsed()) {
-        log('Heal can only be used once!');
-        return false;
-      }
-      setHealUsed();
-      healPlayer(20);
-      log('Player heals for 20 HP.');
+    cooldown: 3,
+    source: 'starter',
+    effect({ healPlayer, player, log }) {
+      const amount = Math.floor(player.maxHp * 0.2);
+      healPlayer(amount);
+      log(`Player heals for ${amount} HP.`);
     }
   },
   shieldWall: {
@@ -156,14 +154,21 @@ const skillDefs = {
     name: 'Aegis Invocation',
     icon: '🛡️',
     description:
-      'Gain a barrier equal to half your max HP and immunity to Weakened for 3 turns.',
+      'Gain a barrier equal to 50% of your max HP and remove all negative effects.',
     category: 'defensive',
     cost: 0,
-    cooldown: 4,
+    cooldown: 7,
+    source: 'map09_floor01_chest',
     unlockCondition: { item: 'aegis_invocation_scroll' },
-    effect({ applyStatus, player, log }) {
+    effect({ applyStatus, removeNegativeStatus, player, log }) {
       applyStatus(player, 'aegis_barrier', Infinity);
-      applyStatus(player, 'weaken_immunity', 3);
+      const removed = removeNegativeStatus(player);
+      if (removed.length > 0) {
+        const names = removed
+          .map((id) => getStatusEffect(id)?.name || id)
+          .join(', ');
+        log(`Negative effects cleansed: ${names}`);
+      }
       log('A powerful aegis surrounds you.');
     }
   },
@@ -171,16 +176,17 @@ const skillDefs = {
     id: 'emberPrayer',
     name: 'Ember Prayer',
     icon: '🔥',
-    description: 'Deal fire damage and apply Burn for 3 turns.',
-    category: 'offensive',
+    description: 'Heal 20% of your max HP and inflict Burn for 10 turns.',
+    category: 'defensive',
     cost: 0,
-    cooldown: 2,
+    cooldown: 4,
+    source: 'map09_floor02_chest',
     unlockCondition: { item: 'ember_prayer_scroll' },
-    effect({ damageEnemy, applyStatus, enemy, log }) {
-      const dmg = 16;
-      damageEnemy(dmg);
-      applyStatus(enemy, 'burn', 3);
-      log('Sacred flames sear the foe!');
+    effect({ healPlayer, applyStatus, enemy, player, log }) {
+      const amount = Math.floor(player.maxHp * 0.2);
+      healPlayer(amount);
+      applyStatus(enemy, 'burn', 10);
+      log('Sacred flames answer your prayer.');
     }
   },
   focusMind: {
@@ -215,15 +221,16 @@ const skillDefs = {
     id: 'leech',
     name: 'Leech',
     icon: '🩸',
-    description: 'Deal 15 damage and heal 15 HP.',
+    description: 'Deal damage equal to your ATK and heal for the damage dealt.',
     category: 'offensive',
     cost: 0,
-    cooldown: 2,
+    cooldown: 3,
+    source: 'npc_syranel',
+    statusEffects: ['lifesteal'],
     effect({ damageEnemy, healPlayer, log }) {
-      const dmg = 15;
-      damageEnemy(dmg);
-      healPlayer(15);
-      log(`You drain life for ${dmg} damage and healing.`);
+      const dealt = damageEnemy(0);
+      healPlayer(dealt);
+      log(`You drain ${dealt} HP from your foe.`);
     }
   },
   purify: {
