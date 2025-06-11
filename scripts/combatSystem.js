@@ -139,6 +139,7 @@ export async function startCombat(enemy, player) {
   enemy.tempDefense = 0;
   enemy.tempAttack = 0;
   enemy.skillIndex = 0;
+  enemy.turnCount = 0;
 
   updateHpBar(playerBar, playerHp, playerMax);
   updateHpBar(enemyBar, enemyHp, enemyMax);
@@ -206,6 +207,12 @@ export async function startCombat(enemy, player) {
   }
 
   function damageEnemy(baseDmg) {
+    if (enemy.evadeNext) {
+      log(`${enemy.name}'s mirage takes the hit!`);
+      removeStatusLogged(enemy, 'evade_next');
+      enemy.evadeNext = false;
+      return 0;
+    }
     if (enemy.evasionChance && Math.random() < enemy.evasionChance) {
       log(`${enemy.name} evades the attack!`);
       return 0;
@@ -303,6 +310,22 @@ export async function startCombat(enemy, player) {
     Object.keys(skillCooldowns).forEach((id) => {
       if (skillCooldowns[id] > 0) skillCooldowns[id]--;
     });
+  }
+
+  function triggerDeathEffect() {
+    if (!enemy.deathSkill || enemy.deathUsed) return;
+    const skill = getEnemySkill(enemy.deathSkill);
+    if (skill) {
+      log(`${enemy.name} ${skill.name}`);
+      skill.effect({
+        enemy,
+        player,
+        damagePlayer,
+        applyStatus: applyStatusLogged,
+        log
+      });
+    }
+    enemy.deathUsed = true;
   }
 
   async function giveDrops() {
@@ -416,7 +439,7 @@ export async function startCombat(enemy, player) {
     }
     const silenced =
       hasStatus(player, 'silenced') || hasStatus(player, 'silence');
-    if (silenced && skill.category === 'offensive') {
+    if (silenced && skill.category === 'offensive' && !skill.silenceExempt) {
       log('You are silenced and cannot use offensive skills.');
       return;
     }
@@ -449,6 +472,7 @@ export async function startCombat(enemy, player) {
     }
     handlePhaseTriggers();
     if (enemyHp <= 0) {
+      triggerDeathEffect();
       log(`${enemy.name} was defeated!`);
       discover('enemies', enemy.id);
       await giveDrops();
@@ -692,6 +716,15 @@ export async function startCombat(enemy, player) {
 
   function enemyTurn() {
     if (enemyHp <= 0) return;
+    enemy.turnCount = (enemy.turnCount || 0) + 1;
+    if (enemy.id === 'chimebound_monk' && enemy.turnCount === 3) {
+      const skill = getEnemySkill('meditate');
+      if (skill) {
+        log(`${enemy.name} uses ${skill.name}`);
+        skill.effect({ enemy, log });
+        if (enemyHp < enemy.maxHp) enemyHp = enemy.hp;
+      }
+    }
     if (hasStatus(enemy, 'paralyzed') && Math.random() < 0.5) {
       log(`${enemy.name} is paralyzed and cannot act!`);
       tickStatusEffects(player, log);
@@ -815,6 +848,7 @@ export async function startCombat(enemy, player) {
       return;
     }
     if (enemyHp <= 0) {
+      triggerDeathEffect();
       log(`${enemy.name} was defeated!`);
       discover('enemies', enemy.id);
       giveDrops();

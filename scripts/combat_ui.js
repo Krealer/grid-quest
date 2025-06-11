@@ -127,7 +127,8 @@ export function setSkillDisabledState(
     if (!btn) return;
     const def = skillLookup[id];
     const offensive = def?.category === 'offensive';
-    if ((isSilenced && offensive) || cooldowns[id] > 0) {
+    const exempt = def?.silenceExempt;
+    if ((isSilenced && offensive && !exempt) || cooldowns[id] > 0) {
       btn.classList.add('disabled');
       btn.disabled = true;
     } else {

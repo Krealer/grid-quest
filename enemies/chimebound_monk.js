@@ -4,10 +4,10 @@ export const chimebound_monk = {
   hp: 70,
   stats: { attack: 4, defense: 3 },
   xp: 22,
-  skills: ['resonance_pulse', 'confusing_toll'],
+  skills: ['resonant_pulse', 'null_chime'],
   behavior: 'cautious',
   description: 'Monk wielding resonant chimes to confuse foes.',
-  drops: [{ item: 'resonant_chime', quantity: 1 }]
+  drops: [{ item: 'cracked_chime', quantity: 1 }]
 };
 
 export default chimebound_monk;
