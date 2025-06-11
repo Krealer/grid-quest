@@ -108,8 +108,7 @@ export const itemData = {
     category: 'equipable',
     consumable: false,
     stackLimit: 1,
-    icon: '🎯',
-    passiveModifier: { accuracy: 0.1 }
+    icon: '🎯'
   },
   goblin_bow: {
     id: 'goblin_bow',

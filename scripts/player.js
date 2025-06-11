@@ -13,9 +13,18 @@ import {
   addItem,
   removeItem as removeInvItem,
   getPassiveModifiers,
-  recalcPassiveModifiers
+  recalcPassiveModifiers,
+  isEquipped
 } from './inventory.js';
 import { checkTempleSet } from './equipment.js';
+
+export function updatePassiveEffects() {
+  const hasTempleSet =
+    isEquipped('temple_sword') &&
+    isEquipped('temple_shell') &&
+    isEquipped('temple_ring');
+  player.hasTemplePassive = hasTempleSet;
+}
 
 export const player = {
   x: 0,
@@ -39,6 +48,7 @@ export const player = {
   passiveImmunities: [],
   tempDefense: 0,
   tempAttack: 0,
+  hasTemplePassive: false,
   statuses: [],
   isPlayer: true
 };
@@ -245,6 +255,7 @@ export function deserializePlayer(data) {
     player.equipment.accessory = data.equipment.accessory || null;
     recalcPassiveModifiers();
     checkTempleSet();
+    updatePassiveEffects();
     document.dispatchEvent(new CustomEvent('equipmentChanged'));
   }
   updateStatsFromLevel();
@@ -311,8 +322,10 @@ export async function enterDoor(target, spawn) {
 export function reapplyEquipmentBonuses() {
   recalcPassiveModifiers();
   checkTempleSet();
+  updatePassiveEffects();
   document.dispatchEvent(new CustomEvent('equipmentChanged'));
 }
 
 // initialize stats based on starting level
 updateStatsFromLevel();
+updatePassiveEffects();

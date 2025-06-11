@@ -205,8 +205,11 @@ export async function startCombat(enemy, player) {
       log('Reflected the damage back!');
       reflectActive = false;
     }
-    if (player.templeSetActive && applied > 0) {
-      damageEnemy(2);
+    if (player.hasTemplePassive && applied > 0) {
+      enemyHp = Math.max(0, enemyHp - 2);
+      enemy.hp = enemyHp;
+      updateHpBar(enemyBar, enemyHp, enemyMax);
+      log('Sacred Counter retaliates!');
       healPlayer(1);
     }
     return applied;

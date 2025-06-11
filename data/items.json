@@ -304,9 +304,6 @@
     "type": "gear",
     "stackLimit": 1,
     "icon": "🎯",
-    "passiveModifier": {
-      "accuracy": 0.1
-    },
     "category": "equipable"
   },
   "goblin_bow": {
