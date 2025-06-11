@@ -549,6 +549,39 @@ export const itemData = {
     consumable: true,
     stackLimit: 99,
     icon: '⚫'
+  },
+  polished_shard: {
+    id: 'polished_shard',
+    name: 'Polished Shard',
+    description: 'Smooth fragment etched with temple runes.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '💎'
+  },
+  temple_resin: {
+    id: 'temple_resin',
+    name: 'Temple Resin',
+    description: 'Fragrant sap once burned in rituals.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🕯'
+  },
+  ritual_oil: {
+    id: 'ritual_oil',
+    name: 'Ritual Oil',
+    description: 'Oily blend used to anoint sacred altars.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🛢️'
   }
 };
 

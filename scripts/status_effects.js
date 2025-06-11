@@ -132,6 +132,34 @@ export const statusEffects = {
     type: 'positive',
     duration: 1
   },
+  guarded: {
+    id: 'guarded',
+    name: 'Guarded',
+    icon: '🛡️',
+    description: 'Incoming damage reduced by 50%.',
+    type: 'positive',
+    duration: 2,
+    apply(target) {
+      target.damageTakenMod = (target.damageTakenMod || 1) - 0.5;
+    },
+    remove(target) {
+      target.damageTakenMod += 0.5;
+    }
+  },
+  evasive: {
+    id: 'evasive',
+    name: 'Evasive',
+    icon: '💨',
+    description: '25% chance to dodge attacks.',
+    type: 'positive',
+    duration: 2,
+    apply(target) {
+      target.evasionChance = (target.evasionChance || 0) + 0.25;
+    },
+    remove(target) {
+      target.evasionChance -= 0.25;
+    }
+  },
 
   // ---------- Negative Effects ----------
   poisoned: {
