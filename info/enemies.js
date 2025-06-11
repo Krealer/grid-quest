@@ -72,6 +72,14 @@ export const enemies = [
     skills: 'shard_spike, reflect_shell'
   },
   {
+    id: 'crystal_sentry',
+    name: 'Crystal Sentry',
+    map: 'Map07 Maze',
+    location: 'various',
+    drops: 'Prism Fragment',
+    skills: 'prism_shot, refract_guard'
+  },
+  {
     id: 'pain_lattice',
     name: 'Pain Lattice',
     map: 'Map05',

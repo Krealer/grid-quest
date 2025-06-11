@@ -83,6 +83,20 @@ export const skillData = {
     accuracy: 1,
     description: 'Hardens the caster, raising defense.'
   },
+  prism_shot: {
+    id: 'prism_shot',
+    name: 'Prism Shot',
+    damage: 6,
+    accuracy: 1,
+    description: 'A crystal bolt that weakens the target.'
+  },
+  refract_guard: {
+    id: 'refract_guard',
+    name: 'Refract Guard',
+    damage: 0,
+    accuracy: 1,
+    description: 'Refracts harm, lowering damage received briefly.'
+  },
   neural_lash: {
     id: 'neural_lash',
     name: 'Neural Lash',

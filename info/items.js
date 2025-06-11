@@ -41,6 +41,8 @@ export const itemDescriptions = {
     'Blood Resin \u2013 a rare component for advanced leech recipes.',
   echo_splinter:
     'Echo Splinter \u2013 rumor says it unlocks a dialogue option in map07.',
+  prism_fragment:
+    'Prism Fragment \u2013 dropped by Crystal Sentries in the maze; used for crafting.',
   crystal_seed: 'Crystal Seed \u2013 essential for future item upgrades.',
   mana_scroll: 'Mana Scroll \u2013 completely refreshes all skill cooldowns.',
   prism_key:

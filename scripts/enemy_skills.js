@@ -381,6 +381,40 @@ export const enemySkills = {
       log(`${enemy.name}'s crystals harden! (+2 defense)`);
     }
   },
+  prism_shot: {
+    id: 'prism_shot',
+    name: 'Prism Shot',
+    icon: '🔶',
+    description: 'Deals 6 damage and inflicts Weakened.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['weakened'],
+    statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 6 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'weakened', 2);
+      log(`${enemy.name} fires a prism shot for ${applied} damage!`);
+    }
+  },
+  refract_guard: {
+    id: 'refract_guard',
+    name: 'Refract Guard',
+    icon: '🔷',
+    description: 'Reduces damage taken next turn.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'buff',
+    effect({ enemy, log, activateEnemyGuard }) {
+      enemy.tempDefense = (enemy.tempDefense || 0) + 1;
+      if (activateEnemyGuard) activateEnemyGuard();
+      log(`${enemy.name} refracts incoming attacks! (+1 defense)`);
+    }
+  },
   neural_lash: {
     id: 'neural_lash',
     name: 'Neural Lash',
