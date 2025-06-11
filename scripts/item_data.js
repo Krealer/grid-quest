@@ -302,6 +302,97 @@ export const itemData = {
     consumable: false,
     stackLimit: 1,
     icon: '💠'
+  },
+  stamina_dust: {
+    id: 'stamina_dust',
+    name: 'Stamina Dust',
+    description: 'Restores one skill cooldown instantly.',
+    type: 'combat',
+    tags: ['combat'],
+    category: 'combat',
+    consumable: true,
+    stackLimit: 10,
+    icon: '💨',
+    useInCombat: true
+  },
+  skill_token: {
+    id: 'skill_token',
+    name: 'Skill Token',
+    description: 'Grants +1 max skill slot on the next map.',
+    type: 'gear',
+    tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
+    stackLimit: 1,
+    icon: '🔶'
+  },
+  reflect_potion: {
+    id: 'reflect_potion',
+    name: 'Reflect Potion',
+    description: 'Reflects the next damage back to the enemy.',
+    type: 'combat',
+    tags: ['combat'],
+    category: 'combat',
+    consumable: true,
+    stackLimit: 5,
+    icon: '🔄',
+    useInCombat: true
+  },
+  blood_resin: {
+    id: 'blood_resin',
+    name: 'Blood Resin',
+    description: 'Used in advanced leech-type recipes.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🩸'
+  },
+  echo_splinter: {
+    id: 'echo_splinter',
+    name: 'Echo Splinter',
+    description: 'May unlock new dialogue in the next area.',
+    type: 'quest',
+    tags: ['lore'],
+    category: 'lore',
+    consumable: false,
+    stackLimit: 1,
+    icon: '✨'
+  },
+  crystal_seed: {
+    id: 'crystal_seed',
+    name: 'Crystal Seed',
+    description: 'A key ingredient for item upgrade recipes.',
+    type: 'material',
+    tags: ['items'],
+    category: 'crafting',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🌱'
+  },
+  mana_scroll: {
+    id: 'mana_scroll',
+    name: 'Mana Scroll',
+    description: 'Completely restores skill cooldowns.',
+    type: 'combat',
+    tags: ['combat'],
+    category: 'combat',
+    consumable: true,
+    stackLimit: 3,
+    icon: '📜',
+    useInCombat: true
+  },
+  forgotten_ring: {
+    id: 'forgotten_ring',
+    name: 'Forgotten Ring',
+    description: 'A simple ring that improves attack slightly.',
+    type: 'gear',
+    tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
+    stackLimit: 1,
+    icon: '💍'
   }
 };
 

@@ -51,3 +51,24 @@ export function useManaGem() {
   }
   return null;
 }
+
+export function useStaminaDust() {
+  if (consumeItem('stamina_dust', 1)) {
+    return { cooldownReduce: 1 };
+  }
+  return null;
+}
+
+export function useReflectPotion() {
+  if (consumeItem('reflect_potion', 1)) {
+    return { reflect: true };
+  }
+  return null;
+}
+
+export function useManaScroll() {
+  if (consumeItem('mana_scroll', 1)) {
+    return { refresh: true };
+  }
+  return null;
+}

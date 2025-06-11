@@ -14,7 +14,10 @@ import {
   useDefensePotionII,
   useFadedBlade,
   useArcaneSpark,
-  useManaGem
+  useManaGem,
+  useStaminaDust,
+  useReflectPotion,
+  useManaScroll
 } from './item_logic.js';
 import { getItemBonuses } from './item_stats.js';
 import {
@@ -219,6 +222,27 @@ function handleInventoryItemUse(id) {
       return;
     }
     const res = useManaGem();
+    if (res) used = true;
+  } else if (id === 'stamina_dust') {
+    if (!gameState.inCombat) {
+      logMessage('Cannot use this item outside combat.');
+      return;
+    }
+    const res = useStaminaDust();
+    if (res) used = true;
+  } else if (id === 'reflect_potion') {
+    if (!gameState.inCombat) {
+      logMessage('Cannot use this item outside combat.');
+      return;
+    }
+    const res = useReflectPotion();
+    if (res) used = true;
+  } else if (id === 'mana_scroll') {
+    if (!gameState.inCombat) {
+      logMessage('Cannot use this item outside combat.');
+      return;
+    }
+    const res = useManaScroll();
     if (res) used = true;
   }
   if (used) {

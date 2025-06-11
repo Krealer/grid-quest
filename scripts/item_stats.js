@@ -7,7 +7,8 @@ export const itemBonuses = {
   'cracked_helmet+2': { slot: 'armor', defense: 3 },
   'cracked_helmet+3': { slot: 'armor', defense: 4 },
   commander_badge: { slot: 'weapon', attack: 2 },
-  focus_ring: { slot: 'accessory' }
+  focus_ring: { slot: 'accessory' },
+  forgotten_ring: { slot: 'accessory', attack: 1 }
 };
 
 export function getItemBonuses(id) {
