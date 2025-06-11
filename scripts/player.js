@@ -210,6 +210,43 @@ export function getPlayerSummary() {
   };
 }
 
+export function serializePlayer() {
+  return {
+    x: player.x,
+    y: player.y,
+    hp: player.hp,
+    maxHp: player.maxHp,
+    level: player.level,
+    xp: player.xp,
+    xpToNextLevel: player.xpToNextLevel,
+    stats: { ...player.stats },
+    learnedSkills: Array.isArray(player.learnedSkills)
+      ? [...player.learnedSkills]
+      : [],
+    equipment: { ...player.equipment }
+  };
+}
+
+export function deserializePlayer(data) {
+  if (!data) return;
+  player.x = data.x ?? player.x;
+  player.y = data.y ?? player.y;
+  player.hp = data.hp ?? player.hp;
+  player.maxHp = data.maxHp ?? player.maxHp;
+  player.level = data.level ?? player.level;
+  player.xp = data.xp ?? player.xp;
+  player.xpToNextLevel = data.xpToNextLevel ?? player.xpToNextLevel;
+  player.stats = { ...player.stats, ...(data.stats || {}) };
+  if (Array.isArray(data.learnedSkills)) {
+    player.learnedSkills = [...data.learnedSkills];
+  }
+  if (data.equipment) {
+    player.equipment.weapon = data.equipment.weapon || null;
+    player.equipment.armor = data.equipment.armor || null;
+    player.equipment.accessory = data.equipment.accessory || null;
+  }
+}
+
 export function getTotalStats() {
   const base = { ...(player.stats || {}) };
   const total = { ...base };

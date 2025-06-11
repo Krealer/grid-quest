@@ -1,4 +1,4 @@
-import { hasMemory, setMemory } from './dialogue_state.js';
+import { dialogueMemory, hasMemory, setMemory } from './dialogue_state.js';
 import { loadJson } from './dataService.js';
 import { showError } from './errorPrompt.js';
 
@@ -75,6 +75,23 @@ export function getActiveQuests() {
       const data = state.data[id] || { title: id, description: '' };
       return { id, ...data };
     });
+}
+
+export function serializeQuestState() {
+  return {
+    quests: { ...state.quests },
+    memoryFlags: Array.from(dialogueMemory)
+  };
+}
+
+export function deserializeQuestState(data) {
+  if (!data) return;
+  if (data.quests) state.quests = { ...data.quests };
+  if (Array.isArray(data.memoryFlags)) {
+    dialogueMemory.clear();
+    data.memoryFlags.forEach((f) => dialogueMemory.add(f));
+  }
+  document.dispatchEvent(new CustomEvent('questUpdated'));
 }
 
 export const questState = state;

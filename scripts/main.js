@@ -35,7 +35,8 @@ import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
 import { toggleInfoMenu, initInfoMenu } from '../ui/info_menu.js';
 import { saveState, loadState, gameState } from './game_state.js';
-import { saveGame, loadGame } from './save_system.js';
+import { saveGame, loadGame } from './save_load.js';
+import { initMenuBar } from '../ui/menu_bar.js';
 import {
   loadSettings,
   saveSettings,
@@ -107,8 +108,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const settingsTab = document.querySelector('.settings-tab');
   const settingsOverlay = document.getElementById('settings-overlay');
   const settingsClose = settingsOverlay.querySelector('.close-btn');
-  const saveTab = document.querySelector('.save-tab');
-  const loadTab = document.querySelector('.load-tab');
   const coordsToggle = document.getElementById('coords-toggle');
   const moveSelect = document.getElementById('move-speed');
   const combatSelect = document.getElementById('combat-speed');
@@ -118,6 +117,42 @@ document.addEventListener('DOMContentLoaded', async () => {
   const langSelect = document.getElementById('language-select');
   const centerToggle = document.getElementById('center-toggle');
   const resetBtn = document.getElementById('reset-settings');
+
+  function handleSave() {
+    saveState();
+    saveGame();
+    showDialogue('Game Saved.');
+  }
+
+  async function handleLoad() {
+    loadState();
+    if (!loadGame()) {
+      showDialogue('No save found.');
+      return;
+    }
+    const mapName = gameState.currentMap || 'map01';
+    try {
+      const { cols: newCols } = await router.loadMap(mapName);
+      cols = newCols;
+      initFog(container, cols, isFogEnabled());
+      if (isFogEnabled()) {
+        if (router.getCurrentMapName() === 'map01') {
+          revealAll();
+        } else {
+          reveal(player.x, player.y);
+        }
+      }
+      player.maxHp = 100 + (gameState.maxHpBonus || 0);
+      player.hp = Math.min(player.hp, player.maxHp);
+      updateHpDisplay();
+      updateXpDisplay();
+      showDialogue('Progress loaded successfully.');
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  initMenuBar(handleSave, handleLoad);
   initInventoryUI();
   initPlayerDisplay();
   updateHpDisplay();
@@ -285,36 +320,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  saveTab.addEventListener('click', () => {
-    saveState();
-    saveGame();
-    showDialogue('Game saved!');
-  });
-
-  loadTab.addEventListener('click', async () => {
-    loadState();
-    loadGame();
-    const mapName = gameState.currentMap || 'map01';
-    try {
-      const { cols: newCols } = await router.loadMap(mapName);
-      cols = newCols;
-      initFog(container, cols, isFogEnabled());
-      if (isFogEnabled()) {
-        if (router.getCurrentMapName() === 'map01') {
-          revealAll();
-        } else {
-          reveal(player.x, player.y);
-        }
-      }
-      player.maxHp = 100 + (gameState.maxHpBonus || 0);
-      player.hp = Math.min(player.hp, player.maxHp);
-      updateHpDisplay();
-      updateXpDisplay();
-      showDialogue('Game loaded!');
-    } catch (err) {
-      console.error(err);
-    }
-  });
 
   try {
     const { cols: newCols } = await router.loadMap('map01');
