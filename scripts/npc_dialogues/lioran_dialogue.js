@@ -20,10 +20,18 @@ export const lioranDialogue = [
         label: 'Accept the ring',
         goto: null,
         memoryFlag: 'lioran_ring_taken',
-        onChoose: () =>
-          import('../inventory.js').then(m => m.giveItem('focus_ring'))
+        onChoose: async () => {
+          const { loadItems } = await import('../item_loader.js');
+          await loadItems();
+          const inv = await import('../inventory.js');
+          inv.giveItem('focus_ring');
+        }
       },
-      { label: 'I have no need of trinkets.', goto: null, memoryFlag: 'lioran_ring_declined' }
+      {
+        label: 'I have no need of trinkets.',
+        goto: null,
+        memoryFlag: 'lioran_ring_declined'
+      }
     ]
   }
 ];
