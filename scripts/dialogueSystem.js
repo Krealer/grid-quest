@@ -9,6 +9,7 @@ import {
   triggerUpgrade,
   triggerReroll
 } from './dialogue_state.js';
+import { unlockRecipe } from './recipe_state.js';
 import { getQuests, completeQuest } from './quest_state.js';
 import { showError } from './errorPrompt.js';
 import { loadJson } from './dataService.js';
@@ -245,6 +246,9 @@ export async function startDialogueTree(dialogue, index = 0) {
       }
       if (opt.giveBlueprint) {
         giveBlueprint(opt.giveBlueprint);
+      }
+      if (opt.grantRecipe) {
+        unlockRecipe(opt.grantRecipe);
       }
       if (opt.triggerUpgrade) {
         await triggerUpgrade(opt.triggerUpgrade);

@@ -89,7 +89,7 @@ export function deserializeQuestState(data) {
   if (data.quests) state.quests = { ...data.quests };
   if (Array.isArray(data.memoryFlags)) {
     dialogueMemory.clear();
-    data.memoryFlags.forEach((f) => dialogueMemory.add(f));
+    data.memoryFlags.forEach((f) => setMemory(f));
   }
   document.dispatchEvent(new CustomEvent('questUpdated'));
 }
