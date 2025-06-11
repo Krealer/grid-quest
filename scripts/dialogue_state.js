@@ -115,10 +115,7 @@ export function chooseForkPath(path) {
 
 export function arbiterDialogue() {
   if (visitedBothForks()) {
-    showDialogue(
-      'You have proven mastery over both paths. Accept this shard of the mirror.'
-    );
-    giveRelic('mirror_shard');
+    showDialogue('You have proven mastery over both paths.');
     discoverLore('two_flames_crossed');
   } else {
     showDialogue(

@@ -146,14 +146,6 @@ const chestContents = {
     hpLoss: 10,
     message: 'Cursed fumes seep out as you grasp the ring.'
   },
-  'map_warrior:18,18': {
-    relic: 'warrior_sigil',
-    message: 'You obtained the Warrior Sigil!'
-  },
-  'map_guardian:18,18': {
-    relic: 'guardian_emblem',
-    message: 'You obtained the Guardian Emblem!'
-  },
   'map_alchemist:18,18': {
     relic: 'alchemist_catalyst',
     message: 'You obtained the Alchemist Catalyst!'
