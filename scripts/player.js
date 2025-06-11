@@ -59,6 +59,14 @@ export function takeDamage(amount) {
   if (player.hp === 0) triggerDeath();
 }
 
+export function loseHpNonLethal(amount) {
+  if (typeof amount !== 'number' || amount <= 0) return;
+  player.hp = Math.max(1, player.hp - amount);
+  document.dispatchEvent(
+    new CustomEvent('playerHpChanged', { detail: { hp: player.hp, maxHp: player.maxHp } })
+  );
+}
+
 export function isAlive() {
   return player.hp > 0;
 }

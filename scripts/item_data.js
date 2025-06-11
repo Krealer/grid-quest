@@ -706,6 +706,39 @@ export const itemData = {
     stackLimit: 99,
     icon: '🌫️'
   },
+  temple_sword: {
+    id: 'temple_sword',
+    name: 'Temple Sword',
+    description: 'A blade resonating with ancient power.',
+    type: 'gear',
+    tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
+    stackLimit: 1,
+    icon: '🗡️'
+  },
+  temple_shell: {
+    id: 'temple_shell',
+    name: 'Temple Shell',
+    description: 'Hardened armor bearing sacred sigils.',
+    type: 'gear',
+    tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
+    stackLimit: 1,
+    icon: '🛡️'
+  },
+  temple_ring: {
+    id: 'temple_ring',
+    name: 'Temple Ring',
+    description: 'An ornate band linked to temple rites.',
+    type: 'gear',
+    tags: ['equipable'],
+    category: 'equipable',
+    consumable: false,
+    stackLimit: 1,
+    icon: '💍'
+  },
   echo_crystal: {
     id: 'echo_crystal',
     name: 'Echo Crystal',

@@ -3,7 +3,7 @@ import { addItem, giveItem } from './inventory.js';
 import { updateInventoryUI } from './inventory_ui.js';
 import { giveRelic, setMemory } from './dialogue_state.js';
 import { getItemData, loadItems } from './item_loader.js';
-import { increaseMaxHp } from './player.js';
+import { increaseMaxHp, loseHpNonLethal } from './player.js';
 import { unlockSkillsFromItem, unlockSkillsFromRelic } from './skills.js';
 
 const chestContents = {
@@ -131,6 +131,21 @@ const chestContents = {
     item: 'ember_prayer_scroll',
     message: 'Inside rests a sealed scroll etched in ember.'
   },
+  'map09_floor03:4,3': {
+    item: 'temple_sword',
+    hpLoss: 10,
+    message: 'A guardian trap drains your strength as you claim the sword.'
+  },
+  'map09_floor03:9,5': {
+    item: 'temple_shell',
+    hpLoss: 10,
+    message: 'Ancient energies lash out when the shell is taken.'
+  },
+  'map09_floor03:15,8': {
+    item: 'temple_ring',
+    hpLoss: 10,
+    message: 'Cursed fumes seep out as you grasp the ring.'
+  },
   'map_warrior:18,18': {
     relic: 'warrior_sigil',
     message: 'You obtained the Warrior Sigil!'
@@ -195,6 +210,9 @@ export async function openChest(id, player) {
   if (config.relic) {
     giveRelic(config.relic);
     unlockedSkills.push(...unlockSkillsFromRelic(config.relic));
+  }
+  if (config.hpLoss && player) {
+    loseHpNonLethal(config.hpLoss);
   }
   return { item, items, message: config.message || null, unlockedSkills };
 }

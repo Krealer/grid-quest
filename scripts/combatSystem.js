@@ -203,6 +203,10 @@ export async function startCombat(enemy, player) {
       log('Reflected the damage back!');
       reflectActive = false;
     }
+    if (player.templeSetActive && applied > 0) {
+      damageEnemy(2);
+      healPlayer(1);
+    }
     return applied;
   }
 

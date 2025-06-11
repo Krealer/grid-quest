@@ -54,6 +54,16 @@ export function updateStatusPanel() {
     }
     equipList.appendChild(row);
   });
+  if (player.templeSetActive) {
+    const row = document.createElement('div');
+    row.classList.add('status-equip');
+    row.innerHTML = '<strong>Set Bonus:</strong> Temple Harmony';
+    row.addEventListener('mouseenter', () =>
+      showItemTooltip(row, 'Counter 2 dmg and heal 1 HP when hit')
+    );
+    row.addEventListener('mouseleave', hideItemTooltip);
+    equipList.appendChild(row);
+  }
   info.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}`;
   (player.passives || []).forEach(id => {
     const p = defs[id];

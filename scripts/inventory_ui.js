@@ -152,6 +152,12 @@ export async function updateInventoryUI() {
       });
       tooltipText = effects.join(', ');
     }
+    const baseId = splitItemId(item.id).baseId;
+    if (baseId === 'temple_sword' || baseId === 'temple_shell' || baseId === 'temple_ring') {
+      if (tooltipText) tooltipText += '\n';
+      tooltipText += 'Temple Set piece';
+      if (player.templeSetActive) tooltipText += ' (Set active)';
+    }
     if (tooltipText) {
       row.addEventListener('mouseenter', () =>
         showItemTooltip(row, tooltipText)

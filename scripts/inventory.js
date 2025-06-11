@@ -2,6 +2,7 @@ import { getItemData } from './item_loader.js';
 import { player, applyItemReward } from './player.js';
 import { gameState } from './game_state.js';
 import { getItemBonuses } from './item_stats.js';
+import { checkTempleSet } from './equipment.js';
 import { unlockBlueprint } from './craft_state.js';
 import { discover } from './player_memory.js';
 import { isRelic } from './relic_state.js';
@@ -243,6 +244,7 @@ export function equipItem(itemId) {
   }
   player.equipment[bonus.slot] = itemId;
   recalcPassiveModifiers();
+  checkTempleSet();
   document.dispatchEvent(new CustomEvent('equipmentChanged'));
   return true;
 }
