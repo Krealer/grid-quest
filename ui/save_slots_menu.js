@@ -1,3 +1,5 @@
+import { showConfirm } from '../scripts/confirmPrompt.js';
+
 let mode = 'save';
 
 export function initSaveSlotsMenu() {
@@ -34,12 +36,29 @@ function buildMenu() {
     const hasData = !!json;
     btn.disabled = mode === 'load' && !hasData;
     btn.addEventListener('click', () => {
-      document.dispatchEvent(
-        new CustomEvent(mode === 'save' ? 'saveSlot' : 'loadSlot', {
-          detail: { slot: i }
-        })
-      );
-      hideMenu();
+      if (mode === 'save') {
+        if (localStorage.getItem(`game_save_slot_${i}`)) {
+          showConfirm(
+            'This slot already contains saved progress. Overwrite it?',
+            () => {
+              document.dispatchEvent(
+                new CustomEvent('saveSlot', { detail: { slot: i } })
+              );
+              buildMenu();
+            }
+          );
+        } else {
+          document.dispatchEvent(
+            new CustomEvent('saveSlot', { detail: { slot: i } })
+          );
+          buildMenu();
+        }
+      } else {
+        document.dispatchEvent(
+          new CustomEvent('loadSlot', { detail: { slot: i } })
+        );
+        hideMenu();
+      }
     });
     row.appendChild(btn);
 
