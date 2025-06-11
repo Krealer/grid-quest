@@ -32,11 +32,14 @@ export const player = {
   y: 0,
   hp: 100,
   maxHp: 100,
+  atk: 15,
+  def: 0,
   level: 1,
   xp: 0,
   xpToNextLevel: 10,
   classId: getChosenClass() || null,
   stats: {
+    attack: 0,
     defense: 0
   },
   equipment: {
@@ -55,18 +58,21 @@ export const player = {
 };
 
 export function calculateStatsFromLevel(level) {
-  const maxHp = 100 + level * 2 + Math.floor(level / 5) * 3;
+  const lvl = level - 1;
+  const maxHp = 100 + lvl * 2 + Math.floor(lvl / 5) * 3;
   const defense = Math.floor(level / 5);
-  const attack = Math.floor(level / 10);
+  const attack = 15 + Math.floor(level / 10);
   return { maxHp, defense, attack };
 }
 
 export function updateStatsFromLevel() {
   const { maxHp, defense, attack } = calculateStatsFromLevel(player.level);
   player.maxHp = maxHp;
+  player.atk = attack;
+  player.def = defense;
   if (!player.stats) player.stats = { attack: 0, defense: 0 };
-  player.stats.defense = defense;
-  player.stats.attack = attack;
+  player.stats.defense = 0;
+  player.stats.attack = 0;
   if (player.hp > player.maxHp) player.hp = player.maxHp;
 }
 
@@ -230,8 +236,6 @@ export function serializePlayer() {
   return {
     x: player.x,
     y: player.y,
-    hp: player.hp,
-    maxHp: player.maxHp,
     level: player.level,
     xp: player.xp,
     xpToNextLevel: player.xpToNextLevel,
@@ -248,8 +252,6 @@ export function deserializePlayer(data) {
   if (!data) return;
   player.x = data.x ?? player.x;
   player.y = data.y ?? player.y;
-  player.hp = data.hp ?? player.hp;
-  player.maxHp = data.maxHp ?? player.maxHp;
   player.level = data.level ?? player.level;
   player.xp = data.xp ?? player.xp;
   player.xpToNextLevel = data.xpToNextLevel ?? player.xpToNextLevel;
@@ -267,10 +269,14 @@ export function deserializePlayer(data) {
     document.dispatchEvent(new CustomEvent('equipmentChanged'));
   }
   updateStatsFromLevel();
+  player.hp = player.maxHp;
 }
 
 export function getTotalStats() {
-  const base = { ...(player.stats || {}) };
+  const base = {
+    attack: (player.atk || 0) + (player.stats?.attack || 0),
+    defense: (player.def || 0) + (player.stats?.defense || 0)
+  };
   const total = { ...base };
   const eq = player.equipment || {};
   for (const slot of Object.keys(eq)) {

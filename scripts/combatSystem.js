@@ -184,10 +184,10 @@ export async function startCombat(enemy, player) {
       amount = Math.max(0, amount - 5);
       guardActive = false;
     }
-    const base = getTotalStats();
+    const totals = getTotalStats();
     const tempTarget = {
       hp: playerHp,
-      stats: { defense: (base.defense || 0) + player.tempDefense },
+      stats: { defense: (totals.defense || 0) + player.tempDefense },
       damageTakenMod: player.damageTakenMod,
       absorb: player.absorb,
       hasResolve: player.hasResolve
@@ -226,8 +226,8 @@ export async function startCombat(enemy, player) {
       log(`${enemy.name} evades the attack!`);
       return 0;
     }
-    const stats = getTotalStats();
-    let dmg = baseDmg + (stats.attack || 0) + (player.tempAttack || 0);
+    const totals = getTotalStats();
+    let dmg = baseDmg + (totals.attack || 0) + (player.tempAttack || 0);
     if (typeof player.damageModifier === 'number') {
       dmg *= player.damageModifier;
     }
