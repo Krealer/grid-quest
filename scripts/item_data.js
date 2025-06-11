@@ -8,6 +8,16 @@ export const itemData = {
     stackLimit: 1,
     icon: '🗝️'
   },
+  health_potion: {
+    id: 'health_potion',
+    name: 'Health Potion',
+    description: 'Recovers 20 HP when used in combat.',
+    type: 'combat',
+    tags: ['combat'],
+    stackLimit: 5,
+    icon: '🧪',
+    useInCombat: true
+  },
   health_amulet: {
     id: 'health_amulet',
     name: 'Health Amulet',
@@ -62,7 +72,8 @@ export const itemData = {
     type: 'combat',
     tags: ['combat'],
     stackLimit: 1,
-    icon: '🗡️'
+    icon: '🗡️',
+    useInCombat: true
   },
   scout_blade: {
     id: 'scout_blade',
@@ -107,7 +118,8 @@ export const itemData = {
     type: 'combat',
     tags: ['combat'],
     stackLimit: 99,
-    icon: '🔮'
+    icon: '🔮',
+    useInCombat: true
   },
   ward_leaf: {
     id: 'ward_leaf',
@@ -134,7 +146,8 @@ export const itemData = {
     type: 'combat',
     tags: ['combat'],
     stackLimit: 3,
-    icon: '✨'
+    icon: '✨',
+    useInCombat: true
   },
   sentry_plating: {
     id: 'sentry_plating',
@@ -179,7 +192,8 @@ export const itemData = {
     type: 'combat',
     tags: ['combat'],
     stackLimit: 10,
-    icon: '🧴'
+    icon: '🧴',
+    useInCombat: true
   },
   flesh_crystal: {
     id: 'flesh_crystal',

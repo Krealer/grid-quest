@@ -9,6 +9,16 @@ import { isRelic } from './relic_state.js';
 export const DEFAULT_STACK_LIMIT = 99;
 export const inventory = [];
 export const passiveModifiers = {};
+export const itemUsage = {};
+
+export function recordItemUse(id, qty = 1) {
+  if (!id) return;
+  itemUsage[id] = (itemUsage[id] || 0) + qty;
+}
+
+export function getItemUsageCount(id) {
+  return itemUsage[id] || 0;
+}
 
 export function recalcPassiveModifiers() {
   Object.keys(passiveModifiers).forEach((k) => delete passiveModifiers[k]);
@@ -154,7 +164,9 @@ export function removeItem(nameOrId, qty = 1) {
 }
 
 export function consumeItem(id, qty = 1) {
-  return removeItem(id, qty);
+  const removed = removeItem(id, qty);
+  if (removed) recordItemUse(id, qty);
+  return removed;
 }
 
 export function getItemsByTag(tag) {
