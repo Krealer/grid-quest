@@ -45,6 +45,9 @@ export const itemDescriptions = {
     'Prism Fragment \u2013 dropped by Crystal Sentries in the maze; used for crafting.',
   crystal_seed: 'Crystal Seed \u2013 essential for future item upgrades.',
   mana_scroll: 'Mana Scroll \u2013 completely refreshes all skill cooldowns.',
+  mana_ember: 'Mana Ember \u2013 restores skill energy when used in combat.',
+  ember_prayer_scroll:
+    'Ember Prayer Scroll \u2013 consume to learn the Ember Prayer skill.',
   prism_key:
     'Prism Key \u2013 obtained from Caelen in map06, unlocks the path to the next area.',
   maze_key_1: 'Maze Key 1 \u2013 opens the western maze in the Gatepoint Room.',

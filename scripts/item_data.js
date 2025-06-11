@@ -604,6 +604,73 @@ export const itemData = {
     consumable: true,
     stackLimit: 99,
     icon: '🛢️'
+  },
+  mana_ember: {
+    id: 'mana_ember',
+    name: 'Mana Ember',
+    description: 'Restores skill energy when used in combat.',
+    type: 'combat',
+    tags: ['combat'],
+    category: 'combat',
+    consumable: true,
+    stackLimit: 5,
+    icon: '🔥',
+    useInCombat: true
+  },
+  ember_prayer_scroll: {
+    id: 'ember_prayer_scroll',
+    name: 'Ember Prayer Scroll',
+    description: 'Using it teaches the Ember Prayer skill.',
+    type: 'quest',
+    tags: ['lore'],
+    category: 'lore',
+    consumable: true,
+    stackLimit: 1,
+    icon: '📜'
+  },
+  ashen_core: {
+    id: 'ashen_core',
+    name: 'Ashen Core',
+    description: 'Remnant from an Ash Vessel.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '⚱️'
+  },
+  dust_talisman: {
+    id: 'dust_talisman',
+    name: 'Dust Talisman',
+    description: 'Charm carried by Dust Prophets.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🌫️'
+  },
+  resonant_chime: {
+    id: 'resonant_chime',
+    name: 'Resonant Chime',
+    description: 'Chime that echoes with power.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🔔'
+  },
+  wailing_essence: {
+    id: 'wailing_essence',
+    name: 'Wailing Essence',
+    description: 'Captures the cry of a Hollow Wailer.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🎵'
   }
 };
 

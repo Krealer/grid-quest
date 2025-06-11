@@ -118,6 +118,19 @@ const chestContents = {
     item: 'aegis_invocation_scroll',
     message: 'You discover a sacred scroll hidden within.'
   },
+  'map09_floor02:3,8': {
+    item: 'temple_chest_key',
+    message: 'Hidden among rubble lies a small key.'
+  },
+  'map09_floor02:17,5': {
+    item: 'mana_ember',
+    quantity: 1,
+    message: 'The chest radiates lingering warmth.'
+  },
+  'map09_floor02:10,14': {
+    item: 'ember_prayer_scroll',
+    message: 'Inside rests a sealed scroll etched in ember.'
+  },
   'map_warrior:18,18': {
     relic: 'warrior_sigil',
     message: 'You obtained the Warrior Sigil!'

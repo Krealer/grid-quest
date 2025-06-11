@@ -159,7 +159,11 @@ export async function onInteractEffect(
       const chestId = `${router.getCurrentMapName()}:${x},${y}`;
       const required = tile.key || tile.requiresItem;
       if (required && !hasItem(required)) {
-        showDialogue('The chest is locked.');
+        if (required === 'temple_chest_key') {
+          showDialogue('A seal protects this chest.');
+        } else {
+          showDialogue('The chest is locked.');
+        }
         break;
       }
       if (!isChestOpened(chestId)) {

@@ -80,3 +80,11 @@ export function useAegisInvocationScroll() {
   }
   return null;
 }
+
+export function useEmberPrayerScroll() {
+  if (consumeItem('ember_prayer_scroll', 1)) {
+    import('./player.js').then((m) => m.grantSkill('emberPrayer'));
+    return { learned: true };
+  }
+  return null;
+}
