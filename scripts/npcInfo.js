@@ -88,6 +88,11 @@ export const npcInfoList = [
     id: 'krealer',
     name: 'Krealer',
     description: 'A cryptic entity guarding forbidden knowledge.'
+  },
+  {
+    id: 'kaelor_the_weaver',
+    name: 'Kaelor the Weaver',
+    description: 'Pragmatic trader who exchanges fragments for a key.'
   }
 ];
 

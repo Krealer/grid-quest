@@ -211,6 +211,10 @@ export function removeHealthBonusItem() {
   return false;
 }
 
+export function removePrismFragments(qty = 10) {
+  return removeItem('prism_fragment', qty);
+}
+
 export function equipItem(itemId) {
   const bonus = getItemBonuses(itemId);
   if (!bonus || !bonus.slot) return false;
