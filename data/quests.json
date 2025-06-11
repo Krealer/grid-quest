@@ -11,5 +11,9 @@
   "purify_token": {
     "title": "Purify the Token",
     "description": "Bring Arvalin a goblin insignia and a cracked helmet."
+  },
+  "crimson_request": {
+    "title": "The Crimson Request",
+    "description": "Deliver a rotting heart to Syranel."
   }
 }

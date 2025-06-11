@@ -179,6 +179,21 @@ const skillDefs = {
       log(`Your focus strike deals ${dmg} damage!`);
     }
   },
+  leech: {
+    id: 'leech',
+    name: 'Leech',
+    icon: '🩸',
+    description: 'Deal 15 damage and heal 15 HP.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 2,
+    effect({ damageEnemy, healPlayer, log }) {
+      const dmg = 15;
+      damageEnemy(dmg);
+      healPlayer(15);
+      log(`You drain life for ${dmg} damage and healing.`);
+    }
+  },
   purify: {
     id: 'purify',
     name: 'Purify',
