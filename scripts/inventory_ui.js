@@ -152,7 +152,7 @@ export async function updateInventoryUI() {
       });
       tooltipText = effects.join(', ');
     }
-    const baseId = splitItemId(item.id).baseId;
+    // baseId was already extracted above; reuse it here to check for set pieces
     if (baseId === 'temple_sword' || baseId === 'temple_shell' || baseId === 'temple_ring') {
       if (tooltipText) tooltipText += '\n';
       tooltipText += 'Temple Set piece';
