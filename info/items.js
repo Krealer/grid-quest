@@ -47,6 +47,8 @@ export const itemDescriptions = {
     'Crystal Seed \u2013 essential for future item upgrades.',
   mana_scroll:
     'Mana Scroll \u2013 completely refreshes all skill cooldowns.',
+  prism_key:
+    'Prism Key \u2013 obtained from Caelen in map06, unlocks the path to the next area.',
   forgotten_ring:
     'Forgotten Ring \u2013 when worn, grants +1 attack.'
 };

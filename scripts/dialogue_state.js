@@ -754,3 +754,7 @@ export function flagObtainedArcaneSpark() {
 export function flagRiftLurkerDefeated() {
   setMemory('rift_lurker_defeated');
 }
+
+export function flagTradedForPrismKey() {
+  setMemory('traded_for_prism_key');
+}

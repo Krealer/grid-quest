@@ -24,4 +24,11 @@ export const npcs = [
     map: 'Map05',
     description: 'Watcher of the rift who mutters about echoes.'
   }
+  ,
+  {
+    id: 'caelen',
+    name: 'Caelen',
+    map: 'Map06',
+    description: 'World-weary trader offering a key for magical exchange.'
+  }
 ];
