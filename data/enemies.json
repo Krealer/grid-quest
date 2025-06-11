@@ -613,6 +613,18 @@
     "behavior": "aggressive",
     "drops": [{ "item": "crystal_dust", "quantity": 1 }]
   },
+  "crystal_sentry": {
+    "name": "Crystal Sentry",
+    "hp": 60,
+    "stats": { "attack": 4, "defense": 3 },
+    "xp": 14,
+    "description": "A vigilant prism guardian.",
+    "intro": "Facets glint as a Crystal Sentry awakens!",
+    "portrait": "🔶",
+    "skills": ["prism_shot", "refract_guard"],
+    "behavior": "balanced",
+    "drops": [{ "item": "prism_fragment", "quantity": 1 }]
+  },
   "pain_lattice": {
     "name": "Pain Lattice",
     "hp": 70,

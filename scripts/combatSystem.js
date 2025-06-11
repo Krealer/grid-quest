@@ -166,6 +166,7 @@ export async function startCombat(enemy, player) {
 
   let guardActive = false;
   let shieldBlock = false;
+  let enemyGuard = false;
   let healUsed = false;
   let sparkUsed = false;
   let reflectActive = false;
@@ -214,6 +215,10 @@ export async function startCombat(enemy, player) {
     if (typeof player.bonusDamage === 'number') {
       dmg += player.bonusDamage;
       player.bonusDamage = 0;
+    }
+    if (enemyGuard) {
+      dmg = Math.max(0, dmg - 4);
+      enemyGuard = false;
     }
     const tempTarget = {
       hp: enemyHp,
@@ -277,6 +282,10 @@ export async function startCombat(enemy, player) {
 
   function activateShieldBlock() {
     shieldBlock = true;
+  }
+
+  function activateEnemyGuard() {
+    enemyGuard = true;
   }
 
   function isHealUsed() {
@@ -772,7 +781,8 @@ export async function startCombat(enemy, player) {
         applyStatus: applyStatusLogged,
         removeStatus: removeStatusLogged,
         removeNegativeStatus: removeNegativeStatusLogged,
-        log
+        log,
+        activateEnemyGuard
       });
     }
     if (playerHp <= 0) {

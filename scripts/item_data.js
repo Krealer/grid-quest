@@ -259,6 +259,17 @@ export const itemData = {
     stackLimit: 99,
     icon: '✨'
   },
+  prism_fragment: {
+    id: 'prism_fragment',
+    name: 'Prism Fragment',
+    description: 'A shimmering piece of condensed prism memory.',
+    type: 'material',
+    tags: ['items'],
+    category: 'crafting',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🔶'
+  },
   psy_fiber: {
     id: 'psy_fiber',
     name: 'Psy Fiber',
