@@ -1,4 +1,4 @@
-import { inventory } from './inventory.js';
+import { inventory, addItem as invAddItem, removeItem as invRemoveItem } from './inventory.js';
 import { player, reapplyEquipmentBonuses } from './player.js';
 
 export function serializeInventory() {
@@ -36,5 +36,11 @@ export const inventoryState = {
     deserializeInventory(savedInventory);
     reapplyEquipmentBonuses();
     document.dispatchEvent(new CustomEvent('inventoryUpdated'));
+  },
+  addItem(item) {
+    return invAddItem(item);
+  },
+  removeItem(id, qty = 1) {
+    return invRemoveItem(id, qty);
   }
 };

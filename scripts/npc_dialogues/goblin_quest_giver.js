@@ -15,17 +15,17 @@ export const goblinQuestDialogue = [
     ]
   },
   {
-    text: "Have you managed to get some goblin gear?",
+    text: "Have you brought the goblin gear I asked for?",
     options: [
       {
         label: "Yes, here it is.",
         goto: 2,
-        condition: (state) => (state.inventory['goblin_ear'] || 0) >= 3,
+        condition: (state) => (state.inventory['goblin_gear'] || 0) >= 5,
         onChoose: async () => {
           await loadItems();
-          const data = getItemData('silver_key') || { name: 'Silver Key', description: '' };
-          removeItem('goblin_ear', 3);
-          addItem({ ...data, id: 'silver_key', quantity: 1 });
+          const data = getItemData('goblin_sword') || { name: 'Goblin Sword', description: '' };
+          removeItem('goblin_gear', 5);
+          addItem({ ...data, id: 'goblin_sword', quantity: 1 });
         },
         completeQuest: 'goblin_gear'
       },
@@ -41,7 +41,7 @@ export const goblinQuestDialogue = [
       {
         label: "Thank you.",
         goto: null,
-        memoryFlag: "quest_goblin_completed"
+        memoryFlag: "goblin_quest_completed"
       }
     ]
   }

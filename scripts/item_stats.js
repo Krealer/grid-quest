@@ -8,6 +8,7 @@ export const itemBonuses = {
   'cracked_helmet+3': { slot: 'armor', defense: 4 },
   focus_ring: { slot: 'accessory' },
   forgotten_ring: { slot: 'accessory', attack: 1 },
+  goblin_sword: { slot: 'weapon', attack: 3 },
   temple_sword: { slot: 'weapon', attack: 3 },
   temple_shell: { slot: 'armor', defense: 2, maxHp: 5 },
   temple_ring: { slot: 'accessory', attack: 1, defense: 1, maxHp: 2 }
