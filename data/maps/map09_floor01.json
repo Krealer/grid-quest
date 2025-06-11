@@ -42,29 +42,10 @@
       "F",
       "F",
       "F",
-      "G",
-      "G",
-      "G",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F"
-    ],
-    [
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "silent_idol"
+      },
       "G",
       "G",
       "F",
@@ -92,6 +73,31 @@
       "F",
       "F",
       "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F"
+    ],
+    [
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "G",
+      "G",
+      "G",
+      "F",
+      "F",
+      {
+        "type": "E",
+        "enemyId": "temple_warden"
+      },
       "F",
       "F",
       "F",
@@ -104,9 +110,6 @@
       "F",
       "F",
       "C",
-      "G",
-      "G",
-      "G",
       {
         "type": "E",
         "enemyId": "temple_warden"
@@ -114,6 +117,9 @@
       "G",
       "G",
       "G",
+      "G",
+      "G",
+      "G",
       "F",
       "F",
       "F",
@@ -178,10 +184,7 @@
       "F",
       "F",
       "G",
-      {
-        "type": "E",
-        "enemyId": "silent_idol"
-      },
+      "G",
       "G",
       "F",
       "F",
@@ -292,10 +295,7 @@
       "F",
       "G",
       "G",
-      {
-        "type": "E",
-        "enemyId": "temple_warden"
-      },
+      "G",
       "G",
       "G",
       "G",
@@ -318,10 +318,7 @@
       "G",
       "G",
       "G",
-      {
-        "type": "E",
-        "enemyId": "silent_idol"
-      },
+      "G",
       "G",
       "t",
       "G",
@@ -338,7 +335,10 @@
       "F",
       "F",
       "F",
-      "F",
+      {
+        "type": "E",
+        "enemyId": "silent_idol"
+      },
       "F",
       "G",
       "G",
@@ -363,10 +363,7 @@
       "F",
       "F",
       "G",
-      {
-        "type": "E",
-        "enemyId": "obsidian_disciple"
-      },
+      "G",
       "G",
       "F",
       "F",
@@ -425,7 +422,10 @@
       "F",
       "F",
       "F",
-      "F",
+      {
+        "type": "E",
+        "enemyId": "obsidian_disciple"
+      },
       "F"
     ],
     "FFFFFFFFFFFFFFFFFFFF"

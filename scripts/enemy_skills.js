@@ -510,6 +510,164 @@ export const enemySkills = {
       applyStatus(player, 'silence', 2);
       log(`${enemy.name} emits a wave of silence!`);
     }
+  },
+  pillar_slam: {
+    id: 'pillar_slam',
+    name: 'Pillar Slam',
+    icon: '🏛️',
+    description: 'Crushing strike that deals heavy damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 12 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} slams a pillar for ${applied} damage!`);
+    }
+  },
+  sanctified_guard: {
+    id: 'sanctified_guard',
+    name: 'Sanctified Guard',
+    icon: '🛡️',
+    description: 'Reduces incoming damage by half for 2 turns.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'buff',
+    statuses: [{ target: 'self', id: 'guarded', duration: 2 }],
+    effect({ enemy, applyStatus, log }) {
+      applyStatus(enemy, 'guarded', 2);
+      log(`${enemy.name} braces behind sacred wards!`);
+    }
+  },
+  ward_pulse: {
+    id: 'ward_pulse',
+    name: 'Ward Pulse',
+    icon: '📿',
+    description: 'Emits a weakening pulse with no damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['weakened'],
+    statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
+    effect({ enemy, player, applyStatus, log }) {
+      applyStatus(player, 'weakened', 2);
+      log(`${enemy.name}'s ward pulse saps your strength!`);
+    }
+  },
+  silent_revelation: {
+    id: 'silent_revelation',
+    name: 'Silent Revelation',
+    icon: '🕯️',
+    description: 'Silences the foe for 1 turn.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['silence'],
+    statuses: [{ target: 'player', id: 'silence', duration: 1 }],
+    effect({ enemy, player, applyStatus, log }) {
+      applyStatus(player, 'silence', 1);
+      log(`${enemy.name} unveils a silent revelation!`);
+    }
+  },
+  fragmented_chant: {
+    id: 'fragmented_chant',
+    name: 'Fragmented Chant',
+    icon: '🎶',
+    description: 'Moderate magic damage with a chance to confuse.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    applies: ['confused'],
+    statuses: [{ target: 'player', id: 'confused', duration: 2 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 7 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      if (Math.random() < 0.1) {
+        applyStatus(player, 'confused', 2);
+        log('You are disoriented by the chant!');
+      }
+      log(`${enemy.name} intones a fragmented chant for ${applied} damage!`);
+    }
+  },
+  still_mind: {
+    id: 'still_mind',
+    name: 'Still Mind',
+    icon: '🧘',
+    description: 'Gain 25% evasion for 2 turns.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'buff',
+    statuses: [{ target: 'self', id: 'evasive', duration: 2 }],
+    effect({ enemy, applyStatus, log }) {
+      applyStatus(enemy, 'evasive', 2);
+      log(`${enemy.name} enters a still meditative stance.`);
+    }
+  },
+  oathfire_slash: {
+    id: 'oathfire_slash',
+    name: 'Oathfire Slash',
+    icon: '🔥',
+    description: 'Strikes and burns the enemy.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['burned'],
+    statuses: [{ target: 'player', id: 'burned', duration: 3 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 9 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'burned', 3);
+      log(`${enemy.name} slashes with oathfire for ${applied} damage!`);
+    }
+  },
+  ashen_oath: {
+    id: 'ashen_oath',
+    name: 'Ashen Oath',
+    icon: '⚔️',
+    description: 'Sacrifices HP to deal heavy damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const loss = Math.max(1, Math.floor(enemy.maxHp * 0.1));
+      enemy.hp = Math.max(0, enemy.hp - loss);
+      log(`${enemy.name} sacrifices ${loss} HP!`);
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 12 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name}'s oath burns for ${applied} damage!`);
+    }
+  },
+  searing_trial: {
+    id: 'searing_trial',
+    name: 'Searing Trial',
+    icon: '🔥',
+    description: 'Burns and weakens the foe. Cooldown 3 turns.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 3,
+    aiType: 'status',
+    applies: ['burned', 'weakened'],
+    statuses: [
+      { target: 'player', id: 'burned', duration: 3 },
+      { target: 'player', id: 'weakened', duration: 2 }
+    ],
+    effect({ player, applyStatus, log, damagePlayer, enemy }) {
+      applyStatus(player, 'burned', 3);
+      applyStatus(player, 'weakened', 2);
+      log(`${enemy.name} subjects you to a searing trial!`);
+    }
   }
 };
 

@@ -1,11 +1,6 @@
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
-import {
-  respawn,
-  increaseMaxHp,
-  gainXP,
-  getTotalStats
-} from './player.js';
+import { respawn, increaseMaxHp, gainXP, getTotalStats } from './player.js';
 import { getClassBonuses } from './class_state.js';
 import { getPassive } from './passive_skills.js';
 import { applyDamage } from './logic.js';
@@ -175,6 +170,10 @@ export async function startCombat(enemy, player) {
 
   function damagePlayer(dmg) {
     let amount = dmg;
+    if (player.evasionChance && Math.random() < player.evasionChance) {
+      log('Player evades the attack!');
+      return 0;
+    }
     if (shieldBlock) {
       amount = 0;
       shieldBlock = false;
@@ -207,6 +206,10 @@ export async function startCombat(enemy, player) {
   }
 
   function damageEnemy(baseDmg) {
+    if (enemy.evasionChance && Math.random() < enemy.evasionChance) {
+      log(`${enemy.name} evades the attack!`);
+      return 0;
+    }
     const stats = getTotalStats();
     let dmg = baseDmg + (stats.attack || 0) + (player.tempAttack || 0);
     if (typeof player.damageModifier === 'number') {
@@ -418,7 +421,9 @@ export async function startCombat(enemy, player) {
       return;
     }
     if (skillCooldowns[skill.id] > 0) {
-      log(`${skill.name} is on cooldown for ${skillCooldowns[skill.id]} more turn(s).`);
+      log(
+        `${skill.name} is on cooldown for ${skillCooldowns[skill.id]} more turn(s).`
+      );
       return;
     }
     const icon = skill.icon ? `${skill.icon} ` : '';
@@ -583,7 +588,9 @@ export async function startCombat(enemy, player) {
     if (id === 'stamina_dust') {
       const res = useStaminaDust();
       if (res) {
-        const key = Object.keys(skillCooldowns).find((k) => skillCooldowns[k] > 0);
+        const key = Object.keys(skillCooldowns).find(
+          (k) => skillCooldowns[k] > 0
+        );
         if (key) skillCooldowns[key] = Math.max(0, skillCooldowns[key] - 1);
         log('One skill cooldown reduced!');
         logMessage(`Player used ${data.name}!`);
