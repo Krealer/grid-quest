@@ -478,6 +478,11 @@ body {
   border: 1px solid #222;
 }
 
+#battle-overlay .actions button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 #battle-overlay .tab-panel button .desc {
   display: block;
   font-size: 12px;

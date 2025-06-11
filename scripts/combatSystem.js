@@ -37,6 +37,7 @@ import {
   setupTabs,
   updateStatusUI,
   renderSkillList,
+  setSkillDisabledState,
   initLogPanel,
   showVictoryMessage,
   showXpGain,
@@ -229,6 +230,7 @@ export async function startCombat(enemy, player) {
     const who = target === player ? 'Player' : enemy.name;
     log(`${who} gains ${name}`);
     updateStatusUI(overlay, player, enemy);
+    updateSkillDisableState();
   }
 
   function removeStatusLogged(target, id) {
@@ -237,6 +239,7 @@ export async function startCombat(enemy, player) {
     const who = target === player ? 'Player' : enemy.name;
     log(`${name} removed from ${who}`);
     updateStatusUI(overlay, player, enemy);
+    updateSkillDisableState();
   }
 
   function removeNegativeStatusLogged(target, ids) {
@@ -247,6 +250,7 @@ export async function startCombat(enemy, player) {
       log(`${name} removed from ${who}`);
     });
     updateStatusUI(overlay, player, enemy);
+    updateSkillDisableState();
     return removed;
   }
 
@@ -317,12 +321,19 @@ export async function startCombat(enemy, player) {
     .map((id) => getSkill(id))
     .filter(Boolean);
 
-  renderSkillList(skillContainer, skillList, handleAction);
+  const skillButtons = renderSkillList(skillContainer, skillList, handleAction);
 
   updateItemsUI();
   document.addEventListener('inventoryUpdated', updateItemsUI);
   setupTabs(overlay);
   updateStatusUI(overlay, player, enemy);
+  updateSkillDisableState();
+
+  function updateSkillDisableState() {
+    const silenced =
+      hasStatus(player, 'silence') || hasStatus(player, 'silenced');
+    setSkillDisabledState(skillButtons, silenced, ['guard']);
+  }
 
   async function handleAction(skill) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
@@ -342,8 +353,10 @@ export async function startCombat(enemy, player) {
       setTimeout(enemyTurn, 300);
       return;
     }
-    if (hasStatus(player, 'silenced') || hasStatus(player, 'silence')) {
-      log('Silenced! You cannot use skills.');
+    const silenced =
+      hasStatus(player, 'silenced') || hasStatus(player, 'silence');
+    if (silenced && !skill.silenceExempt) {
+      log('You are silenced and cannot use that skill.');
       return;
     }
     const icon = skill.icon ? `${skill.icon} ` : '';
@@ -387,6 +400,7 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     updateHpBar(enemyBar, enemyHp, enemyMax);
     updateStatusUI(overlay, player, enemy);
+    updateSkillDisableState();
     if (playerHp <= 0) {
       log('Player was defeated!');
       endCombat();
@@ -460,6 +474,7 @@ export async function startCombat(enemy, player) {
       updateHpBar(playerBar, playerHp, playerMax);
       updateHpBar(enemyBar, enemyHp, enemyMax);
       updateStatusUI(overlay, player, enemy);
+      updateSkillDisableState();
       playerTurn = false;
       setTimeout(enemyTurn, 300);
     }
@@ -605,6 +620,7 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     updateHpBar(enemyBar, enemyHp, enemyMax);
     updateStatusUI(overlay, player, enemy);
+    updateSkillDisableState();
     if (playerHp <= 0) {
       log('Player was defeated!');
       if (enemy.id === 'echo_absolute') {
