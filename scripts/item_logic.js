@@ -16,6 +16,13 @@ export function useDefensePotion() {
   return null;
 }
 
+export function useDefensePotionII() {
+  if (removeItem('defense_potion_II', 1)) {
+    return { defense: 2 };
+  }
+  return null;
+}
+
 export function useFadedBlade() {
   if (removeItem('faded_blade', 1)) {
     addTempAttack(2);

@@ -18,7 +18,11 @@ export const itemDescriptions = {
   old_scroll:
     'Old Scroll \u2013 a weathered document from Isolation Nexus. Someone may want to read it later.',
   rift_stone:
-    'Rift Stone \u2013 unlocks the sealed gate in Isolation Nexus after defeating the Rift Lurker.'
+    'Rift Stone \u2013 unlocks the sealed gate in Isolation Nexus after defeating the Rift Lurker.',
+  crystal_shard: 'Crystal Shard \u2013 can be used later to upgrade skills.',
+  defense_potion_II:
+    'Defense Potion II \u2013 grants +2 defense for the current battle.',
+  rift_fragment: 'Rift Fragment \u2013 a mysterious shard sought by scholars.'
 };
 
 export function markItemUsed(id) {
