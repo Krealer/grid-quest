@@ -15,10 +15,12 @@ export const TILE_DEFS = {
 };
 
 export function isWalkable(symbol) {
+  if (symbol === undefined || symbol === '') return true;
   return TILE_DEFS[symbol]?.walkable ?? false;
 }
 
 export function isInteractable(symbol) {
+  if (symbol === undefined || symbol === '') return false;
   return TILE_DEFS[symbol]?.interactable ?? false;
 }
 
