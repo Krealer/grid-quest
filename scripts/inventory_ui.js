@@ -103,6 +103,9 @@ export async function updateInventoryUI() {
       }
     });
     const bonus = getItemBonuses(item.id);
+    if (bonus && bonus.slot && getEquippedItem(bonus.slot) === item.id) {
+      row.classList.add('equipped-item');
+    }
     if (bonus && bonus.slot) {
       const btn = document.createElement('button');
       btn.classList.add('equip-btn');

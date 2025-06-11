@@ -11,6 +11,7 @@ import {
 } from './inventory_state.js';
 import { serializeQuestState, deserializeQuestState } from './quest_state.js';
 import { serializePlayer, deserializePlayer } from './player.js';
+import { refreshInventoryDisplay } from '../ui/inventory_menu.js';
 
 export function saveGame() {
   const data = {
@@ -29,6 +30,7 @@ export function loadGame() {
     const data = JSON.parse(json);
     deserializeGameState(data.game || {});
     inventoryState.loadFromObject(data.inventory || {});
+    refreshInventoryDisplay();
     validateLoadedInventory(data.inventory?.items || []);
     deserializeQuestState(data.quests || {});
     deserializePlayer(data.player || {});
