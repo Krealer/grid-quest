@@ -1,4 +1,4 @@
-import data from '../settings_data.json' assert { type: 'json' };
+import data from '../settings_data.js';
 
 export const DEFAULT_SETTINGS = Object.fromEntries(
   Object.entries(data).map(([k, v]) => [k, v.default])
@@ -44,4 +44,3 @@ export function applySettings(settings) {
     }
   });
 }
-
