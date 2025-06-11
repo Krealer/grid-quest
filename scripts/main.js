@@ -33,7 +33,7 @@ import { initNullSummary } from '../ui/null_summary.js';
 import { initSkillSystem } from './skills.js';
 import { initPassiveSystem } from './passive_skills.js';
 import { toggleStatusPanel } from './menu/status.js';
-import { toggleInfoPanel, initInfoPanel } from './info_panel.js';
+import { toggleInfoMenu, initInfoMenu } from '../ui/info_menu.js';
 import { saveState, loadState, gameState } from './game_state.js';
 import { saveGame, loadGame } from './save_system.js';
 import {
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initMobileCenter(container);
   initSkillSystem(player);
   initPassiveSystem(player);
-  initInfoPanel();
+  initInfoMenu();
   initNullSummary();
 
   try {
@@ -174,11 +174,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (e.target === statusOverlay) toggleStatusPanel();
     });
   }
-  if (infoTab) infoTab.addEventListener('click', toggleInfoPanel);
-  if (infoClose) infoClose.addEventListener('click', toggleInfoPanel);
+  if (infoTab) infoTab.addEventListener('click', toggleInfoMenu);
+  if (infoClose) infoClose.addEventListener('click', toggleInfoMenu);
   if (infoOverlay) {
     infoOverlay.addEventListener('click', (e) => {
-      if (e.target === infoOverlay) toggleInfoPanel();
+      if (e.target === infoOverlay) toggleInfoMenu();
     });
   }
 
