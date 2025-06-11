@@ -293,7 +293,7 @@
         "type": "D",
         "locked": true,
         "requiresItem": "map02_key",
-        "consumeItem": true,
+        "consumeItem": false,
         "target": "map03.json",
         "spawn": {
           "x": 1,

@@ -83,7 +83,7 @@
         },
         "locked": true,
         "requiresItem": "rusty_key",
-        "consumeItem": true
+        "consumeItem": false
       },
       "F"
     ],

@@ -155,7 +155,7 @@
         },
         "locked": true,
         "requiresItem": "commander_badge",
-        "consumeItem": true,
+        "consumeItem": false,
         "message": "The insignia is missing."
       }
     ],
