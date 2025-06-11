@@ -171,6 +171,20 @@ export const statusEffects = {
       target.evasionChance -= 0.25;
     }
   },
+  evade_next: {
+    id: 'evade_next',
+    name: 'Evade Next',
+    icon: '🌀',
+    description: 'Next incoming attack misses.',
+    type: 'positive',
+    duration: 1,
+    apply(target) {
+      target.evadeNext = true;
+    },
+    remove(target) {
+      target.evadeNext = false;
+    }
+  },
   weaken_immunity: {
     id: 'weaken_immunity',
     name: 'Weaken Immunity',
@@ -216,6 +230,20 @@ export const statusEffects = {
       target.damageModifier /= 0.5;
     }
   },
+  weaken: {
+    id: 'weaken',
+    name: 'Weaken',
+    icon: '🤕',
+    description: 'Deal half damage.',
+    type: 'negative',
+    duration: 3,
+    apply(target) {
+      target.damageModifier = (target.damageModifier || 1) * 0.5;
+    },
+    remove(target) {
+      target.damageModifier /= 0.5;
+    }
+  },
   cursed: {
     id: 'cursed',
     name: 'Cursed',
@@ -247,6 +275,17 @@ export const statusEffects = {
   burned: {
     id: 'burned',
     name: 'Burned',
+    icon: '🔥',
+    description: 'Lose 1 HP per turn.',
+    type: 'negative',
+    duration: 3,
+    apply(target) {
+      target.hp = Math.max(0, target.hp - 1);
+    }
+  },
+  burn: {
+    id: 'burn',
+    name: 'Burn',
     icon: '🔥',
     description: 'Lose 1 HP per turn.',
     type: 'negative',
@@ -354,9 +393,49 @@ export const statusEffects = {
       target.damageTakenMod -= 0.25;
     }
   },
+  attack_down: {
+    id: 'attack_down',
+    name: 'Attack Down',
+    icon: '🔻',
+    description: '-2 attack.',
+    type: 'negative',
+    duration: 2,
+    apply(target) {
+      if (!target.stats) target.stats = { attack: 0, defense: 0 };
+      target.stats.attack -= 2;
+    },
+    remove(target) {
+      if (!target.stats) return;
+      target.stats.attack += 2;
+    }
+  },
+  defense_down: {
+    id: 'defense_down',
+    name: 'Defense Down',
+    icon: '🔻',
+    description: '-2 defense.',
+    type: 'negative',
+    duration: 2,
+    apply(target) {
+      if (!target.stats) target.stats = { attack: 0, defense: 0 };
+      target.stats.defense -= 2;
+    },
+    remove(target) {
+      if (!target.stats) return;
+      target.stats.defense += 2;
+    }
+  },
   confused: {
     id: 'confused',
     name: 'Confused',
+    icon: '❓',
+    description: '20% chance to lose a turn.',
+    type: 'negative',
+    duration: 2
+  },
+  confuse: {
+    id: 'confuse',
+    name: 'Confuse',
     icon: '❓',
     description: '20% chance to lose a turn.',
     type: 'negative',

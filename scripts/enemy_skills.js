@@ -668,6 +668,185 @@ export const enemySkills = {
       applyStatus(player, 'weakened', 2);
       log(`${enemy.name} subjects you to a searing trial!`);
     }
+  },
+  kindled_touch: {
+    id: 'kindled_touch',
+    name: 'Kindled Touch',
+    icon: '🔥',
+    description: 'Melee strike that burns the target.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['burn'],
+    statuses: [{ target: 'player', id: 'burn', duration: 2 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 6 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'burn', 2);
+      log(`${enemy.name} scorches you for ${applied} damage!`);
+    }
+  },
+  ashburst: {
+    id: 'ashburst',
+    name: 'Ashburst',
+    icon: '💥',
+    description: 'Explodes on death, burning the foe.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    applies: ['burn'],
+    statuses: [{ target: 'player', id: 'burn', duration: 1 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 8 + atk;
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'burn', 1);
+      log(`${enemy.name} erupts in ash for ${applied} damage!`);
+    }
+  },
+  resonant_pulse: {
+    id: 'resonant_pulse',
+    name: 'Resonant Pulse',
+    icon: '🔔',
+    description: '15 magic damage with a chance to confuse.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    applies: ['confuse'],
+    statuses: [{ target: 'player', id: 'confuse', duration: 2 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 15 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      if (Math.random() < 0.3) {
+        applyStatus(player, 'confuse', 2);
+        log('The pulse leaves you disoriented!');
+      }
+      log(`${enemy.name}'s pulse hits for ${applied} damage!`);
+    }
+  },
+  null_chime: {
+    id: 'null_chime',
+    name: 'Null Chime',
+    icon: '🔕',
+    description: 'Lowers defense for 2 turns.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['defense_down'],
+    statuses: [{ target: 'player', id: 'defense_down', duration: 2 }],
+    effect({ enemy, player, applyStatus, log }) {
+      applyStatus(player, 'defense_down', 2);
+      log(`${enemy.name} tolls a nullifying chime!`);
+    }
+  },
+  meditate: {
+    id: 'meditate',
+    name: 'Meditate',
+    icon: '🧘',
+    description: 'Regenerates 10 HP.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'buff',
+    effect({ enemy, log }) {
+      enemy.hp = Math.min(enemy.maxHp, enemy.hp + 10);
+      log(`${enemy.name} focuses and recovers!`);
+    }
+  },
+  dust_hex: {
+    id: 'dust_hex',
+    name: 'Dust Hex',
+    icon: '🌫️',
+    description: 'Weakens attack and saps strength.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['attack_down', 'weaken'],
+    statuses: [
+      { target: 'player', id: 'attack_down', duration: 2 },
+      { target: 'player', id: 'weaken', duration: 2 }
+    ],
+    effect({ enemy, player, applyStatus, log }) {
+      applyStatus(player, 'attack_down', 2);
+      applyStatus(player, 'weaken', 2);
+      log(`${enemy.name} whispers a dust hex!`);
+    }
+  },
+  mirage_form: {
+    id: 'mirage_form',
+    name: 'Mirage Form',
+    icon: '✨',
+    description: 'Creates an illusory clone.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'buff',
+    statuses: [{ target: 'self', id: 'evade_next', duration: 1 }],
+    effect({ enemy, applyStatus, log }) {
+      applyStatus(enemy, 'evade_next', 1);
+      log(`${enemy.name} splits into mirage images.`);
+    }
+  },
+  silt_veil: {
+    id: 'silt_veil',
+    name: 'Silt Veil',
+    icon: '🌫️',
+    description: 'Evades the next attack. Cooldown 3 turns.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 3,
+    aiType: 'buff',
+    statuses: [{ target: 'self', id: 'evade_next', duration: 1 }],
+    effect({ enemy, applyStatus, log }) {
+      applyStatus(enemy, 'evade_next', 1);
+      log(`${enemy.name} shrouds itself in silt.`);
+    }
+  },
+  hollow_wail: {
+    id: 'hollow_wail',
+    name: 'Hollow Wail',
+    icon: '🔊',
+    description: 'Sound blast that silences the foe.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['silence'],
+    statuses: [{ target: 'player', id: 'silence', duration: 1 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 8 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'silence', 1);
+      log(`${enemy.name} unleashes a hollow wail for ${applied} damage!`);
+    }
+  },
+  despair_note: {
+    id: 'despair_note',
+    name: 'Despair Note',
+    icon: '🎵',
+    description: 'A resonant note of shadow.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, applyStatus, log, player }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 10 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      if (Math.random() < 0.2) {
+        applyStatus(player, 'silence', 1);
+        log('The note reverberates, stifling your voice!');
+      }
+      log(`${enemy.name} strikes a despairing note for ${applied} damage!`);
+    }
   }
 };
 

@@ -892,13 +892,13 @@
     "intro": "Ash swirls as an Ash Vessel lumbers forward!",
     "portrait": "⚱️",
     "skills": [
-      "smoldering_touch",
-      "ignite_aura"
+      "kindled_touch"
     ],
+    "deathSkill": "ashburst",
     "behavior": "aggressive",
     "drops": [
       {
-        "item": "ashen_core",
+        "item": "volcanic_slag",
         "quantity": 1
       }
     ]
@@ -916,12 +916,13 @@
     "portrait": "🌫️",
     "skills": [
       "dust_hex",
-      "summon_clone"
+      "mirage_form",
+      "silt_veil"
     ],
     "behavior": "cautious",
     "drops": [
       {
-        "item": "dust_talisman",
+        "item": "veil_powder",
         "quantity": 1
       }
     ]
@@ -938,13 +939,13 @@
     "intro": "The ringing of bells heralds the Chimebound Monk!",
     "portrait": "🔔",
     "skills": [
-      "resonance_pulse",
-      "confusing_toll"
+      "resonant_pulse",
+      "null_chime"
     ],
     "behavior": "cautious",
     "drops": [
       {
-        "item": "resonant_chime",
+        "item": "cracked_chime",
         "quantity": 1
       }
     ]
@@ -961,13 +962,13 @@
     "intro": "A mournful cry echoes... the Hollow Wailer appears!",
     "portrait": "🎵",
     "skills": [
-      "sonic_screech",
-      "echoing_sorrow"
+      "hollow_wail",
+      "despair_note"
     ],
     "behavior": "aggressive",
     "drops": [
       {
-        "item": "wailing_essence",
+        "item": "echo_crystal",
         "quantity": 1
       }
     ]

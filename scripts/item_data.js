@@ -671,6 +671,51 @@ export const itemData = {
     consumable: true,
     stackLimit: 99,
     icon: '🎵'
+  },
+  volcanic_slag: {
+    id: 'volcanic_slag',
+    name: 'Volcanic Slag',
+    description: 'Powers up fiery abilities when used in combat.',
+    type: 'combat',
+    tags: ['combat'],
+    category: 'combat',
+    consumable: true,
+    stackLimit: 5,
+    icon: '🌋',
+    useInCombat: true
+  },
+  cracked_chime: {
+    id: 'cracked_chime',
+    name: 'Cracked Chime',
+    description: 'A damaged chime traded among collectors.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🔔'
+  },
+  veil_powder: {
+    id: 'veil_powder',
+    name: 'Veil Powder',
+    description: 'Rare dust used in stealth brews.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🌫️'
+  },
+  echo_crystal: {
+    id: 'echo_crystal',
+    name: 'Echo Crystal',
+    description: 'Resonates with lost voices, used for upgrades.',
+    type: 'material',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🔮'
   }
 };
 
