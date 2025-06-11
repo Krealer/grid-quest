@@ -249,6 +249,7 @@ export async function startCombat(enemy, player) {
     enemyBar.classList.add('damage');
     setTimeout(() => enemyBar.classList.remove('damage'), 300);
     log(`${enemy.name} takes ${applied} damage`);
+    return applied;
   }
 
   function healPlayer(amount) {
