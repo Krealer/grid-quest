@@ -21,6 +21,17 @@ export const itemData = {
     stackLimit: 1,
     icon: '🗝️'
   },
+  temple_chest_key: {
+    id: 'temple_chest_key',
+    name: 'Temple Chest Key',
+    description: 'Opens special chests within the temple.',
+    type: 'key',
+    tags: ['lore'],
+    category: 'key',
+    consumable: true,
+    stackLimit: 1,
+    icon: '🗝️'
+  },
   health_potion: {
     id: 'health_potion',
     name: 'Health Potion',
@@ -502,6 +513,17 @@ export const itemData = {
     tags: ['lore'],
     category: 'lore',
     consumable: false,
+    stackLimit: 1,
+    icon: '📜'
+  },
+  aegis_invocation_scroll: {
+    id: 'aegis_invocation_scroll',
+    name: 'Aegis Invocation Scroll',
+    description: 'Using it teaches the Aegis Invocation skill.',
+    type: 'quest',
+    tags: ['lore'],
+    category: 'lore',
+    consumable: true,
     stackLimit: 1,
     icon: '📜'
   },

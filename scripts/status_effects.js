@@ -94,6 +94,17 @@ export const statusEffects = {
       target.absorb -= 5;
     }
   },
+  aegis_barrier: {
+    id: 'aegis_barrier',
+    name: 'Aegis Barrier',
+    icon: '🛡️',
+    description: 'Absorbs damage equal to half your max HP.',
+    type: 'positive',
+    duration: Infinity,
+    apply(target) {
+      target.absorb = (target.absorb || 0) + Math.floor(target.maxHp * 0.5);
+    }
+  },
   blessed: {
     id: 'blessed',
     name: 'Blessed',
@@ -158,6 +169,24 @@ export const statusEffects = {
     },
     remove(target) {
       target.evasionChance -= 0.25;
+    }
+  },
+  weaken_immunity: {
+    id: 'weaken_immunity',
+    name: 'Weaken Immunity',
+    icon: '🛡️',
+    description: 'Immune to the Weakened status.',
+    type: 'positive',
+    duration: 3,
+    apply(target) {
+      if (!Array.isArray(target.passiveImmunities)) target.passiveImmunities = [];
+      if (!target.passiveImmunities.includes('weakened'))
+        target.passiveImmunities.push('weakened');
+    },
+    remove(target) {
+      if (!Array.isArray(target.passiveImmunities)) return;
+      const idx = target.passiveImmunities.indexOf('weakened');
+      if (idx !== -1) target.passiveImmunities.splice(idx, 1);
     }
   },
 

@@ -17,7 +17,8 @@ import {
   useManaGem,
   useStaminaDust,
   useReflectPotion,
-  useManaScroll
+  useManaScroll,
+  useAegisInvocationScroll
 } from './item_logic.js';
 import { getItemBonuses } from './item_stats.js';
 import {
@@ -243,6 +244,9 @@ function handleInventoryItemUse(id) {
       return;
     }
     const res = useManaScroll();
+    if (res) used = true;
+  } else if (id === 'aegis_invocation_scroll') {
+    const res = useAegisInvocationScroll();
     if (res) used = true;
   }
   if (used) {
