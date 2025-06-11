@@ -19,7 +19,7 @@ export const eryndorDialogue = [
         label: "Got it. Thanks.",
         goto: null,
         memoryFlag: "learned_defense_potion_I",
-        grantRecipe: "defense_potion_I"
+        giveBlueprint: "defense_potion_I"
       }
     ]
   }

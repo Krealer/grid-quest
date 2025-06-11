@@ -12,5 +12,12 @@
     "ingredients": { "armor_piece": 3 },
     "result": "cracked_helmet",
     "quantity": 1
+  },
+  "defense_potion_I": {
+    "id": "defense_potion_I",
+    "name": "Defense Potion I",
+    "ingredients": { "bone_fragment": 1, "armor_piece": 1 },
+    "result": "defense_potion_I",
+    "quantity": 1
   }
 }

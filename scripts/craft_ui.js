@@ -67,3 +67,4 @@ export function toggleCraftView() {
 document.addEventListener('inventoryUpdated', updateCraftUI);
 document.addEventListener('blueprintUnlocked', updateCraftUI);
 document.addEventListener('blueprintsLoaded', updateCraftUI);
+document.addEventListener('recipeUnlocked', updateCraftUI);

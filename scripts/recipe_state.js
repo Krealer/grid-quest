@@ -3,7 +3,7 @@ export const recipeState = {
 };
 
 const recipeFlags = {
-  learned_defense_potion_I: 'defense_potion_I'
+  // map memory flags to recipes for automatic unlocking
 };
 
 export function unlockRecipe(id) {
