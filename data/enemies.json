@@ -712,12 +712,12 @@
   },
   "crystal_sentry": {
     "name": "Crystal Sentry",
-    "hp": 100,
+    "hp": 150,
     "stats": {
       "attack": 4,
       "defense": 3
     },
-    "xp": 30,
+    "xp": 40,
     "description": "A vigilant prism guardian.",
     "intro": "Facets glint as a Crystal Sentry awakens!",
     "portrait": "🔶",

@@ -237,7 +237,7 @@
         "type": "D",
         "target": "map07_maze01.json",
         "spawn": {
-          "x": 1,
+          "x": 10,
           "y": 1
         }
       },
