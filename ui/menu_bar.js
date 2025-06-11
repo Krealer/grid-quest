@@ -1,6 +1,6 @@
 export function initMenuBar(onSave, onLoad) {
-  const saveBtn = document.querySelector('.save-tab');
-  const loadBtn = document.querySelector('.load-tab');
+  const saveBtn = document.querySelector('#menu-bar .save-tab');
+  const loadBtn = document.querySelector('#menu-bar .load-tab');
   if (saveBtn && typeof onSave === 'function') {
     saveBtn.addEventListener('click', onSave);
   }
@@ -8,7 +8,7 @@ export function initMenuBar(onSave, onLoad) {
     loadBtn.addEventListener('click', onLoad);
   }
 
-  const bar = document.getElementById('ui-bar');
+  const bar = document.getElementById('menu-bar');
   function updateLayout() {
     if (!bar) return;
     if (window.innerWidth < 480) {
