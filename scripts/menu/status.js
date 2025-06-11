@@ -54,7 +54,7 @@ export function updateStatusPanel() {
     }
     equipList.appendChild(row);
   });
-  if (player.templeSetActive) {
+  if (player.hasTemplePassive) {
     const row = document.createElement('div');
     row.classList.add('status-equip');
     row.innerHTML = '<strong>Set Bonus:</strong> Temple Harmony';

@@ -1,5 +1,5 @@
 import { getItemData } from './item_loader.js';
-import { player } from './player.js';
+import { player, updatePassiveEffects } from './player.js';
 import { gameState } from './game_state.js';
 import { getItemBonuses } from './item_stats.js';
 import { checkTempleSet } from './equipment.js';
@@ -226,10 +226,19 @@ export function equipItem(itemId) {
   player.equipment[bonus.slot] = itemId;
   recalcPassiveModifiers();
   checkTempleSet();
+  updatePassiveEffects();
   document.dispatchEvent(new CustomEvent('equipmentChanged'));
   return true;
 }
 
 export function getEquippedItem(slot) {
   return player.equipment ? player.equipment[slot] : null;
+}
+
+export function isEquipped(itemId) {
+  const { baseId } = parseItemId(itemId);
+  const eq = player.equipment || {};
+  return Object.values(eq).some(
+    (eqId) => eqId && parseItemId(eqId).baseId === baseId
+  );
 }

@@ -154,7 +154,7 @@ export async function updateInventoryUI() {
     if (baseId === 'temple_sword' || baseId === 'temple_shell' || baseId === 'temple_ring') {
       if (tooltipText) tooltipText += '\n';
       tooltipText += 'Temple Set piece';
-      if (player.templeSetActive) tooltipText += ' (Set active)';
+      if (player.hasTemplePassive) tooltipText += ' (Set active)';
     }
     if (tooltipText) {
       row.addEventListener('mouseenter', () =>
