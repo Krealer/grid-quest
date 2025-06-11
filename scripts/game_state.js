@@ -12,15 +12,27 @@ export const gameState = {
   settings: loadSettings()
 };
 
-export function saveState() {
-  const data = {
+export function serializeGameState() {
+  return {
     currentMap: gameState.currentMap,
     openedChests: Array.from(gameState.openedChests),
     defeatedEnemies: Array.from(gameState.defeatedEnemies),
     maxHpBonus: gameState.maxHpBonus,
     settings: gameState.settings
   };
-  localStorage.setItem('gridquest.state', JSON.stringify(data));
+}
+
+export function deserializeGameState(data) {
+  if (!data) return;
+  gameState.currentMap = data.currentMap || '';
+  gameState.openedChests = new Set(data.openedChests || []);
+  gameState.defeatedEnemies = new Set(data.defeatedEnemies || []);
+  gameState.maxHpBonus = data.maxHpBonus || 0;
+  gameState.settings = data.settings || {};
+}
+
+export function saveState() {
+  localStorage.setItem('gridquest.state', JSON.stringify(serializeGameState()));
 }
 
 export function loadState() {
@@ -28,11 +40,7 @@ export function loadState() {
   if (!json) return;
   try {
     const data = JSON.parse(json);
-    gameState.currentMap = data.currentMap || '';
-    gameState.openedChests = new Set(data.openedChests || []);
-    gameState.defeatedEnemies = new Set(data.defeatedEnemies || []);
-    gameState.maxHpBonus = data.maxHpBonus || 0;
-    gameState.settings = data.settings || {};
+    deserializeGameState(data);
   } catch {
     // ignore malformed data
   }

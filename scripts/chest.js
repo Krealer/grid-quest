@@ -208,3 +208,11 @@ export async function openChest(id, player) {
   }
   return { item, items, message: config.message || null, unlockedSkills };
 }
+
+export function setOpenedChests(list) {
+  gameState.openedChests = new Set(list || []);
+}
+
+export function getOpenedChests() {
+  return Array.from(gameState.openedChests);
+}
