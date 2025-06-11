@@ -1,3 +1,5 @@
+// Base tile definitions. Ensures ground (G), walls (F) and water (W)
+// remain explicitly defined for map navigation like The Silent Prism.
 export const TILE_DEFS = {
   G: { walkable: true, interactable: false, description: 'Ground' },
   F: { walkable: false, interactable: false, description: 'Wall' },
