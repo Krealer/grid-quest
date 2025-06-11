@@ -52,5 +52,12 @@ export const npcs = [
     map: 'Map07 Maze',
     location: '4,15',
     description: 'Calm informant who answers lore questions, not a trader.'
+  },
+  {
+    id: 'map08_npc',
+    name: 'Threshold Guide',
+    map: 'Map08',
+    location: '10,10',
+    description: 'Offers hints about the path ahead.'
   }
 ];

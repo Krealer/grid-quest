@@ -88,6 +88,14 @@ export const enemies = [
     skills: 'neural_lash, confuse'
   },
   {
+    id: 'ember_fiend',
+    name: 'Ember Fiend',
+    map: 'Map08',
+    location: 'various',
+    drops: 'Ember Residue',
+    skills: 'blazing_claw, flame_pulse'
+  },
+  {
     id: 'shattermind',
     name: 'Shattermind',
     map: 'Map05',

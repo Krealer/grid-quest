@@ -101,6 +101,19 @@ const chestContents = {
     item: 'forgotten_ring',
     message: 'This false dead end conceals a forgotten ring.'
   },
+  'map08:3,3': {
+    item: 'defense_potion_I',
+    message: 'You find a basic Defense Potion.'
+  },
+  'map08:8,12': {
+    item: 'ember_residue',
+    quantity: 2,
+    message: 'The chest holds faintly glowing embers.'
+  },
+  'map08:15,15': {
+    item: 'old_coin',
+    message: 'An aged coin rests within.'
+  },
   'map_warrior:18,18': {
     relic: 'warrior_sigil',
     message: 'You obtained the Warrior Sigil!'
