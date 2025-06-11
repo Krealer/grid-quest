@@ -1,30 +1,35 @@
-const STORAGE_KEY = 'gridquest.saveData';
+const STORAGE_PREFIX = 'game_save_slot_';
 
 import {
   serializeGameState,
   deserializeGameState,
   validateLoadedInventory
 } from './game_state.js';
-import {
-  serializeInventory,
-  inventoryState
-} from './inventory_state.js';
+import { serializeInventory, inventoryState } from './inventory_state.js';
 import { serializeQuestState, deserializeQuestState } from './quest_state.js';
 import { serializePlayer, deserializePlayer } from './player.js';
 import { refreshInventoryDisplay } from '../ui/inventory_menu.js';
 
-export function saveGame() {
+import { gameState } from './game_state.js';
+
+export function saveGame(slot = 1) {
   const data = {
+    timestamp: Date.now(),
     game: serializeGameState(),
     inventory: serializeInventory(),
     quests: serializeQuestState(),
     player: serializePlayer()
   };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  const key = `${STORAGE_PREFIX}${slot}`;
+  localStorage.setItem(key, JSON.stringify(data));
+  if (slot === 2) {
+    console.log('Saved to Slot 2:', gameState);
+  }
 }
 
-export function loadGame() {
-  const json = localStorage.getItem(STORAGE_KEY);
+export function loadGame(slot = 1) {
+  const key = `${STORAGE_PREFIX}${slot}`;
+  const json = localStorage.getItem(key);
   if (!json) return false;
   try {
     const data = JSON.parse(json);

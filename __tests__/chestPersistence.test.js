@@ -35,7 +35,9 @@ let openChest,
 
 beforeEach(async () => {
   jest.resetModules();
-  ({ openChest, isChestOpened, setOpenedChests } = await import('../scripts/chest.js'));
+  ({ openChest, isChestOpened, setOpenedChests } = await import(
+    '../scripts/chest.js'
+  ));
   ({ saveGame, loadGame } = await import('../scripts/save_load.js'));
   ({ getItemCount, inventory } = await import('../scripts/inventory.js'));
   inventory.length = 0;
@@ -49,13 +51,13 @@ test('opened chests remain opened after saving and loading', async () => {
   expect(isChestOpened(chestId)).toBe(true);
   expect(getItemCount('rusty_key')).toBe(1);
 
-  saveGame();
+  saveGame(1);
 
   setOpenedChests([]);
   inventory.length = 0;
   expect(isChestOpened(chestId)).toBe(false);
 
-  const loaded = loadGame();
+  const loaded = loadGame(1);
   expect(loaded).toBe(true);
   expect(isChestOpened(chestId)).toBe(true);
   expect(getItemCount('rusty_key')).toBe(1);
