@@ -43,7 +43,7 @@
   },
   "B": {
     "name": "Bandit",
-    "hp": 60,
+    "hp": 100,
     "stats": {
       "attack": 3,
       "defense": 1
@@ -277,7 +277,7 @@
       "attack": 5,
       "defense": 2
     },
-    "xp": 14,
+    "xp": 30,
     "description": "A creature that thrives in darkness and strikes unseen.",
     "intro": "A Shadow Lurker melts out of the gloom!",
     "portrait": "👽",
@@ -712,12 +712,12 @@
   },
   "crystal_sentry": {
     "name": "Crystal Sentry",
-    "hp": 60,
+    "hp": 100,
     "stats": {
       "attack": 4,
       "defense": 3
     },
-    "xp": 14,
+    "xp": 30,
     "description": "A vigilant prism guardian.",
     "intro": "Facets glint as a Crystal Sentry awakens!",
     "portrait": "🔶",
