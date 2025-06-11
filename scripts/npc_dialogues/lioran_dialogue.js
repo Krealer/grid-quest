@@ -24,7 +24,7 @@ export const lioranDialogue = [
           const { loadItems } = await import('../item_loader.js');
           await loadItems();
           const inv = await import('../inventory.js');
-          inv.giveItem('focus_ring');
+          await inv.giveItem('focus_ring');
         }
       },
       {

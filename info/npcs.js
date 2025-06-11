@@ -36,5 +36,13 @@ export const npcs = [
     name: 'Caelen',
     map: 'Map06',
     description: 'World-weary trader offering a key for magical exchange.'
+  },
+  {
+    id: 'darius_the_conversationalist',
+    name: 'Darius',
+    map: 'Map07 Maze',
+    location: '4,10',
+    items: 'Clarity Shard, Gentle Flask, Dreamleaf',
+    description: 'Affable wanderer who loves long conversations.'
   }
 ];

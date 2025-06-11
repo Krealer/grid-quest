@@ -242,7 +242,10 @@
         "type": "W"
       },
       "G",
-      "G",
+      {
+        "type": "N",
+        "npc": "darius_the_conversationalist"
+      },
       "F",
       "G",
       "G",
