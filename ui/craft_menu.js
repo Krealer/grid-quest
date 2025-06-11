@@ -1,3 +1,6 @@
+import { updateCraftUI } from '../scripts/craft_ui.js';
+import { beginCraftingSession, endCraftingSession } from '../scripts/craft.js';
+
 export function toggleCraftMenu() {
   const overlay = document.getElementById('craft-overlay');
   const grid = document.getElementById('game-grid');
@@ -5,13 +8,12 @@ export function toggleCraftMenu() {
   if (overlay.classList.contains('active')) {
     overlay.classList.remove('active');
     grid.classList.remove('blurred', 'no-interact');
+    endCraftingSession();
   } else {
-    const list = document.getElementById('craft-list');
-    if (list && list.children.length === 0) {
-      list.innerHTML = '<p>No recipes unlocked yet.</p>';
-    }
+    updateCraftUI();
     overlay.classList.add('active');
     grid.classList.add('blurred', 'no-interact');
+    beginCraftingSession();
   }
 }
 
