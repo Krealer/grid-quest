@@ -17,5 +17,5 @@ export async function transitionToMap(target, spawn) {
   overlay.classList.remove('active');
   await delay(500);
   overlay.remove();
-  return cols;
+  return { cols };
 }

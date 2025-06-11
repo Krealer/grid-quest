@@ -93,9 +93,9 @@ export const itemData = {
     id: 'commander_badge',
     name: 'Commander Badge',
     description: 'Proof of defeating the scout commander.',
-    type: 'gear',
-    tags: ['equipable'],
-    category: 'equipable',
+    type: 'key',
+    tags: ['lore'],
+    category: 'key',
     consumable: false,
     stackLimit: 1,
     icon: '🎖️'
