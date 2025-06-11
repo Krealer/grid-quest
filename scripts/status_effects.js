@@ -30,6 +30,20 @@ export const statusEffects = {
       target.stats.defense -= 2;
     }
   },
+  defense_boost: {
+    id: 'defense_boost',
+    name: 'Defense Boost',
+    icon: '🛡️',
+    description: '+2 defense for this battle.',
+    type: 'positive',
+    duration: 99,
+    apply(target) {
+      target.stats.defense += 2;
+    },
+    remove(target) {
+      target.stats.defense -= 2;
+    }
+  },
   focus: {
     id: 'focus',
     name: 'Focus',

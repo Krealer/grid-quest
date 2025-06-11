@@ -7,7 +7,15 @@ import {
   getItemsByTag
 } from './inventory.js';
 import { player, getTotalStats } from './player.js';
-import { useArmorPiece } from './item_logic.js';
+import {
+  useArmorPiece,
+  useHealthPotion,
+  useDefensePotion,
+  useDefensePotionII,
+  useFadedBlade,
+  useArcaneSpark,
+  useManaGem
+} from './item_logic.js';
 import { getItemBonuses } from './item_stats.js';
 import {
   showItemTooltip,
@@ -18,6 +26,9 @@ import {
 import { canReroll, rerollEnchantment } from './forge.js';
 import { enchantments } from './enchantments.js';
 import { getItemData } from './item_loader.js';
+import { gameState } from './game_state.js';
+import { logMessage } from './message_log.js';
+import { markItemUsed } from '../info/items.js';
 import { loadRelics, getRelicData, getOwnedRelics } from './relic_state.js';
 
 let currentCategory = 'items';
@@ -113,6 +124,18 @@ export async function updateInventoryUI() {
       row.appendChild(rbtn);
     }
 
+    const baseData = getItemData(item.id);
+    if (baseData && Array.isArray(baseData.tags) && baseData.tags.includes('combat')) {
+      const ubtn = document.createElement('button');
+      ubtn.classList.add('equip-btn');
+      ubtn.textContent = 'Use';
+      ubtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        handleInventoryItemUse(item.id);
+      });
+      row.appendChild(ubtn);
+    }
+
     let tooltipText = '';
     if (bonus) {
       const effects = [];
@@ -141,6 +164,66 @@ export async function updateInventoryUI() {
     row.innerHTML = `<strong>${data.name}</strong><div class="desc">${data.description || ''}</div>`;
     list.appendChild(row);
   });
+}
+
+function handleInventoryItemUse(id) {
+  const data = getItemData(id);
+  if (!data) return;
+  if (data.useInCombat && !gameState.inCombat) {
+    logMessage('Cannot use this item outside combat.');
+    return;
+  }
+  let used = false;
+  if (id === 'health_potion') {
+    const res = useHealthPotion();
+    if (res) {
+      player.hp = Math.min(player.maxHp, player.hp + res.heal);
+      document.dispatchEvent(
+        new CustomEvent('playerHpChanged', { detail: { hp: player.hp, maxHp: player.maxHp } })
+      );
+      used = true;
+    }
+  } else if (id === 'defense_potion_I') {
+    if (!gameState.inCombat) {
+      logMessage('Cannot use this item outside combat.');
+      return;
+    }
+    const res = useDefensePotion();
+    if (res) used = true;
+  } else if (id === 'defense_potion_II') {
+    if (!gameState.inCombat) {
+      logMessage('Cannot use this item outside combat.');
+      return;
+    }
+    const res = useDefensePotionII();
+    if (res) used = true;
+  } else if (id === 'faded_blade') {
+    if (!gameState.inCombat) {
+      logMessage('Cannot use this item outside combat.');
+      return;
+    }
+    const res = useFadedBlade();
+    if (res) used = true;
+  } else if (id === 'arcane_spark') {
+    if (!gameState.inCombat) {
+      logMessage('Cannot use this item outside combat.');
+      return;
+    }
+    const res = useArcaneSpark();
+    if (res) used = true;
+  } else if (id === 'mana_gem') {
+    if (!gameState.inCombat) {
+      logMessage('Cannot use this item outside combat.');
+      return;
+    }
+    const res = useManaGem();
+    if (res) used = true;
+  }
+  if (used) {
+    markItemUsed(id);
+    logMessage(`Player used ${data.name}!`);
+    updateInventoryUI();
+  }
 }
 
 export function toggleInventoryView() {

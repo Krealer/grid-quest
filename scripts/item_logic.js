@@ -1,8 +1,8 @@
-import { removeItem } from './inventory.js';
+import { consumeItem } from './inventory.js';
 import { increaseDefense, addTempAttack } from './player.js';
 
 export function useArmorPiece() {
-  if (removeItem('armor_piece', 1)) {
+  if (consumeItem('armor_piece', 1)) {
     increaseDefense(1);
     return true;
   }
@@ -10,21 +10,21 @@ export function useArmorPiece() {
 }
 
 export function useDefensePotion() {
-  if (removeItem('defense_potion_I', 1)) {
+  if (consumeItem('defense_potion_I', 1)) {
     return { defense: 1 };
   }
   return null;
 }
 
 export function useDefensePotionII() {
-  if (removeItem('defense_potion_II', 1)) {
+  if (consumeItem('defense_potion_II', 1)) {
     return { defense: 2 };
   }
   return null;
 }
 
 export function useFadedBlade() {
-  if (removeItem('faded_blade', 1)) {
+  if (consumeItem('faded_blade', 1)) {
     addTempAttack(2);
     return { attack: 2 };
   }
@@ -32,8 +32,22 @@ export function useFadedBlade() {
 }
 
 export function useArcaneSpark() {
-  if (removeItem('arcane_spark', 1)) {
+  if (consumeItem('arcane_spark', 1)) {
     return { damage: 6 };
+  }
+  return null;
+}
+
+export function useHealthPotion() {
+  if (consumeItem('health_potion', 1)) {
+    return { heal: 20 };
+  }
+  return null;
+}
+
+export function useManaGem() {
+  if (consumeItem('mana_gem', 1)) {
+    return { refresh: true };
   }
   return null;
 }

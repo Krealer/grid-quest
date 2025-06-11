@@ -2,7 +2,6 @@ import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
 import {
   respawn,
-  addTempDefense,
   increaseMaxHp,
   gainXP,
   getTotalStats
@@ -21,8 +20,11 @@ import {
   useDefensePotion,
   useDefensePotionII,
   useFadedBlade,
-  useArcaneSpark
+  useArcaneSpark,
+  useHealthPotion,
+  useManaGem
 } from './item_logic.js';
+import { logMessage } from './message_log.js';
 import { updateInventoryUI } from './inventory_ui.js';
 import { showDialogue } from './dialogueSystem.js';
 import { gameState } from './game_state.js';
@@ -464,6 +466,20 @@ export async function startCombat(enemy, player) {
     let used = false;
     const data = getItemData(id);
     if (data) log(`Player uses ${data.name}`);
+    if (id === 'health_potion') {
+      const res = useHealthPotion();
+      if (res) {
+        let amount = res.heal;
+        const classBonus = getClassBonuses();
+        if (classBonus.itemHealBonus) amount += classBonus.itemHealBonus;
+        healPlayer(amount);
+        log(`Recovered ${amount} HP!`);
+        logMessage(`Player used ${data.name}!`);
+        used = true;
+      } else {
+        log('No potion available.');
+      }
+    }
     if (id === 'defense_potion_I') {
       const res = useDefensePotion();
       if (res) {
@@ -479,8 +495,9 @@ export async function startCombat(enemy, player) {
         if (classBonus.itemHealBonus) {
           amount += classBonus.itemHealBonus;
         }
-        addTempDefense(amount);
+        applyStatusLogged(player, 'defense_boost');
         log(`Defense increased by ${amount} for this fight!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No potion available.');
@@ -500,8 +517,9 @@ export async function startCombat(enemy, player) {
         if (classBonus.itemHealBonus) {
           amount += classBonus.itemHealBonus;
         }
-        addTempDefense(amount);
+        applyStatusLogged(player, 'defense_boost');
         log(`Defense increased by ${amount} for this fight!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No potion available.');
@@ -511,6 +529,7 @@ export async function startCombat(enemy, player) {
       const res = useFadedBlade();
       if (res) {
         log(`Attack increased by ${res.attack} for this fight!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No blade available.');
@@ -525,10 +544,22 @@ export async function startCombat(enemy, player) {
           damageEnemy(res.damage);
           log(`Arcane energies erupt for ${res.damage} damage!`);
           sparkUsed = true;
+          logMessage(`Player used ${data.name}!`);
           used = true;
         } else {
           log('No spark available.');
         }
+      }
+    }
+    if (id === 'mana_gem') {
+      const res = useManaGem();
+      if (res) {
+        Object.keys(skillCooldowns).forEach((k) => (skillCooldowns[k] = 0));
+        log('Skill cooldowns refreshed!');
+        logMessage(`Player used ${data.name}!`);
+        used = true;
+      } else {
+        log('No gem available.');
       }
     }
     if (used) {
