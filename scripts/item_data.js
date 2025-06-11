@@ -427,6 +427,40 @@ export const itemData = {
     stackLimit: 1,
     icon: '🗝️'
   },
+  clarity_shard: {
+    id: 'clarity_shard',
+    name: 'Clarity Shard',
+    description: 'Use in combat to clear debuffs and gain "Focus".',
+    type: 'combat',
+    tags: ['combat'],
+    category: 'combat',
+    consumable: true,
+    stackLimit: 3,
+    icon: '🔷',
+    useInCombat: true
+  },
+  gentle_flask: {
+    id: 'gentle_flask',
+    name: 'Gentle Flask',
+    description: 'Restores 2 HP outside combat.',
+    type: 'usable',
+    tags: ['usable'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 5,
+    icon: '🥤'
+  },
+  dreamleaf: {
+    id: 'dreamleaf',
+    name: 'Dreamleaf',
+    description: 'Can be used later to mix with herbs for potions.',
+    type: 'material',
+    tags: ['items'],
+    category: 'crafting',
+    consumable: true,
+    stackLimit: 99,
+    icon: '🌿'
+  },
   forgotten_ring: {
     id: 'forgotten_ring',
     name: 'Forgotten Ring',

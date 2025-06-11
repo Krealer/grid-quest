@@ -50,7 +50,11 @@ export const itemDescriptions = {
   maze_key_1: 'Maze Key 1 \u2013 opens the western maze in the Gatepoint Room.',
   maze_key_2:
     'Maze Key 2 \u2013 unlocks the northern gate of the Gatepoint Room.',
-  forgotten_ring: 'Forgotten Ring \u2013 when worn, grants +1 attack.'
+  forgotten_ring: 'Forgotten Ring \u2013 when worn, grants +1 attack.',
+  clarity_shard:
+    'Clarity Shard \u2013 clears debuffs and grants Focus when used in combat.',
+  gentle_flask: 'Gentle Flask \u2013 restores a little health outside combat.',
+  dreamleaf: 'Dreamleaf \u2013 useful for brewing potions later.'
 };
 
 export function markItemUsed(id) {

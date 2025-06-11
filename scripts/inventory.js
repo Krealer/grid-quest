@@ -115,10 +115,14 @@ export function addItemToInventory(item) {
   return addItem(item);
 }
 
-export function giveItem(id, quantity = 1) {
+export async function giveItem(id, quantity = 1) {
+  const { loadItems } = await import('./item_loader.js');
+  await loadItems();
   const data = getItemData(id);
   if (!data) return false;
-  return addItem({ ...data, id, quantity });
+  const added = addItem({ ...data, id, quantity });
+  document.dispatchEvent(new CustomEvent('inventoryUpdated'));
+  return added;
 }
 
 export function hasItem(nameOrId) {
