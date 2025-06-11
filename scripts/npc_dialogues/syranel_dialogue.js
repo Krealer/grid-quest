@@ -11,6 +11,19 @@ export const syranelDialogue = [
         goto: null,
         memoryFlag: 'syranel_request',
         onChoose: () => startQuest('crimson_request')
+      },
+      {
+        label: 'Offer the rotting heart.',
+        goto: 2,
+        condition: state => state.inventory['rotting_heart'] >= 1,
+        onChoose: async () => {
+          await loadItems();
+          removeItem('rotting_heart', 1);
+          const m = await import('../player.js');
+          m.grantSkill('leech');
+        },
+        completeQuest: 'crimson_request',
+        memoryFlag: 'learned_leech'
       }
     ]
   },
