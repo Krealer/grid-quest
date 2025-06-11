@@ -234,7 +234,11 @@
       "F",
       "F",
       "F",
-      "F",
+      {
+        "type": "C",
+        "key": "temple_chest_key",
+        "consumeItem": true
+      },
       "F",
       "F",
       "F"

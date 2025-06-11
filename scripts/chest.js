@@ -114,6 +114,10 @@ const chestContents = {
     item: 'old_coin',
     message: 'An aged coin rests within.'
   },
+  'map09_floor01:16,10': {
+    item: 'aegis_invocation_scroll',
+    message: 'You discover a sacred scroll hidden within.'
+  },
   'map_warrior:18,18': {
     relic: 'warrior_sigil',
     message: 'You obtained the Warrior Sigil!'

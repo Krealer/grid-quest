@@ -151,6 +151,22 @@ const skillDefs = {
       log('You steel yourself against attacks.');
     }
   },
+  aegisInvocation: {
+    id: 'aegisInvocation',
+    name: 'Aegis Invocation',
+    icon: '🛡️',
+    description:
+      'Gain a barrier equal to half your max HP and immunity to Weakened for 3 turns.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 4,
+    unlockCondition: { item: 'aegis_invocation_scroll' },
+    effect({ applyStatus, player, log }) {
+      applyStatus(player, 'aegis_barrier', Infinity);
+      applyStatus(player, 'weaken_immunity', 3);
+      log('A powerful aegis surrounds you.');
+    }
+  },
   focusMind: {
     id: 'focusMind',
     name: 'Focus',
