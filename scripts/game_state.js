@@ -1,3 +1,5 @@
+import { loadSettings } from './settingsManager.js';
+
 export const gameState = {
   currentMap: '',
   openedChests: new Set(),
@@ -6,7 +8,8 @@ export const gameState = {
   maxHpBonus: 0,
   isDead: false,
   lastEnemyPos: null,
-  inCombat: false
+  inCombat: false,
+  settings: loadSettings()
 };
 
 export function saveState() {
@@ -15,6 +18,7 @@ export function saveState() {
     openedChests: Array.from(gameState.openedChests),
     defeatedEnemies: Array.from(gameState.defeatedEnemies),
     maxHpBonus: gameState.maxHpBonus,
+    settings: gameState.settings
   };
   localStorage.setItem('gridquest.state', JSON.stringify(data));
 }
@@ -28,6 +32,7 @@ export function loadState() {
     gameState.openedChests = new Set(data.openedChests || []);
     gameState.defeatedEnemies = new Set(data.defeatedEnemies || []);
     gameState.maxHpBonus = data.maxHpBonus || 0;
+    gameState.settings = data.settings || {};
   } catch {
     // ignore malformed data
   }

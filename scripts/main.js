@@ -18,6 +18,7 @@ import { showDialogue } from './dialogueSystem.js';
 import { handleTileInteraction } from './interaction.js';
 import { isMovementDisabled } from './movement.js';
 import { hasCodeFile, hasItem } from './inventory.js';
+import { initMobileCenter } from './mobile_ui.js';
 import { craftState } from './craft_state.js';
 import { movePlayerTo, spawnEnemy } from './map.js';
 import { npcModules } from './npc/index.js';
@@ -38,8 +39,10 @@ import { saveGame, loadGame } from './save_system.js';
 import {
   loadSettings,
   saveSettings,
-  applySettings
+  applySettings,
+  DEFAULT_SETTINGS
 } from './settingsManager.js';
+import { loadLanguage } from './language_loader.js';
 
 // Inventory contents are managed in inventory.js
 
@@ -76,7 +79,9 @@ function handleTileClick(e, player, container, cols) {
     await onStepEffect(tile.type, player, player.x, player.y);
     updateHpDisplay();
     index++;
-    setTimeout(() => requestAnimationFrame(step), 150);
+    const delayMap = { slow: 300, normal: 150, fast: 75 };
+    const delay = delayMap[settings.movementSpeed] || 150;
+    setTimeout(() => requestAnimationFrame(step), delay);
   }
   requestAnimationFrame(step);
 }
@@ -104,9 +109,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   const settingsClose = settingsOverlay.querySelector('.close-btn');
   const saveTab = document.querySelector('.save-tab');
   const loadTab = document.querySelector('.load-tab');
-  const soundToggle = document.getElementById('sound-toggle');
-  const scaleSelect = document.getElementById('ui-scale');
-  const animToggle = document.getElementById('anim-toggle');
+  const coordsToggle = document.getElementById('coords-toggle');
+  const moveSelect = document.getElementById('move-speed');
+  const combatSelect = document.getElementById('combat-speed');
+  const colorblindToggle = document.getElementById('colorblind-toggle');
+  const labelToggle = document.getElementById('label-toggle');
+  const dialogueToggle = document.getElementById('dialogue-toggle');
+  const langSelect = document.getElementById('language-select');
+  const centerToggle = document.getElementById('center-toggle');
+  const resetBtn = document.getElementById('reset-settings');
   initInventoryUI();
   initPlayerDisplay();
   updateHpDisplay();
@@ -116,11 +127,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   let settings = loadSettings();
   applySettings(settings);
-  soundToggle.checked = settings.sound;
-  scaleSelect.value = settings.scale;
-  animToggle.checked = settings.animations;
+  coordsToggle.checked = settings.gridCoordinates;
+  moveSelect.value = settings.movementSpeed;
+  combatSelect.value = settings.combatSpeed;
+  colorblindToggle.checked = settings.colorblind;
+  labelToggle.checked = settings.tileLabels;
+  dialogueToggle.checked = settings.dialogueAnim;
+  langSelect.value = settings.language;
+  centerToggle.checked = settings.centerMode;
+  loadLanguage(settings.language);
 
   router.init(container, player);
+  initMobileCenter(container);
   initSkillSystem(player);
   initPassiveSystem(player);
   initInfoPanel();
@@ -206,21 +224,65 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (e.target === settingsOverlay) hideSettings();
   });
 
-  soundToggle.addEventListener('change', () => {
-    settings.sound = soundToggle.checked;
-    saveSettings(settings);
-  });
-
-  scaleSelect.addEventListener('change', () => {
-    settings.scale = scaleSelect.value;
+  coordsToggle.addEventListener('change', () => {
+    settings.gridCoordinates = coordsToggle.checked;
     applySettings(settings);
     saveSettings(settings);
   });
 
-  animToggle.addEventListener('change', () => {
-    settings.animations = animToggle.checked;
+  moveSelect.addEventListener('change', () => {
+    settings.movementSpeed = moveSelect.value;
+    saveSettings(settings);
+  });
+
+  combatSelect.addEventListener('change', () => {
+    settings.combatSpeed = combatSelect.value;
+    saveSettings(settings);
+  });
+
+  colorblindToggle.addEventListener('change', () => {
+    settings.colorblind = colorblindToggle.checked;
     applySettings(settings);
     saveSettings(settings);
+  });
+
+  labelToggle.addEventListener('change', () => {
+    settings.tileLabels = labelToggle.checked;
+    applySettings(settings);
+    saveSettings(settings);
+  });
+
+  dialogueToggle.addEventListener('change', () => {
+    settings.dialogueAnim = dialogueToggle.checked;
+    saveSettings(settings);
+  });
+
+  langSelect.addEventListener('change', () => {
+    settings.language = langSelect.value;
+    saveSettings(settings);
+    loadLanguage(settings.language);
+  });
+
+  centerToggle.addEventListener('change', () => {
+    settings.centerMode = centerToggle.checked;
+    saveSettings(settings);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (confirm('Reset all settings?')) {
+      settings = { ...DEFAULT_SETTINGS };
+      saveSettings(settings);
+      applySettings(settings);
+      coordsToggle.checked = settings.gridCoordinates;
+      moveSelect.value = settings.movementSpeed;
+      combatSelect.value = settings.combatSpeed;
+      colorblindToggle.checked = settings.colorblind;
+      labelToggle.checked = settings.tileLabels;
+      dialogueToggle.checked = settings.dialogueAnim;
+      langSelect.value = settings.language;
+      centerToggle.checked = settings.centerMode;
+      loadLanguage(settings.language);
+    }
   });
 
   saveTab.addEventListener('click', () => {

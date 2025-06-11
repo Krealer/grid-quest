@@ -1363,3 +1363,32 @@ body {
 #message-log div + div {
   margin-top: 4px;
 }
+
+/* Accessibility additions */
+#game-grid.show-labels .tile::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: center;
+}
+
+#game-grid.colorblind .trap-light {
+  background-color: #dca;
+}
+#game-grid.colorblind .trap-dark {
+  background-color: #f94;
+}
+#game-grid.colorblind .water {
+  background-color: #39f;
+}
+
+.reset-btn {
+  display: block;
+  margin: 12px auto 0;
+}
