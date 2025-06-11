@@ -385,34 +385,29 @@ export const enemySkills = {
     id: 'prism_shot',
     name: 'Prism Shot',
     icon: '🔶',
-    description: 'Deals 6 damage and inflicts Weakened.',
+    description: '50 magic damage that lowers the caster\'s defense by 30.',
     category: 'offensive',
     cost: 0,
     cooldown: 0,
-    aiType: 'status',
-    applies: ['weakened'],
-    statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
-    effect({ enemy, player, damagePlayer, applyStatus, log }) {
-      const atk = enemy.stats?.attack || 0;
-      const dmg = 6 + atk + (enemy.tempAttack || 0);
-      const applied = damagePlayer(dmg);
-      applyStatus(player, 'weakened', 2);
-      log(`${enemy.name} fires a prism shot for ${applied} damage!`);
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const applied = damagePlayer(50);
+      enemy.stats.defense = (enemy.stats?.defense || 0) - 30;
+      log(`${enemy.name} releases a blinding prism shot for ${applied} damage!`);
     }
   },
   refract_guard: {
     id: 'refract_guard',
     name: 'Refract Guard',
     icon: '🔷',
-    description: 'Reduces damage taken next turn.',
+    description: 'Permanently increases defense by 1.',
     category: 'defensive',
     cost: 0,
     cooldown: 0,
     aiType: 'buff',
-    effect({ enemy, log, activateEnemyGuard }) {
-      enemy.tempDefense = (enemy.tempDefense || 0) + 1;
-      if (activateEnemyGuard) activateEnemyGuard();
-      log(`${enemy.name} refracts incoming attacks! (+1 defense)`);
+    effect({ enemy, log }) {
+      enemy.stats.defense = (enemy.stats?.defense || 0) + 1;
+      log(`${enemy.name}'s facets harden! (+1 defense)`);
     }
   },
   neural_lash: {

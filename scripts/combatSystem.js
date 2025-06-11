@@ -782,7 +782,14 @@ export async function startCombat(enemy, player) {
     const behavior = enemy.behavior || 'balanced';
     const special = isElite(enemy) || isBoss(enemy);
 
-    if (enemy.cycleSkills && list.length) {
+    if (enemy.id === 'crystal_sentry') {
+      const currentDef = enemy.stats?.defense || 0;
+      if (currentDef < 20) {
+        skill = getEnemySkill('refract_guard');
+      } else {
+        skill = getEnemySkill('prism_shot');
+      }
+    } else if (enemy.cycleSkills && list.length) {
       const idx = enemy.skillIndex || 0;
       skill = list[idx % list.length];
       enemy.skillIndex = (idx + 1) % list.length;
