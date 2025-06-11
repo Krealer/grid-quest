@@ -181,7 +181,9 @@ export function getItemsByTag(tag) {
 export function getItemsByCategory(category) {
   return inventory.filter((it) => {
     const data = getItemData(it.id);
-    return data && data.category === category;
+    if (!data) return false;
+    const cat = data.category || 'general';
+    return cat === category;
   });
 }
 
