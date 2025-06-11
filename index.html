@@ -12,19 +12,18 @@
   </head>
   <body>
     <div id="game-grid"></div>
+    <div id="menu-bar">
+      <div class="tab settings-tab">Settings</div>
+      <div class="tab menu-tab">Menu</div>
+      <div class="tab inventory-tab">Inventory</div>
+      <div class="tab craft-tab" style="display: none">Craft</div>
+      <div class="tab save-tab">Save</div>
+      <div class="tab load-tab">Load</div>
+    </div>
     <div id="ui-bar">
       <div id="hp-display"></div>
       <div id="defense-display"></div>
       <div id="xp-display"></div>
-      <div class="tab settings-tab">Settings</div>
-      <div class="tab inventory-tab">Inventory</div>
-      <div class="tab craft-tab" style="display: none">Craft</div>
-      <div class="tab quests-tab">Quests</div>
-      <div class="tab status-tab">Status</div>
-      <div class="tab null-tab disabled">The Null Factor</div>
-      <div class="tab info-tab">Info</div>
-      <div class="tab save-tab">Save</div>
-      <div class="tab load-tab">Load</div>
     </div>
     <div id="inventory-overlay" class="inventory-overlay">
       <div class="inventory-content">
@@ -40,6 +39,19 @@
         </div>
         <div id="inventory-list"></div>
         <div id="forge-log" class="forge-log"></div>
+      </div>
+    </div>
+    <div id="menu-overlay" class="menu-overlay">
+      <div class="menu-content">
+        <button class="close-btn">&times;</button>
+        <div class="menu-buttons">
+          <div class="tab guide-tab">Guide</div>
+          <div class="tab info-tab">Info</div>
+          <div class="tab quests-tab">Quest</div>
+          <div class="tab status-tab">Status Panel</div>
+          <div class="tab null-tab">The Null Factor</div>
+        </div>
+        <div id="menu-stats"></div>
       </div>
     </div>
     <div id="craft-overlay" class="craft-overlay">
@@ -148,8 +160,12 @@
             <option value="ja">日本語</option>
           </select>
         </label>
-        <label class="setting-row" title="Keeps the player centered on screen when using a phone in portrait orientation.">
-          <input type="checkbox" id="center-toggle" /> Center Mode (Mobile Portrait Only)
+        <label
+          class="setting-row"
+          title="Keeps the player centered on screen when using a phone in portrait orientation."
+        >
+          <input type="checkbox" id="center-toggle" /> Center Mode (Mobile
+          Portrait Only)
         </label>
         <button id="reset-settings" class="reset-btn">
           Reset All Settings
