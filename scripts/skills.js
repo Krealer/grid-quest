@@ -21,6 +21,7 @@ const skillDefs = {
     name: 'Guard',
     icon: '🛡️',
     description: 'Reduce damage from the next attack.',
+    silenceExempt: true,
     cost: 0,
     cooldown: 0,
     effect({ activateGuard, log }) {

@@ -7,7 +7,8 @@ export function setupTabs(overlay) {
   const itemContainer = overlay.querySelector('.item-buttons');
   const skillsTabBtn = overlay.querySelector('.skills-tab');
   const itemsTabBtn = overlay.querySelector('.items-tab');
-  if (!skillContainer || !itemContainer || !skillsTabBtn || !itemsTabBtn) return;
+  if (!skillContainer || !itemContainer || !skillsTabBtn || !itemsTabBtn)
+    return;
 
   function showSkills() {
     skillContainer.classList.remove('hidden');
@@ -36,7 +37,7 @@ export function updateStatusUI(overlay, player, enemy) {
   if (!playerList || !enemyList) return;
   playerList.innerHTML = '';
   enemyList.innerHTML = '';
-  getStatusList(player).forEach(s => {
+  getStatusList(player).forEach((s) => {
     const ef = getStatusEffect(s.id);
     const span = document.createElement('span');
     span.className = 'effect';
@@ -45,7 +46,7 @@ export function updateStatusUI(overlay, player, enemy) {
     span.textContent = `${icon}${ef?.name || s.id} (${s.remaining})`;
     playerList.appendChild(span);
   });
-  getStatusList(enemy).forEach(s => {
+  getStatusList(enemy).forEach((s) => {
     const ef = getStatusEffect(s.id);
     const span = document.createElement('span');
     span.className = 'effect';
@@ -57,25 +58,27 @@ export function updateStatusUI(overlay, player, enemy) {
 }
 
 export function renderSkillList(container, skills, onClick) {
-  if (!container) return;
+  if (!container) return {};
   container.innerHTML = '';
-  skills.forEach(skill => {
+  const map = {};
+  skills.forEach((skill) => {
     const btn = document.createElement('button');
     const effects = [];
     if (Array.isArray(skill.statuses)) {
-      skill.statuses.forEach(s => {
+      skill.statuses.forEach((s) => {
         const ef = getStatusEffect(s.id);
         if (ef) effects.push(ef.description);
       });
     }
     if (Array.isArray(skill.cleanse)) {
       const names = skill.cleanse
-        .map(id => getStatusEffect(id)?.name || id)
+        .map((id) => getStatusEffect(id)?.name || id)
         .join(', ');
       effects.push(`Removes ${names}`);
     }
     const meta = [];
-    if (typeof skill.cost === 'number' && skill.cost > 0) meta.push(`Cost: ${skill.cost}`);
+    if (typeof skill.cost === 'number' && skill.cost > 0)
+      meta.push(`Cost: ${skill.cost}`);
     if (typeof skill.cooldown === 'number' && skill.cooldown > 0)
       meta.push(`Cooldown: ${skill.cooldown}`);
     const descParts = [skill.description, ...effects, ...meta]
@@ -86,6 +89,21 @@ export function renderSkillList(container, skills, onClick) {
     btn.addEventListener('click', () => onClick(skill));
     attachTooltip(btn, skill);
     container.appendChild(btn);
+    map[skill.id] = btn;
+  });
+  return map;
+}
+
+export function setSkillDisabledState(buttonMap, isSilenced, allowed = []) {
+  Object.entries(buttonMap).forEach(([id, btn]) => {
+    if (!btn) return;
+    if (isSilenced && !allowed.includes(id)) {
+      btn.classList.add('disabled');
+      btn.disabled = true;
+    } else {
+      btn.classList.remove('disabled');
+      btn.disabled = false;
+    }
   });
 }
 

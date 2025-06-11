@@ -215,9 +215,10 @@ export const statusEffects = {
     id: 'silence',
     name: 'Silence',
     icon: '🤐',
-    description: 'Cannot use skills for 2 turns.',
+    description: 'Cannot use skills except Guard.',
     type: 'negative',
-    duration: 2
+    duration: 2,
+    allowSkills: ['guard']
   },
   vulnerable: {
     id: 'vulnerable',
