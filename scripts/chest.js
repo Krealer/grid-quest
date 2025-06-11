@@ -69,6 +69,38 @@ const chestContents = {
     item: 'rift_fragment',
     message: 'Inside the obvious chest rests a curious rift fragment.'
   },
+  'map06:2,1': {
+    item: 'stamina_dust',
+    message: 'A simple chest sits near the entrance.'
+  },
+  'map06:18,2': {
+    item: 'skill_token',
+    message: 'You fish out a shining token behind the water.'
+  },
+  'map06:15,5': {
+    item: 'reflect_potion',
+    message: 'Traps surround this chest. Inside is a Reflect Potion.'
+  },
+  'map06:3,13': {
+    item: 'blood_resin',
+    message: 'Tucked at a hallway turn is a vial of blood resin.'
+  },
+  'map06:18,10': {
+    item: 'echo_splinter',
+    message: 'A distant alcove holds a faintly humming splinter.'
+  },
+  'map06:10,6': {
+    item: 'crystal_seed',
+    message: 'In the middle north lies a crystal seed.'
+  },
+  'map06:1,15': {
+    item: 'mana_scroll',
+    message: 'Hidden in a maze corner is a rare mana scroll.'
+  },
+  'map06:3,17': {
+    item: 'forgotten_ring',
+    message: 'This false dead end conceals a forgotten ring.'
+  },
   'map_warrior:18,18': {
     relic: 'warrior_sigil',
     message: 'You obtained the Warrior Sigil!'

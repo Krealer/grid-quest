@@ -32,7 +32,23 @@ export const itemDescriptions = {
   crystal_shard: 'Crystal Shard \u2013 can be used later to upgrade skills.',
   defense_potion_II:
     'Defense Potion II \u2013 grants +2 defense for the current battle.',
-  rift_fragment: 'Rift Fragment \u2013 a mysterious shard sought by scholars.'
+  rift_fragment: 'Rift Fragment \u2013 a mysterious shard sought by scholars.',
+  stamina_dust:
+    'Stamina Dust \u2013 instantly lowers one skill cooldown when used.',
+  skill_token:
+    'Skill Token \u2013 expands your maximum skill slots temporarily.',
+  reflect_potion:
+    'Reflect Potion \u2013 next damage you take bounces back at the attacker.',
+  blood_resin:
+    'Blood Resin \u2013 a rare component for advanced leech recipes.',
+  echo_splinter:
+    'Echo Splinter \u2013 rumor says it unlocks a dialogue option in map07.',
+  crystal_seed:
+    'Crystal Seed \u2013 essential for future item upgrades.',
+  mana_scroll:
+    'Mana Scroll \u2013 completely refreshes all skill cooldowns.',
+  forgotten_ring:
+    'Forgotten Ring \u2013 when worn, grants +1 attack.'
 };
 
 export function markItemUsed(id) {

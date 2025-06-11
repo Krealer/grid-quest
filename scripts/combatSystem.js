@@ -22,7 +22,10 @@ import {
   useFadedBlade,
   useArcaneSpark,
   useHealthPotion,
-  useManaGem
+  useManaGem,
+  useStaminaDust,
+  useReflectPotion,
+  useManaScroll
 } from './item_logic.js';
 import { logMessage } from './message_log.js';
 import { updateInventoryUI } from './inventory_ui.js';
@@ -165,6 +168,7 @@ export async function startCombat(enemy, player) {
   let shieldBlock = false;
   let healUsed = false;
   let sparkUsed = false;
+  let reflectActive = false;
   const skillCooldowns = {};
   let playerTurn = true;
 
@@ -193,6 +197,11 @@ export async function startCombat(enemy, player) {
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
     log(`Player takes ${applied} damage`);
+    if (reflectActive && applied > 0) {
+      damageEnemy(applied);
+      log('Reflected the damage back!');
+      reflectActive = false;
+    }
     return applied;
   }
 
@@ -560,6 +569,40 @@ export async function startCombat(enemy, player) {
         used = true;
       } else {
         log('No gem available.');
+      }
+    }
+    if (id === 'stamina_dust') {
+      const res = useStaminaDust();
+      if (res) {
+        const key = Object.keys(skillCooldowns).find((k) => skillCooldowns[k] > 0);
+        if (key) skillCooldowns[key] = Math.max(0, skillCooldowns[key] - 1);
+        log('One skill cooldown reduced!');
+        logMessage(`Player used ${data.name}!`);
+        used = true;
+      } else {
+        log('No dust available.');
+      }
+    }
+    if (id === 'reflect_potion') {
+      const res = useReflectPotion();
+      if (res) {
+        reflectActive = true;
+        log('You brace for the next attack.');
+        logMessage(`Player used ${data.name}!`);
+        used = true;
+      } else {
+        log('No potion available.');
+      }
+    }
+    if (id === 'mana_scroll') {
+      const res = useManaScroll();
+      if (res) {
+        Object.keys(skillCooldowns).forEach((k) => (skillCooldowns[k] = 0));
+        log('All skills ready to use!');
+        logMessage(`Player used ${data.name}!`);
+        used = true;
+      } else {
+        log('No scroll available.');
       }
     }
     if (used) {
