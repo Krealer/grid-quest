@@ -316,6 +316,151 @@ export const enemySkills = {
       log(`${enemy.name} hexes you with weakening magic!`);
     }
   },
+  slam: {
+    id: 'slam',
+    name: 'Slam',
+    icon: '🔨',
+    description: 'Basic smash dealing 8 damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 8 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} slams for ${applied} damage!`);
+    }
+  },
+  grasp: {
+    id: 'grasp',
+    name: 'Grasp',
+    icon: '✋',
+    description: 'Deals 5 damage and slows the target.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['slowed'],
+    statuses: [{ target: 'player', id: 'slowed', duration: 2 }],
+    effect({ enemy, damagePlayer, applyStatus, log, player }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 5 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'slowed', 2);
+      log(`${enemy.name} grasps you for ${applied} damage!`);
+    }
+  },
+  shard_spike: {
+    id: 'shard_spike',
+    name: 'Shard Spike',
+    icon: '❄️',
+    description: 'Piercing strike that ignores some defense.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 7 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg + 1);
+      log(`${enemy.name} launches a shard spike for ${applied} damage!`);
+    }
+  },
+  reflect_shell: {
+    id: 'reflect_shell',
+    name: 'Reflect Shell',
+    icon: '🛡️',
+    description: 'Raises defense by 2 for 3 turns.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'buff',
+    effect({ enemy, log }) {
+      enemy.tempDefense = (enemy.tempDefense || 0) + 2;
+      log(`${enemy.name}'s crystals harden! (+2 defense)`);
+    }
+  },
+  neural_lash: {
+    id: 'neural_lash',
+    name: 'Neural Lash',
+    icon: '🔱',
+    description: 'Psychic strike dealing 9 damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 9 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} lashes your mind for ${applied} damage!`);
+    }
+  },
+  confuse: {
+    id: 'confuse',
+    name: 'Confuse',
+    icon: '💫',
+    description: 'Befuddles the foe with psychic noise.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['confused'],
+    statuses: [{ target: 'player', id: 'confused', duration: 2 }],
+    effect({ player, applyStatus, log, enemy }) {
+      applyStatus(player, 'confused', 2);
+      log(`${enemy.name} warps your senses!`);
+    }
+  },
+  fracture_wave: {
+    id: 'fracture_wave',
+    name: 'Fracture Wave',
+    icon: '🌊',
+    description: 'Pulse of mental force.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 8 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} emits a fracture wave for ${applied} damage!`);
+    }
+  },
+  mind_spike: {
+    id: 'mind_spike',
+    name: 'Mind Spike',
+    icon: '🧠',
+    description: 'High magic damage to a single target.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = 12 + atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} drives a mind spike for ${applied} damage!`);
+    }
+  },
+  echo_wound: {
+    id: 'echo_wound',
+    name: 'Echo Wound',
+    icon: '🔔',
+    description: 'Inflicts Fragile for 3 turns.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['fragile'],
+    statuses: [{ target: 'player', id: 'fragile', duration: 3 }],
+    effect({ player, applyStatus, log, enemy }) {
+      applyStatus(player, 'fragile', 3);
+      log(`${enemy.name} rends your psyche, leaving you fragile!`);
+    }
+  },
   silence_wave: {
     id: 'silence_wave',
     name: 'Silencing Wave',

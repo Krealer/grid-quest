@@ -588,5 +588,57 @@
         "quantity": 1
       }
     ]
+  },
+  "cracked_husk": {
+    "name": "Cracked Husk",
+    "hp": 50,
+    "stats": { "attack": 4, "defense": 1 },
+    "xp": 15,
+    "description": "Weak undead remnant held together by crystal.",
+    "intro": "A cracked husk lurches toward you!",
+    "portrait": "🦴",
+    "skills": ["slam", "grasp"],
+    "behavior": "aggressive",
+    "drops": [{ "item": "flesh_crystal", "quantity": 1 }]
+  },
+  "crystarch": {
+    "name": "Crystarch",
+    "hp": 65,
+    "stats": { "attack": 5, "defense": 3 },
+    "xp": 16,
+    "description": "A crystalline guardian that shimmers menacingly.",
+    "intro": "Shards swirl as a Crystarch assembles!",
+    "portrait": "🔹",
+    "skills": ["shard_spike", "reflect_shell"],
+    "behavior": "aggressive",
+    "drops": [{ "item": "crystal_dust", "quantity": 1 }]
+  },
+  "pain_lattice": {
+    "name": "Pain Lattice",
+    "hp": 70,
+    "stats": { "attack": 5, "defense": 2 },
+    "xp": 18,
+    "description": "Psychic construct that lashes out with torment.",
+    "intro": "Mental energy weaves into a lattice of agony!",
+    "portrait": "🕸️",
+    "skills": ["neural_lash", "confuse"],
+    "behavior": "aggressive",
+    "drops": [{ "item": "psy_fiber", "quantity": 1 }]
+  },
+  "shattermind": {
+    "name": "Shattermind",
+    "hp": 130,
+    "stats": { "attack": 7, "defense": 4 },
+    "xp": 30,
+    "description": "A rogue psyche that fractures reality around it.",
+    "intro": "The air screams as Shattermind materializes!",
+    "portrait": "💠",
+    "skills": ["fracture_wave", "mind_spike", "echo_wound"],
+    "cycleSkills": true,
+    "behavior": "aggressive",
+    "drops": [
+      { "item": "rift_eye", "quantity": 1 },
+      { "item": "memory_gem", "quantity": 1 }
+    ]
   }
 }

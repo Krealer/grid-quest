@@ -268,6 +268,28 @@ export const statusEffects = {
     remove(target) {
       target.noHealing = false;
     }
+  },
+  fragile: {
+    id: 'fragile',
+    name: 'Fragile',
+    icon: '🥀',
+    description: 'Take 25% more damage.',
+    type: 'negative',
+    duration: 3,
+    apply(target) {
+      target.damageTakenMod = (target.damageTakenMod || 1) + 0.25;
+    },
+    remove(target) {
+      target.damageTakenMod -= 0.25;
+    }
+  },
+  confused: {
+    id: 'confused',
+    name: 'Confused',
+    icon: '❓',
+    description: '20% chance to lose a turn.',
+    type: 'negative',
+    duration: 2
   }
 };
 

@@ -375,6 +375,14 @@ export async function startCombat(enemy, player) {
       setTimeout(enemyTurn, 300);
       return;
     }
+    if (hasStatus(player, 'confused') && Math.random() < 0.33) {
+      log('Confused! You hesitate in bewilderment.');
+      tickStatusEffects(player, log);
+      tickStatusEffects(enemy, log);
+      playerTurn = false;
+      setTimeout(enemyTurn, 300);
+      return;
+    }
     if (hasStatus(player, 'unstable') && Math.random() < 0.25) {
       log('Unstable! Your action falters.');
       tickStatusEffects(player, log);
@@ -596,6 +604,15 @@ export async function startCombat(enemy, player) {
     if (enemyHp <= 0) return;
     if (hasStatus(enemy, 'paralyzed') && Math.random() < 0.5) {
       log(`${enemy.name} is paralyzed and cannot act!`);
+      tickStatusEffects(player, log);
+      tickStatusEffects(enemy, log);
+      playerTurn = true;
+      tickCooldowns();
+      updateSkillDisableState();
+      return;
+    }
+    if (hasStatus(enemy, 'confused') && Math.random() < 0.33) {
+      log(`${enemy.name} looks confused and hesitates!`);
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       playerTurn = true;

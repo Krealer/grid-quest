@@ -54,5 +54,37 @@ export const enemies = [
     location: '12,10',
     drops: 'Void Residue',
     skills: 'silence_wave'
+  },
+  {
+    id: 'cracked_husk',
+    name: 'Cracked Husk',
+    map: 'Map05',
+    location: '6,3',
+    drops: 'Flesh Crystal',
+    skills: 'slam, grasp'
+  },
+  {
+    id: 'crystarch',
+    name: 'Crystarch',
+    map: 'Map05',
+    location: '14,5',
+    drops: 'Crystal Dust',
+    skills: 'shard_spike, reflect_shell'
+  },
+  {
+    id: 'pain_lattice',
+    name: 'Pain Lattice',
+    map: 'Map05',
+    location: '3,11',
+    drops: 'Psy Fiber',
+    skills: 'neural_lash, confuse'
+  },
+  {
+    id: 'shattermind',
+    name: 'Shattermind',
+    map: 'Map05',
+    location: '8,17',
+    drops: 'Rift Eye, Memory Gem',
+    skills: 'fracture_wave, mind_spike, echo_wound'
   }
 ];
