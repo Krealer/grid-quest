@@ -19,7 +19,7 @@ export async function stepSymbol(symbol) {
     if (symbol === expected) {
       state.index++;
       if (state.index === sequence.length) {
-        solveSealPuzzle();
+        await solveSealPuzzle();
       }
     } else if (sequence.includes(symbol)) {
       state.index = 0;

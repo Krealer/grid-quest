@@ -57,7 +57,9 @@ export const itemDescriptions = {
   clarity_shard:
     'Clarity Shard \u2013 clears debuffs and grants Focus when used in combat.',
   gentle_flask: 'Gentle Flask \u2013 restores a little health outside combat.',
-  dreamleaf: 'Dreamleaf \u2013 useful for brewing potions later.'
+  dreamleaf: 'Dreamleaf \u2013 useful for brewing potions later.',
+  sealing_dust:
+    'Sealing Dust \u2013 mystical powder that dissolves the barrier to Map09.'
 };
 
 export function markItemUsed(id) {
