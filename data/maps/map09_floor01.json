@@ -92,8 +92,8 @@
       "G",
       "G",
       "G",
-      "F",
-      "F",
+      "T",
+      "t",
       {
         "type": "E",
         "enemyId": "temple_warden"
@@ -230,10 +230,10 @@
       "T",
       "G",
       "t",
-      "F",
-      "F",
-      "F",
-      "F",
+      "T",
+      "t",
+      "T",
+      "t",
       {
         "type": "C",
         "key": "temple_chest_key",
@@ -343,7 +343,7 @@
         "type": "E",
         "enemyId": "silent_idol"
       },
-      "F",
+      "t",
       "G",
       "G",
       "G",
@@ -420,12 +420,12 @@
       },
       "G",
       "G",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
-      "F",
+      "t",
+      "T",
+      "t",
+      "T",
+      "t",
+      "T",
       {
         "type": "E",
         "enemyId": "obsidian_disciple"
