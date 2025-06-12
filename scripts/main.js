@@ -54,50 +54,13 @@ import {
 } from './settingsManager.js';
 import { loadLanguage } from './language_loader.js';
 import { initGreeting } from '../ui/greeting.js';
+import { startGame } from './startGame.js';
 
 // Inventory contents are managed in inventory.js
 
 let settings = loadSettings();
 
-let isInBattle = false;
-
-let isMoving = false;
-
-function handleTileClick(e, player, container, cols) {
-  if (isMoving || isInBattle || isMovementDisabled()) return;
-  const target = e.target;
-  if (!target.classList.contains('tile')) return;
-  const x = Number(target.dataset.x);
-  const y = Number(target.dataset.y);
-  const grid = getCurrentGrid();
-  const tileType = grid[y][x].type;
-
-  // Use the centralized tile definitions to determine walkability.
-  if (!isWalkable(tileType)) return;
-
-  const path = findPath(grid, player.x, player.y, x, y);
-  if (path.length === 0) return;
-
-  let index = 0;
-  isMoving = true;
-  async function step() {
-    if (index >= path.length) {
-      isMoving = false;
-      return;
-    }
-    const pos = path[index];
-    stepTo(pos.x, pos.y);
-    router.drawPlayer(player, container, cols);
-    const tile = grid[player.y][player.x];
-    await onStepEffect(tile.type, player, player.x, player.y);
-    updateHpDisplay();
-    index++;
-    const delayMap = { slow: 300, normal: 150, fast: 75 };
-    const delay = delayMap[settings.movementSpeed] || 150;
-    setTimeout(() => requestAnimationFrame(step), delay);
-  }
-  requestAnimationFrame(step);
-}
+const gridState = { cols: 0 };
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
@@ -167,8 +130,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mapName = gameState.currentMap || 'map01';
     try {
       const { cols: newCols } = await router.loadMap(mapName);
-      cols = newCols;
-      initFog(container, cols, isFogEnabled());
+      gridState.cols = newCols;
+      initFog(container, gridState.cols, isFogEnabled());
       if (isFogEnabled()) {
         if (router.getCurrentMapName() === 'map01') {
           revealAll();
@@ -204,7 +167,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateHpDisplay();
   updateDefenseDisplay();
   updateXpDisplay();
-  let cols = 0;
 
   settings = loadSettings();
   applySettings(settings);
@@ -347,106 +309,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  async function startGame() {
-    try {
-      const { cols: newCols } = await router.loadMap('map01');
-      cols = newCols;
-      initFog(container, cols, isFogEnabled());
-      if (isFogEnabled()) {
-        if (router.getCurrentMapName() === 'map01') {
-          revealAll();
-        } else {
-          reveal(player.x, player.y);
-        }
-      }
-      updateHpDisplay();
-      updateXpDisplay();
-
-      container.addEventListener('click', (e) =>
-        handleTileClick(e, player, container, cols)
-      );
-      container.addEventListener('dblclick', async (e) => {
-        if (isInBattle || isMoving || isMovementDisabled()) return;
-        const newCols = await handleTileInteraction(
-          e,
-          player,
-          container,
-          cols,
-          npcModules
-        );
-        if (newCols) {
-          cols = newCols;
-          initFog(container, cols, isFogEnabled());
-          if (isFogEnabled()) {
-            if (router.getCurrentMapName() === 'map01') {
-              revealAll();
-            } else {
-              reveal(player.x, player.y);
-            }
-          }
-          updateHpDisplay();
-        }
-      });
-      document.addEventListener('combatStarted', () => {
-        isInBattle = true;
-      });
-      document.addEventListener('combatEnded', (e) => {
-        isInBattle = false;
-        if (e.detail.enemyHp <= 0) {
-          const enemyId = e.detail.enemy.id;
-          defeatEnemy(enemyId);
-          if (
-            enemyId === 'goblin01' &&
-            !hasItem('goblin_ear') &&
-            !hasItem('goblin_insignia') &&
-            !hasItem('cracked_helmet')
-          ) {
-            const pos = gameState.lastEnemyPos;
-            if (pos) spawnEnemy(pos.x, pos.y, 'ghost_echo');
-          }
-          if (enemyId === 'goblin_scout') {
-            setMemory('scout_defeated');
-            if (
-              isQuestStarted('scout_tracking') &&
-              !isQuestCompleted('scout_tracking')
-            ) {
-              completeQuest('scout_tracking');
-            }
-          }
-          if (enemyId === 'zombie01') {
-            setMemory('flag_zombie_defeated');
-          }
-        }
-      });
-
-      document.addEventListener('playerRespawned', (e) => {
-        cols = e.detail.cols;
-        initFog(container, cols, isFogEnabled());
-        if (isFogEnabled()) {
-          revealAll();
-        }
-        updateHpDisplay();
-        updateDefenseDisplay();
-        updateXpDisplay();
-      });
-      document.addEventListener('playerDefenseChanged', updateDefenseDisplay);
-      document.addEventListener('playerHpChanged', updateHpDisplay);
-      document.addEventListener('playerXpChanged', updateXpDisplay);
-      document.addEventListener('playerLevelUp', updateXpDisplay);
-      document.addEventListener('passivesUpdated', () => {
-        updateHpDisplay();
-        updateDefenseDisplay();
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  const { showGreeting } = initGreeting(startGame);
-  const hasSave = localStorage.getItem('gridquest.state') ||
+  const { showGreeting } = initGreeting(() =>
+    startGame(container, settings, gridState)
+  );
+  const hasSave =
+    localStorage.getItem('gridquest.state') ||
     localStorage.getItem('tutorialComplete');
   if (hasSave) {
-    startGame();
+    startGame(container, settings, gridState);
   } else {
     showGreeting();
   }
