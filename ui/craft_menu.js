@@ -11,6 +11,7 @@ export function toggleCraftMenu() {
     endCraftingSession();
   } else {
     updateCraftUI();
+    overlay.scrollTop = 0;
     overlay.classList.add('active');
     grid.classList.add('blurred', 'no-interact');
     beginCraftingSession();
