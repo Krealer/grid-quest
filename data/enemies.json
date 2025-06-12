@@ -769,5 +769,30 @@
         "quantity": 1
       }
     ]
+  },
+  "runic_sentinel": {
+    "name": "Runic Sentinel",
+    "hp": 160,
+    "stats": {
+      "attack": 6,
+      "defense": 2
+    },
+    "xp": 50,
+    "description": "An ancient guardian of forgotten rites, pulsing with faint magic.",
+    "intro": "Runes flare as the Runic Sentinel awakens!",
+    "portrait": "📜",
+    "skills": [
+      "runic_blast",
+      "sigil_disrupt"
+    ],
+    "cycleSkills": true,
+    "behavior": "aggressive",
+    "boss": true,
+    "drops": [
+      {
+        "item": "sealing_dust",
+        "quantity": 1
+      }
+    ]
   }
 }

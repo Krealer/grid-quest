@@ -884,6 +884,36 @@ export const enemySkills = {
       applyStatus(player, 'paralyzed', 1);
       log(`${enemy.name} invokes a blessed quake for ${applied} damage!`);
     }
+  },
+  runic_blast: {
+    id: 'runic_blast',
+    name: 'Runic Blast',
+    icon: '✨',
+    description: 'Fires a focused glyph of destructive force.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ damagePlayer, log, enemy }) {
+      const applied = damagePlayer(25);
+      log(`${enemy.name} unleashes a runic blast for ${applied} damage!`);
+    }
+  },
+  sigil_disrupt: {
+    id: 'sigil_disrupt',
+    name: 'Sigil Disrupt',
+    icon: '🔮',
+    description: 'Disrupts your stance with arcane pressure.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'status',
+    applies: ['weakened'],
+    statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
+    effect({ player, applyStatus, log, enemy }) {
+      applyStatus(player, 'weakened', 2);
+      log(`${enemy.name} disrupts your stance with arcane pressure!`);
+    }
   }
 };
 

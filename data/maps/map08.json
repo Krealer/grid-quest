@@ -132,7 +132,10 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "runic_sentinel"
+      },
       "G",
       "G",
       "G",

@@ -131,5 +131,19 @@ export const skillData = {
     damage: 0,
     accuracy: 1,
     description: 'Leaves the target Fragile for a short time.'
+  },
+  runic_blast: {
+    id: 'runic_blast',
+    name: 'Runic Blast',
+    damage: 25,
+    accuracy: 1,
+    description: 'Fires a focused glyph of destructive force.'
+  },
+  sigil_disrupt: {
+    id: 'sigil_disrupt',
+    name: 'Sigil Disrupt',
+    damage: 0,
+    accuracy: 1,
+    description: 'Disrupts your stance with arcane pressure.'
   }
 };
