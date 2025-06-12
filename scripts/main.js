@@ -2,7 +2,7 @@ import { getCurrentGrid, isFogEnabled } from './mapLoader.js';
 import { onStepEffect, isWalkable } from './tile_type.js';
 import { toggleInventoryView, initInventoryUI } from './inventory_ui.js';
 import { toggleQuestLog } from './quest_log.js';
-import { toggleCraftMenu, initCraftMenu } from '../ui/craft_menu.js';
+import { toggleCraftMenu, initCraftMenu } from '../ui/crafting_menu_new.js';
 import { player, stepTo, updateStatsFromLevel } from './player.js';
 import { initFog, reveal, revealAll } from './fog_system.js';
 import { loadEnemyData, defeatEnemy } from './enemy.js';
