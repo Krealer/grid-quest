@@ -101,15 +101,17 @@ export async function showDialogueWithChoices(keyOrText, choices = []) {
   document.body.appendChild(overlay);
   const textEl = overlay.querySelector('.dialogue-text');
   const choicesEl = overlay.querySelector('.dialogue-choices');
+  let choicesRendered = false;
 
   let index = 0;
   const speed = gameState.settings?.dialogueAnim === false ? 0 : 30;
+  let typingTimeout;
 
   function typeNext() {
     if (index < text.length) {
       textEl.textContent += text.charAt(index);
       index++;
-      setTimeout(typeNext, speed);
+      typingTimeout = setTimeout(typeNext, speed);
     } else {
       showChoices();
     }
@@ -118,6 +120,7 @@ export async function showDialogueWithChoices(keyOrText, choices = []) {
 
   function finishTyping() {
     if (index < text.length) {
+      clearTimeout(typingTimeout);
       textEl.textContent = text;
       index = text.length;
       showChoices();
@@ -178,6 +181,8 @@ export async function showDialogueWithChoices(keyOrText, choices = []) {
   }
 
   function showChoices() {
+    if (choicesRendered) return;
+    choicesRendered = true;
     choicesEl.style.display = 'flex';
     choices.forEach((choice, i) => {
       const btn = document.createElement('button');
