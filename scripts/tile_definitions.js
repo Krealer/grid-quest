@@ -5,7 +5,12 @@ export const TILE_INFO = {
   t: { color: '#aaaaaa', shape: 'square', walkable: true, interactable: false },
   T: { color: '#444444', shape: 'square', walkable: true, interactable: false },
   C: { color: '#d4af37', shape: 'square', walkable: false, interactable: true },
-  c: { color: '#8b4513', shape: 'square', walkable: true, interactable: false },
+  c: {
+    color: '#b08d57',
+    shape: 'square',
+    walkable: false,
+    interactable: false
+  },
   D: { color: '#5a381e', shape: 'square', walkable: false, interactable: true },
   N: { color: '#9b59b6', shape: 'circle', walkable: false, interactable: true },
   n: { color: '#ffffff', shape: 'circle', walkable: false, interactable: true },
