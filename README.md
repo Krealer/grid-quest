@@ -5,7 +5,7 @@
 ## Features
 
 - Turn based combat on a grid layout
-- Inventory management and crafting
+- Inventory management
 - Quests with an in game log
 - Player stats and leveling
 - Completely client side so it works with GitHub Pages
@@ -41,18 +41,17 @@ Refresh the browser after editing files in `scripts/`, `style/` or `data/`. Node
 npm install
 ```
 
-
 ### Available commands
 
 - `npm run lint` – check code with ESLint
 - `npm run format` – format files using Prettier
 - `npm test` – run Jest tests (none included by default)
+
 ## Deploying to GitHub Pages
 
 1. Push your latest code to the `main` branch (or another branch you wish to publish).
 2. In the repository settings, enable **GitHub Pages** and select that branch as the source.
 3. Once the Pages build completes, access the game at `https://<username>.github.io/<repository>/`.
-
 
 ## Contributing
 
@@ -67,6 +66,7 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 ## Known Issues
 
 5. Large Untested Modules
+
    - Some JavaScript files (e.g., `scripts/main.js`) are several hundred lines long, making them hard to maintain and test.
 
 6. Manual Asset Loading

@@ -1,4 +1,3 @@
-import { unlockBlueprint } from './craft_state.js';
 import { upgradeItem, rerollEnchantment } from './forge.js';
 import { addRelic } from './relic_state.js';
 import { addItem } from './inventory.js';
@@ -65,11 +64,6 @@ export function endSession() {
 }
 
 export const dialogueState = state;
-
-// Allow dialogue options to grant blueprints as rewards
-export function giveBlueprint(id) {
-  if (id) unlockBlueprint(id);
-}
 
 export async function triggerUpgrade(id) {
   if (id) await upgradeItem(id);

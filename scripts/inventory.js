@@ -3,7 +3,6 @@ import { player, updatePassiveEffects } from './player.js';
 import { gameState } from './game_state.js';
 import { getItemBonuses } from './item_stats.js';
 import { checkTempleSet } from './equipment.js';
-import { unlockBlueprint } from './craft_state.js';
 import { discover } from './player_memory.js';
 import { isRelic } from './relic_state.js';
 
@@ -92,10 +91,6 @@ export function addItem(item) {
     description: desc,
     quantity: Math.min(qty, limit)
   });
-  if (item.id && item.id.startsWith('blueprint_')) {
-    const base = item.id.replace('blueprint_', '');
-    unlockBlueprint(`${base}_blueprint`);
-  }
   discover('items', parseItemId(item.id).baseId);
   document.dispatchEvent(new CustomEvent('inventoryUpdated'));
   return true;
