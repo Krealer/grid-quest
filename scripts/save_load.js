@@ -3,14 +3,14 @@ const STORAGE_PREFIX = 'game_save_slot_';
 import {
   serializeGameState,
   deserializeGameState,
-  validateLoadedInventory
+  validateLoadedInventory,
+  gameState
 } from './game_state.js';
 import { serializeInventory, inventoryState } from './inventory_state.js';
 import { serializeQuestState, deserializeQuestState } from './quest_state.js';
 import { serializePlayer, deserializePlayer, player } from './player.js';
 import { refreshInventoryDisplay } from '../ui/inventory_menu.js';
 
-import { gameState } from './game_state.js';
 import { inventory } from './inventory.js';
 
 export function saveGame(slot = 1) {
@@ -25,9 +25,6 @@ export function saveGame(slot = 1) {
   };
   const key = `${STORAGE_PREFIX}${slot}`;
   localStorage.setItem(key, JSON.stringify(data));
-  if (slot === 2) {
-    console.log('Saved to Slot 2:', gameState);
-  }
 }
 
 export function loadGame(slot = 1) {
@@ -38,8 +35,6 @@ export function loadGame(slot = 1) {
     const data = JSON.parse(json);
     deserializeGameState(data.game || {});
     inventoryState.loadFromObject(data.inventory || {});
-    console.log('Loaded inventory:', inventory);
-    console.log('Equipped:', player.equipment);
     refreshInventoryDisplay();
     validateLoadedInventory(data.inventory?.items || []);
     deserializeQuestState(data.quests || {});
