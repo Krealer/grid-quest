@@ -118,9 +118,17 @@ const chestContents = {
     item: 'old_coin',
     message: 'An aged coin rests within.'
   },
+  'map09_floor01:4,5': {
+    item: 'ritual_oil',
+    message: 'You find a vial of ritual oil.'
+  },
   'map09_floor01:16,10': {
     item: 'aegis_invocation_scroll',
     message: 'You discover a sacred scroll hidden within.'
+  },
+  'map09_floor01:15,13': {
+    item: 'polished_shard',
+    message: 'You uncover a gleaming polished shard.'
   },
   'map09_floor02:3,8': {
     item: 'temple_chest_key',
