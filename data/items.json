@@ -15,14 +15,6 @@
     "icon": "🗝️",
     "category": "key"
   },
-  "silver_key": {
-    "name": "Silver Key",
-    "description": "Shines with a dull luster.",
-    "type": "quest",
-    "stackLimit": 1,
-    "icon": "🗝️",
-    "category": "key"
-  },
   "map02_key": {
     "name": "Map02 Key",
     "description": "Required to unlock the path to the next map.",
@@ -409,38 +401,6 @@
     "stackLimit": 1,
     "icon": "📜",
     "category": "lore"
-  },
-  "ashen_core": {
-    "name": "Ashen Core",
-    "description": "Remnant from an Ash Vessel.",
-    "type": "material",
-    "stackLimit": 99,
-    "icon": "⚱️",
-    "category": "general"
-  },
-  "dust_talisman": {
-    "name": "Dust Talisman",
-    "description": "Charm carried by Dust Prophets.",
-    "type": "material",
-    "stackLimit": 99,
-    "icon": "🌫️",
-    "category": "general"
-  },
-  "resonant_chime": {
-    "name": "Resonant Chime",
-    "description": "Chime that echoes with power.",
-    "type": "material",
-    "stackLimit": 99,
-    "icon": "🔔",
-    "category": "general"
-  },
-  "wailing_essence": {
-    "name": "Wailing Essence",
-    "description": "Captures the cry of a Hollow Wailer.",
-    "type": "material",
-    "stackLimit": 99,
-    "icon": "🎵",
-    "category": "general"
   },
   "prism_fragment": {
     "name": "Prism Fragment",

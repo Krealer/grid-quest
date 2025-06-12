@@ -548,17 +548,6 @@ export const itemData = {
     stackLimit: 1,
     icon: '💍'
   },
-  dusty_scroll: {
-    id: 'dusty_scroll',
-    name: 'Dusty Scroll',
-    description: 'Ancient writing describing lost rituals.',
-    type: 'quest',
-    tags: ['lore'],
-    category: 'lore',
-    consumable: false,
-    stackLimit: 1,
-    icon: '📜'
-  },
   aegis_invocation_scroll: {
     id: 'aegis_invocation_scroll',
     name: 'Aegis Invocation Scroll',
@@ -581,39 +570,6 @@ export const itemData = {
     stackLimit: 3,
     icon: '🛢️',
     useInCombat: true
-  },
-  warden_crest: {
-    id: 'warden_crest',
-    name: 'Warden Crest',
-    description: 'Symbol of temple guardians used for sturdy gear.',
-    type: 'material',
-    tags: ['items'],
-    category: 'general',
-    consumable: true,
-    stackLimit: 99,
-    icon: '🛡️'
-  },
-  idol_fragment: {
-    id: 'idol_fragment',
-    name: 'Idol Fragment',
-    description: 'Piece of a shattered idol prized by collectors.',
-    type: 'material',
-    tags: ['items'],
-    category: 'general',
-    consumable: true,
-    stackLimit: 99,
-    icon: '🗿'
-  },
-  obsidian_core: {
-    id: 'obsidian_core',
-    name: 'Obsidian Core',
-    description: 'Dark shard radiating forbidden power.',
-    type: 'material',
-    tags: ['items'],
-    category: 'general',
-    consumable: true,
-    stackLimit: 99,
-    icon: '⚫'
   },
   polished_shard: {
     id: 'polished_shard',
@@ -670,50 +626,6 @@ export const itemData = {
     consumable: true,
     stackLimit: 1,
     icon: '📜'
-  },
-  ashen_core: {
-    id: 'ashen_core',
-    name: 'Ashen Core',
-    description: 'Remnant from an Ash Vessel.',
-    type: 'material',
-    tags: ['items'],
-    category: 'general',
-    consumable: true,
-    stackLimit: 99,
-    icon: '⚱️'
-  },
-  dust_talisman: {
-    id: 'dust_talisman',
-    name: 'Dust Talisman',
-    description: 'Charm carried by Dust Prophets.',
-    type: 'material',
-    tags: ['items'],
-    category: 'general',
-    consumable: true,
-    stackLimit: 99,
-    icon: '🌫️'
-  },
-  resonant_chime: {
-    id: 'resonant_chime',
-    name: 'Resonant Chime',
-    description: 'Chime that echoes with power.',
-    type: 'material',
-    tags: ['items'],
-    category: 'general',
-    consumable: true,
-    stackLimit: 99,
-    icon: '🔔'
-  },
-  wailing_essence: {
-    id: 'wailing_essence',
-    name: 'Wailing Essence',
-    description: 'Captures the cry of a Hollow Wailer.',
-    type: 'material',
-    tags: ['items'],
-    category: 'general',
-    consumable: true,
-    stackLimit: 99,
-    icon: '🎵'
   },
   volcanic_slag: {
     id: 'volcanic_slag',
