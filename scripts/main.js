@@ -53,6 +53,7 @@ import {
   DEFAULT_SETTINGS
 } from './settingsManager.js';
 import { loadLanguage } from './language_loader.js';
+import { initGreeting } from '../ui/greeting.js';
 
 // Inventory contents are managed in inventory.js
 
@@ -346,96 +347,107 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  try {
-    const { cols: newCols } = await router.loadMap('map01');
-    cols = newCols;
-    initFog(container, cols, isFogEnabled());
-    if (isFogEnabled()) {
-      if (router.getCurrentMapName() === 'map01') {
-        revealAll();
-      } else {
-        reveal(player.x, player.y);
-      }
-    }
-    updateHpDisplay();
-    updateXpDisplay();
-
-    container.addEventListener('click', (e) =>
-      handleTileClick(e, player, container, cols)
-    );
-    container.addEventListener('dblclick', async (e) => {
-      if (isInBattle || isMoving || isMovementDisabled()) return;
-      const newCols = await handleTileInteraction(
-        e,
-        player,
-        container,
-        cols,
-        npcModules
-      );
-      if (newCols) {
-        cols = newCols;
-        initFog(container, cols, isFogEnabled());
-        if (isFogEnabled()) {
-          if (router.getCurrentMapName() === 'map01') {
-            revealAll();
-          } else {
-            reveal(player.x, player.y);
-          }
-        }
-        updateHpDisplay();
-      }
-    });
-    document.addEventListener('combatStarted', () => {
-      isInBattle = true;
-    });
-    document.addEventListener('combatEnded', (e) => {
-      isInBattle = false;
-      if (e.detail.enemyHp <= 0) {
-        const enemyId = e.detail.enemy.id;
-        defeatEnemy(enemyId);
-        if (
-          enemyId === 'goblin01' &&
-          !hasItem('goblin_ear') &&
-          !hasItem('goblin_insignia') &&
-          !hasItem('cracked_helmet')
-        ) {
-          const pos = gameState.lastEnemyPos;
-          if (pos) spawnEnemy(pos.x, pos.y, 'ghost_echo');
-        }
-        if (enemyId === 'goblin_scout') {
-          setMemory('scout_defeated');
-          if (
-            isQuestStarted('scout_tracking') &&
-            !isQuestCompleted('scout_tracking')
-          ) {
-            completeQuest('scout_tracking');
-          }
-        }
-        if (enemyId === 'zombie01') {
-          setMemory('flag_zombie_defeated');
-        }
-      }
-    });
-
-    document.addEventListener('playerRespawned', (e) => {
-      cols = e.detail.cols;
+  async function startGame() {
+    try {
+      const { cols: newCols } = await router.loadMap('map01');
+      cols = newCols;
       initFog(container, cols, isFogEnabled());
       if (isFogEnabled()) {
-        revealAll();
+        if (router.getCurrentMapName() === 'map01') {
+          revealAll();
+        } else {
+          reveal(player.x, player.y);
+        }
       }
       updateHpDisplay();
-      updateDefenseDisplay();
       updateXpDisplay();
-    });
-    document.addEventListener('playerDefenseChanged', updateDefenseDisplay);
-    document.addEventListener('playerHpChanged', updateHpDisplay);
-    document.addEventListener('playerXpChanged', updateXpDisplay);
-    document.addEventListener('playerLevelUp', updateXpDisplay);
-    document.addEventListener('passivesUpdated', () => {
-      updateHpDisplay();
-      updateDefenseDisplay();
-    });
-  } catch (err) {
-    console.error(err);
+
+      container.addEventListener('click', (e) =>
+        handleTileClick(e, player, container, cols)
+      );
+      container.addEventListener('dblclick', async (e) => {
+        if (isInBattle || isMoving || isMovementDisabled()) return;
+        const newCols = await handleTileInteraction(
+          e,
+          player,
+          container,
+          cols,
+          npcModules
+        );
+        if (newCols) {
+          cols = newCols;
+          initFog(container, cols, isFogEnabled());
+          if (isFogEnabled()) {
+            if (router.getCurrentMapName() === 'map01') {
+              revealAll();
+            } else {
+              reveal(player.x, player.y);
+            }
+          }
+          updateHpDisplay();
+        }
+      });
+      document.addEventListener('combatStarted', () => {
+        isInBattle = true;
+      });
+      document.addEventListener('combatEnded', (e) => {
+        isInBattle = false;
+        if (e.detail.enemyHp <= 0) {
+          const enemyId = e.detail.enemy.id;
+          defeatEnemy(enemyId);
+          if (
+            enemyId === 'goblin01' &&
+            !hasItem('goblin_ear') &&
+            !hasItem('goblin_insignia') &&
+            !hasItem('cracked_helmet')
+          ) {
+            const pos = gameState.lastEnemyPos;
+            if (pos) spawnEnemy(pos.x, pos.y, 'ghost_echo');
+          }
+          if (enemyId === 'goblin_scout') {
+            setMemory('scout_defeated');
+            if (
+              isQuestStarted('scout_tracking') &&
+              !isQuestCompleted('scout_tracking')
+            ) {
+              completeQuest('scout_tracking');
+            }
+          }
+          if (enemyId === 'zombie01') {
+            setMemory('flag_zombie_defeated');
+          }
+        }
+      });
+
+      document.addEventListener('playerRespawned', (e) => {
+        cols = e.detail.cols;
+        initFog(container, cols, isFogEnabled());
+        if (isFogEnabled()) {
+          revealAll();
+        }
+        updateHpDisplay();
+        updateDefenseDisplay();
+        updateXpDisplay();
+      });
+      document.addEventListener('playerDefenseChanged', updateDefenseDisplay);
+      document.addEventListener('playerHpChanged', updateHpDisplay);
+      document.addEventListener('playerXpChanged', updateXpDisplay);
+      document.addEventListener('playerLevelUp', updateXpDisplay);
+      document.addEventListener('passivesUpdated', () => {
+        updateHpDisplay();
+        updateDefenseDisplay();
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  const { showGreeting } = initGreeting(startGame);
+  const hasSave = localStorage.getItem('gridquest.state') ||
+    localStorage.getItem('tutorialComplete');
+  if (hasSave) {
+    startGame();
+  } else {
+    showGreeting();
   }
 });
