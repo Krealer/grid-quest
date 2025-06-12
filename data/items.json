@@ -177,11 +177,12 @@
   },
   "shadow_token": {
     "name": "Shadow Token",
-    "description": "A dark token that seems to absorb light.",
+    "description": "A strange obsidian token said to whisper in the dark. It may open unseen doors.",
     "type": "key",
     "stackLimit": 1,
-    "icon": "🗝️",
-    "category": "key"
+    "icon": "🕳️",
+    "category": "key",
+    "consumable": false
   },
   "defense_potion_I": {
     "name": "Defense Potion I",
