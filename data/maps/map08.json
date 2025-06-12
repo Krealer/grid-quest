@@ -468,9 +468,7 @@
         "spawn": {
           "x": 10,
           "y": 1
-        },
-        "locked": true,
-        "requiresItem": "temple_key"
+        }
       },
       "F",
       "F",
