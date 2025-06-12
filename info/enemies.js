@@ -118,5 +118,13 @@ export const enemies = [
     location: '8,17',
     drops: 'Rift Eye, Memory Gem',
     skills: 'fracture_wave, mind_spike, echo_wound'
+  },
+  {
+    id: 'warden_threshold',
+    name: 'Warden of the Threshold',
+    map: 'Map07_maze03',
+    location: '10,10',
+    drops: 'Temple Key',
+    skills: 'stone_lash, earthbind, resolve_break, quaking_step'
   }
 ];

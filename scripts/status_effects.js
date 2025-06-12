@@ -313,6 +313,14 @@ export const statusEffects = {
     type: 'negative',
     duration: 2
   },
+  stunned: {
+    id: 'stunned',
+    name: 'Stunned',
+    icon: '💫',
+    description: 'Skip next turn.',
+    type: 'negative',
+    duration: 1
+  },
   silenced: {
     id: 'silenced',
     name: 'Silenced',

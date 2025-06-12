@@ -783,6 +783,21 @@ export async function startCombat(enemy, player) {
       } else {
         skill = getEnemySkill('prism_shot');
       }
+    }
+    else if (enemy.id === 'warden_threshold') {
+      enemy.cooldowns = enemy.cooldowns || { earthbind: 0, resolve_break: 0, quaking_step: 0 };
+      for (const k in enemy.cooldowns) { if (enemy.cooldowns[k] > 0) enemy.cooldowns[k]--; }
+      const opts = [];
+      if (enemy.cooldowns.earthbind === 0) opts.push('earthbind');
+      if (enemy.cooldowns.resolve_break === 0) opts.push('resolve_break');
+      if (enemy.cooldowns.quaking_step === 0) opts.push('quaking_step');
+      const choice = opts.length ? opts[Math.floor(Math.random()*opts.length)] : null;
+      if (choice) {
+        skill = getEnemySkill(choice);
+        if (skill.cooldown > 0) enemy.cooldowns[choice] = skill.cooldown;
+      } else {
+        skill = getEnemySkill('stone_lash');
+      }
     } else if (enemy.cycleSkills && list.length) {
       const idx = enemy.skillIndex || 0;
       skill = list[idx % list.length];

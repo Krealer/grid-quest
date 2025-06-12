@@ -13,7 +13,7 @@ export const itemData = {
   temple_key: {
     id: 'temple_key',
     name: 'Temple Key',
-    description: 'Opens the sealed temple gate.',
+    description: 'A heavy bronze key etched with ancient runes. It unlocks the entrance to the Temple.',
     type: 'key',
     tags: ['lore'],
     category: 'key',
