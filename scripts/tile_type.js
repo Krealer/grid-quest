@@ -11,9 +11,11 @@ export const TILE_DEFS = {
   C: { walkable: false, interactable: true, description: 'Chest' },
   D: { walkable: false, interactable: true, description: 'Door' },
   N: { walkable: false, interactable: true, description: 'NPC' },
+  n: { walkable: false, interactable: true, description: 'Advanced NPC' },
   E: { walkable: false, interactable: true, description: 'Enemy' },
-  echo: { walkable: true, interactable: true, description: 'Memory Echo' },
-  B: { walkable: true, interactable: false, description: 'Bridge' }
+  A: { walkable: false, interactable: true, description: 'Advanced Enemy' },
+  B: { walkable: false, interactable: true, description: 'Boss Enemy' },
+  X: { walkable: false, interactable: true, description: 'Elite Enemy' }
 };
 
 export function isWalkable(symbol) {
@@ -58,22 +60,18 @@ export async function onStepEffect(symbol, player, x, y) {
   }
 }
 
-// Interaction effects for doors, chests, enemies, NPCs and echoes
+// Interaction effects for doors, chests, enemies and NPCs
 import { isChestOpened, openChest } from './chest.js';
 import { hasItem, removeItem, useKey } from './inventory.js';
 import { updateInventoryUI } from './inventory_ui.js';
 import { getEnemyData } from './enemy.js';
 import { startCombat } from './combatSystem.js';
 import { getAllSkills, unlockSkill } from './skills.js';
-import { echoAbsoluteIntro, setMemory } from './dialogue_state.js';
 import * as router from './router.js';
 import { transitionToMap } from './transition.js';
 import { enterDoor } from './player.js';
 import { gameState } from './game_state.js';
 import { triggerRotation } from './rotation_puzzle.js';
-import { recordEchoConversation } from './player_memory.js';
-import { getEchoData } from './echo_data.js';
-import { setLoreFlag } from './lore_state.js';
 import { markItemUsed } from '../info/items.js';
 
 export async function onInteractEffect(
@@ -133,26 +131,22 @@ export async function onInteractEffect(
         return newCols;
       }
     }
-    case 'E': {
+    case 'E':
+    case 'A':
+    case 'B':
+    case 'X': {
       const index = y * cols + x;
       const tileEl = container.children[index];
       if (tileEl) {
-        tileEl.classList.remove('enemy', 'blocked');
-        tileEl.classList.add('ground');
+        tileEl.classList.remove('tile-E', 'tile-A', 'tile-B', 'tile-X', 'blocked');
+        tileEl.classList.add('tile-G');
       }
       tile.type = 'G';
       gameState.lastEnemyPos = { x, y };
       const enemyId = tile.enemyId || 'goblin01';
       const enemy = getEnemyData(enemyId) || { name: 'Enemy', hp: 50 };
-      if (enemyId === 'echo_absolute') {
-        echoAbsoluteIntro();
-        startCombat({ id: enemyId, ...enemy }, player);
-      } else {
-        const intro = enemy.intro || 'A foe appears!';
-        showDialogue(intro, () =>
-          startCombat({ id: enemyId, ...enemy }, player)
-        );
-      }
+      const intro = enemy.intro || 'A foe appears!';
+      showDialogue(intro, () => startCombat({ id: enemyId, ...enemy }, player));
       break;
     }
     case 'C': {
@@ -194,8 +188,8 @@ export async function onInteractEffect(
           const idx = y * cols + x;
           const tileEl = container.children[idx];
           if (tileEl) {
-            tileEl.classList.remove('chest');
-            tileEl.classList.add('chest-opened');
+            tileEl.classList.remove('tile-C', 'blocked');
+            tileEl.classList.add('chest-opened', 'tile-G');
           }
           tile.type = 'G';
           for (const [id, skill] of Object.entries(getAllSkills())) {
@@ -207,26 +201,6 @@ export async function onInteractEffect(
           }
         }
       }
-      break;
-    }
-    case 'echo': {
-      const echo = getEchoData(tile.id);
-      if (echo) {
-        for (const line of echo.text) {
-          // eslint-disable-next-line no-await-in-loop
-          await new Promise((resolve) => showDialogue(line, resolve));
-        }
-        recordEchoConversation(tile.id);
-        setLoreFlag(echo.flag);
-        setMemory(echo.flag);
-      }
-      const index = y * cols + x;
-      const tileEl = container.children[index];
-      if (tileEl) {
-        tileEl.classList.remove('echo', 'blocked');
-        tileEl.classList.add('ground');
-      }
-      tile.type = 'G';
       break;
     }
     case 'W': {

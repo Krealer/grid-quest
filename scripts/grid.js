@@ -1,6 +1,7 @@
 import { getForkChoice } from './player_memory.js';
 import { player } from './player.js';
 import { getTileDescription } from './tile_type.js';
+import { getTileInfo } from './tile_definitions.js';
 
 export function renderGrid(
   grid,
@@ -37,43 +38,12 @@ export function renderGrid(
         type = cell.classType[cls];
       }
 
-      switch (type) {
-        case 'G':
-          div.classList.add('ground');
-          break;
-        case 'C':
-          div.classList.add('chest', 'blocked');
-          break;
-        case 'E':
-          div.classList.add('enemy', 'blocked');
-          break;
-        case 'N':
-          div.classList.add('npc', 'blocked');
-          if (cell.npc) div.dataset.npc = cell.npc;
-          break;
-        case 'echo':
-          div.classList.add('echo', 'blocked');
-          break;
-        case 'D':
-          div.classList.add('door', 'blocked');
-          break;
-        case 't':
-          div.classList.add('trap-light');
-          break;
-        case 'T':
-          div.classList.add('trap-dark');
-          break;
-        case 'W':
-          div.classList.add('water');
-          break;
-        case 'F':
-          div.classList.add('fractured');
-          break;
-        case 'B':
-          div.classList.add('bridge');
-          break;
-        default:
-          div.classList.add('ground');
+      const info = getTileInfo(type);
+      div.classList.add(`tile-${type}`);
+      div.classList.add(`shape-${info.shape}`);
+      if (!info.walkable) div.classList.add('blocked');
+      if (type === 'N' || type === 'n') {
+        if (cell.npc) div.dataset.npc = cell.npc;
       }
 
       div.dataset.label = getTileDescription(type);
