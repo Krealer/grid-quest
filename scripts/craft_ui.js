@@ -28,11 +28,14 @@ export async function updateCraftUI() {
     if (!data) return;
     const row = document.createElement('div');
     row.classList.add('craft-item');
+    row.dataset.recipeId = id;
     const btn = document.createElement('button');
     btn.textContent = 'Craft';
+    btn.dataset.recipeId = id;
     btn.disabled = !canCraft(id);
-    btn.addEventListener('click', async () => {
-      const ok = await craft(id);
+    btn.addEventListener('click', async (e) => {
+      const rid = e.currentTarget.dataset.recipeId;
+      const ok = await craft(rid);
       if (ok) updateCraftUI();
     });
     const reqs = Object.entries(data.ingredients)

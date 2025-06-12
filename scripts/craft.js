@@ -15,7 +15,7 @@ import { getItemBonuses } from './item_stats.js';
 import { isRecipeUnlocked } from './recipe_state.js';
 import { loadJson } from './dataService.js';
 import { showError } from './errorPrompt.js';
-import { showDialogue } from './dialogueSystem.js';
+import { notify } from '../ui/notification.js';
 
 let craftingAllowed = false;
 
@@ -84,7 +84,7 @@ export async function craft(id) {
   if (blueprints[id] && !isBlueprintUnlocked(id)) return false;
   if (recipes[id] && !isRecipeUnlocked(id)) return false;
   if (!canCraft(id)) {
-    showDialogue('Missing materials.');
+    notify('Missing materials.');
     return false;
   }
   for (const [item, qty] of Object.entries(recipe.ingredients)) {
@@ -103,7 +103,7 @@ export async function craft(id) {
         new CustomEvent('equipmentCrafted', { detail: recipe.result })
       );
     }
-    showDialogue(`You've crafted ${data.name}!`);
+    notify(`Crafted ${data.name}!`);
     return true;
   }
   return false;

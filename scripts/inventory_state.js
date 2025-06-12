@@ -42,5 +42,21 @@ export const inventoryState = {
   },
   removeItem(id, qty = 1) {
     return invRemoveItem(id, qty);
+  },
+  addItems(map) {
+    if (!map) return false;
+    let changed = false;
+    Object.entries(map).forEach(([id, qty]) => {
+      if (invAddItem({ id, quantity: qty })) changed = true;
+    });
+    return changed;
+  },
+  removeItems(map) {
+    if (!map) return false;
+    let changed = false;
+    Object.entries(map).forEach(([id, qty]) => {
+      if (invRemoveItem(id, qty)) changed = true;
+    });
+    return changed;
   }
 };
