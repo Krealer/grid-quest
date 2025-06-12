@@ -1,8 +1,9 @@
 import { startDialogueTree, showDialogue } from '../dialogueSystem.js';
-import { eryndorDialogue } from '../npc_dialogues/eryndor_dialogue.js';
+import { createEryndorDialogue } from '../npc_dialogues/eryndor_dialogue.js';
 import { npcAppearance } from '../npc_data.js';
 
-export function interact() {
+export async function interact() {
   const title = npcAppearance.eryndor.displayTitle || 'Eryndor';
-  showDialogue(title, () => startDialogueTree(eryndorDialogue));
+  const dialogue = await createEryndorDialogue();
+  showDialogue(title, () => startDialogueTree(dialogue));
 }

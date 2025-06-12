@@ -16,6 +16,10 @@ export function loadGame() {
     const data = JSON.parse(json);
     if (Array.isArray(data.blueprints)) {
       craftState.unlockedBlueprints = new Set(data.blueprints);
+      localStorage.setItem(
+        'gridquest.blueprints',
+        JSON.stringify(data.blueprints)
+      );
       document.dispatchEvent(new CustomEvent('blueprintsLoaded'));
     }
   } catch {

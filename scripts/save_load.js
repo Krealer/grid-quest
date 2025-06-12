@@ -48,6 +48,10 @@ export function loadGame(slot = 1) {
     deserializePlayer(data.player || {});
     if (Array.isArray(data.blueprints)) {
       craftState.unlockedBlueprints = new Set(data.blueprints);
+      localStorage.setItem(
+        'gridquest.blueprints',
+        JSON.stringify(data.blueprints)
+      );
       document.dispatchEvent(new CustomEvent('blueprintsLoaded'));
     }
     return true;
