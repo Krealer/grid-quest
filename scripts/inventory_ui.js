@@ -37,6 +37,7 @@ import { markItemUsed } from '../info/items.js';
 import { loadRelics, getRelicData, getOwnedRelics } from './relic_state.js';
 
 let currentCategory = 'items';
+const scrollPositions = {};
 
 function updateCategoryButtons() {
   const btns = document.querySelectorAll('.inventory-categories button');
@@ -46,19 +47,29 @@ function updateCategoryButtons() {
 }
 
 export function initInventoryUI() {
+  const list = document.getElementById('inventory-list');
   document.querySelectorAll('.inventory-categories button').forEach((btn) => {
     btn.addEventListener('click', () => {
+      if (list) {
+        scrollPositions[currentCategory] = list.scrollTop;
+      }
       currentCategory = btn.dataset.cat;
       updateCategoryButtons();
       updateInventoryUI();
     });
   });
+  if (list) {
+    list.addEventListener('scroll', () => {
+      scrollPositions[currentCategory] = list.scrollTop;
+    });
+  }
   updateCategoryButtons();
 }
 
 export async function updateInventoryUI() {
   const list = document.getElementById('inventory-list');
   if (!list) return;
+  const prevScroll = scrollPositions[currentCategory] || 0;
   await loadRelics();
   list.innerHTML = '';
   updateCategoryButtons();
@@ -175,6 +186,7 @@ export async function updateInventoryUI() {
     row.innerHTML = `<strong>${data.name}</strong><div class="desc">${data.description || ''}</div>`;
     list.appendChild(row);
   });
+  list.scrollTop = prevScroll;
 }
 
 function handleInventoryItemUse(id) {

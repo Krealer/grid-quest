@@ -630,6 +630,9 @@ body {
   max-width: 90%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   position: relative;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .inventory-content h2 {
@@ -707,6 +710,31 @@ body {
   margin-top: 8px;
   font-size: 14px;
   color: #fff;
+}
+
+#inventory-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 60vh;
+  padding-right: 4px;
+}
+
+#inventory-list::-webkit-scrollbar {
+  width: 6px;
+}
+#inventory-list::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 3px;
+}
+#inventory-list::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 3px;
+}
+
+@media (max-width: 480px) {
+  #inventory-list {
+    max-height: 50vh;
+  }
 }
 
 /* Main Menu Overlay */
