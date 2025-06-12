@@ -1,0 +1,228 @@
+#battle-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+#battle-overlay.battle-transition {
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+#battle-overlay.battle-transition.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#battle-overlay .combat-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#battle-overlay .combatants {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#battle-overlay .combatant {
+  margin: 10px;
+  text-align: center;
+}
+
+#battle-overlay .combatant .portrait {
+  font-size: 48px;
+  margin-bottom: 5px;
+}
+
+#battle-overlay .combatant .desc {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 5px;
+}
+
+#battle-overlay .combatant.enemy.intro-anim {
+  animation: enemyEntrance 0.6s ease;
+}
+
+@keyframes enemyEntrance {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#battle-overlay .hp-bar {
+  width: 150px;
+  height: 20px;
+  background: #444;
+  border: 1px solid #222;
+  margin-top: 5px;
+}
+
+#battle-overlay .statuses {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+#battle-overlay .statuses div {
+  margin-top: 2px;
+}
+
+/* new style for improved status display */
+#battle-overlay .status-effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+#battle-overlay .status-effects .effect {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+#battle-overlay .intro-text {
+  margin-top: 10px;
+  opacity: 0;
+  animation: introFade 1s forwards;
+  text-align: center;
+}
+
+@keyframes introFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#battle-overlay .hp-bar .hp {
+  height: 100%;
+  background: #e74c3c;
+  width: 100%;
+}
+
+#battle-overlay .actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#battle-overlay .action-tabs {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+#battle-overlay .action-tabs button {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #333;
+}
+
+#battle-overlay .action-tabs button.selected {
+  background: #666;
+  border-color: #999;
+}
+
+#battle-overlay .action-tabs button.offensive-tab {
+  background: #533;
+}
+#battle-overlay .action-tabs button.defensive-tab {
+  background: #235;
+}
+#battle-overlay .action-tabs button.items-tab {
+  background: #353;
+}
+
+#battle-overlay .tab-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+#battle-overlay .hidden {
+  display: none;
+}
+
+#battle-overlay .actions.hidden,
+#battle-overlay .log.hidden {
+  display: none;
+}
+
+#battle-overlay .actions button {
+  margin: 0 8px;
+  padding: 8px 18px;
+  font-size: 16px;
+  border-radius: 4px;
+  background: #444;
+  color: #fff;
+  border: 1px solid #222;
+}
+
+#battle-overlay .actions button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+#battle-overlay .tab-panel button .desc {
+  display: block;
+  font-size: 12px;
+  color: #ccc;
+}
+
+#battle-overlay .log {
+  margin-top: 10px;
+  height: 80px;
+  overflow-y: auto;
+  width: 220px;
+  font-size: 14px;
+  border: 1px solid #555;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#battle-overlay .actions button:hover {
+  background: #555;
+}
+
+#battle-overlay .hp.damage {
+  animation: damageFlash 0.3s;
+}
+
+@keyframes damageFlash {
+  from {
+    background: #fff;
+  }
+  to {
+    background: #e74c3c;
+  }
+}

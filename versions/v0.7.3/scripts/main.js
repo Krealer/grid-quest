@@ -55,7 +55,6 @@ import {
 import { loadLanguage } from './language_loader.js';
 import { initGreeting } from '../ui/greeting.js';
 import { startGame } from './startGame.js';
-import { rollbackTo } from './rollback.js';
 
 // Inventory contents are managed in inventory.js
 
@@ -112,17 +111,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const langSelect = document.getElementById('language-select');
   const centerToggle = document.getElementById('center-toggle');
   const resetBtn = document.getElementById('reset-settings');
-  const rollbackRow = document.getElementById('rollback-row');
-  const rollbackSelect = document.getElementById('rollback-select');
-  const rollbackBtn = document.getElementById('rollback-btn');
-
-  if (
-    typeof process !== 'undefined' &&
-    process.env &&
-    process.env.NODE_ENV !== 'development'
-  ) {
-    rollbackRow.style.display = 'none';
-  }
 
   function handleSave() {
     openSaveMenu();
@@ -319,11 +307,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       centerToggle.checked = settings.centerMode;
       loadLanguage(settings.language);
     }
-  });
-
-  rollbackBtn.addEventListener('click', () => {
-    rollbackTo(rollbackSelect.value);
-    alert(`Rolled back to ${rollbackSelect.value}`);
   });
 
   const { showGreeting } = initGreeting(() =>
