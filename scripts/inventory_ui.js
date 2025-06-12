@@ -76,7 +76,9 @@ export async function updateInventoryUI() {
   const statsEl = document.getElementById('player-stats');
   if (statsEl) {
     const stats = getTotalStats();
-    statsEl.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Attack: ${stats.attack || 0}  Defense: ${stats.defense || 0}`;
+    const def = stats.defense || 0;
+    const defHtml = def < 0 ? `<span class="negative">Defense: ${def}</span>` : `Defense: ${def}`;
+    statsEl.innerHTML = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Attack: ${stats.attack || 0}  ${defHtml}`;
   }
   let cat = currentCategory;
   if (cat === 'items') cat = ['general', 'crafting'];

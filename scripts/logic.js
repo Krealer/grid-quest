@@ -17,7 +17,9 @@ export function applyDamage(target, amount) {
     target.absorb -= absorbed;
   }
   const defense = target.stats?.defense || 0;
-  dmg = Math.max(0, dmg - defense);
+  const reduction = Math.max(0, defense);
+  const penalty = defense < 0 ? 1 + Math.abs(defense) * 0.1 : 1;
+  dmg = Math.max(0, (dmg - reduction) * penalty);
   const final = Math.floor(dmg);
   if (target.hasResolve && target.hp - final <= 0) {
     const lost = target.hp - 1;

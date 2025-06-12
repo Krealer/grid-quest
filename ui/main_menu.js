@@ -10,12 +10,14 @@ export function updateMenuStats() {
   const el = document.getElementById('menu-stats');
   if (!el) return;
   const stats = getTotalStats();
+  const def = stats.defense || 0;
+  const defHtml = def < 0 ? `<span class="negative">${def}</span>` : def;
   el.innerHTML = `
     <div>Level: ${player.level}</div>
     <div>XP: ${player.xp} / ${player.xpToNextLevel}</div>
     <div>HP: ${player.hp} / ${player.maxHp}</div>
     <div>ATK: ${stats.attack || 0}</div>
-    <div>DEF: ${stats.defense || 0}</div>
+    <div>DEF: ${defHtml}</div>
   `;
 }
 
