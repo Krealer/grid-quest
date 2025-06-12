@@ -3,14 +3,7 @@
   "environment": "ruins",
   "grid": [
     [
-      {
-        "type": "D",
-        "target": "map07.json",
-        "spawn": {
-          "x": 10,
-          "y": 18
-        }
-      },
+      "F",
       "F",
       "F",
       "F",
@@ -32,7 +25,14 @@
       "F"
     ],
     [
-      "F",
+      {
+        "type": "D",
+        "target": "map07.json",
+        "spawn": {
+          "x": 10,
+          "y": 18
+        }
+      },
       "G",
       "G",
       "G",
