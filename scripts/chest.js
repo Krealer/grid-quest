@@ -149,14 +149,6 @@ const chestContents = {
     item: 'xp_relic',
     hpLoss: 10,
     message: 'Cursed fumes seep out as you grasp the relic.'
-  },
-  'map_alchemist:18,18': {
-    relic: 'alchemist_catalyst',
-    message: 'You obtained the Alchemist Catalyst!'
-  },
-  'map12:9,9': {
-    relic: 'compass_core',
-    message: 'You obtained the Compass Core!'
   }
 };
 
