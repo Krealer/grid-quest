@@ -6,11 +6,13 @@ export function initGreeting(startCallback) {
   const howClose = howtoOverlay?.querySelector('.close-btn');
 
   function showHowto() {
+    greetOverlay?.classList.remove('active');
     howtoOverlay?.classList.add('active');
   }
 
   function hideHowto() {
     howtoOverlay?.classList.remove('active');
+    greetOverlay?.classList.add('active');
   }
 
   function startGame() {
