@@ -1,5 +1,6 @@
 /** @jest-environment jsdom */
 import { jest } from '@jest/globals';
+import fs from 'fs';
 
 const enterDoorMock = jest.fn(async () => 1);
 
@@ -82,6 +83,20 @@ test('door consumes key when flagged and item removed after load', async () => {
   await onInteractEffect(door, 0, 0, {}, null, 0);
   expect(enterDoorMock).toHaveBeenCalled();
   expect(getItemCount('rusty_key')).toBe(0);
+});
+
+test('map05 door to map07 uses maze_key_1 without consuming it', async () => {
+  addItem({ id: 'maze_key_1', quantity: 1 });
+  const saved = serializeInventory();
+  inventory.length = 0;
+  loadInventoryFromObject(saved);
+
+  const map = JSON.parse(fs.readFileSync('./data/maps/map05.json', 'utf8'));
+  const door = map.grid[5][0];
+
+  await onInteractEffect(door, 0, 0, {}, null, 0);
+  expect(enterDoorMock).toHaveBeenCalledWith('map07.json', { x: 10, y: 1 });
+  expect(getItemCount('maze_key_1')).toBe(1);
 });
 
 test('npc trade detects items after load and deducts quantity', async () => {
