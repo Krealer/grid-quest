@@ -24,6 +24,8 @@ export function updateDefenseDisplay() {
     const stats = getTotalStats();
     const def = stats.defense || 0;
     defenseDisplay.textContent = `Defense: ${def}`;
+    defenseDisplay.title =
+      'Negative defense increases damage taken by 10% per point.';
     if (def < 0) defenseDisplay.classList.add('negative');
     else defenseDisplay.classList.remove('negative');
   }

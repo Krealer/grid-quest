@@ -11,7 +11,11 @@ export function updateMenuStats() {
   if (!el) return;
   const stats = getTotalStats();
   const def = stats.defense || 0;
-  const defHtml = def < 0 ? `<span class="negative">${def}</span>` : def;
+  const tooltip =
+    'Negative defense increases damage taken by 10% per point.';
+  const defHtml = def < 0
+    ? `<span class="negative" title="${tooltip}">${def}</span>`
+    : `<span title="${tooltip}">${def}</span>`;
   el.innerHTML = `
     <div>Level: ${player.level}</div>
     <div>XP: ${player.xp} / ${player.xpToNextLevel}</div>

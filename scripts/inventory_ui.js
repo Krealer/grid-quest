@@ -77,7 +77,11 @@ export async function updateInventoryUI() {
   if (statsEl) {
     const stats = getTotalStats();
     const def = stats.defense || 0;
-    const defHtml = def < 0 ? `<span class="negative">Defense: ${def}</span>` : `Defense: ${def}`;
+    const tooltip = 'Negative defense increases damage taken by 10% per point.';
+    const defHtml =
+      def < 0
+        ? `<span class="negative" title="${tooltip}">Defense: ${def}</span>`
+        : `<span title="${tooltip}">Defense: ${def}</span>`;
     statsEl.innerHTML = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Attack: ${stats.attack || 0}  ${defHtml}`;
   }
   let cat = currentCategory;
