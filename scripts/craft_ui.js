@@ -11,19 +11,23 @@ import { isBlueprintUnlocked } from './craft_state.js';
 import { getItemData } from './item_loader.js';
 import { getItemCount } from './inventory.js';
 
-export async function updateCraftUI() {
-  const list = document.getElementById('craft-list');
-  if (!list) return;
+export async function getKnownRecipes() {
   await loadRecipes();
   await loadBlueprints();
-  list.innerHTML = '';
   const recipeData = await loadRecipes();
-  const ids = Object.keys(recipeData).filter((id) => {
+  return Object.keys(recipeData).filter((id) => {
     const rec = recipeData[id];
     const blueprintOk =
       !rec.blueprintId || isBlueprintUnlocked(rec.blueprintId);
     return isRecipeUnlocked(id) && blueprintOk;
   });
+}
+
+export async function updateCraftUI() {
+  const list = document.getElementById('craft-list');
+  if (!list) return;
+  list.innerHTML = '';
+  const ids = await getKnownRecipes();
   ids.forEach((id) => {
     const data = getRecipe(id) || getBlueprint(id);
     if (!data) return;
@@ -72,3 +76,10 @@ document.addEventListener('inventoryUpdated', updateCraftUI);
 document.addEventListener('blueprintUnlocked', updateCraftUI);
 document.addEventListener('blueprintsLoaded', updateCraftUI);
 document.addEventListener('recipeUnlocked', updateCraftUI);
+
+window.addEventListener('resize', () => {
+  const overlay = document.getElementById('craft-overlay');
+  if (overlay && overlay.classList.contains('active')) {
+    updateCraftUI();
+  }
+});
