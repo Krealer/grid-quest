@@ -4,6 +4,7 @@ import { toggleQuestLog } from '../scripts/quest_log.js';
 import { toggleInfoMenu } from './info_menu.js';
 import { toggleStatusPanel } from '../scripts/menu/status.js';
 import { toggleNullSummary } from './null_summary.js';
+import { confirmRestart } from '../scripts/restart.js';
 
 export function updateMenuStats() {
   const el = document.getElementById('menu-stats');
@@ -76,6 +77,12 @@ export function initMainMenu() {
     ?.addEventListener('click', () => {
       toggleMainMenu();
       toggleNullSummary();
+    });
+  document
+    .querySelector('#menu-overlay .restart-tab')
+    ?.addEventListener('click', () => {
+      toggleMainMenu();
+      confirmRestart();
     });
 
   document.addEventListener('inventoryUpdated', updateNullButton);

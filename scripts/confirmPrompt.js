@@ -1,4 +1,10 @@
-export function showConfirm(message, onConfirm, onCancel) {
+export function showConfirm(
+  message,
+  onConfirm,
+  onCancel,
+  confirmText = 'Confirm',
+  cancelText = 'Cancel'
+) {
   const overlay = document.getElementById('confirm-overlay');
   if (!overlay) {
     if (confirm(message)) {
@@ -12,6 +18,8 @@ export function showConfirm(message, onConfirm, onCancel) {
   const yesBtn = overlay.querySelector('.confirm-yes');
   const cancelBtn = overlay.querySelector('.confirm-cancel');
   msgEl.textContent = message;
+  yesBtn.textContent = confirmText;
+  cancelBtn.textContent = cancelText;
   overlay.classList.add('active');
   function cleanup() {
     overlay.classList.remove('active');
