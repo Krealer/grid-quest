@@ -2,6 +2,58 @@ import { getStatusEffect } from './status_effects.js';
 import { getStatusList } from './statusManager.js';
 import { attachTooltip } from '../ui/skillsPanel.js';
 
+export function renderCombatants(root, players = [], enemies = [], onSelect) {
+  if (!root) return;
+  root.innerHTML = '';
+  const container = document.createElement('div');
+  container.className = 'combatants';
+  const playerSide = document.createElement('div');
+  playerSide.className = 'player-team';
+  const enemySide = document.createElement('div');
+  enemySide.className = 'enemy-team';
+
+  players.forEach((p, idx) => {
+    const el = createCombatantEl(p, true, idx);
+    playerSide.appendChild(el);
+  });
+  enemies.forEach((e, idx) => {
+    const el = createCombatantEl(e, false, idx);
+    if (typeof onSelect === 'function') {
+      el.classList.add('selectable');
+      el.addEventListener('click', () => onSelect(e, idx, el));
+    }
+    enemySide.appendChild(el);
+  });
+
+  container.appendChild(playerSide);
+  container.appendChild(enemySide);
+  root.appendChild(container);
+}
+
+function createCombatantEl(entity, isPlayer, index) {
+  const wrapper = document.createElement('div');
+  wrapper.className = `combatant ${isPlayer ? 'player' : 'enemy'}`;
+  wrapper.dataset.index = index;
+  if (entity.portrait) {
+    const portrait = document.createElement('div');
+    portrait.className = 'portrait';
+    portrait.textContent = entity.portrait;
+    wrapper.appendChild(portrait);
+  }
+  const name = document.createElement('div');
+  name.className = 'name';
+  name.textContent = entity.name || (isPlayer ? 'Player' : 'Enemy');
+  wrapper.appendChild(name);
+  const hpBar = document.createElement('div');
+  hpBar.className = 'hp-bar';
+  hpBar.innerHTML = '<div class="hp"></div>';
+  wrapper.appendChild(hpBar);
+  const status = document.createElement('div');
+  status.className = 'statuses status-effects';
+  wrapper.appendChild(status);
+  return wrapper;
+}
+
 export function setupTabs(overlay) {
   const offContainer = overlay.querySelector('.offensive-skill-buttons');
   const defContainer = overlay.querySelector('.defensive-skill-buttons');

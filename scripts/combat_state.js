@@ -3,7 +3,8 @@ export const combatState = {
   players: [],
   enemies: [],
   turnQueue: [],
-  activeEntity: null
+  activeEntity: null,
+  selectedTarget: null
 };
 
 export function initCombatState(player, enemy) {
@@ -12,10 +13,13 @@ export function initCombatState(player, enemy) {
   combatState.enemies = Array.isArray(enemy) ? enemy : [enemy];
   combatState.turnQueue = [];
   combatState.activeEntity = null;
+  combatState.selectedTarget = null;
 }
 
 export function generateTurnQueue() {
-  const all = [...combatState.players, ...combatState.enemies];
+  const livingPlayers = combatState.players.filter((p) => p.hp > 0);
+  const livingEnemies = combatState.enemies.filter((e) => e.hp > 0);
+  const all = [...livingPlayers, ...livingEnemies];
   all.sort((a, b) => (b.stats?.speed ?? 0) - (a.stats?.speed ?? 0));
   combatState.turnQueue = all.slice();
 }
@@ -26,4 +30,20 @@ export function getPlayer() {
 
 export function getEnemy() {
   return combatState.enemies[0] || null;
+}
+
+export function selectTarget(entity) {
+  combatState.selectedTarget = entity;
+}
+
+export function getSelectedTarget() {
+  return combatState.selectedTarget;
+}
+
+export function livingPlayers() {
+  return combatState.players.filter((p) => p.hp > 0);
+}
+
+export function livingEnemies() {
+  return combatState.enemies.filter((e) => e.hp > 0);
 }
