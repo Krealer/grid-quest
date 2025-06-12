@@ -93,7 +93,8 @@ export function addItem(item) {
     quantity: Math.min(qty, limit)
   });
   if (item.id && item.id.startsWith('blueprint_')) {
-    unlockBlueprint(item.id.replace('blueprint_', ''));
+    const base = item.id.replace('blueprint_', '');
+    unlockBlueprint(`${base}_blueprint`);
   }
   discover('items', parseItemId(item.id).baseId);
   document.dispatchEvent(new CustomEvent('inventoryUpdated'));
@@ -189,7 +190,6 @@ export function getItemsByType(type) {
     );
   });
 }
-
 
 export function removePrismFragments(qty = 10) {
   return removeItem('prism_fragment', qty);

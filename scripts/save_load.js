@@ -12,6 +12,7 @@ import { refreshInventoryDisplay } from '../ui/inventory_menu.js';
 
 import { gameState } from './game_state.js';
 import { inventory } from './inventory.js';
+import { craftState } from './craft_state.js';
 
 export function saveGame(slot = 1) {
   const data = {
@@ -21,7 +22,8 @@ export function saveGame(slot = 1) {
     game: serializeGameState(),
     inventory: serializeInventory(),
     quests: serializeQuestState(),
-    player: serializePlayer()
+    player: serializePlayer(),
+    blueprints: Array.from(craftState.unlockedBlueprints)
   };
   const key = `${STORAGE_PREFIX}${slot}`;
   localStorage.setItem(key, JSON.stringify(data));
@@ -44,6 +46,10 @@ export function loadGame(slot = 1) {
     validateLoadedInventory(data.inventory?.items || []);
     deserializeQuestState(data.quests || {});
     deserializePlayer(data.player || {});
+    if (Array.isArray(data.blueprints)) {
+      craftState.unlockedBlueprints = new Set(data.blueprints);
+      document.dispatchEvent(new CustomEvent('blueprintsLoaded'));
+    }
     return true;
   } catch (err) {
     console.error('Failed to load save', err);

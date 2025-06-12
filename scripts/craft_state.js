@@ -32,6 +32,9 @@ function saveUnlockedBlueprints(list) {
 }
 
 craftState.unlockedBlueprints = new Set(loadUnlockedBlueprints());
+if (!craftState.unlockedBlueprints.size) {
+  craftState.unlockedBlueprints.add('healing_salve_blueprint');
+}
 document.dispatchEvent(new CustomEvent('blueprintsLoaded'));
 craftState.fusionUnlocked = readFusionState();
 
