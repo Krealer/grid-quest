@@ -67,8 +67,11 @@ export function getRecipe(id) {
 }
 
 export function canCraft(id) {
-  const recipe = recipes[id] || blueprints[id];
+  const recipe = recipes[id];
   if (!recipe) return false;
+  if (recipe.blueprintId && !isBlueprintUnlocked(recipe.blueprintId))
+    return false;
+  if (!isRecipeUnlocked(id)) return false;
   return Object.entries(recipe.ingredients).every(
     ([item, qty]) => getItemCount(item) >= qty
   );
@@ -79,10 +82,11 @@ export async function craft(id) {
   await loadBlueprints();
   await loadItems();
   if (!craftingAllowed) return false;
-  const recipe = recipes[id] || blueprints[id];
+  const recipe = recipes[id];
   if (!recipe) return false;
-  if (blueprints[id] && !isBlueprintUnlocked(id)) return false;
-  if (recipes[id] && !isRecipeUnlocked(id)) return false;
+  if (recipe.blueprintId && !isBlueprintUnlocked(recipe.blueprintId))
+    return false;
+  if (!isRecipeUnlocked(id)) return false;
   if (!canCraft(id)) {
     notify('Missing materials.');
     return false;

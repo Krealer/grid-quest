@@ -17,12 +17,13 @@ export async function updateCraftUI() {
   await loadRecipes();
   await loadBlueprints();
   list.innerHTML = '';
-  const ids = [
-    ...Object.keys(await loadRecipes()).filter((id) => isRecipeUnlocked(id)),
-    ...Object.keys(await loadBlueprints()).filter((id) =>
-      isBlueprintUnlocked(id)
-    )
-  ];
+  const recipeData = await loadRecipes();
+  const ids = Object.keys(recipeData).filter((id) => {
+    const rec = recipeData[id];
+    const blueprintOk =
+      !rec.blueprintId || isBlueprintUnlocked(rec.blueprintId);
+    return isRecipeUnlocked(id) && blueprintOk;
+  });
   ids.forEach((id) => {
     const data = getRecipe(id) || getBlueprint(id);
     if (!data) return;

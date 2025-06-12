@@ -37,6 +37,7 @@ import {
   refreshInventoryDisplay,
   initInventoryMenu
 } from '../ui/inventory_menu.js';
+import '../ui/system_message.js';
 import {
   initSaveSlotsMenu,
   openSaveMenu,
@@ -271,7 +272,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateNullTab();
   }
   document.addEventListener('inventoryUpdated', updateNullTab);
-
 
   function showSettings() {
     settingsOverlay.classList.add('active');
