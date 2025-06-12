@@ -410,5 +410,14 @@
     "icon": "✨",
     "category": "key",
     "consumable": false
+  },
+  "shadow_token": {
+    "name": "Shadow Token",
+    "type": "key",
+    "description": "A strange obsidian token said to whisper in the dark. It may open unseen doors.",
+    "icon": "🕳️",
+    "stackLimit": 1,
+    "category": "key",
+    "consumable": false
   }
 }
