@@ -1,0 +1,50 @@
+[
+  {
+    "id": "strike",
+    "name": "Strike",
+    "type": "Offensive",
+    "effect": "Deals damage equal to the caster's Attack stat.",
+    "cooldown": 0,
+    "origin": "Starter skill"
+  },
+  {
+    "id": "guard",
+    "name": "Guard",
+    "type": "Defensive",
+    "effect": "Reduces next incoming damage by 50%.",
+    "cooldown": 0,
+    "origin": "Starter skill"
+  },
+  {
+    "id": "heal",
+    "name": "Heal",
+    "type": "Defensive",
+    "effect": "Restores 20% of max HP.",
+    "cooldown": 3,
+    "origin": "Starter skill"
+  },
+  {
+    "id": "leech",
+    "name": "Leech",
+    "type": "Offensive",
+    "effect": "Deals 100% ATK and heals for the damage dealt.",
+    "cooldown": 3,
+    "origin": "NPC quest — Syranel (Map05)"
+  },
+  {
+    "id": "aegisInvocation",
+    "name": "Aegis Invocation",
+    "type": "Defensive",
+    "effect": "Gain a barrier equal to 50% of max HP and cleanse all negative effects.",
+    "cooldown": 7,
+    "origin": "Map09_Floor01 chest"
+  },
+  {
+    "id": "emberPrayer",
+    "name": "Ember Prayer",
+    "type": "Defensive",
+    "effect": "Heal 20% max HP and inflict Burn for 10 turns.",
+    "cooldown": 4,
+    "origin": "Map09_Floor02 chest"
+  }
+]

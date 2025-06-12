@@ -1,0 +1,824 @@
+{
+  "goblin01": {
+    "name": "Goblin",
+    "hp": 50,
+    "stats": {
+      "attack": 2,
+      "defense": 0
+    },
+    "xp": 5,
+    "description": "A mischievous green creature with a sharp grin.",
+    "intro": "The goblin snarls and prepares to strike!",
+    "portrait": "👺",
+    "skills": [
+      "strike"
+    ],
+    "drops": [
+      {
+        "item": "goblin_ear",
+        "quantity": 1
+      }
+    ]
+  },
+  "zombie01": {
+    "name": "Zombie",
+    "hp": 50,
+    "stats": {
+      "attack": 2,
+      "defense": 1
+    },
+    "xp": 5,
+    "description": "A shambling undead with vacant eyes.",
+    "intro": "The zombie groans and lurches forward!",
+    "portrait": "🧟",
+    "skills": [
+      "strike"
+    ],
+    "drops": [
+      {
+        "item": "bone_fragment",
+        "quantity": 1
+      }
+    ]
+  },
+  "goblin_scout": {
+    "name": "Goblin Scout",
+    "hp": 40,
+    "stats": {
+      "attack": 2,
+      "defense": 0
+    },
+    "xp": 6,
+    "description": "A keen-eyed goblin keeping watch over the hills.",
+    "intro": "The scout spots you and blows a horn!",
+    "portrait": "🗡️",
+    "skills": [
+      "strike"
+    ],
+    "drops": [
+      {
+        "item": "scout_blade",
+        "quantity": 1
+      }
+    ]
+  },
+  "goblin_archer": {
+    "name": "Goblin Archer",
+    "hp": 45,
+    "stats": {
+      "attack": 3,
+      "defense": 0
+    },
+    "xp": 6,
+    "description": "A nimble archer supporting the goblin ranks.",
+    "intro": "A goblin archer looses a piercing shot!",
+    "portrait": "🏹",
+    "skills": [
+      "piercing_arrow"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "goblin_bow",
+        "quantity": 1
+      }
+    ]
+  },
+  "rotting_warrior": {
+    "name": "Rotting Warrior",
+    "hp": 65,
+    "stats": {
+      "attack": 4,
+      "defense": 2
+    },
+    "xp": 8,
+    "description": "An undead fighter dripping with stagnant water.",
+    "intro": "A rotting warrior lumbers from the marsh!",
+    "portrait": "🪓",
+    "skills": [
+      "decay_blow"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "bone_shard",
+        "quantity": 1
+      },
+      {
+        "item": "rotting_heart",
+        "quantity": 1
+      }
+    ]
+  },
+  "scout_commander": {
+    "name": "Scout Commander",
+    "hp": 90,
+    "stats": {
+      "attack": 4,
+      "defense": 2
+    },
+    "xp": 12,
+    "description": "Leader of the goblin scouting parties, armored and alert.",
+    "intro": "The scout commander barks orders and charges!",
+    "portrait": "🎖️",
+    "skills": [
+      "power_slash",
+      "call_backup",
+      "crush_defense"
+    ],
+    "behavior": "cautious",
+    "type": "elite",
+    "drops": [
+      {
+        "item": "commander_badge",
+        "quantity": 1
+      }
+    ],
+    "onDefeatMessage": "The commander falls. A silence settles over the hills."
+  },
+  "ghost_echo": {
+    "name": "Ghost Echo",
+    "hp": 30,
+    "stats": {
+      "attack": 1,
+      "defense": 0
+    },
+    "xp": 4,
+    "description": "A faint apparition clinging to lost memories.",
+    "intro": "A ghostly echo rises from the fallen goblin!",
+    "portrait": "👻",
+    "skills": [
+      "weaken"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "faded_letter",
+        "quantity": 1
+      }
+    ]
+  },
+  "shadow_lurker": {
+    "name": "Shadow Lurker",
+    "hp": 65,
+    "stats": {
+      "attack": 5,
+      "defense": 2
+    },
+    "xp": 30,
+    "description": "A creature that thrives in darkness and strikes unseen.",
+    "intro": "A Shadow Lurker melts out of the gloom!",
+    "portrait": "👽",
+    "skills": [
+      "strike",
+      "weaken"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "mysterious_token",
+        "quantity": 1
+      }
+    ]
+  },
+  "flame_hound": {
+    "name": "Flame Hound",
+    "hp": 55,
+    "stats": {
+      "attack": 4,
+      "defense": 1
+    },
+    "xp": 13,
+    "description": "A fiery beast wreathed in scorching flames.",
+    "intro": "A Flame Hound leaps toward you with blazing jaws!",
+    "portrait": "🔥",
+    "skills": [
+      "strike",
+      "emberBite"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "purified_token",
+        "quantity": 1
+      }
+    ]
+  },
+  "ruin_watcher": {
+    "name": "Ruin Watcher",
+    "hp": 70,
+    "stats": {
+      "attack": 5,
+      "defense": 3
+    },
+    "xp": 14,
+    "description": "A sentinel fashioned from forgotten stone.",
+    "intro": "Stone eyes open as a Ruin Watcher stirs!",
+    "portrait": "🗿",
+    "skills": [
+      "strike"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "cracked_helmet",
+        "quantity": 1
+      }
+    ]
+  },
+  "echo_sentinel": {
+    "name": "Echo Sentinel",
+    "hp": 120,
+    "stats": {
+      "attack": 7,
+      "defense": 4
+    },
+    "xp": 30,
+    "description": "Guardian of the old halls, resonating with power.",
+    "intro": "An Echo Sentinel emerges, resonating with menace!",
+    "portrait": "🔊",
+    "skills": [
+      "strike",
+      "weaken"
+    ],
+    "behavior": "aggressive",
+    "type": "elite",
+    "drops": [
+      {
+        "item": "ruin_key",
+        "quantity": 1
+      }
+    ]
+  },
+  "whispered_mirror": {
+    "name": "The Whispered Mirror",
+    "hp": 200,
+    "stats": {
+      "attack": 8,
+      "defense": 5
+    },
+    "xp": 50,
+    "description": "A reflective entity reacting to remembered choices.",
+    "intro": "The mirror's surface ripples, echoing your past decisions.",
+    "portrait": "🪞",
+    "skills": [
+      "strike",
+      "weaken"
+    ],
+    "behavior": "aggressive",
+    "boss": true,
+    "drops": [
+      {
+        "item": "code_file",
+        "quantity": 1
+      }
+    ]
+  },
+  "shadow_inversion": {
+    "name": "Shadow Inversion",
+    "hp": 220,
+    "stats": {
+      "attack": 9,
+      "defense": 6
+    },
+    "xp": 60,
+    "description": "A twisted reflection drawn from forsaken choices.",
+    "intro": "From the rift emerges a warped silhouette of yourself!",
+    "portrait": "🌑",
+    "skills": [
+      "strike",
+      "weaken"
+    ],
+    "behavior": "aggressive",
+    "boss": true,
+    "drops": [
+      {
+        "item": "mysterious_token",
+        "quantity": 1
+      }
+    ]
+  },
+  "goblin_raider": {
+    "name": "Goblin Raider",
+    "hp": 55,
+    "stats": {
+      "attack": 3,
+      "defense": 1
+    },
+    "xp": 7,
+    "description": "A goblin clad in mismatched gear from raids.",
+    "intro": "A goblin raider leaps from the shadows!",
+    "portrait": "🗡️",
+    "skills": [
+      "scratch"
+    ],
+    "drops": [
+      {
+        "item": "goblin_gear",
+        "quantity": 1
+      }
+    ]
+  },
+  "restless_bones": {
+    "name": "Restless Bones",
+    "hp": 45,
+    "stats": {
+      "attack": 2,
+      "defense": 0
+    },
+    "xp": 6,
+    "description": "Bones animated by lingering necrotic energy.",
+    "intro": "A pile of bones rattles to life!",
+    "portrait": "💀",
+    "skills": [
+      "decay_touch"
+    ],
+    "drops": [
+      {
+        "item": "bone_fragment",
+        "quantity": 1
+      }
+    ]
+  },
+  "echo_absolute": {
+    "name": "Echo Absolute",
+    "hp": 300,
+    "stats": {
+      "attack": 10,
+      "defense": 8
+    },
+    "xp": 100,
+    "description": "A culmination of every path you've taken.",
+    "intro": "All echoes merge into one overwhelming presence!",
+    "portrait": "✨",
+    "skills": [
+      "strike",
+      "memorySurge",
+      "relicGuard"
+    ],
+    "behavior": "aggressive",
+    "boss": true,
+    "drops": [
+      {
+        "item": "health_amulet",
+        "quantity": 1
+      }
+    ]
+  },
+  "corrupted_sentry": {
+    "name": "Corrupted Sentry",
+    "hp": 80,
+    "stats": {
+      "attack": 5,
+      "defense": 3
+    },
+    "xp": 15,
+    "description": "A guard construct warped by corruption.",
+    "intro": "Metal screeches as a corrupted sentry charges!",
+    "portrait": "🤖",
+    "skills": [
+      "bleed_claw"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "sentry_plating",
+        "quantity": 1
+      }
+    ]
+  },
+  "rift_lurker": {
+    "name": "Rift Lurker",
+    "hp": 90,
+    "stats": {
+      "attack": 6,
+      "defense": 2
+    },
+    "xp": 18,
+    "description": "A creature fueled by unstable rift energy.",
+    "intro": "A Rift Lurker slips from the shadows!",
+    "portrait": "🕷️",
+    "skills": [
+      "rift_touch"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "chaos_organ",
+        "quantity": 1
+      },
+      {
+        "item": "rift_stone",
+        "quantity": 1
+      }
+    ]
+  },
+  "arcane_wretch": {
+    "name": "Arcane Wretch",
+    "hp": 70,
+    "stats": {
+      "attack": 4,
+      "defense": 1
+    },
+    "xp": 16,
+    "description": "A warped mage that disrupts magic.",
+    "intro": "Arcane whispers herald the wretch's arrival!",
+    "portrait": "🧟‍♂️",
+    "skills": [
+      "silence_wave",
+      "arcane_bolt",
+      "weakening_hex"
+    ],
+    "cycleSkills": true,
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "void_residue",
+        "quantity": 1
+      }
+    ]
+  },
+  "cracked_husk": {
+    "name": "Cracked Husk",
+    "hp": 50,
+    "stats": {
+      "attack": 4,
+      "defense": 1
+    },
+    "xp": 15,
+    "description": "Weak undead remnant held together by crystal.",
+    "intro": "A cracked husk lurches toward you!",
+    "portrait": "🦴",
+    "skills": [
+      "slam",
+      "grasp"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "flesh_crystal",
+        "quantity": 1
+      }
+    ]
+  },
+  "crystarch": {
+    "name": "Crystarch",
+    "hp": 65,
+    "stats": {
+      "attack": 5,
+      "defense": 3
+    },
+    "xp": 16,
+    "description": "A crystalline guardian that shimmers menacingly.",
+    "intro": "Shards swirl as a Crystarch assembles!",
+    "portrait": "🔹",
+    "skills": [
+      "shard_spike",
+      "reflect_shell"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "crystal_dust",
+        "quantity": 1
+      }
+    ]
+  },
+  "crystal_sentry": {
+    "name": "Crystal Sentry",
+    "hp": 150,
+    "stats": {
+      "attack": 4,
+      "defense": 3
+    },
+    "xp": 40,
+    "description": "A vigilant prism guardian.",
+    "intro": "Facets glint as a Crystal Sentry awakens!",
+    "portrait": "🔶",
+    "skills": [
+      "prism_shot",
+      "refract_guard"
+    ],
+    "behavior": "balanced",
+    "drops": [
+      {
+        "item": "prism_fragment",
+        "quantity": 1
+      }
+    ]
+  },
+  "ember_fiend": {
+    "name": "Ember Fiend",
+    "hp": 55,
+    "stats": {
+      "attack": 5,
+      "defense": 1
+    },
+    "xp": 12,
+    "description": "A fiery creature that leaves burning trails.",
+    "intro": "Flames roar as an Ember Fiend emerges!",
+    "portrait": "🔥",
+    "skills": [
+      "blazing_claw",
+      "flame_pulse"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "ember_residue",
+        "quantity": 1
+      }
+    ]
+  },
+  "pain_lattice": {
+    "name": "Pain Lattice",
+    "hp": 70,
+    "stats": {
+      "attack": 5,
+      "defense": 2
+    },
+    "xp": 18,
+    "description": "Psychic construct that lashes out with torment.",
+    "intro": "Mental energy weaves into a lattice of agony!",
+    "portrait": "🕸️",
+    "skills": [
+      "neural_lash",
+      "confuse"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "psy_fiber",
+        "quantity": 1
+      }
+    ]
+  },
+  "temple_warden": {
+    "name": "Temple Warden",
+    "hp": 110,
+    "stats": {
+      "attack": 5,
+      "defense": 6
+    },
+    "xp": 22,
+    "description": "Stonebound guardian of the inner sanctum.",
+    "intro": "Ancient armor grinds as a Temple Warden awakens!",
+    "portrait": "🛡️",
+    "skills": [
+      "pillar_slam",
+      "sanctified_guard",
+      "ward_pulse"
+    ],
+    "behavior": "defensive",
+    "drops": [
+      {
+        "item": "polished_shard",
+        "quantity": 1
+      }
+    ]
+  },
+  "silent_idol": {
+    "name": "Silent Idol",
+    "hp": 80,
+    "stats": {
+      "attack": 5,
+      "defense": 3
+    },
+    "xp": 20,
+    "description": "A haunting statue murmuring forgotten prayers.",
+    "intro": "The idol's eyes flare and silence grips the hall!",
+    "portrait": "🕯️",
+    "skills": [
+      "silent_revelation",
+      "fragmented_chant",
+      "still_mind"
+    ],
+    "behavior": "cautious",
+    "drops": [
+      {
+        "item": "temple_resin",
+        "quantity": 1
+      }
+    ]
+  },
+  "obsidian_disciple": {
+    "name": "Obsidian Disciple",
+    "hp": 100,
+    "stats": {
+      "attack": 6,
+      "defense": 4
+    },
+    "xp": 26,
+    "description": "Keeper of flame and oath within the depths.",
+    "intro": "Heat swirls as the Obsidian Disciple approaches!",
+    "portrait": "🔥",
+    "skills": [
+      "oathfire_slash",
+      "ashen_oath",
+      "searing_trial"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "ritual_oil",
+        "quantity": 1
+      }
+    ]
+  },
+  "shattermind": {
+    "name": "Shattermind",
+    "hp": 130,
+    "stats": {
+      "attack": 7,
+      "defense": 4
+    },
+    "xp": 30,
+    "description": "A rogue psyche that fractures reality around it.",
+    "intro": "The air screams as Shattermind materializes!",
+    "portrait": "💠",
+    "skills": [
+      "fracture_wave",
+      "mind_spike",
+      "echo_wound"
+    ],
+    "cycleSkills": true,
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "rift_eye",
+        "quantity": 1
+      },
+      {
+        "item": "memory_gem",
+        "quantity": 1
+      }
+    ]
+  },
+  "ash_vessel": {
+    "name": "Ash Vessel",
+    "hp": 85,
+    "stats": {
+      "attack": 6,
+      "defense": 2
+    },
+    "xp": 24,
+    "description": "A vessel of smoldering ash that bursts into flame upon defeat.",
+    "intro": "Ash swirls as an Ash Vessel lumbers forward!",
+    "portrait": "⚱️",
+    "skills": [
+      "kindled_touch"
+    ],
+    "deathSkill": "ashburst",
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "volcanic_slag",
+        "quantity": 1
+      }
+    ]
+  },
+  "dust_prophet": {
+    "name": "Dust Prophet",
+    "hp": 75,
+    "stats": {
+      "attack": 5,
+      "defense": 3
+    },
+    "xp": 23,
+    "description": "A seer who conjures dust hexes and mirrored forms.",
+    "intro": "A Dust Prophet whispers and the ground stirs!",
+    "portrait": "🌫️",
+    "skills": [
+      "dust_hex",
+      "mirage_form",
+      "silt_veil"
+    ],
+    "behavior": "cautious",
+    "drops": [
+      {
+        "item": "veil_powder",
+        "quantity": 1
+      }
+    ]
+  },
+  "chimebound_monk": {
+    "name": "Chimebound Monk",
+    "hp": 70,
+    "stats": {
+      "attack": 4,
+      "defense": 3
+    },
+    "xp": 22,
+    "description": "Monk wielding resonant chimes to confuse foes.",
+    "intro": "The ringing of bells heralds the Chimebound Monk!",
+    "portrait": "🔔",
+    "skills": [
+      "resonant_pulse",
+      "null_chime"
+    ],
+    "behavior": "cautious",
+    "drops": [
+      {
+        "item": "cracked_chime",
+        "quantity": 1
+      }
+    ]
+  },
+  "hollow_wailer": {
+    "name": "Hollow Wailer",
+    "hp": 90,
+    "stats": {
+      "attack": 6,
+      "defense": 4
+    },
+    "xp": 26,
+    "description": "A tormented spirit whose wail can silence minds.",
+    "intro": "A mournful cry echoes... the Hollow Wailer appears!",
+    "portrait": "🎵",
+    "skills": [
+      "hollow_wail",
+      "despair_note"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      {
+        "item": "echo_crystal",
+        "quantity": 1
+      }
+    ]
+  },
+  "cracked_crystal_sentry": {
+    "name": "Cracked Crystal Sentry",
+    "hp": 300,
+    "stats": {
+      "attack": 4,
+      "defense": 5
+    },
+    "xp": 100,
+    "description": "A fractured sentinel brimming with unstable power.",
+    "intro": "Fragments stir as a Cracked Crystal Sentry emerges!",
+    "portrait": "💠",
+    "skills": [
+      "refract_crack",
+      "prism_crack"
+    ],
+    "behavior": "balanced",
+    "drops": [
+      {
+        "item": "prism_fragment",
+        "quantity": 1
+      }
+    ]
+  },
+  "runic_sentinel": {
+    "name": "Runic Sentinel",
+    "hp": 160,
+    "stats": {
+      "attack": 6,
+      "defense": 2
+    },
+    "xp": 50,
+    "description": "An ancient guardian of forgotten rites, pulsing with faint magic.",
+    "intro": "Runes flare as the Runic Sentinel awakens!",
+    "portrait": "📜",
+    "skills": [
+      "runic_blast",
+      "sigil_disrupt"
+    ],
+    "cycleSkills": true,
+    "behavior": "aggressive",
+    "boss": true,
+    "drops": [
+      {
+        "item": "sealing_dust",
+        "quantity": 1
+      }
+    ]
+  },
+  "warden_threshold": {
+    "name": "Warden of the Threshold",
+    "hp": 260,
+    "stats": {
+      "attack": 15,
+      "defense": 3
+    },
+    "xp": 110,
+    "description": "An ancient guardian forged to test those who would enter the temple.",
+    "intro": "The Warden rumbles awake, blocking your path!",
+    "portrait": "🚪",
+    "skills": [
+      "stone_lash",
+      "earthbind",
+      "resolve_break",
+      "quaking_step"
+    ],
+    "behavior": "balanced",
+    "boss": true,
+    "drops": [
+      {
+        "item": "temple_key",
+        "quantity": 1
+      }
+    ]
+  }
+}
