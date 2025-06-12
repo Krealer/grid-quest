@@ -13,7 +13,7 @@ export const eryndorDialogue = [
     ]
   },
   {
-    text: "Combine a bone fragment with a broken armor piece. You\u2019ll find resilience in that.",
+    text: "Combine a bone fragment with some goblin gear. You\u2019ll find resilience in that.",
     options: [
       {
         label: "Got it. Thanks.",

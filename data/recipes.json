@@ -16,7 +16,7 @@
   "defense_potion_I": {
     "id": "defense_potion_I",
     "name": "Defense Potion I",
-    "ingredients": { "bone_fragment": 1, "armor_piece": 1 },
+    "ingredients": { "bone_fragment": 1, "goblin_gear": 1 },
     "result": "defense_potion_I",
     "quantity": 1,
     "type": "combat",
