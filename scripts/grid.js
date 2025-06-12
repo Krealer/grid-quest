@@ -38,7 +38,7 @@ export function renderGrid(
         type = cell.classType[cls];
       }
 
-      if (type === 'N' && cell.style === 'advanced') {
+      if (type === 'N' && (cell.style === 'advanced' || cell.advanced)) {
         type = 'n';
       }
 

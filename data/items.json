@@ -175,6 +175,14 @@
     "icon": "☀️",
     "category": "general"
   },
+  "shadow_token": {
+    "name": "Shadow Token",
+    "description": "A dark token that seems to absorb light.",
+    "type": "key",
+    "stackLimit": 1,
+    "icon": "🗝️",
+    "category": "key"
+  },
   "defense_potion_I": {
     "name": "Defense Potion I",
     "description": "Increases defense by 1 for this fight.",
