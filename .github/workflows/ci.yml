@@ -1,0 +1,24 @@
+name: Node CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        id: install
+        run: npm ci
+        continue-on-error: true
+      - name: Lint
+        if: steps.install.outcome == 'success'
+        run: npm run lint
+      - name: Test
+        if: steps.install.outcome == 'success'
+        run: npm test

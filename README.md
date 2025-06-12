@@ -47,6 +47,9 @@ Run this command before using `npm run lint` or `npm test`.
 - `npm run lint` – check code with ESLint
 - `npm run format` – format files using Prettier
 - `npm test` – run Jest tests (none included by default)
+## Continuous Integration
+
+This repository provides a GitHub Actions workflow that attempts to install dependencies and run `npm run lint` and `npm test`. If the install step fails, the workflow skips linting and tests.
 
 ## Deploying to GitHub Pages
 
