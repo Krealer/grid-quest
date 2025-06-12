@@ -35,6 +35,7 @@ import { gameState } from './game_state.js';
 import { logMessage } from './message_log.js';
 import { markItemUsed } from '../info/items.js';
 import { loadRelics, getRelicData, getOwnedRelics } from './relic_state.js';
+import { getBlueprints } from './inventory_state.js';
 
 let currentCategory = 'items';
 const scrollPositions = {};
@@ -77,6 +78,31 @@ export async function updateInventoryUI() {
   if (statsEl) {
     const stats = getTotalStats();
     statsEl.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Attack: ${stats.attack || 0}  Defense: ${stats.defense || 0}`;
+  }
+  if (currentCategory === 'blueprints') {
+    const blueprints = await getBlueprints();
+    if (blueprints.length === 0) {
+      const msg = document.createElement('div');
+      msg.classList.add('info-empty');
+      msg.textContent = 'No blueprints unlocked.';
+      list.appendChild(msg);
+    } else {
+      blueprints.forEach((bp) => {
+        const row = document.createElement('div');
+        row.classList.add('inventory-item');
+        const reqs = Object.entries(bp.ingredients)
+          .map(([itm, qty]) => {
+            const base = getItemData(itm) || { name: itm };
+            return `${base.name} x${qty}`;
+          })
+          .join(' + ');
+        const resultName = getItemData(bp.result)?.name || bp.result;
+        row.innerHTML = `<strong>${bp.name}</strong><div class="desc">Requires: ${reqs}<br>Produces: ${resultName} x${bp.quantity || 1}</div>`;
+        list.appendChild(row);
+      });
+    }
+    list.scrollTop = prevScroll;
+    return;
   }
   let cat = currentCategory;
   if (cat === 'items') cat = ['general', 'crafting'];
@@ -162,7 +188,11 @@ export async function updateInventoryUI() {
       tooltipText = effects.join(', ');
     }
     // baseId was already extracted above; reuse it here to check for set pieces
-    if (baseId === 'temple_sword' || baseId === 'temple_shell' || baseId === 'temple_ring') {
+    if (
+      baseId === 'temple_sword' ||
+      baseId === 'temple_shell' ||
+      baseId === 'temple_ring'
+    ) {
       if (tooltipText) tooltipText += '\n';
       tooltipText += 'Temple Set piece';
       if (player.hasTemplePassive) tooltipText += ' (Set active)';
@@ -202,7 +232,9 @@ function handleInventoryItemUse(id) {
     if (res) {
       player.hp = Math.min(player.maxHp, player.hp + res.heal);
       document.dispatchEvent(
-        new CustomEvent('playerHpChanged', { detail: { hp: player.hp, maxHp: player.maxHp } })
+        new CustomEvent('playerHpChanged', {
+          detail: { hp: player.hp, maxHp: player.maxHp }
+        })
       );
       used = true;
     }
