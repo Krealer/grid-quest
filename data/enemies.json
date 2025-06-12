@@ -41,50 +41,6 @@
       }
     ]
   },
-  "B": {
-    "name": "Bandit",
-    "hp": 100,
-    "stats": {
-      "attack": 3,
-      "defense": 1
-    },
-    "xp": 7,
-    "description": "A scruffy thief eyeing your belongings.",
-    "intro": "The bandit lunges for your coin purse!",
-    "portrait": "🥷",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
-    "behavior": "aggressive",
-    "drops": [
-      {
-        "item": "armor_piece",
-        "quantity": 1
-      }
-    ]
-  },
-  "S": {
-    "name": "Skeleton",
-    "hp": 40,
-    "stats": {
-      "attack": 2,
-      "defense": 0
-    },
-    "xp": 6,
-    "description": "Bones clatter as it advances.",
-    "intro": "A skeleton rattles menacingly!",
-    "portrait": "💀",
-    "skills": [
-      "strike"
-    ],
-    "drops": [
-      {
-        "item": "bone_fragment",
-        "quantity": 1
-      }
-    ]
-  },
   "goblin_scout": {
     "name": "Goblin Scout",
     "hp": 40,
@@ -180,74 +136,6 @@
     ],
     "onDefeatMessage": "The commander falls. A silence settles over the hills."
   },
-  "wandering_shade": {
-    "name": "Wandering Shade",
-    "hp": 55,
-    "stats": {
-      "attack": 3,
-      "defense": 1
-    },
-    "xp": 10,
-    "description": "A spectral remnant drifting between realms.",
-    "intro": "A chill fills the air as a shadowy figure emerges!",
-    "portrait": "💮",
-    "skills": [
-      "weaken",
-      "shadowBolt"
-    ],
-    "behavior": "aggressive",
-    "drops": [
-      {
-        "item": "mystic_dust",
-        "quantity": 1
-      }
-    ]
-  },
-  "stone_beetle": {
-    "name": "Stone Beetle",
-    "hp": 70,
-    "stats": {
-      "attack": 4,
-      "defense": 3
-    },
-    "xp": 12,
-    "description": "A heavy-shelled insect that rumbles with each step.",
-    "intro": "Stones crack as a massive beetle scuttles toward you!",
-    "portrait": "🐞",
-    "skills": [
-      "strike"
-    ],
-    "behavior": "aggressive",
-    "drops": [
-      {
-        "item": "armor_piece",
-        "quantity": 1
-      }
-    ]
-  },
-  "phantom_mage": {
-    "name": "Phantom Mage",
-    "hp": 60,
-    "stats": {
-      "attack": 4,
-      "defense": 1
-    },
-    "xp": 12,
-    "description": "A ghostly spellcaster muttering forgotten words.",
-    "intro": "The air grows cold as a phantom mage materializes!",
-    "portrait": "👻",
-    "skills": [
-      "weaken",
-      "shadowBolt"
-    ],
-    "behavior": "aggressive",
-    "drops": [
-      {
-        "item": "arcane_crystal",
-        "quantity": 1
-      }
-    ]
-  },
   "ghost_echo": {
     "name": "Ghost Echo",
     "hp": 30,
@@ -312,76 +200,6 @@
     "drops": [
       {
         "item": "purified_token",
-        "quantity": 1
-      }
-    ]
-  },
-  "ember_wraith": {
-    "name": "Ember Wraith",
-    "hp": 70,
-    "stats": {
-      "attack": 5,
-      "defense": 3
-    },
-    "xp": 15,
-    "description": "A spirit burning with both shadow and fire.",
-    "intro": "Flames flicker as a wraith coalesces from the darkness!",
-    "portrait": "🔥",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
-    "behavior": "aggressive",
-    "drops": [
-      {
-        "item": "mystic_dust",
-        "quantity": 1
-      }
-    ]
-  },
-  "relic_guardian": {
-    "name": "Relic Guardian",
-    "hp": 120,
-    "stats": {
-      "attack": 6,
-      "defense": 4
-    },
-    "xp": 20,
-    "description": "An ancient construct protecting forgotten treasures.",
-    "intro": "Stone grinds as the relic guardian awakens!",
-    "portrait": "🛡️",
-    "skills": [
-      "strike",
-      "weaken"
-    ],
-    "behavior": "aggressive",
-    "type": "elite",
-    "drops": [
-      {
-        "item": "blueprint_amulet",
-        "quantity": 1
-      }
-    ]
-  },
-  "shadow_pyromancer": {
-    "name": "Shadow Pyromancer",
-    "hp": 80,
-    "stats": {
-      "attack": 6,
-      "defense": 2
-    },
-    "xp": 16,
-    "description": "A mage wielding flames that thrive in darkness.",
-    "intro": "A pyromancer steps from the gloom, sparks dancing!",
-    "portrait": "🧙",
-    "skills": [
-      "weaken",
-      "strike"
-    ],
-    "behavior": "aggressive",
-    "drops": [
-      {
-        "item": "arcane_crystal",
         "quantity": 1
       }
     ]
@@ -476,50 +294,6 @@
     "drops": [
       {
         "item": "mysterious_token",
-        "quantity": 1
-      }
-    ]
-  },
-  "unmoving_shadow": {
-    "name": "Unmoving Shadow",
-    "hp": 80,
-    "stats": {
-      "attack": 2,
-      "defense": 0
-    },
-    "xp": 4,
-    "description": "A dark figure that barely reacts to your presence.",
-    "intro": "A silent shadow looms, unmoving.",
-    "portrait": "🌑",
-    "skills": [
-      "strike"
-    ],
-    "behavior": "passive",
-    "drops": [
-      {
-        "item": "faded_letter",
-        "quantity": 1
-      }
-    ]
-  },
-  "mirror_clone": {
-    "name": "Mirror Clone",
-    "hp": 80,
-    "stats": {
-      "attack": 3,
-      "defense": 1
-    },
-    "xp": 15,
-    "description": "An echo shaped from your resolve.",
-    "intro": "A reflection steps from the mirror!",
-    "portrait": "✨",
-    "skills": [
-      "strike"
-    ],
-    "behavior": "aggressive",
-    "drops": [
-      {
-        "item": "code_file",
         "quantity": 1
       }
     ]
