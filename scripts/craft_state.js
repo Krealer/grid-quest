@@ -52,6 +52,10 @@ export function isBlueprintUnlocked(id) {
   return craftState.unlockedBlueprints.has(id);
 }
 
+export function getUnlockedBlueprints() {
+  return Array.from(craftState.unlockedBlueprints);
+}
+
 export function unlockFusion() {
   if (!craftState.fusionUnlocked) {
     craftState.fusionUnlocked = true;

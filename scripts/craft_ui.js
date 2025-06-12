@@ -31,9 +31,22 @@ export async function updateCraftUI() {
   ids.forEach((id) => {
     const data = getRecipe(id) || getBlueprint(id);
     if (!data) return;
-    const row = document.createElement('div');
-    row.classList.add('craft-item');
-    row.dataset.recipeId = id;
+    const card = document.createElement('div');
+    card.classList.add('recipe-card');
+    card.dataset.recipeId = id;
+    const reqs = Object.entries(data.ingredients)
+      .map(([itm, qty]) => {
+        const base = getItemData(itm) || { name: itm };
+        const have = getItemCount(itm);
+        const cls = have >= qty ? 'have' : 'missing';
+        return `<span class="req ${cls}">${base.name} x${qty}</span>`;
+      })
+      .join(' + ');
+    const resultName = getItemData(data.result)?.name || data.result;
+    card.innerHTML = `
+      <strong>${data.name}</strong>
+      <div class="ingredients">${reqs}</div>
+      <div class="result">&rarr; ${resultName}</div>`;
     const btn = document.createElement('button');
     btn.textContent = 'Craft';
     btn.dataset.recipeId = id;
@@ -43,20 +56,14 @@ export async function updateCraftUI() {
       const ok = await craft(rid);
       if (ok) updateCraftUI();
     });
-    const reqs = Object.entries(data.ingredients)
-      .map(([itm, qty]) => {
-        const base = getItemData(itm) || { name: itm };
-        const have = getItemCount(itm);
-        const cls = have >= qty ? 'have' : 'missing';
-        return `<span class="req ${cls}">${base.name} x${qty}</span>`;
-      })
-      .join(', ');
-    row.innerHTML = `<strong>${data.name}</strong><div class="desc">${reqs}</div>`;
-    row.appendChild(btn);
-    list.appendChild(row);
+    card.appendChild(btn);
+    list.appendChild(card);
   });
   if (ids.length === 0) {
-    list.innerHTML = '<em>No known recipes</em>';
+    const msg = document.createElement('div');
+    msg.classList.add('info-empty');
+    msg.textContent = "You don't know any crafting recipes yet.";
+    list.appendChild(msg);
   }
 }
 
