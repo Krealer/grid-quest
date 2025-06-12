@@ -2,7 +2,35 @@
   "name": "Temple of Depths — Floor I",
   "environment": "ruins",
   "grid": [
-    "FFFFFFFFFFFFFFFFFFFF",
+    [
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      {
+        "type": "D",
+        "target": "map09.json",
+        "spawn": {
+          "x": 10,
+          "y": 18
+        }
+      },
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F"
+    ],
     [
       "F",
       "F",
@@ -14,14 +42,7 @@
       "F",
       "F",
       "G",
-      {
-        "type": "D",
-        "target": "map09_floor02.json",
-        "spawn": {
-          "x": 10,
-          "y": 1
-        }
-      },
+      "G",
       "G",
       "F",
       "F",
@@ -410,14 +431,7 @@
       "F",
       "F",
       "F",
-      {
-        "type": "D",
-        "target": "map09.json",
-        "spawn": {
-          "x": 10,
-          "y": 18
-        }
-      },
+      "G",
       "G",
       "G",
       "t",
@@ -432,6 +446,34 @@
       },
       "F"
     ],
-    "FFFFFFFFFFFFFFFFFFFF"
+    [
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      {
+        "type": "D",
+        "target": "map09_floor02.json",
+        "spawn": {
+          "x": 10,
+          "y": 1
+        }
+      },
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F"
+    ]
   ]
 }
