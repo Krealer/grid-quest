@@ -6,6 +6,15 @@ export function generateTileId(x, y) {
   return `${x},${y}`;
 }
 
+export function calculateDamage(attacker, target, baseDamage) {
+  const defense = target.stats?.defense ?? target.defense ?? 0;
+  const effectiveDefense = Math.max(defense, 0);
+  const penaltyMultiplier = defense < 0 ? 1 + 0.1 * Math.abs(defense) : 1;
+  const rawDamage = baseDamage - effectiveDefense;
+  const amplified = Math.floor(rawDamage * penaltyMultiplier);
+  return Math.max(amplified, 0);
+}
+
 export function applyDamage(target, amount) {
   let dmg = amount;
   if (typeof target.damageTakenMod === 'number') {
@@ -16,11 +25,7 @@ export function applyDamage(target, amount) {
     dmg -= absorbed;
     target.absorb -= absorbed;
   }
-  const defense = target.stats?.defense || 0;
-  const reduction = Math.max(0, defense);
-  const penalty = defense < 0 ? 1 + Math.abs(defense) * 0.1 : 1;
-  dmg = Math.max(0, (dmg - reduction) * penalty);
-  const final = Math.floor(dmg);
+  const final = calculateDamage(null, target, dmg);
   if (target.hasResolve && target.hp - final <= 0) {
     const lost = target.hp - 1;
     target.hasResolve = false;
