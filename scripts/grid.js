@@ -38,6 +38,10 @@ export function renderGrid(
         type = cell.classType[cls];
       }
 
+      if (type === 'N' && cell.style === 'advanced') {
+        type = 'n';
+      }
+
       const info = getTileInfo(type);
       div.classList.add(`tile-${type}`);
       div.classList.add(`shape-${info.shape}`);

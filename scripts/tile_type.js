@@ -220,6 +220,14 @@ export async function onInteractEffect(
       }
       break;
     }
+    case 'n': {
+      const npcId = tile.npc;
+      const npc = npcModules[npcId];
+      if (npc && typeof npc.interact === 'function') {
+        await npc.interact();
+      }
+      break;
+    }
     case 'G': {
       if (tile.rotate) {
         triggerRotation(tile.rotate);
