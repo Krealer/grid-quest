@@ -104,6 +104,14 @@ export const enemies = [
     skills: 'blazing_claw, flame_pulse'
   },
   {
+    id: 'runic_sentinel',
+    name: 'Runic Sentinel',
+    map: 'Map08',
+    location: '10,5',
+    drops: 'Sealing Dust',
+    skills: 'runic_blast, sigil_disrupt'
+  },
+  {
     id: 'shattermind',
     name: 'Shattermind',
     map: 'Map05',
