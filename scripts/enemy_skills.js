@@ -913,8 +913,79 @@ export const enemySkills = {
     effect({ player, applyStatus, log, enemy }) {
       applyStatus(player, 'weakened', 2);
       log(`${enemy.name} disrupts your stance with arcane pressure!`);
+    },
+  },
+  stone_lash: {
+    id: 'stone_lash',
+    name: 'Stone Lash',
+    icon: '🪨',
+    description: 'A heavy strike of stone.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = atk + (enemy.tempAttack || 0);
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} lashes out with stone for ${applied} damage!`);
     }
-  }
+  },
+  earthbind: {
+    id: 'earthbind',
+    name: 'Earthbind',
+    icon: '⛓️',
+    description: '90% ATK and inflicts Weakened for 3 turns.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 5,
+    aiType: 'damage',
+    applies: ['weakened'],
+    statuses: [{ target: 'player', id: 'weakened', duration: 3 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = Math.round(0.9 * (atk + (enemy.tempAttack || 0)));
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'weakened', 3);
+      log(`${enemy.name} binds you with earth for ${applied} damage!`);
+    }
+  },
+  resolve_break: {
+    id: 'resolve_break',
+    name: 'Resolve Break',
+    icon: '🪓',
+    description: '50% ATK and permanently reduces defense by 2.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 10,
+    aiType: 'damage',
+    effect({ enemy, player, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = Math.round(0.5 * (atk + (enemy.tempAttack || 0)));
+      const applied = damagePlayer(dmg);
+      if (player.stats) player.stats.defense = (player.stats.defense || 0) - 2;
+      log(`${enemy.name} shatters your resolve for ${applied} damage!`);
+    }
+  },
+  quaking_step: {
+    id: 'quaking_step',
+    name: 'Quaking Step',
+    icon: '💥',
+    description: '50% ATK and stuns for 1 turn.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 5,
+    aiType: 'damage',
+    applies: ['stunned'],
+    statuses: [{ target: 'player', id: 'stunned', duration: 1 }],
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = Math.round(0.5 * (atk + (enemy.tempAttack || 0)));
+      const applied = damagePlayer(dmg);
+      applyStatus(player, 'stunned', 1);
+      log(`${enemy.name} stomps the ground for ${applied} damage!`);
+    }
+  },
 };
 
 export function getEnemySkill(id) {

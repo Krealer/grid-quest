@@ -233,7 +233,10 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "warden_threshold"
+      },
       "G",
       "G",
       "G",

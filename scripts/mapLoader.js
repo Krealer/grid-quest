@@ -3,9 +3,6 @@ import { loadJson } from './dataService.js';
 import {
   markForkVisited,
   visitedBothForks,
-  hasSealingDust,
-  consumeSealingDust,
-  isSealPuzzleSolved,
   isMirrorPuzzleSolved,
   isCorruptionPuzzleSolved,
   isRotationPuzzleSolved,
@@ -41,8 +38,8 @@ export function normalizeGrid(grid, size = 20) {
 
 const mapEntryConditions = {
   map09: {
-    check: () => hasSealingDust() || isSealPuzzleSolved(),
-    message: 'A shimmering seal bars your way.'
+    check: () => hasItem('temple_key'),
+    message: 'An unyielding gate bars your way. A key may exist somewhere...'
   },
   map10: {
     check: () => isMirrorPuzzleSolved(),
@@ -67,18 +64,6 @@ export async function loadMap(name) {
     if (name === 'map06_right') markForkVisited('right');
     if (name === 'map07' && visitedBothForks()) {
       showDialogue('The air hums as the twin trials align.');
-    }
-    if (name === 'map08' && isSealPuzzleSolved()) {
-      for (const row of data.grid) {
-        for (const cell of row) {
-          if (cell && cell.type === 'D' && cell.target === 'map09.json') {
-            cell.locked = false;
-          }
-        }
-      }
-    }
-    if (name === 'map09' && hasSealingDust()) {
-      consumeSealingDust();
     }
     if (name === 'map09' && isMirrorPuzzleSolved()) {
       // Unlock the door leading to map10 once the mirror puzzle is solved
@@ -113,6 +98,15 @@ export async function loadMap(name) {
           }
         }
       }
+    for (const row of data.grid) {
+      for (const cell of row) {
+        if (cell && cell.type === 'E' && cell.enemyId === 'warden_threshold') {
+          if (isEnemyDefeated('warden_threshold')) {
+            cell.type = 'G';
+          }
+        }
+      }
+    }
   } catch (err) {
     console.error(err);
     showError(err.message || `Failed to load map ${name}`);

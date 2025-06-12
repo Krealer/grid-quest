@@ -794,5 +794,31 @@
         "quantity": 1
       }
     ]
+  },
+  "warden_threshold": {
+    "name": "Warden of the Threshold",
+    "hp": 260,
+    "stats": {
+      "attack": 20,
+      "defense": 4
+    },
+    "xp": 110,
+    "description": "An ancient guardian forged to test those who would enter the temple.",
+    "intro": "The Warden rumbles awake, blocking your path!",
+    "portrait": "🚪",
+    "skills": [
+      "stone_lash",
+      "earthbind",
+      "resolve_break",
+      "quaking_step"
+    ],
+    "behavior": "aggressive",
+    "boss": true,
+    "drops": [
+      {
+        "item": "temple_key",
+        "quantity": 1
+      }
+    ]
   }
 }
