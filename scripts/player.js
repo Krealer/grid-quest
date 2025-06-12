@@ -40,7 +40,8 @@ export const player = {
   classId: getChosenClass() || null,
   stats: {
     attack: 0,
-    defense: 0
+    defense: 0,
+    speed: 10
   },
   equipment: {
     weapon: null,
@@ -63,7 +64,8 @@ export function calculateStatsFromLevel(level) {
   const maxHp = 100 + lvl * 2 + milestoneHp;
   const attack = 15 + Math.floor(lvl / 5);
   const defense = Math.floor(lvl / 10);
-  return { maxHp, defense, attack };
+  const speed = 10;
+  return { maxHp, defense, attack, speed };
 }
 
 export function updateStatsFromLevel() {
@@ -71,9 +73,10 @@ export function updateStatsFromLevel() {
   player.maxHp = maxHp;
   player.atk = attack;
   player.def = defense;
-  if (!player.stats) player.stats = { attack: 0, defense: 0 };
+  if (!player.stats) player.stats = { attack: 0, defense: 0, speed: 10 };
   player.stats.defense = 0;
   player.stats.attack = 0;
+  if (typeof player.stats.speed !== 'number') player.stats.speed = 10;
   if (player.hp > player.maxHp) player.hp = player.maxHp;
 }
 
@@ -283,7 +286,8 @@ export function deserializePlayer(data) {
 export function getTotalStats() {
   const base = {
     attack: (player.atk || 0) + (player.stats?.attack || 0),
-    defense: (player.def || 0) + (player.stats?.defense || 0)
+    defense: (player.def || 0) + (player.stats?.defense || 0),
+    speed: player.stats?.speed ?? 10
   };
   const total = { ...base };
   const eq = player.equipment || {};
