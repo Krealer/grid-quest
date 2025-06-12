@@ -468,7 +468,10 @@
         "spawn": {
           "x": 10,
           "y": 1
-        }
+        },
+        "locked": true,
+        "requiresItem": "sealing_dust",
+        "message": "A shimmering seal bars your way."
       },
       "F",
       "F",
