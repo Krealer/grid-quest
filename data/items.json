@@ -401,5 +401,14 @@
     "stackLimit": 1,
     "icon": "🗝️",
     "category": "quest"
+  },
+  "sealing_dust": {
+    "name": "Sealing Dust",
+    "description": "Fine powder that breaks arcane seals.",
+    "type": "key",
+    "stackLimit": 1,
+    "icon": "✨",
+    "category": "key",
+    "consumable": false
   }
 }

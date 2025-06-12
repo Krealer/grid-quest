@@ -1,3 +1,4 @@
+import { giveItem, hasItem } from './inventory.js';
 const STORAGE_KEY = 'gridquest.memory';
 
 const memory = {
@@ -137,9 +138,10 @@ export function visitedBothForks() {
   return memory.forksVisited.left && memory.forksVisited.right;
 }
 
-export function solveSealPuzzle() {
+export async function solveSealPuzzle() {
   memory.sealPuzzleSolved = true;
   memory.sealingDust = true;
+  await giveItem('sealing_dust', 1);
   saveMemory();
 }
 
@@ -148,7 +150,7 @@ export function isSealPuzzleSolved() {
 }
 
 export function hasSealingDust() {
-  return memory.sealingDust;
+  return memory.sealingDust || hasItem('sealing_dust');
 }
 
 export function consumeSealingDust() {
