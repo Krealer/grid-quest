@@ -96,7 +96,6 @@ export async function loadMap(name) {
           }
         }
       }
-    }
   } catch (err) {
     console.error(err);
     showError(err.message || `Failed to load map ${name}`);
