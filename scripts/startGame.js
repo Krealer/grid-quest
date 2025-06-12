@@ -6,7 +6,7 @@ import { handleTileClick, isPlayerMoving } from './grid_click.js';
 import { handleTileInteraction } from './interaction.js';
 import { npcModules } from './npc/index.js';
 import { defeatEnemy } from './enemy.js';
-import { spawnEnemy } from './map.js';
+import { spawnEnemy, handleEnemyDefeat } from './map.js';
 import { setMemory } from './dialogue_state.js';
 import { hasItem } from './inventory.js';
 import {
@@ -72,13 +72,14 @@ export async function startGame(container, settings, state) {
       if (e.detail.enemyHp <= 0) {
         const enemyId = e.detail.enemy.id;
         defeatEnemy(enemyId);
+        const pos = gameState.lastEnemyPos;
+        if (pos) handleEnemyDefeat(pos.x, pos.y);
         if (
           enemyId === 'goblin01' &&
           !hasItem('goblin_ear') &&
           !hasItem('goblin_insignia') &&
           !hasItem('cracked_helmet')
         ) {
-          const pos = gameState.lastEnemyPos;
           if (pos) spawnEnemy(pos.x, pos.y, 'ghost_echo');
         }
         if (enemyId === 'goblin_scout') {

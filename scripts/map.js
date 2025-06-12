@@ -30,7 +30,20 @@ export function spawnEnemy(x, y, id) {
   const container = document.getElementById('game-grid');
   if (!grid || !container) return;
   if (!grid[y] || !grid[y][x]) return;
-  grid[y][x] = { type: 'E', enemyId: id };
+  grid[y][x] = { base: 'G', type: 'E', enemyId: id };
   renderGrid(grid, container, getCurrentEnvironment(), isFogEnabled());
   router.drawPlayer(player, container, router.getCols());
+}
+
+export function handleEnemyDefeat(x, y) {
+  const grid = getCurrentGrid();
+  const container = document.getElementById('game-grid');
+  if (!grid || !container) return;
+  if (!grid[y] || !grid[y][x]) return;
+  const tile = grid[y][x];
+  if (tile && ['E', 'A', 'B', 'X'].includes(tile.type)) {
+    grid[y][x] = { type: tile.base || 'G' };
+    renderGrid(grid, container, getCurrentEnvironment(), isFogEnabled());
+    router.drawPlayer(player, container, router.getCols());
+  }
 }

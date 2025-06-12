@@ -135,13 +135,6 @@ export async function onInteractEffect(
     case 'A':
     case 'B':
     case 'X': {
-      const index = y * cols + x;
-      const tileEl = container.children[index];
-      if (tileEl) {
-        tileEl.classList.remove('tile-E', 'tile-A', 'tile-B', 'tile-X', 'blocked');
-        tileEl.classList.add('tile-G');
-      }
-      tile.type = 'G';
       gameState.lastEnemyPos = { x, y };
       const enemyId = tile.enemyId || 'goblin01';
       const enemy = getEnemyData(enemyId) || { name: 'Enemy', hp: 50 };
