@@ -7,12 +7,18 @@ export function generateTileId(x, y) {
 }
 
 export function calculateDamage(attacker, target, baseDamage) {
-  const defense = target.stats?.defense ?? target.defense ?? 0;
+  let defense = 0;
+  if (typeof target.defense === 'number') {
+    defense = target.defense;
+  } else if (target.stats && typeof target.stats.defense === 'number') {
+    defense = target.stats.defense;
+  } else if (typeof target.def === 'number') {
+    defense = target.def + (target.stats?.defense || 0);
+  }
   const effectiveDefense = Math.max(defense, 0);
-  const penaltyMultiplier = defense < 0 ? 1 + 0.1 * Math.abs(defense) : 1;
-  const rawDamage = baseDamage - effectiveDefense;
-  const amplified = Math.floor(rawDamage * penaltyMultiplier);
-  return Math.max(amplified, 0);
+  const multiplier = defense < 0 ? 1 + 0.1 * Math.abs(defense) : 1;
+  const damage = Math.max((baseDamage - effectiveDefense) * multiplier, 0);
+  return Math.floor(damage);
 }
 
 export function applyDamage(target, amount) {
