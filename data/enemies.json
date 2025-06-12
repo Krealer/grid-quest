@@ -317,7 +317,7 @@
     "stats": {
       "attack": 3,
       "defense": 1,
-      "speed": 10
+      "speed": 12
     },
     "xp": 7,
     "description": "A goblin clad in mismatched gear from raids.",
@@ -437,7 +437,7 @@
     "stats": {
       "attack": 4,
       "defense": 1,
-      "speed": 10
+      "speed": 8
     },
     "xp": 16,
     "description": "A warped mage that disrupts magic.",
@@ -511,7 +511,7 @@
     "stats": {
       "attack": 4,
       "defense": 3,
-      "speed": 10
+      "speed": 6
     },
     "xp": 40,
     "description": "A vigilant prism guardian.",
