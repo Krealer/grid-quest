@@ -40,6 +40,7 @@ Refresh the browser after editing files in `scripts/`, `style/` or `data/`. Node
 ```bash
 npm install
 ```
+Run this command before using `npm run lint` or `npm test`.
 
 ### Available commands
 
