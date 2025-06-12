@@ -12,14 +12,33 @@
 
 ## Running locally
 
-Grid Quest loads data via `fetch` so it needs to be served over HTTP. After running `npm install` you can start a simple server from the project root:
+To work on Grid Quest locally you need Node.js for the lint and test tools and a
+local HTTP server to serve the static assets.
 
-```bash
-python3 -m http.server
-# or npx http-server
-```
+1. Install [Node.js](https://nodejs.org/) (v18 or later is recommended).
+2. Install the Node dependencies:
 
-Visit `http://localhost:8000/` in your browser.
+   ```bash
+   npm install
+   ```
+
+   This sets up ESLint, Prettier and Jest which are used during development.
+3. Optionally run the checks:
+
+   ```bash
+   npm run lint
+   npm test
+   ```
+
+4. Start a local server from the project root so that the JSON and image assets
+   load correctly:
+
+   ```bash
+   python3 -m http.server
+   # or npx http-server
+   ```
+
+5. Visit `http://localhost:8000/` in your browser.
 
 ## Project structure
 
