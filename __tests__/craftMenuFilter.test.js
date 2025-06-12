@@ -2,10 +2,10 @@
 import { jest } from '@jest/globals';
 
 const recipeData = {
-  healing_salve: {
-    id: 'healing_salve',
-    name: 'Healing Salve',
-    blueprintId: 'healing_salve_blueprint',
+  health_amulet: {
+    id: 'health_amulet',
+    name: 'Health Amulet',
+    blueprintId: 'health_amulet_blueprint',
     ingredients: {}
   },
   defense_potion_I: {
@@ -20,8 +20,8 @@ let getKnownRecipes, unlockedRecipes, unlockedBlueprints;
 
 beforeEach(async () => {
   jest.resetModules();
-  unlockedRecipes = new Set(['healing_salve']);
-  unlockedBlueprints = new Set(['healing_salve_blueprint']);
+  unlockedRecipes = new Set();
+  unlockedBlueprints = new Set();
 
   jest.unstable_mockModule('../scripts/craft.js', () => ({
     loadRecipes: jest.fn(async () => recipeData),
@@ -53,12 +53,17 @@ beforeEach(async () => {
 
 test('filters recipes based on unlocked lists', async () => {
   let ids = await getKnownRecipes();
-  expect(ids).toEqual(['healing_salve']);
+  expect(ids).toEqual([]);
 
   unlockedRecipes.add('defense_potion_I');
   unlockedBlueprints.add('defense_potion_I_blueprint');
   ids = await getKnownRecipes();
-  expect(ids).toEqual(expect.arrayContaining(['healing_salve', 'defense_potion_I']));
+  expect(ids).toEqual(['defense_potion_I']);
+
+  unlockedRecipes.add('health_amulet');
+  unlockedBlueprints.add('health_amulet_blueprint');
+  ids = await getKnownRecipes();
+  expect(ids).toEqual(expect.arrayContaining(['defense_potion_I', 'health_amulet']));
 
   unlockedBlueprints.delete('defense_potion_I_blueprint');
   ids = await getKnownRecipes();

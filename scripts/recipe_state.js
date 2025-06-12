@@ -1,5 +1,5 @@
 export const recipeState = {
-  unlocked: new Set(['healing_salve'])
+  unlocked: new Set()
 };
 
 const recipeFlags = {

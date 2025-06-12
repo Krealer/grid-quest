@@ -1,12 +1,4 @@
 {
-  "healing_salve": {
-    "id": "healing_salve",
-    "name": "Healing Salve",
-    "blueprintId": "healing_salve_blueprint",
-    "ingredients": { "goblin_ear": 1, "rotten_tooth": 1 },
-    "result": "health_potion",
-    "quantity": 1
-  },
   "health_amulet": {
     "id": "health_amulet",
     "name": "Health Amulet",

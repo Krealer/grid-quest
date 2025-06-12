@@ -8,7 +8,7 @@ beforeEach(async () => {
   ({ giveBlueprint } = await import('../scripts/dialogue_state.js'));
   ({ craftState } = await import('../scripts/craft_state.js'));
   ({ saveGame, loadGame } = await import('../scripts/save_load.js'));
-  craftState.unlockedBlueprints = new Set(['healing_salve_blueprint']);
+  craftState.unlockedBlueprints = new Set();
   localStorage.clear();
 });
 
