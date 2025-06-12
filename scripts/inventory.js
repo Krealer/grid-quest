@@ -177,6 +177,9 @@ export function getItemsByCategory(category) {
     const data = getItemData(it.id);
     if (!data) return false;
     const cat = data.category || 'general';
+    if (Array.isArray(category)) {
+      return category.includes(cat);
+    }
     return cat === category;
   });
 }

@@ -442,6 +442,14 @@
     "icon": "🎵",
     "category": "general"
   },
+  "prism_fragment": {
+    "name": "Prism Fragment",
+    "description": "A shimmering piece of condensed prism memory.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🔶",
+    "category": "crafting"
+  },
   "maze_key_1": {
     "name": "Maze Key 1",
     "description": "A key used deep in the maze system.",

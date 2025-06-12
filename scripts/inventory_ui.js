@@ -79,7 +79,7 @@ export async function updateInventoryUI() {
     statsEl.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Attack: ${stats.attack || 0}  Defense: ${stats.defense || 0}`;
   }
   let cat = currentCategory;
-  if (cat === 'items') cat = 'general';
+  if (cat === 'items') cat = ['general', 'crafting'];
   const filtered = getItemsByCategory(cat);
   if (filtered.length === 0) {
     const msg = document.createElement('div');
