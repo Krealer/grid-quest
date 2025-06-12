@@ -118,7 +118,17 @@
       "F"
     ],
     [
-      "F",
+      {
+        "type": "D",
+        "target": "map07.json",
+        "spawn": {
+          "x": 10,
+          "y": 1
+        },
+        "locked": true,
+        "requiresItem": "maze_key_1",
+        "consumeItem": false
+      },
       "G",
       "F",
       "G",
