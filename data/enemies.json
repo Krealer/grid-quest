@@ -799,8 +799,8 @@
     "name": "Warden of the Threshold",
     "hp": 260,
     "stats": {
-      "attack": 20,
-      "defense": 4
+      "attack": 15,
+      "defense": 3
     },
     "xp": 110,
     "description": "An ancient guardian forged to test those who would enter the temple.",
@@ -812,7 +812,7 @@
       "resolve_break",
       "quaking_step"
     ],
-    "behavior": "aggressive",
+    "behavior": "balanced",
     "boss": true,
     "drops": [
       {
