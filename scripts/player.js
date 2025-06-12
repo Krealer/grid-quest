@@ -240,8 +240,10 @@ export function serializePlayer() {
     level: player.level,
     xp: player.xp,
     xpToNextLevel: player.xpToNextLevel,
-    // stats like defense and attack are derived from level and equipment
-    // and will be recalculated when loading a save
+    stats: {
+      attack: player.stats?.attack || 0,
+      defense: player.stats?.defense || 0
+    },
     learnedSkills: Array.isArray(player.learnedSkills)
       ? [...player.learnedSkills]
       : [],
@@ -256,6 +258,11 @@ export function deserializePlayer(data) {
   player.level = data.level ?? player.level;
   player.xp = data.xp ?? player.xp;
   player.xpToNextLevel = data.xpToNextLevel ?? player.xpToNextLevel;
+  if (data.stats) {
+    if (!player.stats) player.stats = { attack: 0, defense: 0 };
+    player.stats.attack = data.stats.attack ?? player.stats.attack;
+    player.stats.defense = data.stats.defense ?? player.stats.defense;
+  }
   // derived stats will be recalculated from the level
   if (Array.isArray(data.learnedSkills)) {
     player.learnedSkills = [...data.learnedSkills];

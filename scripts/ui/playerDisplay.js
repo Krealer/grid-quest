@@ -22,7 +22,10 @@ export function updateHpDisplay() {
 export function updateDefenseDisplay() {
   if (defenseDisplay) {
     const stats = getTotalStats();
-    defenseDisplay.textContent = `Defense: ${stats.defense || 0}`;
+    const def = stats.defense || 0;
+    defenseDisplay.textContent = `Defense: ${def}`;
+    if (def < 0) defenseDisplay.classList.add('negative');
+    else defenseDisplay.classList.remove('negative');
   }
 }
 
