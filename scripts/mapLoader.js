@@ -37,10 +37,6 @@ export function normalizeGrid(grid, size = 20) {
 }
 
 const mapEntryConditions = {
-  map09: {
-    check: () => hasItem('temple_key'),
-    message: 'An unyielding gate bars your way. A key may exist somewhere...'
-  },
   map10: {
     check: () => isMirrorPuzzleSolved(),
     message: 'Ancient glyphs refuse to yield.'
