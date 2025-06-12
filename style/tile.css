@@ -1,0 +1,35 @@
+.tile {
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+  border: 1px solid #333;
+  position: relative;
+  overflow: hidden;
+}
+
+.shape-square {
+  border-radius: 4px;
+}
+
+.shape-circle {
+  border-radius: 50%;
+}
+
+.shape-triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.tile-G { background: #8b6f47; }
+.tile-W { background: #0080ff; }
+.tile-F { background: #555555; }
+.tile-t { background: #aaaaaa; }
+.tile-T { background: #444444; }
+.tile-C { background: #d4af37; }
+.tile-D { background: #5a381e; }
+.tile-N { background: #9b59b6; }
+.tile-n { background: #ffffff; }
+.tile-E { background: #e74c3c; }
+.tile-A { background: #c0392b; }
+.tile-B { background: #8b0000; }
+.tile-X { background: #330000; }
+.tile.blocked { cursor: pointer; }

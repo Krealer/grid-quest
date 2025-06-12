@@ -68,10 +68,7 @@
       "G",
       "G",
       "G",
-      {
-        "type": "echo",
-        "id": "fogbound_fragment"
-      },
+      "G",
       "G",
       "G",
       {
@@ -124,10 +121,7 @@
         "type": "N",
         "npc": "first_memory"
       },
-      {
-        "type": "echo",
-        "id": "fogbound_intro"
-      },
+      "G",
       "G",
       "G",
       "G",
