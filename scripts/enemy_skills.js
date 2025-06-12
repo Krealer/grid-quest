@@ -954,17 +954,16 @@ export const enemySkills = {
     id: 'resolve_break',
     name: 'Resolve Break',
     icon: '🪓',
-    description: '50% ATK and permanently reduces defense by 2.',
+    description: 'A fierce blow dealing 60% ATK damage.',
     category: 'offensive',
     cost: 0,
     cooldown: 10,
     aiType: 'damage',
     effect({ enemy, player, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
-      const dmg = Math.round(0.5 * (atk + (enemy.tempAttack || 0)));
+      const dmg = Math.round(0.6 * (atk + (enemy.tempAttack || 0)));
       const applied = damagePlayer(dmg);
-      if (player.stats) player.stats.defense = (player.stats.defense || 0) - 2;
-      log(`${enemy.name} shatters your resolve for ${applied} damage!`);
+      log(`${enemy.name} slams down with force, dealing ${applied} damage!`);
     }
   },
   quaking_step: {
