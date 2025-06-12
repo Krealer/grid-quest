@@ -7,8 +7,11 @@ export function chooseEnemySkill(entity) {
   return list[0] || null;
 }
 
-export function enemyAct(entity, player, context) {
+export function enemyAct(entity, players, context) {
+  const target = Array.isArray(players)
+    ? players.find((p) => p.hp > 0) || players[0]
+    : players;
   const skill = chooseEnemySkill(entity);
-  if (!skill) return;
-  skill.effect({ enemy: entity, player, ...context });
+  if (!skill || !target) return;
+  skill.effect({ user: entity, target, ...context });
 }
