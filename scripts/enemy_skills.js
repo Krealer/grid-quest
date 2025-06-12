@@ -18,25 +18,6 @@ export const enemySkills = {
       log(`${enemy.name} strikes for ${applied} damage!`);
     }
   },
-  poisonSting: {
-    id: 'poisonSting',
-    name: 'Poison Sting',
-    icon: '☠️',
-    description: 'Deal 5 damage and inflict Poisoned.',
-    category: 'offensive',
-    cost: 0,
-    cooldown: 0,
-    aiType: 'status',
-    applies: ['poisoned'],
-    statuses: [{ target: 'player', id: 'poisoned', duration: 2 }],
-    effect({ enemy, player, damagePlayer, applyStatus, log }) {
-      const atk = enemy.stats?.attack || 0;
-      const dmg = 5 + atk + (enemy.tempAttack || 0);
-      const applied = damagePlayer(dmg);
-      applyStatus(player, 'poisoned', 2);
-      log(`${enemy.name} stings for ${applied} damage and poisons you!`);
-    }
-  },
   weaken: {
     id: 'weaken',
     name: 'Weaken',
@@ -84,25 +65,6 @@ export const enemySkills = {
       const amount = relics * 2;
       enemy.tempDefense = (enemy.tempDefense || 0) + amount;
       log(`${enemy.name} hardens with relic power (+${amount} defense)!`);
-    }
-  },
-  shadowBolt: {
-    id: 'shadowBolt',
-    name: 'Shadow Bolt',
-    icon: '🌑',
-    description: '6 damage and inflicts Haunted.',
-    category: 'offensive',
-    cost: 0,
-    cooldown: 0,
-    aiType: 'status',
-    applies: ['haunted'],
-    statuses: [{ target: 'player', id: 'haunted', duration: 2 }],
-    effect({ enemy, damagePlayer, applyStatus, log, player }) {
-      const atk = enemy.stats?.attack || 0;
-      const dmg = 6 + atk + (enemy.tempAttack || 0);
-      const applied = damagePlayer(dmg);
-      applyStatus(player, 'haunted', 2);
-      log(`${enemy.name} fires a shadow bolt for ${applied} damage!`);
     }
   },
   emberBite: {

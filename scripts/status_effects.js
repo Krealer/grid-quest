@@ -365,20 +365,6 @@ export const statusEffects = {
       target.priority += 1;
     }
   },
-  haunted: {
-    id: 'haunted',
-    name: 'Haunted',
-    icon: '👻',
-    description: 'Cannot heal while active.',
-    type: 'negative',
-    duration: 3,
-    apply(target) {
-      target.noHealing = true;
-    },
-    remove(target) {
-      target.noHealing = false;
-    }
-  },
   fragile: {
     id: 'fragile',
     name: 'Fragile',
