@@ -114,6 +114,9 @@ export async function loadMap(name) {
       if (typeof cell === 'string') {
         return { type: cell };
       }
+      if (cell && ['E', 'A', 'B', 'X'].includes(cell.type)) {
+        return { base: 'G', ...cell };
+      }
       return cell;
     });
   });
