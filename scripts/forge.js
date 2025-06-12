@@ -1,4 +1,5 @@
 import { loadJson } from './dataService.js';
+import { showError } from './errorPrompt.js';
 import { inventory, removeItem, addItem } from './inventory.js';
 import { getItemData } from './item_loader.js';
 import { getItemDisplayName } from './inventory.js';
@@ -11,8 +12,13 @@ let sessionActive = false;
 
 export async function loadUpgradeData() {
   if (loaded) return upgrades;
-  const data = await loadJson('data/upgrade_data.json');
-  if (data) upgrades = data;
+  try {
+    const data = await loadJson('data/upgrade_data.json');
+    upgrades = data;
+  } catch (err) {
+    upgrades = {};
+    showError(err.message || 'Failed to load upgrade data');
+  }
   loaded = true;
   return upgrades;
 }

@@ -14,11 +14,12 @@ export function getQuests() {
 
 export async function loadQuestData() {
   if (state.loaded) return state.data;
-  const data = await loadJson('data/quests.json');
-  if (data) {
+  try {
+    const data = await loadJson('data/quests.json');
     state.data = data;
-  } else {
-    showError('Failed to load quests');
+  } catch (err) {
+    state.data = {};
+    showError(err.message || 'Failed to load quests');
   }
   state.loaded = true;
   return state.data;

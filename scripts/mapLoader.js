@@ -52,10 +52,6 @@ export async function loadMap(name) {
   let data;
   try {
     data = await loadJson(`data/maps/${name}.json`);
-    if (!data) {
-      showError(`Failed to load map ${name}`);
-      return null;
-    }
     if (name === 'map06_left') markForkVisited('left');
     if (name === 'map06_right') markForkVisited('right');
     if (name === 'map07' && visitedBothForks()) {

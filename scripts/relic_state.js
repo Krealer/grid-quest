@@ -45,11 +45,12 @@ document.dispatchEvent(new CustomEvent('relicsLoaded'));
 
 export async function loadRelics() {
   if (Object.keys(relicState.data).length) return relicState.data;
-  const data = await loadJson('data/relics.json');
-  if (data) {
+  try {
+    const data = await loadJson('data/relics.json');
     relicState.data = data;
-  } else {
-    showError('Failed to load relics');
+  } catch (err) {
+    relicState.data = {};
+    showError(err.message || 'Failed to load relics');
   }
   return relicState.data;
 }
