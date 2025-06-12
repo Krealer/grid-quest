@@ -1,7 +1,5 @@
-import { startDialogueTree } from '../dialogueSystem.js';
-import { createGrindleDialogue } from '../npc_dialogues/grindle_dialogue.js';
+import { showDialogue } from '../dialogueSystem.js';
 
-export async function interact() {
-  const dialogue = await createGrindleDialogue();
-  startDialogueTree(dialogue);
+export function interact() {
+  showDialogue('Grindle hums a short tune but says nothing of interest.');
 }

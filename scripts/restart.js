@@ -6,8 +6,6 @@ export function restartGame() {
     'gridquest.relics',
     'gridquest.equipped_relics',
     'gridquest.player_state',
-    'gridquest.blueprints',
-    'gridquest.fusion',
     'gridquest.ending',
     'gridquest.lore_flags',
     'gridquest.class',

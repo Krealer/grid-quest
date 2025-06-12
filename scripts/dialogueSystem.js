@@ -5,11 +5,9 @@ import { unlockSkillsFromItem, getAllSkills } from './skills.js';
 import {
   dialogueMemory,
   setMemory,
-  giveBlueprint,
   triggerUpgrade,
   triggerReroll
 } from './dialogue_state.js';
-import { unlockRecipe } from './recipe_state.js';
 import { getQuests, completeQuest } from './quest_state.js';
 import { showError } from './errorPrompt.js';
 import { loadJson } from './dataService.js';
@@ -203,12 +201,12 @@ export async function startDialogueTree(dialogue, index = 0) {
   const state = {
     inventory: {},
     memory: dialogueMemory,
-    quests: getQuests(),
+    quests: getQuests()
   };
-  inventory.forEach(it => {
+  inventory.forEach((it) => {
     state.inventory[it.id] = it.quantity || 1;
   });
-  const validOptions = (entry.options || []).filter(opt => {
+  const validOptions = (entry.options || []).filter((opt) => {
     if (typeof opt.condition === 'function') {
       try {
         return opt.condition(state);
@@ -218,7 +216,7 @@ export async function startDialogueTree(dialogue, index = 0) {
     }
     return true;
   });
-  const choices = validOptions.map(opt => ({
+  const choices = validOptions.map((opt) => ({
     label: opt.label,
     callback: async () => {
       if (opt.memoryFlag) setMemory(opt.memoryFlag);
@@ -236,19 +234,13 @@ export async function startDialogueTree(dialogue, index = 0) {
           addItem({ ...item, id: opt.give });
           updateInventoryUI();
           const unlocked = unlockSkillsFromItem(opt.give);
-          unlocked.forEach(id => {
+          unlocked.forEach((id) => {
             const skill = getAllSkills()[id];
             if (skill) {
               showDialogue(`You've learned a new skill: ${skill.name}!`);
             }
           });
         }
-      }
-      if (opt.giveBlueprint) {
-        giveBlueprint(opt.giveBlueprint);
-      }
-      if (opt.grantRecipe) {
-        unlockRecipe(opt.grantRecipe);
       }
       if (opt.triggerUpgrade) {
         await triggerUpgrade(opt.triggerUpgrade);

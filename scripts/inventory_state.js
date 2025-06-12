@@ -4,8 +4,6 @@ import {
   removeItem as invRemoveItem
 } from './inventory.js';
 import { player, reapplyEquipmentBonuses } from './player.js';
-import { getUnlockedBlueprints } from './craft_state.js';
-import { loadRecipes } from './craft.js';
 
 export function serializeInventory() {
   return {
@@ -66,11 +64,3 @@ export const inventoryState = {
     return changed;
   }
 };
-
-export async function getBlueprints() {
-  const recipeData = await loadRecipes();
-  const ids = getUnlockedBlueprints();
-  return ids
-    .map((bid) => Object.values(recipeData).find((r) => r.blueprintId === bid))
-    .filter(Boolean);
-}

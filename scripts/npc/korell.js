@@ -1,6 +1,5 @@
-import { startDialogueTree } from '../dialogueSystem.js';
-import { korellDialogue } from '../npc_dialogues/korell_dialogue.js';
+import { showDialogue } from '../dialogueSystem.js';
 
 export function interact() {
-  startDialogueTree(korellDialogue);
+  showDialogue('Korell eyes you briefly, then goes back to work.');
 }

@@ -12,7 +12,3 @@ export function showSystemMessage(text, duration = 2000) {
     box.classList.remove('active');
   }, duration);
 }
-
-document.addEventListener('blueprintUnlocked', () => {
-  showSystemMessage('🧪 New crafting blueprint unlocked!');
-});

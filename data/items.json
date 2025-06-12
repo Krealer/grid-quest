@@ -111,22 +111,6 @@
     "icon": "🩸",
     "category": "equipable"
   },
-  "blueprint_amulet": {
-    "name": "Blueprint: Amulet",
-    "description": "Instructions for crafting a health amulet",
-    "type": "material",
-    "stackLimit": 1,
-    "icon": "📜",
-    "category": "general"
-  },
-  "blueprint_health_amulet": {
-    "name": "Blueprint: Health Amulet",
-    "description": "A parchment detailing how to fuse potions into an amulet",
-    "type": "material",
-    "stackLimit": 1,
-    "icon": "📜",
-    "category": "general"
-  },
   "commander_badge": {
     "name": "Commander Badge",
     "description": "Proof of defeating the scout commander.",
