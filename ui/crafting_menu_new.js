@@ -24,4 +24,9 @@ export function initCraftMenu() {
   overlay?.addEventListener('click', (e) => {
     if (e.target === overlay) toggleCraftMenu();
   });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay?.classList.contains('active')) {
+      toggleCraftMenu();
+    }
+  });
 }
