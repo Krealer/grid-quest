@@ -9,6 +9,7 @@ export const TILE_DEFS = {
   t: { walkable: true, interactable: false, description: 'Light Trap' },
   T: { walkable: true, interactable: false, description: 'Heavy Trap' },
   C: { walkable: false, interactable: true, description: 'Chest' },
+  c: { walkable: true, interactable: false, description: 'Opened Chest' },
   D: { walkable: false, interactable: true, description: 'Door' },
   N: { walkable: false, interactable: true, description: 'NPC' },
   n: { walkable: false, interactable: true, description: 'Advanced NPC' },
@@ -182,9 +183,9 @@ export async function onInteractEffect(
           const tileEl = container.children[idx];
           if (tileEl) {
             tileEl.classList.remove('tile-C', 'blocked');
-            tileEl.classList.add('chest-opened', 'tile-G');
+            tileEl.classList.add('chest-opened', 'tile-c');
           }
-          tile.type = 'G';
+          tile.type = 'c';
           for (const [id, skill] of Object.entries(getAllSkills())) {
             if (skill.unlockCondition?.chest === chestId) {
               if (unlockSkill(id)) {
