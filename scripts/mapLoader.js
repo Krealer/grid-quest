@@ -48,16 +48,8 @@ export async function loadMap(name) {
     showDialogue('Ancient glyphs refuse to yield.');
     return null;
   }
-  if (name === 'map12' && !isCorruptionPuzzleSolved()) {
-    showDialogue('A malignant force repels you.');
-    return null;
-  }
   let data;
   try {
-    if (name === 'null_room' && !hasItem('code_file')) {
-      showDialogue('Obtain code file to enter.');
-      return null;
-    }
     data = await loadJson(`data/maps/${name}.json`);
     if (!data) {
       showError(`Failed to load map ${name}`);
@@ -81,37 +73,6 @@ export async function loadMap(name) {
         }
       }
     }
-    if (name === 'map11' && isCorruptionPuzzleSolved()) {
-      for (const row of data.grid) {
-        for (const cell of row) {
-          if (cell && cell.type === 'D' && cell.target === 'map12.json') {
-            cell.locked = false;
-          }
-        }
-      }
-    }
-    if (name === 'map12' && isRotationPuzzleSolved()) {
-      for (const row of data.grid) {
-        for (const cell of row) {
-          if (
-            cell &&
-            cell.type === 'D' &&
-            (cell.target === 'map13.json' || cell.target === 'map12.json')
-          ) {
-            cell.locked = false;
-          }
-        }
-      }
-    }
-    if (name === 'map13' && isEnemyDefeated('whispered_mirror')) {
-      for (const row of data.grid) {
-        for (const cell of row) {
-          if (cell && cell.type === 'D' && cell.target === 'map14.json') {
-            cell.locked = false;
-          }
-        }
-      }
-    }
     if (name === 'map03' && isEnemyDefeated('scout_commander')) {
       if (!gameState.openedChests.has('map03:10,12')) {
         if (data.grid[12] && data.grid[12][10]) {
@@ -119,25 +80,6 @@ export async function loadMap(name) {
         }
       }
     }
-    if (name === 'map14' && isPortal15Unlocked()) {
-      for (const row of data.grid) {
-        for (const cell of row) {
-          if (cell && cell.type === 'D' && cell.target === 'map15.json') {
-            cell.locked = false;
-          }
-        }
-      }
-    }
-    if (name === 'map15' && getEchoConversationCount() >= 2) {
-      for (const row of data.grid) {
-        for (const cell of row) {
-          if (cell && cell.type === 'D' && cell.target === 'map16.json') {
-            cell.locked = false;
-          }
-        }
-      }
-    }
-    if (name === 'map15') {
       for (const row of data.grid) {
         for (const cell of row) {
           if (
@@ -153,20 +95,6 @@ export async function loadMap(name) {
             }
           }
         }
-      }
-    }
-    if (name === 'map16' && getIdeologyReward() && getLoreRelicCount() >= 3) {
-      for (const row of data.grid) {
-        for (const cell of row) {
-          if (cell && cell.type === 'D' && cell.target === 'map17.json') {
-            cell.locked = false;
-          }
-        }
-      }
-    }
-    if (name === 'map17' && finalFlags.bossDefeated) {
-      if (data.grid[10] && data.grid[10][10]) {
-        data.grid[10][10] = { type: 'N', npc: 'krealer' };
       }
     }
   } catch (err) {
@@ -207,14 +135,6 @@ export function isFogEnabled() {
   return !!currentProperties.fog;
 }
 
-// After a class is chosen, send the player to that class's trial map
-document.addEventListener('classChosen', async (e) => {
-  const id = e?.detail?.id;
-  if (!id) return;
-  const { movePlayerTo } = await import('./map.js');
-  await movePlayerTo(`map_${id}`, { x: 1, y: 1 });
-});
-
 // When a trial is completed, send the player back to the central hub
 document.addEventListener('exitTrial', async () => {
   const { movePlayerTo } = await import('./map.js');
@@ -239,34 +159,4 @@ document.addEventListener('goRightPath', async () => {
 document.addEventListener('goConvergence', async () => {
   const { movePlayerTo } = await import('./map.js');
   await movePlayerTo('map07', { x: 1, y: 1 });
-});
-
-// Load the Null Factor when requested
-document.addEventListener('openNullRoom', async () => {
-  const { movePlayerTo } = await import('./map.js');
-  await movePlayerTo('null_room', { x: 1, y: 1 });
-});
-
-document.addEventListener('portal15Unlocked', () => {
-  if (!currentGrid) return;
-  for (const row of currentGrid) {
-    for (const cell of row) {
-      if (cell && cell.type === 'D' && cell.target === 'map15.json') {
-        cell.locked = false;
-      }
-    }
-  }
-});
-
-document.addEventListener('echoesUpdated', () => {
-  if (!currentGrid) return;
-  if (getEchoConversationCount() >= 2) {
-    for (const row of currentGrid) {
-      for (const cell of row) {
-        if (cell && cell.type === 'D' && cell.target === 'map16.json') {
-          cell.locked = false;
-        }
-      }
-    }
-  }
 });

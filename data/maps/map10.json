@@ -438,14 +438,7 @@
       "G",
       "N",
       "G",
-      {
-        "type": "D",
-        "target": "map11.json",
-        "spawn": {
-          "x": 1,
-          "y": 1
-        }
-      },
+      "G",
       {
         "type": "D",
         "target": "map09.json",
