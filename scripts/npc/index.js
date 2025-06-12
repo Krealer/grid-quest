@@ -11,6 +11,7 @@ import * as echoSelfFlame from './echo_self_flame.js';
 import * as echoSelfPeace from './echo_self_peace.js';
 import * as echoSelfShadow from './echo_self_shadow.js';
 import * as ember from './ember.js';
+import * as snealer from './snealer.js';
 import * as eryndor from './eryndor.js';
 import * as fieldNoteDisintegration from './field_note_disintegration.js';
 import * as firstMemory from './first_memory.js';
@@ -69,6 +70,7 @@ export const npcModules = {
   echo_self_peace: echoSelfPeace,
   echo_self_shadow: echoSelfShadow,
   ember,
+  snealer,
   eryndor,
   field_note_disintegration: fieldNoteDisintegration,
   first_memory: firstMemory,

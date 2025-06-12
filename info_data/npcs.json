@@ -63,5 +63,12 @@
     "map": "Map08",
     "location": "10,10",
     "description": "Offers hints about the path ahead."
+  },
+  {
+    "id": "snealer",
+    "name": "Snealer",
+    "map": "Map01",
+    "location": "6,6",
+    "description": "A cloaked figure with a sly grin and watchful eyes."
   }
 ]

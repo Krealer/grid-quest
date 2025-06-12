@@ -137,7 +137,11 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "N",
+        "npc": "snealer",
+        "style": "advanced"
+      },
       "G",
       "G",
       "G",
