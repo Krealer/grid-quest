@@ -6,12 +6,12 @@ let items = {};
 
 export async function loadItems() {
   if (Object.keys(items).length) return items;
-  const data = await loadJson('data/items.json');
-  if (data) {
+  try {
+    const data = await loadJson('data/items.json');
     items = { ...data, ...itemData };
-  } else {
+  } catch (err) {
     items = { ...itemData };
-    showError('Failed to load items');
+    showError(err.message || 'Failed to load items');
   }
   return items;
 }

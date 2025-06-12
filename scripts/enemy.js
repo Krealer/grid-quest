@@ -6,11 +6,12 @@ let enemyData = {};
 
 export async function loadEnemyData() {
   if (Object.keys(enemyData).length) return enemyData;
-  const data = await loadJson('data/enemies.json');
-  if (data) {
+  try {
+    const data = await loadJson('data/enemies.json');
     enemyData = data;
-  } else {
-    showError('Failed to load enemies');
+  } catch (err) {
+    enemyData = {};
+    showError(err.message || 'Failed to load enemies');
   }
   return enemyData;
 }

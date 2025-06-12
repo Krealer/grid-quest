@@ -18,11 +18,12 @@ let dataLoaded = false;
 
 async function loadDialogData() {
   if (dataLoaded) return;
-  const data = await loadJson('data/dialog.json');
-  if (data) {
+  try {
+    const data = await loadJson('data/dialog.json');
     dialogueLines = data;
-  } else {
-    showError('Failed to load dialogue');
+  } catch (err) {
+    dialogueLines = {};
+    showError(err.message || 'Failed to load dialogue');
   }
   dataLoaded = true;
 }
