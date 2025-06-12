@@ -712,27 +712,38 @@ body {
   color: #fff;
 }
 
-#inventory-list {
-  flex: 1;
-  overflow-y: auto;
-  max-height: 60vh;
-  padding-right: 4px;
+.inventory-panel {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
-#inventory-list::-webkit-scrollbar {
+.inventory-scroll {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.inventory-scroll::-webkit-scrollbar {
   width: 6px;
 }
-#inventory-list::-webkit-scrollbar-track {
+.inventory-scroll::-webkit-scrollbar-track {
   background: #eee;
   border-radius: 3px;
 }
-#inventory-list::-webkit-scrollbar-thumb {
+.inventory-scroll::-webkit-scrollbar-thumb {
   background: #bbb;
   border-radius: 3px;
 }
 
-@media (max-width: 480px) {
-  #inventory-list {
+#inventory-list {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .inventory-scroll {
     max-height: 50vh;
   }
 }
