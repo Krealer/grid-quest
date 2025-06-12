@@ -4,7 +4,8 @@
     "hp": 50,
     "stats": {
       "attack": 2,
-      "defense": 0
+      "defense": 0,
+      "speed": 10
     },
     "xp": 5,
     "description": "A mischievous green creature with a sharp grin.",
@@ -25,7 +26,8 @@
     "hp": 50,
     "stats": {
       "attack": 2,
-      "defense": 1
+      "defense": 1,
+      "speed": 10
     },
     "xp": 5,
     "description": "A shambling undead with vacant eyes.",
@@ -46,7 +48,8 @@
     "hp": 40,
     "stats": {
       "attack": 2,
-      "defense": 0
+      "defense": 0,
+      "speed": 10
     },
     "xp": 6,
     "description": "A keen-eyed goblin keeping watch over the hills.",
@@ -67,7 +70,8 @@
     "hp": 45,
     "stats": {
       "attack": 3,
-      "defense": 0
+      "defense": 0,
+      "speed": 10
     },
     "xp": 6,
     "description": "A nimble archer supporting the goblin ranks.",
@@ -89,7 +93,8 @@
     "hp": 65,
     "stats": {
       "attack": 4,
-      "defense": 2
+      "defense": 2,
+      "speed": 10
     },
     "xp": 8,
     "description": "An undead fighter dripping with stagnant water.",
@@ -115,7 +120,8 @@
     "hp": 90,
     "stats": {
       "attack": 4,
-      "defense": 2
+      "defense": 2,
+      "speed": 10
     },
     "xp": 12,
     "description": "Leader of the goblin scouting parties, armored and alert.",
@@ -141,7 +147,8 @@
     "hp": 30,
     "stats": {
       "attack": 1,
-      "defense": 0
+      "defense": 0,
+      "speed": 10
     },
     "xp": 4,
     "description": "A faint apparition clinging to lost memories.",
@@ -163,7 +170,8 @@
     "hp": 65,
     "stats": {
       "attack": 5,
-      "defense": 2
+      "defense": 2,
+      "speed": 10
     },
     "xp": 30,
     "description": "A creature that thrives in darkness and strikes unseen.",
@@ -186,7 +194,8 @@
     "hp": 55,
     "stats": {
       "attack": 4,
-      "defense": 1
+      "defense": 1,
+      "speed": 10
     },
     "xp": 13,
     "description": "A fiery beast wreathed in scorching flames.",
@@ -209,7 +218,8 @@
     "hp": 70,
     "stats": {
       "attack": 5,
-      "defense": 3
+      "defense": 3,
+      "speed": 10
     },
     "xp": 14,
     "description": "A sentinel fashioned from forgotten stone.",
@@ -231,7 +241,8 @@
     "hp": 120,
     "stats": {
       "attack": 7,
-      "defense": 4
+      "defense": 4,
+      "speed": 10
     },
     "xp": 30,
     "description": "Guardian of the old halls, resonating with power.",
@@ -255,7 +266,8 @@
     "hp": 200,
     "stats": {
       "attack": 8,
-      "defense": 5
+      "defense": 5,
+      "speed": 10
     },
     "xp": 50,
     "description": "A reflective entity reacting to remembered choices.",
@@ -279,7 +291,8 @@
     "hp": 220,
     "stats": {
       "attack": 9,
-      "defense": 6
+      "defense": 6,
+      "speed": 10
     },
     "xp": 60,
     "description": "A twisted reflection drawn from forsaken choices.",
@@ -303,7 +316,8 @@
     "hp": 55,
     "stats": {
       "attack": 3,
-      "defense": 1
+      "defense": 1,
+      "speed": 10
     },
     "xp": 7,
     "description": "A goblin clad in mismatched gear from raids.",
@@ -324,7 +338,8 @@
     "hp": 45,
     "stats": {
       "attack": 2,
-      "defense": 0
+      "defense": 0,
+      "speed": 10
     },
     "xp": 6,
     "description": "Bones animated by lingering necrotic energy.",
@@ -345,7 +360,8 @@
     "hp": 300,
     "stats": {
       "attack": 10,
-      "defense": 8
+      "defense": 8,
+      "speed": 10
     },
     "xp": 100,
     "description": "A culmination of every path you've taken.",
@@ -370,7 +386,8 @@
     "hp": 80,
     "stats": {
       "attack": 5,
-      "defense": 3
+      "defense": 3,
+      "speed": 10
     },
     "xp": 15,
     "description": "A guard construct warped by corruption.",
@@ -392,7 +409,8 @@
     "hp": 90,
     "stats": {
       "attack": 6,
-      "defense": 2
+      "defense": 2,
+      "speed": 10
     },
     "xp": 18,
     "description": "A creature fueled by unstable rift energy.",
@@ -418,7 +436,8 @@
     "hp": 70,
     "stats": {
       "attack": 4,
-      "defense": 1
+      "defense": 1,
+      "speed": 10
     },
     "xp": 16,
     "description": "A warped mage that disrupts magic.",
@@ -443,7 +462,8 @@
     "hp": 50,
     "stats": {
       "attack": 4,
-      "defense": 1
+      "defense": 1,
+      "speed": 10
     },
     "xp": 15,
     "description": "Weak undead remnant held together by crystal.",
@@ -466,7 +486,8 @@
     "hp": 65,
     "stats": {
       "attack": 5,
-      "defense": 3
+      "defense": 3,
+      "speed": 10
     },
     "xp": 16,
     "description": "A crystalline guardian that shimmers menacingly.",
@@ -489,7 +510,8 @@
     "hp": 150,
     "stats": {
       "attack": 4,
-      "defense": 3
+      "defense": 3,
+      "speed": 10
     },
     "xp": 40,
     "description": "A vigilant prism guardian.",
@@ -512,7 +534,8 @@
     "hp": 55,
     "stats": {
       "attack": 5,
-      "defense": 1
+      "defense": 1,
+      "speed": 10
     },
     "xp": 12,
     "description": "A fiery creature that leaves burning trails.",
@@ -535,7 +558,8 @@
     "hp": 70,
     "stats": {
       "attack": 5,
-      "defense": 2
+      "defense": 2,
+      "speed": 10
     },
     "xp": 18,
     "description": "Psychic construct that lashes out with torment.",
@@ -558,7 +582,8 @@
     "hp": 110,
     "stats": {
       "attack": 5,
-      "defense": 6
+      "defense": 6,
+      "speed": 10
     },
     "xp": 22,
     "description": "Stonebound guardian of the inner sanctum.",
@@ -582,7 +607,8 @@
     "hp": 80,
     "stats": {
       "attack": 5,
-      "defense": 3
+      "defense": 3,
+      "speed": 10
     },
     "xp": 20,
     "description": "A haunting statue murmuring forgotten prayers.",
@@ -606,7 +632,8 @@
     "hp": 100,
     "stats": {
       "attack": 6,
-      "defense": 4
+      "defense": 4,
+      "speed": 10
     },
     "xp": 26,
     "description": "Keeper of flame and oath within the depths.",
@@ -630,7 +657,8 @@
     "hp": 130,
     "stats": {
       "attack": 7,
-      "defense": 4
+      "defense": 4,
+      "speed": 10
     },
     "xp": 30,
     "description": "A rogue psyche that fractures reality around it.",
@@ -659,7 +687,8 @@
     "hp": 85,
     "stats": {
       "attack": 6,
-      "defense": 2
+      "defense": 2,
+      "speed": 10
     },
     "xp": 24,
     "description": "A vessel of smoldering ash that bursts into flame upon defeat.",
@@ -682,7 +711,8 @@
     "hp": 75,
     "stats": {
       "attack": 5,
-      "defense": 3
+      "defense": 3,
+      "speed": 10
     },
     "xp": 23,
     "description": "A seer who conjures dust hexes and mirrored forms.",
@@ -706,7 +736,8 @@
     "hp": 70,
     "stats": {
       "attack": 4,
-      "defense": 3
+      "defense": 3,
+      "speed": 10
     },
     "xp": 22,
     "description": "Monk wielding resonant chimes to confuse foes.",
@@ -729,7 +760,8 @@
     "hp": 90,
     "stats": {
       "attack": 6,
-      "defense": 4
+      "defense": 4,
+      "speed": 10
     },
     "xp": 26,
     "description": "A tormented spirit whose wail can silence minds.",
@@ -752,7 +784,8 @@
     "hp": 300,
     "stats": {
       "attack": 4,
-      "defense": 5
+      "defense": 5,
+      "speed": 10
     },
     "xp": 100,
     "description": "A fractured sentinel brimming with unstable power.",
@@ -775,7 +808,8 @@
     "hp": 160,
     "stats": {
       "attack": 6,
-      "defense": 2
+      "defense": 2,
+      "speed": 10
     },
     "xp": 50,
     "description": "An ancient guardian of forgotten rites, pulsing with faint magic.",
@@ -800,7 +834,8 @@
     "hp": 260,
     "stats": {
       "attack": 15,
-      "defense": 3
+      "defense": 3,
+      "speed": 10
     },
     "xp": 110,
     "description": "An ancient guardian forged to test those who would enter the temple.",

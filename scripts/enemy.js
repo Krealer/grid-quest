@@ -33,5 +33,7 @@ export function initEnemyState(enemy) {
   if (!Array.isArray(enemy.statuses)) enemy.statuses = [];
   if (typeof enemy.tempDefense !== 'number') enemy.tempDefense = 0;
   if (typeof enemy.tempAttack !== 'number') enemy.tempAttack = 0;
+  if (!enemy.stats) enemy.stats = { attack: 0, defense: 0, speed: 8 };
+  if (typeof enemy.stats.speed !== 'number') enemy.stats.speed = 8;
   enemy.isPlayer = false;
 }

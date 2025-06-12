@@ -56,6 +56,8 @@ import {
 } from './status_effect.js';
 import { getStatusEffect } from './status_effects.js';
 import { initEnemyState } from './enemy.js';
+import { combatState, initCombatState } from './combat_state.js';
+import { initTurnOrder, nextTurn } from './combat_engine.js';
 
 let overlay = null;
 
@@ -156,6 +158,12 @@ export async function startCombat(enemy, player) {
   const delayMap = { instant: 0, normal: 300 };
   const animDelay = delayMap[gameState.settings?.combatSpeed || 'normal'];
 
+  initCombatState(player, enemy);
+  const firstActor = initTurnOrder();
+  let playerTurn = firstActor?.isPlayer ?? true;
+  player = combatState.players[0];
+  enemy = combatState.enemies[0];
+
   // reveal UI after intro animation
   setTimeout(() => {
     actionsEl.classList.remove('hidden');
@@ -167,7 +175,6 @@ export async function startCombat(enemy, player) {
   let sparkUsed = false;
   let reflectActive = false;
   const skillCooldowns = {};
-  let playerTurn = true;
 
   function damagePlayer(dmg) {
     let amount = dmg;
@@ -414,24 +421,27 @@ export async function startCombat(enemy, player) {
       log('Paralyzed! You cannot act.');
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
-      playerTurn = false;
-      setTimeout(enemyTurn, animDelay);
+      const nextActor = nextTurn();
+      playerTurn = nextActor?.isPlayer ?? true;
+      if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
     if (hasStatus(player, 'confused') && Math.random() < 0.33) {
       log('Confused! You hesitate in bewilderment.');
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
-      playerTurn = false;
-      setTimeout(enemyTurn, animDelay);
+      const nextActor = nextTurn();
+      playerTurn = nextActor?.isPlayer ?? true;
+      if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
     if (hasStatus(player, 'unstable') && Math.random() < 0.25) {
       log('Unstable! Your action falters.');
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
-      playerTurn = false;
-      setTimeout(enemyTurn, animDelay);
+      const nextActor = nextTurn();
+      playerTurn = nextActor?.isPlayer ?? true;
+      if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
     const silenced =
@@ -495,8 +505,9 @@ export async function startCombat(enemy, player) {
       endCombat();
       return;
     }
-    playerTurn = false;
-    setTimeout(enemyTurn, animDelay);
+    const nextActor = nextTurn();
+    playerTurn = nextActor?.isPlayer ?? true;
+    if (!playerTurn) setTimeout(enemyTurn, animDelay);
   }
 
   function handleItemUse(id) {
@@ -650,8 +661,9 @@ export async function startCombat(enemy, player) {
       updateHpBar(enemyBar, enemyHp, enemyMax);
       updateStatusUI(overlay, player, enemy);
       updateSkillDisableState();
-      playerTurn = false;
-      setTimeout(enemyTurn, animDelay);
+      const nextActor = nextTurn();
+      playerTurn = nextActor?.isPlayer ?? true;
+      if (!playerTurn) setTimeout(enemyTurn, animDelay);
     }
   }
 
@@ -720,27 +732,33 @@ export async function startCombat(enemy, player) {
       log(`${enemy.name} is paralyzed and cannot act!`);
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
-      playerTurn = true;
+      const nextActor = nextTurn();
+      playerTurn = nextActor?.isPlayer ?? true;
       tickCooldowns();
       updateSkillDisableState();
+      if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
     if (hasStatus(enemy, 'confused') && Math.random() < 0.33) {
       log(`${enemy.name} looks confused and hesitates!`);
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
-      playerTurn = true;
+      const nextActor = nextTurn();
+      playerTurn = nextActor?.isPlayer ?? true;
       tickCooldowns();
       updateSkillDisableState();
+      if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
     if (hasStatus(enemy, 'unstable') && Math.random() < 0.25) {
       log(`${enemy.name} staggers in instability!`);
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
-      playerTurn = true;
+      const nextActor = nextTurn();
+      playerTurn = nextActor?.isPlayer ?? true;
       tickCooldowns();
       updateSkillDisableState();
+      if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
     const enemySilenced =
@@ -825,9 +843,11 @@ export async function startCombat(enemy, player) {
           log(`${enemy.name} is silenced and cannot act!`);
           tickStatusEffects(player, log);
           tickStatusEffects(enemy, log);
-          playerTurn = true;
+          const nextActor = nextTurn();
+          playerTurn = nextActor?.isPlayer ?? true;
           tickCooldowns();
           updateSkillDisableState();
+          if (!playerTurn) setTimeout(enemyTurn, animDelay);
           return;
         }
       }
@@ -885,8 +905,10 @@ export async function startCombat(enemy, player) {
       setTimeout(endCombat, animDelay + 500);
       return;
     }
-    playerTurn = true;
+    const nextActor = nextTurn();
+    playerTurn = nextActor?.isPlayer ?? true;
     tickCooldowns();
     updateSkillDisableState();
+    if (!playerTurn) setTimeout(enemyTurn, animDelay);
   }
 }
