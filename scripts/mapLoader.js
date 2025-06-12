@@ -39,13 +39,21 @@ export function normalizeGrid(grid, size = 20) {
   return normalized;
 }
 
-export async function loadMap(name) {
-  if (name === 'map09' && !hasSealingDust() && !isSealPuzzleSolved()) {
-    showDialogue('A shimmering seal bars your way.');
-    return null;
+const mapEntryConditions = {
+  map09: {
+    check: () => hasSealingDust() || isSealPuzzleSolved(),
+    message: 'A shimmering seal bars your way.'
+  },
+  map10: {
+    check: () => isMirrorPuzzleSolved(),
+    message: 'Ancient glyphs refuse to yield.'
   }
-  if (name === 'map10' && !isMirrorPuzzleSolved()) {
-    showDialogue('Ancient glyphs refuse to yield.');
+};
+
+export async function loadMap(name) {
+  const condition = mapEntryConditions[name];
+  if (condition && !condition.check()) {
+    showDialogue(condition.message);
     return null;
   }
   let data;
@@ -59,6 +67,15 @@ export async function loadMap(name) {
     if (name === 'map06_right') markForkVisited('right');
     if (name === 'map07' && visitedBothForks()) {
       showDialogue('The air hums as the twin trials align.');
+    }
+    if (name === 'map08' && isSealPuzzleSolved()) {
+      for (const row of data.grid) {
+        for (const cell of row) {
+          if (cell && cell.type === 'D' && cell.target === 'map09.json') {
+            cell.locked = false;
+          }
+        }
+      }
     }
     if (name === 'map09' && hasSealingDust()) {
       consumeSealingDust();

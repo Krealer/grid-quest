@@ -10,6 +10,7 @@ import { markItemUsed } from '../info/items.js';
 import { setMemory } from './dialogue_state.js';
 import { enterDoor } from './player.js';
 import { tryVicarDoor } from './door_logic.js';
+import { hasSealingDust, isSealPuzzleSolved } from './player_memory.js';
 
 /**
  * Handles double click interactions on tiles.
@@ -111,6 +112,16 @@ export async function handleTileInteraction(
     useKey('maze_key_2');
     markItemUsed('maze_key_2');
     updateInventoryUI();
+    tile.locked = false;
+    const newCols = await enterDoor(tile.target, tile.spawn);
+    return newCols;
+  }
+
+  if (tile.type === 'D' && tile.requiresItem === 'sealing_dust' && tile.locked) {
+    if (!hasSealingDust() && !isSealPuzzleSolved()) {
+      showDialogue(tile.message || 'A shimmering seal bars your way.');
+      return;
+    }
     tile.locked = false;
     const newCols = await enterDoor(tile.target, tile.spawn);
     return newCols;
