@@ -6,9 +6,10 @@ function formatTarget(type) {
   const map = {
     self: 'Self',
     enemy: 'Enemy',
-    allEnemies: 'All Enemies',
-    allAllies: 'All Allies',
-    ally: 'Ally'
+    ally: 'Ally',
+    all_enemies: 'All Enemies',
+    all_allies: 'All Allies',
+    any: 'Any'
   };
   return map[type] || type;
 }
@@ -28,7 +29,7 @@ export function showSkillPreview(skill) {
     <strong>${skill.icon ? skill.icon + ' ' : ''}${skill.name}</strong>\
     <div class="desc">${skill.description}</div>\
     <div class="meta">Cooldown: ${skill.cooldown || 0}${remaining ? ` (Remaining: ${remaining})` : ''}</div>\
-    <div class="meta">Target: ${formatTarget(skill.targetType)}</div>\
+    <div class="meta">Target: ${formatTarget(skill.targeting)}</div>\
     ${effects ? `<div class="meta">Effects: ${effects}</div>` : ''}\
   `;
   previewEl.classList.remove('hidden');

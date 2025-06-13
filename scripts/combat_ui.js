@@ -110,7 +110,7 @@ export function highlightSkillTargets(
   enemies,
   onSelect
 ) {
-  const type = skill.targetType || 'enemy';
+  const type = skill.targeting || 'enemy';
   let targets = [];
   if (type === 'self') {
     targets = [actor];
@@ -118,10 +118,12 @@ export function highlightSkillTargets(
     targets = actor.isPlayer ? enemies : players;
   } else if (type === 'ally') {
     targets = (actor.isPlayer ? players : enemies).filter((t) => t !== actor);
-  } else if (type === 'allEnemies') {
+  } else if (type === 'all_enemies') {
     targets = actor.isPlayer ? enemies : players;
-  } else if (type === 'allAllies') {
+  } else if (type === 'all_allies') {
     targets = actor.isPlayer ? players : enemies;
+  } else if (type === 'any') {
+    targets = [...players, ...enemies];
   }
   highlightTiles(targets, onSelect);
 }
@@ -401,6 +403,8 @@ export function showSkillsForCurrentAlly(overlay, players, skillMap) {
   if (!ally) return;
   const skills = skillMap(ally);
   selectSkillForAlly(overlay, ally, skills, () => {
-    renderAllySwitch(overlay, players, (i) => showSkillsForCurrentAlly(overlay, players, skillMap));
+    renderAllySwitch(overlay, players, (i) =>
+      showSkillsForCurrentAlly(overlay, players, skillMap)
+    );
   });
 }

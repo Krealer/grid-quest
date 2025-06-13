@@ -194,7 +194,8 @@ export const statusEffects = {
     type: 'positive',
     duration: 3,
     apply(target) {
-      if (!Array.isArray(target.passiveImmunities)) target.passiveImmunities = [];
+      if (!Array.isArray(target.passiveImmunities))
+        target.passiveImmunities = [];
       if (!target.passiveImmunities.includes('weakened'))
         target.passiveImmunities.push('weakened');
     },
@@ -457,5 +458,8 @@ export function getStatusMetadata() {
 }
 
 // convenience helpers for status manipulation
-export const applyStatus = addStatus;
+export function applyStatus(targets, id, duration) {
+  const list = Array.isArray(targets) ? targets : [targets];
+  list.forEach((t) => addStatus(t, id, duration));
+}
 export { removeStatus, tickStatuses };
