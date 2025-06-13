@@ -2,6 +2,7 @@
 // combat and other game systems. Each effect includes logic for
 // duration and its core impact on gameplay. Skills, items and enemies
 // can apply these by referencing the ID.
+import { addStatus, removeStatus, tickStatuses } from './statusManager.js';
 
 export const statusEffects = {
   // ---------- Positive Effects ----------
@@ -454,3 +455,7 @@ export function getStatusMetadata() {
     temporary: typeof e.duration === 'number'
   }));
 }
+
+// convenience helpers for status manipulation
+export const applyStatus = addStatus;
+export { removeStatus, tickStatuses };
