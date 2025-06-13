@@ -61,6 +61,13 @@ npm install
 ```
 Run this command before using `npm run lint` or `npm test`.
 
+Alternatively run the helper script which prefers cached packages when
+available:
+
+```bash
+./scripts/setup_dev.sh
+```
+
 ### Available commands
 
 - `npm run lint` – check code with ESLint
