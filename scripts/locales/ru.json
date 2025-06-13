@@ -32,6 +32,7 @@
   "settings.colorblind": "Режим дальтоника",
   "settings.labels": "Показывать названия плиток",
   "settings.dialogue": "Анимация диалога",
+  "settings.tapToSkip": "Нажмите, чтобы пропустить диалог",
   "settings.language": "Язык",
   "settings.center": "Центрирование (только портрет)",
   "settings.reset": "Сбросить все настройки",

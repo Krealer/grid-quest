@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const colorblindToggle = document.getElementById('colorblind-toggle');
   const labelToggle = document.getElementById('label-toggle');
   const dialogueToggle = document.getElementById('dialogue-toggle');
+  const skipToggle = document.getElementById('skip-toggle');
   const langSelect = document.getElementById('language-select');
   const centerToggle = document.getElementById('center-toggle');
   const resetBtn = document.getElementById('reset-settings');
@@ -185,6 +186,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   colorblindToggle.checked = settings.colorblind;
   labelToggle.checked = settings.tileLabels;
   dialogueToggle.checked = settings.dialogueAnim;
+  skipToggle.checked = settings.tapToSkip;
   langSelect.value = settings.language;
   centerToggle.checked = settings.centerMode;
   applyTranslations();
@@ -254,6 +256,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       colorblindToggle,
       labelToggle,
       dialogueToggle,
+      skipToggle,
       langSelect,
       centerToggle,
       resetBtn,

@@ -32,6 +32,7 @@
   "settings.colorblind": "色覚サポート",
   "settings.labels": "タイル名を表示",
   "settings.dialogue": "会話アニメーション",
+  "settings.tapToSkip": "タップでスキップ",
   "settings.language": "言語",
   "settings.center": "センターモード (縦向きのみ)",
   "settings.reset": "すべてリセット",
