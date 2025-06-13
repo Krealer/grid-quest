@@ -4,6 +4,7 @@ import {
   livingPlayers,
   livingEnemies
 } from './combat_state.js';
+import { markActiveTile } from './grid_renderer.js';
 import { selectTarget, getSelectedTarget } from './combat_state.js';
 import { tickStatuses } from './status_effects.js';
 import { executeSkill } from './skill_engine.js';
@@ -12,6 +13,10 @@ export function initTurnOrder() {
   generateTurnQueue();
   combatState.turnIndex = 0;
   combatState.activeEntity = combatState.turnQueue[0] || null;
+  markActiveTile(combatState.activeEntity);
+  document.dispatchEvent(
+    new CustomEvent('turnStarted', { detail: combatState.activeEntity })
+  );
   return combatState.activeEntity;
 }
 
@@ -27,6 +32,10 @@ export function nextTurn() {
   }
   combatState.activeEntity =
     combatState.turnQueue[combatState.turnIndex] || null;
+  markActiveTile(combatState.activeEntity);
+  document.dispatchEvent(
+    new CustomEvent('turnStarted', { detail: combatState.activeEntity })
+  );
   return combatState.activeEntity;
 }
 
