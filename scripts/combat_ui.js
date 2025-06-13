@@ -102,7 +102,13 @@ export function enableEnemyTargeting(root, onSelect) {
   });
 }
 
-export function highlightSkillTargets(skill, actor, players, enemies, onSelect) {
+export function highlightSkillTargets(
+  skill,
+  actor,
+  players,
+  enemies,
+  onSelect
+) {
   const type = skill.targetType || 'enemy';
   let targets = [];
   if (type === 'self') {
@@ -206,8 +212,7 @@ export function updateStatusUI(root, players, enemies) {
   const update = (el, unit) => {
     if (!el || !unit) return;
     const hp = el.querySelector('.hp');
-    if (hp && unit.maxHp)
-      hp.style.width = `${(unit.hp / unit.maxHp) * 100}%`;
+    if (hp && unit.maxHp) hp.style.width = `${(unit.hp / unit.maxHp) * 100}%`;
     const statsEl = el.querySelector('.stats');
     if (statsEl) statsEl.textContent = formatStats(unit);
     const list = el.querySelector('.statuses');
@@ -286,39 +291,67 @@ export function setSkillDisabledState(
 }
 
 let logContainer = null;
+let enemyLabel = '';
+let playerLabel = 'Player';
+const logEntries = [];
 
 // Initialize the combat log panel and return a convenience log function.
-export function initLogPanel(overlay) {
-  logContainer = overlay.querySelector('.log');
+export function initLogPanel(overlay, enemyName = '', playerName = 'Player') {
+  logContainer = overlay.querySelector('#combat-log');
   if (logContainer) {
     logContainer.innerHTML = '';
   }
+  enemyLabel = enemyName;
+  playerLabel = playerName;
   document.addEventListener('passiveUnlocked', onPassiveUnlocked);
+  document.addEventListener('turnStarted', onTurnStarted);
+  document.addEventListener('combatEvent', onCombatEvent);
   return appendLog;
 }
 
 // Append a single entry to the combat log panel.
-export function appendLog(message) {
+export function appendLog(message, type = 'system') {
   if (!logContainer) return;
   const entry = document.createElement('div');
+  entry.className = `entry ${type}`;
   entry.textContent = message;
   logContainer.appendChild(entry);
+  logEntries.push(entry);
+  if (logEntries.length > 10) {
+    const old = logEntries.shift();
+    old.remove();
+  }
   logContainer.scrollTop = logContainer.scrollHeight;
 }
 
 export function showVictoryMessage() {
-  appendLog('Victory!');
+  appendLog('Victory!', 'system');
 }
 
 export function showXpGain(amount) {
-  appendLog(`Gained ${amount} XP`);
+  appendLog(`Gained ${amount} XP`, 'system');
 }
 
 export function showLevelUp(level) {
-  appendLog(`Level Up! Now level ${level}`);
+  appendLog(`Level Up! Now level ${level}`, 'system');
 }
 
 function onPassiveUnlocked(e) {
   const name = e.detail?.name || e.detail?.id || 'Passive';
-  appendLog(`Passive unlocked: ${name}`);
+  appendLog(`Passive unlocked: ${name}`, 'system');
+}
+
+function onTurnStarted(e) {
+  const unit = e.detail;
+  if (!unit) return;
+  const label = unit.isPlayer ? playerLabel : enemyLabel || 'Enemy';
+  appendLog(`${label}'s turn`, 'system');
+}
+
+function onCombatEvent(e) {
+  const { type, actor } = e.detail || {};
+  if (type === 'skill' && actor) {
+    const label = actor.isPlayer ? 'player' : 'enemy';
+    appendLog(e.detail.message, label);
+  }
 }

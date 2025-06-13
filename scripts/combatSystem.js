@@ -45,6 +45,11 @@ import {
   showLevelUp,
   highlightActing
 } from './combat_ui.js';
+import {
+  initSkillPreview,
+  showSkillPreview,
+  hideSkillPreview
+} from './combat_renderer.js';
 import { clearActiveTile } from './grid_renderer.js';
 import {
   initStatuses,
@@ -116,7 +121,8 @@ export async function startCombat(enemy, player) {
           <div class="item-buttons tab-panel hidden"></div>
         </div>
       </div>
-      <div class="log hidden"></div>
+      <div id="skill-preview" class="skill-preview hidden"></div>
+      <div id="combat-log" class="log hidden"></div>
     </div>`;
 
   document.body.appendChild(overlay);
@@ -154,8 +160,7 @@ export async function startCombat(enemy, player) {
   const defensiveContainer = overlay.querySelector('.defensive-skill-buttons');
   const itemContainer = overlay.querySelector('.item-buttons');
   const logEl = overlay.querySelector('.log');
-
-  const log = initLogPanel(overlay);
+  const log = initLogPanel(overlay, enemy.name, player.name || 'Player');
 
   await loadItems();
 
@@ -197,6 +202,7 @@ export async function startCombat(enemy, player) {
   let sparkUsed = false;
   let reflectActive = false;
   const skillCooldowns = {};
+  initSkillPreview(overlay, (id) => skillCooldowns[id] || 0);
 
   function damagePlayer(dmg) {
     let amount = dmg;
@@ -424,6 +430,15 @@ export async function startCombat(enemy, player) {
     handleAction
   );
   const skillButtons = { ...offButtons, ...defButtons };
+
+  Object.entries(skillButtons).forEach(([id, btn]) => {
+    const skill = skillLookup[id];
+    if (!btn || !skill) return;
+    btn.addEventListener('mouseenter', () => showSkillPreview(skill));
+    btn.addEventListener('mouseleave', hideSkillPreview);
+    btn.addEventListener('touchstart', () => showSkillPreview(skill));
+    btn.addEventListener('touchend', hideSkillPreview);
+  });
 
   updateItemsUI();
   document.addEventListener('inventoryUpdated', updateItemsUI);
@@ -825,15 +840,22 @@ export async function startCombat(enemy, player) {
       } else {
         skill = getEnemySkill('prism_shot');
       }
-    }
-    else if (enemy.id === 'warden_threshold') {
-      enemy.cooldowns = enemy.cooldowns || { earthbind: 0, resolve_break: 0, quaking_step: 0 };
-      for (const k in enemy.cooldowns) { if (enemy.cooldowns[k] > 0) enemy.cooldowns[k]--; }
+    } else if (enemy.id === 'warden_threshold') {
+      enemy.cooldowns = enemy.cooldowns || {
+        earthbind: 0,
+        resolve_break: 0,
+        quaking_step: 0
+      };
+      for (const k in enemy.cooldowns) {
+        if (enemy.cooldowns[k] > 0) enemy.cooldowns[k]--;
+      }
       const opts = [];
       if (enemy.cooldowns.earthbind === 0) opts.push('earthbind');
       if (enemy.cooldowns.resolve_break === 0) opts.push('resolve_break');
       if (enemy.cooldowns.quaking_step === 0) opts.push('quaking_step');
-      const choice = opts.length ? opts[Math.floor(Math.random()*opts.length)] : null;
+      const choice = opts.length
+        ? opts[Math.floor(Math.random() * opts.length)]
+        : null;
       if (choice) {
         skill = getEnemySkill(choice);
         if (skill.cooldown > 0) enemy.cooldowns[choice] = skill.cooldown;

@@ -6,7 +6,10 @@ import {
 } from './combat_state.js';
 import { markActiveTile } from './grid_renderer.js';
 import { selectTarget, getSelectedTarget } from './combat_state.js';
-import { highlightSkillTargets, clearSkillTargetHighlights } from './combat_ui.js';
+import {
+  highlightSkillTargets,
+  clearSkillTargetHighlights
+} from './combat_ui.js';
 import { tickStatuses } from './status_effects.js';
 import { executeSkill } from './skill_engine.js';
 
@@ -87,10 +90,24 @@ export async function executeAction(skill, actor, targetOverride, extra = {}) {
   const targets = getTargets(targetType, actor);
   const selected = targetOverride || getSelectedTarget();
   let target = selected && targets.includes(selected) ? selected : null;
-  if (!target && actor.isPlayer && targets.length > 1 && targetType !== 'self' && targetType !== 'allEnemies' && targetType !== 'allAllies') {
+  if (
+    !target &&
+    actor.isPlayer &&
+    targets.length > 1 &&
+    targetType !== 'self' &&
+    targetType !== 'allEnemies' &&
+    targetType !== 'allAllies'
+  ) {
     target = await waitForTarget(skill, actor);
   }
   if (!target) target = targets[0];
   if (target) selectTarget(target);
   executeSkill(skill, actor, target, { actor, target, ...extra });
+  const message =
+    `${actor.name} uses ${skill.name}` + (target ? ` on ${target.name}` : '');
+  document.dispatchEvent(
+    new CustomEvent('combatEvent', {
+      detail: { type: 'skill', actor, skill, target, message }
+    })
+  );
 }
