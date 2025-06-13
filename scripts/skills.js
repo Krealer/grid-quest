@@ -1,5 +1,6 @@
 // Defines skill data and manages unlocking/lookup
 import { getStatusEffect } from './status_effects.js';
+import { applyDamage } from './logic.js';
 
 const skillDefs = {
   strike: {
@@ -13,9 +14,12 @@ const skillDefs = {
     cooldown: 0,
     source: 'starter',
     // Basic attack scaled by player ATK
-    effect({ damageEnemy, log }) {
-      const dealt = damageEnemy(0);
-      log(`Player strikes for ${dealt} damage!`);
+    effect({ user, target, log }) {
+      if (target) {
+        const dmg = user?.stats?.attack || 0;
+        const applied = applyDamage(target, dmg);
+        log(`${user.name} strikes ${target.name} for ${applied} damage!`);
+      }
     }
   },
   guard: {
@@ -75,10 +79,12 @@ const skillDefs = {
     cost: 0,
     cooldown: 0,
     unlockCondition: { enemy: 'E' },
-    effect({ damageEnemy, log }) {
-      const dmg = 10;
-      damageEnemy(dmg);
-      log('Flames scorch the enemy for 10 damage!');
+    effect({ user, target, log }) {
+      if (target) {
+        const dmg = 10 + (user?.stats?.attack || 0);
+        const applied = applyDamage(target, dmg);
+        log(`${user.name} scorches ${target.name} for ${applied} damage!`);
+      }
     }
   },
   shadowStab: {
@@ -91,10 +97,12 @@ const skillDefs = {
     cost: 0,
     cooldown: 0,
     unlockCondition: { enemy: 'B' },
-    effect({ damageEnemy, log }) {
-      const dmg = 20;
-      damageEnemy(dmg);
-      log('You lunge from the darkness for 20 damage!');
+    effect({ user, target, log }) {
+      if (target) {
+        const dmg = 20 + (user?.stats?.attack || 0);
+        const applied = applyDamage(target, dmg);
+        log(`${user.name} lunges from the shadows for ${applied} damage!`);
+      }
     }
   },
   boneSpike: {
@@ -107,10 +115,12 @@ const skillDefs = {
     cost: 0,
     cooldown: 0,
     unlockCondition: { enemy: 'S' },
-    effect({ damageEnemy, log }) {
-      const dmg = 18;
-      damageEnemy(dmg);
-      log('Bone shards pierce the foe for 18 damage!');
+    effect({ user, target, log }) {
+      if (target) {
+        const dmg = 18 + (user?.stats?.attack || 0);
+        const applied = applyDamage(target, dmg);
+        log(`${user.name} hurls bone shards for ${applied} damage!`);
+      }
     }
   },
   arcaneBlast: {
@@ -123,10 +133,12 @@ const skillDefs = {
     cost: 0,
     cooldown: 0,
     unlockCondition: { item: 'ancient_scroll' },
-    effect({ damageEnemy, log }) {
-      const dmg = 12;
-      damageEnemy(dmg);
-      log('Arcane power lashes out for 12 damage!');
+    effect({ user, target, log }) {
+      if (target) {
+        const dmg = 12 + (user?.stats?.attack || 0);
+        const applied = applyDamage(target, dmg);
+        log(`${user.name} blasts ${target.name} for ${applied} damage!`);
+      }
     }
   },
   poisonDart: {
