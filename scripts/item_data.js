@@ -548,17 +548,6 @@ export const itemData = {
     stackLimit: 1,
     icon: '💍'
   },
-  aegis_invocation_scroll: {
-    id: 'aegis_invocation_scroll',
-    name: 'Aegis Invocation Scroll',
-    description: 'Using it teaches the Aegis Invocation skill.',
-    type: 'quest',
-    tags: ['lore'],
-    category: 'lore',
-    consumable: true,
-    stackLimit: 1,
-    icon: '📜'
-  },
   ritual_oil: {
     id: 'ritual_oil',
     name: 'Ritual Oil',
@@ -615,17 +604,6 @@ export const itemData = {
     stackLimit: 5,
     icon: '🔥',
     useInCombat: true
-  },
-  ember_prayer_scroll: {
-    id: 'ember_prayer_scroll',
-    name: 'Ember Prayer Scroll',
-    description: 'Using it teaches the Ember Prayer skill.',
-    type: 'quest',
-    tags: ['lore'],
-    category: 'lore',
-    consumable: true,
-    stackLimit: 1,
-    icon: '📜'
   },
   volcanic_slag: {
     id: 'volcanic_slag',

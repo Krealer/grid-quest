@@ -10,8 +10,6 @@ export function restartGame() {
     'gridquest.lore_flags',
     'gridquest.class',
     'gridquest.passives',
-    'gridquest.enemySkillSources',
-    'gridquest.skills',
     'gridquest.save'
   ];
   keys.forEach((k) => localStorage.removeItem(k));

@@ -4,7 +4,6 @@ import { updateInventoryUI } from './inventory_ui.js';
 import { giveRelic, setMemory } from './dialogue_state.js';
 import { getItemData, loadItems } from './item_loader.js';
 import { loseHpNonLethal } from './player.js';
-import { unlockSkillsFromItem, unlockSkillsFromRelic } from './skills.js';
 
 const chestContents = {
   'map01:10,5': {
@@ -122,10 +121,6 @@ const chestContents = {
     item: 'ritual_oil',
     message: 'You find a vial of ritual oil.'
   },
-  'map09_floor01:16,10': {
-    item: 'aegis_invocation_scroll',
-    message: 'You discover a sacred scroll hidden within.'
-  },
   'map09_floor01:15,13': {
     item: 'polished_shard',
     message: 'You uncover a gleaming polished shard.'
@@ -138,10 +133,6 @@ const chestContents = {
     item: 'mana_ember',
     quantity: 1,
     message: 'The chest radiates lingering warmth.'
-  },
-  'map09_floor02:10,14': {
-    item: 'ember_prayer_scroll',
-    message: 'Inside rests a sealed scroll etched in ember.'
   },
   'map09_floor03:4,3': {
     item: 'xp_scroll',
@@ -174,7 +165,6 @@ export async function openChest(id, player) {
   }
   let item = null;
   let items = null;
-  let unlockedSkills = [];
   if (Array.isArray(config.items)) {
     items = [];
     for (const itm of config.items) {
@@ -182,7 +172,6 @@ export async function openChest(id, player) {
       if (data) {
         await giveItem(itm, 1);
         items.push(data);
-        unlockedSkills.push(...unlockSkillsFromItem(itm));
       }
     }
     updateInventoryUI();
@@ -192,17 +181,15 @@ export async function openChest(id, player) {
       const qty = config.quantity || 1;
       await giveItem(config.item, qty);
       updateInventoryUI();
-      unlockedSkills = unlockSkillsFromItem(config.item);
     }
   }
   if (config.relic) {
     giveRelic(config.relic);
-    unlockedSkills.push(...unlockSkillsFromRelic(config.relic));
   }
   if (config.hpLoss && player) {
     loseHpNonLethal(config.hpLoss);
   }
-  return { item, items, message: config.message || null, unlockedSkills };
+  return { item, items, message: config.message || null };
 }
 
 export function setOpenedChests(list) {

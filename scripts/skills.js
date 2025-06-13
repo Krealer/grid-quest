@@ -67,7 +67,6 @@ const skillDefs = {
     category: 'defensive',
     cost: 0,
     cooldown: 0,
-    unlockCondition: { chest: 'map01:11,3' },
     effect({ activateShieldBlock, log }) {
       activateShieldBlock();
       log('A sturdy wall of force surrounds you.');
@@ -83,7 +82,6 @@ const skillDefs = {
     category: 'offensive',
     cost: 0,
     cooldown: 0,
-    unlockCondition: { enemy: 'E' },
     effect({ user, target, log }) {
       if (target) {
         const dmg = 10 + (user?.stats?.attack || 0);
@@ -102,7 +100,6 @@ const skillDefs = {
     category: 'offensive',
     cost: 0,
     cooldown: 0,
-    unlockCondition: { enemy: 'B' },
     effect({ user, target, log }) {
       if (target) {
         const dmg = 20 + (user?.stats?.attack || 0);
@@ -121,7 +118,6 @@ const skillDefs = {
     category: 'offensive',
     cost: 0,
     cooldown: 0,
-    unlockCondition: { enemy: 'S' },
     effect({ user, target, log }) {
       if (target) {
         const dmg = 18 + (user?.stats?.attack || 0);
@@ -140,7 +136,6 @@ const skillDefs = {
     category: 'offensive',
     cost: 0,
     cooldown: 0,
-    unlockCondition: { item: 'ancient_scroll' },
     effect({ user, target, log }) {
       if (target) {
         const dmg = 12 + (user?.stats?.attack || 0);
@@ -193,7 +188,6 @@ const skillDefs = {
     cost: 0,
     cooldown: 7,
     source: 'map09_floor01_chest',
-    unlockCondition: { item: 'aegis_invocation_scroll' },
     effect({ applyStatus, removeNegativeStatus, player, log }) {
       applyStatus(player, 'aegis_barrier', Infinity);
       const removed = removeNegativeStatus(player);
@@ -217,7 +211,6 @@ const skillDefs = {
     cost: 0,
     cooldown: 4,
     source: 'map09_floor02_chest',
-    unlockCondition: { item: 'ember_prayer_scroll' },
     effect({ healPlayer, applyStatus, enemy, player, log }) {
       const amount = Math.floor(player.maxHp * 0.2);
       healPlayer(amount);
@@ -305,99 +298,17 @@ const skillDefs = {
 };
 
 let player = null;
-const enemySkillSources = new Set();
-
-function loadEnemySkillSources() {
-  const json = localStorage.getItem('gridquest.enemySkillSources');
-  if (!json) return [];
-  try {
-    const arr = JSON.parse(json);
-    if (Array.isArray(arr)) return arr;
-    return [];
-  } catch {
-    return [];
-  }
-}
-
-function saveEnemySkillSources(list) {
-  localStorage.setItem('gridquest.enemySkillSources', JSON.stringify(list));
-}
-
-function loadLearnedSkills() {
-  const json = localStorage.getItem('gridquest.skills');
-  if (!json) return [];
-  try {
-    const arr = JSON.parse(json);
-    if (Array.isArray(arr)) return arr;
-    return [];
-  } catch {
-    return [];
-  }
-}
-
-function saveLearnedSkills(list) {
-  localStorage.setItem('gridquest.skills', JSON.stringify(list));
-}
 
 export function initSkillSystem(playerObj) {
   player = playerObj;
   if (!Array.isArray(player.learnedSkills)) {
-    player.learnedSkills = loadLearnedSkills();
+    player.learnedSkills = [];
   }
-  const enemyList = loadEnemySkillSources();
-  enemyList.forEach((id) => enemySkillSources.add(id));
-  // Ensure starting skills are present
   ['strike', 'guard', 'heal'].forEach((id) => {
     if (!player.learnedSkills.includes(id)) {
       player.learnedSkills.push(id);
     }
   });
-  saveLearnedSkills(player.learnedSkills);
-}
-
-export function unlockSkill(id) {
-  if (!player) return false;
-  if (!player.learnedSkills.includes(id)) {
-    player.learnedSkills.push(id);
-    saveLearnedSkills(player.learnedSkills);
-    return true;
-  }
-  return false;
-}
-
-export function isEnemySourceUsed(id) {
-  return enemySkillSources.has(id);
-}
-
-export function markEnemySource(id) {
-  if (!enemySkillSources.has(id)) {
-    enemySkillSources.add(id);
-    saveEnemySkillSources(Array.from(enemySkillSources));
-  }
-}
-
-export function unlockSkillsFromItem(itemId) {
-  const unlocked = [];
-  for (const [id, skill] of Object.entries(skillDefs)) {
-    if (skill.unlockCondition?.item === itemId) {
-      if (unlockSkill(id)) {
-        unlocked.push(id);
-      }
-    }
-  }
-  return unlocked;
-}
-
-export function unlockSkillsFromRelic(relicId) {
-  const unlocked = [];
-  for (const [id, skill] of Object.entries(skillDefs)) {
-    if (skill.unlockCondition?.relic === relicId) {
-      if (unlockSkill(id)) {
-        unlocked.push(id);
-      }
-    }
-  }
-  return unlocked;
 }
 
 export function hasSkill(id) {
