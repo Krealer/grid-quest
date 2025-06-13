@@ -201,7 +201,12 @@ export async function showDialogueWithChoices(keyOrText, choices = []) {
         key = choice.label;
       }
       const text = key ? t(key) : '[Missing Label]';
-      btn.textContent = text === '[Missing Translation]' ? '[Missing Label]' : text;
+      if (text === '[Missing Translation]') {
+        console.warn(`Missing translation key: ${key}`);
+        btn.textContent = '[Missing Label]';
+      } else {
+        btn.textContent = text;
+      }
       btn.addEventListener('click', () => choose(i));
       choicesEl.appendChild(btn);
       buttons.push(btn);
