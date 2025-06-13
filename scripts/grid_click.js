@@ -1,4 +1,4 @@
-import { getCurrentGrid } from './mapLoader.js';
+import { getCurrentGrid } from './map_loader.js';
 import { onStepEffect, isWalkable } from './tile_type.js';
 import { findPath } from './pathfinder.js';
 import { stepTo } from './player.js';

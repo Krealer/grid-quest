@@ -23,7 +23,7 @@ import {
 } from './item_logic.js';
 import { logMessage } from './message_log.js';
 import { updateInventoryUI } from './inventory_ui.js';
-import { showDialogue } from './dialogueSystem.js';
+import { showDialogue } from './dialogue_system.js';
 import { gameState } from './game_state.js';
 import { discover, discoverSkill } from './player_memory.js';
 import { advanceBossPhase, resetBossPhase } from './boss_state.js';
@@ -57,7 +57,7 @@ import {
   removeNegativeStatus as removeNegativeStatusEffect,
   hasStatus,
   clearStatuses
-} from './statusManager.js';
+} from './status_manager.js';
 import {
   applyEffect as applyStatusEffect,
   removeStatus as removeStatusEffect,

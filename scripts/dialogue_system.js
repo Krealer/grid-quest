@@ -9,8 +9,8 @@ import {
   triggerReroll
 } from './dialogue_state.js';
 import { getQuests, completeQuest } from './quest_state.js';
-import { showError } from './errorPrompt.js';
-import { loadJson } from './dataService.js';
+import { showError } from './error_prompt.js';
+import { loadJson } from './data_service.js';
 import { gameState } from './game_state.js';
 
 let dialogueLines = {};

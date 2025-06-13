@@ -1,5 +1,5 @@
-import { loadJson } from './dataService.js';
-import { showError } from './errorPrompt.js';
+import { loadJson } from './data_service.js';
+import { showError } from './error_prompt.js';
 
 const STORAGE_KEY = 'gridquest.relics';
 

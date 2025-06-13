@@ -1,5 +1,5 @@
 import { getStatusEffect } from './status_effects.js';
-import { getStatusList, hasStatus } from './statusManager.js';
+import { getStatusList, hasStatus } from './status_manager.js';
 import { attachTooltip } from '../ui/skills_panel.js';
 import { highlightTiles, clearHighlightedTiles } from './grid_renderer.js';
 import { combatState } from './combat_state.js';

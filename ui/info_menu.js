@@ -1,5 +1,5 @@
-import { loadJson as loadJsonFile } from '../scripts/dataService.js';
-import { showError } from '../scripts/errorPrompt.js';
+import { loadJson as loadJsonFile } from '../scripts/data_service.js';
+import { showError } from '../scripts/error_prompt.js';
 
 export async function loadJson(name) {
   const data = await loadJsonFile(`info_data/${name}`, null);

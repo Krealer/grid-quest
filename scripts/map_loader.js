@@ -1,5 +1,5 @@
-import { showError } from './errorPrompt.js';
-import { loadJson } from './dataService.js';
+import { showError } from './error_prompt.js';
+import { loadJson } from './data_service.js';
 import {
   markForkVisited,
   visitedBothForks,
@@ -11,7 +11,7 @@ import {
   getLoreRelicCount
 } from './player_memory.js';
 import { isEnemyDefeated } from './enemy.js';
-import { showDialogue } from './dialogueSystem.js';
+import { showDialogue } from './dialogue_system.js';
 import { isPortal15Unlocked } from './player_state.js';
 import { finalFlags } from './memory_flags.js';
 import { hasItem } from './inventory.js';
