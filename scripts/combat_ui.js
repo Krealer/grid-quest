@@ -1,6 +1,7 @@
 import { getStatusEffect } from './status_effects.js';
 import { getStatusList } from './statusManager.js';
 import { attachTooltip } from '../ui/skillsPanel.js';
+import { highlightTiles, clearHighlightedTiles } from './grid_renderer.js';
 
 export function renderCombatants(root, players = [], enemies = [], onSelect) {
   if (!root) return;
@@ -99,6 +100,27 @@ export function enableEnemyTargeting(root, onSelect) {
     const handler = () => onSelect?.(idx, el);
     el.addEventListener('click', handler, { once: true });
   });
+}
+
+export function highlightSkillTargets(skill, actor, players, enemies, onSelect) {
+  const type = skill.targetType || 'enemy';
+  let targets = [];
+  if (type === 'self') {
+    targets = [actor];
+  } else if (type === 'enemy') {
+    targets = actor.isPlayer ? enemies : players;
+  } else if (type === 'ally') {
+    targets = (actor.isPlayer ? players : enemies).filter((t) => t !== actor);
+  } else if (type === 'allEnemies') {
+    targets = actor.isPlayer ? enemies : players;
+  } else if (type === 'allAllies') {
+    targets = actor.isPlayer ? players : enemies;
+  }
+  highlightTiles(targets, onSelect);
+}
+
+export function clearSkillTargetHighlights() {
+  clearHighlightedTiles();
 }
 
 function getTurnLabel(unit) {

@@ -6,6 +6,7 @@ import {
 } from './combat_state.js';
 import { markActiveTile } from './grid_renderer.js';
 import { selectTarget, getSelectedTarget } from './combat_state.js';
+import { highlightSkillTargets, clearSkillTargetHighlights } from './combat_ui.js';
 import { tickStatuses } from './status_effects.js';
 import { executeSkill } from './skill_engine.js';
 
@@ -56,11 +57,40 @@ export function getTargets(type, actor) {
   return [];
 }
 
-export function executeAction(skill, actor, targetOverride, extra = {}) {
+function waitForTarget(skill, actor) {
+  return new Promise((resolve) => {
+    const handler = (entity) => {
+      document.removeEventListener('keydown', escListener);
+      clearSkillTargetHighlights();
+      resolve(entity);
+    };
+    const escListener = (e) => {
+      if (e.key === 'Escape') {
+        clearSkillTargetHighlights();
+        document.removeEventListener('keydown', escListener);
+        resolve(null);
+      }
+    };
+    document.addEventListener('keydown', escListener);
+    highlightSkillTargets(
+      skill,
+      actor,
+      combatState.players,
+      combatState.enemies,
+      handler
+    );
+  });
+}
+
+export async function executeAction(skill, actor, targetOverride, extra = {}) {
   const targetType = skill.targetType || 'enemy';
   const targets = getTargets(targetType, actor);
   const selected = targetOverride || getSelectedTarget();
-  const target = selected && targets.includes(selected) ? selected : targets[0];
+  let target = selected && targets.includes(selected) ? selected : null;
+  if (!target && actor.isPlayer && targets.length > 1 && targetType !== 'self' && targetType !== 'allEnemies' && targetType !== 'allAllies') {
+    target = await waitForTarget(skill, actor);
+  }
+  if (!target) target = targets[0];
   if (target) selectTarget(target);
   executeSkill(skill, actor, target, { actor, target, ...extra });
 }
