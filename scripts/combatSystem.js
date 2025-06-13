@@ -185,6 +185,7 @@ export async function startCombat(enemy, player) {
   initCombatState(player, enemy);
   const firstActor = initTurnOrder();
   let playerTurn = firstActor?.isPlayer ?? true;
+  if (!playerTurn) setTimeout(enemyTurn, animDelay);
   player = combatState.players[0];
   enemy = combatState.enemies[0];
   const queueEl = overlay.querySelector('.turn-queue');
