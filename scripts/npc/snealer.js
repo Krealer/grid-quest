@@ -1,6 +1,6 @@
-import { startDialogueTree } from '../dialogue_system.js';
+import { startDialogueTree, showDialogue } from '../dialogue_system.js';
 import snealerDialogue from '../dialogue/npcs/snealer.js';
 
 export function interact() {
-  startDialogueTree(snealerDialogue);
+  showDialogue('snealer.intro', () => startDialogueTree(snealerDialogue));
 }

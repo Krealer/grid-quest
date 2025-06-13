@@ -61,5 +61,18 @@
   "save.slot_empty": "Slot empty",
   "save.map": "Map:",
   "save.items": "Items:",
-  "save.saved": "Saved:"
+  "save.saved": "Saved:",
+  "snealer.name": "Snealer",
+  "snealer.intro": "The air shifts... Snealer grins slyly.",
+  "snealer.dialogue.1.text": "Ah, a wanderer... Looking for fortune, or answers?",
+  "snealer.dialogue.1.ask_fortune": "Fortune",
+  "snealer.dialogue.1.ask_answers": "Answers",
+  "snealer.dialogue.1.leave": "Never mind",
+  "snealer.dialogue.2.text": "Riches lie in ruins, always guarded. But tell me — what will you give for a shortcut?",
+  "snealer.dialogue.2.refuse": "Nothing",
+  "snealer.dialogue.2.intrigued": "Depends...",
+  "snealer.dialogue.3.text": "Truth is a blade. You might cut yourself on it, wanderer.",
+  "snealer.dialogue.3.ponder": "I'll risk it.",
+  "snealer.dialogue.4.text": "Wise. Return with something rare, something dropped by those who hate the light.",
+  "snealer.dialogue.4.nod": "Got it."
 }
