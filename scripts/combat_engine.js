@@ -47,11 +47,11 @@ export function getTargets(type, actor) {
   return [];
 }
 
-export function executeAction(skill, actor) {
+export function executeAction(skill, actor, targetOverride, extra = {}) {
   const targetType = skill.targetType || 'enemy';
   const targets = getTargets(targetType, actor);
-  const selected = getSelectedTarget();
+  const selected = targetOverride || getSelectedTarget();
   const target = selected && targets.includes(selected) ? selected : targets[0];
   if (target) selectTarget(target);
-  executeSkill(skill, actor, target, { actor, target });
+  executeSkill(skill, actor, target, { actor, target, ...extra });
 }
