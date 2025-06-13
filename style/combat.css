@@ -105,6 +105,11 @@
   border-radius: 3px;
 }
 
+#battle-overlay .combatant .stats {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
 #battle-overlay .intro-text {
   margin-top: 10px;
   opacity: 0;

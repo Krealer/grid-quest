@@ -30,6 +30,14 @@ export function renderCombatants(root, players = [], enemies = [], onSelect) {
   root.appendChild(container);
 }
 
+function formatStats(entity) {
+  const atk = entity.stats?.attack ?? entity.atk ?? 0;
+  const def = entity.stats?.defense ?? entity.def ?? 0;
+  const spd = entity.stats?.speed ?? 0;
+  const hp = `${entity.hp}/${entity.maxHp ?? entity.hp}`;
+  return `HP: ${hp} | ATK: ${atk} | DEF: ${def} | SPD: ${spd}`;
+}
+
 function createCombatantEl(entity, isPlayer, index) {
   const wrapper = document.createElement('div');
   wrapper.className = `combatant ${isPlayer ? 'player' : 'enemy'}`;
@@ -48,6 +56,10 @@ function createCombatantEl(entity, isPlayer, index) {
   hpBar.className = 'hp-bar';
   hpBar.innerHTML = '<div class="hp"></div>';
   wrapper.appendChild(hpBar);
+  const stats = document.createElement('div');
+  stats.className = 'stats';
+  stats.textContent = formatStats(entity);
+  wrapper.appendChild(stats);
   const status = document.createElement('div');
   status.className = 'statuses status-effects';
   wrapper.appendChild(status);
@@ -118,30 +130,34 @@ export function setupTabs(overlay) {
   showOffensive();
 }
 
-export function updateStatusUI(overlay, player, enemy) {
-  const playerList = overlay.querySelector('.player-statuses');
-  const enemyList = overlay.querySelector('.enemy-statuses');
-  if (!playerList || !enemyList) return;
-  playerList.innerHTML = '';
-  enemyList.innerHTML = '';
-  getStatusList(player).forEach((s) => {
-    const ef = getStatusEffect(s.id);
-    const span = document.createElement('span');
-    span.className = 'effect';
-    span.title = ef?.description || s.id;
-    const icon = ef?.icon ? `${ef.icon} ` : '';
-    span.textContent = `${icon}${ef?.name || s.id} (${s.remaining})`;
-    playerList.appendChild(span);
-  });
-  getStatusList(enemy).forEach((s) => {
-    const ef = getStatusEffect(s.id);
-    const span = document.createElement('span');
-    span.className = 'effect';
-    span.title = ef?.description || s.id;
-    const icon = ef?.icon ? `${ef.icon} ` : '';
-    span.textContent = `${icon}${ef?.name || s.id} (${s.remaining})`;
-    enemyList.appendChild(span);
-  });
+export function updateStatusUI(root, players, enemies) {
+  if (!root) return;
+  const playerEls = root.querySelectorAll('.player-team .combatant');
+  const enemyEls = root.querySelectorAll('.enemy-team .combatant');
+  const pList = Array.isArray(players) ? players : [players];
+  const eList = Array.isArray(enemies) ? enemies : [enemies];
+  const update = (el, unit) => {
+    if (!el || !unit) return;
+    const hp = el.querySelector('.hp');
+    if (hp && unit.maxHp)
+      hp.style.width = `${(unit.hp / unit.maxHp) * 100}%`;
+    const statsEl = el.querySelector('.stats');
+    if (statsEl) statsEl.textContent = formatStats(unit);
+    const list = el.querySelector('.statuses');
+    if (!list) return;
+    list.innerHTML = '';
+    getStatusList(unit).forEach((s) => {
+      const ef = getStatusEffect(s.id);
+      const span = document.createElement('span');
+      span.className = 'effect';
+      span.title = ef?.description || s.id;
+      const icon = ef?.icon ? `${ef.icon} ` : '';
+      span.textContent = `${icon}${ef?.name || s.id} (${s.remaining})`;
+      list.appendChild(span);
+    });
+  };
+  pList.forEach((p, i) => update(playerEls[i], p));
+  eList.forEach((e, i) => update(enemyEls[i], e));
 }
 
 export function renderSkillList(container, skills, onClick) {

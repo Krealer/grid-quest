@@ -4,6 +4,7 @@ import {
   livingPlayers,
   livingEnemies
 } from './combat_state.js';
+import { tickStatuses } from './status_effects.js';
 
 export function initTurnOrder() {
   generateTurnQueue();
@@ -13,6 +14,9 @@ export function initTurnOrder() {
 }
 
 export function nextTurn() {
+  if (combatState.activeEntity) {
+    tickStatuses(combatState.activeEntity);
+  }
   combatState.turnIndex += 1;
   if (combatState.turnIndex >= combatState.turnQueue.length) {
     generateTurnQueue();
