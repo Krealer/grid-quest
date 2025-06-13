@@ -10,6 +10,7 @@ export function initSettingsPanel(
     labelToggle,
     dialogueToggle,
     skipToggle,
+    notifyToggle,
     langSelect,
     centerToggle,
     resetBtn,
@@ -83,6 +84,11 @@ export function initSettingsPanel(
     saveSettings(settings);
   });
 
+  notifyToggle.addEventListener('change', () => {
+    settings.notifySkip = notifyToggle.checked;
+    saveSettings(settings);
+  });
+
   langSelect.addEventListener('change', () => {
     settings.language = langSelect.value;
     saveSettings(settings);
@@ -106,6 +112,7 @@ export function initSettingsPanel(
       labelToggle.checked = settings.tileLabels;
       dialogueToggle.checked = settings.dialogueAnim;
       skipToggle.checked = settings.tapToSkip;
+      notifyToggle.checked = settings.notifySkip;
       langSelect.value = settings.language;
       centerToggle.checked = settings.centerMode;
       setLanguage(settings.language);
