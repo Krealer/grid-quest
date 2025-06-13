@@ -1,5 +1,9 @@
-import { combatState, selectTarget, getSelectedTarget } from './combat_state.js';
-import { executeAction } from './combat_engine.js';
+import {
+  combatState,
+  selectTarget,
+  getSelectedTarget
+} from './combat_state.js';
+import { executeAction, getTargets } from './combat_engine.js';
 
 export const currentTurn = {
   unit: null,
@@ -25,8 +29,15 @@ export function chooseTarget(entity) {
 
 export async function resolveTurn(skillObj) {
   const actor = combatState.activeEntity;
-  const target = getSelectedTarget();
   if (!actor || !skillObj) return;
-  await executeAction(skillObj, actor);
-  currentTurn.target = target?.id || null;
+  let override = null;
+  if (!actor.isPlayer) {
+    const list = getTargets(skillObj.targeting || 'enemy', actor);
+    if (['enemy', 'ally', 'any'].includes(skillObj.targeting || 'enemy')) {
+      override = list[0] || null;
+    }
+  }
+  await executeAction(skillObj, actor, override);
+  const sel = getSelectedTarget();
+  currentTurn.target = sel?.id || null;
 }

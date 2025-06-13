@@ -54,12 +54,26 @@ export function checkCombatEnd() {
 }
 
 export function getTargets(type, actor) {
-  if (type === 'self') return [actor];
-  if (type === 'enemy') {
-    const list = actor.isPlayer ? livingEnemies() : livingPlayers();
-    return list.filter((t) => t.hp > 0);
+  const players = livingPlayers();
+  const enemies = livingEnemies();
+  const allies = actor.isPlayer ? players : enemies;
+  const foes = actor.isPlayer ? enemies : players;
+  switch (type) {
+    case 'self':
+      return [actor];
+    case 'enemy':
+      return foes;
+    case 'ally':
+      return allies.filter((t) => t !== actor);
+    case 'all_enemies':
+      return foes;
+    case 'all_allies':
+      return allies;
+    case 'any':
+      return [...players, ...enemies];
+    default:
+      return [];
   }
-  return [];
 }
 
 function waitForTarget(skill, actor) {
@@ -94,28 +108,56 @@ export async function executeAction(skill, actor, targetOverride, extra = {}) {
       : getEnemySkill(actor.selectedSkillId);
   }
   if (!skill) return;
-  const targetType = skill.targetType || 'enemy';
-  const targets = getTargets(targetType, actor);
-  const selected = targetOverride || getSelectedTarget();
-  let target = selected && targets.includes(selected) ? selected : null;
-  if (
-    !target &&
-    actor.isPlayer &&
-    targets.length > 1 &&
-    targetType !== 'self' &&
-    targetType !== 'allEnemies' &&
-    targetType !== 'allAllies'
-  ) {
-    target = await waitForTarget(skill, actor);
+  const targeting = skill.targeting || 'enemy';
+  const candidates = getTargets(targeting, actor);
+  let selected = targetOverride || getSelectedTarget();
+  if (Array.isArray(selected)) {
+    selected = selected.find((s) => candidates.includes(s)) || null;
+  } else if (selected && !candidates.includes(selected)) {
+    selected = null;
   }
-  if (!target) target = targets[0];
-  if (target) selectTarget(target);
-  executeSkill(skill, actor, target, { actor, target, ...extra });
+  let chosen = selected;
+  const needsChoice =
+    actor.isPlayer &&
+    candidates.length > 1 &&
+    ['enemy', 'ally', 'any'].includes(targeting);
+  if (!chosen && needsChoice) {
+    chosen = await waitForTarget(skill, actor);
+  }
+  if (!chosen) chosen = candidates[0];
+  const finalTargets =
+    targeting === 'all_enemies' || targeting === 'all_allies'
+      ? candidates
+      : targeting === 'self'
+        ? [actor]
+        : chosen
+          ? [chosen]
+          : [];
+  if (finalTargets[0]) selectTarget(finalTargets[0]);
+
+  // prevent friendly fire
+  const isPlayerTeam = (e) => e.isPlayer || e.isAlly;
+  const filtered = finalTargets.filter((t) => {
+    if (!isPlayerTeam(actor)) return true;
+    if (isPlayerTeam(t) && skill.category === 'offensive') return false;
+    if (!isPlayerTeam(t) && skill.category === 'defensive') return false;
+    return true;
+  });
+  if (filtered.length === 0) return;
+
+  executeSkill(skill, actor, filtered, {
+    actor,
+    caster: actor,
+    targets: filtered,
+    target: filtered[0],
+    ...extra
+  });
+  const names = filtered.map((t) => t.name).join(', ');
   const message =
-    `${actor.name} uses ${skill.name}` + (target ? ` on ${target.name}` : '');
+    `${actor.name} uses ${skill.name}` + (names ? ` on ${names}` : '');
   document.dispatchEvent(
     new CustomEvent('combatEvent', {
-      detail: { type: 'skill', actor, skill, target, message }
+      detail: { type: 'skill', actor, skill, target: filtered[0], message }
     })
   );
 }
