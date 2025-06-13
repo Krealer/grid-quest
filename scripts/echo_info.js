@@ -1,4 +1,4 @@
-import echoInfoList from '../info_data/echo_info_list.json' assert { type: 'json' };
+import echoInfoList from '../info_data/echo_info_list.js';
 
 export function getAllEchoes() {
   return echoInfoList;
