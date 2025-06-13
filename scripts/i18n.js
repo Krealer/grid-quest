@@ -1,38 +1,24 @@
 /* Internationalization utilities */
 
-const availableLocales = ['en', 'nl', 'ja', 'ar', 'ru'];
-const locales = {};
-let currentLang = 'en';
+import en from './locales/en.json' assert { type: 'json' };
+import nl from './locales/nl.json' assert { type: 'json' };
+import ja from './locales/ja.json' assert { type: 'json' };
+import ar from './locales/ar.json' assert { type: 'json' };
+import ru from './locales/ru.json' assert { type: 'json' };
 
-async function loadLocale(lang) {
-  if (locales[lang] || !availableLocales.includes(lang)) return;
-  try {
-    if (typeof fetch === 'function') {
-      const url = new URL(`./locales/${lang}.json`, import.meta.url);
-      const res = await fetch(url);
-      if (res.ok) {
-        locales[lang] = await res.json();
-        return;
-      }
-    }
-    const mod = await import(`./locales/${lang}.json`, { assert: { type: 'json' } });
-    locales[lang] = mod.default;
-  } catch {
-    locales[lang] = {};
-  }
-}
+const translations = { en, nl, ja, ar, ru };
+const availableLocales = Object.keys(translations);
+let currentLang = 'en';
 
 export function hasLocale(lang) {
   return availableLocales.includes(lang);
 }
 
-export async function setLanguage(lang) {
+export function setLanguage(lang) {
   if (!hasLocale(lang)) return;
   currentLang = lang;
   localStorage.setItem('language', lang);
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  await loadLocale('en');
-  if (lang !== 'en') await loadLocale(lang);
   applyTranslations();
 }
 
@@ -41,16 +27,12 @@ export function getLanguage() {
 }
 
 export function t(key) {
-  const langStrings = locales[currentLang] || {};
-  if (Object.prototype.hasOwnProperty.call(langStrings, key)) {
-    return langStrings[key];
+  const value = translations[currentLang]?.[key] ?? translations.en?.[key];
+  if (!value) {
+    console.warn('[Translation Missing]:', key);
+    return '[Missing Translation]';
   }
-  const enStrings = locales.en || {};
-  if (Object.prototype.hasOwnProperty.call(enStrings, key)) {
-    return enStrings[key];
-  }
-  console.warn(`Missing translation key: ${key}`);
-  return '[Missing Translation]';
+  return value;
 }
 
 export function applyTranslations() {
