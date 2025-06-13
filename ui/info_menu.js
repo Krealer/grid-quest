@@ -2,7 +2,7 @@ import { loadJson as loadJsonFile } from '../scripts/data_service.js';
 import { showError } from '../scripts/error_prompt.js';
 
 export async function loadJson(name) {
-  const data = await loadJsonFile(`../info_data/${name}`, null);
+  const data = await loadJsonFile(`info_data/${name}`, null);
   if (data === null) {
     showError(`Failed to load info_data/${name}`);
     return [];

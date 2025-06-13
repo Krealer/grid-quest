@@ -7,7 +7,7 @@ let enemyData = {};
 export async function loadEnemyData() {
   if (Object.keys(enemyData).length) return enemyData;
   try {
-    const data = await loadJson('../data/enemies.json');
+    const data = await loadJson('data/enemies.json');
     enemyData = data;
   } catch (err) {
     enemyData = {};

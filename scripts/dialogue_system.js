@@ -20,7 +20,7 @@ let dataLoaded = false;
 async function loadDialogData() {
   if (dataLoaded) return;
   try {
-    const data = await loadJson('../data/dialog.json');
+    const data = await loadJson('data/dialog.json');
     dialogueLines = data;
   } catch (err) {
     dialogueLines = {};
