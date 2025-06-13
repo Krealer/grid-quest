@@ -67,12 +67,9 @@ import { getStatusEffect } from './status_effects.js';
 import { initEnemyState } from './enemy.js';
 import { combatState, initCombatState } from './combat_state.js';
 import { initTurnOrder, nextTurn } from './combat_engine.js';
+import { updateHpBar } from './combat_ui_helpers.js';
 
 let overlay = null;
-
-function updateHpBar(bar, current, max) {
-  bar.style.width = `${(current / max) * 100}%`;
-}
 
 /**
  * Starts a basic turn-based combat encounter.
