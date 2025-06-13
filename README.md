@@ -101,4 +101,4 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for details.
    - Many JSON assets are fetched at runtime (e.g., `loadMap` in `scripts/mapLoader.js`), requiring a local HTTP server. If any file is missing or malformed, the error handling is minimal.
 
 3. Remove Unused Copies
-   - The `versions/` folder holds full snapshots for the rollback feature. If you rely on Git history for older revisions, consider trimming this folder or moving the snapshots elsewhere to reduce repository size.
+   - Previous releases were stored in a `versions/` directory. These files have been removed from the working tree to keep the repository lightweight. Use Git history or tags to access older snapshots.
