@@ -9,6 +9,7 @@ export function initSettingsPanel(
     colorblindToggle,
     labelToggle,
     dialogueToggle,
+    skipToggle,
     langSelect,
     centerToggle,
     resetBtn,
@@ -77,6 +78,11 @@ export function initSettingsPanel(
     saveSettings(settings);
   });
 
+  skipToggle.addEventListener('change', () => {
+    settings.tapToSkip = skipToggle.checked;
+    saveSettings(settings);
+  });
+
   langSelect.addEventListener('change', () => {
     settings.language = langSelect.value;
     saveSettings(settings);
@@ -99,6 +105,7 @@ export function initSettingsPanel(
       colorblindToggle.checked = settings.colorblind;
       labelToggle.checked = settings.tileLabels;
       dialogueToggle.checked = settings.dialogueAnim;
+      skipToggle.checked = settings.tapToSkip;
       langSelect.value = settings.language;
       centerToggle.checked = settings.centerMode;
       setLanguage(settings.language);

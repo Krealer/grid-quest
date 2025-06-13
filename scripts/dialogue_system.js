@@ -64,6 +64,7 @@ export async function showDialogue(keyOrText, callback = () => {}) {
 
   function finish() {
     if (index < text.length) {
+      if (gameState.settings?.tapToSkip === false) return;
       textEl.textContent = text;
       index = text.length;
       advance.style.display = 'block';
@@ -125,6 +126,7 @@ export async function showDialogueWithChoices(keyOrText, choices = []) {
 
   function finishTyping() {
     if (index < text.length) {
+      if (gameState.settings?.tapToSkip === false) return;
       clearTimeout(typingTimeout);
       textEl.textContent = text;
       index = text.length;

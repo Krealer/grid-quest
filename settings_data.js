@@ -23,6 +23,10 @@ export default {
     default: true,
     description: 'Type out dialogue text'
   },
+  tapToSkip: {
+    default: true,
+    description: 'Tap anywhere to skip dialogue'
+  },
   language: {
     default: 'en',
     description: 'UI language code'
