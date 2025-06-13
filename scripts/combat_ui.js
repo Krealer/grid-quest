@@ -101,6 +101,28 @@ export function enableEnemyTargeting(root, onSelect) {
   });
 }
 
+function getTurnLabel(unit) {
+  if (!unit) return '';
+  if (unit.isPlayer) return `🧍 ${unit.name || 'Player'}`;
+  if (unit.isAlly) return unit.icon || unit.name || 'Ally';
+  return `${unit.name || 'Enemy'} ${unit.portrait || '👾'}`;
+}
+
+export function renderTurnQueue(container, queue = [], active, index = 0) {
+  if (!container) return;
+  container.innerHTML = '';
+  if (!Array.isArray(queue) || queue.length === 0) return;
+  const len = queue.length;
+  for (let i = 0; i < Math.min(len, 5); i++) {
+    const unit = queue[(index + i) % len];
+    const box = document.createElement('div');
+    box.className = 'turn-box';
+    box.textContent = getTurnLabel(unit);
+    if (unit === active) box.classList.add('active');
+    container.appendChild(box);
+  }
+}
+
 export function setupTabs(overlay) {
   const offContainer = overlay.querySelector('.offensive-skill-buttons');
   const defContainer = overlay.querySelector('.defensive-skill-buttons');

@@ -37,12 +37,15 @@ import {
   setupTabs,
   updateStatusUI,
   renderSkillList,
+  renderTurnQueue,
   setSkillDisabledState,
   initLogPanel,
   showVictoryMessage,
   showXpGain,
-  showLevelUp
+  showLevelUp,
+  highlightActing
 } from './combat_ui.js';
+import { clearActiveTile } from './grid_renderer.js';
 import {
   initStatuses,
   removeNegativeStatus as removeNegativeStatusEffect,
@@ -83,6 +86,7 @@ export async function startCombat(enemy, player) {
   overlay.classList.add('battle-transition');
   overlay.innerHTML = `
     <div class="combat-screen">
+      <div class="turn-queue"></div>
       <div class="combatants">
         <div class="combatant player">
           <div class="name">Hero</div>
@@ -163,6 +167,24 @@ export async function startCombat(enemy, player) {
   let playerTurn = firstActor?.isPlayer ?? true;
   player = combatState.players[0];
   enemy = combatState.enemies[0];
+  const queueEl = overlay.querySelector('.turn-queue');
+  function updateTurnQueue() {
+    renderTurnQueue(
+      queueEl,
+      combatState.turnQueue,
+      combatState.activeEntity,
+      combatState.turnIndex
+    );
+    const act = combatState.activeEntity;
+    if (act) {
+      const idx = act.isPlayer
+        ? combatState.players.indexOf(act)
+        : combatState.enemies.indexOf(act);
+      highlightActing(overlay, act.isPlayer, idx);
+    }
+  }
+  updateTurnQueue();
+  document.addEventListener('turnStarted', updateTurnQueue);
 
   // reveal UI after intro animation
   setTimeout(() => {
@@ -678,6 +700,8 @@ export async function startCombat(enemy, player) {
     overlay.remove();
     overlay = null;
     document.removeEventListener('inventoryUpdated', updateItemsUI);
+    document.removeEventListener('turnStarted', updateTurnQueue);
+    clearActiveTile();
     document.dispatchEvent(
       new CustomEvent('combatEnded', { detail: { playerHp, enemyHp, enemy } })
     );
