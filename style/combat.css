@@ -310,3 +310,70 @@
     padding: 2px 6px;
   }
 }
+
+#battle-overlay .ally-switch {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+#battle-overlay .ally-portrait {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#battle-overlay .ally-portrait.active {
+  border-color: #ff0;
+}
+
+#battle-overlay .ally-portrait.pending {
+  box-shadow: 0 0 4px #0ff;
+}
+
+#battle-overlay .inspect-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #555;
+  padding: 6px;
+  color: #fff;
+  width: 160px;
+  font-size: 12px;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+#battle-overlay .inspect-panel.collapsed .inspect-list {
+  display: none;
+}
+
+#battle-overlay .inspect-toggle {
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+#battle-overlay .inspect-entry {
+  margin-bottom: 4px;
+}
+
+#battle-overlay .inspect-entry .statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+@media (max-width: 600px) {
+  #battle-overlay .inspect-panel {
+    width: 140px;
+    font-size: 10px;
+  }
+}

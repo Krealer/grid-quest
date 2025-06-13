@@ -373,3 +373,34 @@ export function selectSkillForAlly(overlay, ally, skills, onSelect) {
     setupTabs(overlay);
   });
 }
+
+export function renderAllySwitch(overlay, players, onSwitch) {
+  if (!overlay) return;
+  const container = overlay.querySelector('.ally-switch');
+  if (!container) return;
+  container.innerHTML = '';
+  players.forEach((p, idx) => {
+    const div = document.createElement('div');
+    div.className = 'ally-portrait';
+    div.textContent = p.portrait || '🧍';
+    if (idx === combatState.currentAllyIndex) div.classList.add('active');
+    if (!p.selectedSkillId) div.classList.add('pending');
+    div.addEventListener('click', () => {
+      if (combatState.currentAllyIndex !== idx) {
+        combatState.currentAllyIndex = idx;
+        onSwitch?.(idx);
+      }
+    });
+    container.appendChild(div);
+  });
+}
+
+export function showSkillsForCurrentAlly(overlay, players, skillMap) {
+  const idx = combatState.currentAllyIndex || 0;
+  const ally = players[idx];
+  if (!ally) return;
+  const skills = skillMap(ally);
+  selectSkillForAlly(overlay, ally, skills, () => {
+    renderAllySwitch(overlay, players, (i) => showSkillsForCurrentAlly(overlay, players, skillMap));
+  });
+}
