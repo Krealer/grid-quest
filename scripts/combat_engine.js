@@ -196,3 +196,22 @@ export async function executeAction(skill, actor, targetOverride, extra = {}) {
     })
   );
 }
+
+export async function startPlayerTurn(unit) {
+  if (!unit) return;
+  const overlay = document.getElementById('battle-overlay');
+  if (!overlay) return;
+  const skillIds = unit.learnedSkills || unit.skills || [];
+  const skills = skillIds
+    .map((id) => (unit.isPlayer ? getSkill(id) : getEnemySkill(id)))
+    .filter(Boolean);
+  const { chooseSkillAndTarget } = await import('./combat_ui.js');
+  const res = await chooseSkillAndTarget(overlay, unit, skills);
+  if (!res || !res.skill) return;
+  await executeAction(res.skill, unit, res.target || null);
+  proceedToNextTurn();
+}
+
+export function proceedToNextTurn() {
+  return nextTurn();
+}
