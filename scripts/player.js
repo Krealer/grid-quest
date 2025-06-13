@@ -41,7 +41,7 @@ export const player = {
   stats: {
     attack: 0,
     defense: 0,
-    speed: 10
+    speed: 6
   },
   equipment: {
     weapon: null,
@@ -64,7 +64,7 @@ export function calculateStatsFromLevel(level) {
   const maxHp = 100 + lvl * 2 + milestoneHp;
   const attack = 15 + Math.floor(lvl / 5);
   const defense = Math.floor(lvl / 10);
-  const speed = 10;
+  const speed = 6;
   return { maxHp, defense, attack, speed };
 }
 
@@ -73,10 +73,10 @@ export function updateStatsFromLevel() {
   player.maxHp = maxHp;
   player.atk = attack;
   player.def = defense;
-  if (!player.stats) player.stats = { attack: 0, defense: 0, speed: 10 };
+  if (!player.stats) player.stats = { attack: 0, defense: 0, speed: 6 };
   player.stats.defense = 0;
   player.stats.attack = 0;
-  if (typeof player.stats.speed !== 'number') player.stats.speed = 10;
+  if (typeof player.stats.speed !== 'number') player.stats.speed = 6;
   if (player.hp > player.maxHp) player.hp = player.maxHp;
 }
 
@@ -245,7 +245,8 @@ export function serializePlayer() {
     xpToNextLevel: player.xpToNextLevel,
     stats: {
       attack: player.stats?.attack || 0,
-      defense: player.stats?.defense || 0
+      defense: player.stats?.defense || 0,
+      speed: player.stats?.speed ?? 6
     },
     learnedSkills: Array.isArray(player.learnedSkills)
       ? [...player.learnedSkills]
@@ -262,9 +263,10 @@ export function deserializePlayer(data) {
   player.xp = data.xp ?? player.xp;
   player.xpToNextLevel = data.xpToNextLevel ?? player.xpToNextLevel;
   if (data.stats) {
-    if (!player.stats) player.stats = { attack: 0, defense: 0 };
+    if (!player.stats) player.stats = { attack: 0, defense: 0, speed: 6 };
     player.stats.attack = data.stats.attack ?? player.stats.attack;
     player.stats.defense = data.stats.defense ?? player.stats.defense;
+    player.stats.speed = data.stats.speed ?? player.stats.speed;
   }
   // derived stats will be recalculated from the level
   if (Array.isArray(data.learnedSkills)) {
@@ -287,7 +289,7 @@ export function getTotalStats() {
   const base = {
     attack: (player.atk || 0) + (player.stats?.attack || 0),
     defense: (player.def || 0) + (player.stats?.defense || 0),
-    speed: player.stats?.speed ?? 10
+    speed: player.stats?.speed ?? 6
   };
   const total = { ...base };
   const eq = player.equipment || {};

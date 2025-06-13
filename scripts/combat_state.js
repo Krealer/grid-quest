@@ -22,7 +22,11 @@ export function generateTurnQueue() {
   const livingPlayers = combatState.players.filter((p) => p.hp > 0);
   const livingEnemies = combatState.enemies.filter((e) => e.hp > 0);
   const all = [...livingPlayers, ...livingEnemies];
-  all.sort((a, b) => (b.stats?.speed ?? 0) - (a.stats?.speed ?? 0));
+  all.sort((a, b) => {
+    const diff = (b.stats?.speed ?? 0) - (a.stats?.speed ?? 0);
+    if (diff !== 0) return diff;
+    return Math.random() < 0.5 ? -1 : 1;
+  });
   combatState.turnQueue = all.slice();
 }
 
