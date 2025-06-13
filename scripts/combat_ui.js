@@ -114,7 +114,7 @@ export function highlightSkillTargets(
   enemies,
   onSelect
 ) {
-  const type = skill.targeting || 'enemy';
+  const type = skill.targetType || 'enemy';
   let targets = [];
   if (type === 'self') {
     targets = [actor];

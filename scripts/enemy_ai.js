@@ -42,9 +42,15 @@ export function chooseEnemySkill(entity) {
 }
 
 export async function enemyAct(entity, players, context) {
-  const target = chooseTarget(players, entity.behavior);
   const skill = chooseEnemySkill(entity);
-  if (!skill || !target) return;
+  if (!skill) return;
+  let target = null;
+  if (skill.targetType === 'self') {
+    target = entity;
+  } else {
+    target = chooseTarget(players, entity.behavior);
+  }
+  if (!target) return;
   recordSkill(skill.id);
   recordTarget(target);
   logAction(entity, skill, target);
