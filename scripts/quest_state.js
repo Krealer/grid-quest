@@ -15,7 +15,7 @@ export function getQuests() {
 export async function loadQuestData() {
   if (state.loaded) return state.data;
   try {
-    const data = await loadJson('../data/quests.json');
+    const data = await loadJson('data/quests.json');
     state.data = data;
   } catch (err) {
     state.data = {};

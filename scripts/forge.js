@@ -13,7 +13,7 @@ let sessionActive = false;
 export async function loadUpgradeData() {
   if (loaded) return upgrades;
   try {
-    const data = await loadJson('../data/upgrade_data.json');
+    const data = await loadJson('data/upgrade_data.json');
     upgrades = data;
   } catch (err) {
     upgrades = {};
