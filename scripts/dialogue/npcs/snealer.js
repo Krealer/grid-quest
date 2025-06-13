@@ -1,53 +1,51 @@
-export default {
-  name: 'Snealer, the Whisperer',
-  start: {
+export default [
+  {
     text: 'Psst... not all treasures are in chests, you know.',
-    labels: [
-      { text: 'What do you mean?', goto: 1 },
-      { text: 'You look suspicious.', goto: 2 },
-      { text: 'I\u2019ll be going.', goto: null }
+    options: [
+      { label: 'What do you mean?', goto: 1 },
+      { label: 'You look suspicious.', goto: 2 },
+      { label: "I'll be going.", goto: null }
     ]
   },
-  1: {
+  {
     text: 'Some secrets lie where footsteps vanish...',
-    labels: [
-      { text: 'Where should I look?', goto: 3 },
-      { text: 'Sounds like nonsense.', goto: null }
+    options: [
+      { label: 'Where should I look?', goto: 3 },
+      { label: 'Sounds like nonsense.', goto: null }
     ]
   },
-  2: {
-    text: 'Suspicious? Me? I\u2019m just a humble observer of the unseen.',
-    labels: [
-      { text: 'Observer of what exactly?', goto: 4 },
-      { text: 'Still sounds suspicious.', goto: null }
+  {
+    text: "Suspicious? Me? I'm just a humble observer of the unseen.",
+    options: [
+      { label: 'Observer of what exactly?', goto: 4 },
+      { label: 'Still sounds suspicious.', goto: null }
     ]
   },
-  3: {
-    text: 'If you can answer this: What walks without a sound, and lives only when no one\u2019s around?',
-    labels: [
-      { text: 'A shadow?', goto: 5 },
-      { text: 'A ghost?', goto: 6 },
-      { text: 'No idea.', goto: null }
+  {
+    text: "If you can answer this: What walks without a sound, and lives only when no one's around?",
+    options: [
+      { label: 'A shadow?', goto: 5 },
+      { label: 'A ghost?', goto: 6 },
+      { label: 'No idea.', goto: null }
     ]
   },
-  4: {
+  {
     text: 'The sort of things that disappear when light hits them...',
-    labels: [{ text: 'Interesting.', goto: null }]
+    options: [{ label: 'Interesting.', goto: null }]
   },
-  5: {
-    text: 'Sharp. I wasn\u2019t sure you had it in you.',
-    givesItem: { item: 'shadow_token', quantity: 1 },
-    labels: [
-      { text: 'What is this token?', goto: 7 },
-      { text: 'Thanks.', goto: null }
+  {
+    text: "Sharp. I wasn't sure you had it in you.",
+    options: [
+      { label: 'What is this token?', goto: 7, give: 'shadow_token' },
+      { label: 'Thanks.', goto: null, give: 'shadow_token' }
     ]
   },
-  6: {
-    text: 'Heh. Close, but shadows don\u2019t haunt.',
-    labels: [{ text: 'Fair point.', goto: null }]
+  {
+    text: "Heh. Close, but shadows don't haunt.",
+    options: [{ label: 'Fair point.', goto: null }]
   },
-  7: {
+  {
     text: 'It might open a path for those who prefer to stay unseen...',
-    labels: [{ text: 'I\u2019ll keep that in mind.', goto: null }]
+    options: [{ label: "I'll keep that in mind.", goto: null }]
   }
-};
+];
