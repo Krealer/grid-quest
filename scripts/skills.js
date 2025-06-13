@@ -15,11 +15,27 @@ const skillDefs = {
     cooldown: 0,
     source: 'starter',
     // Basic attack scaled by player ATK
-    effect({ user, target, log }) {
-      if (target) {
-        const dmg = user?.stats?.attack || 0;
-        const applied = applyDamage(target, dmg);
-        log(`${user.name} strikes ${target.name} for ${applied} damage!`);
+    effect(args) {
+      const {
+        caster,
+        target,
+        damageTarget,
+        damageEnemy,
+        player,
+        enemy,
+        log
+      } = args;
+
+      if (damageTarget && caster && target) {
+        const atk = caster.stats?.attack || 0;
+        const dmg = atk + (caster.tempAttack || 0);
+        const applied = damageTarget(target, dmg);
+        log(`${caster.name} strikes for ${applied} damage!`);
+      } else if (typeof damageEnemy === 'function') {
+        const applied = damageEnemy(0);
+        const actorName = player?.name || caster?.name || 'Player';
+        const enemyName = enemy?.name || target?.name || 'Enemy';
+        log(`${actorName} strikes ${enemyName} for ${applied} damage!`);
       }
     }
   },
