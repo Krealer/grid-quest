@@ -194,7 +194,14 @@ export async function showDialogueWithChoices(keyOrText, choices = []) {
     choices.forEach((choice, i) => {
       const btn = document.createElement('button');
       btn.className = 'dialogue-choice';
-      btn.textContent = choice.label;
+      let key = null;
+      if (choice && typeof choice.label === 'object' && choice.label.label) {
+        key = choice.label.label;
+      } else if (choice && typeof choice.label === 'string') {
+        key = choice.label;
+      }
+      const text = key ? t(key) : '[Missing Label]';
+      btn.textContent = text === '[Missing Translation]' ? '[Missing Label]' : text;
       btn.addEventListener('click', () => choose(i));
       choicesEl.appendChild(btn);
       buttons.push(btn);
@@ -229,7 +236,7 @@ export async function startDialogueTree(dialogue, index = 0) {
     return true;
   });
   const choices = validOptions.map((opt) => ({
-    label: t(opt.label),
+    label: opt.label,
     callback: async () => {
       if (opt.memoryFlag) setMemory(opt.memoryFlag);
       if (typeof opt.onChoose === 'function') {
