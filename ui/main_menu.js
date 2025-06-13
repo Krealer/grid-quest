@@ -1,5 +1,6 @@
-import { player, getTotalStats } from '../scripts/player.js';
 import { hasCodeFile } from '../scripts/inventory.js';
+import { getPlayerState } from '../scripts/player_state.js';
+import { getXpThreshold } from '../scripts/leveling.js';
 import { toggleQuestLog } from '../scripts/quest_log.js';
 import { toggleInfoMenu } from './info_menu.js';
 import { toggleStatusPanel } from '../scripts/menu/status.js';
@@ -9,20 +10,23 @@ import { confirmRestart } from '../scripts/restart.js';
 export function updateMenuStats() {
   const el = document.getElementById('menu-stats');
   if (!el) return;
-  const stats = getTotalStats();
-  const def = stats.defense || 0;
-  const tooltip =
-    'Negative defense increases damage taken by 10% per point.';
-  const defHtml = def < 0
-    ? `<span class="negative" title="${tooltip}">${def}</span>`
-    : `<span title="${tooltip}">${def}</span>`;
+  const { hp, maxHp, stats, level, xp } = getPlayerState();
+  const { attack, defense, speed } = stats;
+  const tooltip = 'Negative defense increases damage taken by 10% per point.';
+  const defHtml =
+    defense < 0
+      ? `<span class="negative" title="${tooltip}">${defense}</span>`
+      : `<span title="${tooltip}">${defense}</span>`;
+  const xpCap = getXpThreshold(level);
   el.innerHTML = `
-    <div>Level: ${player.level}</div>
-    <div>XP: ${player.xp} / ${player.xpToNextLevel}</div>
-    <div>HP: ${player.hp} / ${player.maxHp}</div>
-    <div>ATK: ${stats.attack || 0}</div>
-    <div>DEF: ${defHtml}</div>
-  `;
+    <div class="menu-stats">
+      <p><strong>Level:</strong> ${level}</p>
+      <p><strong>XP:</strong> ${xp} / ${xpCap}</p>
+      <p><strong>HP:</strong> ${hp} / ${maxHp}</p>
+      <p><strong>ATK:</strong> ${attack}</p>
+      <p><strong>DEF:</strong> ${defHtml}</p>
+      <p><strong>SPD:</strong> ${speed}</p>
+    </div>`;
 }
 
 function updateNullButton() {
