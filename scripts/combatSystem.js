@@ -45,6 +45,7 @@ import {
   showLevelUp,
   highlightActing
 } from './combat_ui.js';
+import { chooseBestSkill } from './ai_logic.js';
 import {
   initSkillPreview,
   showSkillPreview,
@@ -110,6 +111,7 @@ export async function startCombat(enemy, player) {
         enemy.intro || 'A shadowy beast snarls and prepares to strike!'
       }</div>
       <div class="actions hidden">
+        <button id="auto-battle-toggle" class="auto-battle-btn">Toggle Auto-Battle</button>
         <div class="action-tabs">
           <button class="offensive-tab selected">Offensive</button>
           <button class="defensive-tab">Defensive</button>
@@ -159,8 +161,21 @@ export async function startCombat(enemy, player) {
   const offensiveContainer = overlay.querySelector('.offensive-skill-buttons');
   const defensiveContainer = overlay.querySelector('.defensive-skill-buttons');
   const itemContainer = overlay.querySelector('.item-buttons');
+  const autoBtn = overlay.querySelector('#auto-battle-toggle');
   const logEl = overlay.querySelector('.log');
   const log = initLogPanel(overlay, enemy.name, player.name || 'Player');
+
+  if (autoBtn) {
+    autoBtn.textContent = combatState.autoBattle
+      ? 'Auto-Battle ON'
+      : 'Auto-Battle OFF';
+    autoBtn.addEventListener('click', () => {
+      combatState.autoBattle = !combatState.autoBattle;
+      autoBtn.textContent = combatState.autoBattle
+        ? 'Auto-Battle ON'
+        : 'Auto-Battle OFF';
+    });
+  }
 
   await loadItems();
 
@@ -190,6 +205,17 @@ export async function startCombat(enemy, player) {
   }
   updateTurnQueue();
   document.addEventListener('turnStarted', updateTurnQueue);
+
+  function autoAct(e) {
+    const unit = e.detail;
+    if (!unit?.isPlayer || !combatState.autoBattle) return;
+    const skillObjs = (unit.learnedSkills || [])
+      .map((id) => getSkill(id))
+      .filter(Boolean);
+    const skill = chooseBestSkill(skillObjs, unit, (s) => skillCooldowns[s.id] > 0);
+    if (skill) handleAction(skill);
+  }
+  document.addEventListener('turnStarted', autoAct);
 
   // reveal UI after intro animation
   setTimeout(() => {
@@ -493,6 +519,7 @@ export async function startCombat(enemy, player) {
       );
       return;
     }
+    player.selectedSkillId = skill.id;
     const icon = skill.icon ? `${skill.icon} ` : '';
     log(`Player uses ${icon}${skill.name}`);
     discoverSkill(skill.id);
@@ -716,6 +743,7 @@ export async function startCombat(enemy, player) {
     overlay = null;
     document.removeEventListener('inventoryUpdated', updateItemsUI);
     document.removeEventListener('turnStarted', updateTurnQueue);
+    document.removeEventListener('turnStarted', autoAct);
     clearActiveTile();
     document.dispatchEvent(
       new CustomEvent('combatEnded', { detail: { playerHp, enemyHp, enemy } })

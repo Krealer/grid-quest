@@ -2,6 +2,7 @@ import { getStatusEffect } from './status_effects.js';
 import { getStatusList } from './statusManager.js';
 import { attachTooltip } from '../ui/skillsPanel.js';
 import { highlightTiles, clearHighlightedTiles } from './grid_renderer.js';
+import { combatState } from './combat_state.js';
 
 export function renderCombatants(root, players = [], enemies = [], onSelect) {
   if (!root) return;
@@ -354,4 +355,21 @@ function onCombatEvent(e) {
     const label = actor.isPlayer ? 'player' : 'enemy';
     appendLog(e.detail.message, label);
   }
+}
+
+export function selectSkillForAlly(overlay, ally, skills, onSelect) {
+  return new Promise((resolve) => {
+    if (!overlay || !ally || !Array.isArray(skills)) return resolve(null);
+    const index = combatState.players ? combatState.players.indexOf(ally) : 0;
+    highlightActing(overlay, true, index);
+    const off = overlay.querySelector('.offensive-skill-buttons');
+    const def = overlay.querySelector('.defensive-skill-buttons');
+    const buttons = renderSkillList(off, skills, (skill) => {
+      ally.selectedSkillId = skill.id;
+      if (typeof onSelect === 'function') onSelect(skill);
+      resolve(skill);
+    });
+    renderSkillList(def, [], () => {});
+    setupTabs(overlay);
+  });
 }

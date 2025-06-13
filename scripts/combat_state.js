@@ -5,13 +5,20 @@ export const combatState = {
   turnQueue: [],
   turnIndex: 0,
   activeEntity: null,
-  selectedTarget: null
+  selectedTarget: null,
+  autoBattle: false
 };
 
 export function initCombatState(player, enemy) {
   combatState.round = 1;
   combatState.players = Array.isArray(player) ? player : [player];
   combatState.enemies = Array.isArray(enemy) ? enemy : [enemy];
+  combatState.players.forEach((p) => {
+    p.selectedSkillId = null;
+  });
+  combatState.enemies.forEach((e) => {
+    e.selectedSkillId = null;
+  });
   combatState.turnQueue = [];
   combatState.turnIndex = 0;
   combatState.activeEntity = null;
@@ -56,4 +63,12 @@ export function livingPlayers() {
 
 export function livingEnemies() {
   return combatState.enemies.filter((e) => e.hp > 0);
+}
+
+export function setAutoBattle(value) {
+  combatState.autoBattle = Boolean(value);
+}
+
+export function isAutoBattle() {
+  return combatState.autoBattle;
 }
