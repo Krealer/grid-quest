@@ -3,7 +3,7 @@ import { onStepEffect, isWalkable } from './tile_type.js';
 import { findPath } from './pathfinder.js';
 import { stepTo } from './player.js';
 import * as router from './router.js';
-import { updateHpDisplay } from './ui/playerDisplay.js';
+import { updateHpDisplay } from './ui/player_display.js';
 import { isMovementDisabled } from './movement.js';
 
 let isMoving = false;

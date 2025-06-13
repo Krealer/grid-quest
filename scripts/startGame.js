@@ -19,7 +19,7 @@ import {
   updateHpDisplay,
   updateDefenseDisplay,
   updateXpDisplay,
-} from './ui/playerDisplay.js';
+} from './ui/player_display.js';
 import { isMovementDisabled } from './movement.js';
 
 let isInBattle = false;

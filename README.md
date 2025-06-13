@@ -84,7 +84,8 @@ available:
 
 1. Fork the repository and create a branch for your changes.
 2. Run `npm test` and `npm run lint` before committing.
-3. Submit a pull request describing your changes.
+3. Name new files using `snake_case` to keep the repository consistent.
+4. Submit a pull request describing your changes.
 
 ## License
 
