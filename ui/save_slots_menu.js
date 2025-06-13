@@ -1,4 +1,5 @@
 import { showConfirm } from '../scripts/confirm_prompt.js';
+import { t } from '../scripts/i18n.js';
 
 let mode = 'save';
 
@@ -84,16 +85,16 @@ function buildMenu() {
     infoEl.classList.add('slot-info');
     if (infoData) {
       const mapEl = document.createElement('div');
-      mapEl.textContent = `Map: ${infoData.map || 'N/A'}`;
+      mapEl.textContent = `${t('save.map')} ${infoData.map || 'N/A'}`;
       const itemsEl = document.createElement('div');
-      itemsEl.textContent = `Items: ${infoData.items}`;
+      itemsEl.textContent = `${t('save.items')} ${infoData.items}`;
       const timeEl = document.createElement('div');
-      timeEl.textContent = `Saved: ${infoData.date}`;
+      timeEl.textContent = `${t('save.saved')} ${infoData.date}`;
       infoEl.appendChild(mapEl);
       infoEl.appendChild(itemsEl);
       infoEl.appendChild(timeEl);
     } else {
-      infoEl.textContent = 'Slot empty';
+      infoEl.textContent = t('save.slot_empty');
     }
     row.appendChild(infoEl);
 

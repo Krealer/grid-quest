@@ -33,6 +33,7 @@ import { gameState } from './game_state.js';
 import { logMessage } from './message_log.js';
 import { markItemUsed } from '../info/items.js';
 import { loadRelics, getRelicData, getOwnedRelics } from './relic_state.js';
+import { t } from './i18n.js';
 
 let currentCategory = 'items';
 const scrollPositions = {};
@@ -88,7 +89,7 @@ export async function updateInventoryUI() {
   if (filtered.length === 0) {
     const msg = document.createElement('div');
     msg.classList.add('info-empty');
-    msg.textContent = 'No items in this category.';
+    msg.textContent = t('inventory.none');
     list.appendChild(msg);
   }
   filtered.forEach((item) => {
@@ -120,7 +121,7 @@ export async function updateInventoryUI() {
       const btn = document.createElement('button');
       btn.classList.add('equip-btn');
       btn.textContent =
-        getEquippedItem(bonus.slot) === item.id ? 'Unequip' : 'Equip';
+        getEquippedItem(bonus.slot) === item.id ? t('inventory.unequip') : t('inventory.equip');
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         equipItem(item.id);
@@ -131,7 +132,7 @@ export async function updateInventoryUI() {
     if (enchantId && bonus && bonus.slot) {
       const rbtn = document.createElement('button');
       rbtn.classList.add('reroll-btn');
-      rbtn.textContent = 'Reroll';
+      rbtn.textContent = t('inventory.reroll');
       rbtn.disabled = !canReroll(item.id);
       rbtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -148,7 +149,7 @@ export async function updateInventoryUI() {
     if (baseData && baseData.category === 'combat') {
       const ubtn = document.createElement('button');
       ubtn.classList.add('equip-btn');
-      ubtn.textContent = 'Use';
+      ubtn.textContent = t('inventory.use');
       ubtn.addEventListener('click', (e) => {
         e.stopPropagation();
         handleInventoryItemUse(item.id);
