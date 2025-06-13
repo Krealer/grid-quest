@@ -1,334 +1,39 @@
-// JSON import assertions are not supported in all browsers so the locale
-// files are inlined here instead of being imported.
-const en = {
-  "menu.settings": "Settings",
-  "menu.menu": "Menu",
-  "menu.inventory": "Inventory",
-  "menu.save": "Save",
-  "menu.load": "Load",
-  "inventory.title": "Inventory",
-  "inventory.items": "Items",
-  "inventory.equipable": "Equipable Items",
-  "inventory.combat": "Combat Items",
-  "inventory.key": "Key Items",
-  "inventory.lore": "Lore Items",
-  "menu.guide": "Guide",
-  "menu.info": "Info",
-  "menu.quests": "Quest",
-  "menu.status": "Status Panel",
-  "menu.null": "The Null Factor",
-  "menu.restart": "Restart",
-  "quest.active": "Active Quests",
-  "status.title": "Player Status",
-  "status.passives": "Passive Skills",
-  "info.enemies": "Enemies",
-  "info.items": "Items",
-  "info.skills": "Skills",
-  "info.status": "Status",
-  "info.lore": "Lore",
-  "null.summary": "Null Factor Summary",
-  "settings.title": "Settings",
-  "settings.coords": "Grid Coordinates",
-  "settings.movement": "Movement Speed",
-  "settings.combat": "Combat Speed",
-  "settings.colorblind": "Colorblind Mode",
-  "settings.labels": "Show Tile Labels",
-  "settings.dialogue": "Dialogue Animation",
-  "settings.tapToSkip": "Tap to Skip Dialogue",
-  "settings.language": "Language",
-  "settings.center": "Center Mode (Mobile Portrait Only)",
-  "settings.reset": "Reset All Settings",
-  "rollback": "Rollback",
-  "error.ok": "OK",
-  "confirm.cancel": "Cancel",
-  "confirm.yes": "Confirm",
-  "save.title": "Save Game",
-  "howto.title": "How to Play",
-  "greet.welcome": "Welcome to Grid Quest",
-  "greet.howto": "How to Play",
-  "greet.play": "Play",
-  "inventory.none": "No items in this category.",
-  "inventory.equip": "Equip",
-  "inventory.unequip": "Unequip",
-  "inventory.use": "Use",
-  "inventory.reroll": "Reroll",
-  "dialogue.skip": "Tap to skip",
-  "status.burned": "Burned",
-  "status.stunned": "Stunned",
-  "status.weakened": "Weakened",
-  "player.hp": "HP",
-  "player.atk": "Attack",
-  "player.def": "Defense",
-  "player.spd": "Speed",
-  "player.lvl": "Level",
-  "save.slot_empty": "Slot empty",
-  "save.map": "Map:",
-  "save.items": "Items:",
-  "save.saved": "Saved:"
-};
+/* Internationalization utilities */
 
-const nl = {
-  "menu.settings": "Instellingen",
-  "menu.menu": "Menu",
-  "menu.inventory": "Inventaris",
-  "menu.save": "Opslaan",
-  "menu.load": "Laden",
-  "inventory.title": "Inventaris",
-  "inventory.items": "Items",
-  "inventory.equipable": "Uitrustbare Items",
-  "inventory.combat": "Gevechtsitems",
-  "inventory.key": "Sleutelitems",
-  "inventory.lore": "Lore-items",
-  "menu.guide": "Gids",
-  "menu.info": "Info",
-  "menu.quests": "Quest",
-  "menu.status": "Statuspaneel",
-  "menu.null": "De Null Factor",
-  "menu.restart": "Herstart",
-  "quest.active": "Actieve Quests",
-  "status.title": "Spelerstatus",
-  "status.passives": "Passieve Vaardigheden",
-  "info.enemies": "Vijanden",
-  "info.items": "Items",
-  "info.skills": "Vaardigheden",
-  "info.status": "Status",
-  "info.lore": "Lore",
-  "null.summary": "Null Factor Samenvatting",
-  "settings.title": "Instellingen",
-  "settings.coords": "Rastercoördinaten",
-  "settings.movement": "Bewegingssnelheid",
-  "settings.combat": "Gevechtssnelheid",
-  "settings.colorblind": "Kleurenblindmodus",
-  "settings.labels": "Tegel labels weergeven",
-  "settings.dialogue": "Dialoog Animatie",
-  "settings.tapToSkip": "Tik om dialoog over te slaan",
-  "settings.language": "Taal",
-  "settings.center": "Centrummodus (alleen mobiel portret)",
-  "settings.reset": "Reset alle instellingen",
-  "rollback": "Terugdraaien",
-  "error.ok": "OK",
-  "confirm.cancel": "Annuleren",
-  "confirm.yes": "Bevestigen",
-  "save.title": "Spel opslaan",
-  "howto.title": "Hoe te spelen",
-  "greet.welcome": "Welkom bij Grid Quest",
-  "greet.howto": "Hoe te spelen",
-  "greet.play": "Spelen",
-  "inventory.none": "Geen items in deze categorie.",
-  "inventory.equip": "Uitrust",
-  "inventory.unequip": "Uittrekken",
-  "inventory.use": "Gebruik",
-  "inventory.reroll": "Hertrek",
-  "dialogue.skip": "Tik om over te slaan",
-  "status.burned": "Verbrand",
-  "status.stunned": "Verlamd",
-  "status.weakened": "Verzwakt",
-  "player.hp": "Leven",
-  "player.atk": "Aanval",
-  "player.def": "Verdediging",
-  "player.spd": "Snelheid",
-  "player.lvl": "Niveau",
-  "save.slot_empty": "Leeg slot",
-  "save.map": "Kaart:",
-  "save.items": "Items:",
-  "save.saved": "Opgeslagen:"
-};
-
-const ja = {
-  "menu.settings": "設定",
-  "menu.menu": "メニュー",
-  "menu.inventory": "インベントリ",
-  "menu.save": "保存",
-  "menu.load": "読み込み",
-  "inventory.title": "インベントリ",
-  "inventory.items": "アイテム",
-  "inventory.equipable": "装備品",
-  "inventory.combat": "戦闘アイテム",
-  "inventory.key": "キーアイテム",
-  "inventory.lore": "資料",
-  "menu.guide": "ガイド",
-  "menu.info": "情報",
-  "menu.quests": "クエスト",
-  "menu.status": "ステータスパネル",
-  "menu.null": "ヌルファクター",
-  "menu.restart": "再開始",
-  "quest.active": "進行中のクエスト",
-  "status.title": "プレイヤーステータス",
-  "status.passives": "パッシブスキル",
-  "info.enemies": "敵",
-  "info.items": "アイテム",
-  "info.skills": "スキル",
-  "info.status": "ステータス",
-  "info.lore": "資料",
-  "null.summary": "ヌルファクター概要",
-  "settings.title": "設定",
-  "settings.coords": "グリッド座標",
-  "settings.movement": "移動速度",
-  "settings.combat": "戦闘速度",
-  "settings.colorblind": "色覚サポート",
-  "settings.labels": "タイル名を表示",
-  "settings.dialogue": "会話アニメーション",
-  "settings.tapToSkip": "タップでスキップ",
-  "settings.language": "言語",
-  "settings.center": "センターモード (縦向きのみ)",
-  "settings.reset": "すべてリセット",
-  "rollback": "ロールバック",
-  "error.ok": "OK",
-  "confirm.cancel": "キャンセル",
-  "confirm.yes": "確認",
-  "save.title": "セーブ",
-  "howto.title": "遊び方",
-  "greet.welcome": "Grid Questへようこそ",
-  "greet.howto": "遊び方",
-  "greet.play": "プレイ",
-  "inventory.none": "このカテゴリにはアイテムがありません。",
-  "inventory.equip": "装備",
-  "inventory.unequip": "外す",
-  "inventory.use": "使用",
-  "inventory.reroll": "リロール",
-  "dialogue.skip": "タップしてスキップ",
-  "status.burned": "火傷",
-  "save.slot_empty": "空きスロット",
-  "save.map": "マップ:",
-  "save.items": "アイテム:",
-  "save.saved": "保存日時:"
-};
-
-const ar = {
-  "menu.settings": "الإعدادات",
-  "menu.menu": "القائمة",
-  "menu.inventory": "المخزون",
-  "menu.save": "حفظ",
-  "menu.load": "تحميل",
-  "inventory.title": "المخزون",
-  "inventory.items": "العناصر",
-  "inventory.equipable": "عناصر قابلة للتجهيز",
-  "inventory.combat": "عناصر القتال",
-  "inventory.key": "عناصر رئيسية",
-  "inventory.lore": "القصص",
-  "menu.guide": "الدليل",
-  "menu.info": "المعلومات",
-  "menu.quests": "المهمة",
-  "menu.status": "لوحة الحالة",
-  "menu.null": "عامل العدم",
-  "menu.restart": "إعادة التشغيل",
-  "quest.active": "المهام النشطة",
-  "status.title": "حالة اللاعب",
-  "status.passives": "المهارات السلبية",
-  "info.enemies": "الأعداء",
-  "info.items": "العناصر",
-  "info.skills": "المهارات",
-  "info.status": "الحالة",
-  "info.lore": "القصص",
-  "null.summary": "ملخص عامل العدم",
-  "settings.title": "الإعدادات",
-  "settings.coords": "إحداثيات الشبكة",
-  "settings.movement": "سرعة الحركة",
-  "settings.combat": "سرعة القتال",
-  "settings.colorblind": "وضع عمى الألوان",
-  "settings.labels": "إظهار أسماء المربعات",
-  "settings.dialogue": "تحريك الحوار",
-  "settings.tapToSkip": "اضغط لتخطي الحوار",
-  "settings.language": "اللغة",
-  "settings.center": "وضع التمركز (للجوال فقط)",
-  "settings.reset": "إعادة كل الإعدادات",
-  "rollback": "استرجاع",
-  "error.ok": "حسناً",
-  "confirm.cancel": "إلغاء",
-  "confirm.yes": "تأكيد",
-  "save.title": "حفظ اللعبة",
-  "howto.title": "كيفية اللعب",
-  "greet.welcome": "مرحباً بك في جريد كويست",
-  "greet.howto": "كيفية اللعب",
-  "greet.play": "ابدأ",
-  "inventory.none": "لا توجد عناصر في هذه الفئة.",
-  "inventory.equip": "تجهيز",
-  "inventory.unequip": "إزالة",
-  "inventory.use": "استخدام",
-  "inventory.reroll": "إعادة",
-  "dialogue.skip": "اضغط للتخطي",
-  "status.burned": "محترق",
-  "save.slot_empty": "فتحة فارغة",
-  "save.map": "الخريطة:",
-  "save.items": "العناصر:",
-  "save.saved": "تم الحفظ:"
-};
-
-const ru = {
-  "menu.settings": "Настройки",
-  "menu.menu": "Меню",
-  "menu.inventory": "Инвентарь",
-  "menu.save": "Сохранить",
-  "menu.load": "Загрузить",
-  "inventory.title": "Инвентарь",
-  "inventory.items": "Предметы",
-  "inventory.equipable": "Снаряжение",
-  "inventory.combat": "Боевые предметы",
-  "inventory.key": "Ключевые предметы",
-  "inventory.lore": "Лор",
-  "menu.guide": "Руководство",
-  "menu.info": "Инфо",
-  "menu.quests": "Квест",
-  "menu.status": "Статус",
-  "menu.null": "Фактор Нуля",
-  "menu.restart": "Перезапуск",
-  "quest.active": "Активные квесты",
-  "status.title": "Статус игрока",
-  "status.passives": "Пассивные навыки",
-  "info.enemies": "Враги",
-  "info.items": "Предметы",
-  "info.skills": "Навыки",
-  "info.status": "Статус",
-  "info.lore": "Лор",
-  "null.summary": "Сводка Нуля",
-  "settings.title": "Настройки",
-  "settings.coords": "Координаты сетки",
-  "settings.movement": "Скорость движения",
-  "settings.combat": "Скорость боя",
-  "settings.colorblind": "Режим дальтоника",
-  "settings.labels": "Показывать названия плиток",
-  "settings.dialogue": "Анимация диалога",
-  "settings.tapToSkip": "Нажмите, чтобы пропустить диалог",
-  "settings.language": "Язык",
-  "settings.center": "Центрирование (только портрет)",
-  "settings.reset": "Сбросить все настройки",
-  "rollback": "Откат",
-  "error.ok": "ОК",
-  "confirm.cancel": "Отмена",
-  "confirm.yes": "Подтвердить",
-  "save.title": "Сохранить игру",
-  "howto.title": "Как играть",
-  "greet.welcome": "Добро пожаловать в Grid Quest",
-  "greet.howto": "Как играть",
-  "greet.play": "Играть",
-  "inventory.none": "Нет предметов в этой категории.",
-  "inventory.equip": "Надеть",
-  "inventory.unequip": "Снять",
-  "inventory.use": "Использовать",
-  "inventory.reroll": "Перебросить",
-  "dialogue.skip": "Нажмите, чтобы пропустить",
-  "status.burned": "Сожжен",
-  "save.slot_empty": "Пустой слот",
-  "save.map": "Карта:",
-  "save.items": "Предметы:",
-  "save.saved": "Сохранено:"
-};
-
-const locales = { en, nl, ja, ar, ru };
-
+const availableLocales = ['en', 'nl', 'ja', 'ar', 'ru'];
+const locales = {};
 let currentLang = 'en';
 
-export function hasLocale(lang) {
-  return Object.prototype.hasOwnProperty.call(locales, lang);
+async function loadLocale(lang) {
+  if (locales[lang] || !availableLocales.includes(lang)) return;
+  try {
+    if (typeof fetch === 'function') {
+      const url = new URL(`./locales/${lang}.json`, import.meta.url);
+      const res = await fetch(url);
+      if (res.ok) {
+        locales[lang] = await res.json();
+        return;
+      }
+    }
+    const mod = await import(`./locales/${lang}.json`, { assert: { type: 'json' } });
+    locales[lang] = mod.default;
+  } catch {
+    locales[lang] = {};
+  }
 }
 
-export function setLanguage(lang) {
-  if (locales[lang]) {
-    currentLang = lang;
-    localStorage.setItem('language', lang);
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    applyTranslations();
-  }
+export function hasLocale(lang) {
+  return availableLocales.includes(lang);
+}
+
+export async function setLanguage(lang) {
+  if (!hasLocale(lang)) return;
+  currentLang = lang;
+  localStorage.setItem('language', lang);
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  await loadLocale('en');
+  if (lang !== 'en') await loadLocale(lang);
+  applyTranslations();
 }
 
 export function getLanguage() {
@@ -336,23 +41,29 @@ export function getLanguage() {
 }
 
 export function t(key) {
-  return locales[currentLang]?.[key] || locales.en?.[key] || key;
+  const langStrings = locales[currentLang] || {};
+  if (Object.prototype.hasOwnProperty.call(langStrings, key)) {
+    return langStrings[key];
+  }
+  const enStrings = locales.en || {};
+  if (Object.prototype.hasOwnProperty.call(enStrings, key)) {
+    return enStrings[key];
+  }
+  return '[Missing Translation]';
 }
 
 export function applyTranslations() {
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
-    if (key) {
-      el.textContent = t(key);
-    }
+    if (key) el.textContent = t(key);
   });
 }
 
-// initialize language from storage or browser
 const stored = localStorage.getItem('language');
 if (stored && hasLocale(stored)) {
   setLanguage(stored);
 } else {
   const userLang = navigator.language.slice(0, 2);
   if (hasLocale(userLang)) setLanguage(userLang);
+  else setLanguage('en');
 }
