@@ -1,4 +1,4 @@
-import { isFogEnabled } from './mapLoader.js';
+import { isFogEnabled } from './map_loader.js';
 import * as router from './router.js';
 import { initFog, reveal, revealAll } from './fog_system.js';
 import { player } from './player.js';

@@ -16,7 +16,7 @@ import {
 } from './player_memory.js';
 import { getEchoConversationCount } from './player_memory.js';
 import { recordEnding } from './ending_manager.js';
-import { showDialogue } from './dialogueSystem.js';
+import { showDialogue } from './dialogue_system.js';
 import { chooseClass as selectClass } from './class_state.js';
 import { player } from './player.js';
 import { clearCorruption } from './corruption_state.js';

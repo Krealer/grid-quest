@@ -1,4 +1,4 @@
-import { showDialogue } from './dialogueSystem.js';
+import { showDialogue } from './dialogue_system.js';
 import { getForkChoice } from './player_memory.js';
 
 const bosses = {

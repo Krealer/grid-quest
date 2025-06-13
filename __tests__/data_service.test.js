@@ -6,7 +6,7 @@ const originalFetch = global.fetch;
 
 beforeEach(async () => {
   jest.resetModules();
-  ({ loadJson } = await import('../scripts/dataService.js'));
+  ({ loadJson } = await import('../scripts/data_service.js'));
 });
 
 afterEach(() => {

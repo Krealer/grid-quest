@@ -1,4 +1,4 @@
-import { startDialogueTree, showDialogue } from '../dialogueSystem.js';
+import { startDialogueTree, showDialogue } from '../dialogue_system.js';
 import { npcAppearance } from '../npc_data.js';
 import { eryndorDialogue } from '../npc_dialogues/eryndor_dialogue.js';
 

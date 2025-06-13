@@ -5,7 +5,7 @@ jest.unstable_mockModule('../scripts/dialogue/memory.js', () => ({
   setMemory: jest.fn()
 }));
 
-jest.unstable_mockModule('../scripts/dialogueSystem.js', () => ({
+jest.unstable_mockModule('../scripts/dialogue_system.js', () => ({
   showDialogue: jest.fn()
 }));
 
@@ -28,7 +28,7 @@ beforeEach(async () => {
   jest.resetModules();
   flags = await import('../scripts/dialogue/flags.js');
   memoryMod = await import('../scripts/dialogue/memory.js');
-  dialogueSys = await import('../scripts/dialogueSystem.js');
+  dialogueSys = await import('../scripts/dialogue_system.js');
   endingMgr = await import('../scripts/ending_manager.js');
 });
 

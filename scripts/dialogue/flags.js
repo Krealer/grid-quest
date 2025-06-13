@@ -1,7 +1,7 @@
 import { getOwnedRelics } from '../relic_state.js';
 import { getEchoConversationCount, recordLore } from '../player_memory.js';
 import { recordEnding } from '../ending_manager.js';
-import { showDialogue } from '../dialogueSystem.js';
+import { showDialogue } from '../dialogue_system.js';
 import { setMemory } from './memory.js';
 
 export function echoAbsoluteIntro() {

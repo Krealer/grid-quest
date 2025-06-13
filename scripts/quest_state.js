@@ -1,6 +1,6 @@
 import { dialogueMemory, hasMemory, setMemory } from './dialogue_state.js';
-import { loadJson } from './dataService.js';
-import { showError } from './errorPrompt.js';
+import { loadJson } from './data_service.js';
+import { showError } from './error_prompt.js';
 
 const state = {
   quests: {},

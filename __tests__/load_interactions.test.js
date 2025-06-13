@@ -8,7 +8,7 @@ jest.unstable_mockModule('../scripts/player.js', () => ({
   enterDoor: enterDoorMock
 }));
 
-jest.unstable_mockModule('../scripts/dialogueSystem.js', () => ({
+jest.unstable_mockModule('../scripts/dialogue_system.js', () => ({
   showDialogue: jest.fn((text, cb) => {
     if (typeof cb === 'function') cb();
   })

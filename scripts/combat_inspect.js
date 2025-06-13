@@ -1,6 +1,6 @@
 import { getAllCombatants } from './combat_state.js';
 import { getStatusEffect } from './status_effects.js';
-import { getStatusList } from './statusManager.js';
+import { getStatusList } from './status_manager.js';
 
 export function createInspectPanel() {
   const panel = document.createElement('div');

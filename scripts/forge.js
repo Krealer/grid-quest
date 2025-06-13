@@ -1,5 +1,5 @@
-import { loadJson } from './dataService.js';
-import { showError } from './errorPrompt.js';
+import { loadJson } from './data_service.js';
+import { showError } from './error_prompt.js';
 import { inventory, removeItem, addItem } from './inventory.js';
 import { getItemData } from './item_loader.js';
 import { getItemDisplayName } from './inventory.js';
