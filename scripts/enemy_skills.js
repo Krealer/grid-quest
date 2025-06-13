@@ -114,6 +114,46 @@ export const enemySkills = {
       log(`${enemy.name} scratches for ${applied} damage!`);
     }
   },
+  goblin_scratch: {
+    id: 'goblin_scratch',
+    name: 'Goblin Scratch',
+    icon: '👊',
+    description: 'A quick, irritating scratch that deals moderate damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = atk + 3;
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} scratches wildly for ${applied} damage!`);
+    }
+  },
+  goblin_rush: {
+    id: 'goblin_rush',
+    name: 'Goblin Rush',
+    icon: '💨',
+    description:
+      'A reckless charge that deals high damage but lowers Goblin\'s defense for 2 turns.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 3,
+    aiType: 'risk',
+    targetType: 'enemy',
+    range: 'single',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = atk + 6;
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} rushes at you with reckless force for ${applied} damage!`);
+      enemy.tempDefense = (enemy.tempDefense || 0) - 2;
+      enemy.tempDefenseDuration = 2;
+      log(`${enemy.name}'s defense drops!`);
+    }
+  },
   decay_touch: {
     id: 'decay_touch',
     name: 'Decay Touch',

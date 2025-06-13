@@ -313,25 +313,27 @@
   },
   "goblin_raider": {
     "name": "Goblin Raider",
-    "hp": 55,
+    "hp": 65,
     "stats": {
-      "attack": 3,
+      "attack": 4,
       "defense": 1,
-      "speed": 12
+      "speed": 6
     },
-    "xp": 7,
-    "description": "A goblin clad in mismatched gear from raids.",
+    "xp": 8,
+    "description": "A scrappy goblin eager to prove himself with reckless strikes.",
     "intro": "A goblin raider leaps from the shadows!",
     "portrait": "🗡️",
     "skills": [
-      "scratch"
+      "goblin_scratch",
+      "goblin_rush"
     ],
     "drops": [
       {
         "item": "goblin_gear",
         "quantity": 1
       }
-    ]
+    ],
+    "script": "enemies/goblin_raider.js"
   },
   "restless_bones": {
     "name": "Restless Bones",
