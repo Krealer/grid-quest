@@ -12,6 +12,8 @@ import {
 } from './combat_ui.js';
 import { tickStatuses } from './status_effects.js';
 import { executeSkill } from './skill_engine.js';
+import { getSkill } from './skills.js';
+import { getEnemySkill } from './enemy_skills.js';
 
 export function initTurnOrder() {
   generateTurnQueue();
@@ -86,6 +88,12 @@ function waitForTarget(skill, actor) {
 }
 
 export async function executeAction(skill, actor, targetOverride, extra = {}) {
+  if (!skill && actor?.selectedSkillId) {
+    skill = actor.isPlayer
+      ? getSkill(actor.selectedSkillId)
+      : getEnemySkill(actor.selectedSkillId);
+  }
+  if (!skill) return;
   const targetType = skill.targetType || 'enemy';
   const targets = getTargets(targetType, actor);
   const selected = targetOverride || getSelectedTarget();
