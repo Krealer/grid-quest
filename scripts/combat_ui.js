@@ -433,3 +433,37 @@ export function showSkillsForCurrentAlly(overlay, players, skillMap) {
     );
   });
 }
+
+export function chooseTargetForSkill(skill, actor) {
+  return new Promise((resolve) => {
+    const overlay = document.getElementById('battle-overlay');
+    if (!overlay) return resolve(null);
+    const handler = (entity) => {
+      document.removeEventListener('keydown', esc);
+      clearSkillTargetHighlights();
+      resolve(entity);
+    };
+    const esc = (e) => {
+      if (e.key === 'Escape') {
+        document.removeEventListener('keydown', esc);
+        clearSkillTargetHighlights();
+        resolve(null);
+      }
+    };
+    document.addEventListener('keydown', esc);
+    highlightSkillTargets(
+      skill,
+      actor,
+      combatState.players,
+      combatState.enemies,
+      handler
+    );
+  });
+}
+
+export async function chooseSkillAndTarget(overlay, unit, skillList) {
+  const skill = await selectSkillForAlly(overlay, unit, skillList);
+  if (!skill) return null;
+  const target = await chooseTargetForSkill(skill, unit);
+  return { skill, target };
+}

@@ -29,3 +29,7 @@ export function nextTurn() {
   combatState.activeEntity = combatState.turnQueue[combatState.turnIndex] || null;
   return combatState.activeEntity;
 }
+
+export function proceedToNextTurn() {
+  return nextTurn();
+}
