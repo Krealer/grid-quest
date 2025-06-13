@@ -25,7 +25,7 @@ import {
   updateHpDisplay,
   updateDefenseDisplay,
   updateXpDisplay
-} from './ui/playerDisplay.js';
+} from './ui/player_display.js';
 import { initNullTab } from './ui_state.js';
 import { initNullSummary } from '../ui/null_summary.js';
 import { initSkillSystem } from './skills.js';
@@ -56,7 +56,7 @@ import { loadLanguage } from './language_loader.js';
 import { initGreeting } from '../ui/greeting.js';
 import { startGame } from './startGame.js';
 import { rollbackTo } from './rollback.js';
-import { initSettingsPanel } from './ui/settingsPanel.js';
+import { initSettingsPanel } from './ui/settings_panel.js';
 
 // Inventory contents are managed in inventory.js
 
