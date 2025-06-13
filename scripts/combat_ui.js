@@ -1,5 +1,5 @@
 import { getStatusEffect } from './status_effects.js';
-import { getStatusList } from './statusManager.js';
+import { getStatusList, hasStatus } from './statusManager.js';
 import { attachTooltip } from '../ui/skillsPanel.js';
 import { highlightTiles, clearHighlightedTiles } from './grid_renderer.js';
 import { combatState } from './combat_state.js';
@@ -158,9 +158,7 @@ export function clearSkillTargetHighlights() {
 
 function getTurnLabel(unit) {
   if (!unit) return '';
-  if (unit.isPlayer) return `🧍 ${unit.name || 'Player'}`;
-  if (unit.isAlly) return unit.icon || unit.name || 'Ally';
-  return `${unit.name || 'Enemy'} ${unit.portrait || '👾'}`;
+  return unit.portrait || unit.icon || (unit.isPlayer || unit.isAlly ? '🧍' : '👾');
 }
 
 export function renderTurnQueue(container, queue = [], active, index = 0) {
@@ -168,12 +166,15 @@ export function renderTurnQueue(container, queue = [], active, index = 0) {
   container.innerHTML = '';
   if (!Array.isArray(queue) || queue.length === 0) return;
   const len = queue.length;
-  for (let i = 0; i < Math.min(len, 5); i++) {
+  for (let i = 0; i < len; i++) {
     const unit = queue[(index + i) % len];
     const box = document.createElement('div');
-    box.className = 'turn-box';
+    box.className = 'turn-entry';
     box.textContent = getTurnLabel(unit);
-    if (unit === active) box.classList.add('active');
+    if (unit === active && i === 0) box.classList.add('active');
+    if (unit.hp <= 0 || hasStatus(unit, 'stunned')) {
+      box.classList.add('skipped');
+    }
     container.appendChild(box);
   }
 }
