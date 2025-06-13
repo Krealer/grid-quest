@@ -15,3 +15,7 @@ export function enemyAct(entity, players, context) {
   if (!skill || !target) return;
   skill.effect({ user: entity, target, ...context });
 }
+
+export function takeTurn(entity, players, context) {
+  enemyAct(entity, players, context);
+}

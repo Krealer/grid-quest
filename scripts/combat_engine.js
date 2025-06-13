@@ -7,20 +7,20 @@ import {
 
 export function initTurnOrder() {
   generateTurnQueue();
-  combatState.activeEntity = combatState.turnQueue.shift() || null;
+  combatState.turnIndex = 0;
+  combatState.activeEntity = combatState.turnQueue[0] || null;
   return combatState.activeEntity;
 }
 
 export function nextTurn() {
-  if (combatState.activeEntity) {
-    if (combatState.activeEntity.hp > 0)
-      combatState.turnQueue.push(combatState.activeEntity);
-  }
-  if (combatState.turnQueue.length === 0) {
+  combatState.turnIndex += 1;
+  if (combatState.turnIndex >= combatState.turnQueue.length) {
     generateTurnQueue();
+    combatState.turnIndex = 0;
     combatState.round += 1;
   }
-  combatState.activeEntity = combatState.turnQueue.shift() || null;
+  combatState.activeEntity =
+    combatState.turnQueue[combatState.turnIndex] || null;
   return combatState.activeEntity;
 }
 
