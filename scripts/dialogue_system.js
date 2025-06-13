@@ -12,6 +12,7 @@ import { getQuests, completeQuest } from './quest_state.js';
 import { showError } from './error_prompt.js';
 import { loadJson } from './data_service.js';
 import { gameState } from './game_state.js';
+import { t } from './i18n.js';
 
 let dialogueLines = {};
 let dataLoaded = false;
@@ -30,7 +31,8 @@ async function loadDialogData() {
 
 export async function showDialogue(keyOrText, callback = () => {}) {
   await loadDialogData();
-  const text = dialogueLines[keyOrText] || keyOrText || '';
+  const raw = dialogueLines[keyOrText] || keyOrText || '';
+  const text = t(raw);
 
   const overlay = document.createElement('div');
   overlay.id = 'dialogue-overlay';
@@ -42,6 +44,7 @@ export async function showDialogue(keyOrText, callback = () => {}) {
   document.body.appendChild(overlay);
   const textEl = overlay.querySelector('.dialogue-text');
   const advance = overlay.querySelector('.dialogue-advance');
+  advance.textContent = t('dialogue.skip');
   advance.style.display = 'none';
 
   let index = 0;
@@ -90,7 +93,8 @@ export async function showDialogue(keyOrText, callback = () => {}) {
 
 export async function showDialogueWithChoices(keyOrText, choices = []) {
   await loadDialogData();
-  const text = dialogueLines[keyOrText] || keyOrText || '';
+  const raw = dialogueLines[keyOrText] || keyOrText || '';
+  const text = t(raw);
 
   const overlay = document.createElement('div');
   overlay.id = 'dialogue-overlay';

@@ -19,7 +19,7 @@ export function initSettingsPanel(
   settings,
   applySettings,
   saveSettings,
-  loadLanguage,
+  setLanguage,
   DEFAULT_SETTINGS,
   rollbackTo
 ) {
@@ -80,7 +80,7 @@ export function initSettingsPanel(
   langSelect.addEventListener('change', () => {
     settings.language = langSelect.value;
     saveSettings(settings);
-    loadLanguage(settings.language);
+    setLanguage(settings.language);
   });
 
   centerToggle.addEventListener('change', () => {
@@ -101,7 +101,7 @@ export function initSettingsPanel(
       dialogueToggle.checked = settings.dialogueAnim;
       langSelect.value = settings.language;
       centerToggle.checked = settings.centerMode;
-      loadLanguage(settings.language);
+      setLanguage(settings.language);
     }
   });
 

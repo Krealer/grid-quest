@@ -52,7 +52,7 @@ import {
   applySettings,
   DEFAULT_SETTINGS
 } from './settings_manager.js';
-import { loadLanguage } from './language_loader.js';
+import { setLanguage, applyTranslations, hasLocale } from './i18n.js';
 import { initGreeting } from '../ui/greeting.js';
 import { startGame } from './start_game.js';
 import { rollbackTo } from './rollback.js';
@@ -61,6 +61,9 @@ import { initSettingsPanel } from './ui/settings_panel.js';
 // Inventory contents are managed in inventory.js
 
 let settings = loadSettings();
+if (hasLocale(settings.language)) {
+  setLanguage(settings.language);
+}
 
 const gridState = { cols: 0 };
 
@@ -184,7 +187,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   dialogueToggle.checked = settings.dialogueAnim;
   langSelect.value = settings.language;
   centerToggle.checked = settings.centerMode;
-  loadLanguage(settings.language);
+  applyTranslations();
 
   router.init(container, player);
   initMobileCenter(container);
@@ -261,7 +264,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     settings,
     applySettings,
     saveSettings,
-    loadLanguage,
+    setLanguage,
     DEFAULT_SETTINGS,
     rollbackTo
   );
