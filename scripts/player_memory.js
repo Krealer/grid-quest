@@ -114,6 +114,9 @@ export function discoverLore(id) {
   discover('lore', id);
 }
 
+// Provide an alias for legacy imports
+export const recordLore = discoverLore;
+
 export function discoverMap(id) {
   discover('maps', id);
 }
