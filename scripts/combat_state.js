@@ -3,6 +3,7 @@ export const combatState = {
   players: [],
   enemies: [],
   turnQueue: [],
+  turnIndex: 0,
   activeEntity: null,
   selectedTarget: null
 };
@@ -12,6 +13,7 @@ export function initCombatState(player, enemy) {
   combatState.players = Array.isArray(player) ? player : [player];
   combatState.enemies = Array.isArray(enemy) ? enemy : [enemy];
   combatState.turnQueue = [];
+  combatState.turnIndex = 0;
   combatState.activeEntity = null;
   combatState.selectedTarget = null;
 }
@@ -30,6 +32,10 @@ export function getPlayer() {
 
 export function getEnemy() {
   return combatState.enemies[0] || null;
+}
+
+export function getActiveEntity() {
+  return combatState.activeEntity;
 }
 
 export function selectTarget(entity) {

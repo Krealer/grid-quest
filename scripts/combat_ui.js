@@ -54,6 +54,18 @@ function createCombatantEl(entity, isPlayer, index) {
   return wrapper;
 }
 
+export function highlightActing(root, isPlayer, index) {
+  if (!root) return;
+  const group = root.querySelectorAll(
+    isPlayer ? '.player-team .combatant' : '.enemy-team .combatant'
+  );
+  group.forEach((el) => {
+    const match = Number(el.dataset.index) === index;
+    if (match) el.classList.add('acting');
+    else el.classList.remove('acting');
+  });
+}
+
 export function setupTabs(overlay) {
   const offContainer = overlay.querySelector('.offensive-skill-buttons');
   const defContainer = overlay.querySelector('.defensive-skill-buttons');

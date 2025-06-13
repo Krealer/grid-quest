@@ -218,6 +218,11 @@
   animation: damageFlash 0.3s;
 }
 
+#battle-overlay .combatant.acting {
+  outline: 2px solid #ff0;
+  outline-offset: 2px;
+}
+
 @keyframes damageFlash {
   from {
     background: #fff;
