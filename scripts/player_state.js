@@ -1,3 +1,5 @@
+import { player, getTotalStats } from './player.js';
+
 const STORAGE_KEY = 'gridquest.player_state';
 
 const state = {
@@ -65,3 +67,13 @@ export function isPortal15Unlocked() {
 }
 
 export const playerState = state;
+
+export function getPlayerState() {
+  return {
+    hp: player.hp,
+    maxHp: player.maxHp,
+    stats: getTotalStats(),
+    level: player.level,
+    xp: player.xp
+  };
+}

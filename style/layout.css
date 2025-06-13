@@ -415,6 +415,11 @@ body {
   font-weight: bold;
 }
 
+.menu-stats p {
+  margin: 4px 0;
+  font-family: monospace;
+}
+
 /* Quest Log UI */
 .quest-overlay {
   position: fixed;
