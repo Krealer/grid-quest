@@ -61,14 +61,14 @@ import { initSettingsPanel } from './ui/settings_panel.js';
 // Inventory contents are managed in inventory.js
 
 let settings = loadSettings();
-if (hasLocale(settings.language)) {
-  setLanguage(settings.language);
-}
 
 const gridState = { cols: 0 };
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
+  if (hasLocale(settings.language)) {
+    await setLanguage(settings.language);
+  }
   // Prevent double-tap zoom on mobile devices
   document.addEventListener(
     'touchstart',

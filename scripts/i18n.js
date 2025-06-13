@@ -49,6 +49,7 @@ export function t(key) {
   if (Object.prototype.hasOwnProperty.call(enStrings, key)) {
     return enStrings[key];
   }
+  console.warn(`Missing translation key: ${key}`);
   return '[Missing Translation]';
 }
 
