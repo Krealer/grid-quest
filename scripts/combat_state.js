@@ -6,7 +6,9 @@ export const combatState = {
   turnIndex: 0,
   activeEntity: null,
   selectedTarget: null,
-  autoBattle: false
+  autoBattle: false,
+  currentAllyIndex: 0,
+  selectedSkillId: null
 };
 
 export function initCombatState(player, enemy) {
@@ -23,6 +25,8 @@ export function initCombatState(player, enemy) {
   combatState.turnIndex = 0;
   combatState.activeEntity = null;
   combatState.selectedTarget = null;
+  combatState.currentAllyIndex = 0;
+  combatState.selectedSkillId = null;
 }
 
 export function generateTurnQueue() {
@@ -63,6 +67,10 @@ export function livingPlayers() {
 
 export function livingEnemies() {
   return combatState.enemies.filter((e) => e.hp > 0);
+}
+
+export function getAllCombatants() {
+  return [...combatState.players, ...combatState.enemies];
 }
 
 export function setAutoBattle(value) {
