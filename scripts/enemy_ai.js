@@ -41,16 +41,16 @@ export function chooseEnemySkill(entity) {
   return list[0] || null;
 }
 
-export function enemyAct(entity, players, context) {
+export async function enemyAct(entity, players, context) {
   const target = chooseTarget(players, entity.behavior);
   const skill = chooseEnemySkill(entity);
   if (!skill || !target) return;
   recordSkill(skill.id);
   recordTarget(target);
   logAction(entity, skill, target);
-  executeAction(skill, entity, target);
+  await executeAction(skill, entity, target);
 }
 
-export function takeTurn(entity, players, context) {
-  enemyAct(entity, players, context);
+export async function takeTurn(entity, players, context) {
+  await enemyAct(entity, players, context);
 }

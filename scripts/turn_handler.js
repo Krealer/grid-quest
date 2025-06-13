@@ -23,10 +23,10 @@ export function chooseTarget(entity) {
   selectTarget(entity);
 }
 
-export function resolveTurn(skillObj) {
+export async function resolveTurn(skillObj) {
   const actor = combatState.activeEntity;
   const target = getSelectedTarget();
   if (!actor || !skillObj) return;
-  executeAction(skillObj, actor);
+  await executeAction(skillObj, actor);
   currentTurn.target = target?.id || null;
 }
