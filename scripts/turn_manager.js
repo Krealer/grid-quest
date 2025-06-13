@@ -9,11 +9,7 @@ export function startRound() {
     (u) => u && u.hp > 0
   );
   activeUnits.sort((a, b) => {
-    const diff = getSpeed(b) - getSpeed(a);
-    if (diff !== 0) return diff;
-    if (a.isPlayer && !b.isPlayer) return -1;
-    if (!a.isPlayer && b.isPlayer) return 1;
-    return Math.random() < 0.5 ? -1 : 1;
+    return getSpeed(b) - getSpeed(a);
   });
   combatState.turnQueue = activeUnits.slice();
   combatState.turnIndex = 0;
