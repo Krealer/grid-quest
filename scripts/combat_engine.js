@@ -1,9 +1,5 @@
-import {
-  combatState,
-  generateTurnQueue,
-  livingPlayers,
-  livingEnemies
-} from './combat_state.js';
+import { combatState, livingPlayers, livingEnemies } from './combat_state.js';
+import { startRound, nextTurn as queueNextTurn } from './turn_manager.js';
 import { markActiveTile } from './grid_renderer.js';
 import { selectTarget, getSelectedTarget } from './combat_state.js';
 import {
@@ -29,7 +25,7 @@ function getCombatantEl(entity) {
 }
 
 export function initTurnOrder() {
-  generateTurnQueue();
+  startRound();
   combatState.turnIndex = 0;
   combatState.activeEntity = combatState.turnQueue[0] || null;
   markActiveTile(combatState.activeEntity);
@@ -43,14 +39,8 @@ export function nextTurn() {
   if (combatState.activeEntity) {
     tickStatuses(combatState.activeEntity);
   }
-  combatState.turnIndex += 1;
-  if (combatState.turnIndex >= combatState.turnQueue.length) {
-    generateTurnQueue();
-    combatState.turnIndex = 0;
-    combatState.round += 1;
-  }
-  combatState.activeEntity =
-    combatState.turnQueue[combatState.turnIndex] || null;
+  queueNextTurn();
+  combatState.activeEntity = combatState.turnQueue[combatState.turnIndex] || null;
   markActiveTile(combatState.activeEntity);
   document.dispatchEvent(
     new CustomEvent('turnStarted', { detail: combatState.activeEntity })
