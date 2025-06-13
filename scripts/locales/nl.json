@@ -61,5 +61,18 @@
   "save.slot_empty": "Leeg slot",
   "save.map": "Kaart:",
   "save.items": "Items:",
-  "save.saved": "Opgeslagen:"
+  "save.saved": "Opgeslagen:",
+  "snealer.name": "Snealer",
+  "snealer.intro": "De lucht verandert... Snealer grijnst sluw.",
+  "snealer.dialogue.1.text": "Ah, een zwerver... Op zoek naar rijkdom of antwoorden?",
+  "snealer.dialogue.1.ask_fortune": "Rijkdom",
+  "snealer.dialogue.1.ask_answers": "Antwoorden",
+  "snealer.dialogue.1.leave": "Laat maar",
+  "snealer.dialogue.2.text": "Rijkdom ligt in ruïnes, altijd bewaakt. Maar zeg me – wat geef je voor een kortere weg?",
+  "snealer.dialogue.2.refuse": "Niets",
+  "snealer.dialogue.2.intrigued": "Hangt ervan af...",
+  "snealer.dialogue.3.text": "De waarheid is een mes. Je kunt jezelf eraan snijden, zwerver.",
+  "snealer.dialogue.3.ponder": "Ik waag het.",
+  "snealer.dialogue.4.text": "Wijs. Kom terug met iets zeldzaams, iets wat wordt achtergelaten door zij die het licht haten.",
+  "snealer.dialogue.4.nod": "Begrepen."
 }

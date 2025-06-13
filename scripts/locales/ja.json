@@ -54,5 +54,18 @@
   "save.slot_empty": "空きスロット",
   "save.map": "マップ:",
   "save.items": "アイテム:",
-  "save.saved": "保存日時:"
+  "save.saved": "保存日時:",
+  "snealer.name": "スニーラー",
+  "snealer.intro": "空気が変わる…スニーラーがニヤリと笑う。",
+  "snealer.dialogue.1.text": "ああ、旅人か... 富を求めているのか、それとも答えを？",
+  "snealer.dialogue.1.ask_fortune": "富",
+  "snealer.dialogue.1.ask_answers": "答え",
+  "snealer.dialogue.1.leave": "やっぱいい",
+  "snealer.dialogue.2.text": "財宝は廃墟に眠る、常に守られている。だが近道を教えるとしたら、代償は？",
+  "snealer.dialogue.2.refuse": "何もない",
+  "snealer.dialogue.2.intrigued": "場合による…",
+  "snealer.dialogue.3.text": "真実は刃だ。触れれば切れるぞ、旅人。",
+  "snealer.dialogue.3.ponder": "やってみよう。",
+  "snealer.dialogue.4.text": "賢いな。光を嫌う者たちが落とす珍品を持って戻れ。",
+  "snealer.dialogue.4.nod": "了解。"
 }

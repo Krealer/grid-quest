@@ -227,7 +227,7 @@ export async function startDialogueTree(dialogue, index = 0) {
     return true;
   });
   const choices = validOptions.map((opt) => ({
-    label: opt.label,
+    label: t(opt.label),
     callback: async () => {
       if (opt.memoryFlag) setMemory(opt.memoryFlag);
       if (typeof opt.onChoose === 'function') {

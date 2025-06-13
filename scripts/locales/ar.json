@@ -54,5 +54,18 @@
   "save.slot_empty": "فتحة فارغة",
   "save.map": "الخريطة:",
   "save.items": "العناصر:",
-  "save.saved": "تم الحفظ:"
+  "save.saved": "تم الحفظ:",
+  "snealer.name": "سنيالر",
+  "snealer.intro": "الهواء يتغير... سنيالر يبتسم بمكر.",
+  "snealer.dialogue.1.text": "آه، متجول... تبحث عن ثروة أم إجابات؟",
+  "snealer.dialogue.1.ask_fortune": "الثروة",
+  "snealer.dialogue.1.ask_answers": "الإجابات",
+  "snealer.dialogue.1.leave": "لا شيء",
+  "snealer.dialogue.2.text": "الثروات في الخراب، محمية دائمًا. لكن قل لي - ماذا ستعطيني مقابل اختصار الطريق؟",
+  "snealer.dialogue.2.refuse": "لا شيء",
+  "snealer.dialogue.2.intrigued": "يعتمد...",
+  "snealer.dialogue.3.text": "الحقيقة شفرة. قد تجرح نفسك بها، أيها المتجول.",
+  "snealer.dialogue.3.ponder": "سأجازف.",
+  "snealer.dialogue.4.text": "حكيم. عد إلي بشيء نادر، شيء يسقطه من يكرهون النور.",
+  "snealer.dialogue.4.nod": "حسنًا."
 }
