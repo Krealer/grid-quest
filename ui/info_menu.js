@@ -1,11 +1,13 @@
+import { loadJson as loadJsonFile } from '../scripts/dataService.js';
+import { showError } from '../scripts/errorPrompt.js';
+
 export async function loadJson(name) {
-  try {
-    const res = await fetch(`info_data/${name}`);
-    if (!res.ok) return [];
-    return await res.json();
-  } catch {
+  const data = await loadJsonFile(`info_data/${name}`, null);
+  if (data === null) {
+    showError(`Failed to load info_data/${name}`);
     return [];
   }
+  return data;
 }
 
 function createEntry(obj, fields) {

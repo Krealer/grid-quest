@@ -49,3 +49,13 @@ test('returns parsed JSON on success', async () => {
     .mockResolvedValue(new Response('{"a":1}', { status: 200 }));
   await expect(loadJson('test.json')).resolves.toEqual({ a: 1 });
 });
+
+test('uses fallback on network error', async () => {
+  global.fetch = jest.fn().mockRejectedValue(new Error('fail'));
+  await expect(loadJson('path/file.json', { ok: true })).resolves.toEqual({ ok: true });
+});
+
+test('uses fallback on malformed JSON', async () => {
+  global.fetch = jest.fn().mockResolvedValue(new Response('oops', { status: 200 }));
+  await expect(loadJson('bad.json', [])).resolves.toEqual([]);
+});
