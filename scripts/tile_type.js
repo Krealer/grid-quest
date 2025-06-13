@@ -57,7 +57,9 @@ export async function onStepEffect(symbol, player, x, y) {
     }
   } else if (symbol === 'W') {
     healToFull();
-    showDialogue('The cool water rejuvenates you. HP fully restored.');
+    if (!gameState.settings?.notifySkip) {
+      showDialogue('The cool water rejuvenates you. HP fully restored.');
+    }
     if (tileEl) {
       tileEl.classList.add('ripple');
       setTimeout(() => tileEl.classList.remove('ripple'), 800);
@@ -188,7 +190,9 @@ export async function onInteractEffect(
     }
     case 'W': {
       healToFull();
-      showDialogue('The cool water rejuvenates you. HP fully restored.');
+      if (!gameState.settings?.notifySkip) {
+        showDialogue('The cool water rejuvenates you. HP fully restored.');
+      }
       const index = y * cols + x;
       const tileEl = container.children[index];
       if (tileEl) {

@@ -27,6 +27,11 @@ export default {
     default: true,
     description: 'Tap anywhere to skip dialogue'
   },
+  notifySkip: {
+    default: false,
+    description:
+      'Disables non-essential auto-messages like trap warnings and water healing.'
+  },
   language: {
     default: 'en',
     description: 'UI language code'

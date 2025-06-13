@@ -33,6 +33,7 @@
   "settings.labels": "Show Tile Labels",
   "settings.dialogue": "Dialogue Animation",
   "settings.tapToSkip": "Tap to Skip Dialogue",
+  "settings.notifySkip": "Notify Skip",
   "settings.language": "Language",
   "settings.center": "Center Mode (Mobile Portrait Only)",
   "settings.reset": "Reset All Settings",

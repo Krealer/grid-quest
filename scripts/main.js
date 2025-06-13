@@ -114,13 +114,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const labelToggle = document.getElementById('label-toggle');
   const dialogueToggle = document.getElementById('dialogue-toggle');
   const skipToggle = document.getElementById('skip-toggle');
+  const notifyToggle = document.getElementById('notify-toggle');
   const langSelect = document.getElementById('language-select');
   const centerToggle = document.getElementById('center-toggle');
   const resetBtn = document.getElementById('reset-settings');
   const rollbackRow = document.getElementById('rollback-row');
   const rollbackSelect = document.getElementById('rollback-select');
   const rollbackBtn = document.getElementById('rollback-btn');
-
 
   function handleSave() {
     openSaveMenu();
@@ -187,6 +187,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   labelToggle.checked = settings.tileLabels;
   dialogueToggle.checked = settings.dialogueAnim;
   skipToggle.checked = settings.tapToSkip;
+  notifyToggle.checked = settings.notifySkip;
   langSelect.value = settings.language;
   centerToggle.checked = settings.centerMode;
   applyTranslations();
@@ -257,6 +258,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       labelToggle,
       dialogueToggle,
       skipToggle,
+      notifyToggle,
       langSelect,
       centerToggle,
       resetBtn,

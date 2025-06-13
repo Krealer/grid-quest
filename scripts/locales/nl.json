@@ -33,6 +33,7 @@
   "settings.labels": "Tegel labels weergeven",
   "settings.dialogue": "Dialoog Animatie",
   "settings.tapToSkip": "Tik om dialoog over te slaan",
+  "settings.notifySkip": "Meldingen overslaan",
   "settings.language": "Taal",
   "settings.center": "Centrummodus (alleen mobiel portret)",
   "settings.reset": "Reset alle instellingen",
