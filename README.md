@@ -98,3 +98,6 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 
 2. Manual Asset Loading
    - Many JSON assets are fetched at runtime (e.g., `loadMap` in `scripts/mapLoader.js`), requiring a local HTTP server. If any file is missing or malformed, the error handling is minimal.
+
+3. Remove Unused Copies
+   - The `versions/` folder holds full snapshots for the rollback feature. If you rely on Git history for older revisions, consider trimming this folder or moving the snapshots elsewhere to reduce repository size.
