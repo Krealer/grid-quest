@@ -78,6 +78,29 @@ export function highlightActing(root, isPlayer, index) {
   });
 }
 
+export function highlightTarget(root, isPlayer, index) {
+  if (!root) return;
+  const group = root.querySelectorAll(
+    isPlayer ? '.player-team .combatant' : '.enemy-team .combatant'
+  );
+  group.forEach((el) => {
+    const match = Number(el.dataset.index) === index;
+    if (match) el.classList.add('targeted');
+    else el.classList.remove('targeted');
+  });
+}
+
+export function enableEnemyTargeting(root, onSelect) {
+  if (!root) return;
+  const enemyEls = root.querySelectorAll('.enemy-team .combatant');
+  enemyEls.forEach((el) => {
+    el.classList.add('selectable');
+    const idx = Number(el.dataset.index);
+    const handler = () => onSelect?.(idx, el);
+    el.addEventListener('click', handler, { once: true });
+  });
+}
+
 export function setupTabs(overlay) {
   const offContainer = overlay.querySelector('.offensive-skill-buttons');
   const defContainer = overlay.querySelector('.defensive-skill-buttons');

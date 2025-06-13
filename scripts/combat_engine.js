@@ -4,7 +4,9 @@ import {
   livingPlayers,
   livingEnemies
 } from './combat_state.js';
+import { selectTarget, getSelectedTarget } from './combat_state.js';
 import { tickStatuses } from './status_effects.js';
+import { executeSkill } from './skill_engine.js';
 
 export function initTurnOrder() {
   generateTurnQueue();
@@ -34,4 +36,22 @@ export function checkCombatEnd() {
   if (allEnemiesDefeated) return 'victory';
   if (allPlayersDefeated) return 'defeat';
   return null;
+}
+
+export function getTargets(type, actor) {
+  if (type === 'self') return [actor];
+  if (type === 'enemy') {
+    const list = actor.isPlayer ? livingEnemies() : livingPlayers();
+    return list.filter((t) => t.hp > 0);
+  }
+  return [];
+}
+
+export function executeAction(skill, actor) {
+  const targetType = skill.targetType || 'enemy';
+  const targets = getTargets(targetType, actor);
+  const selected = getSelectedTarget();
+  const target = selected && targets.includes(selected) ? selected : targets[0];
+  if (target) selectTarget(target);
+  executeSkill(skill, actor, target, { actor, target });
 }
