@@ -66,18 +66,3 @@ export function useManaScroll() {
   return null;
 }
 
-export function useAegisInvocationScroll() {
-  if (consumeItem('aegis_invocation_scroll', 1)) {
-    import('./player.js').then((m) => m.grantSkill('aegisInvocation'));
-    return { learned: true };
-  }
-  return null;
-}
-
-export function useEmberPrayerScroll() {
-  if (consumeItem('ember_prayer_scroll', 1)) {
-    import('./player.js').then((m) => m.grantSkill('emberPrayer'));
-    return { learned: true };
-  }
-  return null;
-}

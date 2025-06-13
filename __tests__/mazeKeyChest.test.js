@@ -20,10 +20,6 @@ jest.unstable_mockModule('../scripts/player.js', () => ({
   loseHpNonLethal: jest.fn()
 }));
 
-jest.unstable_mockModule('../scripts/skills.js', () => ({
-  unlockSkillsFromItem: jest.fn(() => []),
-  unlockSkillsFromRelic: jest.fn(() => [])
-}));
 
 let openChest,
   getItemCount,

@@ -71,7 +71,7 @@ import { hasItem, removeItem, useKey } from './inventory.js';
 import { updateInventoryUI } from './inventory_ui.js';
 import { getEnemyData } from './enemy.js';
 import { startCombat } from './combatSystem.js';
-import { getAllSkills, unlockSkill } from './skills.js';
+import { getAllSkills } from './skills.js';
 import * as router from './router.js';
 import { transitionToMap } from './transition.js';
 import { enterDoor } from './player.js';
@@ -175,14 +175,6 @@ export async function onInteractEffect(
           } else if (result.item) {
             showDialogue(`You obtained ${result.item.name}!`);
           }
-          if (Array.isArray(result.unlockedSkills)) {
-            result.unlockedSkills.forEach((id) => {
-              const skill = getAllSkills()[id];
-              if (skill) {
-                showDialogue(`You've learned a new skill: ${skill.name}!`);
-              }
-            });
-          }
           const idx = y * cols + x;
           const tileEl = container.children[idx];
           if (tileEl) {
@@ -190,13 +182,6 @@ export async function onInteractEffect(
             tileEl.classList.add('chest-opened', 'tile-c', 'blocked');
           }
           tile.type = 'c';
-          for (const [id, skill] of Object.entries(getAllSkills())) {
-            if (skill.unlockCondition?.chest === chestId) {
-              if (unlockSkill(id)) {
-                showDialogue(`You've learned a new skill: ${skill.name}!`);
-              }
-            }
-          }
         }
       }
       break;

@@ -387,14 +387,6 @@
     "icon": "🔥",
     "category": "combat"
   },
-  "ember_prayer_scroll": {
-    "name": "Scroll: Ember Prayer",
-    "description": "Using it teaches the Ember Prayer skill.",
-    "type": "quest",
-    "stackLimit": 1,
-    "icon": "📜",
-    "category": "lore"
-  },
   "prism_fragment": {
     "name": "Prism Fragment",
     "description": "A shimmering piece of condensed prism memory.",

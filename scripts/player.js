@@ -9,7 +9,7 @@ import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
 import { getItemBonuses } from './item_stats.js';
 import { getRelicBonuses } from './relic_state.js';
 import { getClassBonuses, getChosenClass } from './class_state.js';
-import { unlockSkill, getAllSkills } from './skills.js';
+import { getAllSkills } from './skills.js';
 import {
   addItem,
   removeItem as removeInvItem,
@@ -60,23 +60,27 @@ export const player = {
 
 export function calculateStatsFromLevel(level) {
   const lvl = level;
-  const milestoneHp = Math.floor(lvl / 5) * 2 + Math.floor(lvl / 10) * 2;
-  const maxHp = 100 + lvl * 2 + milestoneHp;
+  const bonusHp =
+    (lvl - 1) * 2 +
+    Math.floor(lvl / 5) * 2 +
+    Math.floor(lvl / 10) * 2 +
+    Math.floor(lvl / 15) * 2;
+  const maxHp = 100 + bonusHp;
   const attack = 15 + Math.floor(lvl / 5);
-  const defense = Math.floor(lvl / 10);
-  const speed = 6;
+  const defense = Math.floor(lvl / 10) + Math.floor(lvl / 15);
+  const speed = 6 + Math.floor(lvl / 15);
   return { maxHp, defense, attack, speed };
 }
 
 export function updateStatsFromLevel() {
-  const { maxHp, defense, attack } = calculateStatsFromLevel(player.level);
+  const { maxHp, defense, attack, speed } = calculateStatsFromLevel(player.level);
   player.maxHp = maxHp;
   player.atk = attack;
   player.def = defense;
   if (!player.stats) player.stats = { attack: 0, defense: 0, speed: 6 };
   player.stats.defense = 0;
   player.stats.attack = 0;
-  if (typeof player.stats.speed !== 'number') player.stats.speed = 6;
+  player.stats.speed = speed;
   if (player.hp > player.maxHp) player.hp = player.maxHp;
 }
 
@@ -326,7 +330,8 @@ export function getTotalStats() {
 }
 
 export function grantSkill(id) {
-  if (unlockSkill(id)) {
+  if (!player.learnedSkills.includes(id)) {
+    player.learnedSkills.push(id);
     const skill = getAllSkills()[id];
     if (skill) {
       showDialogue(`You've learned a new skill: ${skill.name}!`);
