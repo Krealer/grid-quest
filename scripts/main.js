@@ -67,7 +67,7 @@ const gridState = { cols: 0 };
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
   if (hasLocale(settings.language)) {
-    await setLanguage(settings.language);
+    setLanguage(settings.language);
   }
   // Prevent double-tap zoom on mobile devices
   document.addEventListener(
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       resetBtn,
       rollbackRow,
       rollbackSelect,
-      rollbackBtn,
+      rollbackBtn
     },
     settings,
     applySettings,
