@@ -26,7 +26,7 @@ export function getLanguage() {
 }
 
 export function t(key) {
-  return locales[currentLang][key] || key;
+  return locales[currentLang]?.[key] || locales.en?.[key] || key;
 }
 
 export function applyTranslations() {
