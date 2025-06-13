@@ -4,6 +4,7 @@ import { getItemData } from '../item_loader.js';
 import { getItemDisplayName, getItemLevel } from '../inventory.js';
 import { getItemBonuses } from '../item_stats.js';
 import { showItemTooltip, hideItemTooltip } from '../utils.js';
+import { t } from '../i18n.js';
 
 export function updateStatusPanel() {
   const list = document.getElementById('status-passives');
@@ -64,7 +65,7 @@ export function updateStatusPanel() {
     row.addEventListener('mouseleave', hideItemTooltip);
     equipList.appendChild(row);
   }
-  info.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}`;
+  info.textContent = `${t('player.lvl')}: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}`;
   (player.passives || []).forEach(id => {
     const p = defs[id];
     if (!p) return;

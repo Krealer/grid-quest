@@ -79,9 +79,9 @@ export async function updateInventoryUI() {
     const tooltip = 'Negative defense increases damage taken by 10% per point.';
     const defHtml =
       def < 0
-        ? `<span class="negative" title="${tooltip}">Defense: ${def}</span>`
-        : `<span title="${tooltip}">Defense: ${def}</span>`;
-    statsEl.innerHTML = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Attack: ${stats.attack || 0}  ${defHtml}`;
+        ? `<span class="negative" title="${tooltip}">${t('player.def')}: ${def}</span>`
+        : `<span title="${tooltip}">${t('player.def')}: ${def}</span>`;
+    statsEl.innerHTML = `${t('player.lvl')}: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  ${t('player.atk')}: ${stats.attack || 0}  ${defHtml}`;
   }
   let cat = currentCategory;
   if (cat === 'items') cat = ['general', 'crafting'];

@@ -3,6 +3,7 @@ import { getStatusList, hasStatus } from './status_manager.js';
 import { attachTooltip } from '../ui/skills_panel.js';
 import { highlightTiles, clearHighlightedTiles } from './grid_renderer.js';
 import { combatState } from './combat_state.js';
+import { t } from './i18n.js';
 import {
   highlightTargets as highlightDomTargets,
   clearTargetHighlights
@@ -41,7 +42,7 @@ function formatStats(entity) {
   const def = entity.stats?.defense ?? entity.def ?? 0;
   const spd = entity.stats?.speed ?? 0;
   const hp = `${entity.hp}/${entity.maxHp ?? entity.hp}`;
-  return `HP: ${hp} | ATK: ${atk} | DEF: ${def} | SPD: ${spd}`;
+  return `${t('player.hp')}: ${hp} | ${t('player.atk').toUpperCase()}: ${atk} | ${t('player.def').toUpperCase()}: ${def} | ${t('player.spd').toUpperCase()}: ${spd}`;
 }
 
 function createCombatantEl(entity, isPlayer, index) {
