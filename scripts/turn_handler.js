@@ -32,8 +32,8 @@ export async function resolveTurn(skillObj) {
   if (!actor || !skillObj) return;
   let override = null;
   if (!actor.isPlayer) {
-    const list = getTargets(skillObj.targeting || 'enemy', actor);
-    if (['enemy', 'ally', 'any'].includes(skillObj.targeting || 'enemy')) {
+    const list = getTargets(skillObj.targetType || 'enemy', actor);
+    if (['enemy', 'ally', 'any'].includes(skillObj.targetType || 'enemy')) {
       override = list[0] || null;
     }
   }

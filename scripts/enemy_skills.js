@@ -11,6 +11,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 8 + atk + (enemy.tempAttack || 0);
@@ -27,6 +29,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['weakened'],
     statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
     effect({ player, applyStatus, log, enemy }) {
@@ -43,6 +47,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const count = getEchoConversationCount();
       const atk = enemy.stats?.attack || 0;
@@ -60,6 +66,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'buff',
+    targetType: 'self',
+    range: 'single',
     effect({ enemy, log }) {
       const relics = getOwnedRelics().length;
       const amount = relics * 2;
@@ -76,6 +84,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['burned'],
     statuses: [{ target: 'player', id: 'burned', duration: 2 }],
     effect({ enemy, damagePlayer, applyStatus, log, player }) {
@@ -95,6 +105,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 7 + atk + (enemy.tempAttack || 0);
@@ -111,6 +123,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['cursed'],
     statuses: [{ target: 'player', id: 'cursed', duration: 2 }],
     effect({ enemy, damagePlayer, applyStatus, log, player }) {
@@ -130,6 +144,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 6 + atk + (enemy.tempAttack || 0);
@@ -146,6 +162,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['weakened'],
     statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
     effect({ enemy, damagePlayer, applyStatus, log, player }) {
@@ -168,6 +186,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 10 + atk + (enemy.tempAttack || 0);
@@ -184,6 +204,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'buff',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, log }) {
       enemy.tempAttack = (enemy.tempAttack || 0) + 2;
       log(`${enemy.name} calls for backup, bolstering its strength!`);
@@ -198,6 +220,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['vulnerable'],
     statuses: [{ target: 'player', id: 'vulnerable', duration: 2 }],
     effect({ enemy, damagePlayer, applyStatus, log, player }) {
@@ -217,6 +241,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['bleeding'],
     statuses: [{ target: 'player', id: 'bleeding', duration: 3 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
@@ -236,6 +262,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['unstable'],
     statuses: [{ target: 'player', id: 'unstable', duration: 3 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
@@ -255,6 +283,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 7 + atk + (enemy.tempAttack || 0);
@@ -271,6 +301,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['weakened'],
     statuses: [{ target: 'player', id: 'weakened', duration: 3 }],
     effect({ enemy, player, applyStatus, log }) {
@@ -287,6 +319,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 8 + atk + (enemy.tempAttack || 0);
@@ -303,6 +337,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['slowed'],
     statuses: [{ target: 'player', id: 'slowed', duration: 2 }],
     effect({ enemy, damagePlayer, applyStatus, log, player }) {
@@ -322,6 +358,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 7 + atk + (enemy.tempAttack || 0);
@@ -338,6 +376,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'buff',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, log }) {
       enemy.tempDefense = (enemy.tempDefense || 0) + 2;
       log(`${enemy.name}'s crystals harden! (+2 defense)`);
@@ -352,6 +392,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const applied = damagePlayer(50);
       enemy.stats.defense = (enemy.stats?.defense || 0) - 30;
@@ -367,6 +409,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'buff',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, log }) {
       enemy.stats.defense = (enemy.stats?.defense || 0) + 1;
       log(`${enemy.name}'s facets harden! (+1 defense)`);
@@ -381,6 +425,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'buff',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, log }) {
       enemy.stats.defense = (enemy.stats?.defense || 0) + 2;
       log(`${enemy.name}'s cracked shards realign! (+2 defense)`);
@@ -395,6 +441,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 10,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const applied = damagePlayer(100);
       enemy.stats.defense = (enemy.stats?.defense || 0) - 30;
@@ -410,6 +458,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 9 + atk + (enemy.tempAttack || 0);
@@ -426,6 +476,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['confused'],
     statuses: [{ target: 'player', id: 'confused', duration: 2 }],
     effect({ player, applyStatus, log, enemy }) {
@@ -442,6 +494,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 8 + atk + (enemy.tempAttack || 0);
@@ -458,6 +512,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 12 + atk + (enemy.tempAttack || 0);
@@ -474,6 +530,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['fragile'],
     statuses: [{ target: 'player', id: 'fragile', duration: 3 }],
     effect({ player, applyStatus, log, enemy }) {
@@ -490,6 +548,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['silence'],
     statuses: [{ target: 'player', id: 'silence', duration: 2 }],
     effect({ enemy, player, applyStatus, log }) {
@@ -506,6 +566,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 12 + atk + (enemy.tempAttack || 0);
@@ -522,6 +584,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'buff',
+    targetType: 'self',
+    range: 'single',
     statuses: [{ target: 'self', id: 'guarded', duration: 2 }],
     effect({ enemy, applyStatus, log }) {
       applyStatus(enemy, 'guarded', 2);
@@ -537,6 +601,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['weakened'],
     statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
     effect({ enemy, player, applyStatus, log }) {
@@ -553,6 +619,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['silence'],
     statuses: [{ target: 'player', id: 'silence', duration: 1 }],
     effect({ enemy, player, applyStatus, log }) {
@@ -569,6 +637,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['confused'],
     statuses: [{ target: 'player', id: 'confused', duration: 2 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
@@ -591,6 +661,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'buff',
+    targetType: 'self',
+    range: 'single',
     statuses: [{ target: 'self', id: 'evasive', duration: 2 }],
     effect({ enemy, applyStatus, log }) {
       applyStatus(enemy, 'evasive', 2);
@@ -606,6 +678,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['burned'],
     statuses: [{ target: 'player', id: 'burned', duration: 3 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
@@ -625,6 +699,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const loss = Math.max(1, Math.floor(enemy.maxHp * 0.1));
       enemy.hp = Math.max(0, enemy.hp - loss);
@@ -644,6 +720,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 3,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['burned', 'weakened'],
     statuses: [
       { target: 'player', id: 'burned', duration: 3 },
@@ -664,6 +742,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['burn'],
     statuses: [{ target: 'player', id: 'burn', duration: 2 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
@@ -683,6 +763,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['burn'],
     statuses: [{ target: 'player', id: 'burn', duration: 1 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
@@ -702,6 +784,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['confuse'],
     statuses: [{ target: 'player', id: 'confuse', duration: 2 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
@@ -724,6 +808,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['defense_down'],
     statuses: [{ target: 'player', id: 'defense_down', duration: 2 }],
     effect({ enemy, player, applyStatus, log }) {
@@ -740,6 +826,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'buff',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, log }) {
       enemy.hp = Math.min(enemy.maxHp, enemy.hp + 10);
       log(`${enemy.name} focuses and recovers!`);
@@ -754,6 +842,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['attack_down', 'weaken'],
     statuses: [
       { target: 'player', id: 'attack_down', duration: 2 },
@@ -774,6 +864,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'buff',
+    targetType: 'self',
+    range: 'single',
     statuses: [{ target: 'self', id: 'evade_next', duration: 1 }],
     effect({ enemy, applyStatus, log }) {
       applyStatus(enemy, 'evade_next', 1);
@@ -789,6 +881,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 3,
     aiType: 'buff',
+    targetType: 'self',
+    range: 'single',
     statuses: [{ target: 'self', id: 'evade_next', duration: 1 }],
     effect({ enemy, applyStatus, log }) {
       applyStatus(enemy, 'evade_next', 1);
@@ -804,6 +898,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['silence'],
     statuses: [{ target: 'player', id: 'silence', duration: 1 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
@@ -823,6 +919,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, applyStatus, log, player }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 10 + atk + (enemy.tempAttack || 0);
@@ -843,6 +941,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = 9 + atk + (enemy.tempAttack || 0);
@@ -859,6 +959,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 3,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['silence'],
     statuses: [{ target: 'player', id: 'silence', duration: 3 }],
     effect({ enemy, player, applyStatus, log }) {
@@ -875,6 +977,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 2,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['paralyzed'],
     statuses: [{ target: 'player', id: 'paralyzed', duration: 1 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
@@ -894,6 +998,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ damagePlayer, log, enemy }) {
       const applied = damagePlayer(25);
       log(`${enemy.name} unleashes a runic blast for ${applied} damage!`);
@@ -908,6 +1014,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'status',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['weakened'],
     statuses: [{ target: 'player', id: 'weakened', duration: 2 }],
     effect({ player, applyStatus, log, enemy }) {
@@ -924,6 +1032,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 0,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = atk + (enemy.tempAttack || 0);
@@ -940,6 +1050,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 5,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['weakened'],
     statuses: [{ target: 'player', id: 'weakened', duration: 3 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {
@@ -959,6 +1071,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 10,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     effect({ enemy, player, damagePlayer, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = Math.round(0.6 * (atk + (enemy.tempAttack || 0)));
@@ -975,6 +1089,8 @@ export const enemySkills = {
     cost: 0,
     cooldown: 5,
     aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
     applies: ['stunned'],
     statuses: [{ target: 'player', id: 'stunned', duration: 1 }],
     effect({ enemy, player, damagePlayer, applyStatus, log }) {

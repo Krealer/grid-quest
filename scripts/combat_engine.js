@@ -111,7 +111,7 @@ export async function executeAction(skill, actor, targetOverride, extra = {}) {
       : getEnemySkill(actor.selectedSkillId);
   }
   if (!skill) return;
-  const targeting = skill.targeting || 'enemy';
+  const targeting = skill.targetType || 'enemy';
   const candidates = getTargets(targeting, actor);
   let selected = targetOverride || getSelectedTarget();
   if (Array.isArray(selected)) {
@@ -167,7 +167,7 @@ export async function executeAction(skill, actor, targetOverride, extra = {}) {
   }));
 
   const isAoe =
-    skill.targeting === 'all_enemies' || skill.targeting === 'all_allies';
+    skill.targetType === 'all_enemies' || skill.targetType === 'all_allies';
   filtered.forEach((t, i) => {
     const el = getCombatantEl(t);
     const diff = after[i].hp - before[i].hp;
