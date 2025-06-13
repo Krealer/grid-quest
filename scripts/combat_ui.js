@@ -3,6 +3,10 @@ import { getStatusList } from './statusManager.js';
 import { attachTooltip } from '../ui/skillsPanel.js';
 import { highlightTiles, clearHighlightedTiles } from './grid_renderer.js';
 import { combatState } from './combat_state.js';
+import {
+  highlightTargets as highlightDomTargets,
+  clearTargetHighlights
+} from './animation_utils.js';
 
 export function renderCombatants(root, players = [], enemies = [], onSelect) {
   if (!root) return;
@@ -125,11 +129,31 @@ export function highlightSkillTargets(
   } else if (type === 'any') {
     targets = [...players, ...enemies];
   }
-  highlightTiles(targets, onSelect);
+  const living = targets.filter((t) => t && t.hp > 0);
+  highlightTiles(living, onSelect);
+  const overlay = document.getElementById('battle-overlay');
+  if (overlay) {
+    const infos = living.map((t) => {
+      const list = t.isPlayer || t.isAlly ? players : enemies;
+      const idx = list.indexOf(t);
+      const selector = t.isPlayer || t.isAlly
+        ? `.player-team .combatant[data-index="${idx}"]`
+        : `.enemy-team .combatant[data-index="${idx}"]`;
+      const el = overlay.querySelector(selector);
+      return {
+        element: el,
+        entity: t,
+        tooltip: `${t.name} ${t.hp}/${t.maxHp ?? t.hp}`
+      };
+    });
+    highlightDomTargets(infos, (info) => onSelect?.(info.entity));
+  }
 }
 
 export function clearSkillTargetHighlights() {
   clearHighlightedTiles();
+  const overlay = document.getElementById('battle-overlay');
+  if (overlay) clearTargetHighlights(overlay);
 }
 
 function getTurnLabel(unit) {

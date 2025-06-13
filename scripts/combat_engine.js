@@ -14,6 +14,19 @@ import { tickStatuses } from './status_effects.js';
 import { executeSkill } from './skill_engine.js';
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
+import { flashElement, floatTextOver } from './animation_utils.js';
+
+function getCombatantEl(entity) {
+  const overlay = document.getElementById('battle-overlay');
+  if (!overlay || !entity) return null;
+  const idx = entity.isPlayer || entity.isAlly
+    ? combatState.players.indexOf(entity)
+    : combatState.enemies.indexOf(entity);
+  const selector = entity.isPlayer || entity.isAlly
+    ? `.player-team .combatant[data-index="${idx}"]`
+    : `.enemy-team .combatant[data-index="${idx}"]`;
+  return overlay.querySelector(selector);
+}
 
 export function initTurnOrder() {
   generateTurnQueue();
@@ -145,12 +158,44 @@ export async function executeAction(skill, actor, targetOverride, extra = {}) {
   });
   if (filtered.length === 0) return;
 
+  const before = filtered.map((t) => ({
+    hp: t.hp,
+    statuses: (t.statuses || []).map((s) => s.id)
+  }));
+
   executeSkill(skill, actor, filtered, {
     actor,
     caster: actor,
     targets: filtered,
     target: filtered[0],
     ...extra
+  });
+
+  const after = filtered.map((t) => ({
+    hp: t.hp,
+    statuses: (t.statuses || []).map((s) => s.id)
+  }));
+
+  const isAoe =
+    skill.targeting === 'all_enemies' || skill.targeting === 'all_allies';
+  filtered.forEach((t, i) => {
+    const el = getCombatantEl(t);
+    const diff = after[i].hp - before[i].hp;
+    const delay = isAoe ? i * 150 : 0;
+    if (!el) return;
+    setTimeout(() => {
+      if (diff < 0) {
+        flashElement(el, 'hit');
+        floatTextOver(el, String(diff), { color: 'red' });
+      } else if (diff > 0) {
+        flashElement(el, 'heal');
+        floatTextOver(el, `+${diff}`, { color: 'limegreen' });
+      }
+      const added = after[i].statuses.filter((s) => !before[i].statuses.includes(s));
+      added.forEach((id, idx) => {
+        setTimeout(() => floatTextOver(el, id, { color: 'yellow' }), idx * 150);
+      });
+    }, delay);
   });
   const names = filtered.map((t) => t.name).join(', ');
   const message =

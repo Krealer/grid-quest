@@ -297,9 +297,6 @@
   box-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
 }
 
-.clickable-target {
-  cursor: pointer;
-}
 
 @media (max-width: 600px) {
   #battle-overlay .turn-queue {
@@ -376,4 +373,70 @@
     width: 140px;
     font-size: 10px;
   }
+}
+
+.target-highlight {
+  outline: 2px solid var(--highlight-color, #ff5555);
+  box-shadow: 0 0 6px var(--highlight-color, #ff5555);
+  animation: targetPulse 1s infinite alternate;
+}
+
+@keyframes targetPulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+.flash-hit {
+  animation: flashHit 0.4s;
+}
+
+.flash-heal {
+  animation: flashHeal 0.4s;
+}
+
+@keyframes flashHit {
+  from {
+    background: rgba(255, 0, 0, 0.6);
+  }
+  to {
+    background: transparent;
+  }
+}
+
+@keyframes flashHeal {
+  from {
+    background: rgba(0, 255, 0, 0.6);
+  }
+  to {
+    background: transparent;
+  }
+}
+
+.floating-text {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, 0);
+  animation: floatUp 1.2s forwards;
+  font-weight: bold;
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+}
+
+.clickable-target {
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
 }
