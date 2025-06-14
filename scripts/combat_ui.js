@@ -1,6 +1,7 @@
 import { getStatusEffect } from './status_effects.js';
 import { getStatusList, hasStatus } from './status_manager.js';
-import { attachTooltip } from '../ui/skills_panel.js';
+import { attachTooltip as attachSkillTooltip } from '../ui/skills_panel.js';
+import { attachTooltip as attachStatusTooltip } from './tooltip_manager.js';
 import { highlightTiles, clearHighlightedTiles } from './grid_renderer.js';
 import { combatState } from './combat_state.js';
 import { t } from './i18n.js';
@@ -137,9 +138,10 @@ export function highlightSkillTargets(
     const infos = living.map((t) => {
       const list = t.isPlayer || t.isAlly ? players : enemies;
       const idx = list.indexOf(t);
-      const selector = t.isPlayer || t.isAlly
-        ? `.player-team .combatant[data-index="${idx}"]`
-        : `.enemy-team .combatant[data-index="${idx}"]`;
+      const selector =
+        t.isPlayer || t.isAlly
+          ? `.player-team .combatant[data-index="${idx}"]`
+          : `.enemy-team .combatant[data-index="${idx}"]`;
       const el = overlay.querySelector(selector);
       return {
         element: el,
@@ -159,7 +161,9 @@ export function clearSkillTargetHighlights() {
 
 function getTurnLabel(unit) {
   if (!unit) return '';
-  return unit.portrait || unit.icon || (unit.isPlayer || unit.isAlly ? '🧍' : '👾');
+  return (
+    unit.portrait || unit.icon || (unit.isPlayer || unit.isAlly ? '🧍' : '👾')
+  );
 }
 
 export function renderTurnQueue(container, queue = [], active, index = 0) {
@@ -251,9 +255,13 @@ export function updateStatusUI(root, players, enemies) {
       const ef = getStatusEffect(s.id);
       const span = document.createElement('span');
       span.className = 'effect';
-      span.title = ef?.description || s.id;
-      const icon = ef?.icon ? `${ef.icon} ` : '';
-      span.textContent = `${icon}${t(`status.${s.id}`)} (${s.remaining})`;
+      span.textContent = ef?.icon || '?';
+      attachStatusTooltip(span, () => {
+        const name = t(`status.${s.id}`);
+        const desc = ef?.description || '';
+        const turns = t('status.remaining', { turns: s.remaining });
+        return `${name}\n${desc}\n${turns}`;
+      });
       list.appendChild(span);
     });
   };
@@ -275,9 +283,7 @@ export function renderSkillList(container, skills, onClick) {
       });
     }
     if (Array.isArray(skill.cleanse)) {
-      const names = skill.cleanse
-        .map((id) => t(`status.${id}`))
-        .join(', ');
+      const names = skill.cleanse.map((id) => t(`status.${id}`)).join(', ');
       effects.push(`Removes ${names}`);
     }
     const meta = [];
@@ -291,7 +297,7 @@ export function renderSkillList(container, skills, onClick) {
     const icon = skill.icon ? `${skill.icon} ` : '';
     btn.innerHTML = `<strong>${icon}${skill.name}</strong><div class="desc">${descParts}</div>`;
     btn.addEventListener('click', () => onClick(skill));
-    attachTooltip(btn, skill);
+    attachSkillTooltip(btn, skill);
     container.appendChild(btn);
     map[skill.id] = btn;
   });
