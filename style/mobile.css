@@ -1,0 +1,13 @@
+/* Mobile overrides for combat UI */
+@media (max-width: 768px) {
+  .combatant-label {
+    font-size: 0.8rem;
+    padding: 2px;
+  }
+
+  .stat-block {
+    font-size: 0.75rem;
+    padding: 2px;
+    margin-top: 4px;
+  }
+}

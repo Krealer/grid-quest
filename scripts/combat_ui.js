@@ -70,7 +70,7 @@ function createCombatantEl(entity, isPlayer, index) {
   }
   wrapper.appendChild(portrait);
   const name = document.createElement('div');
-  name.className = 'name';
+  name.className = 'name combatant-label';
   name.textContent = entity.name || (isPlayer ? 'Player' : 'Enemy');
   wrapper.appendChild(name);
   const hpBar = document.createElement('div');
@@ -78,7 +78,7 @@ function createCombatantEl(entity, isPlayer, index) {
   hpBar.innerHTML = '<div class="hp"></div>';
   wrapper.appendChild(hpBar);
   const stats = document.createElement('div');
-  stats.className = 'stats';
+  stats.className = 'stats stat-block';
   stats.textContent = formatStats(entity);
   wrapper.appendChild(stats);
   const status = document.createElement('div');
