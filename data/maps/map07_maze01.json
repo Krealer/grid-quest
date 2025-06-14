@@ -179,7 +179,8 @@
       "F",
       {
         "type": "C",
-        "item": "maze_key_1"
+        "item": "maze_key_1",
+        "opened": false
       },
       "F",
       "G",

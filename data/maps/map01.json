@@ -147,7 +147,9 @@
       "G",
       "G",
       {
-        "type": "C"
+        "type": "C",
+        "item": "rusty_key",
+        "opened": false
       },
       "G",
       "G",
@@ -246,7 +248,9 @@
       "G",
       "G",
       {
-        "type": "C"
+        "type": "C",
+        "item": "defense_potion_I",
+        "opened": false
       },
       "G",
       "F",
@@ -414,7 +418,9 @@
       "G",
       "G",
       {
-        "type": "C"
+        "type": "C",
+        "item": "old_coin",
+        "opened": false
       },
       "G",
       "G",

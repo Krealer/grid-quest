@@ -70,5 +70,7 @@ export default {
   "snealer.dialogue.3.ponder": "سأجازف.",
   "snealer.dialogue.4.text": "حكيم. عد إلي بشيء نادر، شيء يسقطه من يكرهون النور.",
   "snealer.dialogue.4.nod": "حسنًا.",
-  "message.water_restore": "الماء البارد يجددك. تم استعادة نقاط الصحة بالكامل."
+  "message.water_restore": "الماء البارد يجددك. تم استعادة نقاط الصحة بالكامل.",
+  "message.chest_found": "وجدت {itemName} في الصندوق!",
+  "message.chest_empty": "الصندوق فارغ."
 }

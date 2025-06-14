@@ -70,5 +70,7 @@ export default {
   "snealer.dialogue.3.ponder": "Рискну.",
   "snealer.dialogue.4.text": "Мудро. Вернись с редкостью, добытой у тех, кто боится света.",
   "snealer.dialogue.4.nod": "Понял.",
-  "message.water_restore": "Прохладная вода освежает. HP полностью восстановлено."
+  "message.water_restore": "Прохладная вода освежает. HP полностью восстановлено.",
+  "message.chest_found": "Вы нашли {itemName} в сундуке!",
+  "message.chest_empty": "Сундук пуст."
 }

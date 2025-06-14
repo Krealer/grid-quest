@@ -77,5 +77,7 @@ export default {
   "snealer.dialogue.3.ponder": "I'll risk it.",
   "snealer.dialogue.4.text": "Wise. Return with something rare, something dropped by those who hate the light.",
   "snealer.dialogue.4.nod": "Got it.",
-  "message.water_restore": "The cool water rejuvenates you. HP fully restored."
+  "message.water_restore": "The cool water rejuvenates you. HP fully restored.",
+  "message.chest_found": "You found {itemName} in the chest!",
+  "message.chest_empty": "The chest is empty."
 }
