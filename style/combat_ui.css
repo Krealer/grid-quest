@@ -39,16 +39,19 @@
 }
 
 .combat-log {
-  width: 90%;
-  max-height: 80px;
-  overflow-y: auto;
-  margin: 12px auto;
-  padding: 6px;
-  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 90px;
+  background: rgba(0, 0, 0, 0.65);
   color: white;
-  font-family: monospace;
-  font-size: 12px;
-  border-radius: 6px;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  overflow-y: auto;
+  border-radius: 8px;
+  text-align: left;
 }
 
 .action-types {
