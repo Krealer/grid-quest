@@ -1,8 +1,11 @@
 import { showItemTooltip, hideItemTooltip } from '../scripts/utils.js';
+import { t } from '../scripts/i18n.js';
 
 export function attachTooltip(button, skill) {
   if (!button || !skill) return;
-  const parts = [skill.description];
+  const descKey = `combat.skill.${skill.id}.description`;
+  const baseDesc = t(descKey);
+  const parts = [baseDesc !== '[Missing Translation]' ? baseDesc : skill.description];
   if (typeof skill.cost === 'number' && skill.cost > 0) {
     parts.push(`Cost: ${skill.cost}`);
   }

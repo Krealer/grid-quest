@@ -180,5 +180,6 @@ export default {
   'combat.category.items': 'Items',
   'combat.auto.toggle': 'Toggle Auto-Battle',
   'combat.auto.on': 'Auto-Battle ON',
-  'combat.auto.off': 'Auto-Battle OFF'
+  'combat.auto.off': 'Auto-Battle OFF',
+  'combat.skill.strike.description': 'Deal damage equal to your Attack stat.'
 };
