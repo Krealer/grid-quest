@@ -68,6 +68,7 @@ import { initEnemyState } from './enemy.js';
 import { combatState, initCombatState } from './combat_state.js';
 import { initTurnOrder, nextTurn } from './combat_engine.js';
 import { updateHpBar } from './combat_ui_helpers.js';
+import { t } from './i18n.js';
 
 let overlay = null;
 
@@ -231,7 +232,7 @@ export async function startCombat(enemy, player) {
   function damagePlayer(dmg) {
     let amount = dmg;
     if (player.evasionChance && Math.random() < player.evasionChance) {
-      log('Player evades the attack!');
+      log(t('combat.miss', { attacker: enemy.name }));
       return 0;
     }
     if (shieldBlock) {
@@ -253,17 +254,17 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
-    log(`Player takes ${applied} damage`);
+    log(t('combat.attack', { attacker: enemy.name, amount: applied }));
     if (reflectActive && applied > 0) {
       damageEnemy(applied);
-      log('Reflected the damage back!');
+      log(t('combat.reflect'));
       reflectActive = false;
     }
     if (player.hasTemplePassive && applied > 0) {
       enemyHp = Math.max(0, enemyHp - 2);
       enemy.hp = enemyHp;
       updateHpBar(enemyBar, enemyHp, enemyMax);
-      log('Sacred Counter retaliates!');
+      log(t('combat.sacredCounter'));
       healPlayer(1);
     }
     return applied;
@@ -271,13 +272,13 @@ export async function startCombat(enemy, player) {
 
   function damageEnemy(baseDmg) {
     if (enemy.evadeNext) {
-      log(`${enemy.name}'s mirage takes the hit!`);
+      log(t('combat.miss', { attacker: 'Player' }));
       removeStatusLogged(enemy, 'evade_next');
       enemy.evadeNext = false;
       return 0;
     }
     if (enemy.evasionChance && Math.random() < enemy.evasionChance) {
-      log(`${enemy.name} evades the attack!`);
+      log(t('combat.miss', { attacker: 'Player' }));
       return 0;
     }
     const totals = getTotalStats();
@@ -307,7 +308,7 @@ export async function startCombat(enemy, player) {
     updateHpBar(enemyBar, enemyHp, enemyMax);
     enemyBar.classList.add('damage');
     setTimeout(() => enemyBar.classList.remove('damage'), 300);
-    log(`${enemy.name} takes ${applied} damage`);
+    log(t('combat.attack', { attacker: 'Player', amount: applied }));
     return applied;
   }
 
@@ -317,14 +318,14 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
-    log(`Player heals ${amount} HP`);
+    log(t('combat.heal', { target: 'Player', amount }));
   }
 
   function applyStatusLogged(target, id, duration) {
     applyStatusEffect(target, id, duration);
     const name = getStatusEffect(id)?.name || id;
     const who = target === player ? 'Player' : enemy.name;
-    log(`${who} gains ${name}`);
+    log(t('combat.status.apply', { target: who, status: name, turns: duration }));
     updateStatusUI(overlay, player, enemy);
     updateSkillDisableState();
   }
@@ -333,7 +334,7 @@ export async function startCombat(enemy, player) {
     removeStatusEffect(target, id);
     const name = getStatusEffect(id)?.name || id;
     const who = target === player ? 'Player' : enemy.name;
-    log(`${name} removed from ${who}`);
+    log(t('combat.status.expire', { status: name, target: who }));
     updateStatusUI(overlay, player, enemy);
     updateSkillDisableState();
   }
@@ -343,7 +344,7 @@ export async function startCombat(enemy, player) {
     removed.forEach((r) => {
       const name = getStatusEffect(r)?.name || r;
       const who = target === player ? 'Player' : enemy.name;
-      log(`${name} removed from ${who}`);
+      log(t('combat.status.expire', { status: name, target: who }));
     });
     updateStatusUI(overlay, player, enemy);
     updateSkillDisableState();
@@ -479,7 +480,7 @@ export async function startCombat(enemy, player) {
   async function handleAction(skill) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
     if (hasStatus(player, 'paralyzed') && Math.random() < 0.5) {
-      log('Paralyzed! You cannot act.');
+      log(t('combat.paralyzed', { enemy: 'Player' }));
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       const nextActor = nextTurn();
@@ -488,7 +489,7 @@ export async function startCombat(enemy, player) {
       return;
     }
     if (hasStatus(player, 'confused') && Math.random() < 0.33) {
-      log('Confused! You hesitate in bewilderment.');
+      log(t('combat.confused', { enemy: 'Player' }));
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       const nextActor = nextTurn();
@@ -497,7 +498,7 @@ export async function startCombat(enemy, player) {
       return;
     }
     if (hasStatus(player, 'unstable') && Math.random() < 0.25) {
-      log('Unstable! Your action falters.');
+      log(t('combat.unstable', { enemy: 'Player' }));
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       const nextActor = nextTurn();
@@ -508,18 +509,16 @@ export async function startCombat(enemy, player) {
     const silenced =
       hasStatus(player, 'silenced') || hasStatus(player, 'silence');
     if (silenced && skill.category === 'offensive' && !skill.silenceExempt) {
-      log('You are silenced and cannot use offensive skills.');
+      log(t('combat.silenced'));
       return;
     }
     if (skillCooldowns[skill.id] > 0) {
-      log(
-        `${skill.name} is on cooldown for ${skillCooldowns[skill.id]} more turn(s).`
-      );
+      log(t('combat.cooldown', { skill: skill.name, turns: skillCooldowns[skill.id] }));
       return;
     }
     player.selectedSkillId = skill.id;
     const icon = skill.icon ? `${skill.icon} ` : '';
-    log(`Player uses ${icon}${skill.name}`);
+    log(t('combat.skill.use', { user: 'Player', skillName: `${icon}${skill.name}` }));
     discoverSkill(skill.id);
     const result = skill.effect({
       damageEnemy,
@@ -540,7 +539,7 @@ export async function startCombat(enemy, player) {
     handlePhaseTriggers();
     if (enemyHp <= 0) {
       triggerDeathEffect();
-      log(`${enemy.name} was defeated!`);
+      log(t('combat.defeat.enemy', { enemy: enemy.name }));
       discover('enemies', enemy.id);
       await giveDrops();
       if (enemy.id === 'echo_absolute') {
@@ -563,7 +562,7 @@ export async function startCombat(enemy, player) {
     updateStatusUI(overlay, player, enemy);
     updateSkillDisableState();
     if (playerHp <= 0) {
-      log('Player was defeated!');
+      log(t('combat.defeat.player'));
       endCombat();
       return;
     }
@@ -575,12 +574,12 @@ export async function startCombat(enemy, player) {
   function handleItemUse(id) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
     if (hasStatus(player, 'cursed')) {
-      log('A curse prevents you from using items!');
+      log(t('combat.item.curseBlock'));
       return;
     }
     let used = false;
     const data = getItemData(id);
-    if (data) log(`Player uses ${data.name}`);
+    if (data) log(t('combat.item.use', { user: 'Player', item: data.name }));
     if (id === 'health_potion') {
       const res = useHealthPotion();
       if (res) {
@@ -588,7 +587,7 @@ export async function startCombat(enemy, player) {
         const classBonus = getClassBonuses();
         if (classBonus.itemHealBonus) amount += classBonus.itemHealBonus;
         healPlayer(amount);
-        log(`Recovered ${amount} HP!`);
+        log(t('combat.heal', { target: 'Player', amount }));
         logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
@@ -788,13 +787,13 @@ export async function startCombat(enemy, player) {
     if (enemy.id === 'chimebound_monk' && enemy.turnCount === 3) {
       const skill = getEnemySkill('meditate');
       if (skill) {
-        log(`${enemy.name} uses ${skill.name}`);
+        log(t('combat.skill.use', { user: enemy.name, skillName: skill.name }));
         skill.effect({ enemy, log });
         if (enemyHp < enemy.maxHp) enemyHp = enemy.hp;
       }
     }
     if (hasStatus(enemy, 'paralyzed') && Math.random() < 0.5) {
-      log(`${enemy.name} is paralyzed and cannot act!`);
+      log(t('combat.paralyzed', { enemy: enemy.name }));
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       const nextActor = nextTurn();
@@ -805,7 +804,7 @@ export async function startCombat(enemy, player) {
       return;
     }
     if (hasStatus(enemy, 'confused') && Math.random() < 0.33) {
-      log(`${enemy.name} looks confused and hesitates!`);
+      log(t('combat.confused', { enemy: enemy.name }));
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       const nextActor = nextTurn();
@@ -816,7 +815,7 @@ export async function startCombat(enemy, player) {
       return;
     }
     if (hasStatus(enemy, 'unstable') && Math.random() < 0.25) {
-      log(`${enemy.name} staggers in instability!`);
+      log(t('combat.unstable', { enemy: enemy.name }));
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       const nextActor = nextTurn();
@@ -912,7 +911,7 @@ export async function startCombat(enemy, player) {
         } else if (!enemySilenced) {
           skill = getEnemySkill('strike');
         } else {
-          log(`${enemy.name} is silenced and cannot act!`);
+          log(t('combat.silenced')); // enemy silenced
           tickStatusEffects(player, log);
           tickStatusEffects(enemy, log);
           const nextActor = nextTurn();
@@ -927,7 +926,7 @@ export async function startCombat(enemy, player) {
 
     if (skill) {
       const icon = skill.icon ? `${skill.icon} ` : '';
-      log(`${enemy.name} uses ${icon}${skill.name}`);
+      log(t('combat.skill.use', { user: enemy.name, skillName: `${icon}${skill.name}` }));
       discoverSkill(skill.id);
       skill.effect({
         player,
@@ -941,7 +940,7 @@ export async function startCombat(enemy, player) {
       });
     }
     if (playerHp <= 0) {
-      log('Player was defeated!');
+      log(t('combat.defeat.player'));
       endCombat();
       return;
     }
@@ -954,7 +953,7 @@ export async function startCombat(enemy, player) {
     updateStatusUI(overlay, player, enemy);
     updateSkillDisableState();
     if (playerHp <= 0) {
-      log('Player was defeated!');
+      log(t('combat.defeat.player'));
       if (enemy.id === 'echo_absolute') {
         recordEnding('defeat', 'echo absolute');
         echoAbsoluteDefeat();
@@ -964,7 +963,7 @@ export async function startCombat(enemy, player) {
     }
     if (enemyHp <= 0) {
       triggerDeathEffect();
-      log(`${enemy.name} was defeated!`);
+      log(t('combat.defeat.enemy', { enemy: enemy.name }));
       discover('enemies', enemy.id);
       giveDrops();
       if (enemy.id === 'echo_absolute') {

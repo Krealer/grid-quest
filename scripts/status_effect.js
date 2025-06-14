@@ -1,5 +1,6 @@
 export { addStatus as applyEffect, removeStatus } from './status_manager.js';
 import { getStatusEffect } from './status_effects.js';
+import { t } from './i18n.js';
 
 export function tickStatusEffects(target, log) {
   if (!target || !Array.isArray(target.statuses)) return;
@@ -15,7 +16,11 @@ export function tickStatusEffects(target, log) {
       const dmg = prevHp - target.hp;
       const who = target.isPlayer ? 'You' : target.name || 'Enemy';
       log(
-        `${who} suffer${target.isPlayer ? '' : 's'} ${dmg} ${st.id.replace('_', ' ')} damage.`
+        t('combat.status.damage', {
+          target: who,
+          amount: dmg,
+          status: st.id.replace('_', ' ')
+        })
       );
     }
     st.remaining -= 1;
@@ -24,7 +29,13 @@ export function tickStatusEffects(target, log) {
       target.statuses.splice(i, 1);
       if (typeof log === 'function') {
         const who = target.isPlayer ? 'You' : target.name || 'Enemy';
-        log(`${def.name || st.id} fades from ${who}.`);
+        log(
+          t('combat.status.expire', {
+            status: def.name || st.id,
+            target: who,
+            turns: ''
+          })
+        );
       }
     }
   }
