@@ -13,12 +13,12 @@ import {
 export function renderCombatants(root, players = [], enemies = [], onSelect) {
   if (!root) return;
   root.innerHTML = '';
-  const container = document.createElement('div');
-  container.className = 'combatants';
+  const container = root;
+  container.classList.add('actor-grid');
   const playerSide = document.createElement('div');
-  playerSide.className = 'player-team';
+  playerSide.className = 'player-team actor-column';
   const enemySide = document.createElement('div');
-  enemySide.className = 'enemy-team';
+  enemySide.className = 'enemy-team actor-column';
 
   for (let i = 0; i < 3; i++) {
     const p = players[i] || null;
@@ -37,7 +37,6 @@ export function renderCombatants(root, players = [], enemies = [], onSelect) {
 
   container.appendChild(playerSide);
   container.appendChild(enemySide);
-  root.appendChild(container);
 }
 
 function formatStats(entity) {
@@ -50,7 +49,7 @@ function formatStats(entity) {
 
 function createCombatantEl(entity, isPlayer, index) {
   const wrapper = document.createElement('div');
-  wrapper.className = `combatant combat-box actor-slot ${
+  wrapper.className = `combatant combat-box actor-box actor-slot ${
     isPlayer ? 'player' : 'enemy'
   }`;
   wrapper.dataset.index = index;
@@ -75,7 +74,7 @@ function createCombatantEl(entity, isPlayer, index) {
   name.textContent = entity.name || (isPlayer ? 'Player' : 'Enemy');
   wrapper.appendChild(name);
   const hpBar = document.createElement('div');
-  hpBar.className = 'hp-bar';
+  hpBar.className = 'hp-bar actor-hp';
   hpBar.innerHTML = '<div class="hp"></div>';
   wrapper.appendChild(hpBar);
   const stats = document.createElement('div');
@@ -183,6 +182,7 @@ function getTurnLabel(unit) {
 
 export function renderTurnQueue(container, queue = [], active, index = 0) {
   if (!container) return;
+  container.classList.add('speed-log');
   container.innerHTML = '';
   if (!Array.isArray(queue) || queue.length === 0) return;
   const len = queue.length;
@@ -295,7 +295,7 @@ export function renderSkillList(container, skills, onClick) {
   const map = {};
   skills.forEach((skill) => {
     const btn = document.createElement('button');
-    btn.className = 'skill-btn combat-skill-button';
+    btn.className = 'skill-btn combat-skill-button skill-button';
     btn.dataset.id = skill.id;
     const effects = [];
     if (Array.isArray(skill.statuses)) {

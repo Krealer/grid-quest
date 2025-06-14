@@ -92,23 +92,23 @@ export async function startCombat(enemy, player) {
   overlay.classList.add('battle-transition');
   overlay.innerHTML = `
     <div class="combat-screen">
-      <div class="turn-queue spd-log spd-bar"></div>
-      <div class="combatants">
-        <div class="player-team"></div>
+      <div class="turn-queue spd-log spd-bar speed-log"></div>
+      <div class="combatants actor-grid">
+        <div class="player-team actor-column"></div>
         <div id="combat-log" class="log combat-log hidden"></div>
-        <div class="enemy-team"></div>
+        <div class="enemy-team actor-column"></div>
       </div>
       <div class="intro-text">${
         enemy.intro || 'A shadowy beast snarls and prepares to strike!'
       }</div>
       <div class="actions hidden">
         <button id="auto-battle-toggle" class="auto-battle-btn" data-i18n="combat.auto.toggle">${t('combat.auto.toggle')}</button>
-        <div class="action-tabs">
-          <button class="offensive-tab combat-skill-category selected" data-i18n="combat.category.offensive">${t('combat.category.offensive')}</button>
-          <button class="defensive-tab combat-skill-category" data-i18n="combat.category.defensive">${t('combat.category.defensive')}</button>
-          <button class="items-tab combat-skill-category" data-i18n="combat.category.items">${t('combat.category.items')}</button>
+        <div class="action-tabs action-types">
+          <button class="offensive-tab combat-skill-category action-button selected" data-i18n="combat.category.offensive">${t('combat.category.offensive')}</button>
+          <button class="defensive-tab combat-skill-category action-button" data-i18n="combat.category.defensive">${t('combat.category.defensive')}</button>
+          <button class="items-tab combat-skill-category action-button" data-i18n="combat.category.items">${t('combat.category.items')}</button>
         </div>
-        <div class="tab-panels">
+        <div class="tab-panels skill-panel">
           <div class="offensive-skill-buttons tab-panel"></div>
           <div class="defensive-skill-buttons tab-panel hidden"></div>
           <div class="item-buttons tab-panel hidden"></div>
