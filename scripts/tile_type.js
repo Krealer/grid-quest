@@ -34,6 +34,7 @@ export function isInteractable(symbol) {
 }
 
 import { showDialogue } from './dialogue_system.js';
+import { t } from './i18n.js';
 import { healFull, healToFull } from './player.js';
 import { applyDamage } from './logic.js';
 import { triggerDarkTrap, triggerFireTrap } from './trap_logic.js';
@@ -58,7 +59,7 @@ export async function onStepEffect(symbol, player, x, y) {
   } else if (symbol === 'W') {
     healToFull();
     if (!gameState.settings?.notifySkip) {
-      showDialogue('The cool water rejuvenates you. HP fully restored.');
+      showDialogue(t('message.water_restore'));
     }
     if (tileEl) {
       tileEl.classList.add('ripple');
@@ -191,7 +192,7 @@ export async function onInteractEffect(
     case 'W': {
       healToFull();
       if (!gameState.settings?.notifySkip) {
-        showDialogue('The cool water rejuvenates you. HP fully restored.');
+        showDialogue(t('message.water_restore'));
       }
       const index = y * cols + x;
       const tileEl = container.children[index];

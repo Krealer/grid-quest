@@ -76,5 +76,6 @@ export default {
   "snealer.dialogue.3.text": "De waarheid is een mes. Je kunt jezelf eraan snijden, zwerver.",
   "snealer.dialogue.3.ponder": "Ik waag het.",
   "snealer.dialogue.4.text": "Wijs. Kom terug met iets zeldzaams, iets wat wordt achtergelaten door zij die het licht haten.",
-  "snealer.dialogue.4.nod": "Begrepen."
+  "snealer.dialogue.4.nod": "Begrepen.",
+  "message.water_restore": "Het koele water verjongt je. HP volledig hersteld."
 }

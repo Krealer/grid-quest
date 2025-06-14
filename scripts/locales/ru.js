@@ -69,5 +69,6 @@ export default {
   "snealer.dialogue.3.text": "Правда — это лезвие. Можешь порезаться, странник.",
   "snealer.dialogue.3.ponder": "Рискну.",
   "snealer.dialogue.4.text": "Мудро. Вернись с редкостью, добытой у тех, кто боится света.",
-  "snealer.dialogue.4.nod": "Понял."
+  "snealer.dialogue.4.nod": "Понял.",
+  "message.water_restore": "Прохладная вода освежает. HP полностью восстановлено."
 }
