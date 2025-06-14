@@ -1,4 +1,4 @@
-{
+export default {
   "menu.settings": "Настройки",
   "menu.menu": "Меню",
   "menu.inventory": "Инвентарь",

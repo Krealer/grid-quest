@@ -1,4 +1,4 @@
-{
+export default {
   "menu.settings": "الإعدادات",
   "menu.menu": "القائمة",
   "menu.inventory": "المخزون",
