@@ -69,5 +69,6 @@ export default {
   "snealer.dialogue.3.text": "真実は刃だ。触れれば切れるぞ、旅人。",
   "snealer.dialogue.3.ponder": "やってみよう。",
   "snealer.dialogue.4.text": "賢いな。光を嫌う者たちが落とす珍品を持って戻れ。",
-  "snealer.dialogue.4.nod": "了解。"
+  "snealer.dialogue.4.nod": "了解。",
+  "message.water_restore": "冷たい水があなたを癒す。HPが全回復した。"
 }
