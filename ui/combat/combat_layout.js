@@ -14,6 +14,7 @@ export function createCombatLayout() {
   for (let i = 0; i < 3; i++) {
     const box = document.createElement('div');
     box.className = 'combatant combat-box empty';
+    box.dataset.index = i;
     const icon = document.createElement('div');
     icon.className = 'icon';
     box.appendChild(icon);
@@ -33,6 +34,7 @@ export function createCombatLayout() {
   for (let i = 0; i < 3; i++) {
     const box = document.createElement('div');
     box.className = 'combatant combat-box empty';
+    box.dataset.index = i;
     const icon = document.createElement('div');
     icon.className = 'icon';
     box.appendChild(icon);
@@ -51,6 +53,7 @@ export function createCombatLayout() {
   const actions = document.createElement('div');
   actions.className = 'actions';
   actions.innerHTML = `
+    <button id="auto-battle-toggle" class="auto-battle-btn">Auto-Battle OFF</button>
     <div class="action-tabs">
       <button class="offensive-tab combat-skill-category">Offensive</button>
       <button class="defensive-tab combat-skill-category">Defensive</button>
