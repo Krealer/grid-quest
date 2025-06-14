@@ -1,7 +1,7 @@
-import { addItem, removeItem, inventory } from './inventory.js';
+import { inventory } from './inventory.js';
 import { updateInventoryUI } from './inventory_ui.js';
-import { loadItems, getItemData } from './item_loader.js';
 import { getAllSkills } from './skills.js';
+import { getPlayerState } from './player_state.js';
 import {
   dialogueMemory,
   setMemory,
@@ -217,6 +217,7 @@ export async function startDialogueTree(dialogue, index = 0) {
   const entry = dialogue[index];
   if (!entry) return;
   const state = {
+    player: getPlayerState(),
     inventory: {},
     memory: dialogueMemory,
     quests: getQuests()
@@ -245,13 +246,29 @@ export async function startDialogueTree(dialogue, index = 0) {
           console.error('onChoose error', e);
         }
       }
-      if (opt.give) {
-        await loadItems();
-        const item = getItemData(opt.give);
-        if (item) {
-          addItem({ ...item, id: opt.give });
-          updateInventoryUI();
+        if (opt.remove) {
+          const { removeItems } = await import('./inventory.js');
+          const toRemove = Array.isArray(opt.remove)
+            ? opt.remove.reduce((acc, id) => {
+                acc[id] = (acc[id] || 0) + 1;
+                return acc;
+              }, {})
+            : typeof opt.remove === 'string'
+            ? { [opt.remove]: 1 }
+            : opt.remove;
+          if (toRemove) {
+            removeItems(toRemove);
+            updateInventoryUI();
+          }
         }
+      if (opt.give) {
+        const { giveItem, giveItems } = await import('./inventory.js');
+        if (typeof opt.give === 'string') {
+          await giveItem(opt.give);
+        } else {
+          await giveItems(opt.give);
+        }
+        updateInventoryUI();
       }
       if (opt.triggerUpgrade) {
         await triggerUpgrade(opt.triggerUpgrade);
