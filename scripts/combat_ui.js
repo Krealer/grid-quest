@@ -50,7 +50,7 @@ function formatStats(entity) {
 
 function createCombatantEl(entity, isPlayer, index) {
   const wrapper = document.createElement('div');
-  wrapper.className = `combatant ${isPlayer ? 'player' : 'enemy'}`;
+  wrapper.className = `combatant combat-box ${isPlayer ? 'player' : 'enemy'}`;
   wrapper.dataset.index = index;
   if (!entity) {
     wrapper.classList.add('empty');
@@ -293,7 +293,7 @@ export function renderSkillList(container, skills, onClick) {
   const map = {};
   skills.forEach((skill) => {
     const btn = document.createElement('button');
-    btn.className = 'skill-btn';
+    btn.className = 'skill-btn combat-skill-button';
     btn.dataset.id = skill.id;
     const effects = [];
     if (Array.isArray(skill.statuses)) {
