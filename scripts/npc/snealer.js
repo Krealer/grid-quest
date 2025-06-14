@@ -1,6 +1,7 @@
 import { startDialogueTree, showDialogue } from '../dialogue_system.js';
-import snealerDialogue from '../dialogue/npcs/snealer.js';
+import { loadSnealerDialogue } from '../npc_dialogues/snealer_dialogue_loader.js';
 
-export function interact() {
-  showDialogue('snealer.intro', () => startDialogueTree(snealerDialogue));
+export async function interact() {
+  const dialogueTree = await loadSnealerDialogue();
+  showDialogue('snealer.intro', () => startDialogueTree(dialogueTree));
 }
