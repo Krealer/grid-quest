@@ -35,10 +35,11 @@
 }
 
 #battle-overlay .combatants {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   width: 100%;
   justify-content: center;
-  align-items: flex-start;
+  align-items: start;
   gap: 12px;
   margin-bottom: 20px;
 }
@@ -53,7 +54,8 @@
 }
 
 #battle-overlay .combatants #combat-log {
-  flex: 0 0 260px;
+  width: 260px;
+  justify-self: center;
 }
 
 #battle-overlay .combatant {
@@ -71,6 +73,19 @@
 #battle-overlay .combatant .portrait {
   font-size: 48px;
   margin-bottom: 5px;
+}
+
+#battle-overlay .enemy-icon[data-tier='spawn'] {
+  color: #e74c3c;
+}
+#battle-overlay .enemy-icon[data-tier='advanced'] {
+  color: #b22222;
+}
+#battle-overlay .enemy-icon[data-tier='elite'] {
+  color: #721414;
+}
+#battle-overlay .enemy-icon[data-tier='boss'] {
+  color: #4b0000;
 }
 
 #battle-overlay .combatant .desc {
@@ -156,15 +171,17 @@
 
 #battle-overlay .actions {
   margin-top: 20px;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 #battle-overlay .action-tabs {
-  margin-bottom: 10px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 6px;
-  flex-wrap: wrap;
 }
 
 #battle-overlay .action-tabs button {
@@ -194,6 +211,14 @@
   justify-content: center;
   gap: 8px;
   margin-bottom: 6px;
+  flex: 1 1 auto;
+}
+#battle-overlay .tab-panels {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  justify-content: center;
+  gap: 8px;
 }
 
 #battle-overlay .hidden {
@@ -320,6 +345,18 @@
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
 }
+#battle-overlay .turn-entry.enemy-icon[data-tier='spawn'] {
+  color: #e74c3c;
+}
+#battle-overlay .turn-entry.enemy-icon[data-tier='advanced'] {
+  color: #b22222;
+}
+#battle-overlay .turn-entry.enemy-icon[data-tier='elite'] {
+  color: #721414;
+}
+#battle-overlay .turn-entry.enemy-icon[data-tier='boss'] {
+  color: #4b0000;
+}
 
 #battle-overlay .turn-entry.active {
   border-color: gold;
@@ -352,7 +389,6 @@
   box-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
 }
 
-
 @media (max-width: 600px) {
   #battle-overlay .turn-queue {
     overflow-x: auto;
@@ -362,8 +398,13 @@
     padding: 2px 6px;
   }
   #battle-overlay .combatants {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    justify-items: center;
+  }
+  #battle-overlay .actions {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
 }
 

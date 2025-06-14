@@ -56,12 +56,18 @@ function createCombatantEl(entity, isPlayer, index) {
     wrapper.classList.add('empty');
     return wrapper;
   }
+  const portrait = document.createElement('div');
+  portrait.className = 'portrait';
   if (entity.portrait || entity.icon) {
-    const portrait = document.createElement('div');
-    portrait.className = 'portrait';
     portrait.textContent = entity.portrait || entity.icon;
-    wrapper.appendChild(portrait);
+  } else if (!isPlayer) {
+    portrait.textContent = '▲';
+    portrait.classList.add('enemy-icon');
+    portrait.dataset.tier = entity.boss ? 'boss' : entity.type || 'spawn';
+  } else {
+    portrait.textContent = '🧍';
   }
+  wrapper.appendChild(portrait);
   const name = document.createElement('div');
   name.className = 'name';
   name.textContent = entity.name || (isPlayer ? 'Player' : 'Enemy');
@@ -169,9 +175,8 @@ export function clearSkillTargetHighlights() {
 
 function getTurnLabel(unit) {
   if (!unit) return '';
-  return (
-    unit.portrait || unit.icon || (unit.isPlayer || unit.isAlly ? '🧍' : '👾')
-  );
+  if (unit.portrait || unit.icon) return unit.portrait || unit.icon;
+  return unit.isPlayer || unit.isAlly ? '🧍' : '▲';
 }
 
 export function renderTurnQueue(container, queue = [], active, index = 0) {
@@ -184,6 +189,11 @@ export function renderTurnQueue(container, queue = [], active, index = 0) {
     const box = document.createElement('div');
     box.className = 'turn-entry';
     box.textContent = getTurnLabel(unit);
+    box.title = unit.name;
+    if (!unit.isPlayer && !unit.isAlly && !unit.icon && !unit.portrait) {
+      box.classList.add('enemy-icon');
+      box.dataset.tier = unit.boss ? 'boss' : unit.type || 'spawn';
+    }
     if (unit === active && i === 0) box.classList.add('active');
     if (unit.hp <= 0 || hasStatus(unit, 'stunned')) {
       box.classList.add('skipped');
