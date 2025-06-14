@@ -124,6 +124,15 @@ export async function startCombat(enemy, player) {
     Array.isArray(player) ? player : [player],
     Array.isArray(enemy) ? enemy : [enemy]
   );
+  // Re-insert the combat log panel that renderCombatants() removed
+  const combatantsEl = overlay.querySelector('.combatants');
+  if (combatantsEl) {
+    const logPanel = document.createElement('div');
+    logPanel.id = 'combat-log';
+    logPanel.className = 'log combat-log hidden';
+    const enemyTeam = combatantsEl.querySelector('.enemy-team');
+    combatantsEl.insertBefore(logPanel, enemyTeam);
+  }
   resetBossPhase(enemy.id);
   if (enemy.id === 'echo_absolute') setPhase(1);
   document.dispatchEvent(new CustomEvent('combatStarted'));
