@@ -32,7 +32,7 @@ async function loadDialogData() {
 export async function showDialogue(keyOrText, callback = () => {}) {
   await loadDialogData();
   const raw = dialogueLines[keyOrText] || keyOrText || '';
-  const text = t(raw);
+  const text = raw;
 
   const overlay = document.createElement('div');
   overlay.id = 'dialogue-overlay';
@@ -95,7 +95,7 @@ export async function showDialogue(keyOrText, callback = () => {}) {
 export async function showDialogueWithChoices(keyOrText, choices = []) {
   await loadDialogData();
   const raw = dialogueLines[keyOrText] || keyOrText || '';
-  const text = t(raw);
+  const text = raw;
 
   const overlay = document.createElement('div');
   overlay.id = 'dialogue-overlay';
@@ -194,19 +194,13 @@ export async function showDialogueWithChoices(keyOrText, choices = []) {
     choices.forEach((choice, i) => {
       const btn = document.createElement('button');
       btn.className = 'dialogue-choice';
-      let key = null;
+      let labelText = '[Missing Label]';
       if (choice && typeof choice.label === 'object' && choice.label.label) {
-        key = choice.label.label;
+        labelText = choice.label.label;
       } else if (choice && typeof choice.label === 'string') {
-        key = choice.label;
+        labelText = choice.label;
       }
-      const text = key ? t(key) : '[Missing Label]';
-      if (text === '[Missing Translation]') {
-        console.warn(`Missing translation key: ${key}`);
-        btn.textContent = '[Missing Label]';
-      } else {
-        btn.textContent = text;
-      }
+      btn.textContent = labelText;
       btn.addEventListener('click', () => choose(i));
       choicesEl.appendChild(btn);
       buttons.push(btn);
