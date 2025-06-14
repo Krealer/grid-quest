@@ -540,3 +540,86 @@
   min-width: 44px;
   min-height: 44px;
 }
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  #battle-overlay .combat-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  #battle-overlay .turn-queue {
+    text-align: center;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #ccc;
+  }
+
+  #battle-overlay .combatants {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 10px;
+  }
+
+  #battle-overlay .player-team,
+  #battle-overlay .enemy-team {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  #battle-overlay .combatant {
+    width: 60px;
+    height: 60px;
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  #battle-overlay #combat-log {
+    width: 95%;
+    height: 100px;
+    background: #111;
+    color: #eee;
+    overflow-y: auto;
+    font-size: 13px;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+
+  #battle-overlay .actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  #battle-overlay .action-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #battle-overlay .tab-panels {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 60%;
+  }
+
+  #battle-overlay .tab-panel button {
+    background-color: #2b2b2b;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 14px;
+  }
+}
