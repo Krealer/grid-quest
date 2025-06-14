@@ -50,7 +50,9 @@ function formatStats(entity) {
 
 function createCombatantEl(entity, isPlayer, index) {
   const wrapper = document.createElement('div');
-  wrapper.className = `combatant combat-box ${isPlayer ? 'player' : 'enemy'}`;
+  wrapper.className = `combatant combat-box actor-slot ${
+    isPlayer ? 'player' : 'enemy'
+  }`;
   wrapper.dataset.index = index;
   if (!entity) {
     wrapper.classList.add('empty');
