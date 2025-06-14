@@ -443,7 +443,12 @@ export const statusEffects = {
 export function getStatusEffect(id) {
   const base = statusEffects[id];
   if (!base) return undefined;
-  return { ...base, name: t(`status.${id}`) };
+  const desc = t(`status.${id}.description`);
+  return {
+    ...base,
+    name: t(`status.${id}`),
+    description: desc === '[Missing Translation]' ? base.description : desc
+  };
 }
 
 export function getAllStatusEffects() {

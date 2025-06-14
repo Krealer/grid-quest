@@ -1,5 +1,8 @@
 import { combatState, livingPlayers, livingEnemies } from './combat_state.js';
-import { startRound, nextTurn as queueNextTurn } from './turn_manager.js';
+import {
+  startRound,
+  nextTurn as queueNextTurn
+} from './combat_turn_manager.js';
 import { markActiveTile } from './grid_renderer.js';
 import { selectTarget, getSelectedTarget } from './combat_state.js';
 import {
