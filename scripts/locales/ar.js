@@ -165,5 +165,11 @@ export default {
   'combat.silenced': 'حالة الصمت تمنعك من الفعل!',
   'combat.paralyzed': '{enemy} مشلول ولا يستطيع التحرك!',
   'combat.confused': '{enemy} مرتبك ومتردد!',
-  'combat.unstable': '{enemy} غير مستقر ويتمايل!'
+  'combat.unstable': '{enemy} غير مستقر ويتمايل!',
+  'combat.category.offensive': 'Offensive',
+  'combat.category.defensive': 'Defensive',
+  'combat.category.items': 'Items',
+  'combat.auto.toggle': 'Toggle Auto-Battle',
+  'combat.auto.on': 'Auto-Battle ON',
+  'combat.auto.off': 'Auto-Battle OFF'
 };

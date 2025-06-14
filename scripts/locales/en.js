@@ -173,4 +173,11 @@ export default {
   'combat.paralyzed': '{enemy} is paralyzed and cannot act!',
   'combat.confused': '{enemy} looks confused and hesitates!',
   'combat.unstable': '{enemy} staggers in instability!'
+  ,
+  'combat.category.offensive': 'Offensive',
+  'combat.category.defensive': 'Defensive',
+  'combat.category.items': 'Items',
+  'combat.auto.toggle': 'Toggle Auto-Battle',
+  'combat.auto.on': 'Auto-Battle ON',
+  'combat.auto.off': 'Auto-Battle OFF'
 };

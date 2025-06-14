@@ -167,5 +167,11 @@ export default {
   'combat.silenced': 'Немота не даёт действовать!',
   'combat.paralyzed': '{enemy} парализован и не может ходить!',
   'combat.confused': '{enemy} в замешательстве!',
-  'combat.unstable': '{enemy} пошатнулся в нестабильности!'
+  'combat.unstable': '{enemy} пошатнулся в нестабильности!',
+  'combat.category.offensive': 'Offensive',
+  'combat.category.defensive': 'Defensive',
+  'combat.category.items': 'Items',
+  'combat.auto.toggle': 'Toggle Auto-Battle',
+  'combat.auto.on': 'Auto-Battle ON',
+  'combat.auto.off': 'Auto-Battle OFF'
 };

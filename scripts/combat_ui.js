@@ -20,18 +20,20 @@ export function renderCombatants(root, players = [], enemies = [], onSelect) {
   const enemySide = document.createElement('div');
   enemySide.className = 'enemy-team';
 
-  players.forEach((p, idx) => {
-    const el = createCombatantEl(p, true, idx);
+  for (let i = 0; i < 3; i++) {
+    const p = players[i] || null;
+    const el = createCombatantEl(p, true, i);
     playerSide.appendChild(el);
-  });
-  enemies.forEach((e, idx) => {
-    const el = createCombatantEl(e, false, idx);
-    if (typeof onSelect === 'function') {
+  }
+  for (let i = 0; i < 3; i++) {
+    const e = enemies[i] || null;
+    const el = createCombatantEl(e, false, i);
+    if (e && typeof onSelect === 'function') {
       el.classList.add('selectable');
-      el.addEventListener('click', () => onSelect(e, idx, el));
+      el.addEventListener('click', () => onSelect(e, i, el));
     }
     enemySide.appendChild(el);
-  });
+  }
 
   container.appendChild(playerSide);
   container.appendChild(enemySide);
@@ -50,10 +52,14 @@ function createCombatantEl(entity, isPlayer, index) {
   const wrapper = document.createElement('div');
   wrapper.className = `combatant ${isPlayer ? 'player' : 'enemy'}`;
   wrapper.dataset.index = index;
-  if (entity.portrait) {
+  if (!entity) {
+    wrapper.classList.add('empty');
+    return wrapper;
+  }
+  if (entity.portrait || entity.icon) {
     const portrait = document.createElement('div');
     portrait.className = 'portrait';
-    portrait.textContent = entity.portrait;
+    portrait.textContent = entity.portrait || entity.icon;
     wrapper.appendChild(portrait);
   }
   const name = document.createElement('div');
@@ -80,6 +86,7 @@ export function highlightActing(root, isPlayer, index) {
     isPlayer ? '.player-team .combatant' : '.enemy-team .combatant'
   );
   group.forEach((el) => {
+    if (el.classList.contains('empty')) return;
     const match = Number(el.dataset.index) === index;
     if (match) el.classList.add('acting');
     else el.classList.remove('acting');
@@ -92,6 +99,7 @@ export function highlightTarget(root, isPlayer, index) {
     isPlayer ? '.player-team .combatant' : '.enemy-team .combatant'
   );
   group.forEach((el) => {
+    if (el.classList.contains('empty')) return;
     const match = Number(el.dataset.index) === index;
     if (match) el.classList.add('targeted');
     else el.classList.remove('targeted');

@@ -36,15 +36,36 @@
 
 #battle-overlay .combatants {
   display: flex;
-  width: 80%;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
   margin-bottom: 20px;
+}
+
+#battle-overlay .player-team,
+#battle-overlay .enemy-team {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 120px;
+  align-items: center;
+}
+
+#battle-overlay .combatants #combat-log {
+  flex: 0 0 260px;
 }
 
 #battle-overlay .combatant {
   margin: 10px;
   text-align: center;
+}
+
+#battle-overlay .combatant.empty {
+  opacity: 0.3;
+  border: 1px dashed #666;
+  width: 100px;
+  height: 100px;
 }
 
 #battle-overlay .combatant .portrait {
@@ -324,6 +345,10 @@
   #battle-overlay .turn-queue .turn-entry {
     font-size: 12px;
     padding: 2px 6px;
+  }
+  #battle-overlay .combatants {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
