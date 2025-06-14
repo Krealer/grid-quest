@@ -1,12 +1,18 @@
 export function renderCategory(container, skills = [], onClick) {
   if (!container) return;
   container.innerHTML = '';
+  const buttons = [];
   skills.forEach((skill) => {
     const btn = document.createElement('button');
     btn.className = 'skill-btn';
     btn.textContent = skill.name;
-    btn.addEventListener('click', () => onClick?.(skill));
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      onClick?.(skill);
+    });
     container.appendChild(btn);
+    buttons.push(btn);
   });
 }
 
@@ -17,5 +23,8 @@ export function switchCategory(root, name) {
   if (tab) tab.classList.remove('hidden');
   root
     .querySelectorAll('.combat-skill-category')
-    .forEach((b) => b.classList.toggle('selected', b.classList.contains(`${name}-tab`)));
+    .forEach((b) => {
+      const active = b.classList.contains(`${name}-tab`);
+      b.classList.toggle('selected', active);
+    });
 }

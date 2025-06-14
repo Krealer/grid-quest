@@ -1,7 +1,7 @@
 export const combatState = {
   round: 1,
-  players: [],
-  enemies: [],
+  players: [null, null, null],
+  enemies: [null, null, null],
   turnQueue: [],
   turnIndex: 0,
   activeEntity: null,
@@ -13,8 +13,16 @@ export const combatState = {
 
 export function initCombatState(player, enemy) {
   combatState.round = 1;
-  combatState.players = Array.isArray(player) ? player : [player];
-  combatState.enemies = Array.isArray(enemy) ? enemy : [enemy];
+  combatState.players = [null, null, null];
+  combatState.enemies = [null, null, null];
+  const pList = Array.isArray(player) ? player : [player];
+  const eList = Array.isArray(enemy) ? enemy : [enemy];
+  pList.forEach((p, i) => {
+    if (i < 3) combatState.players[i] = p;
+  });
+  eList.forEach((e, i) => {
+    if (i < 3) combatState.enemies[i] = e;
+  });
   combatState.players.forEach((p) => {
     p.selectedSkillId = null;
   });
@@ -30,8 +38,8 @@ export function initCombatState(player, enemy) {
 }
 
 export function generateTurnQueue() {
-  const livingPlayers = combatState.players.filter((p) => p.hp > 0);
-  const livingEnemies = combatState.enemies.filter((e) => e.hp > 0);
+  const livingPlayers = combatState.players.filter((p) => p && p.hp > 0);
+  const livingEnemies = combatState.enemies.filter((e) => e && e.hp > 0);
   const all = [...livingPlayers, ...livingEnemies];
   all.sort((a, b) => {
     const diff = (b.stats?.speed ?? 0) - (a.stats?.speed ?? 0);
@@ -62,11 +70,11 @@ export function getSelectedTarget() {
 }
 
 export function livingPlayers() {
-  return combatState.players.filter((p) => p.hp > 0);
+  return combatState.players.filter((p) => p && p.hp > 0);
 }
 
 export function livingEnemies() {
-  return combatState.enemies.filter((e) => e.hp > 0);
+  return combatState.enemies.filter((e) => e && e.hp > 0);
 }
 
 export function getAllCombatants() {
