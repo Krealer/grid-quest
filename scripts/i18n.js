@@ -1,10 +1,10 @@
 /* Internationalization utilities */
 
-import en from './locales/en.json' assert { type: 'json' };
-import nl from './locales/nl.json' assert { type: 'json' };
-import ja from './locales/ja.json' assert { type: 'json' };
-import ar from './locales/ar.json' assert { type: 'json' };
-import ru from './locales/ru.json' assert { type: 'json' };
+import en from './locales/en.js';
+import nl from './locales/nl.js';
+import ja from './locales/ja.js';
+import ar from './locales/ar.js';
+import ru from './locales/ru.js';
 
 const translations = { en, nl, ja, ar, ru };
 const availableLocales = Object.keys(translations);
