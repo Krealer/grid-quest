@@ -107,6 +107,20 @@
   margin-bottom: 5px;
 }
 
+#battle-overlay .combatant .name,
+.combatant-label {
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-weight: 500;
+  text-align: center;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  font-family: system-ui, Arial, sans-serif;
+}
+
 #battle-overlay .enemy-icon[data-tier='spawn'] {
   color: #e74c3c;
 }
@@ -175,9 +189,16 @@
   border-radius: 3px;
 }
 
-#battle-overlay .combatant .stats {
-  font-size: 12px;
-  margin-top: 2px;
+#battle-overlay .combatant .stats,
+.stat-block {
+  font-size: 0.85rem;
+  line-height: 1.2;
+  margin-top: 4px;
+  padding: 2px 4px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+  letter-spacing: 0.3px;
+  font-family: system-ui, Arial, sans-serif;
 }
 
 #battle-overlay .intro-text {
