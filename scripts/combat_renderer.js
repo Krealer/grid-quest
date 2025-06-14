@@ -53,3 +53,15 @@ export function initPortraitLayout(overlay) {
   mq.addEventListener('change', update);
   update();
 }
+
+export function injectMiniHpBars(container) {
+  if (!container) return;
+  container.querySelectorAll('.combatant').forEach((el) => {
+    if (!el.querySelector('.hp-bar')) {
+      const bar = document.createElement('div');
+      bar.className = 'hp-bar';
+      bar.innerHTML = '<div class="hp"></div>';
+      el.appendChild(bar);
+    }
+  });
+}
