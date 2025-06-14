@@ -14,6 +14,13 @@ export function createCombatLayout() {
   for (let i = 0; i < 3; i++) {
     const box = document.createElement('div');
     box.className = 'combatant combat-box empty';
+    const icon = document.createElement('div');
+    icon.className = 'icon';
+    box.appendChild(icon);
+    const hp = document.createElement('div');
+    hp.className = 'hp-bar';
+    hp.innerHTML = '<div class="hp"></div>';
+    box.appendChild(hp);
     playerCol.appendChild(box);
   }
 
@@ -26,6 +33,13 @@ export function createCombatLayout() {
   for (let i = 0; i < 3; i++) {
     const box = document.createElement('div');
     box.className = 'combatant combat-box empty';
+    const icon = document.createElement('div');
+    icon.className = 'icon';
+    box.appendChild(icon);
+    const hp = document.createElement('div');
+    hp.className = 'hp-bar';
+    hp.innerHTML = '<div class="hp"></div>';
+    box.appendChild(hp);
     enemyCol.appendChild(box);
   }
 

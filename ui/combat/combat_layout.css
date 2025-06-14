@@ -5,6 +5,11 @@
   width: 100%;
 }
 
+.turn-queue {
+  margin-bottom: 6px;
+  text-align: center;
+}
+
 .combatants {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -22,8 +27,8 @@
 }
 
 .combat-box {
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   background: #222;
   border: 1px solid #555;
   border-radius: 6px;
@@ -40,7 +45,7 @@
   bottom: -6px;
   left: 2px;
   right: 2px;
-  height: 4px;
+  height: 6px;
   background: #444;
 }
 
@@ -52,11 +57,35 @@
 
 .log-box {
   width: 90%;
-  height: 100px;
+  height: 90px;
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid #fff;
   margin: auto;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.action-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tab-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.tab-panel button {
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -64,6 +93,10 @@
     width: 48px;
     height: 48px;
     font-size: 12px;
+  }
+
+  .log-box {
+    height: 80px;
   }
 
   .action-tabs button {
