@@ -283,6 +283,8 @@ export function renderSkillList(container, skills, onClick) {
   const map = {};
   skills.forEach((skill) => {
     const btn = document.createElement('button');
+    btn.className = 'skill-btn';
+    btn.dataset.id = skill.id;
     const effects = [];
     if (Array.isArray(skill.statuses)) {
       skill.statuses.forEach((s) => {
@@ -303,7 +305,7 @@ export function renderSkillList(container, skills, onClick) {
       .filter(Boolean)
       .join(' ');
     const icon = skill.icon ? `${skill.icon} ` : '';
-    btn.innerHTML = `<strong>${icon}${skill.name}</strong><div class="desc">${descParts}</div>`;
+    btn.innerHTML = `<strong>${icon}${skill.name}</strong><div class="desc">${descParts}</div><div class="cooldown-overlay hidden"></div>`;
     btn.addEventListener('click', () => onClick(skill));
     attachSkillTooltip(btn, skill);
     container.appendChild(btn);
@@ -323,12 +325,23 @@ export function setSkillDisabledState(
     const def = skillLookup[id];
     const offensive = def?.category === 'offensive';
     const exempt = def?.silenceExempt;
-    if ((isSilenced && offensive && !exempt) || cooldowns[id] > 0) {
+    const cd = cooldowns[id] || 0;
+    const overlay = btn.querySelector('.cooldown-overlay');
+    if ((isSilenced && offensive && !exempt) || cd > 0) {
       btn.classList.add('disabled');
       btn.disabled = true;
     } else {
       btn.classList.remove('disabled');
       btn.disabled = false;
+    }
+    if (overlay) {
+      if (cd > 0) {
+        overlay.textContent = cd;
+        overlay.classList.remove('hidden');
+      } else {
+        overlay.textContent = '';
+        overlay.classList.add('hidden');
+      }
     }
   });
 }
