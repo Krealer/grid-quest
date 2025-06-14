@@ -23,11 +23,11 @@ export function initCombatState(player, enemy) {
   eList.forEach((e, i) => {
     if (i < 3) combatState.enemies[i] = e;
   });
-  combatState.players.forEach((p) => {
-    p.selectedSkillId = null;
+  combatState.players.forEach((p, i) => {
+    if (p) combatState.players[i].selectedSkillId = null;
   });
-  combatState.enemies.forEach((e) => {
-    e.selectedSkillId = null;
+  combatState.enemies.forEach((e, i) => {
+    if (e) combatState.enemies[i].selectedSkillId = null;
   });
   combatState.turnQueue = [];
   combatState.turnIndex = 0;
