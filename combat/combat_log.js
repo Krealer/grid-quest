@@ -5,10 +5,11 @@ export function initLog(el) {
   if (container) container.innerHTML = '';
 }
 
-export function append(message) {
-  if (!container) return;
-  const div = document.createElement('div');
-  div.textContent = message;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
+export function log(message) {
+  const logBox = container || document.querySelector('.combat-log');
+  if (!logBox) return;
+  const entry = document.createElement('div');
+  entry.textContent = message;
+  logBox.appendChild(entry);
+  logBox.scrollTop = logBox.scrollHeight;
 }
