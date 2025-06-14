@@ -110,6 +110,28 @@ export async function giveItem(id, quantity = 1) {
   return added;
 }
 
+export async function giveItems(map) {
+  if (!map) return false;
+  const { loadItems } = await import('./item_loader.js');
+  await loadItems();
+  let changed = false;
+  for (const [id, qty] of Object.entries(map)) {
+    const data = getItemData(id);
+    if (data && addItem({ ...data, id, quantity: qty })) changed = true;
+  }
+  if (changed) document.dispatchEvent(new CustomEvent('inventoryUpdated'));
+  return changed;
+}
+
+export function removeItems(map) {
+  if (!map) return false;
+  let changed = false;
+  for (const [id, qty] of Object.entries(map)) {
+    if (removeItem(id, qty)) changed = true;
+  }
+  return changed;
+}
+
 export function hasItem(nameOrId) {
   return getItemCount(nameOrId) > 0;
 }
