@@ -1,4 +1,9 @@
-/* Internationalization utilities */
+/* Internationalization utilities
+ *
+ * Locale files are plain JavaScript modules rather than JSON imports.
+ * This avoids the need for `assert { type: "json" }` which some
+ * browsers do not yet support and previously caused a syntax error.
+ */
 
 import en from './locales/en.js';
 import nl from './locales/nl.js';
