@@ -323,7 +323,7 @@ export async function startCombat(enemy, player) {
 
   function applyStatusLogged(target, id, duration) {
     applyStatusEffect(target, id, duration);
-    const name = getStatusEffect(id)?.name || id;
+    const name = t(`status.${id}`);
     const who = target === player ? 'Player' : enemy.name;
     log(t('combat.status.apply', { target: who, status: name, turns: duration }));
     updateStatusUI(overlay, player, enemy);
@@ -332,7 +332,7 @@ export async function startCombat(enemy, player) {
 
   function removeStatusLogged(target, id) {
     removeStatusEffect(target, id);
-    const name = getStatusEffect(id)?.name || id;
+    const name = t(`status.${id}`);
     const who = target === player ? 'Player' : enemy.name;
     log(t('combat.status.expire', { status: name, target: who }));
     updateStatusUI(overlay, player, enemy);
@@ -342,7 +342,7 @@ export async function startCombat(enemy, player) {
   function removeNegativeStatusLogged(target, ids) {
     const removed = removeNegativeStatusEffect(target, ids);
     removed.forEach((r) => {
-      const name = getStatusEffect(r)?.name || r;
+      const name = t(`status.${r}`);
       const who = target === player ? 'Player' : enemy.name;
       log(t('combat.status.expire', { status: name, target: who }));
     });
