@@ -14,7 +14,7 @@ export function updateStatusPanel() {
   if (!list || !info || !container) return;
   if (!equipList) {
     const heading = document.createElement('h3');
-    heading.textContent = 'Equipment';
+    heading.textContent = t('status.equipment');
     equipList = document.createElement('div');
     equipList.id = 'status-equipment';
     container.insertBefore(heading, list);
@@ -29,7 +29,7 @@ export function updateStatusPanel() {
     const item = id ? getItemData(id) : null;
     const row = document.createElement('div');
     row.classList.add('status-equip');
-    let display = 'None';
+    let display = t('status.none');
     let level = 0;
     if (id) {
       display = getItemDisplayName(id);
@@ -75,7 +75,7 @@ export function updateStatusPanel() {
     list.appendChild(row);
   });
   if ((player.passives || []).length === 0) {
-    list.innerHTML = '<em>No passive skills</em>';
+    list.innerHTML = `<em>${t('status.noPassives')}</em>`;
   }
 }
 
