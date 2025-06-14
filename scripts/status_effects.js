@@ -3,6 +3,7 @@
 // duration and its core impact on gameplay. Skills, items and enemies
 // can apply these by referencing the ID.
 import { addStatus, removeStatus, tickStatuses } from './status_manager.js';
+import { t } from './i18n.js';
 
 export const statusEffects = {
   // ---------- Positive Effects ----------
@@ -440,7 +441,9 @@ export const statusEffects = {
 };
 
 export function getStatusEffect(id) {
-  return statusEffects[id];
+  const base = statusEffects[id];
+  if (!base) return undefined;
+  return { ...base, name: t(`status.${id}`) };
 }
 
 export function getAllStatusEffects() {
@@ -450,7 +453,7 @@ export function getAllStatusEffects() {
 export function getStatusMetadata() {
   return Object.values(statusEffects).map((e) => ({
     id: e.id,
-    name: e.name,
+    name: t(`status.${e.id}`),
     description: e.description,
     type: e.type,
     temporary: typeof e.duration === 'number'

@@ -19,7 +19,7 @@ export function tickStatusEffects(target, log) {
         t('combat.status.damage', {
           target: who,
           amount: dmg,
-          status: st.id.replace('_', ' ')
+          status: t(`status.${st.id}`)
         })
       );
     }
@@ -31,7 +31,7 @@ export function tickStatusEffects(target, log) {
         const who = target.isPlayer ? 'You' : target.name || 'Enemy';
         log(
           t('combat.status.expire', {
-            status: def.name || st.id,
+            status: t(`status.${st.id}`),
             target: who,
             turns: ''
           })

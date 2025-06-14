@@ -1,5 +1,6 @@
 // Defines skill data and manages unlocking/lookup
 import { getStatusEffect } from './status_effects.js';
+import { t } from './i18n.js';
 import { applyDamage } from './logic.js';
 
 const skillDefs = {
@@ -209,7 +210,7 @@ const skillDefs = {
       const removed = removeNegativeStatus(player);
       if (removed.length > 0) {
         const names = removed
-          .map((id) => getStatusEffect(id)?.name || id)
+          .map((id) => t(`status.${id}`))
           .join(', ');
         log(`Negative effects cleansed: ${names}`);
       }
@@ -303,7 +304,7 @@ const skillDefs = {
       ]);
       if (removed.length > 0) {
         const names = removed
-          .map((id) => getStatusEffect(id)?.name || id)
+          .map((id) => t(`status.${id}`))
           .join(', ');
         log(`Purify cleanses ${names}!`);
       } else {

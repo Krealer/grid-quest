@@ -253,7 +253,7 @@ export function updateStatusUI(root, players, enemies) {
       span.className = 'effect';
       span.title = ef?.description || s.id;
       const icon = ef?.icon ? `${ef.icon} ` : '';
-      span.textContent = `${icon}${ef?.name || s.id} (${s.remaining})`;
+      span.textContent = `${icon}${t(`status.${s.id}`)} (${s.remaining})`;
       list.appendChild(span);
     });
   };
@@ -276,7 +276,7 @@ export function renderSkillList(container, skills, onClick) {
     }
     if (Array.isArray(skill.cleanse)) {
       const names = skill.cleanse
-        .map((id) => getStatusEffect(id)?.name || id)
+        .map((id) => t(`status.${id}`))
         .join(', ');
       effects.push(`Removes ${names}`);
     }
