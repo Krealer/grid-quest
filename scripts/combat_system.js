@@ -38,6 +38,7 @@ import {
   updateStatusUI,
   renderSkillList,
   renderTurnQueue,
+  renderCombatants,
   setSkillDisabledState,
   initLogPanel,
   showVictoryMessage,
@@ -90,30 +91,21 @@ export async function startCombat(enemy, player) {
   overlay.classList.add('battle-transition');
   overlay.innerHTML = `
     <div class="combat-screen">
-      <div class="turn-queue"></div>
+      <div class="turn-queue spd-log"></div>
       <div class="combatants">
-        <div class="combatant player">
-          <div class="name">Hero</div>
-          <div class="hp-bar"><div class="hp"></div></div>
-          <div class="statuses status-effects player-statuses"></div>
-        </div>
-        <div class="combatant enemy intro-anim">
-          <div class="portrait">${enemy.portrait || '👾'}</div>
-          <div class="name">${enemy.name}</div>
-          <div class="desc">${enemy.description || ''}</div>
-          <div class="hp-bar"><div class="hp"></div></div>
-          <div class="statuses status-effects enemy-statuses"></div>
-        </div>
+        <div class="player-team"></div>
+        <div id="combat-log" class="log hidden"></div>
+        <div class="enemy-team"></div>
       </div>
       <div class="intro-text">${
         enemy.intro || 'A shadowy beast snarls and prepares to strike!'
       }</div>
       <div class="actions hidden">
-        <button id="auto-battle-toggle" class="auto-battle-btn">Toggle Auto-Battle</button>
+        <button id="auto-battle-toggle" class="auto-battle-btn" data-i18n="combat.auto.toggle">${t('combat.auto.toggle')}</button>
         <div class="action-tabs">
-          <button class="offensive-tab selected">Offensive</button>
-          <button class="defensive-tab">Defensive</button>
-          <button class="items-tab">Items</button>
+          <button class="offensive-tab selected" data-i18n="combat.category.offensive">${t('combat.category.offensive')}</button>
+          <button class="defensive-tab" data-i18n="combat.category.defensive">${t('combat.category.defensive')}</button>
+          <button class="items-tab" data-i18n="combat.category.items">${t('combat.category.items')}</button>
         </div>
         <div class="tab-panels">
           <div class="offensive-skill-buttons tab-panel"></div>
@@ -122,17 +114,25 @@ export async function startCombat(enemy, player) {
         </div>
       </div>
       <div id="skill-preview" class="skill-preview hidden"></div>
-      <div id="combat-log" class="log hidden"></div>
     </div>`;
 
   document.body.appendChild(overlay);
+  renderCombatants(
+    overlay.querySelector('.combatants'),
+    Array.isArray(player) ? player : [player],
+    Array.isArray(enemy) ? enemy : [enemy]
+  );
   resetBossPhase(enemy.id);
   if (enemy.id === 'echo_absolute') setPhase(1);
   document.dispatchEvent(new CustomEvent('combatStarted'));
   requestAnimationFrame(() => overlay.classList.add('active'));
 
-  const playerBar = overlay.querySelector('.player .hp');
-  const enemyBar = overlay.querySelector('.enemy .hp');
+  const playerBar = overlay.querySelector(
+    '.player-team .combatant[data-index="0"] .hp'
+  );
+  const enemyBar = overlay.querySelector(
+    '.enemy-team .combatant[data-index="0"] .hp'
+  );
 
   const statsBonus = getTotalStats();
   const playerMax = (player.maxHp ?? 100) + (statsBonus.maxHp || 0);
@@ -165,13 +165,13 @@ export async function startCombat(enemy, player) {
 
   if (autoBtn) {
     autoBtn.textContent = combatState.autoBattle
-      ? 'Auto-Battle ON'
-      : 'Auto-Battle OFF';
+      ? t('combat.auto.on')
+      : t('combat.auto.off');
     autoBtn.addEventListener('click', () => {
       combatState.autoBattle = !combatState.autoBattle;
       autoBtn.textContent = combatState.autoBattle
-        ? 'Auto-Battle ON'
-        : 'Auto-Battle OFF';
+        ? t('combat.auto.on')
+        : t('combat.auto.off');
     });
   }
 

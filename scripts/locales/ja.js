@@ -165,5 +165,11 @@ export default {
   'combat.silenced': '沈黙状態で行動できない！',
   'combat.paralyzed': '{enemy}は麻痺して動けない！',
   'combat.confused': '{enemy}は混乱している！',
-  'combat.unstable': '{enemy}は不安定に揺らいでいる！'
+  'combat.unstable': '{enemy}は不安定に揺らいでいる！',
+  'combat.category.offensive': 'Offensive',
+  'combat.category.defensive': 'Defensive',
+  'combat.category.items': 'Items',
+  'combat.auto.toggle': 'Toggle Auto-Battle',
+  'combat.auto.on': 'Auto-Battle ON',
+  'combat.auto.off': 'Auto-Battle OFF'
 };

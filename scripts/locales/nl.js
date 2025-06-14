@@ -174,4 +174,11 @@ export default {
   'combat.paralyzed': '{enemy} is verlamd en kan niet handelen!',
   'combat.confused': '{enemy} is verward en aarzelt!',
   'combat.unstable': '{enemy} wankelt onstabiel!'
+  ,
+  'combat.category.offensive': 'Offensive',
+  'combat.category.defensive': 'Defensive',
+  'combat.category.items': 'Items',
+  'combat.auto.toggle': 'Toggle Auto-Battle',
+  'combat.auto.on': 'Auto-Battle ON',
+  'combat.auto.off': 'Auto-Battle OFF'
 };
