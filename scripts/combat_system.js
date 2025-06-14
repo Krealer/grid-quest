@@ -50,7 +50,8 @@ import { chooseBestSkill } from './ai_logic.js';
 import {
   initSkillPreview,
   showSkillPreview,
-  hideSkillPreview
+  hideSkillPreview,
+  initPortraitLayout
 } from './combat_renderer.js';
 import { clearActiveTile } from './grid_renderer.js';
 import {
@@ -91,10 +92,10 @@ export async function startCombat(enemy, player) {
   overlay.classList.add('battle-transition');
   overlay.innerHTML = `
     <div class="combat-screen">
-      <div class="turn-queue spd-log"></div>
+      <div class="turn-queue spd-log spd-bar"></div>
       <div class="combatants">
         <div class="player-team"></div>
-        <div id="combat-log" class="log hidden"></div>
+        <div id="combat-log" class="log combat-log hidden"></div>
         <div class="enemy-team"></div>
       </div>
       <div class="intro-text">${
@@ -103,9 +104,9 @@ export async function startCombat(enemy, player) {
       <div class="actions hidden">
         <button id="auto-battle-toggle" class="auto-battle-btn" data-i18n="combat.auto.toggle">${t('combat.auto.toggle')}</button>
         <div class="action-tabs">
-          <button class="offensive-tab selected" data-i18n="combat.category.offensive">${t('combat.category.offensive')}</button>
-          <button class="defensive-tab" data-i18n="combat.category.defensive">${t('combat.category.defensive')}</button>
-          <button class="items-tab" data-i18n="combat.category.items">${t('combat.category.items')}</button>
+          <button class="offensive-tab combat-skill-category selected" data-i18n="combat.category.offensive">${t('combat.category.offensive')}</button>
+          <button class="defensive-tab combat-skill-category" data-i18n="combat.category.defensive">${t('combat.category.defensive')}</button>
+          <button class="items-tab combat-skill-category" data-i18n="combat.category.items">${t('combat.category.items')}</button>
         </div>
         <div class="tab-panels">
           <div class="offensive-skill-buttons tab-panel"></div>
@@ -117,6 +118,7 @@ export async function startCombat(enemy, player) {
     </div>`;
 
   document.body.appendChild(overlay);
+  initPortraitLayout(overlay);
   renderCombatants(
     overlay.querySelector('.combatants'),
     Array.isArray(player) ? player : [player],

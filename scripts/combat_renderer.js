@@ -40,3 +40,16 @@ export function hideSkillPreview() {
     previewEl.classList.add('hidden');
   }
 }
+
+export function initPortraitLayout(overlay) {
+  if (!overlay) return;
+  const mq = window.matchMedia(
+    '(max-width: 768px) and (orientation: portrait)'
+  );
+  const update = () => {
+    if (mq.matches) overlay.classList.add('portrait');
+    else overlay.classList.remove('portrait');
+  };
+  mq.addEventListener('change', update);
+  update();
+}
