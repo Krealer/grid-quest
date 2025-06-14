@@ -4,6 +4,7 @@ import {
   nextTurn as queueNextTurn
 } from './combat_turn_manager.js';
 import { markActiveTile } from './grid_renderer.js';
+import { highlightActiveUnit, syncHpBars } from './status_tracker.js';
 import { selectTarget, getSelectedTarget } from './combat_state.js';
 import {
   highlightSkillTargets,
@@ -18,12 +19,14 @@ import { flashElement, floatTextOver } from './animation_utils.js';
 function getCombatantEl(entity) {
   const overlay = document.getElementById('battle-overlay');
   if (!overlay || !entity) return null;
-  const idx = entity.isPlayer || entity.isAlly
-    ? combatState.players.indexOf(entity)
-    : combatState.enemies.indexOf(entity);
-  const selector = entity.isPlayer || entity.isAlly
-    ? `.player-team .combatant[data-index="${idx}"]`
-    : `.enemy-team .combatant[data-index="${idx}"]`;
+  const idx =
+    entity.isPlayer || entity.isAlly
+      ? combatState.players.indexOf(entity)
+      : combatState.enemies.indexOf(entity);
+  const selector =
+    entity.isPlayer || entity.isAlly
+      ? `.player-team .combatant[data-index="${idx}"]`
+      : `.enemy-team .combatant[data-index="${idx}"]`;
   return overlay.querySelector(selector);
 }
 
@@ -32,6 +35,16 @@ export function initTurnOrder() {
   combatState.turnIndex = 0;
   combatState.activeEntity = combatState.turnQueue[0] || null;
   markActiveTile(combatState.activeEntity);
+  const overlay = document.getElementById('battle-overlay');
+  if (overlay) {
+    highlightActiveUnit(
+      overlay,
+      combatState.activeEntity,
+      combatState.players,
+      combatState.enemies
+    );
+    syncHpBars(overlay, combatState.players, combatState.enemies);
+  }
   document.dispatchEvent(
     new CustomEvent('turnStarted', { detail: combatState.activeEntity })
   );
@@ -43,8 +56,19 @@ export function nextTurn() {
     tickStatuses(combatState.activeEntity);
   }
   queueNextTurn();
-  combatState.activeEntity = combatState.turnQueue[combatState.turnIndex] || null;
+  combatState.activeEntity =
+    combatState.turnQueue[combatState.turnIndex] || null;
   markActiveTile(combatState.activeEntity);
+  const overlay = document.getElementById('battle-overlay');
+  if (overlay) {
+    highlightActiveUnit(
+      overlay,
+      combatState.activeEntity,
+      combatState.players,
+      combatState.enemies
+    );
+    syncHpBars(overlay, combatState.players, combatState.enemies);
+  }
   document.dispatchEvent(
     new CustomEvent('turnStarted', { detail: combatState.activeEntity })
   );
@@ -184,7 +208,9 @@ export async function executeAction(skill, actor, targetOverride, extra = {}) {
         flashElement(el, 'heal');
         floatTextOver(el, `+${diff}`, { color: 'limegreen' });
       }
-      const added = after[i].statuses.filter((s) => !before[i].statuses.includes(s));
+      const added = after[i].statuses.filter(
+        (s) => !before[i].statuses.includes(s)
+      );
       added.forEach((id, idx) => {
         setTimeout(() => floatTextOver(el, id, { color: 'yellow' }), idx * 150);
       });
