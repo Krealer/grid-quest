@@ -77,5 +77,7 @@ export default {
   "snealer.dialogue.3.ponder": "Ik waag het.",
   "snealer.dialogue.4.text": "Wijs. Kom terug met iets zeldzaams, iets wat wordt achtergelaten door zij die het licht haten.",
   "snealer.dialogue.4.nod": "Begrepen.",
-  "message.water_restore": "Het koele water verjongt je. HP volledig hersteld."
+  "message.water_restore": "Het koele water verjongt je. HP volledig hersteld.",
+  "message.chest_found": "Je vond {itemName} in de kist!",
+  "message.chest_empty": "De kist is leeg."
 }

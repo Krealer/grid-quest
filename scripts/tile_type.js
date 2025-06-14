@@ -168,15 +168,14 @@ export async function onInteractEffect(
         }
         const result = await openChest(chestId, player);
         if (result) {
-          if (result.message) {
-            showDialogue(result.message);
-          }
           if (Array.isArray(result.items)) {
             result.items.forEach((it) => {
-              if (it) showDialogue(`You obtained ${it.name}!`);
+              if (it) showDialogue(t('message.chest_found', { itemName: it.name }));
             });
           } else if (result.item) {
-            showDialogue(`You obtained ${result.item.name}!`);
+            showDialogue(t('message.chest_found', { itemName: result.item.name }));
+          } else {
+            showDialogue(t('message.chest_empty'));
           }
           const idx = y * cols + x;
           const tileEl = container.children[idx];
@@ -185,7 +184,10 @@ export async function onInteractEffect(
             tileEl.classList.add('chest-opened', 'tile-c', 'blocked');
           }
           tile.type = 'c';
+          tile.opened = true;
         }
+      } else {
+        showDialogue(t('message.chest_empty'));
       }
       break;
     }

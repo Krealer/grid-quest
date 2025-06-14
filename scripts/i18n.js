@@ -31,13 +31,16 @@ export function getLanguage() {
   return currentLang;
 }
 
-export function t(key) {
-  const value = translations[currentLang]?.[key] ?? translations.en?.[key];
-  if (!value) {
+export function t(key, vars = {}) {
+  const template = translations[currentLang]?.[key] ?? translations.en?.[key];
+  if (!template) {
     console.warn('[Translation Missing]:', key);
     return '[Missing Translation]';
   }
-  return value;
+  if (typeof template === 'string') {
+    return template.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`);
+  }
+  return template;
 }
 
 export function applyTranslations() {

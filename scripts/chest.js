@@ -4,6 +4,8 @@ import { updateInventoryUI } from './inventory_ui.js';
 import { giveRelic, setMemory } from './dialogue_state.js';
 import { getItemData, loadItems } from './item_loader.js';
 import { loseHpNonLethal } from './player.js';
+import { getCurrentGrid } from './map_loader.js';
+import { getCurrentMapName } from './router.js';
 
 const chestContents = {
   'map01:10,5': {
@@ -159,7 +161,16 @@ export async function openChest(id, player) {
   if (isChestOpened(id)) return null;
   gameState.openedChests.add(id);
   await loadItems();
-  const config = chestContents[id] || {};
+  const [map, coord] = id.split(':');
+  const [x, y] = coord.split(',').map(Number);
+  let config = chestContents[id] || {};
+  if (map === getCurrentMapName()) {
+    const grid = getCurrentGrid();
+    const tile = grid?.[y]?.[x];
+    if (tile && tile.item) {
+      config = { ...config, item: tile.item, quantity: tile.quantity };
+    }
+  }
   if (config.memoryFlag) {
     setMemory(config.memoryFlag);
   }
@@ -189,7 +200,13 @@ export async function openChest(id, player) {
   if (config.hpLoss && player) {
     loseHpNonLethal(config.hpLoss);
   }
-  return { item, items, message: config.message || null };
+  if (map === getCurrentMapName()) {
+    const grid = getCurrentGrid();
+    if (grid && grid[y] && grid[y][x]) {
+      grid[y][x].opened = true;
+    }
+  }
+  return { item, items };
 }
 
 export function setOpenedChests(list) {

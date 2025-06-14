@@ -50,6 +50,7 @@ export async function loadMap(filename, spawnPoint) {
     const [cx, cy] = coord.split(',').map(Number);
     if (grid[cy] && grid[cy][cx]) {
       grid[cy][cx].type = 'c';
+      grid[cy][cx].opened = true;
     }
   }
   currentMap = name;
