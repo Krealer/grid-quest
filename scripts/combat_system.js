@@ -177,6 +177,7 @@ export async function startCombat(enemy, player) {
   const offensiveContainer = overlay.querySelector('.offensive-skill-buttons');
   const defensiveContainer = overlay.querySelector('.defensive-skill-buttons');
   const itemContainer = overlay.querySelector('.item-buttons');
+  const itemsTabBtn = overlay.querySelector('.items-tab');
   const autoBtn = overlay.querySelector('#auto-battle-toggle');
   const logEl = overlay.querySelector('.log');
   const log = initLogPanel(overlay, enemy.name, player.name || 'Player');
@@ -401,7 +402,11 @@ export async function startCombat(enemy, player) {
     const items = getItemsByCategory('combat');
     if (items.length === 0) {
       const msg = document.createElement('div');
-      msg.textContent = 'No usable items';
+      msg.classList.add('no-items-message');
+      msg.textContent = t('combat.no_items');
+      if (!itemsTabBtn?.classList.contains('selected')) {
+        msg.classList.add('hidden');
+      }
       itemContainer.appendChild(msg);
       return;
     }

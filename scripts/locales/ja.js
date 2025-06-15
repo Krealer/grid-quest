@@ -162,6 +162,7 @@ export default {
   'combat.defeat.player': 'あなたは倒れた…',
   'combat.item.curseBlock': '呪いでアイテムが使えない！',
   'combat.item.use': '{user}は{item}を使った！',
+  'combat.no_items': 'No usable items',
   'combat.reflect': 'ダメージを跳ね返した！',
   'combat.sacredCounter': '聖なる反撃が発動！',
   'combat.silenced': '沈黙状態で行動できない！',

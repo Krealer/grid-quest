@@ -162,6 +162,7 @@ export default {
   'combat.defeat.player': 'لقد هُزمت...',
   'combat.item.curseBlock': 'اللعنة تمنعك من استخدام الأدوات!',
   'combat.item.use': '{user} يستخدم {item}!',
+  'combat.no_items': 'No usable items',
   'combat.reflect': 'تم عكس الضرر!',
   'combat.sacredCounter': 'الرد المقدس يفعل!',
   'combat.silenced': 'حالة الصمت تمنعك من الفعل!',
