@@ -1,5 +1,4 @@
 import { loadJson } from './data_service.js';
-import { showError } from './error_prompt.js';
 import { inventory, removeItem, addItem } from './inventory.js';
 import { getItemData } from './item_loader.js';
 import { getItemDisplayName } from './inventory.js';
@@ -17,7 +16,6 @@ export async function loadUpgradeData() {
     upgrades = data;
   } catch (err) {
     upgrades = {};
-    showError(err.message || 'Failed to load upgrade data');
   }
   loaded = true;
   return upgrades;

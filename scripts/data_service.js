@@ -8,9 +8,9 @@ export async function loadJson(path, fallback) {
   }
 
   function handleError(msg) {
+    console.error(msg);
+    showError(msg);
     if (fallback !== undefined) {
-      console.error(msg);
-      showError(msg);
       cache.set(path, fallback);
       return fallback;
     }
