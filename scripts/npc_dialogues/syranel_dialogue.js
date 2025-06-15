@@ -19,8 +19,7 @@ export const syranelDialogue = [
         onChoose: async () => {
           await loadItems();
           removeItem('rotting_heart', 1);
-          const m = await import('../player.js');
-          m.grantSkill('leech');
+          // Skill learning removed
         },
         completeQuest: 'crimson_request',
         memoryFlag: 'learned_leech'
@@ -37,8 +36,7 @@ export const syranelDialogue = [
         onChoose: async () => {
           await loadItems();
           removeItem('rotting_heart', 1);
-          const m = await import('../player.js');
-          m.grantSkill('leech');
+          // Skill learning removed
         },
         completeQuest: 'crimson_request',
         memoryFlag: 'learned_leech'
