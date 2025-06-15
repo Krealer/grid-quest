@@ -127,8 +127,7 @@
       "G",
       "G",
       {
-        "type": "N",
-        "npc": "goblin_quest_giver"
+        "type": "G"
       },
       "G",
       "G",
@@ -222,8 +221,7 @@
       "G",
       "G",
       {
-        "type": "N",
-        "npc": "lioran"
+        "type": "G"
       },
       "G",
       "G",
