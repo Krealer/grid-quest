@@ -15,7 +15,6 @@ import * as ember from './ember.js';
 import * as snealer from './snealer.js';
 import * as eryndor from './eryndor.js';
 import * as fieldNoteDisintegration from './field_note_disintegration.js';
-import * as firstMemory from './first_memory.js';
 import * as flamebound from './flamebound.js';
 import * as forgeNpc from './forge_npc.js';
 import * as forkGuide from './fork_guide.js';
@@ -75,7 +74,6 @@ export const npcModules = {
   snealer,
   eryndor,
   field_note_disintegration: fieldNoteDisintegration,
-  first_memory: firstMemory,
   flamebound,
   forge_npc: forgeNpc,
   fork_guide: forkGuide,

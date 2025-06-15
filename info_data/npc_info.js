@@ -6,11 +6,6 @@ export default
     "description": "Last of the Lorebound, keeper of forgotten tales."
   },
   {
-    "id": "first_memory",
-    "name": "Memory Echo",
-    "description": "A lingering vision of your earliest recollections."
-  },
-  {
     "id": "echo",
     "name": "Echo of the Name",
     "description": "A resonance that repeats what was once forgotten."
