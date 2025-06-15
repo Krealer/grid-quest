@@ -1,12 +1,17 @@
 // Defines skill data and manages unlocking/lookup
 import { applyDamage } from './logic.js';
+import { t } from './i18n.js';
 
 const skillDefs = {
   strike: {
     id: 'strike',
-    name: 'Strike',
+    get name() {
+      return t('skill.strike.name');
+    },
     icon: '⚔️',
-    description: 'Deal damage equal to your Attack stat.',
+    get description() {
+      return t('skill.strike.description');
+    },
     targetType: 'enemy',
     range: 'single',
     category: 'offensive',
@@ -40,9 +45,13 @@ const skillDefs = {
   },
   guard: {
     id: 'guard',
-    name: 'Guard',
+    get name() {
+      return t('skill.guard.name');
+    },
     icon: '🛡️',
-    description: 'Reduce damage from the next attack by 50%.',
+    get description() {
+      return t('skill.guard.description');
+    },
     targetType: 'self',
     range: 'single',
     category: 'defensive',
@@ -57,9 +66,13 @@ const skillDefs = {
   },
   heal: {
     id: 'heal',
-    name: 'Heal',
+    get name() {
+      return t('skill.heal.name');
+    },
     icon: '✨',
-    description: 'Restore 20% of your max HP.',
+    get description() {
+      return t('skill.heal.description');
+    },
     targetType: 'self',
     range: 'single',
     category: 'defensive',

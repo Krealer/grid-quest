@@ -174,5 +174,11 @@ export default {
   'combat.auto.toggle': 'Toggle Auto-Battle',
   'combat.auto.on': 'Auto-Battle ON',
   'combat.auto.off': 'Auto-Battle OFF',
-  'combat.skill.strike.description': 'Deal damage equal to your Attack stat.'
+  'combat.skill.strike.description': 'Deal damage equal to your Attack stat.',
+  'skill.strike.name': 'ضربة',
+  'skill.strike.description': 'يسبب ضررًا يعادل قوة الهجوم.',
+  'skill.guard.name': 'حراسة',
+  'skill.guard.description': 'تقليل الضرر من الهجوم التالي بنسبة 50٪.',
+  'skill.heal.name': 'شفاء',
+  'skill.heal.description': 'استعادة 20٪ من نقاط الحياة القصوى. وقت التهدئة: 3'
 };

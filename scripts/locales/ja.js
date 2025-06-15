@@ -174,5 +174,11 @@ export default {
   'combat.auto.toggle': 'Toggle Auto-Battle',
   'combat.auto.on': 'Auto-Battle ON',
   'combat.auto.off': 'Auto-Battle OFF',
-  'combat.skill.strike.description': 'Deal damage equal to your Attack stat.'
+  'combat.skill.strike.description': 'Deal damage equal to your Attack stat.',
+  'skill.strike.name': '一撃',
+  'skill.strike.description': '攻撃力に等しいダメージを与える。',
+  'skill.guard.name': '防御',
+  'skill.guard.description': '次の攻撃からのダメージを50％軽減。',
+  'skill.heal.name': '回復',
+  'skill.heal.description': '最大HPの20%を回復。クールダウン: 3'
 };
