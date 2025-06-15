@@ -40,7 +40,6 @@ export default {
   'settings.language': '言語',
   'settings.center': 'センターモード (縦向きのみ)',
   'settings.reset': 'すべてリセット',
-  rollback: 'ロールバック',
   'error.ok': 'OK',
   'confirm.cancel': 'キャンセル',
   'confirm.yes': '確認',

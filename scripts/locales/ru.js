@@ -40,7 +40,6 @@ export default {
   'settings.language': 'Язык',
   'settings.center': 'Центрирование (только портрет)',
   'settings.reset': 'Сбросить все настройки',
-  rollback: 'Откат',
   'error.ok': 'ОК',
   'confirm.cancel': 'Отмена',
   'confirm.yes': 'Подтвердить',

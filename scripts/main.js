@@ -55,7 +55,6 @@ import {
 import { setLanguage, applyTranslations, hasLocale } from './i18n.js';
 import { initGreeting } from '../ui/greeting.js';
 import { startGame } from './start_game.js';
-import { rollbackTo } from './rollback.js';
 import { initSettingsPanel } from './ui/settings_panel.js';
 
 // Inventory contents are managed in inventory.js
@@ -118,9 +117,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const langSelect = document.getElementById('language-select');
   const centerToggle = document.getElementById('center-toggle');
   const resetBtn = document.getElementById('reset-settings');
-  const rollbackRow = document.getElementById('rollback-row');
-  const rollbackSelect = document.getElementById('rollback-select');
-  const rollbackBtn = document.getElementById('rollback-btn');
 
   function handleSave() {
     openSaveMenu();
@@ -261,17 +257,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       notifyToggle,
       langSelect,
       centerToggle,
-      resetBtn,
-      rollbackRow,
-      rollbackSelect,
-      rollbackBtn
+      resetBtn
     },
     settings,
     applySettings,
     saveSettings,
     setLanguage,
-    DEFAULT_SETTINGS,
-    rollbackTo
+    DEFAULT_SETTINGS
   );
 
   const { showGreeting } = initGreeting(() =>
