@@ -53,7 +53,6 @@ export default {
   'inventory.unequip': 'إزالة',
   'inventory.use': 'استخدام',
   'inventory.reroll': 'إعادة',
-  'dialogue.skip': 'اضغط للتخطي',
   'status.regen': 'Regeneration',
   'status.fortify': 'Fortify',
   'status.defense_boost': 'Defense Boost',

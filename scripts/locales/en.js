@@ -53,7 +53,6 @@ export default {
   'inventory.unequip': 'Unequip',
   'inventory.use': 'Use',
   'inventory.reroll': 'Reroll',
-  'dialogue.skip': 'Tap to skip',
   'status.regen': 'Regeneration',
   'status.fortify': 'Fortify',
   'status.defense_boost': 'Defense Boost',

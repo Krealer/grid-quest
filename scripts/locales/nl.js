@@ -53,7 +53,6 @@ export default {
   'inventory.unequip': 'Uittrekken',
   'inventory.use': 'Gebruik',
   'inventory.reroll': 'Hertrek',
-  'dialogue.skip': 'Tik om over te slaan',
   'status.regen': 'Regeneration',
   'status.fortify': 'Fortify',
   'status.defense_boost': 'Defense Boost',
