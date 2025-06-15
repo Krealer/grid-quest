@@ -46,6 +46,7 @@ local HTTP server to serve the static assets.
 - `scripts/` – JavaScript modules that power the game
 - `style/` – stylesheets
 - `data/` – maps, enemies, items and other JSON data
+- `info_data/` – supplementary game info stored as JavaScript modules
 
 ## Development
 
