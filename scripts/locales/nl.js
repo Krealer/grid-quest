@@ -183,5 +183,11 @@ export default {
   'combat.auto.toggle': 'Toggle Auto-Battle',
   'combat.auto.on': 'Auto-Battle ON',
   'combat.auto.off': 'Auto-Battle OFF',
-  'combat.skill.strike.description': 'Deal damage equal to your Attack stat.'
+  'combat.skill.strike.description': 'Deal damage equal to your Attack stat.',
+  'skill.strike.name': 'Slaan',
+  'skill.strike.description': 'Breng schade toe gelijk aan je Aanval-statistiek.',
+  'skill.guard.name': 'Blokkeer',
+  'skill.guard.description': 'Verminder schade van de volgende aanval met 50%.',
+  'skill.heal.name': 'Genezen',
+  'skill.heal.description': 'Herstel 20% van je maximale HP. Aflopende tijd: 3'
 };

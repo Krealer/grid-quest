@@ -176,5 +176,11 @@ export default {
   'combat.auto.toggle': 'Toggle Auto-Battle',
   'combat.auto.on': 'Auto-Battle ON',
   'combat.auto.off': 'Auto-Battle OFF',
-  'combat.skill.strike.description': 'Deal damage equal to your Attack stat.'
+  'combat.skill.strike.description': 'Deal damage equal to your Attack stat.',
+  'skill.strike.name': 'Удар',
+  'skill.strike.description': 'Наносит урон, равный вашей атаке.',
+  'skill.guard.name': 'Блок',
+  'skill.guard.description': 'Уменьшает урон от следующей атаки на 50%.',
+  'skill.heal.name': 'Лечение',
+  'skill.heal.description': 'Восстанавливает 20% от макс. HP. Перезарядка: 3'
 };
