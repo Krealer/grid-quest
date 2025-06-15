@@ -37,11 +37,12 @@ import {
   initInventoryMenu
 } from '../ui/inventory_menu.js';
 import '../ui/system_message.js';
+import { initSaveSlotsMenu } from '../ui/save_slots_menu.js';
 import {
-  initSaveSlotsMenu,
-  openSaveMenu,
-  openLoadMenu
-} from '../ui/save_slots_menu.js';
+  handleSave,
+  handleLoad,
+  initSaveLoadEvents
+} from './save_load_handlers.js';
 import { saveState, loadState, gameState } from './game_state.js';
 import { saveGame, loadGame } from './save_load.js';
 import { initMenuBar } from '../ui/menu_bar.js';
@@ -118,52 +119,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const centerToggle = document.getElementById('center-toggle');
   const resetBtn = document.getElementById('reset-settings');
 
-  function handleSave() {
-    openSaveMenu();
-  }
-
-  function handleLoad() {
-    openLoadMenu();
-  }
-
-  async function performLoad(slot) {
-    loadState();
-    if (!loadGame(slot)) {
-      showDialogue('No save found.');
-      return;
-    }
-    refreshInventoryDisplay();
-    const mapName = gameState.currentMap || 'map01';
-    try {
-      const { cols: newCols } = await router.loadMap(mapName);
-      gridState.cols = newCols;
-      initFog(container, gridState.cols, isFogEnabled());
-      if (isFogEnabled()) {
-        if (router.getCurrentMapName() === 'map01') {
-          revealAll();
-        } else {
-          reveal(player.x, player.y);
-        }
-      }
-      updateStatsFromLevel();
-      player.hp = Math.min(player.hp, player.maxHp);
-      updateHpDisplay();
-      updateXpDisplay();
-      showDialogue('Progress loaded successfully.');
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  document.addEventListener('saveSlot', (e) => {
-    saveState();
-    saveGame(e.detail.slot);
-    showDialogue('Game Saved.');
-  });
-
-  document.addEventListener('loadSlot', (e) => {
-    performLoad(e.detail.slot);
-  });
+  initSaveLoadEvents(container, gridState);
 
   initMenuBar(handleSave, handleLoad);
   initMainMenu();
