@@ -689,3 +689,27 @@
     text-align: center;
   }
 }
+
+@media screen and (orientation: landscape) and (min-aspect-ratio: 4/3) {
+  #battle-overlay .combatants {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 20px;
+  }
+
+  #battle-overlay .actor-column {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  #battle-overlay #combat-log {
+    position: relative;
+    order: 3;
+    margin: 10px auto 20px auto;
+    max-width: 70%;
+    font-size: 1rem;
+  }
+}
