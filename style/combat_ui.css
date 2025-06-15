@@ -114,3 +114,40 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+/* Auto-battle toggle styling */
+.auto-battle-button {
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+/* Combat log container */
+#combat-log {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* Ensure skill buttons align consistently */
+.skill-button {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .auto-battle-button {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+
+  .skill-button {
+    width: 100%;
+    margin-bottom: 6px;
+  }
+}

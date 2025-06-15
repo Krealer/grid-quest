@@ -109,7 +109,7 @@ export async function startCombat(enemy, player) {
         enemy.intro || 'A shadowy beast snarls and prepares to strike!'
       }</div>
       <div class="actions hidden">
-        <button id="auto-battle-toggle" class="auto-battle-btn" data-i18n="combat.auto.toggle">${t('combat.auto.toggle')}</button>
+        <button id="auto-battle-toggle" class="auto-battle-btn auto-battle-button" data-i18n="combat.auto.toggle">${t('combat.auto.toggle')}</button>
         <div class="action-tabs action-types">
           <button class="offensive-tab combat-skill-category action-button selected" data-i18n="combat.category.offensive">${t('combat.category.offensive')}</button>
           <button class="defensive-tab combat-skill-category action-button" data-i18n="combat.category.defensive">${t('combat.category.defensive')}</button>
