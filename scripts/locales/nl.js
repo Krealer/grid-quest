@@ -170,6 +170,7 @@ export default {
   'combat.defeat.player': 'Je bent verslagen...',
   'combat.item.curseBlock': 'Een vloek verhindert het gebruik van items!',
   'combat.item.use': '{user} gebruikt {item}!',
+  'combat.no_items': 'No usable items',
   'combat.reflect': 'Schade werd teruggekaatst!',
   'combat.sacredCounter': 'Heilige Tegenstoot slaat terug!',
   'combat.silenced': 'Het zwijgen is je opgelegd!',

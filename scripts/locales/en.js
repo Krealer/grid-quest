@@ -169,6 +169,7 @@ export default {
   'combat.defeat.player': 'You were defeated...',
   'combat.item.curseBlock': 'A curse prevents you from using items!',
   'combat.item.use': '{user} uses {item}!',
+  'combat.no_items': 'No usable items',
   'combat.reflect': 'Reflected the damage back!',
   'combat.sacredCounter': 'Sacred Counter retaliates!',
   'combat.silenced': 'Silenced! Cannot act.',

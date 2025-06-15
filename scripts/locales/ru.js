@@ -164,6 +164,7 @@ export default {
   'combat.defeat.player': 'Вы проиграли...',
   'combat.item.curseBlock': 'Проклятие не даёт использовать предметы!',
   'combat.item.use': '{user} использует {item}!',
+  'combat.no_items': 'No usable items',
   'combat.reflect': 'Урон отражён обратно!',
   'combat.sacredCounter': 'Священный отпор наносит удар!',
   'combat.silenced': 'Немота не даёт действовать!',

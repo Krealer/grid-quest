@@ -228,6 +228,8 @@ export function setupTabs(overlay) {
     offTabBtn.classList.add('selected');
     defTabBtn.classList.remove('selected');
     itemsTabBtn.classList.remove('selected');
+    const msg = itemContainer.querySelector('.no-items-message');
+    if (msg) msg.classList.add('hidden');
   }
 
   function showDefensive() {
@@ -237,6 +239,8 @@ export function setupTabs(overlay) {
     defTabBtn.classList.add('selected');
     offTabBtn.classList.remove('selected');
     itemsTabBtn.classList.remove('selected');
+    const msg = itemContainer.querySelector('.no-items-message');
+    if (msg) msg.classList.add('hidden');
   }
 
   function showItems() {
@@ -246,6 +250,11 @@ export function setupTabs(overlay) {
     itemsTabBtn.classList.add('selected');
     offTabBtn.classList.remove('selected');
     defTabBtn.classList.remove('selected');
+    const msg = itemContainer.querySelector('.no-items-message');
+    if (msg) {
+      const hasItems = itemContainer.querySelectorAll('button').length > 0;
+      msg.classList.toggle('hidden', hasItems);
+    }
   }
 
   offTabBtn.addEventListener('click', showOffensive);
