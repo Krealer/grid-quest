@@ -221,48 +221,51 @@ export function setupTabs(overlay) {
   )
     return;
 
-  function showOffensive() {
-    offContainer.classList.remove('hidden');
+  function hideAllSkillPanels() {
+    offContainer.classList.add('hidden');
     defContainer.classList.add('hidden');
+  }
+
+  function hideItemPanel() {
     itemContainer.classList.add('hidden');
-    offTabBtn.classList.add('selected');
-    defTabBtn.classList.remove('selected');
-    itemsTabBtn.classList.remove('selected');
     const msg = itemContainer.querySelector('.no-items-message');
     if (msg) msg.classList.add('hidden');
   }
 
-  function showDefensive() {
-    defContainer.classList.remove('hidden');
-    offContainer.classList.add('hidden');
-    itemContainer.classList.add('hidden');
-    defTabBtn.classList.add('selected');
-    offTabBtn.classList.remove('selected');
-    itemsTabBtn.classList.remove('selected');
-    const msg = itemContainer.querySelector('.no-items-message');
-    if (msg) msg.classList.add('hidden');
-  }
+  function showTab(tab) {
+    hideAllSkillPanels();
+    hideItemPanel();
 
-  function showItems() {
-    itemContainer.classList.remove('hidden');
-    offContainer.classList.add('hidden');
-    defContainer.classList.add('hidden');
-    itemsTabBtn.classList.add('selected');
-    offTabBtn.classList.remove('selected');
-    defTabBtn.classList.remove('selected');
-    const msg = itemContainer.querySelector('.no-items-message');
-    if (msg) {
+    if (tab === 'offensive') {
+      offContainer.classList.remove('hidden');
+    } else if (tab === 'defensive') {
+      defContainer.classList.remove('hidden');
+    } else if (tab === 'items') {
       const hasItems = itemContainer.querySelectorAll('button').length > 0;
-      msg.classList.toggle('hidden', hasItems);
+      if (!hasItems) {
+        let msg = itemContainer.querySelector('.no-items-message');
+        if (!msg) {
+          msg = document.createElement('div');
+          msg.classList.add('no-items-message');
+          msg.textContent = t('combat.no_items');
+          itemContainer.appendChild(msg);
+        }
+        msg.classList.remove('hidden');
+      }
+      itemContainer.classList.remove('hidden');
     }
+
+    offTabBtn.classList.toggle('selected', tab === 'offensive');
+    defTabBtn.classList.toggle('selected', tab === 'defensive');
+    itemsTabBtn.classList.toggle('selected', tab === 'items');
   }
 
-  offTabBtn.addEventListener('click', showOffensive);
-  defTabBtn.addEventListener('click', showDefensive);
-  itemsTabBtn.addEventListener('click', showItems);
+  offTabBtn.addEventListener('click', () => showTab('offensive'));
+  defTabBtn.addEventListener('click', () => showTab('defensive'));
+  itemsTabBtn.addEventListener('click', () => showTab('items'));
 
   // default
-  showOffensive();
+  showTab('offensive');
 }
 
 export function updateStatusUI(root, players, enemies) {
