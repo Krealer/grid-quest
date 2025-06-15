@@ -60,6 +60,13 @@ import {
   hasStatus,
   clearStatuses
 } from './status_manager.js';
+import { tickCooldowns } from './cooldown_manager.js';
+import {
+  applyStatusLogged,
+  removeStatusLogged,
+  removeNegativeStatusLogged
+} from './status_logic.js';
+import { updateSkillDisableState } from './skill_ui.js';
 import {
   applyEffect as applyStatusEffect,
   removeStatus as removeStatusEffect,
@@ -332,36 +339,6 @@ export async function startCombat(enemy, player) {
     log(t('combat.heal', { target: 'Player', amount }));
   }
 
-  function applyStatusLogged(target, id, duration) {
-    applyStatusEffect(target, id, duration);
-    const name = t(`status.${id}`);
-    const who = target === player ? 'Player' : enemy.name;
-    log(t('combat.status.apply', { target: who, status: name, turns: duration }));
-    updateStatusUI(overlay, player, enemy);
-    updateSkillDisableState();
-  }
-
-  function removeStatusLogged(target, id) {
-    removeStatusEffect(target, id);
-    const name = t(`status.${id}`);
-    const who = target === player ? 'Player' : enemy.name;
-    log(t('combat.status.expire', { status: name, target: who }));
-    updateStatusUI(overlay, player, enemy);
-    updateSkillDisableState();
-  }
-
-  function removeNegativeStatusLogged(target, ids) {
-    const removed = removeNegativeStatusEffect(target, ids);
-    removed.forEach((r) => {
-      const name = t(`status.${r}`);
-      const who = target === player ? 'Player' : enemy.name;
-      log(t('combat.status.expire', { status: name, target: who }));
-    });
-    updateStatusUI(overlay, player, enemy);
-    updateSkillDisableState();
-    return removed;
-  }
-
   function activateGuard() {
     applyStatusEffect(player, 'guarded', 2);
   }
@@ -374,11 +351,6 @@ export async function startCombat(enemy, player) {
     enemyGuard = true;
   }
 
-  function tickCooldowns() {
-    Object.keys(skillCooldowns).forEach((id) => {
-      if (skillCooldowns[id] > 0) skillCooldowns[id]--;
-    });
-  }
 
   function triggerDeathEffect() {
     if (!enemy.deathSkill || enemy.deathUsed) return;
@@ -480,13 +452,7 @@ export async function startCombat(enemy, player) {
   document.addEventListener('inventoryUpdated', updateItemsUI);
   setupTabs(overlay);
   updateStatusUI(overlay, player, enemy);
-  updateSkillDisableState();
-
-  function updateSkillDisableState() {
-    const silenced =
-      hasStatus(player, 'silence') || hasStatus(player, 'silenced');
-    setSkillDisabledState(skillButtons, skillLookup, silenced, skillCooldowns);
-  }
+  updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
 
   async function handleAction(skill) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
@@ -571,7 +537,7 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     updateHpBar(enemyBar, enemyHp, enemyMax);
     updateStatusUI(overlay, player, enemy);
-    updateSkillDisableState();
+    updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
     if (playerHp <= 0) {
       log(t('combat.defeat.player'));
       endCombat();
@@ -732,7 +698,7 @@ export async function startCombat(enemy, player) {
       updateHpBar(playerBar, playerHp, playerMax);
       updateHpBar(enemyBar, enemyHp, enemyMax);
       updateStatusUI(overlay, player, enemy);
-      updateSkillDisableState();
+      updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
       const nextActor = nextTurn();
       playerTurn = nextActor?.isPlayer ?? true;
       if (!playerTurn) setTimeout(enemyTurn, animDelay);
@@ -809,8 +775,8 @@ export async function startCombat(enemy, player) {
       tickStatusEffects(enemy, log);
       const nextActor = nextTurn();
       playerTurn = nextActor?.isPlayer ?? true;
-      tickCooldowns();
-      updateSkillDisableState();
+      tickCooldowns(skillCooldowns);
+      updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
       if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
@@ -820,8 +786,8 @@ export async function startCombat(enemy, player) {
       tickStatusEffects(enemy, log);
       const nextActor = nextTurn();
       playerTurn = nextActor?.isPlayer ?? true;
-      tickCooldowns();
-      updateSkillDisableState();
+      tickCooldowns(skillCooldowns);
+      updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
       if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
@@ -831,8 +797,8 @@ export async function startCombat(enemy, player) {
       tickStatusEffects(enemy, log);
       const nextActor = nextTurn();
       playerTurn = nextActor?.isPlayer ?? true;
-      tickCooldowns();
-      updateSkillDisableState();
+      tickCooldowns(skillCooldowns);
+      updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
       if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
@@ -927,8 +893,8 @@ export async function startCombat(enemy, player) {
           tickStatusEffects(enemy, log);
           const nextActor = nextTurn();
           playerTurn = nextActor?.isPlayer ?? true;
-          tickCooldowns();
-          updateSkillDisableState();
+          tickCooldowns(skillCooldowns);
+          updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
           if (!playerTurn) setTimeout(enemyTurn, animDelay);
           return;
         }
@@ -962,7 +928,7 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     updateHpBar(enemyBar, enemyHp, enemyMax);
     updateStatusUI(overlay, player, enemy);
-    updateSkillDisableState();
+    updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
     if (playerHp <= 0) {
       log(t('combat.defeat.player'));
       if (enemy.id === 'echo_absolute') {
@@ -989,8 +955,8 @@ export async function startCombat(enemy, player) {
     }
     const nextActor = nextTurn();
     playerTurn = nextActor?.isPlayer ?? true;
-    tickCooldowns();
-    updateSkillDisableState();
+    tickCooldowns(skillCooldowns);
+    updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
     if (!playerTurn) setTimeout(enemyTurn, animDelay);
   }
 }
