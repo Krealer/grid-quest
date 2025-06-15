@@ -10,6 +10,11 @@
 - Player stats and leveling
 - Completely client side so it works with GitHub Pages
 
+GitHub Pages serves only these static files. The Node-based tools
+configured in this repository are used solely for development tasks
+like linting and testing. They are not required when the site is
+deployed.
+
 ## Running locally
 
 To work on Grid Quest locally you need Node.js for the lint and test tools and a
@@ -23,6 +28,7 @@ local HTTP server to serve the static assets.
    ```
 
    This sets up ESLint, Prettier and Jest which are used during development.
+   The packages are not part of the static site hosted on GitHub Pages.
 3. Optionally run the checks:
 
    ```bash
