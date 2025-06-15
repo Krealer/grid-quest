@@ -35,3 +35,7 @@ npm test
 ```
 
 Both commands should complete without errors before you submit a pull request.
+
+## File naming
+
+Name new files using `snake_case` to keep the repository consistent.
