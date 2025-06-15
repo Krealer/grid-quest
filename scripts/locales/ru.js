@@ -53,7 +53,6 @@ export default {
   'inventory.unequip': 'Снять',
   'inventory.use': 'Использовать',
   'inventory.reroll': 'Перебросить',
-  'dialogue.skip': 'Нажмите, чтобы пропустить',
   'status.regen': 'Regeneration',
   'status.fortify': 'Fortify',
   'status.defense_boost': 'Defense Boost',

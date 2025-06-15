@@ -53,7 +53,6 @@ export default {
   'inventory.unequip': '外す',
   'inventory.use': '使用',
   'inventory.reroll': 'リロール',
-  'dialogue.skip': 'タップしてスキップ',
   'status.regen': 'Regeneration',
   'status.fortify': 'Fortify',
   'status.defense_boost': 'Defense Boost',

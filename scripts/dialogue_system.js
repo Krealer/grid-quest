@@ -37,13 +37,9 @@ export async function showDialogue(keyOrText, callback = () => {}) {
   overlay.innerHTML = `
     <div class="dialogue-box">
       <div class="dialogue-text"></div>
-      <div class="dialogue-advance">\u2192</div>
     </div>`;
   document.body.appendChild(overlay);
   const textEl = overlay.querySelector('.dialogue-text');
-  const advance = overlay.querySelector('.dialogue-advance');
-  advance.textContent = t('dialogue.skip');
-  advance.style.display = 'none';
 
   let index = 0;
   const speed = gameState.settings?.dialogueAnim === false ? 0 : 30; // ms per character
@@ -54,7 +50,6 @@ export async function showDialogue(keyOrText, callback = () => {}) {
       index++;
       setTimeout(typeNext, speed);
     } else {
-      advance.style.display = 'block';
       overlay.querySelector('.dialogue-box').classList.add('finished');
     }
   }
@@ -65,7 +60,6 @@ export async function showDialogue(keyOrText, callback = () => {}) {
       if (gameState.settings?.tapToSkip === false) return;
       textEl.textContent = text;
       index = text.length;
-      advance.style.display = 'block';
       overlay.querySelector('.dialogue-box').classList.add('finished');
     } else {
       cleanup();

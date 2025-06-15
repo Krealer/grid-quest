@@ -808,23 +808,6 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
-.dialogue-advance {
-  position: absolute;
-  right: 10px;
-  bottom: 6px;
-  font-size: 20px;
-  animation: blink 1s steps(1) infinite;
-}
-
-.dialogue-box:not(.finished) .dialogue-advance {
-  display: none;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
 
 .dialogue-choices {
   margin-top: 12px;
