@@ -1,4 +1,3 @@
-import { showError } from './error_prompt.js';
 import { loadJson } from './data_service.js';
 import {
   markForkVisited,
@@ -101,7 +100,6 @@ export async function loadMap(name) {
     }
   } catch (err) {
     console.error(err);
-    showError(err.message || `Failed to load map ${name}`);
     throw err;
   }
   currentEnvironment = data.environment || 'clear';

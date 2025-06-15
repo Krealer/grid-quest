@@ -26,6 +26,7 @@ test('throws on network error', async () => {
   await expect(loadJson('path/file.json')).rejects.toThrow(
     'Network error while fetching path/file.json: boom'
   );
+  expect(errorPrompt.showError).toHaveBeenCalled();
 });
 
 test('throws on 404 error', async () => {
@@ -37,6 +38,7 @@ test('throws on 404 error', async () => {
   await expect(loadJson('missing.json')).rejects.toThrow(
     'File not found: missing.json'
   );
+  expect(errorPrompt.showError).toHaveBeenCalled();
 });
 
 test('throws on other HTTP error', async () => {
@@ -48,6 +50,7 @@ test('throws on other HTTP error', async () => {
   await expect(loadJson('server.json')).rejects.toThrow(
     '500 Server Error (server.json)'
   );
+  expect(errorPrompt.showError).toHaveBeenCalled();
 });
 
 test('throws on malformed JSON', async () => {
@@ -57,6 +60,7 @@ test('throws on malformed JSON', async () => {
   await expect(loadJson('bad.json')).rejects.toThrow(
     'Malformed JSON in bad.json'
   );
+  expect(errorPrompt.showError).toHaveBeenCalled();
 });
 
 test('returns parsed JSON on success', async () => {

@@ -1,5 +1,4 @@
 import { loadJson } from './data_service.js';
-import { showError } from './error_prompt.js';
 import { itemData } from './item_data.js';
 
 let items = {};
@@ -11,7 +10,6 @@ export async function loadItems() {
     items = { ...data, ...itemData };
   } catch (err) {
     items = { ...itemData };
-    showError(err.message || 'Failed to load items');
   }
   return items;
 }

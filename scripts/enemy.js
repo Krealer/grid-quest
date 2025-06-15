@@ -1,5 +1,4 @@
 import { gameState } from './game_state.js';
-import { showError } from './error_prompt.js';
 import { loadJson } from './data_service.js';
 
 let enemyData = {};
@@ -11,7 +10,6 @@ export async function loadEnemyData() {
     enemyData = data;
   } catch (err) {
     enemyData = {};
-    showError(err.message || 'Failed to load enemies');
   }
   return enemyData;
 }

@@ -1,5 +1,4 @@
 import { loadJson } from './data_service.js';
-import { showError } from './error_prompt.js';
 
 const STORAGE_KEY = 'gridquest.relics';
 
@@ -50,7 +49,6 @@ export async function loadRelics() {
     relicState.data = data;
   } catch (err) {
     relicState.data = {};
-    showError(err.message || 'Failed to load relics');
   }
   return relicState.data;
 }

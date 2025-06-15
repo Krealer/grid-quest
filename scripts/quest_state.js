@@ -1,6 +1,5 @@
 import { dialogueMemory, hasMemory, setMemory } from './dialogue_state.js';
 import { loadJson } from './data_service.js';
-import { showError } from './error_prompt.js';
 
 const state = {
   quests: {},
@@ -19,7 +18,6 @@ export async function loadQuestData() {
     state.data = data;
   } catch (err) {
     state.data = {};
-    showError(err.message || 'Failed to load quests');
   }
   state.loaded = true;
   return state.data;

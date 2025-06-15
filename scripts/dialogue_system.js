@@ -9,7 +9,6 @@ import {
   triggerReroll
 } from './dialogue_state.js';
 import { getQuests, completeQuest } from './quest_state.js';
-import { showError } from './error_prompt.js';
 import { loadJson } from './data_service.js';
 import { gameState } from './game_state.js';
 import { t } from './i18n.js';
@@ -24,7 +23,6 @@ async function loadDialogData() {
     dialogueLines = data;
   } catch (err) {
     dialogueLines = {};
-    showError(err.message || 'Failed to load dialogue');
   }
   dataLoaded = true;
 }
