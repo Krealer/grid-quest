@@ -10,6 +10,7 @@ import * as echoMemory from './echo_memory.js';
 import * as echoSelfFlame from './echo_self_flame.js';
 import * as echoSelfPeace from './echo_self_peace.js';
 import * as echoSelfShadow from './echo_self_shadow.js';
+import * as echo from './echo.js';
 import * as ember from './ember.js';
 import * as snealer from './snealer.js';
 import * as eryndor from './eryndor.js';
@@ -69,6 +70,7 @@ export const npcModules = {
   echo_self_flame: echoSelfFlame,
   echo_self_peace: echoSelfPeace,
   echo_self_shadow: echoSelfShadow,
+  echo,
   ember,
   snealer,
   eryndor,

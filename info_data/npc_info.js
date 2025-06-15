@@ -11,6 +11,11 @@ export default
     "description": "A lingering vision of your earliest recollections."
   },
   {
+    "id": "echo",
+    "name": "Echo of the Name",
+    "description": "A resonance that repeats what was once forgotten."
+  },
+  {
     "id": "lioran",
     "name": "Lioran",
     "description": "A fugitive scholar hiding among the ruins."

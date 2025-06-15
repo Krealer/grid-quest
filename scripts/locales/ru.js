@@ -148,6 +148,15 @@ export default {
   'snealer.dialogue.4.text':
     'Мудро. Вернись с редкостью, добытой у тех, кто боится света.',
   'snealer.dialogue.4.nod': 'Понял.',
+  'echo.dialogue.1.text': 'Шепот твоего имени эхом разносится из тумана.',
+  'echo.dialogue.1.option_1': 'Прислушаться',
+  'echo.dialogue.1.option_2': 'Игнорировать',
+  'echo.dialogue.2.text': 'Эхо говорит голосом, не совсем похожим на твой...',
+  'echo.dialogue.2.option_1': 'Кто ты?',
+  'echo.dialogue.2.option_2': 'Уйти',
+  'echo.dialogue.3.text': 'Я — то, что осталось от забытых имён. И ты можешь исчезнуть.',
+  'echo.dialogue.3.option_1': 'Что ты имеешь в виду?',
+  'echo.dialogue.3.option_2': 'Уйти',
   'message.water_restore':
     'Прохладная вода освежает. HP полностью восстановлено.',
   'message.chest_found': 'Вы нашли {itemName} в сундуке!',
