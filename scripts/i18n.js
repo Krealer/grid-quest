@@ -10,6 +10,7 @@ import nl from './locales/nl.js';
 import ja from './locales/ja.js';
 import ar from './locales/ar.js';
 import ru from './locales/ru.js';
+import { logWarn } from './logger.js';
 
 const translations = { en, nl, ja, ar, ru };
 const availableLocales = Object.keys(translations);
@@ -34,7 +35,7 @@ export function getLanguage() {
 export function t(key, vars = {}) {
   const template = translations[currentLang]?.[key] ?? translations.en?.[key];
   if (!template) {
-    console.warn('[Translation Missing]:', key);
+    logWarn('Translation Missing', { key });
     return '[Missing Translation]';
   }
   if (typeof template === 'string') {

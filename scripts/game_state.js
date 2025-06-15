@@ -1,5 +1,6 @@
 import { loadSettings } from './settings_manager.js';
 import { inventory } from './inventory.js';
+import { logMessage } from './message_log.js';
 
 export const gameState = {
   currentMap: '',
@@ -47,6 +48,6 @@ export function loadState() {
 export function validateLoadedInventory(savedItems) {
   const expected = Array.isArray(savedItems) ? savedItems.length : 0;
   if (expected !== inventory.length) {
-    console.warn('Inventory size mismatch after load');
+    logMessage('Inventory size mismatch after load');
   }
 }
