@@ -53,7 +53,7 @@ export function createCombatLayout() {
   const actions = document.createElement('div');
   actions.className = 'actions';
   actions.innerHTML = `
-    <button id="auto-battle-toggle" class="auto-battle-btn">Auto-Battle OFF</button>
+    <button id="auto-battle-toggle" class="auto-battle-btn auto-battle-button">Auto-Battle OFF</button>
     <div class="action-tabs">
       <button class="offensive-tab combat-skill-category">Offensive</button>
       <button class="defensive-tab combat-skill-category">Defensive</button>
