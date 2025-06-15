@@ -14,24 +14,13 @@ export function initSettingsPanel(
     langSelect,
     centerToggle,
     resetBtn,
-    rollbackRow,
-    rollbackSelect,
-    rollbackBtn,
   },
   settings,
   applySettings,
   saveSettings,
   setLanguage,
-  DEFAULT_SETTINGS,
-  rollbackTo
+  DEFAULT_SETTINGS
 ) {
-  if (
-    typeof process !== 'undefined' &&
-    process.env &&
-    process.env.NODE_ENV !== 'development'
-  ) {
-    rollbackRow.style.display = 'none';
-  }
 
   function showSettings() {
     settingsOverlay.classList.add('active');
@@ -119,8 +108,4 @@ export function initSettingsPanel(
     }
   });
 
-  rollbackBtn.addEventListener('click', () => {
-    rollbackTo(rollbackSelect.value);
-    alert(`Rolled back to ${rollbackSelect.value}`);
-  });
 }

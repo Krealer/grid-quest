@@ -102,5 +102,5 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 2. Manual Asset Loading
    - Many JSON assets are fetched at runtime (e.g., `loadMap` in `scripts/map_loader.js`), requiring a local HTTP server. If any file is missing or malformed, the error handling is minimal.
 
-3. Remove Unused Copies
-   - Previous releases were stored in a `versions/` directory. These files have been removed from the working tree to keep the repository lightweight. Use Git history or tags to access older snapshots.
+3. Historical Versions
+   - The optional rollback feature has been removed. Use Git history or tags if you need to reference older releases or maintain your own archives outside of the repository.

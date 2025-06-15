@@ -40,7 +40,6 @@ export default {
   'settings.language': 'اللغة',
   'settings.center': 'وضع التمركز (للجوال فقط)',
   'settings.reset': 'إعادة كل الإعدادات',
-  rollback: 'استرجاع',
   'error.ok': 'حسناً',
   'confirm.cancel': 'إلغاء',
   'confirm.yes': 'تأكيد',

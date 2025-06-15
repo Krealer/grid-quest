@@ -40,7 +40,6 @@ export default {
   'settings.language': 'Language',
   'settings.center': 'Center Mode (Mobile Portrait Only)',
   'settings.reset': 'Reset All Settings',
-  rollback: 'Rollback',
   'error.ok': 'OK',
   'confirm.cancel': 'Cancel',
   'confirm.yes': 'Confirm',

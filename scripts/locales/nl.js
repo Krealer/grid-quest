@@ -40,7 +40,6 @@ export default {
   'settings.language': 'Taal',
   'settings.center': 'Centrummodus (alleen mobiel portret)',
   'settings.reset': 'Reset alle instellingen',
-  rollback: 'Terugdraaien',
   'error.ok': 'OK',
   'confirm.cancel': 'Annuleren',
   'confirm.yes': 'Bevestigen',
