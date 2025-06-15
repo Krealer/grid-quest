@@ -1,7 +1,9 @@
+import { logInfo, logWarn } from './logger.js';
+
 export async function rollbackTo(version) {
   // Guard against executing in a browser environment
   if (typeof window !== 'undefined') {
-    console.warn('Rollback is not supported in the browser.');
+    logWarn('Rollback is not supported in the browser.');
     return;
   }
 
@@ -24,5 +26,5 @@ export async function rollbackTo(version) {
     filter: (src) => !src.includes('/versions/')
   });
 
-  console.log(`Rolled back to version ${version}`);
+  logInfo(`Rolled back to version ${version}`);
 }
