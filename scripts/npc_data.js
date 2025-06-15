@@ -1,11 +1,4 @@
 export const npcAppearance = {
-  first_memory: {
-    nameColor: '#ccccff',
-    font: 'sans-serif',
-    border: '#ccccff',
-    displayTitle: 'Echo of a Name',
-    dialogueScale: 1
-  },
   eryndor: {
     nameColor: '#99ff99',
     font: 'serif',
@@ -86,11 +79,6 @@ export const npcAppearance = {
 };
 
 export const npcData = {
-  first_memory: {
-    name: 'Echo of a Name',
-    map: 'map01',
-    description: 'A fragmented memory that speaks in whispers.'
-  },
   eryndor: {
     name: 'Eryndor, the Withheld',
     map: 'map01',
