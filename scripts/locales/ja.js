@@ -189,5 +189,17 @@ export default {
   'skill.guard.name': '防御',
   'skill.guard.description': '次の攻撃からのダメージを50％軽減。',
   'skill.heal.name': '回復',
-  'skill.heal.description': '最大HPの20%を回復。クールダウン: 3'
+  'skill.heal.description': '最大HPの20%を回復。クールダウン: 3',
+  'leda.dialogue.intro.text': 'あなたはフレデリカを探す最初の者ではない…そして最後でもない.',
+  'leda.dialogue.intro.0': '彼女は誰？',
+  'leda.dialogue.intro.1': 'どうして分かるの？',
+  'leda.dialogue.intro.2': '立ち去る',
+  'leda.dialogue.who.text': 'かつて炎の守護者だった。輝き、恐れられ、裏切られた。今は沈黙の道を歩む。',
+  'leda.dialogue.who.0': 'もっと教えて',
+  'leda.dialogue.who.1': '立ち去る',
+  'leda.dialogue.how.text': 'この場所の残響を長く聞いてきた。名前は繰り返されるものだ。',
+  'leda.dialogue.how.0': 'フレデリカ…?',
+  'leda.dialogue.how.1': '立ち去る',
+  'leda.dialogue.more.text': 'もし彼女を見つけたなら、力ではなく…目的を求めなさい。',
+  'leda.dialogue.more.0': 'ありがとう'
 };

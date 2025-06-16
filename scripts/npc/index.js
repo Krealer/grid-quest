@@ -21,6 +21,7 @@ import * as forkGuide from './fork_guide.js';
 import * as goblinQuestGiver from './goblin_quest_giver.js';
 import * as grindle from './grindle.js';
 import * as korell from './korell.js';
+import * as leda from './leda.js';
 import * as krealer from './krealer.js';
 import * as krealer1 from './krealer1.js';
 import * as krealer2 from './krealer2.js';
@@ -80,6 +81,7 @@ export const npcModules = {
   goblin_quest_giver: goblinQuestGiver,
   grindle,
   korell,
+  leda,
   krealer,
   krealer1,
   krealer2,

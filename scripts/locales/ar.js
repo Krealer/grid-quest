@@ -189,5 +189,17 @@ export default {
   'skill.guard.name': 'حراسة',
   'skill.guard.description': 'تقليل الضرر من الهجوم التالي بنسبة 50٪.',
   'skill.heal.name': 'شفاء',
-  'skill.heal.description': 'استعادة 20٪ من نقاط الحياة القصوى. وقت التهدئة: 3'
+  'skill.heal.description': 'استعادة 20٪ من نقاط الحياة القصوى. وقت التهدئة: 3',
+  'leda.dialogue.intro.text': 'لست أول من يبحث عن فريدريكا... ولن تكون الأخير.',
+  'leda.dialogue.intro.0': 'من هي؟',
+  'leda.dialogue.intro.1': 'كيف عرفت؟',
+  'leda.dialogue.intro.2': 'رحيل',
+  'leda.dialogue.who.text': 'كانت حارسةً للنار. متألقة، مهابة، وخُدعت. طريقها الآن صامت.',
+  'leda.dialogue.who.0': 'أخبرني المزيد',
+  'leda.dialogue.who.1': 'رحيل',
+  'leda.dialogue.how.text': 'لقد أصغيت طويلاً لأصداء هذا المكان. تتكرر الأسماء دائماً.',
+  'leda.dialogue.how.0': 'فريدريكا...؟',
+  'leda.dialogue.how.1': 'رحيل',
+  'leda.dialogue.more.text': 'إن وجدتها، فلا تطلب القوة... بل الغاية.',
+  'leda.dialogue.more.0': 'شكراً لك'
 };
