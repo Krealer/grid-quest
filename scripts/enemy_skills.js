@@ -1129,11 +1129,11 @@ export const enemySkills = {
     aiType: 'damage',
     applies: ['burn'],
     statuses: [{ target: 'player', id: 'burn', duration: 3 }],
-    effect({ enemy, damagePlayer, applyStatus, log }) {
+    effect({ enemy, player, damagePlayer, applyStatus, log }) {
       const atk = enemy.stats?.attack || 0;
       const dmg = atk + 4;
       const applied = damagePlayer(dmg);
-      applyStatus('player', 'burn', 3);
+      applyStatus(player, 'burn', 3);
       log(`${enemy.name} breathes embers for ${applied} damage!`);
     }
   },
