@@ -9,7 +9,7 @@ export const TILE_INFO = {
     color: '#b08d57',
     shape: 'square',
     walkable: false,
-    interactable: false
+    interactable: true
   },
   D: { color: '#5a381e', shape: 'square', walkable: false, interactable: true },
   N: { color: '#9b59b6', shape: 'circle', walkable: false, interactable: true },
