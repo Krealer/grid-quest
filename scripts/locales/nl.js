@@ -156,10 +156,12 @@ export default {
   'echo.dialogue.1.text': 'Een fluistering van je naam weerklinkt uit de mist.',
   'echo.dialogue.1.option_1': 'Luister',
   'echo.dialogue.1.option_2': 'Negeer het',
-  'echo.dialogue.2.text': 'De echo spreekt in tonen die niet helemaal de jouwe zijn...',
+  'echo.dialogue.2.text':
+    'De echo spreekt in tonen die niet helemaal de jouwe zijn...',
   'echo.dialogue.2.option_1': 'Wie ben je?',
   'echo.dialogue.2.option_2': 'Weggaan',
-  'echo.dialogue.3.text': 'Ik ben wat overblijft van vergeten namen. Ook jij kunt vervagen.',
+  'echo.dialogue.3.text':
+    'Ik ben wat overblijft van vergeten namen. Ook jij kunt vervagen.',
   'echo.dialogue.3.option_1': 'Hoe bedoel je?',
   'echo.dialogue.3.option_2': 'Weggaan',
   'message.water_restore': 'Het koele water verjongt je. HP volledig hersteld.',
@@ -192,25 +194,32 @@ export default {
   'combat.auto.on': 'Auto-Battle ON',
   'combat.auto.off': 'Auto-Battle OFF',
   'combat.skill.strike.description': 'Deal damage equal to your Attack stat.',
-  'combat.skill.guard.description': 'Verminder schade van de volgende aanval met 50%.',
-  'combat.skill.heal.description': 'Herstel 20% van je maximale HP. Aflopende tijd: 3',
+  'combat.skill.guard.description':
+    'Verminder schade van de volgende aanval met 50%.',
+  'combat.skill.heal.description':
+    'Herstel 20% van je maximale HP. Aflopende tijd: 3',
   'skill.strike.name': 'Slaan',
-  'skill.strike.description': 'Breng schade toe gelijk aan je Aanval-statistiek.',
+  'skill.strike.description':
+    'Breng schade toe gelijk aan je Aanval-statistiek.',
   'skill.guard.name': 'Blokkeer',
   'skill.guard.description': 'Verminder schade van de volgende aanval met 50%.',
   'skill.heal.name': 'Genezen',
   'skill.heal.description': 'Herstel 20% van je maximale HP. Aflopende tijd: 3',
-  'leda.dialogue.intro.text': 'Je bent niet de eerste die naar Frederica zoekt... en zeker niet de laatste.',
+  'leda.dialogue.intro.text':
+    'Je bent niet de eerste die naar Frederica zoekt... en zeker niet de laatste.',
   'leda.dialogue.intro.0': 'Wie is zij?',
   'leda.dialogue.intro.1': 'Hoe weet je dat?',
   'leda.dialogue.intro.2': 'Weggaan',
-  'leda.dialogue.who.text': 'Ooit een hoedster van het vuur. Briljant, gevreesd en verraden. Haar pad is nu stil.',
+  'leda.dialogue.who.text':
+    'Ooit een hoedster van het vuur. Briljant, gevreesd en verraden. Haar pad is nu stil.',
   'leda.dialogue.who.0': 'Vertel me meer',
   'leda.dialogue.who.1': 'Weggaan',
-  'leda.dialogue.how.text': 'Ik heb lang genoeg geluisterd naar de echo\'s van deze plek. Namen herhalen zich.',
+  'leda.dialogue.how.text':
+    "Ik heb lang genoeg geluisterd naar de echo's van deze plek. Namen herhalen zich.",
   'leda.dialogue.how.0': 'Frederica...?',
   'leda.dialogue.how.1': 'Weggaan',
-  'leda.dialogue.more.text': 'Als je haar vindt, vraag dan niet om macht... maar om doel.',
+  'leda.dialogue.more.text':
+    'Als je haar vindt, vraag dan niet om macht... maar om doel.',
   'leda.dialogue.more.0': 'Dank je',
   'frederica.dialogue.start.text': 'Ah, een reiziger. Wat zoek je?',
   'frederica.dialogue.start.0': 'Vertel me over de grot.',
@@ -218,16 +227,19 @@ export default {
   'frederica.dialogue.start.2': 'En Timara?',
   'frederica.dialogue.start.3': 'Ik heb drankjes meegebracht.',
   'frederica.dialogue.start.4': 'Weggaan',
-  'frederica.dialogue.cave.text': 'Donker en genadeloos. Velen proberen het, weinigen keren terug.',
+  'frederica.dialogue.cave.text':
+    'Donker en genadeloos. Velen proberen het, weinigen keren terug.',
   'frederica.dialogue.cave.0': 'Ik zal voorzichtig zijn.',
-  'frederica.dialogue.leda.text': 'Ze luistert beter dan ze praat. Haar ogen weten veel.',
+  'frederica.dialogue.leda.text':
+    'Ze luistert beter dan ze praat. Haar ogen weten veel.',
   'frederica.dialogue.leda.0': 'Interessant.',
   'frederica.dialogue.timara.text': 'Een koppige smid. Eerlijk. Dapper.',
   'frederica.dialogue.timara.0': 'Ik begrijp het.',
   'frederica.dialogue.trade_offer.text': 'Heb je 3 Verdedigingsdrank I?',
   'frederica.dialogue.trade_offer.0': 'Ja, geef ze maar.',
   'frederica.dialogue.trade_offer.1': 'Misschien later.',
-  'frederica.dialogue.trade_denied.text': 'Als je terugkomt met drie Verdedigingsdrank I... zal ik je belonen.',
+  'frederica.dialogue.trade_denied.text':
+    'Als je terugkomt met drie Verdedigingsdrank I... zal ik je belonen.',
   'frederica.dialogue.trade_denied.0': 'Begrepen.',
   'frederica.dialogue.thanks.text': 'Uitstekend. Hier is je grotpas.',
   'frederica.dialogue.thanks.0': 'Goede reis.',
@@ -237,16 +249,27 @@ export default {
   'timara.dialogue.start.1': 'Waar dient deze edelsteen voor?',
   'timara.dialogue.start.2': 'Vaarwel',
 
-  'timara.dialogue.ronington.text': 'In de grot huist Ronington — een vurige babydraak. In 30% van de gevallen laat hij een edelsteen vallen als hij verslagen wordt.',
+  'timara.dialogue.ronington.text':
+    'In de grot huist Ronington — een vurige babydraak. In 30% van de gevallen laat hij een edelsteen vallen als hij verslagen wordt.',
   'timara.dialogue.ronington.0': 'Dat is zeldzaam... en gevaarlijk.',
 
-  'timara.dialogue.gem_info.text': 'Een edelsteen, hè? Vuurgeboren en lichtgevend. Zeldzaam en prachtig.',
+  'timara.dialogue.gem_info.text':
+    'Een edelsteen, hè? Vuurgeboren en lichtgevend. Zeldzaam en prachtig.',
   'timara.dialogue.gem_info.offer': 'Wil je deze edelsteen ruilen?',
   'timara.dialogue.gem_info.0': 'Ik wilde het alleen weten.',
 
   'timara.dialogue.gem_offer': 'Bied de edelsteen aan',
-  'timara.dialogue.gem_receive': 'Timara accepteert de steen en geeft je een roestige bijl.',
+  'timara.dialogue.gem_receive':
+    'Timara accepteert de steen en geeft je een roestige bijl.',
 
-  'timara.dialogue.thank_you.text': 'Moge hij je goed dienen. Lomp, maar scherp.',
+  'timara.dialogue.gem_trade.text':
+    'You carry a gem? I could use one for my forge.',
+  'timara.dialogue.gem_trade.give': 'Give gem',
+  'timara.dialogue.gem_trade.leave': 'Leave',
+  'timara.dialogue.after_trade.text':
+    "This'll do nicely. Here, take this old axe.",
+
+  'timara.dialogue.thank_you.text':
+    'Moge hij je goed dienen. Lomp, maar scherp.',
   'timara.dialogue.thank_you.0': 'Bedankt.'
 };
