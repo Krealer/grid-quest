@@ -203,7 +203,7 @@ export default {
   'leda.dialogue.how.0': 'Фредерика...?',
   'leda.dialogue.how.1': 'Уйти',
   'leda.dialogue.more.text': 'Если найдёшь её, проси не силу... а цель.',
-  'leda.dialogue.more.0': 'Спасибо'
+  'leda.dialogue.more.0': 'Спасибо',
   'frederica.dialogue.start.text': 'Ах, путник. Что ищешь?',
   'frederica.dialogue.start.0': 'Расскажи о пещере.',
   'frederica.dialogue.start.1': 'Кто такая Леда?',
