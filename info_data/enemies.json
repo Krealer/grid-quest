@@ -85,7 +85,7 @@
     "map": "Map07 Maze",
     "location": "14,8",
     "drops": "Prism Fragment",
-    "skills": "refract_crack, prism_crack"
+    "skills": "crystal_fortify, shatter_pulse, refract_crack, prism_crack"
   },
   {
     "id": "pain_lattice",

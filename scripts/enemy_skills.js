@@ -489,6 +489,40 @@ export const enemySkills = {
       log(`${enemy.name} unleashes a prism crack for ${applied} damage!`);
     }
   },
+  crystal_fortify: {
+    id: 'crystal_fortify',
+    name: 'Crystal Fortify',
+    icon: '🛡️',
+    description: 'Permanently increases own Defense by 2.',
+    category: 'defensive',
+    cooldown: 0,
+    aiType: 'buff',
+    targetType: 'self',
+    range: 'single',
+    effect({ enemy, log }) {
+      enemy.stats.defense = (enemy.stats.defense || 0) + 2;
+      log(`${enemy.name} reinforces its crystalline shell!`);
+    }
+  },
+  shatter_pulse: {
+    id: 'shatter_pulse',
+    name: 'Shatter Pulse',
+    icon: '💎',
+    description: 'Deals 100 damage and permanently lowers Defense by 30.',
+    category: 'offensive',
+    cooldown: 10,
+    aiType: 'damage',
+    targetType: 'enemy',
+    range: 'single',
+    effect({ player, damagePlayer, log }) {
+      const baseDmg = 100;
+      const dmg = player.hasGuard ? Math.floor(baseDmg / 2) : baseDmg;
+      const applied = damagePlayer(dmg);
+      player.stats.defense = (player.stats.defense || 0) - 30;
+      log(`${player.name} is hit by a brutal pulse for ${applied} damage!`);
+      log(`${player.name}'s defense is shattered by 30!`);
+    }
+  },
   neural_lash: {
     id: 'neural_lash',
     name: 'Neural Lash',

@@ -55,6 +55,7 @@ export const player = {
   tempAttack: 0,
   hasTemplePassive: false,
   guarding: false,
+  hasGuard: false,
   statuses: [],
   isPlayer: true
 };

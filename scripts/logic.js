@@ -23,9 +23,10 @@ export function calculateDamage(attacker, target, baseDamage) {
 
 export function applyDamage(target, amount) {
   let dmg = amount;
-  if (target.guarding) {
+  if (target.guarding || target.hasGuard) {
     dmg = Math.floor(dmg / 2);
     target.guarding = false;
+    target.hasGuard = false;
   }
   if (typeof target.damageTakenMod === 'number') {
     dmg *= target.damageTakenMod;
