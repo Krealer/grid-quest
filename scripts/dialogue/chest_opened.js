@@ -1,6 +1,8 @@
 import { giveItem } from '../inventory.js';
 import { removeChest } from '../map.js';
 import { showDialogue } from '../dialogue_system.js';
+import { markChestAsCut } from '../chest.js';
+import { getCurrentMapName } from '../router.js';
 
 export function createOpenedChestDialogue(x, y) {
   return [
@@ -14,6 +16,7 @@ export function createOpenedChestDialogue(x, y) {
           onChoose: async () => {
             removeChest(x, y);
             await giveItem('wood', 1);
+            markChestAsCut(`${getCurrentMapName()}:${x},${y}`);
             showDialogue('You salvage wood from the old chest.');
           }
         },

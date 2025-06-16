@@ -5,6 +5,7 @@ import { logMessage } from './message_log.js';
 export const gameState = {
   currentMap: '',
   openedChests: new Set(),
+  cutChests: new Set(),
   defeatedEnemies: new Set(),
   environment: 'clear',
   isDead: false,
@@ -17,6 +18,7 @@ export function serializeGameState() {
   return {
     currentMap: gameState.currentMap,
     openedChests: Array.from(gameState.openedChests),
+    cutChests: Array.from(gameState.cutChests),
     defeatedEnemies: Array.from(gameState.defeatedEnemies),
     settings: gameState.settings
   };
@@ -26,6 +28,7 @@ export function deserializeGameState(data) {
   if (!data) return;
   gameState.currentMap = data.currentMap || '';
   gameState.openedChests = new Set(data.openedChests || []);
+  gameState.cutChests = new Set(data.cutChests || []);
   gameState.defeatedEnemies = new Set(data.defeatedEnemies || []);
   gameState.settings = data.settings || {};
 }

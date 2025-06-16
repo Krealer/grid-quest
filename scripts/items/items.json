@@ -14,5 +14,13 @@
     "description": "An old but functional axe. It can break apart worn-down objects.",
     "type": "key",
     "key": true
+  },
+  "wood": {
+    "name": "Wood",
+    "description": "A sturdy piece of lumber, could be useful.",
+    "icon": "🪵",
+    "type": "material",
+    "stackLimit": 99,
+    "category": "general"
   }
 }

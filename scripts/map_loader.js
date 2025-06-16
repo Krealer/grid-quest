@@ -98,6 +98,16 @@ export async function loadMap(name) {
         }
       }
     }
+
+    for (let y = 0; y < data.grid.length; y++) {
+      for (let x = 0; x < data.grid[y].length; x++) {
+        const cell = data.grid[y][x];
+        if (!cell) continue;
+        if ((cell.type === 'C' || cell.type === 'c') && gameState.cutChests.has(`${name}:${x},${y}`)) {
+          data.grid[y][x] = { type: 'G' };
+        }
+      }
+    }
   } catch (err) {
     console.error(err);
     throw err;
