@@ -185,7 +185,8 @@ export default {
   'combat.auto.off': 'Auto-Battle OFF',
   'combat.skill.strike.description': 'Deal damage equal to your Attack stat.',
   'combat.skill.guard.description': 'تقليل الضرر من الهجوم التالي بنسبة 50٪.',
-  'combat.skill.heal.description': 'استعادة 20٪ من نقاط الحياة القصوى. وقت التهدئة: 3',
+  'combat.skill.heal.description':
+    'استعادة 20٪ من نقاط الحياة القصوى. وقت التهدئة: 3',
   'skill.strike.name': 'ضربة',
   'skill.strike.description': 'يسبب ضررًا يعادل قوة الهجوم.',
   'skill.guard.name': 'حراسة',
@@ -196,10 +197,12 @@ export default {
   'leda.dialogue.intro.0': 'من هي؟',
   'leda.dialogue.intro.1': 'كيف عرفت؟',
   'leda.dialogue.intro.2': 'رحيل',
-  'leda.dialogue.who.text': 'كانت حارسةً للنار. متألقة، مهابة، وخُدعت. طريقها الآن صامت.',
+  'leda.dialogue.who.text':
+    'كانت حارسةً للنار. متألقة، مهابة، وخُدعت. طريقها الآن صامت.',
   'leda.dialogue.who.0': 'أخبرني المزيد',
   'leda.dialogue.who.1': 'رحيل',
-  'leda.dialogue.how.text': 'لقد أصغيت طويلاً لأصداء هذا المكان. تتكرر الأسماء دائماً.',
+  'leda.dialogue.how.text':
+    'لقد أصغيت طويلاً لأصداء هذا المكان. تتكرر الأسماء دائماً.',
   'leda.dialogue.how.0': 'فريدريكا...؟',
   'leda.dialogue.how.1': 'رحيل',
   'leda.dialogue.more.text': 'إن وجدتها، فلا تطلب القوة... بل الغاية.',
@@ -212,14 +215,17 @@ export default {
   'frederica.dialogue.start.4': 'الرحيل',
   'frederica.dialogue.cave.text': 'مظلم لا يرحم. كثيرون يحاولون وقلة يعودون.',
   'frederica.dialogue.cave.0': 'سأكون حذراً.',
-  'frederica.dialogue.leda.text': 'هي تستمع أكثر مما تتكلم. عيناها تعرفان الكثير.',
+  'frederica.dialogue.leda.text':
+    'هي تستمع أكثر مما تتكلم. عيناها تعرفان الكثير.',
   'frederica.dialogue.leda.0': 'مثير للاهتمام.',
   'frederica.dialogue.timara.text': 'حدادة عنيدة. صادقة. شجاعة.',
   'frederica.dialogue.timara.0': 'أرى.',
-  'frederica.dialogue.trade_offer.text': 'هل لديك 3 جرعات دفاع من المستوى الأول؟',
+  'frederica.dialogue.trade_offer.text':
+    'هل لديك 3 جرعات دفاع من المستوى الأول؟',
   'frederica.dialogue.trade_offer.0': 'نعم، خذها.',
   'frederica.dialogue.trade_offer.1': 'لاحقاً ربما.',
-  'frederica.dialogue.trade_denied.text': 'إن عدت بثلاث جرعات دفاع من المستوى الأول... سأكافئك.',
+  'frederica.dialogue.trade_denied.text':
+    'إن عدت بثلاث جرعات دفاع من المستوى الأول... سأكافئك.',
   'frederica.dialogue.trade_denied.0': 'أتفهم.',
   'frederica.dialogue.thanks.text': 'ممتاز. إليك تصريح الكهف.',
   'frederica.dialogue.thanks.0': 'رحلات آمنة.',
@@ -229,7 +235,8 @@ export default {
   'timara.dialogue.start.1': 'لما هذه الجوهرة؟',
   'timara.dialogue.start.2': 'وداعاً',
 
-  'timara.dialogue.ronington.text': 'داخل الكهف يعيش روننغتون — تنين صغير ناري. يسقط جوهرة بنسبة 30٪ عند هزيمته.',
+  'timara.dialogue.ronington.text':
+    'داخل الكهف يعيش روننغتون — تنين صغير ناري. يسقط جوهرة بنسبة 30٪ عند هزيمته.',
   'timara.dialogue.ronington.0': 'نادر... وخطير.',
 
   'timara.dialogue.gem_info.text': 'جوهرة؟ ولدت من النار ومضيئة. نادرة وجميلة.',
@@ -238,6 +245,13 @@ export default {
 
   'timara.dialogue.gem_offer': 'قدم الجوهرة',
   'timara.dialogue.gem_receive': 'تقبلت تيمارا الجوهرة وسلمتك فأساً صدئة.',
+
+  'timara.dialogue.gem_trade.text':
+    'You carry a gem? I could use one for my forge.',
+  'timara.dialogue.gem_trade.give': 'Give gem',
+  'timara.dialogue.gem_trade.leave': 'Leave',
+  'timara.dialogue.after_trade.text':
+    "This'll do nicely. Here, take this old axe.",
 
   'timara.dialogue.thank_you.text': 'عسى أن تخدمك جيداً. بدائية لكنها حادة.',
   'timara.dialogue.thank_you.0': 'شكراً.'

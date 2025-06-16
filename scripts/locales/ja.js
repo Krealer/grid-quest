@@ -152,7 +152,8 @@ export default {
   'echo.dialogue.2.text': 'そのこだまは、あなたとは少し違う声色で語りかける…',
   'echo.dialogue.2.option_1': 'あなたは誰？',
   'echo.dialogue.2.option_2': '立ち去る',
-  'echo.dialogue.3.text': '私は忘れられた名の残滓。あなたもいずれ消えゆくかもしれない。',
+  'echo.dialogue.3.text':
+    '私は忘れられた名の残滓。あなたもいずれ消えゆくかもしれない。',
   'echo.dialogue.3.option_1': 'どういう意味だ？',
   'echo.dialogue.3.option_2': '立ち去る',
   'message.water_restore': '冷たい水があなたを癒す。HPが全回復した。',
@@ -192,17 +193,21 @@ export default {
   'skill.guard.description': '次の攻撃からのダメージを50％軽減。',
   'skill.heal.name': '回復',
   'skill.heal.description': '最大HPの20%を回復。クールダウン: 3',
-  'leda.dialogue.intro.text': 'あなたはフレデリカを探す最初の者ではない…そして最後でもない.',
+  'leda.dialogue.intro.text':
+    'あなたはフレデリカを探す最初の者ではない…そして最後でもない.',
   'leda.dialogue.intro.0': '彼女は誰？',
   'leda.dialogue.intro.1': 'どうして分かるの？',
   'leda.dialogue.intro.2': '立ち去る',
-  'leda.dialogue.who.text': 'かつて炎の守護者だった。輝き、恐れられ、裏切られた。今は沈黙の道を歩む。',
+  'leda.dialogue.who.text':
+    'かつて炎の守護者だった。輝き、恐れられ、裏切られた。今は沈黙の道を歩む。',
   'leda.dialogue.who.0': 'もっと教えて',
   'leda.dialogue.who.1': '立ち去る',
-  'leda.dialogue.how.text': 'この場所の残響を長く聞いてきた。名前は繰り返されるものだ。',
+  'leda.dialogue.how.text':
+    'この場所の残響を長く聞いてきた。名前は繰り返されるものだ。',
   'leda.dialogue.how.0': 'フレデリカ…?',
   'leda.dialogue.how.1': '立ち去る',
-  'leda.dialogue.more.text': 'もし彼女を見つけたなら、力ではなく…目的を求めなさい。',
+  'leda.dialogue.more.text':
+    'もし彼女を見つけたなら、力ではなく…目的を求めなさい。',
   'leda.dialogue.more.0': 'ありがとう',
   'frederica.dialogue.start.text': '旅人か。何を求めている？',
   'frederica.dialogue.start.0': '洞窟について教えて。',
@@ -210,16 +215,19 @@ export default {
   'frederica.dialogue.start.2': 'ティマラは？',
   'frederica.dialogue.start.3': 'ポーションを持ってきた。',
   'frederica.dialogue.start.4': '去る',
-  'frederica.dialogue.cave.text': '暗く容赦ない。挑む者は多いが、戻る者は少ない。',
+  'frederica.dialogue.cave.text':
+    '暗く容赦ない。挑む者は多いが、戻る者は少ない。',
   'frederica.dialogue.cave.0': '気を付ける。',
-  'frederica.dialogue.leda.text': '彼女は話すより聞く方が得意だ。瞳は多くを知っている。',
+  'frederica.dialogue.leda.text':
+    '彼女は話すより聞く方が得意だ。瞳は多くを知っている。',
   'frederica.dialogue.leda.0': '興味深い。',
   'frederica.dialogue.timara.text': '頑固な鍛冶屋。誠実で勇敢。',
   'frederica.dialogue.timara.0': 'なるほど。',
   'frederica.dialogue.trade_offer.text': '防御ポーションIを3つ持っているかい?',
   'frederica.dialogue.trade_offer.0': 'はい、渡す。',
   'frederica.dialogue.trade_offer.1': 'また今度。',
-  'frederica.dialogue.trade_denied.text': 'もし防御ポーションIを三つ持ってきたら…良い物をやろう。',
+  'frederica.dialogue.trade_denied.text':
+    'もし防御ポーションIを三つ持ってきたら…良い物をやろう。',
   'frederica.dialogue.trade_denied.0': 'わかった。',
   'frederica.dialogue.thanks.text': '素晴らしい。これが洞窟通行証だ。',
   'frederica.dialogue.thanks.0': '良い旅を。',
@@ -229,7 +237,8 @@ export default {
   'timara.dialogue.start.1': 'この宝石は何に使うの？',
   'timara.dialogue.start.2': 'さようなら',
 
-  'timara.dialogue.ronington.text': '洞窟にはロニントンという炎の赤ちゃんドラゴンがいる。倒すと30%の確率で宝石を落とす。',
+  'timara.dialogue.ronington.text':
+    '洞窟にはロニントンという炎の赤ちゃんドラゴンがいる。倒すと30%の確率で宝石を落とす。',
   'timara.dialogue.ronington.0': '珍しくて…危険だね。',
 
   'timara.dialogue.gem_info.text': '宝石か。炎に生まれ輝く。希少で美しい。',
@@ -237,7 +246,15 @@ export default {
   'timara.dialogue.gem_info.0': 'ただ知りたかっただけ。',
 
   'timara.dialogue.gem_offer': '宝石を渡す',
-  'timara.dialogue.gem_receive': 'ティマラは宝石を受け取り、錆びた斧を手渡した。',
+  'timara.dialogue.gem_receive':
+    'ティマラは宝石を受け取り、錆びた斧を手渡した。',
+
+  'timara.dialogue.gem_trade.text':
+    'You carry a gem? I could use one for my forge.',
+  'timara.dialogue.gem_trade.give': 'Give gem',
+  'timara.dialogue.gem_trade.leave': 'Leave',
+  'timara.dialogue.after_trade.text':
+    "This'll do nicely. Here, take this old axe.",
 
   'timara.dialogue.thank_you.text': '役立ててくれ。粗末だけど切れるよ。',
   'timara.dialogue.thank_you.0': 'ありがとう'

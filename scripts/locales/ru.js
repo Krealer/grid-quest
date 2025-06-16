@@ -153,7 +153,8 @@ export default {
   'echo.dialogue.2.text': 'Эхо говорит голосом, не совсем похожим на твой...',
   'echo.dialogue.2.option_1': 'Кто ты?',
   'echo.dialogue.2.option_2': 'Уйти',
-  'echo.dialogue.3.text': 'Я — то, что осталось от забытых имён. И ты можешь исчезнуть.',
+  'echo.dialogue.3.text':
+    'Я — то, что осталось от забытых имён. И ты можешь исчезнуть.',
   'echo.dialogue.3.option_1': 'Что ты имеешь в виду?',
   'echo.dialogue.3.option_2': 'Уйти',
   'message.water_restore':
@@ -187,21 +188,25 @@ export default {
   'combat.auto.off': 'Auto-Battle OFF',
   'combat.skill.strike.description': 'Deal damage equal to your Attack stat.',
   'combat.skill.guard.description': 'Уменьшает урон от следующей атаки на 50%.',
-  'combat.skill.heal.description': 'Восстанавливает 20% от макс. HP. Перезарядка: 3',
+  'combat.skill.heal.description':
+    'Восстанавливает 20% от макс. HP. Перезарядка: 3',
   'skill.strike.name': 'Удар',
   'skill.strike.description': 'Наносит урон, равный вашей атаке.',
   'skill.guard.name': 'Блок',
   'skill.guard.description': 'Уменьшает урон от следующей атаки на 50%.',
   'skill.heal.name': 'Лечение',
   'skill.heal.description': 'Восстанавливает 20% от макс. HP. Перезарядка: 3',
-  'leda.dialogue.intro.text': 'Ты не первый ищущий Фредерику... и не последний.',
+  'leda.dialogue.intro.text':
+    'Ты не первый ищущий Фредерику... и не последний.',
   'leda.dialogue.intro.0': 'Кто она?',
   'leda.dialogue.intro.1': 'Откуда ты знаешь?',
   'leda.dialogue.intro.2': 'Уйти',
-  'leda.dialogue.who.text': 'Когда-то она была хранительницей пламени. Яркая, грозная, преданная. Теперь её путь — молчание.',
+  'leda.dialogue.who.text':
+    'Когда-то она была хранительницей пламени. Яркая, грозная, преданная. Теперь её путь — молчание.',
   'leda.dialogue.who.0': 'Расскажи подробнее',
   'leda.dialogue.who.1': 'Уйти',
-  'leda.dialogue.how.text': 'Я достаточно наслушалась эха этого места. Имена имеют свойство повторяться.',
+  'leda.dialogue.how.text':
+    'Я достаточно наслушалась эха этого места. Имена имеют свойство повторяться.',
   'leda.dialogue.how.0': 'Фредерика...?',
   'leda.dialogue.how.1': 'Уйти',
   'leda.dialogue.more.text': 'Если найдёшь её, проси не силу... а цель.',
@@ -212,16 +217,20 @@ export default {
   'frederica.dialogue.start.2': 'А Тимара?',
   'frederica.dialogue.start.3': 'Я принёс зелья.',
   'frederica.dialogue.start.4': 'Уйти',
-  'frederica.dialogue.cave.text': 'Тёмная и беспощадная. Многие пытаются, но возвращаются немногие.',
+  'frederica.dialogue.cave.text':
+    'Тёмная и беспощадная. Многие пытаются, но возвращаются немногие.',
   'frederica.dialogue.cave.0': 'Буду осторожен.',
-  'frederica.dialogue.leda.text': 'Она лучше слушает, чем говорит. Её глаза многое знают.',
+  'frederica.dialogue.leda.text':
+    'Она лучше слушает, чем говорит. Её глаза многое знают.',
   'frederica.dialogue.leda.0': 'Интересно.',
   'frederica.dialogue.timara.text': 'Упрямый кузнец. Честный. Смелый.',
   'frederica.dialogue.timara.0': 'Понятно.',
-  'frederica.dialogue.trade_offer.text': 'У тебя есть 3 зелья защиты I? Они мне очень нужны.',
+  'frederica.dialogue.trade_offer.text':
+    'У тебя есть 3 зелья защиты I? Они мне очень нужны.',
   'frederica.dialogue.trade_offer.0': 'Да, держи.',
   'frederica.dialogue.trade_offer.1': 'Позже, возможно.',
-  'frederica.dialogue.trade_denied.text': 'Вернись с тремя зельями защиты I... и я отблагодарю тебя.',
+  'frederica.dialogue.trade_denied.text':
+    'Вернись с тремя зельями защиты I... и я отблагодарю тебя.',
   'frederica.dialogue.trade_denied.0': 'Понимаю.',
   'frederica.dialogue.thanks.text': 'Отлично. Вот твой пропуск в пещеру.',
   'frederica.dialogue.thanks.0': 'Счастливого пути.',
@@ -231,15 +240,25 @@ export default {
   'timara.dialogue.start.1': 'Для чего этот самоцвет?',
   'timara.dialogue.start.2': 'До встречи',
 
-  'timara.dialogue.ronington.text': 'Внутри пещеры живёт Ронингтон — огненный дракончик. В 30% случаев после победы он роняет самоцвет.',
+  'timara.dialogue.ronington.text':
+    'Внутри пещеры живёт Ронингтон — огненный дракончик. В 30% случаев после победы он роняет самоцвет.',
   'timara.dialogue.ronington.0': 'Редко... и опасно.',
 
-  'timara.dialogue.gem_info.text': 'Самоцвет, говоришь? Рождён пламенем и светится. Редкая красота.',
+  'timara.dialogue.gem_info.text':
+    'Самоцвет, говоришь? Рождён пламенем и светится. Редкая красота.',
   'timara.dialogue.gem_info.offer': 'Хочешь обменять этот самоцвет?',
   'timara.dialogue.gem_info.0': 'Просто хотел узнать.',
 
   'timara.dialogue.gem_offer': 'Предложить самоцвет',
-  'timara.dialogue.gem_receive': 'Тимара принимает самоцвет и вручает тебе ржавый топор.',
+  'timara.dialogue.gem_receive':
+    'Тимара принимает самоцвет и вручает тебе ржавый топор.',
+
+  'timara.dialogue.gem_trade.text':
+    'You carry a gem? I could use one for my forge.',
+  'timara.dialogue.gem_trade.give': 'Give gem',
+  'timara.dialogue.gem_trade.leave': 'Leave',
+  'timara.dialogue.after_trade.text':
+    "This'll do nicely. Here, take this old axe.",
 
   'timara.dialogue.thank_you.text': 'Пусть послужит тебе. Грубый, но острый.',
   'timara.dialogue.thank_you.0': 'Спасибо.'
