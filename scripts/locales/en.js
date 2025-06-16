@@ -159,7 +159,8 @@ export default {
   'echo.dialogue.2.text': 'The echo speaks in tones not quite your own...',
   'echo.dialogue.2.option_1': 'Who are you?',
   'echo.dialogue.2.option_2': 'Leave',
-  'echo.dialogue.3.text': 'I am what remains of forgotten names. You, too, may fade.',
+  'echo.dialogue.3.text':
+    'I am what remains of forgotten names. You, too, may fade.',
   'echo.dialogue.3.option_1': 'What do you mean?',
   'echo.dialogue.3.option_2': 'Leave',
   'message.water_restore': 'The cool water rejuvenates you. HP fully restored.',
@@ -191,7 +192,8 @@ export default {
   'combat.auto.on': 'Auto-Battle ON',
   'combat.auto.off': 'Auto-Battle OFF',
   'combat.skill.strike.description': 'Deal damage equal to your Attack stat.',
-  'combat.skill.guard.description': 'Reduce damage from the next attack by 50%.',
+  'combat.skill.guard.description':
+    'Reduce damage from the next attack by 50%.',
   'combat.skill.heal.description': 'Restore 20% of your max HP. Cooldown: 3',
   'skill.strike.name': 'Strike',
   'skill.strike.description': 'Deal damage equal to your Attack stat.',
@@ -199,19 +201,23 @@ export default {
   'skill.guard.description': 'Reduce damage from the next attack by 50%.',
   'skill.heal.name': 'Heal',
   'skill.heal.description': 'Restore 20% of your max HP. Cooldown: 3',
-  'leda.dialogue.intro.text': "You're not the first to search for Frederica... nor the last.",
+  'leda.dialogue.intro.text':
+    "You're not the first to search for Frederica... nor the last.",
   'leda.dialogue.intro.0': 'Who is she?',
   'leda.dialogue.intro.1': 'How do you know?',
   'leda.dialogue.intro.2': 'Leave',
-  'leda.dialogue.who.text': 'Once a guardian of flame. Brilliant, feared, and betrayed. Her path is one of silence now.',
+  'leda.dialogue.who.text':
+    'Once a guardian of flame. Brilliant, feared, and betrayed. Her path is one of silence now.',
   'leda.dialogue.who.0': 'Tell me more',
   'leda.dialogue.who.1': 'Leave',
-  'leda.dialogue.how.text': 'I’ve listened long enough to the echoes of this place. Names tend to repeat themselves.',
+  'leda.dialogue.how.text':
+    'I’ve listened long enough to the echoes of this place. Names tend to repeat themselves.',
   'leda.dialogue.how.0': 'Frederica...?',
   'leda.dialogue.how.1': 'Leave',
-  'leda.dialogue.more.text': 'If you do find her, ask not for power... but for purpose.',
+  'leda.dialogue.more.text':
+    'If you do find her, ask not for power... but for purpose.',
   'leda.dialogue.more.0': 'Thank you',
-  
+
   'frederica.dialogue.start.text': 'Ah, a traveler. What do you seek?',
   'frederica.dialogue.start.0': 'Tell me about the cave.',
   'frederica.dialogue.start.1': 'Who is Leda?',
@@ -222,7 +228,8 @@ export default {
   'frederica.dialogue.cave.text': 'Dark and unforgiving. Many try, few return.',
   'frederica.dialogue.cave.0': 'I’ll be careful.',
 
-  'frederica.dialogue.leda.text': 'She listens better than she speaks. Her eyes know much.',
+  'frederica.dialogue.leda.text':
+    'She listens better than she speaks. Her eyes know much.',
   'frederica.dialogue.leda.0': 'Interesting.',
 
   'frederica.dialogue.timara.text': 'A stubborn smith. Honest. Brave.',
@@ -232,26 +239,37 @@ export default {
   'frederica.dialogue.trade_offer.0': 'Yes, hand them over.',
   'frederica.dialogue.trade_offer.1': 'Maybe later.',
 
-  'frederica.dialogue.trade_denied.text': 'If you return with three Defense Potion I... I’ll make it worth your while.',
+  'frederica.dialogue.trade_denied.text':
+    'If you return with three Defense Potion I... I’ll make it worth your while.',
   'frederica.dialogue.trade_denied.0': 'I understand.',
 
   'frederica.dialogue.thanks.text': 'Excellent. Here’s your cave pass.',
-    'timara.dialogue.start.text': 'Looking for tools or tales?',
-    'timara.dialogue.start.0': 'Tell me about the cave.',
-    'timara.dialogue.start.1': "What's this gem for?",
-    'timara.dialogue.start.2': 'Goodbye',
-  
-    'timara.dialogue.ronington.text': 'Inside the cave dwells Ronington — a fiery baby dragon. 30% of the time, it drops a gem when defeated.',
-    'timara.dialogue.ronington.0': 'That\'s rare... and dangerous.',
-  
-    'timara.dialogue.gem_info.text': 'A gem, eh? Fireborn and luminous. Rare and beautiful.',
-    'timara.dialogue.gem_info.offer': 'Would you like to trade this gem?',
-    'timara.dialogue.gem_info.0': 'Just wanted to know.',
+  'timara.dialogue.start.text': 'Looking for tools or tales?',
+  'timara.dialogue.start.0': 'Tell me about the cave.',
+  'timara.dialogue.start.1': "What's this gem for?",
+  'timara.dialogue.start.2': 'Goodbye',
 
-    'timara.dialogue.gem_offer': 'Offer the gem',
-    'timara.dialogue.gem_receive': 'Timara accepts the gem and hands you a Rusty Axe.',
-  
-    'timara.dialogue.thank_you.text': 'May it serve you well. Crude, but sharp.',
-    'timara.dialogue.thank_you.0': 'Thanks.',
-    'frederica.dialogue.thanks.0': 'Safe travels.' 
-  };
+  'timara.dialogue.ronington.text':
+    'Inside the cave dwells Ronington — a fiery baby dragon. 30% of the time, it drops a gem when defeated.',
+  'timara.dialogue.ronington.0': "That's rare... and dangerous.",
+
+  'timara.dialogue.gem_info.text':
+    'A gem, eh? Fireborn and luminous. Rare and beautiful.',
+  'timara.dialogue.gem_info.offer': 'Would you like to trade this gem?',
+  'timara.dialogue.gem_info.0': 'Just wanted to know.',
+
+  'timara.dialogue.gem_offer': 'Offer the gem',
+  'timara.dialogue.gem_receive':
+    'Timara accepts the gem and hands you a Rusty Axe.',
+
+  'timara.dialogue.gem_trade.text':
+    'You carry a gem? I could use one for my forge.',
+  'timara.dialogue.gem_trade.give': 'Give gem',
+  'timara.dialogue.gem_trade.leave': 'Leave',
+  'timara.dialogue.after_trade.text':
+    "This'll do nicely. Here, take this old axe.",
+
+  'timara.dialogue.thank_you.text': 'May it serve you well. Crude, but sharp.',
+  'timara.dialogue.thank_you.0': 'Thanks.',
+  'frederica.dialogue.thanks.0': 'Safe travels.'
+};

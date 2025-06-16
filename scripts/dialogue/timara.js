@@ -1,3 +1,5 @@
+import { removeItem, hasItem, giveItem } from '../inventory.js';
+
 export const timara = {
   id: 'timara',
   name: 'Timara',
@@ -8,39 +10,37 @@ export const timara = {
       text: 'timara.dialogue.start.text',
       options: [
         { text: 'timara.dialogue.start.0', goto: 'ronington' },
-        { text: 'timara.dialogue.start.1', goto: 'gem_info' },
+        { text: 'timara.dialogue.start.1', goto: 'gem_trade' },
         { text: 'timara.dialogue.start.2', goto: null }
       ]
     },
 
     ronington: {
       text: 'timara.dialogue.ronington.text',
-      options: [
-        { text: 'timara.dialogue.ronington.0', goto: null }
-      ]
+      options: [{ text: 'timara.dialogue.ronington.0', goto: null }]
     },
 
-    gem_info: {
-      text: 'timara.dialogue.gem_info.text',
+    gem_trade: {
+      text: 'timara.dialogue.gem_trade.text',
       options: [
         {
-          if: {
-            hasItem: { item: 'gem', quantity: 1 }
+          condition: (state) =>
+            (state.inventory['gem'] || 0) > 0 &&
+            (state.inventory['rusty_axe'] || 0) === 0,
+          text: 'timara.dialogue.gem_trade.give',
+          onChoose: async () => {
+            removeItem('gem', 1);
+            if (!hasItem('rusty_axe')) await giveItem('rusty_axe', 1);
           },
-          text: 'timara.dialogue.gem_offer',
-          give: { item: 'gem', quantity: 1 },
-          receive: { item: 'rusty_axe', quantity: 1 },
-          goto: 'gem_receive'
+          goto: 'after_trade'
         },
-        { text: 'timara.dialogue.gem_info.0', goto: null }
+        { text: 'timara.dialogue.gem_trade.leave', goto: null }
       ]
     },
 
-    gem_receive: {
-      text: 'timara.dialogue.gem_receive',
-      options: [
-        { text: 'timara.dialogue.thank_you.0', goto: null }
-      ]
+    after_trade: {
+      text: 'timara.dialogue.after_trade.text',
+      options: [{ text: 'timara.dialogue.thank_you.0', goto: null }]
     }
   }
 };
