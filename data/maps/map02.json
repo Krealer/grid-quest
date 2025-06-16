@@ -95,8 +95,9 @@
         "type": "W"
       },
       {
-        "type": "A",
-        "npc": "timara"
+        "type": "N",
+        "npc": "timara",
+        "style": "advanced"
       },
       "G",
       "G",
