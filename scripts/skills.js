@@ -59,8 +59,12 @@ const skillDefs = {
     cost: 0,
     cooldown: 0,
     source: 'starter',
-    effect({ activateGuard, log }) {
-      activateGuard();
+    effect({ caster, activateGuard, log }) {
+      if (typeof activateGuard === 'function') {
+        activateGuard(caster);
+      } else if (caster) {
+        caster.guarding = true;
+      }
       log('Player braces for impact.');
     }
   },
