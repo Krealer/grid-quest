@@ -195,6 +195,17 @@
     },
     "category": "combat"
   },
+  "defensive_potion_ii": {
+    "name": "Defensive Potion II",
+    "description": "Increases defense by 2 for this fight.",
+    "type": "consumable",
+    "stackLimit": 10,
+    "icon": "🛡️",
+    "effect": {
+      "temporaryDefense": 2
+    },
+    "category": "combat"
+  },
   "faded_blade": {
     "name": "Faded Blade",
     "description": "A worn weapon once carried by Vaelin. Use in battle to strike harder.",

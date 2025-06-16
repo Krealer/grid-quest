@@ -121,7 +121,9 @@ export async function updateInventoryUI() {
       const btn = document.createElement('button');
       btn.classList.add('equip-btn');
       btn.textContent =
-        getEquippedItem(bonus.slot) === item.id ? t('inventory.unequip') : t('inventory.equip');
+        getEquippedItem(bonus.slot) === item.id
+          ? t('inventory.unequip')
+          : t('inventory.equip');
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         equipItem(item.id);
@@ -224,7 +226,7 @@ function handleInventoryItemUse(id) {
     }
     const res = useDefensePotion();
     if (res) used = true;
-  } else if (id === 'defense_potion_II') {
+  } else if (id === 'defense_potion_II' || id === 'defensive_potion_ii') {
     if (!gameState.inCombat) {
       logMessage('Cannot use this item outside combat.');
       return;
