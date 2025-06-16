@@ -228,14 +228,14 @@ export default {
   'frederica.dialogue.timara.text': 'A stubborn smith. Honest. Brave.',
   'frederica.dialogue.timara.0': 'I see.',
 
-  'frederica.dialogue.trade_offer.text': 'Three Defense Potions? I need them... badly.',
-  'frederica.dialogue.trade_offer.0': 'Here, take them.',
+  'frederica.dialogue.trade_offer.text': 'Do you have 3 Defense Potion I?',
+  'frederica.dialogue.trade_offer.0': 'Yes, hand them over.',
   'frederica.dialogue.trade_offer.1': 'Maybe later.',
 
-  'frederica.dialogue.trade_denied.text': 'If you return with three Defense Potions... I’ll make it worth your while.',
+  'frederica.dialogue.trade_denied.text': 'If you return with three Defense Potion I... I’ll make it worth your while.',
   'frederica.dialogue.trade_denied.0': 'I understand.',
 
-  'frederica.dialogue.thanks.text': 'Thank you. Take this — the Cave Pass. It may help.',
+  'frederica.dialogue.thanks.text': 'Excellent. Here’s your cave pass.',
     'timara.dialogue.start.text': 'Looking for tools or tales?',
     'timara.dialogue.start.0': 'Tell me about the cave.',
     'timara.dialogue.start.1': "What's this gem for?",

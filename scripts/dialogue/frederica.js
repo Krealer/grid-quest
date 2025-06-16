@@ -38,7 +38,7 @@ export const frederica = {
 
     trade_check: {
       if: {
-        hasItem: { item: 'defense_potion', quantity: 3 }
+        hasItem: { item: 'defense_potion_I', quantity: 3 }
       },
       then: 'trade_offer',
       else: 'trade_denied'
@@ -49,7 +49,7 @@ export const frederica = {
       options: [
         {
           text: 'frederica.dialogue.trade_offer.0',
-          give: { item: 'defense_potion', quantity: 3 },
+          give: { item: 'defense_potion_I', quantity: 3 },
           receive: { item: 'cave_pass', quantity: 1 },
           goto: 'thanks'
         },
