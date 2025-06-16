@@ -189,10 +189,7 @@ export async function showDialogueWithChoices(keyOrText, choices = []) {
   overlay.addEventListener('click', finishTyping);
 }
 
-export async function startDialogueTree(dialogue, index = 0) {
-  if (!Array.isArray(dialogue) || index == null) return;
-  const entry = dialogue[index];
-  if (!entry) return;
+function buildState() {
   const state = {
     player: getPlayerState(),
     inventory: {},
@@ -202,6 +199,23 @@ export async function startDialogueTree(dialogue, index = 0) {
   inventory.forEach((it) => {
     state.inventory[it.id] = it.quantity || 1;
   });
+  return state;
+}
+
+function checkCondition(cond, state) {
+  if (!cond) return true;
+  if (cond.hasItem) {
+    const { item, quantity = 1 } = cond.hasItem;
+    return (state.inventory[item] || 0) >= quantity;
+  }
+  return false;
+}
+
+function runArrayDialogue(dialogue, index) {
+  if (!Array.isArray(dialogue) || index == null) return;
+  const entry = dialogue[index];
+  if (!entry) return;
+  const state = buildState();
   const validOptions = (entry.options || []).filter((opt) => {
     if (typeof opt.condition === 'function') {
       try {
@@ -257,7 +271,7 @@ export async function startDialogueTree(dialogue, index = 0) {
         completeQuest(opt.completeQuest);
       }
       if (opt.goto !== null && opt.goto !== undefined) {
-        startDialogueTree(dialogue, opt.goto);
+        runArrayDialogue(dialogue, opt.goto);
       }
     }
   }));
@@ -266,5 +280,105 @@ export async function startDialogueTree(dialogue, index = 0) {
     showDialogueWithChoices(entry.text, choices);
   } else {
     showDialogue(entry.text);
+  }
+}
+
+function runDialogueObject(tree, currentKey) {
+  if (!tree || !tree.dialogue) return;
+  let entry = tree.dialogue[currentKey];
+  if (!entry) return;
+
+  const state = buildState();
+
+  if (entry.if && (entry.then || entry.else)) {
+    const nextKey = checkCondition(entry.if, state) ? entry.then : entry.else;
+    if (nextKey !== null && nextKey !== undefined) {
+      runDialogueObject(tree, nextKey);
+    }
+    return;
+  }
+
+  const validOptions = (entry.options || []).filter((opt) => {
+    if (opt.if) return checkCondition(opt.if, state);
+    if (typeof opt.condition === 'function') {
+      try {
+        return opt.condition(state);
+      } catch {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  const choices = validOptions.map((opt) => ({
+    label: typeof opt.text === 'string' ? t(opt.text) : opt.label,
+    callback: async () => {
+      if (opt.memoryFlag) setMemory(opt.memoryFlag);
+      if (typeof opt.onChoose === 'function') {
+        try {
+          await opt.onChoose();
+        } catch (e) {
+          console.error('onChoose error', e);
+        }
+      }
+      if (opt.give) {
+        const { removeItems } = await import('./inventory.js');
+        const toRemove = Array.isArray(opt.give)
+          ? opt.give.reduce((acc, id) => {
+              acc[id] = (acc[id] || 0) + 1;
+              return acc;
+            }, {})
+          : typeof opt.give === 'string'
+          ? { [opt.give]: 1 }
+          : opt.give.item
+          ? { [opt.give.item]: opt.give.quantity || 1 }
+          : opt.give;
+        if (toRemove) {
+          removeItems(toRemove);
+          updateInventoryUI();
+        }
+      }
+      if (opt.receive) {
+        const { giveItem, giveItems } = await import('./inventory.js');
+        if (typeof opt.receive === 'string') {
+          await giveItem(opt.receive);
+        } else if (opt.receive.item) {
+          await giveItem(opt.receive.item, opt.receive.quantity || 1);
+        } else {
+          await giveItems(opt.receive);
+        }
+        updateInventoryUI();
+      }
+      if (opt.triggerUpgrade) {
+        await triggerUpgrade(opt.triggerUpgrade);
+      }
+      if (opt.triggerReroll) {
+        await triggerReroll(opt.triggerReroll);
+      }
+      if (opt.completeQuest) {
+        completeQuest(opt.completeQuest);
+      }
+      if (opt.goto !== null && opt.goto !== undefined) {
+        runDialogueObject(tree, opt.goto);
+      }
+    }
+  }));
+
+  if (choices.length > 0) {
+    showDialogueWithChoices(t(entry.text), choices);
+  } else {
+    showDialogue(t(entry.text));
+  }
+}
+
+export async function startDialogueTree(dialogue, index = 0) {
+  if (Array.isArray(dialogue)) {
+    runArrayDialogue(dialogue, index);
+    return;
+  }
+
+  if (dialogue && typeof dialogue === 'object' && dialogue.start && dialogue.dialogue) {
+    const key = typeof index === 'string' ? index : dialogue.start;
+    runDialogueObject(dialogue, key);
   }
 }
