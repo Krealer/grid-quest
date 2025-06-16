@@ -236,9 +236,8 @@ export default {
   'timara.dialogue.gem_info.offer': 'هل تود مبادلة هذه الجوهرة؟',
   'timara.dialogue.gem_info.0': 'كنت أستفسر فقط.',
 
-  'timara.dialogue.offer_gem.text': 'يمكنني صنع فأس صدئ بها.',
-  'timara.dialogue.offer_gem.0': 'تفضل الجوهرة.',
-  'timara.dialogue.offer_gem.1': 'ليس الآن.',
+  'timara.dialogue.gem_offer': 'قدم الجوهرة',
+  'timara.dialogue.gem_receive': 'تقبلت تيمارا الجوهرة وسلمتك فأساً صدئة.',
 
   'timara.dialogue.thank_you.text': 'عسى أن تخدمك جيداً. بدائية لكنها حادة.',
   'timara.dialogue.thank_you.0': 'شكراً.'

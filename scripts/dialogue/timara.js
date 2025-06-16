@@ -27,28 +27,17 @@ export const timara = {
           if: {
             hasItem: { item: 'gem', quantity: 1 }
           },
-          text: 'timara.dialogue.gem_info.offer',
-          goto: 'offer_gem'
+          text: 'timara.dialogue.gem_offer',
+          give: { item: 'gem', quantity: 1 },
+          receive: { item: 'rusty_axe', quantity: 1 },
+          goto: 'gem_receive'
         },
         { text: 'timara.dialogue.gem_info.0', goto: null }
       ]
     },
 
-    offer_gem: {
-      text: 'timara.dialogue.offer_gem.text',
-      options: [
-        {
-          text: 'timara.dialogue.offer_gem.0',
-          give: { item: 'gem', quantity: 1 },
-          receive: { item: 'rusty_axe', quantity: 1 },
-          goto: 'thank_you'
-        },
-        { text: 'timara.dialogue.offer_gem.1', goto: null }
-      ]
-    },
-
-    thank_you: {
-      text: 'timara.dialogue.thank_you.text',
+    gem_receive: {
+      text: 'timara.dialogue.gem_receive',
       options: [
         { text: 'timara.dialogue.thank_you.0', goto: null }
       ]
