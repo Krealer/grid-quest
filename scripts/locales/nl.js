@@ -184,8 +184,7 @@ export default {
   'combat.silenced': 'Het zwijgen is je opgelegd!',
   'combat.paralyzed': '{enemy} is verlamd en kan niet handelen!',
   'combat.confused': '{enemy} is verward en aarzelt!',
-  'combat.unstable': '{enemy} wankelt onstabiel!'
-  ,
+  'combat.unstable': '{enemy} wankelt onstabiel!',
   'combat.category.offensive': 'Offensive',
   'combat.category.defensive': 'Defensive',
   'combat.category.items': 'Items',
@@ -210,7 +209,7 @@ export default {
   'leda.dialogue.how.0': 'Frederica...?',
   'leda.dialogue.how.1': 'Weggaan',
   'leda.dialogue.more.text': 'Als je haar vindt, vraag dan niet om macht... maar om doel.',
-  'leda.dialogue.more.0': 'Dank je'
+  'leda.dialogue.more.0': 'Dank je',
   'frederica.dialogue.start.text': 'Ah, een reiziger. Wat zoek je?',
   'frederica.dialogue.start.0': 'Vertel me over de grot.',
   'frederica.dialogue.start.1': 'Wie is Leda?',

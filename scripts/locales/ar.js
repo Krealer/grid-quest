@@ -201,7 +201,7 @@ export default {
   'leda.dialogue.how.0': 'فريدريكا...؟',
   'leda.dialogue.how.1': 'رحيل',
   'leda.dialogue.more.text': 'إن وجدتها، فلا تطلب القوة... بل الغاية.',
-  'leda.dialogue.more.0': 'شكراً لك'
+  'leda.dialogue.more.0': 'شكراً لك',
   'frederica.dialogue.start.text': 'أهلاً أيها المسافر. ماذا تريد؟',
   'frederica.dialogue.start.0': 'حدثني عن الكهف.',
   'frederica.dialogue.start.1': 'من هي ليدا؟',

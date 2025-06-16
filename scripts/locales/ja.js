@@ -201,7 +201,7 @@ export default {
   'leda.dialogue.how.0': 'フレデリカ…?',
   'leda.dialogue.how.1': '立ち去る',
   'leda.dialogue.more.text': 'もし彼女を見つけたなら、力ではなく…目的を求めなさい。',
-  'leda.dialogue.more.0': 'ありがとう'
+  'leda.dialogue.more.0': 'ありがとう',
   'frederica.dialogue.start.text': '旅人か。何を求めている？',
   'frederica.dialogue.start.0': '洞窟について教えて。',
   'frederica.dialogue.start.1': 'レダとは？',
