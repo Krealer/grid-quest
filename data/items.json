@@ -422,5 +422,13 @@
     "icon": "✨",
     "category": "key",
     "consumable": false
+  },
+  "wood": {
+    "name": "Wood",
+    "description": "Material gathered from old objects.",
+    "type": "material",
+    "stackLimit": 99,
+    "icon": "🪵",
+    "category": "crafting"
   }
 }

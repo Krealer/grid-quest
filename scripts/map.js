@@ -47,3 +47,13 @@ export function handleEnemyDefeat(x, y) {
     router.drawPlayer(player, container, router.getCols());
   }
 }
+
+export function removeChest(x, y) {
+  const grid = getCurrentGrid();
+  const container = document.getElementById('game-grid');
+  if (!grid || !container) return;
+  if (!grid[y] || !grid[y][x]) return;
+  grid[y][x] = { type: 'G' };
+  renderGrid(grid, container, getCurrentEnvironment(), isFogEnabled());
+  router.drawPlayer(player, container, router.getCols());
+}

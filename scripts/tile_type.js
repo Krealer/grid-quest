@@ -11,7 +11,7 @@ export const TILE_DEFS = {
   C: { walkable: false, interactable: true, description: 'Chest' },
   c: {
     walkable: false,
-    interactable: false,
+    interactable: true,
     description: 'Opened Chest'
   },
   D: { walkable: false, interactable: true, description: 'Door' },
@@ -33,12 +33,13 @@ export function isInteractable(symbol) {
   return TILE_DEFS[symbol]?.interactable ?? false;
 }
 
-import { showDialogue } from './dialogue_system.js';
+import { showDialogue, startDialogueTree } from './dialogue_system.js';
 import { t } from './i18n.js';
 import { healFull, healToFull } from './player.js';
 import { applyDamage } from './logic.js';
 import { triggerDarkTrap, triggerFireTrap } from './trap_logic.js';
 import { getCurrentGrid } from './map_loader.js';
+import createOpenedChestDialogue from './dialogue/chest_opened.js';
 
 export async function onStepEffect(symbol, player, x, y) {
   const grid = getCurrentGrid();
@@ -187,8 +188,12 @@ export async function onInteractEffect(
           tile.opened = true;
         }
       } else {
-        showDialogue(t('message.chest_empty'));
+        startDialogueTree(createOpenedChestDialogue(x, y));
       }
+      break;
+    }
+    case 'c': {
+      startDialogueTree(createOpenedChestDialogue(x, y));
       break;
     }
     case 'W': {
