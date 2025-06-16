@@ -23,8 +23,7 @@
       "F",
       "F",
       {
-        "type": "E",
-        "enemyId": "cracked_crystal_sentry"
+        "type": "W"
       }
     ],
     [
@@ -440,7 +439,10 @@
     ],
     [
       "F",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "cracked_crystal_sentry"
+      },
       "G",
       "G",
       "G",
