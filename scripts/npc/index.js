@@ -18,6 +18,7 @@ import * as fieldNoteDisintegration from './field_note_disintegration.js';
 import * as flamebound from './flamebound.js';
 import * as forgeNpc from './forge_npc.js';
 import * as forkGuide from './fork_guide.js';
+import * as frederica from './frederica.js';
 import * as goblinQuestGiver from './goblin_quest_giver.js';
 import * as grindle from './grindle.js';
 import * as korell from './korell.js';
@@ -78,6 +79,7 @@ export const npcModules = {
   flamebound,
   forge_npc: forgeNpc,
   fork_guide: forkGuide,
+  frederica,
   goblin_quest_giver: goblinQuestGiver,
   grindle,
   korell,

@@ -1,0 +1,7 @@
+{
+  "cave_pass": {
+    "name": "Cave Pass",
+    "type": "key",
+    "description": "Allows passage into the sealed cave beyond."
+  }
+}

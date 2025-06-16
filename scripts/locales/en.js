@@ -210,4 +210,30 @@ export default {
   'leda.dialogue.how.1': 'Leave',
   'leda.dialogue.more.text': 'If you do find her, ask not for power... but for purpose.',
   'leda.dialogue.more.0': 'Thank you'
+  
+  'frederica.dialogue.start.text': 'Ah, a traveler. What do you seek?',
+  'frederica.dialogue.start.0': 'Tell me about the cave.',
+  'frederica.dialogue.start.1': 'Who is Leda?',
+  'frederica.dialogue.start.2': 'What about Timara?',
+  'frederica.dialogue.start.3': 'I brought potions.',
+  'frederica.dialogue.start.4': 'Leave',
+
+  'frederica.dialogue.cave.text': 'Dark and unforgiving. Many try, few return.',
+  'frederica.dialogue.cave.0': 'I’ll be careful.',
+
+  'frederica.dialogue.leda.text': 'She listens better than she speaks. Her eyes know much.',
+  'frederica.dialogue.leda.0': 'Interesting.',
+
+  'frederica.dialogue.timara.text': 'A stubborn smith. Honest. Brave.',
+  'frederica.dialogue.timara.0': 'I see.',
+
+  'frederica.dialogue.trade_offer.text': 'Three Defense Potions? I need them... badly.',
+  'frederica.dialogue.trade_offer.0': 'Here, take them.',
+  'frederica.dialogue.trade_offer.1': 'Maybe later.',
+
+  'frederica.dialogue.trade_denied.text': 'If you return with three Defense Potions... I’ll make it worth your while.',
+  'frederica.dialogue.trade_denied.0': 'I understand.',
+
+  'frederica.dialogue.thanks.text': 'Thank you. Take this — the Cave Pass. It may help.',
+  'frederica.dialogue.thanks.0': 'Safe travels.' 
 };
