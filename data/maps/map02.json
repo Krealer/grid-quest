@@ -322,7 +322,17 @@
       "F"
     ],
     [
-      "F",
+      {
+        "type": "D",
+        "target": "map02_cave01.json",
+        "spawn": {
+          "x": 1,
+          "y": 12
+        },
+        "locked": true,
+        "requiresItem": "cave_pass",
+        "message": "A sealed gate blocks the path. A special pass may grant access."
+      },
       "G",
       "G",
       "G",

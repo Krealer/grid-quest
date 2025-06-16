@@ -1,0 +1,9 @@
+{
+  "cave_pass": {
+    "name": "Cave Pass",
+    "description": "Grants access to the caves beyond the sealed gate.",
+    "icon": "🪪",
+    "keyItem": true
+  }
+}
+
