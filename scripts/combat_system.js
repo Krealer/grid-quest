@@ -67,11 +67,7 @@ import {
   removeNegativeStatusLogged
 } from './status_logic.js';
 import { updateSkillDisableState } from './skill_ui.js';
-import {
-  applyEffect as applyStatusEffect,
-  removeStatus as removeStatusEffect,
-  tickStatusEffects
-} from './status_effect.js';
+import { tickStatusEffects } from './status_effect.js';
 import { getStatusEffect } from './status_effects.js';
 import { initEnemyState } from './enemy.js';
 import { combatState, initCombatState } from './combat_state.js';
@@ -344,8 +340,10 @@ export async function startCombat(enemy, player) {
     log(t('combat.heal', { target: 'Player', amount }));
   }
 
-  function activateGuard() {
-    applyStatusEffect(player, 'guarded', 2);
+  function activateGuard(target = player) {
+    if (target) {
+      target.guarding = true;
+    }
   }
 
   function activateShieldBlock() {
@@ -516,6 +514,7 @@ export async function startCombat(enemy, player) {
     );
     discoverSkill(skill.id);
     const result = skill.effect({
+      caster: player,
       damageEnemy,
       healPlayer,
       activateGuard,
