@@ -206,7 +206,7 @@ export default {
   'leda.dialogue.who.text': 'Ooit een hoedster van het vuur. Briljant, gevreesd en verraden. Haar pad is nu stil.',
   'leda.dialogue.who.0': 'Vertel me meer',
   'leda.dialogue.who.1': 'Weggaan',
-  'leda.dialogue.how.text': 'Ik heb lang genoeg geluisterd naar de echo's van deze plek. Namen herhalen zich.',
+  'leda.dialogue.how.text': 'Ik heb lang genoeg geluisterd naar de echo\'s van deze plek. Namen herhalen zich.',
   'leda.dialogue.how.0': 'Frederica...?',
   'leda.dialogue.how.1': 'Weggaan',
   'leda.dialogue.more.text': 'Als je haar vindt, vraag dan niet om macht... maar om doel.',
