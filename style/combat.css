@@ -688,6 +688,10 @@
     margin: 6px auto;
     text-align: center;
   }
+  /* Ensure hidden panels stay hidden on small screens */
+  #battle-overlay .tab-panel.hidden {
+    display: none !important;
+  }
 }
 
 @media screen and (orientation: landscape) and (min-aspect-ratio: 4/3) {

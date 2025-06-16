@@ -255,6 +255,13 @@ export function setupTabs(overlay) {
       itemContainer.classList.remove('hidden');
     }
 
+    const allButtons = overlay.querySelectorAll('.skill-btn');
+    allButtons.forEach((btn) => {
+      const cat = btn.dataset.category;
+      const show = tab !== 'items' && cat === tab;
+      btn.classList.toggle('hidden', !show);
+    });
+
     offTabBtn.classList.toggle('selected', tab === 'offensive');
     defTabBtn.classList.toggle('selected', tab === 'defensive');
     itemsTabBtn.classList.toggle('selected', tab === 'items');
@@ -309,6 +316,7 @@ export function renderSkillList(container, skills, onClick) {
     const btn = document.createElement('button');
     btn.className = 'skill-btn combat-skill-button skill-button';
     btn.dataset.id = skill.id;
+    if (skill.category) btn.dataset.category = skill.category;
     const effects = [];
     if (Array.isArray(skill.statuses)) {
       skill.statuses.forEach((s) => {
