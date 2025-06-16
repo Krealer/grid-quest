@@ -9,26 +9,12 @@ import {
   triggerReroll
 } from './dialogue_state.js';
 import { getQuests, completeQuest } from './quest_state.js';
-import { loadJson } from './data_service.js';
 import { gameState } from './game_state.js';
 import { t } from './i18n.js';
 
-let dialogueLines = {};
-let dataLoaded = false;
-
-async function loadDialogData() {
-  if (dataLoaded) return;
-  try {
-    const data = await loadJson('data/dialog.json');
-    dialogueLines = data;
-  } catch (err) {
-    dialogueLines = {};
-  }
-  dataLoaded = true;
-}
+const dialogueLines = {};
 
 export async function showDialogue(keyOrText, callback = () => {}) {
-  await loadDialogData();
   const raw = dialogueLines[keyOrText] || keyOrText || '';
   const text = raw;
 
@@ -85,7 +71,6 @@ export async function showDialogue(keyOrText, callback = () => {}) {
 }
 
 export async function showDialogueWithChoices(keyOrText, choices = []) {
-  await loadDialogData();
   const raw = dialogueLines[keyOrText] || keyOrText || '';
   const text = raw;
 
