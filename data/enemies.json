@@ -819,9 +819,7 @@
     "portrait": "💠",
     "skills": [
       "crystal_fortify",
-      "shatter_pulse",
-      "refract_crack",
-      "prism_crack"
+      "shatter_pulse"
     ],
     "behavior": "balanced",
     "drops": [

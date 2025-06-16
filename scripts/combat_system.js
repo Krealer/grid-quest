@@ -867,14 +867,14 @@ export async function startCombat(enemy, player) {
     const special = isElite(enemy) || isBoss(enemy);
 
     if (enemy.id === 'cracked_crystal_sentry') {
-      enemy.prismCooldown = enemy.prismCooldown || 0;
-      if (enemy.prismCooldown > 0) enemy.prismCooldown--;
+      enemy.shatterCooldown = enemy.shatterCooldown || 0;
+      if (enemy.shatterCooldown > 0) enemy.shatterCooldown--;
       const currentDef = enemy.stats?.defense || 0;
-      if (currentDef >= 30 && enemy.prismCooldown === 0) {
-        skill = getEnemySkill('prism_crack');
-        enemy.prismCooldown = skill.cooldown;
+      if (currentDef >= 30 && enemy.shatterCooldown === 0) {
+        skill = getEnemySkill('shatter_pulse');
+        enemy.shatterCooldown = skill.cooldown;
       } else {
-        skill = getEnemySkill('refract_crack');
+        skill = getEnemySkill('crystal_fortify');
       }
     } else if (enemy.id === 'crystal_sentry') {
       const currentDef = enemy.stats?.defense || 0;

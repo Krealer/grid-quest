@@ -456,39 +456,6 @@ export const enemySkills = {
       log(`${enemy.name}'s facets harden! (+1 defense)`);
     }
   },
-  refract_crack: {
-    id: 'refract_crack',
-    name: 'Refract Crack',
-    icon: '🔷',
-    description: 'Permanently increases defense by 2.',
-    category: 'defensive',
-    cost: 0,
-    cooldown: 0,
-    aiType: 'buff',
-    targetType: 'enemy',
-    range: 'single',
-    effect({ enemy, log }) {
-      enemy.stats.defense = (enemy.stats?.defense || 0) + 2;
-      log(`${enemy.name}'s cracked shards realign! (+2 defense)`);
-    }
-  },
-  prism_crack: {
-    id: 'prism_crack',
-    name: 'Prism Crack',
-    icon: '🔶',
-    description: 'Crushing prism blast for 100 damage that lowers defense by 30.',
-    category: 'offensive',
-    cost: 0,
-    cooldown: 10,
-    aiType: 'damage',
-    targetType: 'enemy',
-    range: 'single',
-    effect({ enemy, damagePlayer, log }) {
-      const applied = damagePlayer(100);
-      enemy.stats.defense = (enemy.stats?.defense || 0) - 30;
-      log(`${enemy.name} unleashes a prism crack for ${applied} damage!`);
-    }
-  },
   crystal_fortify: {
     id: 'crystal_fortify',
     name: 'Crystal Fortify',
