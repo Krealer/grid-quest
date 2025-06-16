@@ -223,4 +223,23 @@ export default {
   'frederica.dialogue.trade_denied.0': 'Понимаю.',
   'frederica.dialogue.thanks.text': 'Спасибо. Возьми это — пропуск в пещеру. Может помочь.',
   'frederica.dialogue.thanks.0': 'Счастливого пути.',
+
+  'timara.dialogue.start.text': 'Ищешь инструменты или истории?',
+  'timara.dialogue.start.0': 'Расскажи о пещере.',
+  'timara.dialogue.start.1': 'Для чего этот самоцвет?',
+  'timara.dialogue.start.2': 'До встречи',
+
+  'timara.dialogue.ronington.text': 'Внутри пещеры живёт Ронингтон — огненный дракончик. В 30% случаев после победы он роняет самоцвет.',
+  'timara.dialogue.ronington.0': 'Редко... и опасно.',
+
+  'timara.dialogue.gem_info.text': 'Самоцвет, говоришь? Рождён пламенем и светится. Редкая красота.',
+  'timara.dialogue.gem_info.offer': 'Хочешь обменять этот самоцвет?',
+  'timara.dialogue.gem_info.0': 'Просто хотел узнать.',
+
+  'timara.dialogue.offer_gem.text': 'Могу смастерить из него что-то грубое. Например, ржавый топор.',
+  'timara.dialogue.offer_gem.0': 'Вот самоцвет.',
+  'timara.dialogue.offer_gem.1': 'Пока нет.',
+
+  'timara.dialogue.thank_you.text': 'Пусть послужит тебе. Грубый, но острый.',
+  'timara.dialogue.thank_you.0': 'Спасибо.'
 };

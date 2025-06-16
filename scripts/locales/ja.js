@@ -221,4 +221,23 @@ export default {
   'frederica.dialogue.trade_denied.0': 'わかった。',
   'frederica.dialogue.thanks.text': 'ありがとう。これは洞窟通行証だ。役に立つだろう。',
   'frederica.dialogue.thanks.0': '良い旅を。',
+
+  'timara.dialogue.start.text': '道具か物語をお探し？',
+  'timara.dialogue.start.0': '洞窟について教えて。',
+  'timara.dialogue.start.1': 'この宝石は何に使うの？',
+  'timara.dialogue.start.2': 'さようなら',
+
+  'timara.dialogue.ronington.text': '洞窟にはロニントンという炎の赤ちゃんドラゴンがいる。倒すと30%の確率で宝石を落とす。',
+  'timara.dialogue.ronington.0': '珍しくて…危険だね。',
+
+  'timara.dialogue.gem_info.text': '宝石か。炎に生まれ輝く。希少で美しい。',
+  'timara.dialogue.gem_info.offer': 'この宝石を交換してみる？',
+  'timara.dialogue.gem_info.0': 'ただ知りたかっただけ。',
+
+  'timara.dialogue.offer_gem.text': 'これで粗末な物を作れる。錆びた斧とか。',
+  'timara.dialogue.offer_gem.0': 'はい、どうぞ。',
+  'timara.dialogue.offer_gem.1': 'まだ渡さない。',
+
+  'timara.dialogue.thank_you.text': '役立ててくれ。粗末だけど切れるよ。',
+  'timara.dialogue.thank_you.0': 'ありがとう'
 };

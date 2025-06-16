@@ -3,5 +3,15 @@
     "name": "Cave Pass",
     "type": "key",
     "description": "Allows passage into the sealed cave beyond."
+  },
+  "gem": {
+    "name": "Gem",
+    "type": "material",
+    "description": "A luminous gem dropped by the fire-dragonling Ronington."
+  },
+  "rusty_axe": {
+    "name": "Rusty Axe",
+    "type": "weapon",
+    "description": "A heavy axe made from salvaged parts. Basic, but functional."
   }
 }
