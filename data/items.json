@@ -423,6 +423,14 @@
     "category": "key",
     "consumable": false
   },
+  "rusty_axe": {
+    "name": "Rusty Axe",
+    "description": "An old but functional axe. It can break apart worn-down objects.",
+    "type": "utility",
+    "stackLimit": 1,
+    "icon": "🪓",
+    "category": "key"
+  },
   "wood": {
     "name": "Wood",
     "description": "Material gathered from old objects.",
