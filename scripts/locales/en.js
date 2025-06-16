@@ -240,14 +240,14 @@ export default {
     'timara.dialogue.start.2': 'Goodbye',
   
     'timara.dialogue.ronington.text': 'Inside the cave dwells Ronington — a fiery baby dragon. 30% of the time, it drops a gem when defeated.',
-    'timara.dialogue.ronington.0': 'That's rare... and dangerous.',
+    'timara.dialogue.ronington.0': 'That\'s rare... and dangerous.',
   
     'timara.dialogue.gem_info.text': 'A gem, eh? Fireborn and luminous. Rare and beautiful.',
     'timara.dialogue.gem_info.offer': 'Would you like to trade this gem?',
     'timara.dialogue.gem_info.0': 'Just wanted to know.',
   
     'timara.dialogue.offer_gem.text': 'I can craft something crude with it. A rusty axe, perhaps.',
-    'timara.dialogue.offer_gem.0': 'Here's the gem.',
+    'timara.dialogue.offer_gem.0': 'Here\'s the gem.',
     'timara.dialogue.offer_gem.1': 'Not yet.',
   
     'timara.dialogue.thank_you.text': 'May it serve you well. Crude, but sharp.',
