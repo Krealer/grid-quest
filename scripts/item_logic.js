@@ -1,7 +1,6 @@
 import { consumeItem } from './inventory.js';
 import { addTempAttack } from './player.js';
 
-
 export function useDefensePotion() {
   if (consumeItem('defense_potion_I', 1)) {
     return { defense: 1 };
@@ -10,7 +9,10 @@ export function useDefensePotion() {
 }
 
 export function useDefensePotionII() {
-  if (consumeItem('defense_potion_II', 1)) {
+  if (
+    consumeItem('defense_potion_II', 1) ||
+    consumeItem('defensive_potion_ii', 1)
+  ) {
     return { defense: 2 };
   }
   return null;
@@ -65,4 +67,3 @@ export function useManaScroll() {
   }
   return null;
 }
-

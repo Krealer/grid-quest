@@ -30,6 +30,8 @@ export const itemDescriptions = {
   crystal_shard: 'Crystal Shard \u2013 can be used later to upgrade skills.',
   defense_potion_II:
     'Defense Potion II \u2013 grants +2 defense for the current battle.',
+  defensive_potion_ii:
+    'Defensive Potion II \u2013 grants +2 defense for the current battle.',
   rift_fragment: 'Rift Fragment \u2013 a mysterious shard sought by scholars.',
   stamina_dust:
     'Stamina Dust \u2013 instantly lowers one skill cooldown when used.',

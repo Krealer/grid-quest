@@ -230,7 +230,11 @@ export async function startCombat(enemy, player) {
     const skillObjs = (unit.learnedSkills || [])
       .map((id) => getSkill(id))
       .filter(Boolean);
-    const skill = chooseBestSkill(skillObjs, unit, (s) => skillCooldowns[s.id] > 0);
+    const skill = chooseBestSkill(
+      skillObjs,
+      unit,
+      (s) => skillCooldowns[s.id] > 0
+    );
     if (skill) handleAction(skill);
   }
   document.addEventListener('turnStarted', autoAct);
@@ -351,7 +355,6 @@ export async function startCombat(enemy, player) {
   function activateEnemyGuard() {
     enemyGuard = true;
   }
-
 
   function triggerDeathEffect() {
     if (!enemy.deathSkill || enemy.deathUsed) return;
@@ -495,12 +498,22 @@ export async function startCombat(enemy, player) {
       return;
     }
     if (skillCooldowns[skill.id] > 0) {
-      log(t('combat.cooldown', { skill: skill.name, turns: skillCooldowns[skill.id] }));
+      log(
+        t('combat.cooldown', {
+          skill: skill.name,
+          turns: skillCooldowns[skill.id]
+        })
+      );
       return;
     }
     player.selectedSkillId = skill.id;
     const icon = skill.icon ? `${skill.icon} ` : '';
-    log(t('combat.skill.use', { user: 'Player', skillName: `${icon}${skill.name}` }));
+    log(
+      t('combat.skill.use', {
+        user: 'Player',
+        skillName: `${icon}${skill.name}`
+      })
+    );
     discoverSkill(skill.id);
     const result = skill.effect({
       damageEnemy,
@@ -599,7 +612,7 @@ export async function startCombat(enemy, player) {
         log('No potion available.');
       }
     }
-    if (id === 'defense_potion_II') {
+    if (id === 'defense_potion_II' || id === 'defensive_potion_ii') {
       const res = useDefensePotionII();
       if (res) {
         let amount = res.defense;
@@ -703,7 +716,12 @@ export async function startCombat(enemy, player) {
       updateHpBar(playerBar, playerHp, playerMax);
       updateHpBar(enemyBar, enemyHp, enemyMax);
       updateStatusUI(overlay, player, enemy);
-      updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
+      updateSkillDisableState(
+        skillButtons,
+        skillLookup,
+        player,
+        skillCooldowns
+      );
       const nextActor = nextTurn();
       playerTurn = nextActor?.isPlayer ?? true;
       if (!playerTurn) setTimeout(enemyTurn, animDelay);
@@ -781,7 +799,12 @@ export async function startCombat(enemy, player) {
       const nextActor = nextTurn();
       playerTurn = nextActor?.isPlayer ?? true;
       tickCooldowns(skillCooldowns);
-      updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
+      updateSkillDisableState(
+        skillButtons,
+        skillLookup,
+        player,
+        skillCooldowns
+      );
       if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
@@ -792,7 +815,12 @@ export async function startCombat(enemy, player) {
       const nextActor = nextTurn();
       playerTurn = nextActor?.isPlayer ?? true;
       tickCooldowns(skillCooldowns);
-      updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
+      updateSkillDisableState(
+        skillButtons,
+        skillLookup,
+        player,
+        skillCooldowns
+      );
       if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
@@ -803,7 +831,12 @@ export async function startCombat(enemy, player) {
       const nextActor = nextTurn();
       playerTurn = nextActor?.isPlayer ?? true;
       tickCooldowns(skillCooldowns);
-      updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
+      updateSkillDisableState(
+        skillButtons,
+        skillLookup,
+        player,
+        skillCooldowns
+      );
       if (!playerTurn) setTimeout(enemyTurn, animDelay);
       return;
     }
@@ -899,7 +932,12 @@ export async function startCombat(enemy, player) {
           const nextActor = nextTurn();
           playerTurn = nextActor?.isPlayer ?? true;
           tickCooldowns(skillCooldowns);
-          updateSkillDisableState(skillButtons, skillLookup, player, skillCooldowns);
+          updateSkillDisableState(
+            skillButtons,
+            skillLookup,
+            player,
+            skillCooldowns
+          );
           if (!playerTurn) setTimeout(enemyTurn, animDelay);
           return;
         }
@@ -908,7 +946,12 @@ export async function startCombat(enemy, player) {
 
     if (skill) {
       const icon = skill.icon ? `${skill.icon} ` : '';
-      log(t('combat.skill.use', { user: enemy.name, skillName: `${icon}${skill.name}` }));
+      log(
+        t('combat.skill.use', {
+          user: enemy.name,
+          skillName: `${icon}${skill.name}`
+        })
+      );
       discoverSkill(skill.id);
       skill.effect({
         player,
