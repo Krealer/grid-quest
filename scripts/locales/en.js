@@ -197,5 +197,17 @@ export default {
   'skill.guard.name': 'Guard',
   'skill.guard.description': 'Reduce damage from the next attack by 50%.',
   'skill.heal.name': 'Heal',
-  'skill.heal.description': 'Restore 20% of your max HP. Cooldown: 3'
+  'skill.heal.description': 'Restore 20% of your max HP. Cooldown: 3',
+  'leda.dialogue.intro.text': "You're not the first to search for Frederica... nor the last.",
+  'leda.dialogue.intro.0': 'Who is she?',
+  'leda.dialogue.intro.1': 'How do you know?',
+  'leda.dialogue.intro.2': 'Leave',
+  'leda.dialogue.who.text': 'Once a guardian of flame. Brilliant, feared, and betrayed. Her path is one of silence now.',
+  'leda.dialogue.who.0': 'Tell me more',
+  'leda.dialogue.who.1': 'Leave',
+  'leda.dialogue.how.text': 'I’ve listened long enough to the echoes of this place. Names tend to repeat themselves.',
+  'leda.dialogue.how.0': 'Frederica...?',
+  'leda.dialogue.how.1': 'Leave',
+  'leda.dialogue.more.text': 'If you do find her, ask not for power... but for purpose.',
+  'leda.dialogue.more.0': 'Thank you'
 };

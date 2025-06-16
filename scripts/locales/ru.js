@@ -191,5 +191,17 @@ export default {
   'skill.guard.name': 'Блок',
   'skill.guard.description': 'Уменьшает урон от следующей атаки на 50%.',
   'skill.heal.name': 'Лечение',
-  'skill.heal.description': 'Восстанавливает 20% от макс. HP. Перезарядка: 3'
+  'skill.heal.description': 'Восстанавливает 20% от макс. HP. Перезарядка: 3',
+  'leda.dialogue.intro.text': 'Ты не первый ищущий Фредерику... и не последний.',
+  'leda.dialogue.intro.0': 'Кто она?',
+  'leda.dialogue.intro.1': 'Откуда ты знаешь?',
+  'leda.dialogue.intro.2': 'Уйти',
+  'leda.dialogue.who.text': 'Когда-то она была хранительницей пламени. Яркая, грозная, преданная. Теперь её путь — молчание.',
+  'leda.dialogue.who.0': 'Расскажи подробнее',
+  'leda.dialogue.who.1': 'Уйти',
+  'leda.dialogue.how.text': 'Я достаточно наслушалась эха этого места. Имена имеют свойство повторяться.',
+  'leda.dialogue.how.0': 'Фредерика...?',
+  'leda.dialogue.how.1': 'Уйти',
+  'leda.dialogue.more.text': 'Если найдёшь её, проси не силу... а цель.',
+  'leda.dialogue.more.0': 'Спасибо'
 };

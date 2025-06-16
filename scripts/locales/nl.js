@@ -198,5 +198,17 @@ export default {
   'skill.guard.name': 'Blokkeer',
   'skill.guard.description': 'Verminder schade van de volgende aanval met 50%.',
   'skill.heal.name': 'Genezen',
-  'skill.heal.description': 'Herstel 20% van je maximale HP. Aflopende tijd: 3'
+  'skill.heal.description': 'Herstel 20% van je maximale HP. Aflopende tijd: 3',
+  'leda.dialogue.intro.text': 'Je bent niet de eerste die naar Frederica zoekt... en zeker niet de laatste.',
+  'leda.dialogue.intro.0': 'Wie is zij?',
+  'leda.dialogue.intro.1': 'Hoe weet je dat?',
+  'leda.dialogue.intro.2': 'Weggaan',
+  'leda.dialogue.who.text': 'Ooit een hoedster van het vuur. Briljant, gevreesd en verraden. Haar pad is nu stil.',
+  'leda.dialogue.who.0': 'Vertel me meer',
+  'leda.dialogue.who.1': 'Weggaan',
+  'leda.dialogue.how.text': 'Ik heb lang genoeg geluisterd naar de echo's van deze plek. Namen herhalen zich.',
+  'leda.dialogue.how.0': 'Frederica...?',
+  'leda.dialogue.how.1': 'Weggaan',
+  'leda.dialogue.more.text': 'Als je haar vindt, vraag dan niet om macht... maar om doel.',
+  'leda.dialogue.more.0': 'Dank je'
 };
