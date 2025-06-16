@@ -191,6 +191,8 @@ export default {
   'combat.auto.on': 'Auto-Battle ON',
   'combat.auto.off': 'Auto-Battle OFF',
   'combat.skill.strike.description': 'Deal damage equal to your Attack stat.',
+  'combat.skill.guard.description': 'Reduce damage from the next attack by 50%.',
+  'combat.skill.heal.description': 'Restore 20% of your max HP. Cooldown: 3',
   'skill.strike.name': 'Strike',
   'skill.strike.description': 'Deal damage equal to your Attack stat.',
   'skill.guard.name': 'Guard',
