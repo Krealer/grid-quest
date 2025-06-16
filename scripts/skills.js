@@ -65,6 +65,7 @@ const skillDefs = {
       } else if (caster) {
         caster.guarding = true;
       }
+      if (caster) caster.hasGuard = true;
       log('Player braces for impact.');
     }
   },

@@ -818,6 +818,8 @@
     "intro": "Fragments stir as a Cracked Crystal Sentry emerges!",
     "portrait": "💠",
     "skills": [
+      "crystal_fortify",
+      "shatter_pulse",
       "refract_crack",
       "prism_crack"
     ],

@@ -343,6 +343,7 @@ export async function startCombat(enemy, player) {
   function activateGuard(target = player) {
     if (target) {
       target.guarding = true;
+      target.hasGuard = true;
     }
   }
 
