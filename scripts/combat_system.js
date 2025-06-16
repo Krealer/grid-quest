@@ -375,6 +375,9 @@ export async function startCombat(enemy, player) {
     if (!list.length) return;
     await loadItems();
     for (const drop of list) {
+      if (drop.chance !== undefined && Math.random() >= drop.chance) {
+        continue;
+      }
       const data = getItemData(drop.item);
       if (!data) continue;
       const success = addItemToInventory({
