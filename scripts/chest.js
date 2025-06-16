@@ -1,4 +1,4 @@
-import { gameState } from './game_state.js';
+import { gameState, saveState } from './game_state.js';
 import { addItem, giveItem } from './inventory.js';
 import { updateInventoryUI } from './inventory_ui.js';
 import { giveRelic, setMemory } from './dialogue_state.js';
@@ -215,4 +215,21 @@ export function setOpenedChests(list) {
 
 export function getOpenedChests() {
   return Array.from(gameState.openedChests);
+}
+
+export function markChestAsCut(id) {
+  if (!id) return;
+  gameState.cutChests.add(id);
+  if (gameState.openedChests.has(id)) {
+    gameState.openedChests.delete(id);
+  }
+  saveState();
+}
+
+export function setCutChests(list) {
+  gameState.cutChests = new Set(list || []);
+}
+
+export function getCutChests() {
+  return Array.from(gameState.cutChests);
 }

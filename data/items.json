@@ -433,10 +433,10 @@
   },
   "wood": {
     "name": "Wood",
-    "description": "Material gathered from old objects.",
+    "description": "A sturdy piece of lumber, could be useful.",
+    "icon": "🪵",
     "type": "material",
     "stackLimit": 99,
-    "icon": "🪵",
-    "category": "crafting"
+    "category": "general"
   }
 }
