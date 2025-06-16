@@ -230,4 +230,23 @@ export default {
   'frederica.dialogue.trade_denied.0': 'Begrepen.',
   'frederica.dialogue.thanks.text': 'Dank je. Neem dit — de Grotpas. Het kan helpen.',
   'frederica.dialogue.thanks.0': 'Goede reis.',
+
+  'timara.dialogue.start.text': 'Op zoek naar gereedschap of verhalen?',
+  'timara.dialogue.start.0': 'Vertel me over de grot.',
+  'timara.dialogue.start.1': 'Waar dient deze edelsteen voor?',
+  'timara.dialogue.start.2': 'Vaarwel',
+
+  'timara.dialogue.ronington.text': 'In de grot huist Ronington — een vurige babydraak. In 30% van de gevallen laat hij een edelsteen vallen als hij verslagen wordt.',
+  'timara.dialogue.ronington.0': 'Dat is zeldzaam... en gevaarlijk.',
+
+  'timara.dialogue.gem_info.text': 'Een edelsteen, hè? Vuurgeboren en lichtgevend. Zeldzaam en prachtig.',
+  'timara.dialogue.gem_info.offer': 'Wil je deze edelsteen ruilen?',
+  'timara.dialogue.gem_info.0': 'Ik wilde het alleen weten.',
+
+  'timara.dialogue.offer_gem.text': 'Ik kan er iets grofs mee smeden. Misschien een roestige bijl.',
+  'timara.dialogue.offer_gem.0': 'Hier is de edelsteen.',
+  'timara.dialogue.offer_gem.1': 'Nog niet.',
+
+  'timara.dialogue.thank_you.text': 'Moge hij je goed dienen. Lomp, maar scherp.',
+  'timara.dialogue.thank_you.0': 'Bedankt.'
 };

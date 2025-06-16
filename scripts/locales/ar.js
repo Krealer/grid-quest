@@ -221,4 +221,23 @@ export default {
   'frederica.dialogue.trade_denied.0': 'أتفهم.',
   'frederica.dialogue.thanks.text': 'شكراً لك. خذ هذا — تصريح الكهف. قد يفيدك.',
   'frederica.dialogue.thanks.0': 'رحلات آمنة.',
+
+  'timara.dialogue.start.text': 'هل تبحث عن أدوات أم حكايات؟',
+  'timara.dialogue.start.0': 'حدثيني عن الكهف.',
+  'timara.dialogue.start.1': 'لما هذه الجوهرة؟',
+  'timara.dialogue.start.2': 'وداعاً',
+
+  'timara.dialogue.ronington.text': 'داخل الكهف يعيش روننغتون — تنين صغير ناري. يسقط جوهرة بنسبة 30٪ عند هزيمته.',
+  'timara.dialogue.ronington.0': 'نادر... وخطير.',
+
+  'timara.dialogue.gem_info.text': 'جوهرة؟ ولدت من النار ومضيئة. نادرة وجميلة.',
+  'timara.dialogue.gem_info.offer': 'هل تود مبادلة هذه الجوهرة؟',
+  'timara.dialogue.gem_info.0': 'كنت أستفسر فقط.',
+
+  'timara.dialogue.offer_gem.text': 'يمكنني صنع فأس صدئ بها.',
+  'timara.dialogue.offer_gem.0': 'تفضل الجوهرة.',
+  'timara.dialogue.offer_gem.1': 'ليس الآن.',
+
+  'timara.dialogue.thank_you.text': 'عسى أن تخدمك جيداً. بدائية لكنها حادة.',
+  'timara.dialogue.thank_you.0': 'شكراً.'
 };
