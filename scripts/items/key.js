@@ -115,5 +115,18 @@ export const keyItems = {
     "consumable": false,
     "stackLimit": 1,
     "icon": "🗝️"
+  },
+  "cave_pass": {
+    "id": "cave_pass",
+    "name": "Cave Pass",
+    "description": "Grants access to the caves beyond the sealed gate.",
+    "type": "key",
+    "tags": [
+      "lore"
+    ],
+    "category": "key",
+    "consumable": false,
+    "stackLimit": 1,
+    "icon": "🪪"
   }
 };
