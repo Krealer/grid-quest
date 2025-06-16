@@ -1102,6 +1102,57 @@ export const enemySkills = {
       log(`${enemy.name} binds you with earth for ${applied} damage!`);
     }
   },
+  flame_nip: {
+    id: 'flame_nip',
+    name: 'Flame Nip',
+    icon: '🐲',
+    description: 'A quick fiery bite. No cooldown.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = atk + 2;
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} bites with flame for ${applied} damage!`);
+    }
+  },
+  ember_puff: {
+    id: 'ember_puff',
+    name: 'Ember Puff',
+    icon: '🔥',
+    description: 'Scorches the foe, chance to burn. 5-turn cooldown.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 5,
+    aiType: 'damage',
+    applies: ['burn'],
+    statuses: [{ target: 'player', id: 'burn', duration: 3 }],
+    effect({ enemy, damagePlayer, applyStatus, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = atk + 4;
+      const applied = damagePlayer(dmg);
+      applyStatus('player', 'burn', 3);
+      log(`${enemy.name} breathes embers for ${applied} damage!`);
+    }
+  },
+  tail_spark: {
+    id: 'tail_spark',
+    name: 'Tail Spark',
+    icon: '💥',
+    description: 'Tail flick with a fiery spark. 5-turn cooldown.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 5,
+    aiType: 'damage',
+    effect({ enemy, damagePlayer, log }) {
+      const atk = enemy.stats?.attack || 0;
+      const dmg = atk + 6;
+      const applied = damagePlayer(dmg);
+      log(`${enemy.name} lashes out with a blazing tail! (${applied} damage)`);
+    }
+  },
   resolve_break: {
     id: 'resolve_break',
     name: 'Resolve Break',
