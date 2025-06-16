@@ -183,8 +183,7 @@ export default {
   'combat.silenced': 'Silenced! Cannot act.',
   'combat.paralyzed': '{enemy} is paralyzed and cannot act!',
   'combat.confused': '{enemy} looks confused and hesitates!',
-  'combat.unstable': '{enemy} staggers in instability!'
-  ,
+  'combat.unstable': '{enemy} staggers in instability!',
   'combat.category.offensive': 'Offensive',
   'combat.category.defensive': 'Defensive',
   'combat.category.items': 'Items',
@@ -209,7 +208,7 @@ export default {
   'leda.dialogue.how.0': 'Frederica...?',
   'leda.dialogue.how.1': 'Leave',
   'leda.dialogue.more.text': 'If you do find her, ask not for power... but for purpose.',
-  'leda.dialogue.more.0': 'Thank you'
+  'leda.dialogue.more.0': 'Thank you',
   
   'frederica.dialogue.start.text': 'Ah, a traveler. What do you seek?',
   'frederica.dialogue.start.0': 'Tell me about the cave.',
