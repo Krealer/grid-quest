@@ -11,7 +11,8 @@
   },
   "rusty_axe": {
     "name": "Rusty Axe",
-    "type": "weapon",
-    "description": "A heavy axe made from salvaged parts. Basic, but functional."
+    "description": "An old but functional axe. It can break apart worn-down objects.",
+    "type": "key",
+    "key": true
   }
 }

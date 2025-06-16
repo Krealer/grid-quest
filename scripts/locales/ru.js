@@ -238,9 +238,8 @@ export default {
   'timara.dialogue.gem_info.offer': 'Хочешь обменять этот самоцвет?',
   'timara.dialogue.gem_info.0': 'Просто хотел узнать.',
 
-  'timara.dialogue.offer_gem.text': 'Могу смастерить из него что-то грубое. Например, ржавый топор.',
-  'timara.dialogue.offer_gem.0': 'Вот самоцвет.',
-  'timara.dialogue.offer_gem.1': 'Пока нет.',
+  'timara.dialogue.gem_offer': 'Предложить самоцвет',
+  'timara.dialogue.gem_receive': 'Тимара принимает самоцвет и вручает тебе ржавый топор.',
 
   'timara.dialogue.thank_you.text': 'Пусть послужит тебе. Грубый, но острый.',
   'timara.dialogue.thank_you.0': 'Спасибо.'

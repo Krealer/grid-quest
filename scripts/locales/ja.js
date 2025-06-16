@@ -236,9 +236,8 @@ export default {
   'timara.dialogue.gem_info.offer': 'この宝石を交換してみる？',
   'timara.dialogue.gem_info.0': 'ただ知りたかっただけ。',
 
-  'timara.dialogue.offer_gem.text': 'これで粗末な物を作れる。錆びた斧とか。',
-  'timara.dialogue.offer_gem.0': 'はい、どうぞ。',
-  'timara.dialogue.offer_gem.1': 'まだ渡さない。',
+  'timara.dialogue.gem_offer': '宝石を渡す',
+  'timara.dialogue.gem_receive': 'ティマラは宝石を受け取り、錆びた斧を手渡した。',
 
   'timara.dialogue.thank_you.text': '役立ててくれ。粗末だけど切れるよ。',
   'timara.dialogue.thank_you.0': 'ありがとう'

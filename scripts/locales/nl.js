@@ -244,9 +244,8 @@ export default {
   'timara.dialogue.gem_info.offer': 'Wil je deze edelsteen ruilen?',
   'timara.dialogue.gem_info.0': 'Ik wilde het alleen weten.',
 
-  'timara.dialogue.offer_gem.text': 'Ik kan er iets grofs mee smeden. Misschien een roestige bijl.',
-  'timara.dialogue.offer_gem.0': 'Hier is de edelsteen.',
-  'timara.dialogue.offer_gem.1': 'Nog niet.',
+  'timara.dialogue.gem_offer': 'Bied de edelsteen aan',
+  'timara.dialogue.gem_receive': 'Timara accepteert de steen en geeft je een roestige bijl.',
 
   'timara.dialogue.thank_you.text': 'Moge hij je goed dienen. Lomp, maar scherp.',
   'timara.dialogue.thank_you.0': 'Bedankt.'
