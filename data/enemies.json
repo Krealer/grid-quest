@@ -555,6 +555,30 @@
       }
     ]
   },
+  "ronington": {
+    "name": "Ronington",
+    "hp": 70,
+    "stats": {
+      "attack": 5,
+      "defense": 0,
+      "speed": 7
+    },
+    "xp": 12,
+    "description": "A fiery baby dragon with surprising agility.",
+    "intro": "A young dragon snorts sparks at your approach!",
+    "portrait": "🐲",
+    "skills": [
+      "flame_nip",
+      "ember_puff",
+      "tail_spark"
+    ],
+    "behavior": "aggressive",
+    "drops": [
+      { "item": "baby_dragon_scale", "quantity": 1 },
+      { "item": "gem", "quantity": 1, "chance": 0.3 }
+    ],
+    "script": "enemies/ronington.js"
+  },
   "pain_lattice": {
     "name": "Pain Lattice",
     "hp": 70,

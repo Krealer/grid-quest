@@ -273,6 +273,32 @@ export const generalItems = {
     "stackLimit": 99,
     "icon": "🌫️"
   },
+  "baby_dragon_scale": {
+    "id": "baby_dragon_scale",
+    "name": "Baby Dragon Scale",
+    "description": "A small yet sturdy scale from a young dragon.",
+    "type": "material",
+    "tags": [
+      "items"
+    ],
+    "category": "general",
+    "consumable": true,
+    "stackLimit": 99,
+    "icon": "🐲"
+  },
+  "gem": {
+    "id": "gem",
+    "name": "Gem",
+    "description": "A luminous gem dropped by the fire-dragonling Ronington.",
+    "type": "material",
+    "tags": [
+      "items"
+    ],
+    "category": "general",
+    "consumable": true,
+    "stackLimit": 99,
+    "icon": "💎"
+  },
   "echo_crystal": {
     "id": "echo_crystal",
     "name": "Echo Crystal",
