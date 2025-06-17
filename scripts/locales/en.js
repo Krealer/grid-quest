@@ -251,7 +251,7 @@ export default {
   'timara.dialogue.start.2': 'Goodbye',
 
   'timara.dialogue.ronington.text':
-    'Inside the cave dwells Ronington — a fiery baby dragon. 30% of the time, it drops a gem when defeated.',
+    'Inside the cave dwells Ronington — a fiery baby dragon. 40% of the time, it drops a gem when defeated.',
   'timara.dialogue.ronington.0': "That's rare... and dangerous.",
 
   'timara.dialogue.gem_info.text':
