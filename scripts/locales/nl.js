@@ -167,6 +167,7 @@ export default {
   'message.water_restore': 'Het koele water verjongt je. HP volledig hersteld.',
   'message.chest_found': 'Je vond {itemName} in de kist!',
   'message.chest_empty': 'De kist is leeg.',
+  'translator.required': 'Vertaal sleutel vereist.',
   'combat.attack': '{attacker} valt aan voor {amount} schade!',
   'combat.skill.use': '{user} gebruikt {skillName}!',
   'combat.status.apply':

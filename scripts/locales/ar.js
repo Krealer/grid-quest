@@ -158,6 +158,7 @@ export default {
   'message.water_restore': 'الماء البارد يجددك. تم استعادة نقاط الصحة بالكامل.',
   'message.chest_found': 'وجدت {itemName} في الصندوق!',
   'message.chest_empty': 'الصندوق فارغ.',
+  'translator.required': 'مطلوب مفتاح المترجم.',
   'combat.attack': '{attacker} يهاجم ويسبب {amount} ضرر!',
   'combat.skill.use': '{user} يستخدم {skillName}!',
   'combat.status.apply': '{target} متأثر بـ{status} لمدة {turns} دورة.',

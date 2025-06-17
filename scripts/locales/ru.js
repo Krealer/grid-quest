@@ -161,6 +161,7 @@ export default {
     'Прохладная вода освежает. HP полностью восстановлено.',
   'message.chest_found': 'Вы нашли {itemName} в сундуке!',
   'message.chest_empty': 'Сундук пуст.',
+  'translator.required': 'Требуется ключ переводчика.',
   'combat.attack': '{attacker} наносит {amount} урона!',
   'combat.skill.use': '{user} использует {skillName}!',
   'combat.status.apply': '{target} получает эффект {status} на {turns} ходов.',

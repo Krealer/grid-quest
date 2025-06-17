@@ -166,6 +166,7 @@ export default {
   'message.water_restore': 'The cool water rejuvenates you. HP fully restored.',
   'message.chest_found': 'You found {itemName} in the chest!',
   'message.chest_empty': 'The chest is empty.',
+  'translator.required': 'Translator key is required.',
   'combat.attack': '{attacker} strikes for {amount} damage!',
   'combat.skill.use': '{user} uses {skillName}!',
   'combat.status.apply': '{target} is affected by {status} for {turns} turns.',
