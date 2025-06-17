@@ -251,7 +251,7 @@ export default {
   'timara.dialogue.start.2': 'Vaarwel',
 
   'timara.dialogue.ronington.text':
-    'In de grot huist Ronington — een vurige babydraak. In 30% van de gevallen laat hij een edelsteen vallen als hij verslagen wordt.',
+    'In de grot huist Ronington — een vurige babydraak. In 40% van de gevallen laat hij een edelsteen vallen als hij verslagen wordt.',
   'timara.dialogue.ronington.0': 'Dat is zeldzaam... en gevaarlijk.',
 
   'timara.dialogue.gem_info.text':

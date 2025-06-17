@@ -239,7 +239,7 @@ export default {
   'timara.dialogue.start.2': 'さようなら',
 
   'timara.dialogue.ronington.text':
-    '洞窟にはロニントンという炎の赤ちゃんドラゴンがいる。倒すと30%の確率で宝石を落とす。',
+    '洞窟にはロニントンという炎の赤ちゃんドラゴンがいる。倒すと40%の確率で宝石を落とす。',
   'timara.dialogue.ronington.0': '珍しくて…危険だね。',
 
   'timara.dialogue.gem_info.text': '宝石か。炎に生まれ輝く。希少で美しい。',

@@ -237,7 +237,7 @@ export default {
   'timara.dialogue.start.2': 'وداعاً',
 
   'timara.dialogue.ronington.text':
-    'داخل الكهف يعيش روننغتون — تنين صغير ناري. يسقط جوهرة بنسبة 30٪ عند هزيمته.',
+    'داخل الكهف يعيش روننغتون — تنين صغير ناري. يسقط جوهرة بنسبة 40٪ عند هزيمته.',
   'timara.dialogue.ronington.0': 'نادر... وخطير.',
 
   'timara.dialogue.gem_info.text': 'جوهرة؟ ولدت من النار ومضيئة. نادرة وجميلة.',

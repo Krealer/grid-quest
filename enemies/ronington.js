@@ -9,7 +9,7 @@ export const ronington = {
   description: 'A fiery baby dragon with surprising agility.',
   drops: [
     { item: 'baby_dragon_scale', quantity: 1 },
-    { item: 'gem', quantity: 1, chance: 0.3 }
+    { item: 'gem', quantity: 1, chance: 0.4 }
   ]
 };
 

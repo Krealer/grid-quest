@@ -575,7 +575,7 @@
     "behavior": "aggressive",
     "drops": [
       { "item": "baby_dragon_scale", "quantity": 1 },
-      { "item": "gem", "quantity": 1, "chance": 0.3 }
+      { "item": "gem", "quantity": 1, "chance": 0.4 }
     ],
     "script": "enemies/ronington.js"
   },
