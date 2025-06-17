@@ -159,6 +159,7 @@ export default {
   'message.water_restore': '冷たい水があなたを癒す。HPが全回復した。',
   'message.chest_found': '宝箱の中に{itemName}を見つけた！',
   'message.chest_empty': '宝箱は空っぽだ。',
+  'translator.required': '翻訳キーが必要です。',
   'combat.attack': '{attacker}の攻撃！{amount}のダメージ。',
   'combat.skill.use': '{user}は{skillName}を使った！',
   'combat.status.apply': '{target}は{status}を{turns}ターン受けた。',

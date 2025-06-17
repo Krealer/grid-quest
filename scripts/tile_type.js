@@ -97,7 +97,11 @@ export async function onInteractEffect(
       const required = tile.key || tile.requiresItem;
       const targetMap = tile.target;
       if (required && !hasItem(required) && tile.locked) {
-        showDialogue('It\u2019s locked.');
+        if (required === 'translator_key' && tile.message === 'translator.required') {
+          showDialogue(t('translator.required'));
+        } else {
+          showDialogue('It\u2019s locked.');
+        }
         break;
       }
       if (required === 'commander_badge') {
