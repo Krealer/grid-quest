@@ -2,7 +2,7 @@
 // determined by tile_type.js so the logic stays centralized.
 import { isWalkable } from './tile_type.js';
 
-import PriorityQueue from './priorityQueue.js';
+import PriorityQueue from './priority_queue.js';
 
 export function findPath(mapGrid, startX, startY, targetX, targetY) {
   const rows = mapGrid.length;

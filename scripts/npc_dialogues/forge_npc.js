@@ -1,5 +1,5 @@
 import { loadUpgradeData, listUpgradeableItems, listRerollableItems, beginForgeSession, canUpgrade, canReroll } from '../forge.js';
-import { showDialogue } from '../dialogueSystem.js';
+import { showDialogue } from '../dialogue_system.js';
 import { getItemDisplayName, parseItemId } from '../inventory.js';
 
 export async function createForgeDialogue() {

@@ -2,7 +2,7 @@
 import { onStepEffect } from './tile_type.js';
 import { stepSymbol } from './puzzle_state.js';
 import { triggerRotation } from './rotation_puzzle.js';
-import { getCurrentGrid } from './mapLoader.js';
+import { getCurrentGrid } from './map_loader.js';
 
 /**
  * Applies effects based on the tile symbol the player stepped on.
