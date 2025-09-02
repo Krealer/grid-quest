@@ -9,7 +9,8 @@
     "test": "node tools/check_filenames.js && jest",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "check:names": "node tools/check_filenames.js"
+    "check:names": "node tools/check_filenames.js",
+    "build:npc-index": "node tools/build_npc_index.js"
   },
   "devDependencies": {
     "eslint": "^9.0.0",
