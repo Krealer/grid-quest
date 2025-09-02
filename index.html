@@ -8,21 +8,18 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
     <link rel="stylesheet" href="style/layout.css" />
-    <link rel="stylesheet" href="style/tile.css" />
     <link rel="stylesheet" href="style/combat.css" />
-    <link rel="stylesheet" href="style/combat_ui.css" />
-    <link rel="stylesheet" href="style/mobile.css" />
     <link rel="stylesheet" href="style/inventory.css" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   </head>
   <body>
     <div id="game-grid"></div>
     <div id="menu-bar">
-      <div class="tab settings-tab" data-i18n="menu.settings">Settings</div>
-      <div class="tab menu-tab" data-i18n="menu.menu">Menu</div>
-      <div class="tab inventory-tab" data-i18n="menu.inventory">Inventory</div>
-      <div class="tab save-tab" data-i18n="menu.save">Save</div>
-      <div class="tab load-tab" data-i18n="menu.load">Load</div>
+      <div class="tab settings-tab">Settings</div>
+      <div class="tab menu-tab">Menu</div>
+      <div class="tab inventory-tab">Inventory</div>
+      <div class="tab save-tab">Save</div>
+      <div class="tab load-tab">Load</div>
     </div>
     <div id="ui-bar">
       <div id="hp-display"></div>
@@ -31,15 +28,15 @@
     </div>
     <div id="inventory-overlay" class="inventory-overlay">
       <div class="inventory-content">
-        <button class="close-btn" aria-label="Close">&times;</button>
-        <h2 data-i18n="inventory.title">Inventory</h2>
+        <button class="close-btn">&times;</button>
+        <h2>Inventory</h2>
         <div id="player-stats"></div>
         <div class="inventory-categories">
-          <button data-cat="items" class="tab selected" data-i18n="inventory.items">Items</button>
-          <button data-cat="equipable" class="tab" data-i18n="inventory.equipable">Equipable Items</button>
-          <button data-cat="combat" class="tab" data-i18n="inventory.combat">Combat Items</button>
-          <button data-cat="key" class="tab" data-i18n="inventory.key">Key Items</button>
-          <button data-cat="lore" class="tab" data-i18n="inventory.lore">Lore Items</button>
+          <button data-cat="items" class="tab selected">Items</button>
+          <button data-cat="equipable" class="tab">Equipable Items</button>
+          <button data-cat="combat" class="tab">Combat Items</button>
+          <button data-cat="key" class="tab">Key Items</button>
+          <button data-cat="lore" class="tab">Lore Items</button>
         </div>
         <div class="inventory-panel">
           <div class="inventory-scroll">
@@ -51,43 +48,43 @@
     </div>
     <div id="menu-overlay" class="menu-overlay">
       <div class="menu-content">
-        <button class="close-btn" aria-label="Close">&times;</button>
+        <button class="close-btn">&times;</button>
         <div class="menu-buttons">
-          <div class="tab guide-tab" data-i18n="menu.guide">Guide</div>
-          <div class="tab info-tab" data-i18n="menu.info">Info</div>
-          <div class="tab quests-tab" data-i18n="menu.quests">Quest</div>
-          <div class="tab status-tab" data-i18n="menu.status">Status Panel</div>
-          <div class="tab null-tab" data-i18n="menu.null">The Null Factor</div>
-          <div class="tab restart-tab" data-i18n="menu.restart">Restart</div>
+          <div class="tab guide-tab">Guide</div>
+          <div class="tab info-tab">Info</div>
+          <div class="tab quests-tab">Quest</div>
+          <div class="tab status-tab">Status Panel</div>
+          <div class="tab null-tab">The Null Factor</div>
+          <div class="tab restart-tab">Restart</div>
         </div>
         <div id="menu-stats"></div>
       </div>
     </div>
     <div id="quest-log-overlay" class="quest-overlay">
       <div class="quest-content">
-        <button class="close-btn" aria-label="Close">&times;</button>
-        <h2 data-i18n="quest.active">Active Quests</h2>
+        <button class="close-btn">&times;</button>
+        <h2>Active Quests</h2>
         <div id="quest-log"></div>
       </div>
     </div>
     <div id="status-overlay" class="status-overlay">
       <div class="status-content">
-        <button class="close-btn" aria-label="Close">&times;</button>
-        <h2 data-i18n="status.title">Player Status</h2>
+        <button class="close-btn">&times;</button>
+        <h2>Player Status</h2>
         <div id="status-info"></div>
-        <h3 data-i18n="status.passives">Passive Skills</h3>
+        <h3>Passive Skills</h3>
         <div id="status-passives"></div>
       </div>
     </div>
     <div id="info-overlay" class="info-overlay">
       <div id="info-menu">
-        <button class="close-btn" aria-label="Close">&times;</button>
+        <button class="close-btn">&times;</button>
         <nav class="info-nav">
-          <div class="info-nav-btn active" data-target="enemies" data-i18n="info.enemies">Enemies</div>
-          <div class="info-nav-btn" data-target="items" data-i18n="info.items">Items</div>
-          <div class="info-nav-btn" data-target="skills" data-i18n="info.skills">Skills</div>
-          <div class="info-nav-btn" data-target="status" data-i18n="info.status">Status</div>
-          <div class="info-nav-btn" data-target="lore" data-i18n="info.lore">Lore</div>
+          <div class="info-nav-btn active" data-target="enemies">Enemies</div>
+          <div class="info-nav-btn" data-target="items">Items</div>
+          <div class="info-nav-btn" data-target="skills">Skills</div>
+          <div class="info-nav-btn" data-target="status">Status</div>
+          <div class="info-nav-btn" data-target="lore">Lore</div>
         </nav>
         <div class="info-content">
           <div id="content-enemies" class="info-section"></div>
@@ -116,22 +113,21 @@
     </div>
     <div id="null-summary-overlay" class="null-summary-overlay">
       <div class="null-summary-content">
-        <button class="close-btn" aria-label="Close">&times;</button>
-        <h2 data-i18n="null.summary">Null Factor Summary</h2>
+        <button class="close-btn">&times;</button>
+        <h2>Null Factor Summary</h2>
         <div id="null-summary-message"></div>
         <div id="null-summary-list"></div>
       </div>
     </div>
     <div id="settings-overlay" class="settings-overlay">
       <div class="settings-content">
-        <button class="close-btn" aria-label="Close">&times;</button>
-        <h2 data-i18n="settings.title">Settings</h2>
+        <button class="close-btn">&times;</button>
+        <h2>Settings</h2>
         <label class="setting-row">
-          <input type="checkbox" id="coords-toggle" />
-          <span data-i18n="settings.coords">Grid Coordinates</span>
+          <input type="checkbox" id="coords-toggle" /> Grid Coordinates
         </label>
         <label class="setting-row">
-          <span data-i18n="settings.movement">Movement Speed</span>
+          Movement Speed
           <select id="move-speed">
             <option value="slow">Slow</option>
             <option value="normal">Normal</option>
@@ -139,80 +135,75 @@
           </select>
         </label>
         <label class="setting-row">
-          <span data-i18n="settings.combat">Combat Speed</span>
+          Combat Speed
           <select id="combat-speed">
             <option value="instant">Instant</option>
             <option value="normal">Normal</option>
           </select>
         </label>
         <label class="setting-row">
-          <input type="checkbox" id="colorblind-toggle" />
-          <span data-i18n="settings.colorblind">Colorblind Mode</span>
+          <input type="checkbox" id="colorblind-toggle" /> Colorblind Mode
         </label>
         <label class="setting-row">
-          <input type="checkbox" id="label-toggle" />
-          <span data-i18n="settings.labels">Show Tile Labels</span>
+          <input type="checkbox" id="label-toggle" /> Show Tile Labels
         </label>
         <label class="setting-row">
-          <input type="checkbox" id="dialogue-toggle" />
-          <span data-i18n="settings.dialogue">Dialogue Animation</span>
+          <input type="checkbox" id="dialogue-toggle" /> Dialogue Animation
         </label>
         <label class="setting-row">
-          <input type="checkbox" id="skip-toggle" />
-          <span data-i18n="settings.tapToSkip">Tap to Skip Dialogue</span>
-        </label>
-        <label class="setting-row" title="Disables non-essential auto-messages like trap warnings and water healing.">
-          <input type="checkbox" id="notify-toggle" />
-          <span data-i18n="settings.notifySkip">Notify Skip</span>
-        </label>
-        <label class="setting-row">
-          <span data-i18n="settings.language">Language</span>
+          Language
           <select id="language-select">
             <option value="en">English</option>
-            <option value="nl">Nederlands</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
             <option value="ja">日本語</option>
-            <option value="ar">العربية</option>
-            <option value="ru">Русский</option>
           </select>
         </label>
         <label
           class="setting-row"
           title="Keeps the player centered on screen when using a phone in portrait orientation."
         >
-          <input type="checkbox" id="center-toggle" />
-          <span data-i18n="settings.center">Center Mode (Mobile Portrait Only)</span>
+          <input type="checkbox" id="center-toggle" /> Center Mode (Mobile
+          Portrait Only)
         </label>
-        <button id="reset-settings" class="reset-btn" data-i18n="settings.reset">
+        <button id="reset-settings" class="reset-btn">
           Reset All Settings
         </button>
+        <label class="setting-row" id="rollback-row">
+          Rollback
+          <select id="rollback-select">
+            <option value="v0.7.3">v0.7.3</option>
+          </select>
+          <button id="rollback-btn" title="Restore Selected Version">&#8635;</button>
+        </label>
       </div>
     </div>
     <div id="error-overlay" class="error-overlay">
       <div class="error-content">
         <div id="error-message"></div>
-        <button class="error-ok" data-i18n="error.ok">OK</button>
+        <button class="error-ok">OK</button>
       </div>
     </div>
     <div id="confirm-overlay" class="confirm-overlay">
       <div class="confirm-content">
         <div id="confirm-message"></div>
         <div class="confirm-actions">
-          <button class="confirm-cancel" data-i18n="confirm.cancel">Cancel</button>
-          <button class="confirm-yes" data-i18n="confirm.yes">Confirm</button>
+          <button class="confirm-cancel">Cancel</button>
+          <button class="confirm-yes">Confirm</button>
         </div>
       </div>
     </div>
     <div id="save-load-overlay" class="save-load-overlay">
       <div class="save-load-content">
-        <button class="close-btn" aria-label="Close">&times;</button>
-        <h2 id="save-load-title" data-i18n="save.title">Save Game</h2>
+        <button class="close-btn">&times;</button>
+        <h2 id="save-load-title">Save Game</h2>
         <div id="slots-container"></div>
       </div>
     </div>
     <div id="howto-overlay" class="howto-overlay">
       <div class="howto-content">
-        <button class="close-btn" aria-label="Close">&times;</button>
-        <h2 data-i18n="howto.title">How to Play</h2>
+        <button class="close-btn">&times;</button>
+        <h2>How to Play</h2>
         <div class="howto-scroll">
           <p><strong>Movement:</strong> Tap or click a ground tile to move. (Ground tiles are light green squares.)</p>
           <p><strong>Interaction:</strong> Double tap or double click a tile to interact.</p>
@@ -229,10 +220,10 @@
     </div>
     <div id="greeting-overlay" class="greeting-overlay">
       <div class="greeting-content">
-        <h2 data-i18n="greet.welcome">Welcome to Grid Quest</h2>
+        <h2>Welcome to Grid Quest</h2>
         <div class="greeting-buttons">
-          <button id="greet-howto-btn" data-i18n="greet.howto">How to Play</button>
-          <button id="greet-play-btn" data-i18n="greet.play">Play</button>
+          <button id="greet-howto-btn">How to Play</button>
+          <button id="greet-play-btn">Play</button>
         </div>
       </div>
     </div>
