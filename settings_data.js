@@ -3,6 +3,10 @@ export default {
     default: false,
     description: 'Show (x, y) when hovering over a tile'
   },
+  phoneCoordinates: {
+    default: false,
+    description: 'Show (x, y) on each tile'
+  },
   movementSpeed: {
     default: 'normal',
     description: 'Player tile transition speed'

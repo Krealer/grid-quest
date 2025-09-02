@@ -32,6 +32,11 @@ export function applySettings(settings) {
   } else {
     grid.classList.remove('show-labels');
   }
+  if (settings.phoneCoordinates) {
+    grid.classList.add('show-coords');
+  } else {
+    grid.classList.remove('show-coords');
+  }
 
   const tiles = grid.querySelectorAll('.tile');
   tiles.forEach((t) => {
@@ -41,6 +46,11 @@ export function applySettings(settings) {
       t.title = `(${x},${y})`;
     } else {
       t.removeAttribute('title');
+    }
+    if (settings.phoneCoordinates) {
+      t.dataset.coords = `(${x},${y})`;
+    } else {
+      delete t.dataset.coords;
     }
   });
 }

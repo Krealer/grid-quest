@@ -1148,6 +1148,19 @@ body {
   text-align: center;
 }
 
+#game-grid.show-coords .tile::before {
+  content: attr(data-coords);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: center;
+}
+
 #game-grid.colorblind .trap-light {
   background-color: #dca;
 }
