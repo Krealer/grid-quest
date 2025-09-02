@@ -1,4 +1,4 @@
-import { startDialogueTree } from '../dialogue_system.js';
+import { startDialogueTree } from '../dialogueSystem.js';
 import { watcherDialogue } from '../npc_dialogues/watcher_dialogue.js';
 
 export function interact() {

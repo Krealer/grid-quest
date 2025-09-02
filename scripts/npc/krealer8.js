@@ -1,4 +1,4 @@
-import { startDialogueTree, showDialogue } from '../dialogue_system.js';
+import { startDialogueTree, showDialogue } from '../dialogueSystem.js';
 import { krealer8Dialogue } from '../dialogue_state.js';
 import { npcAppearance } from '../npc_data.js';
 

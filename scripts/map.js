@@ -1,7 +1,7 @@
 import * as router from './router.js';
 import { renderGrid } from './grid.js';
 import { player } from './player.js';
-import { getCurrentGrid, getCurrentEnvironment, isFogEnabled } from './map_loader.js';
+import { getCurrentGrid, getCurrentEnvironment, isFogEnabled } from './mapLoader.js';
 
 /**
  * Move the player to a given map and coordinates.

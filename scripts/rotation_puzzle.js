@@ -1,4 +1,4 @@
-import { getCurrentGrid } from './map_loader.js';
+import { getCurrentGrid } from './mapLoader.js';
 import {
   solveRotationPuzzle,
   isRotationPuzzleSolved

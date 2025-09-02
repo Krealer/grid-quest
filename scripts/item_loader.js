@@ -1,5 +1,5 @@
-import { loadJson } from './data_service.js';
-import { showError } from './error_prompt.js';
+import { loadJson } from './dataService.js';
+import { showError } from './errorPrompt.js';
 import { itemData } from './item_data.js';
 
 let items = {};

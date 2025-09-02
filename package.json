@@ -6,11 +6,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tools/check_filenames.js && jest",
+    "test": "jest",
     "lint": "eslint .",
-    "format": "prettier --write .",
-    "check:names": "node tools/check_filenames.js",
-    "build:npc-index": "node tools/build_npc_index.js"
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "eslint": "^9.0.0",

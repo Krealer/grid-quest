@@ -1,4 +1,4 @@
-export { addStatus as applyEffect, removeStatus } from './status_manager.js';
+export { addStatus as applyEffect, removeStatus } from './statusManager.js';
 import { getStatusEffect } from './status_effects.js';
 
 export function tickStatusEffects(target, log) {

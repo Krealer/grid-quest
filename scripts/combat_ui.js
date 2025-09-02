@@ -1,6 +1,6 @@
 import { getStatusEffect } from './status_effects.js';
-import { getStatusList } from './status_manager.js';
-import { attachTooltip } from '../ui/skills_panel.js';
+import { getStatusList } from './statusManager.js';
+import { attachTooltip } from '../ui/skillsPanel.js';
 
 export function setupTabs(overlay) {
   const offContainer = overlay.querySelector('.offensive-skill-buttons');

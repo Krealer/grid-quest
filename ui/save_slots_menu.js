@@ -1,4 +1,4 @@
-import { showConfirm } from '../scripts/confirm_prompt.js';
+import { showConfirm } from '../scripts/confirmPrompt.js';
 
 let mode = 'save';
 
