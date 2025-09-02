@@ -21,14 +21,18 @@ let currentGrid = null;
 let currentEnvironment = 'clear';
 let currentProperties = {};
 
-export function normalizeGrid(grid, size = 20) {
+export function normalizeGrid(
+  grid,
+  width = grid[0]?.length || 0,
+  height = grid.length
+) {
   const normalized = [];
-  for (let y = 0; y < size; y++) {
+  for (let y = 0; y < height; y++) {
     const row = grid[y] || [];
     const paddedRow = row
-      .slice(0, size)
+      .slice(0, width)
       .map((cell) => (typeof cell === 'string' ? { type: cell } : cell));
-    for (let i = paddedRow.length; i < size; i++) {
+    for (let i = paddedRow.length; i < width; i++) {
       paddedRow.push({ type: 'G' });
     }
     normalized.push(paddedRow);
