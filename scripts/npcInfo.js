@@ -95,9 +95,9 @@ export const npcInfoList = [
     description: 'Pragmatic trader who exchanges fragments for a key.'
   },
   {
-    id: 'mystic_orb',
-    name: 'Mystic Orb',
-    description: 'A floating sphere that speaks in riddles.'
+    id: 'imuku',
+    name: 'Imuku',
+    description: 'A friendly guide who shares knowledge of the land.'
   }
 ];
 
