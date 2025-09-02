@@ -1,4 +1,4 @@
-import { loadItems } from '../item_loader.js';
+import { loadItems } from '../../scripts/item_loader.js';
 
 export async function createDariusDialogue() {
   await loadItems();

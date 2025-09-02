@@ -1,4 +1,4 @@
-import { startDialogueTree } from '../dialogueSystem.js';
+import { startDialogueTree } from '../../scripts/dialogueSystem.js';
 
 export const mysticOrbDialogue = [
   {

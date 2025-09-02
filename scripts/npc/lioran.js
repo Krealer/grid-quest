@@ -1,5 +1,5 @@
 import { startDialogueTree, showDialogue } from '../dialogueSystem.js';
-import { lioranDialogue } from '../npc_dialogues/lioran_dialogue.js';
+import { lioranDialogue } from '../../data/dialogues/lioran_dialogue.js';
 import { npcAppearance } from '../npc_data.js';
 
 export function interact() {

@@ -16,7 +16,7 @@ export const shadeSageDialogue = [
   {
     text: "It binds the paths of heroes. Remember what you learn here.",
     options: [
-      { label: "I understand.", goto: null, onChoose: () => import('../dialogue_state.js').then(m => m.discoverLore('hub_origins')) }
+      { label: "I understand.", goto: null, onChoose: () => import('../../scripts/dialogue_state.js').then(m => m.discoverLore('hub_origins')) }
     ]
   }
 ];
