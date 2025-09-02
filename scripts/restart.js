@@ -18,7 +18,7 @@ export function restartGame() {
   window.location.reload();
 }
 
-import { showConfirm } from './confirm_prompt.js';
+import { showConfirm } from './confirmPrompt.js';
 
 export function confirmRestart() {
   showConfirm(

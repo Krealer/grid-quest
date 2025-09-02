@@ -1,5 +1,5 @@
 import { hasCodeFile } from './inventory.js';
-import { showDialogue } from './dialogue_system.js';
+import { showDialogue } from './dialogueSystem.js';
 import { toggleNullSummary } from '../ui/null_summary.js';
 
 

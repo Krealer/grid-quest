@@ -1,4 +1,4 @@
-import { getCurrentGrid, isFogEnabled } from './map_loader.js';
+import { getCurrentGrid, isFogEnabled } from './mapLoader.js';
 import { onStepEffect, isWalkable } from './tile_type.js';
 import { toggleInventoryView, initInventoryUI } from './inventory_ui.js';
 import { toggleQuestLog } from './quest_log.js';
@@ -13,7 +13,7 @@ import {
 } from './quest_state.js';
 import { findPath } from './pathfinder.js';
 import * as router from './router.js';
-import { showDialogue } from './dialogue_system.js';
+import { showDialogue } from './dialogueSystem.js';
 import { handleTileInteraction } from './interaction.js';
 import { isMovementDisabled } from './movement.js';
 import { hasCodeFile, hasItem } from './inventory.js';
@@ -25,7 +25,7 @@ import {
   updateHpDisplay,
   updateDefenseDisplay,
   updateXpDisplay
-} from './ui/player_display.js';
+} from './ui/playerDisplay.js';
 import { initNullTab } from './ui_state.js';
 import { initNullSummary } from '../ui/null_summary.js';
 import { initSkillSystem } from './skills.js';
@@ -51,10 +51,10 @@ import {
   saveSettings,
   applySettings,
   DEFAULT_SETTINGS
-} from './settings_manager.js';
+} from './settingsManager.js';
 import { loadLanguage } from './language_loader.js';
 import { initGreeting } from '../ui/greeting.js';
-import { startGame } from './start_game.js';
+import { startGame } from './startGame.js';
 import { rollbackTo } from './rollback.js';
 
 // Inventory contents are managed in inventory.js

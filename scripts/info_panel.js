@@ -1,14 +1,14 @@
-import { getAllNpcs } from './npc_info.js';
-import { loadEnemyInfo, getAllEnemies } from './enemy_info.js';
-import { loadItemInfo, getAllItems } from './item_info.js';
+import { getAllNpcs } from './npcInfo.js';
+import { loadEnemyInfo, getAllEnemies } from './enemyInfo.js';
+import { loadItemInfo, getAllItems } from './itemInfo.js';
 import { getDiscovered, getEchoConversations } from './player_memory.js';
-import { getAllSkillsInfo } from './skills_info.js';
+import { getAllSkillsInfo } from './skillsInfo.js';
 import { getStatusMetadata } from './status_effects.js';
 import { getLoreEntries } from './lore_entries.js';
-import { getAllClasses } from './classes_info.js';
+import { getAllClasses } from './classesInfo.js';
 import { getChosenClass } from './class_state.js';
 import { loadRelics, getRelicData, getOwnedRelics } from './relic_state.js';
-import { getAllEchoes } from './echo_info.js';
+import { getAllEchoes } from './echoInfo.js';
 
 function createEntry(obj) {
   const row = document.createElement('div');

@@ -1,4 +1,4 @@
-import { getClassInfo } from './classes_info.js';
+import { getClassInfo } from './classesInfo.js';
 
 const STORAGE_KEY = 'gridquest.class';
 let chosenClass = null;

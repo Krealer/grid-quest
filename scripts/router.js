@@ -1,4 +1,4 @@
-import { loadMap as loadMapData, getCurrentGrid } from './map_loader.js';
+import { loadMap as loadMapData, getCurrentGrid } from './mapLoader.js';
 import { renderGrid } from './grid.js';
 import { gameState } from './game_state.js';
 import { discoverMap } from './player_memory.js';

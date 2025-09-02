@@ -1,4 +1,4 @@
-import { startDialogueTree, showDialogue } from '../dialogue_system.js';
+import { startDialogueTree, showDialogue } from '../dialogueSystem.js';
 import { firstMemoryDialogue } from '../npc_dialogues/first_memory_dialogue.js';
 import { npcAppearance } from '../npc_data.js';
 

@@ -1,5 +1,5 @@
 import { reveal } from './fog_system.js';
-import { applyStatus } from './status_manager.js';
+import { applyStatus } from './statusManager.js';
 
 export function triggerDarkTrap(player, applyDamage, showDialogue, x, y) {
   applyDamage(player, 1);

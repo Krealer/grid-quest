@@ -1,9 +1,9 @@
-import { getCurrentGrid } from './map_loader.js';
+import { getCurrentGrid } from './mapLoader.js';
 import { onStepEffect, isWalkable } from './tile_type.js';
 import { findPath } from './pathfinder.js';
 import { stepTo } from './player.js';
 import * as router from './router.js';
-import { updateHpDisplay } from './ui/player_display.js';
+import { updateHpDisplay } from './ui/playerDisplay.js';
 import { isMovementDisabled } from './movement.js';
 
 let isMoving = false;

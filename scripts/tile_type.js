@@ -26,11 +26,11 @@ export function isInteractable(symbol) {
   return TILE_DEFS[symbol]?.interactable ?? false;
 }
 
-import { showDialogue } from './dialogue_system.js';
+import { showDialogue } from './dialogueSystem.js';
 import { healFull, healToFull } from './player.js';
 import { applyDamage } from './logic.js';
 import { triggerDarkTrap, triggerFireTrap } from './trap_logic.js';
-import { getCurrentGrid } from './map_loader.js';
+import { getCurrentGrid } from './mapLoader.js';
 
 export async function onStepEffect(symbol, player, x, y) {
   const grid = getCurrentGrid();
@@ -63,7 +63,7 @@ import { isChestOpened, openChest } from './chest.js';
 import { hasItem, removeItem, useKey } from './inventory.js';
 import { updateInventoryUI } from './inventory_ui.js';
 import { getEnemyData } from './enemy.js';
-import { startCombat } from './combat_system.js';
+import { startCombat } from './combatSystem.js';
 import { getAllSkills, unlockSkill } from './skills.js';
 import { echoAbsoluteIntro, setMemory } from './dialogue_state.js';
 import * as router from './router.js';

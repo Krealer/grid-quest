@@ -1,11 +1,11 @@
 // Centralized interaction logic
-import { getCurrentGrid } from './map_loader.js';
+import { getCurrentGrid } from './mapLoader.js';
 import { isAdjacent } from './logic.js';
 import { gameState } from './game_state.js';
 import { isInteractable, onInteractEffect } from './tile_type.js';
 import { hasItem, removeItem, useKey } from './inventory.js';
 import { updateInventoryUI } from './inventory_ui.js';
-import { showDialogue } from './dialogue_system.js';
+import { showDialogue } from './dialogueSystem.js';
 import { markItemUsed } from '../info/items.js';
 import { setMemory } from './dialogue_state.js';
 import { enterDoor } from './player.js';
