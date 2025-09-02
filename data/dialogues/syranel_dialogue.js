@@ -1,6 +1,6 @@
-import { startQuest, completeQuest } from '../quest_state.js';
-import { removeItem } from '../inventory.js';
-import { loadItems } from '../item_loader.js';
+import { startQuest, completeQuest } from '../../scripts/quest_state.js';
+import { removeItem } from '../../scripts/inventory.js';
+import { loadItems } from '../../scripts/item_loader.js';
 
 export const syranelDialogue = [
   {
@@ -19,7 +19,7 @@ export const syranelDialogue = [
         onChoose: async () => {
           await loadItems();
           removeItem('rotting_heart', 1);
-          const m = await import('../player.js');
+          const m = await import('../../scripts/player.js');
           m.grantSkill('leech');
         },
         completeQuest: 'crimson_request',
@@ -37,7 +37,7 @@ export const syranelDialogue = [
         onChoose: async () => {
           await loadItems();
           removeItem('rotting_heart', 1);
-          const m = await import('../player.js');
+          const m = await import('../../scripts/player.js');
           m.grantSkill('leech');
         },
         completeQuest: 'crimson_request',

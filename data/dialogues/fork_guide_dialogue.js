@@ -18,8 +18,8 @@ export const forkGuideDialogue = [
   {
     text: "Which way calls to you?",
     options: [
-      { label: "I walk the left path.", goto: null, onChoose: () => import('../dialogue_state.js').then(m => m.chooseForkPath('left')) },
-      { label: "I walk the right path.", goto: null, onChoose: () => import('../dialogue_state.js').then(m => m.chooseForkPath('right')) }
+      { label: "I walk the left path.", goto: null, onChoose: () => import('../../scripts/dialogue_state.js').then(m => m.chooseForkPath('left')) },
+      { label: "I walk the right path.", goto: null, onChoose: () => import('../../scripts/dialogue_state.js').then(m => m.chooseForkPath('right')) }
     ]
   }
 ];

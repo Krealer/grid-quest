@@ -40,7 +40,7 @@ export const firstMemoryDialogue = [
         goto: null,
         memoryFlag: 'first_memory_seen',
         onChoose: () =>
-          import('../dialogue_state.js').then((m) => m.discoverLore('first_memory'))
+          import('../../scripts/dialogue_state.js').then((m) => m.discoverLore('first_memory'))
       }
     ]
   }

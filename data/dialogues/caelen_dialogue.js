@@ -1,5 +1,5 @@
-import { removeItem, addItem } from '../inventory.js';
-import { loadItems, getItemData } from '../item_loader.js';
+import { removeItem, addItem } from '../../scripts/inventory.js';
+import { loadItems, getItemData } from '../../scripts/item_loader.js';
 
 export const caelenDialogue = [
   {

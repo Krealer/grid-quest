@@ -35,8 +35,8 @@ export const eryndorDialogue = [
         label: "Yeah, let's do this!",
         goto: null,
         onChoose: async () => {
-          const { removeItem, addItem } = await import('../inventory.js');
-          const { loadItems, getItemData } = await import('../item_loader.js');
+          const { removeItem, addItem } = await import('../../scripts/inventory.js');
+          const { loadItems, getItemData } = await import('../../scripts/item_loader.js');
           await loadItems();
           removeItem('bone_fragment', 1);
           removeItem('goblin_gear', 1);

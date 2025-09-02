@@ -1,5 +1,5 @@
-import { removeEnemyDropItem } from '../inventory.js';
-import { loadItems } from '../item_loader.js';
+import { removeEnemyDropItem } from '../../scripts/inventory.js';
+import { loadItems } from '../../scripts/item_loader.js';
 
 const hasEnemyDrop = (state) =>
   (state.inventory['prism_fragment'] || 0) > 0 ||

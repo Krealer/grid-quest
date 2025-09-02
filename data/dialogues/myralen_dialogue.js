@@ -1,5 +1,5 @@
-import { loadItems, getItemData } from '../item_loader.js';
-import { addItem } from '../inventory.js';
+import { loadItems, getItemData } from '../../scripts/item_loader.js';
+import { addItem } from '../../scripts/inventory.js';
 
 export async function createMyralenDialogue() {
   await loadItems();

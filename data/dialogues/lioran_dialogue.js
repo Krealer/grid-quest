@@ -21,9 +21,9 @@ export const lioranDialogue = [
         goto: null,
         memoryFlag: 'lioran_ring_taken',
         onChoose: async () => {
-          const { loadItems } = await import('../item_loader.js');
+          const { loadItems } = await import('../../scripts/item_loader.js');
           await loadItems();
-          const inv = await import('../inventory.js');
+          const inv = await import('../../scripts/inventory.js');
           await inv.giveItem('focus_ring');
         }
       },

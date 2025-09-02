@@ -1,6 +1,6 @@
-import { startQuest } from '../quest_state.js';
-import { removeItem, addItem } from '../inventory.js';
-import { loadItems, getItemData } from '../item_loader.js';
+import { startQuest } from '../../scripts/quest_state.js';
+import { removeItem, addItem } from '../../scripts/inventory.js';
+import { loadItems, getItemData } from '../../scripts/item_loader.js';
 
 export const goblinQuestDialogue = [
   {

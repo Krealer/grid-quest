@@ -1,5 +1,5 @@
-import { removePrismFragments, addItem } from '../inventory.js';
-import { loadItems, getItemData } from '../item_loader.js';
+import { removePrismFragments, addItem } from '../../scripts/inventory.js';
+import { loadItems, getItemData } from '../../scripts/item_loader.js';
 
 export async function createKaelorDialogue() {
   await loadItems();
