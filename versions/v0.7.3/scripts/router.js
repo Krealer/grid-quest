@@ -8,11 +8,24 @@ let player = null;
 let cols = 0;
 let currentMap = '';
 
-function findFirstWalkable(grid) {
-  for (let y = 0; y < grid.length; y++) {
-    for (let x = 0; x < grid[y].length; x++) {
-      if (['G', 't', 'T', 'W'].includes(grid[y][x].type)) {
-        return { x, y };
+function findCentralWalkable(grid) {
+  const height = grid.length;
+  const width = grid[0].length;
+  const midX = Math.floor(width / 2);
+  const midY = Math.floor(height / 2);
+  const isWalkable = (x, y) => ['G', 't', 'T', 'W'].includes(grid[y][x].type);
+
+  if (isWalkable(midX, midY)) return { x: midX, y: midY };
+
+  const maxRadius = Math.max(width, height);
+  for (let r = 1; r < maxRadius; r++) {
+    for (let dy = -r; dy <= r; dy++) {
+      for (let dx = -r; dx <= r; dx++) {
+        if (Math.abs(dx) !== r && Math.abs(dy) !== r) continue;
+        const x = midX + dx;
+        const y = midY + dy;
+        if (x < 0 || y < 0 || x >= width || y >= height) continue;
+        if (isWalkable(x, y)) return { x, y };
       }
     }
   }
@@ -66,7 +79,7 @@ export async function loadMap(filename, spawnPoint) {
     player.x = spawnPoint.x;
     player.y = spawnPoint.y;
   } else {
-    const start = findFirstWalkable(grid);
+    const start = findCentralWalkable(grid);
     player.x = start.x;
     player.y = start.y;
   }
