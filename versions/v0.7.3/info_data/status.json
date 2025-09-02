@@ -1,0 +1,11 @@
+[
+  {
+    "id": "poisoned",
+    "name": "Poisoned",
+    "type": "negative",
+    "description": "Loses HP each turn.",
+    "duration": "3 turns",
+    "inflicted_by": "Poison Dagger",
+    "cured_by": "Antidote"
+  }
+]

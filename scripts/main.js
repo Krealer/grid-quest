@@ -1,4 +1,4 @@
-import { getCurrentGrid, isFogEnabled } from './map_loader.js';
+import { getCurrentGrid, isFogEnabled } from './mapLoader.js';
 import { onStepEffect, isWalkable } from './tile_type.js';
 import { toggleInventoryView, initInventoryUI } from './inventory_ui.js';
 import { toggleQuestLog } from './quest_log.js';
@@ -13,7 +13,7 @@ import {
 } from './quest_state.js';
 import { findPath } from './pathfinder.js';
 import * as router from './router.js';
-import { showDialogue } from './dialogue_system.js';
+import { showDialogue } from './dialogueSystem.js';
 import { handleTileInteraction } from './interaction.js';
 import { isMovementDisabled } from './movement.js';
 import { hasCodeFile, hasItem } from './inventory.js';
@@ -25,7 +25,7 @@ import {
   updateHpDisplay,
   updateDefenseDisplay,
   updateXpDisplay
-} from './ui/player_display.js';
+} from './ui/playerDisplay.js';
 import { initNullTab } from './ui_state.js';
 import { initNullSummary } from '../ui/null_summary.js';
 import { initSkillSystem } from './skills.js';
@@ -37,12 +37,11 @@ import {
   initInventoryMenu
 } from '../ui/inventory_menu.js';
 import '../ui/system_message.js';
-import { initSaveSlotsMenu } from '../ui/save_slots_menu.js';
 import {
-  handleSave,
-  handleLoad,
-  initSaveLoadEvents
-} from './save_load_handlers.js';
+  initSaveSlotsMenu,
+  openSaveMenu,
+  openLoadMenu
+} from '../ui/save_slots_menu.js';
 import { saveState, loadState, gameState } from './game_state.js';
 import { saveGame, loadGame } from './save_load.js';
 import { initMenuBar } from '../ui/menu_bar.js';
@@ -52,11 +51,11 @@ import {
   saveSettings,
   applySettings,
   DEFAULT_SETTINGS
-} from './settings_manager.js';
-import { setLanguage, applyTranslations, hasLocale } from './i18n.js';
+} from './settingsManager.js';
+import { loadLanguage } from './language_loader.js';
 import { initGreeting } from '../ui/greeting.js';
-import { startGame } from './start_game.js';
-import { initSettingsPanel } from './ui/settings_panel.js';
+import { startGame } from './startGame.js';
+import { rollbackTo } from './rollback.js';
 
 // Inventory contents are managed in inventory.js
 
@@ -66,9 +65,6 @@ const gridState = { cols: 0 };
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
-  if (hasLocale(settings.language)) {
-    setLanguage(settings.language);
-  }
   // Prevent double-tap zoom on mobile devices
   document.addEventListener(
     'touchstart',
@@ -113,13 +109,67 @@ document.addEventListener('DOMContentLoaded', async () => {
   const colorblindToggle = document.getElementById('colorblind-toggle');
   const labelToggle = document.getElementById('label-toggle');
   const dialogueToggle = document.getElementById('dialogue-toggle');
-  const skipToggle = document.getElementById('skip-toggle');
-  const notifyToggle = document.getElementById('notify-toggle');
   const langSelect = document.getElementById('language-select');
   const centerToggle = document.getElementById('center-toggle');
   const resetBtn = document.getElementById('reset-settings');
+  const rollbackRow = document.getElementById('rollback-row');
+  const rollbackSelect = document.getElementById('rollback-select');
+  const rollbackBtn = document.getElementById('rollback-btn');
 
-  initSaveLoadEvents(container, gridState);
+  if (
+    typeof process !== 'undefined' &&
+    process.env &&
+    process.env.NODE_ENV !== 'development'
+  ) {
+    rollbackRow.style.display = 'none';
+  }
+
+  function handleSave() {
+    openSaveMenu();
+  }
+
+  function handleLoad() {
+    openLoadMenu();
+  }
+
+  async function performLoad(slot) {
+    loadState();
+    if (!loadGame(slot)) {
+      showDialogue('No save found.');
+      return;
+    }
+    refreshInventoryDisplay();
+    const mapName = gameState.currentMap || 'map01';
+    try {
+      const { cols: newCols } = await router.loadMap(mapName);
+      gridState.cols = newCols;
+      initFog(container, gridState.cols, isFogEnabled());
+      if (isFogEnabled()) {
+        if (router.getCurrentMapName() === 'map01') {
+          revealAll();
+        } else {
+          reveal(player.x, player.y);
+        }
+      }
+      updateStatsFromLevel();
+      player.hp = Math.min(player.hp, player.maxHp);
+      updateHpDisplay();
+      updateXpDisplay();
+      showDialogue('Progress loaded successfully.');
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  document.addEventListener('saveSlot', (e) => {
+    saveState();
+    saveGame(e.detail.slot);
+    showDialogue('Game Saved.');
+  });
+
+  document.addEventListener('loadSlot', (e) => {
+    performLoad(e.detail.slot);
+  });
 
   initMenuBar(handleSave, handleLoad);
   initMainMenu();
@@ -138,11 +188,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   colorblindToggle.checked = settings.colorblind;
   labelToggle.checked = settings.tileLabels;
   dialogueToggle.checked = settings.dialogueAnim;
-  skipToggle.checked = settings.tapToSkip;
-  notifyToggle.checked = settings.notifySkip;
   langSelect.value = settings.language;
   centerToggle.checked = settings.centerMode;
-  applyTranslations();
+  loadLanguage(settings.language);
 
   router.init(container, player);
   initMobileCenter(container);
@@ -198,29 +246,85 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   document.addEventListener('inventoryUpdated', updateNullTab);
 
-  initSettingsPanel(
-    {
-      settingsTab,
-      settingsOverlay,
-      settingsClose,
-      coordsToggle,
-      moveSelect,
-      combatSelect,
-      colorblindToggle,
-      labelToggle,
-      dialogueToggle,
-      skipToggle,
-      notifyToggle,
-      langSelect,
-      centerToggle,
-      resetBtn
-    },
-    settings,
-    applySettings,
-    saveSettings,
-    setLanguage,
-    DEFAULT_SETTINGS
-  );
+  function showSettings() {
+    settingsOverlay.classList.add('active');
+  }
+
+  function hideSettings() {
+    settingsOverlay.classList.remove('active');
+  }
+
+  settingsTab.addEventListener('click', showSettings);
+  settingsClose.addEventListener('click', hideSettings);
+  settingsOverlay.addEventListener('click', (e) => {
+    if (e.target === settingsOverlay) hideSettings();
+  });
+
+  coordsToggle.addEventListener('change', () => {
+    settings.gridCoordinates = coordsToggle.checked;
+    applySettings(settings);
+    saveSettings(settings);
+  });
+
+  moveSelect.addEventListener('change', () => {
+    settings.movementSpeed = moveSelect.value;
+    saveSettings(settings);
+  });
+
+  combatSelect.addEventListener('change', () => {
+    settings.combatSpeed = combatSelect.value;
+    saveSettings(settings);
+  });
+
+  colorblindToggle.addEventListener('change', () => {
+    settings.colorblind = colorblindToggle.checked;
+    applySettings(settings);
+    saveSettings(settings);
+  });
+
+  labelToggle.addEventListener('change', () => {
+    settings.tileLabels = labelToggle.checked;
+    applySettings(settings);
+    saveSettings(settings);
+  });
+
+  dialogueToggle.addEventListener('change', () => {
+    settings.dialogueAnim = dialogueToggle.checked;
+    saveSettings(settings);
+  });
+
+  langSelect.addEventListener('change', () => {
+    settings.language = langSelect.value;
+    saveSettings(settings);
+    loadLanguage(settings.language);
+  });
+
+  centerToggle.addEventListener('change', () => {
+    settings.centerMode = centerToggle.checked;
+    saveSettings(settings);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (confirm('Reset all settings?')) {
+      settings = { ...DEFAULT_SETTINGS };
+      saveSettings(settings);
+      applySettings(settings);
+      coordsToggle.checked = settings.gridCoordinates;
+      moveSelect.value = settings.movementSpeed;
+      combatSelect.value = settings.combatSpeed;
+      colorblindToggle.checked = settings.colorblind;
+      labelToggle.checked = settings.tileLabels;
+      dialogueToggle.checked = settings.dialogueAnim;
+      langSelect.value = settings.language;
+      centerToggle.checked = settings.centerMode;
+      loadLanguage(settings.language);
+    }
+  });
+
+  rollbackBtn.addEventListener('click', () => {
+    rollbackTo(rollbackSelect.value);
+    alert(`Rolled back to ${rollbackSelect.value}`);
+  });
 
   const { showGreeting } = initGreeting(() =>
     startGame(container, settings, gridState)
