@@ -26,11 +26,11 @@ let isInBattle = false;
 
 export async function startGame(container, settings, state) {
   try {
-    const { cols: newCols } = await router.loadMap('map01');
+    const { cols: newCols } = await router.loadMap('map001');
     state.cols = newCols;
     initFog(container, state.cols, isFogEnabled());
     if (isFogEnabled()) {
-      if (router.getCurrentMapName() === 'map01') {
+      if (router.getCurrentMapName() === 'map001') {
         revealAll();
       } else {
         reveal(player.x, player.y);
@@ -55,7 +55,7 @@ export async function startGame(container, settings, state) {
         state.cols = newCols;
         initFog(container, state.cols, isFogEnabled());
         if (isFogEnabled()) {
-          if (router.getCurrentMapName() === 'map01') {
+          if (router.getCurrentMapName() === 'map001') {
             revealAll();
           } else {
             reveal(player.x, player.y);
