@@ -1,6 +1,6 @@
 import { gameState } from './game_state.js';
 import { disableMovement, enableMovement } from './movement.js';
-import { showDialogue } from './dialogueSystem.js';
+import { showDialogue } from './dialogue_system.js';
 import { movePlayerTo } from './map.js';
 import { transitionToMap } from './transition.js';
 import { handleMoveCorruption } from './corruption_state.js';

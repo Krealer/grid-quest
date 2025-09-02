@@ -51,6 +51,9 @@ local HTTP server to serve the static assets.
 
 Refresh the browser after editing files in `scripts/`, `style/` or `data/`. Node tooling is only used for linting and tests and does not affect the static build.
 
+### File naming
+All JavaScript files use **snake_case** names (e.g., `map_loader.js`). The test script enforces this convention.
+
 ### Setup
 
 1. Install [Node.js](https://nodejs.org/) (v18 or later recommended).
@@ -90,4 +93,4 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for details.
    - Some JavaScript files (e.g., `scripts/main.js`) are several hundred lines long, making them hard to maintain and test.
 
 2. Manual Asset Loading
-   - Many JSON assets are fetched at runtime (e.g., `loadMap` in `scripts/mapLoader.js`), requiring a local HTTP server. If any file is missing or malformed, the error handling is minimal.
+   - Many JSON assets are fetched at runtime (e.g., `loadMap` in `scripts/map_loader.js`), requiring a local HTTP server. If any file is missing or malformed, the error handling is minimal.

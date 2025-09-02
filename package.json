@@ -6,9 +6,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "jest",
+    "test": "node tools/check_filenames.js && jest",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "check:names": "node tools/check_filenames.js"
   },
   "devDependencies": {
     "eslint": "^9.0.0",

@@ -1,4 +1,4 @@
-import { loadSettings } from './settingsManager.js';
+import { loadSettings } from './settings_manager.js';
 import { inventory } from './inventory.js';
 
 export const gameState = {
