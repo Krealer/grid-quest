@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const settingsOverlay = document.getElementById('settings-overlay');
   const settingsClose = settingsOverlay.querySelector('.close-btn');
   const coordsToggle = document.getElementById('coords-toggle');
+  const phoneCoordsToggle = document.getElementById('coords-phone-toggle');
   const moveSelect = document.getElementById('move-speed');
   const combatSelect = document.getElementById('combat-speed');
   const colorblindToggle = document.getElementById('colorblind-toggle');
@@ -183,6 +184,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   settings = loadSettings();
   applySettings(settings);
   coordsToggle.checked = settings.gridCoordinates;
+  phoneCoordsToggle.checked = settings.phoneCoordinates;
   moveSelect.value = settings.movementSpeed;
   combatSelect.value = settings.combatSpeed;
   colorblindToggle.checked = settings.colorblind;
@@ -266,6 +268,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     saveSettings(settings);
   });
 
+  phoneCoordsToggle.addEventListener('change', () => {
+    settings.phoneCoordinates = phoneCoordsToggle.checked;
+    applySettings(settings);
+    saveSettings(settings);
+  });
+
   moveSelect.addEventListener('change', () => {
     settings.movementSpeed = moveSelect.value;
     saveSettings(settings);
@@ -310,6 +318,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       saveSettings(settings);
       applySettings(settings);
       coordsToggle.checked = settings.gridCoordinates;
+      phoneCoordsToggle.checked = settings.phoneCoordinates;
       moveSelect.value = settings.movementSpeed;
       combatSelect.value = settings.combatSpeed;
       colorblindToggle.checked = settings.colorblind;
