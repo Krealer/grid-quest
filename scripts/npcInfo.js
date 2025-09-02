@@ -93,6 +93,11 @@ export const npcInfoList = [
     id: 'kaelor_the_weaver',
     name: 'Kaelor the Weaver',
     description: 'Pragmatic trader who exchanges fragments for a key.'
+  },
+  {
+    id: 'mystic_orb',
+    name: 'Mystic Orb',
+    description: 'A floating sphere that speaks in riddles.'
   }
 ];
 
