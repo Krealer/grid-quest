@@ -136,11 +136,11 @@ body {
 }
 
 .door {
-  background: #2ecc71;
+  background: #ffffff;
 }
 
 .door.locked {
-  background: #1abc9c;
+  background: #ffffff;
 }
 
 .tile.trap-light {
