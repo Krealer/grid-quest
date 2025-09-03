@@ -120,7 +120,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (
     typeof process !== 'undefined' &&
     process.env &&
-    process.env.NODE_ENV !== 'development'
+    process.env.NODE_ENV !== 'development' &&
+    rollbackRow
   ) {
     rollbackRow.style.display = 'none';
   }
