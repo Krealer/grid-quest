@@ -6,6 +6,7 @@ export const TILE_DEFS = {
   G: { walkable: true, interactable: false, description: 'Ground' },
   F: { walkable: false, interactable: false, description: 'Wall' },
   W: { walkable: false, interactable: true, description: 'Water' },
+  S: { walkable: false, interactable: true, description: 'Stove' },
   t: { walkable: true, interactable: false, description: 'Light Trap' },
   T: { walkable: true, interactable: false, description: 'Heavy Trap' },
   C: { walkable: false, interactable: true, description: 'Chest' },
@@ -26,7 +27,7 @@ export function isInteractable(symbol) {
   return TILE_DEFS[symbol]?.interactable ?? false;
 }
 
-import { showDialogue } from './dialogueSystem.js';
+import { showDialogue, showDialogueWithChoices } from './dialogueSystem.js';
 import { healFull, healToFull } from './player.js';
 import { applyDamage } from './logic.js';
 import { triggerDarkTrap, triggerFireTrap } from './trap_logic.js';
@@ -48,12 +49,16 @@ export async function onStepEffect(symbol, player, x, y) {
       tileEl.classList.add('triggered');
       setTimeout(() => tileEl.classList.remove('triggered'), 400);
     }
-  } else if (symbol === 'W') {
+  } else if (symbol === 'W' || symbol === 'S') {
     healToFull();
-    showDialogue('The cool water rejuvenates you. HP fully restored.');
-    if (tileEl) {
-      tileEl.classList.add('ripple');
-      setTimeout(() => tileEl.classList.remove('ripple'), 800);
+    if (symbol === 'W') {
+      showDialogue('The cool water rejuvenates you. HP fully restored.');
+      if (tileEl) {
+        tileEl.classList.add('ripple');
+        setTimeout(() => tileEl.classList.remove('ripple'), 800);
+      }
+    } else if (symbol === 'S') {
+      showDialogue('The warmth of the stove heals you. HP fully restored.');
     }
   }
 }
@@ -238,6 +243,26 @@ export async function onInteractEffect(
         tileEl.classList.add('ripple');
         setTimeout(() => tileEl.classList.remove('ripple'), 800);
       }
+      break;
+    }
+    case 'S': {
+      showDialogueWithChoices('Would you like to cook something', [
+        {
+          label: 'Yes',
+          callback: () => {
+            const outcomes = [
+              'You have cooked an egg. HP fully restored.',
+              'You have cooked some beans. HP fully restored.',
+              'You have cooked a steak. HP fully restored.',
+              'You have cooked a fish. HP fully restored.'
+            ];
+            const msg = outcomes[Math.floor(Math.random() * outcomes.length)];
+            healToFull();
+            showDialogue(msg);
+          }
+        },
+        { label: 'No', callback: () => {} }
+      ]);
       break;
     }
     case 'N': {
