@@ -14,7 +14,7 @@ const skillDefs = {
     // Basic attack scaled by player ATK
     effect({ damageEnemy, log }) {
       const dealt = damageEnemy(0);
-      log(`Player strikes for ${dealt} damage!`);
+      log(`Zealer strikes for ${dealt} damage!`);
     }
   },
   guard: {
@@ -29,7 +29,7 @@ const skillDefs = {
     source: 'starter',
     effect({ activateGuard, log }) {
       activateGuard();
-      log('Player braces for impact.');
+      log('Zealer braces for impact.');
     }
   },
   heal: {
@@ -44,7 +44,7 @@ const skillDefs = {
     effect({ healPlayer, player, log }) {
       const amount = Math.floor(player.maxHp * 0.2);
       healPlayer(amount);
-      log(`Player heals for ${amount} HP.`);
+      log(`Zealer heals for ${amount} HP.`);
     }
   },
   shieldWall: {

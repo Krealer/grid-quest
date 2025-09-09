@@ -293,7 +293,7 @@ function handleInventoryItemUse(id) {
   }
   if (used) {
     markItemUsed(id);
-    logMessage(`Player used ${data.name}!`);
+    logMessage(`Zealer used ${data.name}!`);
     updateInventoryUI();
   }
 }
