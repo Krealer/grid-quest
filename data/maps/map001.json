@@ -17,7 +17,11 @@
       "F"
     ],
     [
-      "F",
+      {
+        "type": "D",
+        "target": "map001-house01.json",
+        "spawn": { "x": 5, "y": 5 }
+      },
       "G",
       "G",
       "G",
