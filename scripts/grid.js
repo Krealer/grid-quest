@@ -66,6 +66,9 @@ export function renderGrid(
         case 'W':
           div.classList.add('water');
           break;
+        case 'S':
+          div.classList.add('stove');
+          break;
         case 'F':
           div.classList.add('fractured');
           break;
