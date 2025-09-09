@@ -27,10 +27,6 @@ export default {
     default: true,
     description: 'Type out dialogue text'
   },
-  zoom: {
-    default: true,
-    description: 'Enable zoom controls'
-  },
   language: {
     default: 'en',
     description: 'UI language code'
