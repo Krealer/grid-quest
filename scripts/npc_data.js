@@ -82,6 +82,13 @@ export const npcAppearance = {
     border: '#ff6666',
     displayTitle: 'Braga',
     dialogueScale: 1
+  },
+  hadoukai: {
+    nameColor: '#6699ff',
+    font: 'serif',
+    border: '#6699ff',
+    displayTitle: 'Hadoukai',
+    dialogueScale: 1
   }
 };
 
@@ -89,7 +96,8 @@ export const npcElements = {
   krealer: 'fire',
   lioran: 'water',
   imuku: 'earth',
-  braga: 'fire'
+  braga: 'fire',
+  hadoukai: 'water'
 };
 
 export const npcData = {

@@ -381,7 +381,11 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "N",
+        "npc": "hadoukai",
+        "element": "water"
+      },
       "G",
       "F"
     ],
