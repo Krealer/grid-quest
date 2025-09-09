@@ -64,7 +64,7 @@ export function updateStatusPanel() {
     row.addEventListener('mouseleave', hideItemTooltip);
     equipList.appendChild(row);
   }
-  info.textContent = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}`;
+  info.textContent = `Level: ${player.level}`;
   (player.passives || []).forEach(id => {
     const p = defs[id];
     if (!p) return;
@@ -91,7 +91,6 @@ export function toggleStatusPanel() {
 
 document.addEventListener('passivesUpdated', updateStatusPanel);
 document.addEventListener('playerHpChanged', updateStatusPanel);
-document.addEventListener('playerXpChanged', updateStatusPanel);
 document.addEventListener('playerLevelUp', updateStatusPanel);
 document.addEventListener('equipmentChanged', updateStatusPanel);
 document.addEventListener('equipmentCrafted', updateStatusPanel);

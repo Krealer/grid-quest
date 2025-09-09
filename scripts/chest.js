@@ -20,8 +20,8 @@ const chestContents = {
     message: 'You pick up an old coin.'
   },
   'map02:5,5': {
-    item: 'xp_scroll',
-    message: 'You found a shimmering scroll.',
+    item: 'small_fire_stone',
+    message: 'You find a warm fire stone.',
     memoryFlag: 'map02_health_amulet'
   },
   'map02:9,9': {
@@ -35,8 +35,8 @@ const chestContents = {
     memoryFlag: 'empty_chest_seen'
   },
   'map03:10,12': {
-    item: 'xp_scroll',
-    message: 'You feel knowledge flow into you.'
+    item: 'small_fire_stone',
+    message: 'You pick up a small fire stone.'
   },
   'map04:10,11': {
     item: 'mana_gem',
@@ -144,19 +144,19 @@ const chestContents = {
     message: 'Inside rests a sealed scroll etched in ember.'
   },
   'map09_floor03:4,3': {
-    item: 'xp_scroll',
+    item: 'small_fire_stone',
     hpLoss: 10,
-    message: 'A guardian trap drains your strength as you snatch the scroll.'
+    message: 'A guardian trap drains your strength as you snatch the stone.'
   },
   'map09_floor03:9,5': {
-    item: 'xp_potion',
+    item: 'small_fire_stone',
     hpLoss: 10,
-    message: 'Ancient energies lash out as you secure the potion.'
+    message: 'Ancient energies lash out as you secure the stone.'
   },
   'map09_floor03:15,8': {
-    item: 'xp_relic',
+    item: 'small_fire_stone',
     hpLoss: 10,
-    message: 'Cursed fumes seep out as you grasp the relic.'
+    message: 'Cursed fumes seep out as you grasp the stone.'
   }
 };
 

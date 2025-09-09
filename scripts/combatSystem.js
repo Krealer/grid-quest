@@ -1,6 +1,6 @@
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
-import { respawn, gainXP, getTotalStats } from './player.js';
+import { respawn, getTotalStats } from './player.js';
 import { getClassBonuses } from './class_state.js';
 import { getPassive } from './passive_skills.js';
 import { applyDamage } from './logic.js';
@@ -39,9 +39,7 @@ import {
   renderSkillList,
   setSkillDisabledState,
   initLogPanel,
-  showVictoryMessage,
-  showXpGain,
-  showLevelUp
+  showVictoryMessage
 } from './combat_ui.js';
 import {
   initStatuses,
@@ -349,13 +347,6 @@ export async function startCombat(enemy, player) {
         showDialogue(`You obtained ${data.name}!`);
       } else {
         showDialogue('Inventory full for this item');
-      }
-    }
-    if (typeof enemy.xp === 'number') {
-      const leveled = gainXP(enemy.xp);
-      showXpGain(enemy.xp);
-      if (leveled) {
-        showLevelUp(player.level);
       }
     }
   }
