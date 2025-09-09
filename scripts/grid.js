@@ -42,6 +42,7 @@ export function renderGrid(
           break;
         case 'N':
           div.classList.add('npc', 'blocked');
+          if (cell.element) div.classList.add(cell.element);
           if (cell.npc) div.dataset.npc = cell.npc;
           break;
         case 'echo':

@@ -123,6 +123,18 @@ body {
   background: #9b59b6;
 }
 
+.npc.fire {
+  background: #e74c3c;
+}
+
+.npc.water {
+  background: #3498db;
+}
+
+.npc.earth {
+  background: #2ecc71;
+}
+
 .echo {
   background: #95a5a6;
 }
