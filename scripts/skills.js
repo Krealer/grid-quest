@@ -55,7 +55,6 @@ const skillDefs = {
     category: 'defensive',
     cost: 0,
     cooldown: 0,
-    unlockCondition: { chest: 'map01:11,3' },
     effect({ activateShieldBlock, log }) {
       activateShieldBlock();
       log('A sturdy wall of force surrounds you.');
@@ -158,7 +157,6 @@ const skillDefs = {
     category: 'defensive',
     cost: 0,
     cooldown: 7,
-    source: 'map09_floor01_chest',
     unlockCondition: { item: 'aegis_invocation_scroll' },
     effect({ applyStatus, removeNegativeStatus, player, log }) {
       applyStatus(player, 'aegis_barrier', Infinity);
@@ -180,7 +178,6 @@ const skillDefs = {
     category: 'defensive',
     cost: 0,
     cooldown: 4,
-    source: 'map09_floor02_chest',
     unlockCondition: { item: 'ember_prayer_scroll' },
     effect({ healPlayer, applyStatus, enemy, player, log }) {
       const amount = Math.floor(player.maxHp * 0.2);

@@ -3,7 +3,6 @@ import { inventory } from './inventory.js';
 
 export const gameState = {
   currentMap: '',
-  openedChests: new Set(),
   defeatedEnemies: new Set(),
   environment: 'clear',
   isDead: false,
@@ -15,7 +14,6 @@ export const gameState = {
 export function serializeGameState() {
   return {
     currentMap: gameState.currentMap,
-    openedChests: Array.from(gameState.openedChests),
     defeatedEnemies: Array.from(gameState.defeatedEnemies),
     settings: gameState.settings
   };
@@ -24,7 +22,6 @@ export function serializeGameState() {
 export function deserializeGameState(data) {
   if (!data) return;
   gameState.currentMap = data.currentMap || '';
-  gameState.openedChests = new Set(data.openedChests || []);
   gameState.defeatedEnemies = new Set(data.defeatedEnemies || []);
   gameState.settings = data.settings || {};
 }

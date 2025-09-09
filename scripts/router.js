@@ -62,19 +62,6 @@ export async function loadMap(filename, spawnPoint) {
   cols = grid[0].length;
   renderGrid(grid, container, environment, properties?.fog);
 
-  // Mark chests that were previously opened
-  for (const id of gameState.openedChests) {
-    const [map, coord] = id.split(':');
-    if (map !== name) continue;
-    const [cx, cy] = coord.split(',').map(Number);
-    const index = cy * cols + cx;
-    const tileEl = container.children[index];
-    if (tileEl) {
-      tileEl.classList.remove('chest');
-      tileEl.classList.add('chest-opened');
-    }
-  }
-
   if (spawnPoint) {
     player.x = spawnPoint.x;
     player.y = spawnPoint.y;

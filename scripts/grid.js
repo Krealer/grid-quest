@@ -41,9 +41,6 @@ export function renderGrid(
         case 'G':
           div.classList.add('ground');
           break;
-        case 'C':
-          div.classList.add('chest', 'blocked');
-          break;
         case 'E':
           div.classList.add('enemy', 'blocked');
           break;

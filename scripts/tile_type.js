@@ -9,7 +9,6 @@ export const TILE_DEFS = {
   S: { walkable: false, interactable: true, description: 'Stove' },
   t: { walkable: true, interactable: false, description: 'Light Trap' },
   T: { walkable: true, interactable: false, description: 'Heavy Trap' },
-  C: { walkable: false, interactable: true, description: 'Chest' },
   D: { walkable: false, interactable: true, description: 'Door' },
   N: { walkable: false, interactable: true, description: 'NPC' },
   E: { walkable: false, interactable: true, description: 'Enemy' },
@@ -63,13 +62,11 @@ export async function onStepEffect(symbol, player, x, y) {
   }
 }
 
-// Interaction effects for doors, chests, enemies, NPCs and echoes
-import { isChestOpened, openChest } from './chest.js';
+// Interaction effects for doors, enemies, NPCs and echoes
 import { hasItem, removeItem, useKey } from './inventory.js';
 import { updateInventoryUI } from './inventory_ui.js';
 import { getEnemyData } from './enemy.js';
 import { startCombat } from './combatSystem.js';
-import { getAllSkills, unlockSkill } from './skills.js';
 import { echoAbsoluteIntro, setMemory } from './dialogue_state.js';
 import * as router from './router.js';
 import { transitionToMap } from './transition.js';
@@ -157,60 +154,6 @@ export async function onInteractEffect(
         showDialogue(intro, () =>
           startCombat({ id: enemyId, ...enemy }, player)
         );
-      }
-      break;
-    }
-    case 'C': {
-      const chestId = `${router.getCurrentMapName()}:${x},${y}`;
-      const required = tile.key || tile.requiresItem;
-      if (required && !hasItem(required)) {
-        if (required === 'temple_chest_key') {
-          showDialogue('A seal protects this chest.');
-        } else {
-          showDialogue('The chest is locked.');
-        }
-        break;
-      }
-      if (!isChestOpened(chestId)) {
-        if (required && tile.consumeItem) {
-          removeItem(required);
-          updateInventoryUI();
-        }
-        const result = await openChest(chestId, player);
-        if (result) {
-          if (result.message) {
-            showDialogue(result.message);
-          }
-          if (Array.isArray(result.items)) {
-            result.items.forEach((it) => {
-              if (it) showDialogue(`You obtained ${it.name}!`);
-            });
-          } else if (result.item) {
-            showDialogue(`You obtained ${result.item.name}!`);
-          }
-          if (Array.isArray(result.unlockedSkills)) {
-            result.unlockedSkills.forEach((id) => {
-              const skill = getAllSkills()[id];
-              if (skill) {
-                showDialogue(`You've learned a new skill: ${skill.name}!`);
-              }
-            });
-          }
-          const idx = y * cols + x;
-          const tileEl = container.children[idx];
-          if (tileEl) {
-            tileEl.classList.remove('chest');
-            tileEl.classList.add('chest-opened');
-          }
-          tile.type = 'G';
-          for (const [id, skill] of Object.entries(getAllSkills())) {
-            if (skill.unlockCondition?.chest === chestId) {
-              if (unlockSkill(id)) {
-                showDialogue(`You've learned a new skill: ${skill.name}!`);
-              }
-            }
-          }
-        }
       }
       break;
     }

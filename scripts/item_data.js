@@ -21,17 +21,6 @@ export const itemData = {
     stackLimit: 1,
     icon: '🗝️'
   },
-  temple_chest_key: {
-    id: 'temple_chest_key',
-    name: 'Temple Chest Key',
-    description: 'Opens special chests within the temple.',
-    type: 'key',
-    tags: ['lore'],
-    category: 'key',
-    consumable: true,
-    stackLimit: 1,
-    icon: '🗝️'
-  },
   health_potion: {
     id: 'health_potion',
     name: 'Health Potion',
@@ -58,17 +47,6 @@ export const itemData = {
     use() {
       import('./player.js').then((m) => m.levelUp());
     }
-  },
-  empty_note: {
-    id: 'empty_note',
-    name: 'Empty Note',
-    description: 'This chest was empty.',
-    type: 'quest',
-    tags: ['lore'],
-    category: 'lore',
-    consumable: false,
-    stackLimit: 1,
-    icon: '📝'
   },
   focus_ring: {
     id: 'focus_ring',

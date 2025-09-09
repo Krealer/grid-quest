@@ -15,7 +15,6 @@ import { showDialogue } from './dialogueSystem.js';
 import { isPortal15Unlocked } from './player_state.js';
 import { finalFlags } from './memory_flags.js';
 import { hasItem } from './inventory.js';
-import { gameState } from './game_state.js';
 
 let currentGrid = null;
 let currentEnvironment = 'clear';
@@ -71,18 +70,11 @@ export async function loadMap(name) {
         }
       }
     }
-    if (name === 'map03' && isEnemyDefeated('scout_commander')) {
-      if (!gameState.openedChests.has('map03:10,12')) {
-        if (data.grid[12] && data.grid[12][10]) {
-          data.grid[12][10] = { type: 'C', glow: true };
-        }
-      }
-    }
-      for (const row of data.grid) {
-        for (const cell of row) {
-          if (
-            cell &&
-            cell.type === 'E' &&
+    for (const row of data.grid) {
+      for (const cell of row) {
+        if (
+          cell &&
+          cell.type === 'E' &&
             cell.enemyId === 'shadow_inversion'
           ) {
             if (
