@@ -56,7 +56,6 @@ import { loadLanguage } from './language_loader.js';
 import { initGreeting } from '../ui/greeting.js';
 import { startGame } from './startGame.js';
 import { rollbackTo } from './rollback.js';
-import { initZoom, setZoomEnabled } from './zoom.js';
 
 // Inventory contents are managed in inventory.js
 
@@ -66,7 +65,6 @@ const gridState = { cols: 0 };
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('game-grid');
-  initZoom(container);
   // Prevent double-tap zoom on mobile devices
   document.addEventListener(
     'touchstart',
@@ -112,7 +110,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const colorblindToggle = document.getElementById('colorblind-toggle');
   const labelToggle = document.getElementById('label-toggle');
   const dialogueToggle = document.getElementById('dialogue-toggle');
-  const zoomToggle = document.getElementById('zoom-toggle');
   const langSelect = document.getElementById('language-select');
   const centerToggle = document.getElementById('center-toggle');
   const resetBtn = document.getElementById('reset-settings');
@@ -194,11 +191,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   colorblindToggle.checked = settings.colorblind;
   labelToggle.checked = settings.tileLabels;
   dialogueToggle.checked = settings.dialogueAnim;
-  zoomToggle.checked = settings.zoom;
   langSelect.value = settings.language;
   centerToggle.checked = settings.centerMode;
   loadLanguage(settings.language);
-  setZoomEnabled(settings.zoom);
 
   router.init(container, player);
   initMobileCenter(container);
@@ -307,12 +302,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     saveSettings(settings);
   });
 
-  zoomToggle.addEventListener('change', () => {
-    settings.zoom = zoomToggle.checked;
-    setZoomEnabled(settings.zoom);
-    saveSettings(settings);
-  });
-
   langSelect.addEventListener('change', () => {
     settings.language = langSelect.value;
     saveSettings(settings);
@@ -336,11 +325,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       colorblindToggle.checked = settings.colorblind;
       labelToggle.checked = settings.tileLabels;
       dialogueToggle.checked = settings.dialogueAnim;
-      zoomToggle.checked = settings.zoom;
       langSelect.value = settings.language;
       centerToggle.checked = settings.centerMode;
       loadLanguage(settings.language);
-      setZoomEnabled(settings.zoom);
     }
   });
 
