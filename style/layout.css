@@ -115,14 +115,6 @@ body {
   outline: 2px solid #fff;
 }
 
-.chest {
-  background: #b5651d;
-}
-
-.chest-opened {
-  background: #8b4513;
-}
-
 .enemy {
   background: #e74c3c;
 }
