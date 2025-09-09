@@ -103,14 +103,14 @@ export async function startCombat(enemy, player) {
       }</div>
       <div class="actions hidden">
         <div class="action-tabs">
-          <button class="offensive-tab selected">Offensive</button>
-          <button class="defensive-tab">Defensive</button>
-          <button class="items-tab">Items</button>
+          <button class="attack-tab selected">Attack</button>
+          <button class="non-attack-tab">Non-Attack</button>
+          <button class="swap-tab">Swap</button>
         </div>
         <div class="tab-panels">
-          <div class="offensive-skill-buttons tab-panel"></div>
-          <div class="defensive-skill-buttons tab-panel hidden"></div>
-          <div class="item-buttons tab-panel hidden"></div>
+          <div class="attack-skill-buttons tab-panel"></div>
+          <div class="non-attack-skill-buttons tab-panel hidden"></div>
+          <div class="swap-buttons tab-panel hidden"></div>
         </div>
       </div>
       <div class="log hidden"></div>
@@ -147,9 +147,9 @@ export async function startCombat(enemy, player) {
   updateHpBar(enemyBar, enemyHp, enemyMax);
 
   const actionsEl = overlay.querySelector('.actions');
-  const offensiveContainer = overlay.querySelector('.offensive-skill-buttons');
-  const defensiveContainer = overlay.querySelector('.defensive-skill-buttons');
-  const itemContainer = overlay.querySelector('.item-buttons');
+  const attackContainer = overlay.querySelector('.attack-skill-buttons');
+  const nonAttackContainer = overlay.querySelector('.non-attack-skill-buttons');
+  const swapContainer = overlay.querySelector('.swap-buttons');
   const logEl = overlay.querySelector('.log');
 
   const log = initLogPanel(overlay);
@@ -214,7 +214,7 @@ export async function startCombat(enemy, player) {
     return applied;
   }
 
-  function damageEnemy(baseDmg) {
+  function damageEnemy(baseDmg, elementOverride = player.element) {
     if (enemy.evadeNext) {
       log(`${enemy.name}'s mirage takes the hit!`);
       removeStatusLogged(enemy, 'evade_next');
@@ -238,7 +238,9 @@ export async function startCombat(enemy, player) {
       dmg = Math.max(0, dmg - 4);
       enemyGuard = false;
     }
-    dmg *= getElementMultiplier(player.element, enemy.element);
+    const elem = elementOverride === null ? null : elementOverride;
+    const mult = elem ? getElementMultiplier(elem, enemy.element) : 1;
+    dmg *= mult;
     const tempTarget = {
       hp: enemyHp,
       stats: { defense: (enemy.stats?.defense || 0) + enemy.tempDefense },
@@ -296,10 +298,6 @@ export async function startCombat(enemy, player) {
     return removed;
   }
 
-  function activateGuard() {
-    applyStatusEffect(player, 'guarded', 2);
-  }
-
   function activateShieldBlock() {
     shieldBlock = true;
   }
@@ -351,13 +349,13 @@ export async function startCombat(enemy, player) {
     }
   }
 
-  function updateItemsUI() {
-    itemContainer.innerHTML = '';
+  function updateSwapUI() {
+    swapContainer.innerHTML = '';
     const items = getItemsByCategory('combat');
     if (items.length === 0) {
       const msg = document.createElement('div');
-      msg.textContent = 'No usable items';
-      itemContainer.appendChild(msg);
+      msg.textContent = 'No swaps available';
+      swapContainer.appendChild(msg);
       return;
     }
     items.forEach((it) => {
@@ -365,8 +363,8 @@ export async function startCombat(enemy, player) {
       const btn = document.createElement('button');
       const qty = it.quantity > 1 ? ` x${it.quantity}` : '';
       btn.textContent = `${data.name}${qty}`;
-      btn.addEventListener('click', () => handleItemUse(it.id));
-      itemContainer.appendChild(btn);
+      btn.addEventListener('click', () => handleSwap(it.id));
+      swapContainer.appendChild(btn);
     });
   }
 
@@ -379,23 +377,23 @@ export async function startCombat(enemy, player) {
     skillLookup[s.id] = s;
   });
 
-  const offensiveSkills = allSkills.filter((s) => s.category === 'offensive');
-  const defensiveSkills = allSkills.filter((s) => s.category === 'defensive');
+  const attackSkills = allSkills.filter((s) => s.category === 'attack');
+  const nonAttackSkills = allSkills.filter((s) => s.category === 'non-attack');
 
-  const offButtons = renderSkillList(
-    offensiveContainer,
-    offensiveSkills,
+  const attackButtons = renderSkillList(
+    attackContainer,
+    attackSkills,
     handleAction
   );
-  const defButtons = renderSkillList(
-    defensiveContainer,
-    defensiveSkills,
+  const nonAttackButtons = renderSkillList(
+    nonAttackContainer,
+    nonAttackSkills,
     handleAction
   );
-  const skillButtons = { ...offButtons, ...defButtons };
+  const skillButtons = { ...attackButtons, ...nonAttackButtons };
 
-  updateItemsUI();
-  document.addEventListener('inventoryUpdated', updateItemsUI);
+  updateSwapUI();
+  document.addEventListener('inventoryUpdated', updateSwapUI);
   setupTabs(overlay);
   updateStatusUI(overlay, player, enemy);
   updateSkillDisableState();
@@ -434,8 +432,8 @@ export async function startCombat(enemy, player) {
     }
     const silenced =
       hasStatus(player, 'silenced') || hasStatus(player, 'silence');
-    if (silenced && skill.category === 'offensive' && !skill.silenceExempt) {
-      log('You are silenced and cannot use offensive skills.');
+    if (silenced && skill.category === 'attack' && !skill.silenceExempt) {
+      log('You are silenced and cannot use attack skills.');
       return;
     }
     if (skillCooldowns[skill.id] > 0) {
@@ -450,7 +448,6 @@ export async function startCombat(enemy, player) {
     const result = skill.effect({
       damageEnemy,
       healPlayer,
-      activateGuard,
       activateShieldBlock,
       log,
       applyStatus: applyStatusLogged,
@@ -497,10 +494,10 @@ export async function startCombat(enemy, player) {
     setTimeout(enemyTurn, animDelay);
   }
 
-  function handleItemUse(id) {
+  function handleSwap(id) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
     if (hasStatus(player, 'cursed')) {
-      log('A curse prevents you from using items!');
+      log('A curse prevents you from swapping!');
       return;
     }
     let used = false;
@@ -639,7 +636,7 @@ export async function startCombat(enemy, player) {
       }
     }
     if (used) {
-      updateItemsUI();
+      updateSwapUI();
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       playerHp = player.hp;
@@ -663,7 +660,7 @@ export async function startCombat(enemy, player) {
     gridEl.classList.remove('no-interact');
     overlay.remove();
     overlay = null;
-    document.removeEventListener('inventoryUpdated', updateItemsUI);
+    document.removeEventListener('inventoryUpdated', updateSwapUI);
     document.dispatchEvent(
       new CustomEvent('combatEnded', { detail: { playerHp, enemyHp, enemy } })
     );
@@ -747,7 +744,7 @@ export async function startCombat(enemy, player) {
       .map((id) => getEnemySkill(id))
       .filter(Boolean);
     if (enemySilenced) {
-      list = list.filter((s) => s.category !== 'offensive');
+      list = list.filter((s) => s.category !== 'attack');
     }
 
     const statusSkills = list.filter(

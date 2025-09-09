@@ -8,7 +8,7 @@ export const classes = [
   {
     id: 'guardian',
     name: 'Guardian',
-    description: 'Defensive specialist with extra protection.',
+    description: 'Non-attack specialist with extra protection.',
     bonuses: { defense: 3 }
   },
   {

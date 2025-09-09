@@ -248,7 +248,7 @@ export const statusEffects = {
     id: 'cursed',
     name: 'Cursed',
     icon: '💀',
-    description: 'Cannot use items.',
+    description: 'Cannot swap.',
     type: 'negative',
     duration: 3,
     apply(target) {
@@ -325,7 +325,7 @@ export const statusEffects = {
     id: 'silenced',
     name: 'Silenced',
     icon: '🤐',
-    description: 'Cannot use offensive skills.',
+    description: 'Cannot use attack skills.',
     type: 'negative',
     duration: 2
   },
@@ -333,7 +333,7 @@ export const statusEffects = {
     id: 'silence',
     name: 'Silence',
     icon: '🤐',
-    description: 'Cannot use offensive skills.',
+    description: 'Cannot use attack skills.',
     type: 'negative',
     duration: 2
   },

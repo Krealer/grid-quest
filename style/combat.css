@@ -151,13 +151,13 @@
   border-color: #999;
 }
 
-#battle-overlay .action-tabs button.offensive-tab {
+#battle-overlay .action-tabs button.attack-tab {
   background: #533;
 }
-#battle-overlay .action-tabs button.defensive-tab {
+#battle-overlay .action-tabs button.non-attack-tab {
   background: #235;
 }
-#battle-overlay .action-tabs button.items-tab {
+#battle-overlay .action-tabs button.swap-tab {
   background: #353;
 }
 

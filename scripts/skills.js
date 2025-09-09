@@ -7,13 +7,13 @@ const skillDefs = {
     name: 'Strike',
     icon: '⚔️',
     description: 'Deal damage equal to your Attack stat.',
-    category: 'offensive',
+    category: 'attack',
     cost: 0,
     cooldown: 0,
     source: 'starter',
     // Basic attack scaled by player ATK
     effect({ damageEnemy, log }) {
-      const dealt = damageEnemy(0);
+      const dealt = damageEnemy(0, null);
       log(`Zealer strikes for ${dealt} damage!`);
     }
   },
@@ -21,15 +21,29 @@ const skillDefs = {
     id: 'guard',
     name: 'Guard',
     icon: '🛡️',
-    description: 'Reduce damage from the next attack by 50%.',
-    category: 'defensive',
+    description: 'Nullify the next incoming damage.',
+    category: 'non-attack',
     silenceExempt: true,
     cost: 0,
-    cooldown: 0,
+    cooldown: 4,
     source: 'starter',
-    effect({ activateGuard, log }) {
-      activateGuard();
+    effect({ activateShieldBlock, log }) {
+      activateShieldBlock();
       log('Zealer braces for impact.');
+    }
+  },
+  fire_slash: {
+    id: 'fire_slash',
+    name: 'Fire Slash',
+    icon: '🔥',
+    description: 'Deal damage equal to your Attack stat.',
+    category: 'attack',
+    cost: 0,
+    cooldown: 4,
+    source: 'starter',
+    effect({ damageEnemy, log }) {
+      const dealt = damageEnemy(0, 'fire');
+      log(`Zealer's fire slash deals ${dealt} damage!`);
     }
   },
   heal: {
@@ -37,10 +51,9 @@ const skillDefs = {
     name: 'Heal',
     icon: '✨',
     description: 'Restore 20% of your max HP.',
-    category: 'defensive',
+    category: 'non-attack',
     cost: 0,
     cooldown: 3,
-    source: 'starter',
     effect({ healPlayer, player, log }) {
       const amount = Math.floor(player.maxHp * 0.2);
       healPlayer(amount);
@@ -52,7 +65,7 @@ const skillDefs = {
     name: 'Shield Wall',
     icon: '🛡️',
     description: 'Completely block the next attack.',
-    category: 'defensive',
+    category: 'non-attack',
     cost: 0,
     cooldown: 0,
     effect({ activateShieldBlock, log }) {
@@ -65,7 +78,7 @@ const skillDefs = {
     name: 'Flame Burst',
     icon: '🔥',
     description: 'Engulf the foe in flames for 10 damage.',
-    category: 'offensive',
+    category: 'attack',
     cost: 0,
     cooldown: 0,
     unlockCondition: { enemy: 'E' },
@@ -80,7 +93,7 @@ const skillDefs = {
     name: 'Shadow Stab',
     icon: '🌑',
     description: 'Strike from the shadows for 20 damage.',
-    category: 'offensive',
+    category: 'attack',
     cost: 0,
     cooldown: 0,
     unlockCondition: { enemy: 'B' },
@@ -95,7 +108,7 @@ const skillDefs = {
     name: 'Bone Spike',
     icon: '🦴',
     description: 'Hurl bone shards for 18 damage.',
-    category: 'offensive',
+    category: 'attack',
     cost: 0,
     cooldown: 0,
     unlockCondition: { enemy: 'S' },
@@ -110,7 +123,7 @@ const skillDefs = {
     name: 'Arcane Blast',
     icon: '✨',
     description: 'Unleash arcane energy for 12 damage.',
-    category: 'offensive',
+    category: 'attack',
     cost: 0,
     cooldown: 0,
     unlockCondition: { item: 'ancient_scroll' },
@@ -125,7 +138,7 @@ const skillDefs = {
     name: 'Poison Dart',
     icon: '☠️',
     description: 'Inflict Poisoned for 3 turns.',
-    category: 'offensive',
+    category: 'attack',
     cost: 0,
     cooldown: 0,
     statuses: [{ target: 'enemy', id: 'poisoned', duration: 3 }],
@@ -139,7 +152,7 @@ const skillDefs = {
     name: 'Rally',
     icon: '📣',
     description: 'Gain Fortify for 3 turns.',
-    category: 'defensive',
+    category: 'non-attack',
     cost: 0,
     cooldown: 0,
     statuses: [{ target: 'self', id: 'fortify', duration: 3 }],
@@ -154,7 +167,7 @@ const skillDefs = {
     icon: '🛡️',
     description:
       'Gain a barrier equal to 50% of your max HP and remove all negative effects.',
-    category: 'defensive',
+    category: 'non-attack',
     cost: 0,
     cooldown: 7,
     unlockCondition: { item: 'aegis_invocation_scroll' },
@@ -175,7 +188,7 @@ const skillDefs = {
     name: 'Ember Prayer',
     icon: '🔥',
     description: 'Heal 20% of your max HP and inflict Burn for 10 turns.',
-    category: 'defensive',
+    category: 'non-attack',
     cost: 0,
     cooldown: 4,
     unlockCondition: { item: 'ember_prayer_scroll' },
@@ -191,7 +204,7 @@ const skillDefs = {
     name: 'Focus',
     icon: '🎯',
     description: 'Gain Focus for your next attack.',
-    category: 'defensive',
+    category: 'non-attack',
     cost: 0,
     cooldown: 0,
     statuses: [{ target: 'self', id: 'focus', duration: 1 }],
@@ -205,7 +218,7 @@ const skillDefs = {
     name: 'Focus Strike',
     icon: '🎯',
     description: 'A precise attack that rarely misses.',
-    category: 'offensive',
+    category: 'attack',
     cost: 0,
     cooldown: 0,
     effect({ damageEnemy, log }) {
@@ -219,7 +232,7 @@ const skillDefs = {
     name: 'Leech',
     icon: '🩸',
     description: 'Deal damage equal to your ATK and heal for the damage dealt.',
-    category: 'offensive',
+    category: 'attack',
     cost: 0,
     cooldown: 3,
     source: 'npc_syranel',
@@ -235,7 +248,7 @@ const skillDefs = {
     name: 'Purify',
     icon: '💫',
     description: 'Remove certain negative effects from yourself.',
-    category: 'defensive',
+    category: 'non-attack',
     cost: 0,
     cooldown: 0,
     cleanse: ['poisoned', 'cursed', 'blinded'],
@@ -300,7 +313,7 @@ export function initSkillSystem(playerObj) {
   const enemyList = loadEnemySkillSources();
   enemyList.forEach((id) => enemySkillSources.add(id));
   // Ensure starting skills are present
-  ['strike', 'guard', 'heal'].forEach((id) => {
+  ['strike', 'guard', 'fire_slash'].forEach((id) => {
     if (!player.learnedSkills.includes(id)) {
       player.learnedSkills.push(id);
     }
