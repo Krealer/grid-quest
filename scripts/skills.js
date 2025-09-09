@@ -45,44 +45,6 @@ const skillDefs = {
       const dealt = damageEnemy(0, 'fire');
       log(`Zealer's fire slash deals ${dealt} damage!`);
     }
-  },
-  aegisInvocation: {
-    id: 'aegisInvocation',
-    name: 'Aegis Invocation',
-    icon: '🛡️',
-    description:
-      'Gain a barrier equal to 50% of your max HP and remove all negative effects.',
-    category: 'non-attack',
-    cost: 0,
-    cooldown: 7,
-    unlockCondition: { item: 'aegis_invocation_scroll' },
-    effect({ applyStatus, removeNegativeStatus, player, log }) {
-      applyStatus(player, 'aegis_barrier', Infinity);
-      const removed = removeNegativeStatus(player);
-      if (removed.length > 0) {
-        const names = removed
-          .map((id) => getStatusEffect(id)?.name || id)
-          .join(', ');
-        log(`Negative effects cleansed: ${names}`);
-      }
-      log('A powerful aegis surrounds you.');
-    }
-  },
-  emberPrayer: {
-    id: 'emberPrayer',
-    name: 'Ember Prayer',
-    icon: '🔥',
-    description: 'Heal 20% of your max HP and inflict Burn for 10 turns.',
-    category: 'non-attack',
-    cost: 0,
-    cooldown: 4,
-    unlockCondition: { item: 'ember_prayer_scroll' },
-    effect({ healPlayer, applyStatus, enemy, player, log }) {
-      const amount = Math.floor(player.maxHp * 0.2);
-      healPlayer(amount);
-      applyStatus(enemy, 'burn', 10);
-      log('Sacred flames answer your prayer.');
-    }
   }
 };
 
