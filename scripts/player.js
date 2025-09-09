@@ -8,7 +8,6 @@ import { isMobilePortrait, centerGridOnPlayer } from './mobile_ui.js';
 import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
 import { getItemBonuses } from './item_stats.js';
 import { getRelicBonuses } from './relic_state.js';
-import { getClassBonuses, getChosenClass } from './class_state.js';
 import { unlockSkill, getAllSkills } from './skills.js';
 import {
   addItem,
@@ -36,7 +35,6 @@ export const player = {
   def: 0,
   element: 'fire',
   level: 1,
-  classId: getChosenClass() || null,
   stats: {
     attack: 0,
     defense: 0
@@ -192,7 +190,6 @@ export function levelUp() {
 export function getPlayerSummary() {
   return {
     level: player.level,
-    classId: player.classId,
     passives: Array.isArray(player.passives) ? [...player.passives] : []
   };
 }
@@ -270,13 +267,6 @@ export function getTotalStats() {
   const passiveMods = getPassiveModifiers();
   for (const [key, val] of Object.entries(passiveMods)) {
     total[key] = (total[key] || 0) + val;
-  }
-  const classBonus = getClassBonuses();
-  if (classBonus) {
-    for (const [key, val] of Object.entries(classBonus)) {
-      if (key === 'itemHealBonus') continue;
-      total[key] = (total[key] || 0) + val;
-    }
   }
   return total;
 }
