@@ -34,6 +34,7 @@ export const player = {
   maxHp: 100,
   atk: 15,
   def: 0,
+  element: 'fire',
   level: 1,
   xp: 0,
   xpToNextLevel: 10,
@@ -237,6 +238,7 @@ export function serializePlayer() {
   return {
     x: player.x,
     y: player.y,
+    element: player.element,
     level: player.level,
     xp: player.xp,
     xpToNextLevel: player.xpToNextLevel,
@@ -255,6 +257,7 @@ export function deserializePlayer(data) {
   if (!data) return;
   player.x = data.x ?? player.x;
   player.y = data.y ?? player.y;
+  player.element = data.element ?? player.element;
   player.level = data.level ?? player.level;
   player.xp = data.xp ?? player.xp;
   player.xpToNextLevel = data.xpToNextLevel ?? player.xpToNextLevel;
