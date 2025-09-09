@@ -78,6 +78,12 @@ export const npcAppearance = {
   }
 };
 
+export const npcElements = {
+  krealer: 'fire',
+  lioran: 'water',
+  imuku: 'earth'
+};
+
 export const npcData = {
   first_memory: {
     name: 'Echo of a Name',
