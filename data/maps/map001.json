@@ -175,7 +175,10 @@
       "G",
       "G",
       "G",
-      "G",
+      {
+        "type": "E",
+        "enemyId": "blaze_hound"
+      },
       "G",
       "G",
       "G",

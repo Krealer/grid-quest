@@ -1,1 +1,8 @@
-{}
+{
+  "blaze_hound": {
+    "name": "Blaze Hound",
+    "hp": 40,
+    "xp": 10,
+    "skills": ["blaze_scratch", "blaze_bite"]
+  }
+}
