@@ -4,6 +4,12 @@ const advantages = {
   earth: 'water'
 };
 
+const elementIcons = {
+  fire: '🔥',
+  water: '💧',
+  earth: '🌳'
+};
+
 export function getElementMultiplier(attacker, defender) {
   if (!attacker || !defender) return 1;
   if (advantages[attacker] === defender) return 2;
@@ -13,5 +19,5 @@ export function getElementMultiplier(attacker, defender) {
 
 export function formatElement(element) {
   if (!element) return '';
-  return element.charAt(0).toUpperCase() + element.slice(1);
+  return elementIcons[element] ?? element.charAt(0).toUpperCase() + element.slice(1);
 }
