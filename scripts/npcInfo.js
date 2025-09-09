@@ -103,6 +103,11 @@ export const npcInfoList = [
     id: 'braga',
     name: 'Braga',
     description: 'A flame-touched wanderer with a fondness for sparks.'
+  },
+  {
+    id: 'hadoukai',
+    name: 'Hadoukai',
+    description: 'A serene traveler attuned to flowing water.'
   }
 ];
 
