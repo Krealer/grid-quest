@@ -9,6 +9,7 @@
 - Quests with an in game log
 - Player stats and leveling
 - Completely client side so it works with GitHub Pages
+- Optional zoom controls for the game grid
 
 ## Running locally
 
