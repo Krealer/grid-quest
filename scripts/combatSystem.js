@@ -1,7 +1,6 @@
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
 import { respawn, getTotalStats } from './player.js';
-import { getClassBonuses } from './class_state.js';
 import { getPassive } from './passive_skills.js';
 import { applyDamage } from './logic.js';
 import {
@@ -507,8 +506,6 @@ export async function startCombat(enemy, player) {
       const res = useHealthPotion();
       if (res) {
         let amount = res.heal;
-        const classBonus = getClassBonuses();
-        if (classBonus.itemHealBonus) amount += classBonus.itemHealBonus;
         healPlayer(amount);
         log(`Recovered ${amount} HP!`);
         logMessage(`Zealer used ${data.name}!`);
@@ -528,10 +525,6 @@ export async function startCombat(enemy, player) {
             amount += p.itemHealBonus;
           }
         }
-        const classBonus = getClassBonuses();
-        if (classBonus.itemHealBonus) {
-          amount += classBonus.itemHealBonus;
-        }
         applyStatusLogged(player, 'defense_boost');
         log(`Defense increased by ${amount} for this fight!`);
         logMessage(`Zealer used ${data.name}!`);
@@ -549,10 +542,6 @@ export async function startCombat(enemy, player) {
           if (p && p.itemHealBonus) {
             amount += p.itemHealBonus;
           }
-        }
-        const classBonus = getClassBonuses();
-        if (classBonus.itemHealBonus) {
-          amount += classBonus.itemHealBonus;
         }
         applyStatusLogged(player, 'defense_boost');
         log(`Defense increased by ${amount} for this fight!`);

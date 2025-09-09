@@ -22,7 +22,6 @@ export function renderGrid(
 
   grid.forEach((row, y) => {
     const choice = getForkChoice();
-    const cls = player.classId;
     row.forEach((cell, x) => {
       const div = document.createElement('div');
       div.classList.add('tile');
@@ -32,9 +31,6 @@ export function renderGrid(
       let type = cell.type;
       if (cell.memoryType && choice && cell.memoryType[choice]) {
         type = cell.memoryType[choice];
-      }
-      if (cell.classType && cls && cell.classType[cls]) {
-        type = cell.classType[cls];
       }
 
       switch (type) {
