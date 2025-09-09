@@ -3,55 +3,57 @@ import { getStatusList } from './statusManager.js';
 import { attachTooltip } from '../ui/skillsPanel.js';
 
 export function setupTabs(overlay) {
-  const offContainer = overlay.querySelector('.offensive-skill-buttons');
-  const defContainer = overlay.querySelector('.defensive-skill-buttons');
-  const itemContainer = overlay.querySelector('.item-buttons');
-  const offTabBtn = overlay.querySelector('.offensive-tab');
-  const defTabBtn = overlay.querySelector('.defensive-tab');
-  const itemsTabBtn = overlay.querySelector('.items-tab');
+  const attackContainer = overlay.querySelector('.attack-skill-buttons');
+  const nonAttackContainer = overlay.querySelector(
+    '.non-attack-skill-buttons'
+  );
+  const swapContainer = overlay.querySelector('.swap-buttons');
+  const attackTabBtn = overlay.querySelector('.attack-tab');
+  const nonAttackTabBtn = overlay.querySelector('.non-attack-tab');
+  const swapTabBtn = overlay.querySelector('.swap-tab');
   if (
-    !offContainer ||
-    !defContainer ||
-    !itemContainer ||
-    !offTabBtn ||
-    !defTabBtn ||
-    !itemsTabBtn
+    !attackContainer ||
+    !nonAttackContainer ||
+    !swapContainer ||
+    !attackTabBtn ||
+    !nonAttackTabBtn ||
+    !swapTabBtn
   )
     return;
 
-  function showOffensive() {
-    offContainer.classList.remove('hidden');
-    defContainer.classList.add('hidden');
-    itemContainer.classList.add('hidden');
-    offTabBtn.classList.add('selected');
-    defTabBtn.classList.remove('selected');
-    itemsTabBtn.classList.remove('selected');
+  function showAttack() {
+    attackContainer.classList.remove('hidden');
+    nonAttackContainer.classList.add('hidden');
+    swapContainer.classList.add('hidden');
+    attackTabBtn.classList.add('selected');
+    nonAttackTabBtn.classList.remove('selected');
+    swapTabBtn.classList.remove('selected');
   }
 
-  function showDefensive() {
-    defContainer.classList.remove('hidden');
-    offContainer.classList.add('hidden');
-    itemContainer.classList.add('hidden');
-    defTabBtn.classList.add('selected');
-    offTabBtn.classList.remove('selected');
-    itemsTabBtn.classList.remove('selected');
+  function showNonAttack() {
+    nonAttackContainer.classList.remove('hidden');
+    attackContainer.classList.add('hidden');
+    swapContainer.classList.add('hidden');
+    nonAttackTabBtn.classList.add('selected');
+    attackTabBtn.classList.remove('selected');
+    swapTabBtn.classList.remove('selected');
   }
 
-  function showItems() {
-    itemContainer.classList.remove('hidden');
-    offContainer.classList.add('hidden');
-    defContainer.classList.add('hidden');
-    itemsTabBtn.classList.add('selected');
-    offTabBtn.classList.remove('selected');
-    defTabBtn.classList.remove('selected');
+  function showSwap() {
+    swapContainer.classList.remove('hidden');
+    attackContainer.classList.add('hidden');
+    nonAttackContainer.classList.add('hidden');
+    swapTabBtn.classList.add('selected');
+    attackTabBtn.classList.remove('selected');
+    nonAttackTabBtn.classList.remove('selected');
   }
 
-  offTabBtn.addEventListener('click', showOffensive);
-  defTabBtn.addEventListener('click', showDefensive);
-  itemsTabBtn.addEventListener('click', showItems);
+  attackTabBtn.addEventListener('click', showAttack);
+  nonAttackTabBtn.addEventListener('click', showNonAttack);
+  swapTabBtn.addEventListener('click', showSwap);
 
   // default
-  showOffensive();
+  showAttack();
 }
 
 export function updateStatusUI(overlay, player, enemy) {
@@ -126,9 +128,9 @@ export function setSkillDisabledState(
   Object.entries(buttonMap).forEach(([id, btn]) => {
     if (!btn) return;
     const def = skillLookup[id];
-    const offensive = def?.category === 'offensive';
+    const isAttack = def?.category === 'attack';
     const exempt = def?.silenceExempt;
-    if ((isSilenced && offensive && !exempt) || cooldowns[id] > 0) {
+    if ((isSilenced && isAttack && !exempt) || cooldowns[id] > 0) {
       btn.classList.add('disabled');
       btn.disabled = true;
     } else {
