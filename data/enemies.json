@@ -3,7 +3,9 @@
     "name": "Blaze Hound",
     "element": "fire",
     "hp": 40,
-    "xp": 10,
-    "skills": ["blaze_scratch", "blaze_bite"]
+    "skills": ["blaze_scratch", "blaze_bite"],
+    "drops": [
+      { "item": "small_fire_stone", "quantity": 1, "chance": 0.4 }
+    ]
   }
 }

@@ -36,8 +36,6 @@ export const player = {
   def: 0,
   element: 'fire',
   level: 1,
-  xp: 0,
-  xpToNextLevel: 10,
   classId: getChosenClass() || null,
   stats: {
     attack: 0,
@@ -176,7 +174,6 @@ export function resetTempStats() {
 
 export function levelUp() {
   player.level += 1;
-  player.xpToNextLevel = Math.floor(player.xpToNextLevel * 1.5);
   updateStatsFromLevel();
   player.hp = player.maxHp;
   const unlocked = unlockPassivesForLevel(player.level);
@@ -190,45 +187,11 @@ export function levelUp() {
   document.dispatchEvent(
     new CustomEvent('playerLevelUp', { detail: { level: player.level } })
   );
-  document.dispatchEvent(
-    new CustomEvent('playerXpChanged', {
-      detail: {
-        xp: player.xp,
-        level: player.level,
-        xpToNext: player.xpToNextLevel
-      }
-    })
-  );
-}
-
-export function gainXP(amount) {
-  if (typeof amount !== 'number' || amount <= 0) return false;
-  player.xp += amount;
-  let leveled = false;
-  while (player.xp >= player.xpToNextLevel) {
-    player.xp -= player.xpToNextLevel;
-    levelUp();
-    leveled = true;
-  }
-  if (!leveled) {
-    document.dispatchEvent(
-      new CustomEvent('playerXpChanged', {
-        detail: {
-          xp: player.xp,
-          level: player.level,
-          xpToNext: player.xpToNextLevel
-        }
-      })
-    );
-  }
-  return leveled;
 }
 
 export function getPlayerSummary() {
   return {
     level: player.level,
-    xp: player.xp,
-    xpToNextLevel: player.xpToNextLevel,
     classId: player.classId,
     passives: Array.isArray(player.passives) ? [...player.passives] : []
   };
@@ -240,8 +203,6 @@ export function serializePlayer() {
     y: player.y,
     element: player.element,
     level: player.level,
-    xp: player.xp,
-    xpToNextLevel: player.xpToNextLevel,
     stats: {
       attack: player.stats?.attack || 0,
       defense: player.stats?.defense || 0
@@ -259,8 +220,6 @@ export function deserializePlayer(data) {
   player.y = data.y ?? player.y;
   player.element = data.element ?? player.element;
   player.level = data.level ?? player.level;
-  player.xp = data.xp ?? player.xp;
-  player.xpToNextLevel = data.xpToNextLevel ?? player.xpToNextLevel;
   if (data.stats) {
     if (!player.stats) player.stats = { attack: 0, defense: 0 };
     player.stats.attack = data.stats.attack ?? player.stats.attack;

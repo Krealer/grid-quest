@@ -18,7 +18,6 @@ export function updateMenuStats() {
     : `<span title="${tooltip}">${def}</span>`;
   el.innerHTML = `
     <div>Level: ${player.level}</div>
-    <div>XP: ${player.xp} / ${player.xpToNextLevel}</div>
     <div>HP: ${player.hp} / ${player.maxHp}</div>
     <div>ATK: ${stats.attack || 0}</div>
     <div>DEF: ${defHtml}</div>
@@ -93,7 +92,6 @@ export function initMainMenu() {
 
   document.addEventListener('inventoryUpdated', updateNullButton);
   document.addEventListener('playerHpChanged', updateMenuStats);
-  document.addEventListener('playerXpChanged', updateMenuStats);
   document.addEventListener('playerLevelUp', updateMenuStats);
   document.addEventListener('equipmentChanged', updateMenuStats);
 }

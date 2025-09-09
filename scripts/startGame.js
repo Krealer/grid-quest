@@ -108,7 +108,6 @@ export async function startGame(container, settings, state) {
     });
     document.addEventListener('playerDefenseChanged', updateDefenseDisplay);
     document.addEventListener('playerHpChanged', updateHpDisplay);
-    document.addEventListener('playerXpChanged', updateXpDisplay);
     document.addEventListener('playerLevelUp', updateXpDisplay);
     document.addEventListener('passivesUpdated', () => {
       updateHpDisplay();

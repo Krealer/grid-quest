@@ -44,48 +44,19 @@ export const itemData = {
     icon: '🧪',
     useInCombat: true
   },
-  xp_scroll: {
-    id: 'xp_scroll',
-    name: 'XP Scroll',
-    description: 'Use to gain 25 experience.',
+  small_fire_stone: {
+    id: 'small_fire_stone',
+    name: 'Small Fire Stone',
+    description: 'A faintly warm stone that Zealer can use to level up.',
     type: 'consumable',
     tags: ['items'],
-    category: 'general',
+    category: 'usable',
     consumable: true,
     stackLimit: 99,
-    icon: '📜',
-    use() {
-      import('./player.js').then((m) => m.gainXP(25));
-    }
-  },
-  xp_potion: {
-    id: 'xp_potion',
-    name: 'XP Potion',
-    description: 'Use in battle to gain 50 XP.',
-    type: 'consumable',
-    tags: ['combat'],
-    category: 'combat',
-    consumable: true,
-    stackLimit: 5,
-    icon: '🧪',
-    useInCombat: true,
-    use() {
-      import('./player.js').then((m) => m.gainXP(50));
-    }
-  },
-  xp_relic: {
-    id: 'xp_relic',
-    name: 'XP Relic',
-    description: 'Grants 100 XP when used from your pack.',
-    type: 'consumable',
-    tags: ['items'],
-    category: 'general',
-    consumable: true,
-    stackLimit: 1,
-    icon: '🔮',
+    icon: '🔥',
     inventoryOnly: true,
     use() {
-      import('./player.js').then((m) => m.gainXP(100));
+      import('./player.js').then((m) => m.levelUp());
     }
   },
   empty_note: {
