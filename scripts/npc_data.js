@@ -75,13 +75,21 @@ export const npcAppearance = {
     border: '#ff99cc',
     displayTitle: 'Persona Architecture',
     dialogueScale: 0.9
+  },
+  braga: {
+    nameColor: '#ff6666',
+    font: 'serif',
+    border: '#ff6666',
+    displayTitle: 'Braga',
+    dialogueScale: 1
   }
 };
 
 export const npcElements = {
   krealer: 'fire',
   lioran: 'water',
-  imuku: 'earth'
+  imuku: 'earth',
+  braga: 'fire'
 };
 
 export const npcData = {

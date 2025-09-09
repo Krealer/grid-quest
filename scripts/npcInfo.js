@@ -98,6 +98,11 @@ export const npcInfoList = [
     id: 'imuku',
     name: 'Imuku',
     description: 'A friendly guide who shares knowledge of the land.'
+  },
+  {
+    id: 'braga',
+    name: 'Braga',
+    description: 'A flame-touched wanderer with a fondness for sparks.'
   }
 ];
 
