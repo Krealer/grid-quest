@@ -65,11 +65,6 @@ export function getActiveQuests() {
       completeQuest('scout_tracking');
     }
   }
-  if (isQuestStarted('crimson_request') && !isQuestCompleted('crimson_request')) {
-    if (hasMemory('learned_leech')) {
-      completeQuest('crimson_request');
-    }
-  }
   return Object.keys(state.quests)
     .filter(id => state.quests[id].started && !state.quests[id].completed)
     .map(id => {
