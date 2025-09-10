@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const questsOverlay = document.getElementById('quest-log-overlay');
   const questsClose = questsOverlay.querySelector('.close-btn');
   const statusTab = document.querySelector('.status-tab');
+  const statsTab = document.querySelector('.stats-tab');
   const nullTab = document.querySelector('.null-tab');
   const statusOverlay = document.getElementById('status-overlay');
   const statusClose = statusOverlay?.querySelector('.close-btn');
@@ -220,6 +221,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (e.target === questsOverlay) toggleQuestLog();
   });
   if (statusTab) statusTab.addEventListener('click', toggleStatusPanel);
+  if (statsTab) statsTab.addEventListener('click', toggleStatusPanel);
   if (statusClose) statusClose.addEventListener('click', toggleStatusPanel);
   if (statusOverlay) {
     statusOverlay.addEventListener('click', (e) => {
