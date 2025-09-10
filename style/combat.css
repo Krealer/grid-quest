@@ -210,9 +210,6 @@
   background: rgba(0, 0, 0, 0.3);
 }
 
-#battle-overlay .actions button:hover {
-  background: #555;
-}
 
 #battle-overlay .hp.damage {
   animation: damageFlash 0.3s;
