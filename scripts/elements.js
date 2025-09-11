@@ -7,7 +7,7 @@ const advantages = {
 const elementIcons = {
   fire: '🔥',
   water: '💧',
-  earth: '🌳'
+  earth: '🌿'
 };
 
 export function getElementMultiplier(attacker, defender) {
