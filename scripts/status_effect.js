@@ -13,7 +13,7 @@ export function tickStatusEffects(target, log) {
     }
     if (typeof log === 'function' && target.hp < prevHp) {
       const dmg = prevHp - target.hp;
-      const who = target.isPlayer ? 'You' : target.name || 'Enemy';
+      const who = target.isPlayer ? target.name || 'You' : target.name || 'Enemy';
       log(
         `${who} suffer${target.isPlayer ? '' : 's'} ${dmg} ${st.id.replace('_', ' ')} damage.`
       );
@@ -23,7 +23,7 @@ export function tickStatusEffects(target, log) {
       if (def.remove) def.remove(target);
       target.statuses.splice(i, 1);
       if (typeof log === 'function') {
-        const who = target.isPlayer ? 'You' : target.name || 'Enemy';
+        const who = target.isPlayer ? target.name || 'You' : target.name || 'Enemy';
         log(`${def.name || st.id} fades from ${who}.`);
       }
     }
