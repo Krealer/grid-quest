@@ -27,6 +27,7 @@ export function updatePassiveEffects() {
 }
 
 export const player = {
+  name: 'Yorien',
   x: 0,
   y: 0,
   hp: 100,

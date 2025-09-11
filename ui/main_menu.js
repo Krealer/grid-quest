@@ -17,6 +17,7 @@ export function updateMenuStats() {
     ? `<span class="negative" title="${tooltip}">${def}</span>`
     : `<span title="${tooltip}">${def}</span>`;
   el.innerHTML = `
+    <div>Name: ${player.name}</div>
     <div>Level: ${player.level}</div>
     <div>HP: ${player.hp} / ${player.maxHp}</div>
     <div>ATK: ${stats.attack || 0}</div>
