@@ -17,6 +17,8 @@ import {
 import { getEchoConversationCount } from './player_memory.js';
 import { recordEnding } from './ending_manager.js';
 import { showDialogue } from './dialogueSystem.js';
+import { chooseClass as selectClass } from './class_state.js';
+import { player } from './player.js';
 import { clearCorruption } from './corruption_state.js';
 import { unlockRelicSlot, unlockPortal15 } from './player_state.js';
 
@@ -85,6 +87,12 @@ export function discoverLore(id) {
   if (id) recordLore(id);
 }
 
+// Set the player's class if not already chosen
+export function chooseClass(id) {
+  if (id && selectClass(id)) {
+    player.classId = id;
+  }
+}
 
 export function chooseForkPath(path) {
   if (!path) return;

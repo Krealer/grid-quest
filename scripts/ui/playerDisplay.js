@@ -4,12 +4,12 @@ import { getRelicBonuses } from '../relic_state.js';
 
 let hpDisplay;
 let defenseDisplay;
-let levelDisplay;
+let xpDisplay;
 
 export function initPlayerDisplay() {
   hpDisplay = document.getElementById('hp-display');
   defenseDisplay = document.getElementById('defense-display');
-  levelDisplay = document.getElementById('xp-display');
+  xpDisplay = document.getElementById('xp-display');
 }
 
 export function updateHpDisplay() {
@@ -32,7 +32,7 @@ export function updateDefenseDisplay() {
 }
 
 export function updateXpDisplay() {
-  if (levelDisplay) {
-    levelDisplay.textContent = `Level: ${player.level}`;
+  if (xpDisplay) {
+    xpDisplay.textContent = `Level: ${player.level} XP: ${player.xp}/${player.xpToNextLevel}`;
   }
 }

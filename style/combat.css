@@ -151,13 +151,13 @@
   border-color: #999;
 }
 
-#battle-overlay .action-tabs button.attack-tab {
+#battle-overlay .action-tabs button.offensive-tab {
   background: #533;
 }
-#battle-overlay .action-tabs button.non-attack-tab {
+#battle-overlay .action-tabs button.defensive-tab {
   background: #235;
 }
-#battle-overlay .action-tabs button.swap-tab {
+#battle-overlay .action-tabs button.items-tab {
   background: #353;
 }
 
@@ -210,6 +210,9 @@
   background: rgba(0, 0, 0, 0.3);
 }
 
+#battle-overlay .actions button:hover {
+  background: #555;
+}
 
 #battle-overlay .hp.damage {
   animation: damageFlash 0.3s;

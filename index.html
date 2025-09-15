@@ -18,7 +18,6 @@
       <div class="tab settings-tab">Settings</div>
       <div class="tab menu-tab">Menu</div>
       <div class="tab inventory-tab">Inventory</div>
-      <div class="tab stats-tab">Stats</div>
       <div class="tab save-tab">Save</div>
       <div class="tab load-tab">Load</div>
     </div>
@@ -36,9 +35,8 @@
           <button data-cat="items" class="tab selected">Items</button>
           <button data-cat="equipable" class="tab">Equipable Items</button>
           <button data-cat="combat" class="tab">Combat Items</button>
-          <button data-cat="usable" class="tab">Usable Items</button>
           <button data-cat="key" class="tab">Key Items</button>
-          <button data-cat="lore" class="tab">Change Items</button>
+          <button data-cat="lore" class="tab">Lore Items</button>
         </div>
         <div class="inventory-panel">
           <div class="inventory-scroll">
@@ -72,7 +70,7 @@
     <div id="status-overlay" class="status-overlay">
       <div class="status-content">
         <button class="close-btn">&times;</button>
-        <h2>Yorien Status</h2>
+        <h2>Player Status</h2>
         <div id="status-info"></div>
         <h3>Passive Skills</h3>
         <div id="status-passives"></div>
@@ -129,9 +127,6 @@
           <input type="checkbox" id="coords-toggle" /> Grid Coordinates
         </label>
         <label class="setting-row">
-          <input type="checkbox" id="coords-phone-toggle" /> Coordinates (phone)
-        </label>
-        <label class="setting-row">
           Movement Speed
           <select id="move-speed">
             <option value="slow">Slow</option>
@@ -174,13 +169,6 @@
         <button id="reset-settings" class="reset-btn">
           Reset All Settings
         </button>
-        <label class="setting-row" id="rollback-row">
-          Rollback
-          <select id="rollback-select">
-            <option value="v0.7.3">v0.7.3</option>
-          </select>
-          <button id="rollback-btn" title="Restore Selected Version">&#8635;</button>
-        </label>
       </div>
     </div>
     <div id="error-overlay" class="error-overlay">
@@ -212,12 +200,12 @@
         <div class="howto-scroll">
           <p><strong>Movement:</strong> Tap or click a ground tile to move. (Ground tiles are light green squares.)</p>
           <p><strong>Interaction:</strong> Double tap or double click a tile to interact.</p>
-          <p><strong>NPCs:</strong> Red circles mark fire NPCs, blue circles mark water NPCs, and green circles mark earth NPCs. Interact with any of them to start a dialogue.</p>
-          <p><strong>Enemy (Red Tile):</strong> Interact to enter combat. Defeating enemies may drop stones and loot.</p>
+          <p><strong>NPC (Purple Circle):</strong> Talk to NPCs by interacting. They may give quests, items, or secrets.</p>
+          <p><strong>Enemy (Red Tile):</strong> Interact to enter combat. Defeating enemies grants XP and drops.</p>
           <p><strong>Water (Blue Tile):</strong> Interacting heals you to full health. Use wisely!</p>
-          <p><strong>Stove (Black Tile with red dot):</strong> Cook a random meal to restore full health.</p>
+          <p><strong>Chest (Brown Tile):</strong> Open to receive a reward. Some may be locked.</p>
           <p><strong>Traps (Light Red / Dark Red Tiles):</strong> Step carefully — they cause damage or status effects.</p>
-          <p><strong>Combat:</strong> You have attack and non-attack skills. Use cooldowns tactically. The Swap tab appears in combat if you have usable items.</p>
+          <p><strong>Combat:</strong> You have offensive and defensive skills. Use cooldowns tactically. Items appear in combat if you have any usable ones.</p>
           <p><strong>Stats &amp; Leveling:</strong> Each level increases your HP. Every 5 and 10 levels increase attack and defense.</p>
           <p><strong>Doors (Gray Tile with marking):</strong> Require specific items or actions to unlock. Explore carefully.</p>
         </div>

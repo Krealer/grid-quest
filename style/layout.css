@@ -115,6 +115,14 @@ body {
   outline: 2px solid #fff;
 }
 
+.chest {
+  background: #b5651d;
+}
+
+.chest-opened {
+  background: #8b4513;
+}
+
 .enemy {
   background: #e74c3c;
 }
@@ -123,28 +131,16 @@ body {
   background: #9b59b6;
 }
 
-.npc.fire {
-  background: #e74c3c;
-}
-
-.npc.water {
-  background: #3498db;
-}
-
-.npc.earth {
-  background: #2ecc71;
-}
-
 .echo {
   background: #95a5a6;
 }
 
 .door {
-  background: #ffffff;
+  background: #2ecc71;
 }
 
 .door.locked {
-  background: #ffffff;
+  background: #1abc9c;
 }
 
 .tile.trap-light {
@@ -183,22 +179,6 @@ body {
 
 .tile.water {
   background-color: #00bfff;
-}
-
-.tile.stove {
-  background-color: #000;
-}
-
-.tile.stove::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  background: #e74c3c;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .tile.water.ripple::after {
@@ -362,7 +342,7 @@ body {
 }
 
 .tile.player {
-  background: #e74c3c;
+  background: #3498db;
 }
 
 .tile.player,
@@ -1159,19 +1139,6 @@ body {
   content: attr(data-label);
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  font-size: 10px;
-  line-height: 12px;
-  text-align: center;
-}
-
-#game-grid.show-coords .tile::before {
-  content: attr(data-coords);
-  position: absolute;
-  top: 0;
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.6);

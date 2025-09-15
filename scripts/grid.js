@@ -22,6 +22,7 @@ export function renderGrid(
 
   grid.forEach((row, y) => {
     const choice = getForkChoice();
+    const cls = player.classId;
     row.forEach((cell, x) => {
       const div = document.createElement('div');
       div.classList.add('tile');
@@ -32,17 +33,22 @@ export function renderGrid(
       if (cell.memoryType && choice && cell.memoryType[choice]) {
         type = cell.memoryType[choice];
       }
+      if (cell.classType && cls && cell.classType[cls]) {
+        type = cell.classType[cls];
+      }
 
       switch (type) {
         case 'G':
           div.classList.add('ground');
+          break;
+        case 'C':
+          div.classList.add('chest', 'blocked');
           break;
         case 'E':
           div.classList.add('enemy', 'blocked');
           break;
         case 'N':
           div.classList.add('npc', 'blocked');
-          if (cell.element) div.classList.add(cell.element);
           if (cell.npc) div.dataset.npc = cell.npc;
           break;
         case 'echo':
@@ -59,9 +65,6 @@ export function renderGrid(
           break;
         case 'W':
           div.classList.add('water');
-          break;
-        case 'S':
-          div.classList.add('stove');
           break;
         case 'F':
           div.classList.add('fractured');

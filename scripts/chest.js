@@ -1,0 +1,214 @@
+import { gameState } from './game_state.js';
+import { addItem, giveItem } from './inventory.js';
+import { updateInventoryUI } from './inventory_ui.js';
+import { giveRelic, setMemory } from './dialogue_state.js';
+import { getItemData, loadItems } from './item_loader.js';
+import { loseHpNonLethal } from './player.js';
+import { unlockSkillsFromItem, unlockSkillsFromRelic } from './skills.js';
+
+const chestContents = {
+  'map01:10,5': {
+    item: 'rusty_key',
+    message: 'Inside you find a rusty key.'
+  },
+  'map01:17,9': {
+    item: 'defense_potion_I',
+    message: 'The chest holds a Defense Potion.'
+  },
+  'map01:3,17': {
+    item: 'old_coin',
+    message: 'You pick up an old coin.'
+  },
+  'map02:5,5': {
+    item: 'xp_scroll',
+    message: 'You found a shimmering scroll.',
+    memoryFlag: 'map02_health_amulet'
+  },
+  'map02:9,9': {
+    item: 'map02_key',
+    message: 'You found a key among the traps.',
+    memoryFlag: 'map02_key_found'
+  },
+  'map02:15,15': {
+    item: 'empty_note',
+    message: 'This chest was empty.',
+    memoryFlag: 'empty_chest_seen'
+  },
+  'map03:10,12': {
+    item: 'xp_scroll',
+    message: 'You feel knowledge flow into you.'
+  },
+  'map04:10,11': {
+    item: 'mana_gem',
+    message: 'You found a glowing Mana Gem.',
+    memoryFlag: 'map04_chest_1_opened'
+  },
+  'map04:7,4': {
+    item: 'ward_leaf',
+    message: 'Inside lies a delicate Ward Leaf.',
+    memoryFlag: 'map04_chest_2_opened'
+  },
+  'map04:18,10': {
+    item: 'old_scroll',
+    message: 'The chest holds an old scroll.',
+    memoryFlag: 'map04_chest_3_opened'
+  },
+  'map05:10,9': {
+    item: 'mysterious_key',
+    message: 'The chest clicks open revealing a strange key.'
+  },
+  'map05:9,10': {
+    item: 'defense_potion_II',
+    message: 'Carefully prying it open yields a potent Defense Potion.'
+  },
+  'map05:2,1': {
+    item: 'crystal_shard',
+    message: 'Tucked in the corner lies a faintly glowing crystal shard.'
+  },
+  'map05:10,15': {
+    item: 'rift_fragment',
+    message: 'Inside the obvious chest rests a curious rift fragment.'
+  },
+  'map06:2,1': {
+    item: 'stamina_dust',
+    message: 'A simple chest sits near the entrance.'
+  },
+  'map06:18,2': {
+    item: 'skill_token',
+    message: 'You fish out a shining token behind the water.'
+  },
+  'map06:15,5': {
+    item: 'reflect_potion',
+    message: 'Traps surround this chest. Inside is a Reflect Potion.'
+  },
+  'map06:3,13': {
+    item: 'blood_resin',
+    message: 'Tucked at a hallway turn is a vial of blood resin.'
+  },
+  'map06:18,10': {
+    item: 'echo_splinter',
+    message: 'A distant alcove holds a faintly humming splinter.'
+  },
+  'map06:10,6': {
+    item: 'crystal_seed',
+    message: 'In the middle north lies a crystal seed.'
+  },
+  'map06:1,15': {
+    item: 'mana_scroll',
+    message: 'Hidden in a maze corner is a rare mana scroll.'
+  },
+  'map06:3,17': {
+    item: 'forgotten_ring',
+    message: 'This false dead end conceals a forgotten ring.'
+  },
+  'map07_maze01:14,7': {
+    item: 'maze_key_1',
+    message: 'Inside you find Maze Key 1.'
+  },
+  'map08:3,3': {
+    item: 'defense_potion_I',
+    message: 'You find a basic Defense Potion.'
+  },
+  'map08:8,12': {
+    item: 'ember_residue',
+    quantity: 2,
+    message: 'The chest holds faintly glowing embers.'
+  },
+  'map08:15,15': {
+    item: 'old_coin',
+    message: 'An aged coin rests within.'
+  },
+  'map09_floor01:4,5': {
+    item: 'ritual_oil',
+    message: 'You find a vial of ritual oil.'
+  },
+  'map09_floor01:16,10': {
+    item: 'aegis_invocation_scroll',
+    message: 'You discover a sacred scroll hidden within.'
+  },
+  'map09_floor01:15,13': {
+    item: 'polished_shard',
+    message: 'You uncover a gleaming polished shard.'
+  },
+  'map09_floor02:3,8': {
+    item: 'temple_chest_key',
+    message: 'Hidden among rubble lies a small key.'
+  },
+  'map09_floor02:17,5': {
+    item: 'mana_ember',
+    quantity: 1,
+    message: 'The chest radiates lingering warmth.'
+  },
+  'map09_floor02:10,14': {
+    item: 'ember_prayer_scroll',
+    message: 'Inside rests a sealed scroll etched in ember.'
+  },
+  'map09_floor03:4,3': {
+    item: 'xp_scroll',
+    hpLoss: 10,
+    message: 'A guardian trap drains your strength as you snatch the scroll.'
+  },
+  'map09_floor03:9,5': {
+    item: 'xp_potion',
+    hpLoss: 10,
+    message: 'Ancient energies lash out as you secure the potion.'
+  },
+  'map09_floor03:15,8': {
+    item: 'xp_relic',
+    hpLoss: 10,
+    message: 'Cursed fumes seep out as you grasp the relic.'
+  }
+};
+
+export function isChestOpened(id) {
+  return gameState.openedChests.has(id);
+}
+
+export async function openChest(id, player) {
+  if (isChestOpened(id)) return null;
+  gameState.openedChests.add(id);
+  await loadItems();
+  const config = chestContents[id] || {};
+  if (config.memoryFlag) {
+    setMemory(config.memoryFlag);
+  }
+  let item = null;
+  let items = null;
+  let unlockedSkills = [];
+  if (Array.isArray(config.items)) {
+    items = [];
+    for (const itm of config.items) {
+      const data = getItemData(itm);
+      if (data) {
+        await giveItem(itm, 1);
+        items.push(data);
+        unlockedSkills.push(...unlockSkillsFromItem(itm));
+      }
+    }
+    updateInventoryUI();
+  } else if (config.item) {
+    item = getItemData(config.item);
+    if (item) {
+      const qty = config.quantity || 1;
+      await giveItem(config.item, qty);
+      updateInventoryUI();
+      unlockedSkills = unlockSkillsFromItem(config.item);
+    }
+  }
+  if (config.relic) {
+    giveRelic(config.relic);
+    unlockedSkills.push(...unlockSkillsFromRelic(config.relic));
+  }
+  if (config.hpLoss && player) {
+    loseHpNonLethal(config.hpLoss);
+  }
+  return { item, items, message: config.message || null, unlockedSkills };
+}
+
+export function setOpenedChests(list) {
+  gameState.openedChests = new Set(list || []);
+}
+
+export function getOpenedChests() {
+  return Array.from(gameState.openedChests);
+}

@@ -8,6 +8,7 @@ import { isMobilePortrait, centerGridOnPlayer } from './mobile_ui.js';
 import { unlockPassivesForLevel, getPassive } from './passive_skills.js';
 import { getItemBonuses } from './item_stats.js';
 import { getRelicBonuses } from './relic_state.js';
+import { getClassBonuses, getChosenClass } from './class_state.js';
 import { unlockSkill, getAllSkills } from './skills.js';
 import {
   addItem,
@@ -27,15 +28,16 @@ export function updatePassiveEffects() {
 }
 
 export const player = {
-  name: 'Yorien',
   x: 0,
   y: 0,
   hp: 100,
   maxHp: 100,
   atk: 15,
   def: 0,
-  element: 'fire',
   level: 1,
+  xp: 0,
+  xpToNextLevel: 10,
+  classId: getChosenClass() || null,
   stats: {
     attack: 0,
     defense: 0
@@ -173,6 +175,7 @@ export function resetTempStats() {
 
 export function levelUp() {
   player.level += 1;
+  player.xpToNextLevel = Math.floor(player.xpToNextLevel * 1.5);
   updateStatsFromLevel();
   player.hp = player.maxHp;
   const unlocked = unlockPassivesForLevel(player.level);
@@ -186,11 +189,46 @@ export function levelUp() {
   document.dispatchEvent(
     new CustomEvent('playerLevelUp', { detail: { level: player.level } })
   );
+  document.dispatchEvent(
+    new CustomEvent('playerXpChanged', {
+      detail: {
+        xp: player.xp,
+        level: player.level,
+        xpToNext: player.xpToNextLevel
+      }
+    })
+  );
+}
+
+export function gainXP(amount) {
+  if (typeof amount !== 'number' || amount <= 0) return false;
+  player.xp += amount;
+  let leveled = false;
+  while (player.xp >= player.xpToNextLevel) {
+    player.xp -= player.xpToNextLevel;
+    levelUp();
+    leveled = true;
+  }
+  if (!leveled) {
+    document.dispatchEvent(
+      new CustomEvent('playerXpChanged', {
+        detail: {
+          xp: player.xp,
+          level: player.level,
+          xpToNext: player.xpToNextLevel
+        }
+      })
+    );
+  }
+  return leveled;
 }
 
 export function getPlayerSummary() {
   return {
     level: player.level,
+    xp: player.xp,
+    xpToNextLevel: player.xpToNextLevel,
+    classId: player.classId,
     passives: Array.isArray(player.passives) ? [...player.passives] : []
   };
 }
@@ -199,8 +237,9 @@ export function serializePlayer() {
   return {
     x: player.x,
     y: player.y,
-    element: player.element,
     level: player.level,
+    xp: player.xp,
+    xpToNextLevel: player.xpToNextLevel,
     stats: {
       attack: player.stats?.attack || 0,
       defense: player.stats?.defense || 0
@@ -216,8 +255,9 @@ export function deserializePlayer(data) {
   if (!data) return;
   player.x = data.x ?? player.x;
   player.y = data.y ?? player.y;
-  player.element = data.element ?? player.element;
   player.level = data.level ?? player.level;
+  player.xp = data.xp ?? player.xp;
+  player.xpToNextLevel = data.xpToNextLevel ?? player.xpToNextLevel;
   if (data.stats) {
     if (!player.stats) player.stats = { attack: 0, defense: 0 };
     player.stats.attack = data.stats.attack ?? player.stats.attack;
@@ -268,6 +308,13 @@ export function getTotalStats() {
   const passiveMods = getPassiveModifiers();
   for (const [key, val] of Object.entries(passiveMods)) {
     total[key] = (total[key] || 0) + val;
+  }
+  const classBonus = getClassBonuses();
+  if (classBonus) {
+    for (const [key, val] of Object.entries(classBonus)) {
+      if (key === 'itemHealBonus') continue;
+      total[key] = (total[key] || 0) + val;
+    }
   }
   return total;
 }

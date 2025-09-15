@@ -93,21 +93,6 @@ export const npcInfoList = [
     id: 'kaelor_the_weaver',
     name: 'Kaelor the Weaver',
     description: 'Pragmatic trader who exchanges fragments for a key.'
-  },
-  {
-    id: 'imuku',
-    name: 'Imuku',
-    description: 'A friendly guide who shares knowledge of the land.'
-  },
-  {
-    id: 'braga',
-    name: 'Braga',
-    description: 'A flame-touched wanderer with a fondness for sparks.'
-  },
-  {
-    id: 'hadoukai',
-    name: 'Hadoukai',
-    description: 'A serene traveler attuned to flowing water.'
   }
 ];
 

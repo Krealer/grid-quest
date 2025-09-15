@@ -15,23 +15,20 @@ import { showDialogue } from './dialogueSystem.js';
 import { isPortal15Unlocked } from './player_state.js';
 import { finalFlags } from './memory_flags.js';
 import { hasItem } from './inventory.js';
+import { gameState } from './game_state.js';
 
 let currentGrid = null;
 let currentEnvironment = 'clear';
 let currentProperties = {};
 
-export function normalizeGrid(
-  grid,
-  width = grid[0]?.length || 0,
-  height = grid.length
-) {
+export function normalizeGrid(grid, size = 20) {
   const normalized = [];
-  for (let y = 0; y < height; y++) {
+  for (let y = 0; y < size; y++) {
     const row = grid[y] || [];
     const paddedRow = row
-      .slice(0, width)
+      .slice(0, size)
       .map((cell) => (typeof cell === 'string' ? { type: cell } : cell));
-    for (let i = paddedRow.length; i < width; i++) {
+    for (let i = paddedRow.length; i < size; i++) {
       paddedRow.push({ type: 'G' });
     }
     normalized.push(paddedRow);
@@ -70,11 +67,18 @@ export async function loadMap(name) {
         }
       }
     }
-    for (const row of data.grid) {
-      for (const cell of row) {
-        if (
-          cell &&
-          cell.type === 'E' &&
+    if (name === 'map03' && isEnemyDefeated('scout_commander')) {
+      if (!gameState.openedChests.has('map03:10,12')) {
+        if (data.grid[12] && data.grid[12][10]) {
+          data.grid[12][10] = { type: 'C', glow: true };
+        }
+      }
+    }
+      for (const row of data.grid) {
+        for (const cell of row) {
+          if (
+            cell &&
+            cell.type === 'E' &&
             cell.enemyId === 'shadow_inversion'
           ) {
             if (

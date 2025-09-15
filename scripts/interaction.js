@@ -47,8 +47,8 @@ export async function handleTileInteraction(
   }
   if (!isInteractable(tile.type)) return;
 
-  // Other interactables are handled through onInteractEffect,
-  // which will grant items and update the map as needed.
+  // Chests and other interactables are handled through onInteractEffect,
+  // which will grant items and remove opened chests from the map.
 
   if (tile.type === 'D' && tile.requiresItem === 'commander_badge') {
     if (!hasItem('commander_badge')) {

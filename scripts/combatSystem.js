@@ -1,6 +1,7 @@
 import { getSkill } from './skills.js';
 import { getEnemySkill } from './enemy_skills.js';
-import { respawn, getTotalStats } from './player.js';
+import { respawn, gainXP, getTotalStats } from './player.js';
+import { getClassBonuses } from './class_state.js';
 import { getPassive } from './passive_skills.js';
 import { applyDamage } from './logic.js';
 import {
@@ -38,7 +39,9 @@ import {
   renderSkillList,
   setSkillDisabledState,
   initLogPanel,
-  showVictoryMessage
+  showVictoryMessage,
+  showXpGain,
+  showLevelUp
 } from './combat_ui.js';
 import {
   initStatuses,
@@ -53,7 +56,6 @@ import {
 } from './status_effect.js';
 import { getStatusEffect } from './status_effects.js';
 import { initEnemyState } from './enemy.js';
-import { getElementMultiplier, formatElement } from './elements.js';
 
 let overlay = null;
 
@@ -77,21 +79,17 @@ export async function startCombat(enemy, player) {
   overlay = document.createElement('div');
   overlay.id = 'battle-overlay';
   overlay.classList.add('battle-transition');
-  const playerElement = formatElement(player.element);
-  const enemyElement = formatElement(enemy.element);
   overlay.innerHTML = `
     <div class="combat-screen">
       <div class="combatants">
         <div class="combatant player">
-          <div class="name">Zealer</div>
-          ${playerElement ? `<div class="element">${playerElement}</div>` : ''}
+          <div class="name">Hero</div>
           <div class="hp-bar"><div class="hp"></div></div>
           <div class="statuses status-effects player-statuses"></div>
         </div>
         <div class="combatant enemy intro-anim">
           <div class="portrait">${enemy.portrait || '👾'}</div>
           <div class="name">${enemy.name}</div>
-          ${enemyElement ? `<div class="element">${enemyElement}</div>` : ''}
           <div class="desc">${enemy.description || ''}</div>
           <div class="hp-bar"><div class="hp"></div></div>
           <div class="statuses status-effects enemy-statuses"></div>
@@ -102,14 +100,14 @@ export async function startCombat(enemy, player) {
       }</div>
       <div class="actions hidden">
         <div class="action-tabs">
-          <button class="attack-tab selected">Attack</button>
-          <button class="non-attack-tab">Non-Attack</button>
-          <button class="swap-tab">Swap</button>
+          <button class="offensive-tab selected">Offensive</button>
+          <button class="defensive-tab">Defensive</button>
+          <button class="items-tab">Items</button>
         </div>
         <div class="tab-panels">
-          <div class="attack-skill-buttons tab-panel"></div>
-          <div class="non-attack-skill-buttons tab-panel hidden"></div>
-          <div class="swap-buttons tab-panel hidden"></div>
+          <div class="offensive-skill-buttons tab-panel"></div>
+          <div class="defensive-skill-buttons tab-panel hidden"></div>
+          <div class="item-buttons tab-panel hidden"></div>
         </div>
       </div>
       <div class="log hidden"></div>
@@ -146,9 +144,9 @@ export async function startCombat(enemy, player) {
   updateHpBar(enemyBar, enemyHp, enemyMax);
 
   const actionsEl = overlay.querySelector('.actions');
-  const attackContainer = overlay.querySelector('.attack-skill-buttons');
-  const nonAttackContainer = overlay.querySelector('.non-attack-skill-buttons');
-  const swapContainer = overlay.querySelector('.swap-buttons');
+  const offensiveContainer = overlay.querySelector('.offensive-skill-buttons');
+  const defensiveContainer = overlay.querySelector('.defensive-skill-buttons');
+  const itemContainer = overlay.querySelector('.item-buttons');
   const logEl = overlay.querySelector('.log');
 
   const log = initLogPanel(overlay);
@@ -174,14 +172,13 @@ export async function startCombat(enemy, player) {
   function damagePlayer(dmg) {
     let amount = dmg;
     if (player.evasionChance && Math.random() < player.evasionChance) {
-      log('Zealer evades the attack!');
+      log('Player evades the attack!');
       return 0;
     }
     if (shieldBlock) {
       amount = 0;
       shieldBlock = false;
     }
-    amount *= getElementMultiplier(enemy.element, player.element);
     const totals = getTotalStats();
     const tempTarget = {
       hp: playerHp,
@@ -197,7 +194,7 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
-    log(`Zealer takes ${applied} damage`);
+    log(`Player takes ${applied} damage`);
     if (reflectActive && applied > 0) {
       damageEnemy(applied);
       log('Reflected the damage back!');
@@ -213,7 +210,7 @@ export async function startCombat(enemy, player) {
     return applied;
   }
 
-  function damageEnemy(baseDmg, elementOverride = player.element) {
+  function damageEnemy(baseDmg) {
     if (enemy.evadeNext) {
       log(`${enemy.name}'s mirage takes the hit!`);
       removeStatusLogged(enemy, 'evade_next');
@@ -237,9 +234,6 @@ export async function startCombat(enemy, player) {
       dmg = Math.max(0, dmg - 4);
       enemyGuard = false;
     }
-    const elem = elementOverride === null ? null : elementOverride;
-    const mult = elem ? getElementMultiplier(elem, enemy.element) : 1;
-    dmg *= mult;
     const tempTarget = {
       hp: enemyHp,
       stats: { defense: (enemy.stats?.defense || 0) + enemy.tempDefense },
@@ -264,13 +258,13 @@ export async function startCombat(enemy, player) {
     updateHpBar(playerBar, playerHp, playerMax);
     playerBar.classList.add('damage');
     setTimeout(() => playerBar.classList.remove('damage'), 300);
-    log(`Zealer heals ${amount} HP`);
+    log(`Player heals ${amount} HP`);
   }
 
   function applyStatusLogged(target, id, duration) {
     applyStatusEffect(target, id, duration);
     const name = getStatusEffect(id)?.name || id;
-    const who = target === player ? 'Zealer' : enemy.name;
+    const who = target === player ? 'Player' : enemy.name;
     log(`${who} gains ${name}`);
     updateStatusUI(overlay, player, enemy);
     updateSkillDisableState();
@@ -279,7 +273,7 @@ export async function startCombat(enemy, player) {
   function removeStatusLogged(target, id) {
     removeStatusEffect(target, id);
     const name = getStatusEffect(id)?.name || id;
-    const who = target === player ? 'Zealer' : enemy.name;
+    const who = target === player ? 'Player' : enemy.name;
     log(`${name} removed from ${who}`);
     updateStatusUI(overlay, player, enemy);
     updateSkillDisableState();
@@ -289,12 +283,16 @@ export async function startCombat(enemy, player) {
     const removed = removeNegativeStatusEffect(target, ids);
     removed.forEach((r) => {
       const name = getStatusEffect(r)?.name || r;
-      const who = target === player ? 'Zealer' : enemy.name;
+      const who = target === player ? 'Player' : enemy.name;
       log(`${name} removed from ${who}`);
     });
     updateStatusUI(overlay, player, enemy);
     updateSkillDisableState();
     return removed;
+  }
+
+  function activateGuard() {
+    applyStatusEffect(player, 'guarded', 2);
   }
 
   function activateShieldBlock() {
@@ -346,15 +344,22 @@ export async function startCombat(enemy, player) {
         showDialogue('Inventory full for this item');
       }
     }
+    if (typeof enemy.xp === 'number') {
+      const leveled = gainXP(enemy.xp);
+      showXpGain(enemy.xp);
+      if (leveled) {
+        showLevelUp(player.level);
+      }
+    }
   }
 
-  function updateSwapUI() {
-    swapContainer.innerHTML = '';
+  function updateItemsUI() {
+    itemContainer.innerHTML = '';
     const items = getItemsByCategory('combat');
     if (items.length === 0) {
       const msg = document.createElement('div');
-      msg.textContent = 'No swaps available';
-      swapContainer.appendChild(msg);
+      msg.textContent = 'No usable items';
+      itemContainer.appendChild(msg);
       return;
     }
     items.forEach((it) => {
@@ -362,8 +367,8 @@ export async function startCombat(enemy, player) {
       const btn = document.createElement('button');
       const qty = it.quantity > 1 ? ` x${it.quantity}` : '';
       btn.textContent = `${data.name}${qty}`;
-      btn.addEventListener('click', () => handleSwap(it.id));
-      swapContainer.appendChild(btn);
+      btn.addEventListener('click', () => handleItemUse(it.id));
+      itemContainer.appendChild(btn);
     });
   }
 
@@ -376,23 +381,23 @@ export async function startCombat(enemy, player) {
     skillLookup[s.id] = s;
   });
 
-  const attackSkills = allSkills.filter((s) => s.category === 'attack');
-  const nonAttackSkills = allSkills.filter((s) => s.category === 'non-attack');
+  const offensiveSkills = allSkills.filter((s) => s.category === 'offensive');
+  const defensiveSkills = allSkills.filter((s) => s.category === 'defensive');
 
-  const attackButtons = renderSkillList(
-    attackContainer,
-    attackSkills,
+  const offButtons = renderSkillList(
+    offensiveContainer,
+    offensiveSkills,
     handleAction
   );
-  const nonAttackButtons = renderSkillList(
-    nonAttackContainer,
-    nonAttackSkills,
+  const defButtons = renderSkillList(
+    defensiveContainer,
+    defensiveSkills,
     handleAction
   );
-  const skillButtons = { ...attackButtons, ...nonAttackButtons };
+  const skillButtons = { ...offButtons, ...defButtons };
 
-  updateSwapUI();
-  document.addEventListener('inventoryUpdated', updateSwapUI);
+  updateItemsUI();
+  document.addEventListener('inventoryUpdated', updateItemsUI);
   setupTabs(overlay);
   updateStatusUI(overlay, player, enemy);
   updateSkillDisableState();
@@ -431,8 +436,8 @@ export async function startCombat(enemy, player) {
     }
     const silenced =
       hasStatus(player, 'silenced') || hasStatus(player, 'silence');
-    if (silenced && skill.category === 'attack' && !skill.silenceExempt) {
-      log('You are silenced and cannot use attack skills.');
+    if (silenced && skill.category === 'offensive' && !skill.silenceExempt) {
+      log('You are silenced and cannot use offensive skills.');
       return;
     }
     if (skillCooldowns[skill.id] > 0) {
@@ -442,11 +447,12 @@ export async function startCombat(enemy, player) {
       return;
     }
     const icon = skill.icon ? `${skill.icon} ` : '';
-    log(`Zealer uses ${icon}${skill.name}`);
+    log(`Player uses ${icon}${skill.name}`);
     discoverSkill(skill.id);
     const result = skill.effect({
       damageEnemy,
       healPlayer,
+      activateGuard,
       activateShieldBlock,
       log,
       applyStatus: applyStatusLogged,
@@ -485,7 +491,7 @@ export async function startCombat(enemy, player) {
     updateStatusUI(overlay, player, enemy);
     updateSkillDisableState();
     if (playerHp <= 0) {
-      log('Zealer was defeated!');
+      log('Player was defeated!');
       endCombat();
       return;
     }
@@ -493,22 +499,24 @@ export async function startCombat(enemy, player) {
     setTimeout(enemyTurn, animDelay);
   }
 
-  function handleSwap(id) {
+  function handleItemUse(id) {
     if (!playerTurn || playerHp <= 0 || enemyHp <= 0) return;
     if (hasStatus(player, 'cursed')) {
-      log('A curse prevents you from swapping!');
+      log('A curse prevents you from using items!');
       return;
     }
     let used = false;
     const data = getItemData(id);
-    if (data) log(`Zealer uses ${data.name}`);
+    if (data) log(`Player uses ${data.name}`);
     if (id === 'health_potion') {
       const res = useHealthPotion();
       if (res) {
         let amount = res.heal;
+        const classBonus = getClassBonuses();
+        if (classBonus.itemHealBonus) amount += classBonus.itemHealBonus;
         healPlayer(amount);
         log(`Recovered ${amount} HP!`);
-        logMessage(`Zealer used ${data.name}!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No potion available.');
@@ -525,9 +533,13 @@ export async function startCombat(enemy, player) {
             amount += p.itemHealBonus;
           }
         }
+        const classBonus = getClassBonuses();
+        if (classBonus.itemHealBonus) {
+          amount += classBonus.itemHealBonus;
+        }
         applyStatusLogged(player, 'defense_boost');
         log(`Defense increased by ${amount} for this fight!`);
-        logMessage(`Zealer used ${data.name}!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No potion available.');
@@ -543,9 +555,13 @@ export async function startCombat(enemy, player) {
             amount += p.itemHealBonus;
           }
         }
+        const classBonus = getClassBonuses();
+        if (classBonus.itemHealBonus) {
+          amount += classBonus.itemHealBonus;
+        }
         applyStatusLogged(player, 'defense_boost');
         log(`Defense increased by ${amount} for this fight!`);
-        logMessage(`Zealer used ${data.name}!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No potion available.');
@@ -555,7 +571,7 @@ export async function startCombat(enemy, player) {
       const res = useFadedBlade();
       if (res) {
         log(`Attack increased by ${res.attack} for this fight!`);
-        logMessage(`Zealer used ${data.name}!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No blade available.');
@@ -570,7 +586,7 @@ export async function startCombat(enemy, player) {
           damageEnemy(res.damage);
           log(`Arcane energies erupt for ${res.damage} damage!`);
           sparkUsed = true;
-          logMessage(`Zealer used ${data.name}!`);
+          logMessage(`Player used ${data.name}!`);
           used = true;
         } else {
           log('No spark available.');
@@ -582,7 +598,7 @@ export async function startCombat(enemy, player) {
       if (res) {
         Object.keys(skillCooldowns).forEach((k) => (skillCooldowns[k] = 0));
         log('Skill cooldowns refreshed!');
-        logMessage(`Zealer used ${data.name}!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No gem available.');
@@ -596,7 +612,7 @@ export async function startCombat(enemy, player) {
         );
         if (key) skillCooldowns[key] = Math.max(0, skillCooldowns[key] - 1);
         log('One skill cooldown reduced!');
-        logMessage(`Zealer used ${data.name}!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No dust available.');
@@ -607,7 +623,7 @@ export async function startCombat(enemy, player) {
       if (res) {
         reflectActive = true;
         log('You brace for the next attack.');
-        logMessage(`Zealer used ${data.name}!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No potion available.');
@@ -618,14 +634,14 @@ export async function startCombat(enemy, player) {
       if (res) {
         Object.keys(skillCooldowns).forEach((k) => (skillCooldowns[k] = 0));
         log('All skills ready to use!');
-        logMessage(`Zealer used ${data.name}!`);
+        logMessage(`Player used ${data.name}!`);
         used = true;
       } else {
         log('No scroll available.');
       }
     }
     if (used) {
-      updateSwapUI();
+      updateItemsUI();
       tickStatusEffects(player, log);
       tickStatusEffects(enemy, log);
       playerHp = player.hp;
@@ -649,7 +665,7 @@ export async function startCombat(enemy, player) {
     gridEl.classList.remove('no-interact');
     overlay.remove();
     overlay = null;
-    document.removeEventListener('inventoryUpdated', updateSwapUI);
+    document.removeEventListener('inventoryUpdated', updateItemsUI);
     document.dispatchEvent(
       new CustomEvent('combatEnded', { detail: { playerHp, enemyHp, enemy } })
     );
@@ -733,7 +749,7 @@ export async function startCombat(enemy, player) {
       .map((id) => getEnemySkill(id))
       .filter(Boolean);
     if (enemySilenced) {
-      list = list.filter((s) => s.category !== 'attack');
+      list = list.filter((s) => s.category !== 'offensive');
     }
 
     const statusSkills = list.filter(
@@ -833,7 +849,7 @@ export async function startCombat(enemy, player) {
       });
     }
     if (playerHp <= 0) {
-      log('Zealer was defeated!');
+      log('Player was defeated!');
       endCombat();
       return;
     }
@@ -846,7 +862,7 @@ export async function startCombat(enemy, player) {
     updateStatusUI(overlay, player, enemy);
     updateSkillDisableState();
     if (playerHp <= 0) {
-      log('Zealer was defeated!');
+      log('Player was defeated!');
       if (enemy.id === 'echo_absolute') {
         recordEnding('defeat', 'echo absolute');
         echoAbsoluteDefeat();

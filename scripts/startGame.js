@@ -26,11 +26,11 @@ let isInBattle = false;
 
 export async function startGame(container, settings, state) {
   try {
-    const { cols: newCols } = await router.loadMap('map001-house01');
+    const { cols: newCols } = await router.loadMap('map01');
     state.cols = newCols;
     initFog(container, state.cols, isFogEnabled());
     if (isFogEnabled()) {
-      if (router.getCurrentMapName() === 'map001-house01') {
+      if (router.getCurrentMapName() === 'map01') {
         revealAll();
       } else {
         reveal(player.x, player.y);
@@ -55,7 +55,7 @@ export async function startGame(container, settings, state) {
         state.cols = newCols;
         initFog(container, state.cols, isFogEnabled());
         if (isFogEnabled()) {
-          if (router.getCurrentMapName() === 'map001-house01') {
+          if (router.getCurrentMapName() === 'map01') {
             revealAll();
           } else {
             reveal(player.x, player.y);
@@ -108,6 +108,7 @@ export async function startGame(container, settings, state) {
     });
     document.addEventListener('playerDefenseChanged', updateDefenseDisplay);
     document.addEventListener('playerHpChanged', updateHpDisplay);
+    document.addEventListener('playerXpChanged', updateXpDisplay);
     document.addEventListener('playerLevelUp', updateXpDisplay);
     document.addEventListener('passivesUpdated', () => {
       updateHpDisplay();

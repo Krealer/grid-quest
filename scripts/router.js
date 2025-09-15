@@ -8,24 +8,11 @@ let player = null;
 let cols = 0;
 let currentMap = '';
 
-function findCentralWalkable(grid) {
-  const height = grid.length;
-  const width = grid[0].length;
-  const midX = Math.floor(width / 2);
-  const midY = Math.floor(height / 2);
-  const isWalkable = (x, y) => ['G', 't', 'T', 'W'].includes(grid[y][x].type);
-
-  if (isWalkable(midX, midY)) return { x: midX, y: midY };
-
-  const maxRadius = Math.max(width, height);
-  for (let r = 1; r < maxRadius; r++) {
-    for (let dy = -r; dy <= r; dy++) {
-      for (let dx = -r; dx <= r; dx++) {
-        if (Math.abs(dx) !== r && Math.abs(dy) !== r) continue;
-        const x = midX + dx;
-        const y = midY + dy;
-        if (x < 0 || y < 0 || x >= width || y >= height) continue;
-        if (isWalkable(x, y)) return { x, y };
+function findFirstWalkable(grid) {
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[y].length; x++) {
+      if (['G', 't', 'T', 'W'].includes(grid[y][x].type)) {
+        return { x, y };
       }
     }
   }
@@ -62,11 +49,24 @@ export async function loadMap(filename, spawnPoint) {
   cols = grid[0].length;
   renderGrid(grid, container, environment, properties?.fog);
 
+  // Mark chests that were previously opened
+  for (const id of gameState.openedChests) {
+    const [map, coord] = id.split(':');
+    if (map !== name) continue;
+    const [cx, cy] = coord.split(',').map(Number);
+    const index = cy * cols + cx;
+    const tileEl = container.children[index];
+    if (tileEl) {
+      tileEl.classList.remove('chest');
+      tileEl.classList.add('chest-opened');
+    }
+  }
+
   if (spawnPoint) {
     player.x = spawnPoint.x;
     player.y = spawnPoint.y;
   } else {
-    const start = findCentralWalkable(grid);
+    const start = findFirstWalkable(grid);
     player.x = start.x;
     player.y = start.y;
   }
