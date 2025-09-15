@@ -21,6 +21,17 @@ export const itemData = {
     stackLimit: 1,
     icon: '🗝️'
   },
+  temple_chest_key: {
+    id: 'temple_chest_key',
+    name: 'Temple Chest Key',
+    description: 'Opens special chests within the temple.',
+    type: 'key',
+    tags: ['lore'],
+    category: 'key',
+    consumable: true,
+    stackLimit: 1,
+    icon: '🗝️'
+  },
   health_potion: {
     id: 'health_potion',
     name: 'Health Potion',
@@ -33,20 +44,60 @@ export const itemData = {
     icon: '🧪',
     useInCombat: true
   },
-  small_fire_stone: {
-    id: 'small_fire_stone',
-    name: 'Small Fire Stone',
-    description: 'A faintly warm stone that Zealer can use to level up.',
+  xp_scroll: {
+    id: 'xp_scroll',
+    name: 'XP Scroll',
+    description: 'Use to gain 25 experience.',
     type: 'consumable',
     tags: ['items'],
-    category: 'usable',
+    category: 'general',
     consumable: true,
     stackLimit: 99,
-    icon: '🔥',
+    icon: '📜',
+    use() {
+      import('./player.js').then((m) => m.gainXP(25));
+    }
+  },
+  xp_potion: {
+    id: 'xp_potion',
+    name: 'XP Potion',
+    description: 'Use in battle to gain 50 XP.',
+    type: 'consumable',
+    tags: ['combat'],
+    category: 'combat',
+    consumable: true,
+    stackLimit: 5,
+    icon: '🧪',
+    useInCombat: true,
+    use() {
+      import('./player.js').then((m) => m.gainXP(50));
+    }
+  },
+  xp_relic: {
+    id: 'xp_relic',
+    name: 'XP Relic',
+    description: 'Grants 100 XP when used from your pack.',
+    type: 'consumable',
+    tags: ['items'],
+    category: 'general',
+    consumable: true,
+    stackLimit: 1,
+    icon: '🔮',
     inventoryOnly: true,
     use() {
-      import('./player.js').then((m) => m.levelUp());
+      import('./player.js').then((m) => m.gainXP(100));
     }
+  },
+  empty_note: {
+    id: 'empty_note',
+    name: 'Empty Note',
+    description: 'This chest was empty.',
+    type: 'quest',
+    tags: ['lore'],
+    category: 'lore',
+    consumable: false,
+    stackLimit: 1,
+    icon: '📝'
   },
   focus_ring: {
     id: 'focus_ring',
@@ -497,6 +548,17 @@ export const itemData = {
     stackLimit: 1,
     icon: '💍'
   },
+  aegis_invocation_scroll: {
+    id: 'aegis_invocation_scroll',
+    name: 'Aegis Invocation Scroll',
+    description: 'Using it teaches the Aegis Invocation skill.',
+    type: 'quest',
+    tags: ['lore'],
+    category: 'lore',
+    consumable: true,
+    stackLimit: 1,
+    icon: '📜'
+  },
   ritual_oil: {
     id: 'ritual_oil',
     name: 'Ritual Oil',
@@ -553,6 +615,17 @@ export const itemData = {
     stackLimit: 5,
     icon: '🔥',
     useInCombat: true
+  },
+  ember_prayer_scroll: {
+    id: 'ember_prayer_scroll',
+    name: 'Ember Prayer Scroll',
+    description: 'Using it teaches the Ember Prayer skill.',
+    type: 'quest',
+    tags: ['lore'],
+    category: 'lore',
+    consumable: true,
+    stackLimit: 1,
+    icon: '📜'
   },
   volcanic_slag: {
     id: 'volcanic_slag',

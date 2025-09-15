@@ -55,7 +55,6 @@ import {
 import { loadLanguage } from './language_loader.js';
 import { initGreeting } from '../ui/greeting.js';
 import { startGame } from './startGame.js';
-import { rollbackTo } from './rollback.js';
 
 // Inventory contents are managed in inventory.js
 
@@ -94,7 +93,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const questsOverlay = document.getElementById('quest-log-overlay');
   const questsClose = questsOverlay.querySelector('.close-btn');
   const statusTab = document.querySelector('.status-tab');
-  const statsTab = document.querySelector('.stats-tab');
   const nullTab = document.querySelector('.null-tab');
   const statusOverlay = document.getElementById('status-overlay');
   const statusClose = statusOverlay?.querySelector('.close-btn');
@@ -105,7 +103,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const settingsOverlay = document.getElementById('settings-overlay');
   const settingsClose = settingsOverlay.querySelector('.close-btn');
   const coordsToggle = document.getElementById('coords-toggle');
-  const phoneCoordsToggle = document.getElementById('coords-phone-toggle');
   const moveSelect = document.getElementById('move-speed');
   const combatSelect = document.getElementById('combat-speed');
   const colorblindToggle = document.getElementById('colorblind-toggle');
@@ -114,18 +111,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const langSelect = document.getElementById('language-select');
   const centerToggle = document.getElementById('center-toggle');
   const resetBtn = document.getElementById('reset-settings');
-  const rollbackRow = document.getElementById('rollback-row');
-  const rollbackSelect = document.getElementById('rollback-select');
-  const rollbackBtn = document.getElementById('rollback-btn');
-
-  if (
-    typeof process !== 'undefined' &&
-    process.env &&
-    process.env.NODE_ENV !== 'development' &&
-    rollbackRow
-  ) {
-    rollbackRow.style.display = 'none';
-  }
 
   function handleSave() {
     openSaveMenu();
@@ -186,7 +171,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   settings = loadSettings();
   applySettings(settings);
   coordsToggle.checked = settings.gridCoordinates;
-  phoneCoordsToggle.checked = settings.phoneCoordinates;
   moveSelect.value = settings.movementSpeed;
   combatSelect.value = settings.combatSpeed;
   colorblindToggle.checked = settings.colorblind;
@@ -221,7 +205,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (e.target === questsOverlay) toggleQuestLog();
   });
   if (statusTab) statusTab.addEventListener('click', toggleStatusPanel);
-  if (statsTab) statsTab.addEventListener('click', toggleStatusPanel);
   if (statusClose) statusClose.addEventListener('click', toggleStatusPanel);
   if (statusOverlay) {
     statusOverlay.addEventListener('click', (e) => {
@@ -271,12 +254,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     saveSettings(settings);
   });
 
-  phoneCoordsToggle.addEventListener('change', () => {
-    settings.phoneCoordinates = phoneCoordsToggle.checked;
-    applySettings(settings);
-    saveSettings(settings);
-  });
-
   moveSelect.addEventListener('change', () => {
     settings.movementSpeed = moveSelect.value;
     saveSettings(settings);
@@ -321,7 +298,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       saveSettings(settings);
       applySettings(settings);
       coordsToggle.checked = settings.gridCoordinates;
-      phoneCoordsToggle.checked = settings.phoneCoordinates;
       moveSelect.value = settings.movementSpeed;
       combatSelect.value = settings.combatSpeed;
       colorblindToggle.checked = settings.colorblind;
@@ -331,11 +307,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       centerToggle.checked = settings.centerMode;
       loadLanguage(settings.language);
     }
-  });
-
-  rollbackBtn.addEventListener('click', () => {
-    rollbackTo(rollbackSelect.value);
-    alert(`Rolled back to ${rollbackSelect.value}`);
   });
 
   const { showGreeting } = initGreeting(() =>

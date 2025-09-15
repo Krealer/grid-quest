@@ -7,7 +7,7 @@ import {
   getItemsByCategory,
   consumeItem
 } from './inventory.js';
-import { player, getTotalStats } from './player.js';
+import { player, getTotalStats, gainXP } from './player.js';
 import {
   useHealthPotion,
   useDefensePotion,
@@ -17,7 +17,9 @@ import {
   useManaGem,
   useStaminaDust,
   useReflectPotion,
-  useManaScroll
+  useManaScroll,
+  useAegisInvocationScroll,
+  useEmberPrayerScroll
 } from './item_logic.js';
 import { getItemBonuses } from './item_stats.js';
 import {
@@ -80,7 +82,7 @@ export async function updateInventoryUI() {
       def < 0
         ? `<span class="negative" title="${tooltip}">Defense: ${def}</span>`
         : `<span title="${tooltip}">Defense: ${def}</span>`;
-    statsEl.innerHTML = `Level: ${player.level}  Attack: ${stats.attack || 0}  ${defHtml}`;
+    statsEl.innerHTML = `Level: ${player.level}  XP: ${player.xp}/${player.xpToNextLevel}  Attack: ${stats.attack || 0}  ${defHtml}`;
   }
   let cat = currentCategory;
   if (cat === 'items') cat = ['general', 'crafting'];
@@ -145,7 +147,7 @@ export async function updateInventoryUI() {
     }
 
     const baseData = getItemData(item.id);
-    if (baseData && (baseData.category === 'combat' || baseData.category === 'usable')) {
+    if (baseData && baseData.category === 'combat') {
       const ubtn = document.createElement('button');
       ubtn.classList.add('equip-btn');
       ubtn.textContent = 'Use';
@@ -272,6 +274,12 @@ function handleInventoryItemUse(id) {
     }
     const res = useManaScroll();
     if (res) used = true;
+  } else if (id === 'aegis_invocation_scroll') {
+    const res = useAegisInvocationScroll();
+    if (res) used = true;
+  } else if (id === 'ember_prayer_scroll') {
+    const res = useEmberPrayerScroll();
+    if (res) used = true;
   } else if (typeof data.use === 'function') {
     if (data.inventoryOnly && gameState.inCombat) {
       logMessage('Cannot use this item in combat.');
@@ -285,7 +293,7 @@ function handleInventoryItemUse(id) {
   }
   if (used) {
     markItemUsed(id);
-    logMessage(`Zealer used ${data.name}!`);
+    logMessage(`Player used ${data.name}!`);
     updateInventoryUI();
   }
 }
@@ -305,5 +313,6 @@ export function toggleInventoryView() {
 document.addEventListener('inventoryUpdated', updateInventoryUI);
 document.addEventListener('playerDefenseChanged', updateInventoryUI);
 document.addEventListener('playerHpChanged', updateInventoryUI);
+document.addEventListener('playerXpChanged', updateInventoryUI);
 document.addEventListener('playerLevelUp', updateInventoryUI);
 document.addEventListener('relicsUpdated', updateInventoryUI);

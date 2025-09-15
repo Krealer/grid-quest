@@ -1,0 +1,22 @@
+[
+  {
+    "id": "fogbound_fragment",
+    "name": "Fogbound Fragment",
+    "location": "Map01"
+  },
+  {
+    "id": "verge_whispers",
+    "name": "Verge Whispers",
+    "location": "Map02"
+  },
+  {
+    "id": "breach_fragment",
+    "name": "Breach Fragment",
+    "location": "Map04"
+  },
+  {
+    "id": "convergence_fragment",
+    "name": "Convergence Fragment",
+    "location": "Map05"
+  }
+]

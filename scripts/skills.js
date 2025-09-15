@@ -6,44 +6,256 @@ const skillDefs = {
     id: 'strike',
     name: 'Strike',
     icon: '⚔️',
-    description: 'Deal damage to an enemy.',
-    category: 'attack',
+    description: 'Deal damage equal to your Attack stat.',
+    category: 'offensive',
     cost: 0,
     cooldown: 0,
     source: 'starter',
     // Basic attack scaled by player ATK
     effect({ damageEnemy, log }) {
-      const dealt = damageEnemy(0, null);
-      log(`Zealer strikes for ${dealt} damage!`);
+      const dealt = damageEnemy(0);
+      log(`Player strikes for ${dealt} damage!`);
     }
   },
   guard: {
     id: 'guard',
     name: 'Guard',
     icon: '🛡️',
-    description: 'Nullify the next incoming damage.',
-    category: 'non-attack',
+    description: 'Reduce damage from the next attack by 50%.',
+    category: 'defensive',
     silenceExempt: true,
     cost: 0,
-    cooldown: 4,
+    cooldown: 0,
     source: 'starter',
-    effect({ activateShieldBlock, log }) {
-      activateShieldBlock();
-      log('Zealer braces for impact.');
+    effect({ activateGuard, log }) {
+      activateGuard();
+      log('Player braces for impact.');
     }
   },
-  fire_slash: {
-    id: 'fire_slash',
-    name: 'Fire Slash',
+  heal: {
+    id: 'heal',
+    name: 'Heal',
+    icon: '✨',
+    description: 'Restore 20% of your max HP.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 3,
+    source: 'starter',
+    effect({ healPlayer, player, log }) {
+      const amount = Math.floor(player.maxHp * 0.2);
+      healPlayer(amount);
+      log(`Player heals for ${amount} HP.`);
+    }
+  },
+  shieldWall: {
+    id: 'shieldWall',
+    name: 'Shield Wall',
+    icon: '🛡️',
+    description: 'Completely block the next attack.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 0,
+    unlockCondition: { chest: 'map01:11,3' },
+    effect({ activateShieldBlock, log }) {
+      activateShieldBlock();
+      log('A sturdy wall of force surrounds you.');
+    }
+  },
+  flameBurst: {
+    id: 'flameBurst',
+    name: 'Flame Burst',
     icon: '🔥',
-    description: 'Deal fire damage to an enemy.',
-    category: 'attack',
+    description: 'Engulf the foe in flames for 10 damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    unlockCondition: { enemy: 'E' },
+    effect({ damageEnemy, log }) {
+      const dmg = 10;
+      damageEnemy(dmg);
+      log('Flames scorch the enemy for 10 damage!');
+    }
+  },
+  shadowStab: {
+    id: 'shadowStab',
+    name: 'Shadow Stab',
+    icon: '🌑',
+    description: 'Strike from the shadows for 20 damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    unlockCondition: { enemy: 'B' },
+    effect({ damageEnemy, log }) {
+      const dmg = 20;
+      damageEnemy(dmg);
+      log('You lunge from the darkness for 20 damage!');
+    }
+  },
+  boneSpike: {
+    id: 'boneSpike',
+    name: 'Bone Spike',
+    icon: '🦴',
+    description: 'Hurl bone shards for 18 damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    unlockCondition: { enemy: 'S' },
+    effect({ damageEnemy, log }) {
+      const dmg = 18;
+      damageEnemy(dmg);
+      log('Bone shards pierce the foe for 18 damage!');
+    }
+  },
+  arcaneBlast: {
+    id: 'arcaneBlast',
+    name: 'Arcane Blast',
+    icon: '✨',
+    description: 'Unleash arcane energy for 12 damage.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    unlockCondition: { item: 'ancient_scroll' },
+    effect({ damageEnemy, log }) {
+      const dmg = 12;
+      damageEnemy(dmg);
+      log('Arcane power lashes out for 12 damage!');
+    }
+  },
+  poisonDart: {
+    id: 'poisonDart',
+    name: 'Poison Dart',
+    icon: '☠️',
+    description: 'Inflict Poisoned for 3 turns.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
+    statuses: [{ target: 'enemy', id: 'poisoned', duration: 3 }],
+    effect({ applyStatus, enemy, log }) {
+      applyStatus(enemy, 'poisoned', 3);
+      log('Enemy is poisoned!');
+    }
+  },
+  rally: {
+    id: 'rally',
+    name: 'Rally',
+    icon: '📣',
+    description: 'Gain Fortify for 3 turns.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 0,
+    statuses: [{ target: 'self', id: 'fortify', duration: 3 }],
+    effect({ applyStatus, player, log }) {
+      applyStatus(player, 'fortify', 3);
+      log('You steel yourself against attacks.');
+    }
+  },
+  aegisInvocation: {
+    id: 'aegisInvocation',
+    name: 'Aegis Invocation',
+    icon: '🛡️',
+    description:
+      'Gain a barrier equal to 50% of your max HP and remove all negative effects.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 7,
+    source: 'map09_floor01_chest',
+    unlockCondition: { item: 'aegis_invocation_scroll' },
+    effect({ applyStatus, removeNegativeStatus, player, log }) {
+      applyStatus(player, 'aegis_barrier', Infinity);
+      const removed = removeNegativeStatus(player);
+      if (removed.length > 0) {
+        const names = removed
+          .map((id) => getStatusEffect(id)?.name || id)
+          .join(', ');
+        log(`Negative effects cleansed: ${names}`);
+      }
+      log('A powerful aegis surrounds you.');
+    }
+  },
+  emberPrayer: {
+    id: 'emberPrayer',
+    name: 'Ember Prayer',
+    icon: '🔥',
+    description: 'Heal 20% of your max HP and inflict Burn for 10 turns.',
+    category: 'defensive',
     cost: 0,
     cooldown: 4,
-    source: 'starter',
+    source: 'map09_floor02_chest',
+    unlockCondition: { item: 'ember_prayer_scroll' },
+    effect({ healPlayer, applyStatus, enemy, player, log }) {
+      const amount = Math.floor(player.maxHp * 0.2);
+      healPlayer(amount);
+      applyStatus(enemy, 'burn', 10);
+      log('Sacred flames answer your prayer.');
+    }
+  },
+  focusMind: {
+    id: 'focusMind',
+    name: 'Focus',
+    icon: '🎯',
+    description: 'Gain Focus for your next attack.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 0,
+    statuses: [{ target: 'self', id: 'focus', duration: 1 }],
+    effect({ applyStatus, player, log }) {
+      applyStatus(player, 'focus', 1);
+      log('You concentrate deeply, preparing your strike.');
+    }
+  },
+  focusStrike: {
+    id: 'focus_strike',
+    name: 'Focus Strike',
+    icon: '🎯',
+    description: 'A precise attack that rarely misses.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 0,
     effect({ damageEnemy, log }) {
-      const dealt = damageEnemy(0, 'fire');
-      log(`Zealer's fire slash deals ${dealt} damage!`);
+      const dmg = 18;
+      damageEnemy(dmg);
+      log(`Your focus strike deals ${dmg} damage!`);
+    }
+  },
+  leech: {
+    id: 'leech',
+    name: 'Leech',
+    icon: '🩸',
+    description: 'Deal damage equal to your ATK and heal for the damage dealt.',
+    category: 'offensive',
+    cost: 0,
+    cooldown: 3,
+    source: 'npc_syranel',
+    statusEffects: ['lifesteal'],
+    effect({ damageEnemy, healPlayer, log }) {
+      const dealt = damageEnemy(0);
+      healPlayer(dealt);
+      log(`You drain ${dealt} HP from your foe.`);
+    }
+  },
+  purify: {
+    id: 'purify',
+    name: 'Purify',
+    icon: '💫',
+    description: 'Remove certain negative effects from yourself.',
+    category: 'defensive',
+    cost: 0,
+    cooldown: 0,
+    cleanse: ['poisoned', 'cursed', 'blinded'],
+    effect({ player, removeNegativeStatus, log }) {
+      const removed = removeNegativeStatus(player, [
+        'poisoned',
+        'cursed',
+        'blinded'
+      ]);
+      if (removed.length > 0) {
+        const names = removed
+          .map((id) => getStatusEffect(id)?.name || id)
+          .join(', ');
+        log(`Purify cleanses ${names}!`);
+      } else {
+        log('No negative effects to purify.');
+      }
     }
   }
 };
@@ -91,7 +303,7 @@ export function initSkillSystem(playerObj) {
   const enemyList = loadEnemySkillSources();
   enemyList.forEach((id) => enemySkillSources.add(id));
   // Ensure starting skills are present
-  ['strike', 'guard', 'fire_slash'].forEach((id) => {
+  ['strike', 'guard', 'heal'].forEach((id) => {
     if (!player.learnedSkills.includes(id)) {
       player.learnedSkills.push(id);
     }
